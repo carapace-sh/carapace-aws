@@ -1,50 +1,22 @@
 name: sts
 description: AWS Security Token Service
 commands:
-    - name: assume-role-with-web-identity
-      description: Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The duration, in seconds, of the role session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arns=: The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as managed session policies.
-        --policy=: An IAM policy in JSON format that you want to use as an inline session policy.
-        --provider-id=: The fully qualified host component of the domain name of the OAuth 2.0 identity provider.
-        --role-arn=!: The Amazon Resource Name (ARN) of the role that the caller is assuming.
-        --role-session-name=!: An identifier for the assumed role session.
-        --web-identity-token=!: The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider.
-    - name: assume-root
-      description: Returns a set of short term credentials you can use to perform privileged tasks on a member account in your organization.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The duration, in seconds, of the privileged session.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-principal=!: The member account principal ARN or account ID.
-        --task-policy-arn=!: The identity based policy that scopes the session to the privileged tasks that can be performed.
-    - name: decode-authorization-message
-      description: Decodes additional information about the authorization status of a request from an encoded message returned in response to an Amazon Web Services request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encoded-message=!: The encoded message that was returned with the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-caller-identity
       description: Returns details about the IAM user or role whose credentials are used to call the operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-session-token
-      description: Returns a set of temporary credentials for an Amazon Web Services account or IAM user.
+    - name: get-web-identity-token
+      description: Returns a signed JSON Web Token (JWT) that represents the calling Amazon Web Services identity.
       flags:
+        --audience=!: The intended recipient of the web identity token.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The duration, in seconds, that the credentials should remain valid.
+        --duration-seconds=: The duration, in seconds, for which the JSON Web Token (JWT) will remain valid.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --serial-number=: The identification number of the MFA device that is associated with the IAM user who is making the `GetSessionToken` call.
-        --token-code=: The value provided by the MFA device, if MFA is required.
+        --signing-algorithm=!: The cryptographic algorithm to use for signing the JSON Web Token (JWT).
+        --tags=: An optional list of tags to include in the JSON Web Token (JWT).
     - name: assume-role
       description: Returns a set of temporary security credentials that you can use to access Amazon Web Services resources.
       flags:
@@ -63,18 +35,22 @@ commands:
         --tags=: A list of session tags that you want to pass.
         --token-code=: The value provided by the MFA device, if the trust policy of the role being assumed requires MFA.
         --transitive-tag-keys=: A list of keys for session tags that you want to set as transitive.
-    - name: assume-role-with-saml
-      description: Returns a set of temporary security credentials for users who have been authenticated via a SAML authentication response.
+    - name: assume-root
+      description: Returns a set of short term credentials you can use to perform privileged tasks on a member account in your organization.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The duration, in seconds, of the role session.
+        --duration-seconds=: The duration, in seconds, of the privileged session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arns=: The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as managed session policies.
-        --policy=: An IAM policy in JSON format that you want to use as an inline session policy.
-        --principal-arn=!: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
-        --role-arn=!: The Amazon Resource Name (ARN) of the role that the caller is assuming.
-        --saml-assertion=!: The base64 encoded SAML authentication response provided by the IdP.
+        --target-principal=!: The member account principal ARN or account ID.
+        --task-policy-arn=!: The identity based policy that scopes the session to the privileged tasks that can be performed.
+    - name: decode-authorization-message
+      description: Decodes additional information about the authorization status of a request from an encoded message returned in response to an Amazon Web Services request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encoded-message=!: The encoded message that was returned with the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-access-key-info
       description: Returns the account identifier for the specified access key ID.
       flags:
@@ -100,13 +76,37 @@ commands:
         --policy-arns=: The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as a managed session policy.
         --policy=: An IAM policy in JSON format that you want to use as an inline session policy.
         --tags=: A list of session tags.
-    - name: get-web-identity-token
-      description: Returns a signed JSON Web Token (JWT) that represents the calling Amazon Web Services identity.
+    - name: get-session-token
+      description: Returns a set of temporary credentials for an Amazon Web Services account or IAM user.
       flags:
-        --audience=!: The intended recipient of the web identity token.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration-seconds=: The duration, in seconds, for which the JSON Web Token (JWT) will remain valid.
+        --duration-seconds=: The duration, in seconds, that the credentials should remain valid.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signing-algorithm=!: The cryptographic algorithm to use for signing the JSON Web Token (JWT).
-        --tags=: An optional list of tags to include in the JSON Web Token (JWT).
+        --serial-number=: The identification number of the MFA device that is associated with the IAM user who is making the `GetSessionToken` call.
+        --token-code=: The value provided by the MFA device, if MFA is required.
+    - name: assume-role-with-saml
+      description: Returns a set of temporary security credentials for users who have been authenticated via a SAML authentication response.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The duration, in seconds, of the role session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arns=: The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as managed session policies.
+        --policy=: An IAM policy in JSON format that you want to use as an inline session policy.
+        --principal-arn=!: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
+        --role-arn=!: The Amazon Resource Name (ARN) of the role that the caller is assuming.
+        --saml-assertion=!: The base64 encoded SAML authentication response provided by the IdP.
+    - name: assume-role-with-web-identity
+      description: Returns a set of temporary security credentials for users who have been authenticated in a mobile or web application with a web identity provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The duration, in seconds, of the role session.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arns=: The Amazon Resource Names (ARNs) of the IAM managed policies that you want to use as managed session policies.
+        --policy=: An IAM policy in JSON format that you want to use as an inline session policy.
+        --provider-id=: The fully qualified host component of the domain name of the OAuth 2.0 identity provider.
+        --role-arn=!: The Amazon Resource Name (ARN) of the role that the caller is assuming.
+        --role-session-name=!: An identifier for the assumed role session.
+        --web-identity-token=!: The OAuth 2.0 access token or OpenID Connect ID token that is provided by the identity provider.

@@ -1,14 +1,53 @@
 name: sagemaker-geospatial
 description: Amazon SageMaker geospatial capabilities
 commands:
-    - name: tag-resource
-      description: The resource you want to tag.
+    - name: list-raster-data-collections
+      description: Use this operation to get raster data collections.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The total number of items to return.
+        --next-token=: If the previous response was truncated, you receive this token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags attached to the resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to tag.
-        --tags=!: Each tag consists of a key and a value.
+    - name: stop-earth-observation-job
+      description: Use this operation to stop an existing earth observation job.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job being stopped.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-vector-enrichment-job
+      description: Stops the Vector Enrichment job for a given job ARN.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: untag-resource
+      description: The resource you want to untag.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to untag.
+        --tag-keys=!: Keys of the tags you want to remove.
+    - name: delete-earth-observation-job
+      description: Use this operation to delete an Earth Observation job.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-vector-enrichment-job
       description: Use this operation to delete a Vector Enrichment job.
       flags:
@@ -16,6 +55,61 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: export-earth-observation-job
+      description: Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an Amazon S3 location.
+      flags:
+        --arn=!: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token that guarantees that the call to this API is idempotent.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        --export-source-images: The source images provided to the Earth Observation job being exported.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-export-source-images: The source images provided to the Earth Observation job being exported.
+        --output-config=!: An object containing information about the output file.
+    - name: get-raster-data-collection
+      description: Use this operation to get details of a specific raster data collection.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the raster data collection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: search-raster-data-collection
+      description: Allows you run image query on a specific raster data collection to get a list of the satellite imagery matching the selected filters.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the raster data collection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: If the previous response was truncated, you receive this token.
+        --raster-data-collection-query=!: RasterDataCollectionQuery consisting of [AreaOfInterest(AOI)](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html), [PropertyFilters](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html) and [TimeRangeFilterInput](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html) used in [SearchRasterDataCollection](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html).
+    - name: get-earth-observation-job
+      description: Get the details for a previously initiated Earth Observation job.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-vector-enrichment-job
+      description: Retrieves details of a Vector Enrichment Job for a given job Amazon Resource Name (ARN).
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the Vector Enrichment job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-vector-enrichment-job
+      description: Creates a Vector Enrichment job for the supplied job type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token that guarantees that the call to this API is idempotent.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-config=!: Input configuration information for the Vector Enrichment job.
+        --job-config=!: An object containing information about the job configuration.
+        --kms-key-id=: The Key Management Service key ID for server-side encryption.
+        --name=!: The name of the Vector Enrichment job.
+        --tags=: Each tag consists of a key and a value.
     - name: list-earth-observation-jobs
       description: Use this operation to get a list of the Earth Observation jobs associated with the calling Amazon Web Services account.
       flags:
@@ -44,13 +138,6 @@ commands:
                 - FAILED
                 - DELETING
                 - DELETED
-    - name: list-tags-for-resource
-      description: Lists the tags attached to the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to tag.
     - name: list-vector-enrichment-jobs
       description: Retrieves a list of vector enrichment jobs.
       flags:
@@ -70,33 +157,27 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: untag-resource
-      description: The resource you want to untag.
+    - name: start-earth-observation-job
+      description: Use this operation to create an Earth observation job.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to untag.
-        --tag-keys=!: Keys of the tags you want to remove.
-    - name: delete-earth-observation-job
-      description: Use this operation to delete an Earth Observation job.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: export-earth-observation-job
-      description: Use this operation to export results of an Earth Observation job and optionally source images used as input to the EOJ to an Amazon S3 location.
-      flags:
-        --arn=!: The input Amazon Resource Name (ARN) of the Earth Observation job being exported.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token that guarantees that the call to this API is idempotent.
         --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
-        --export-source-images: The source images provided to the Earth Observation job being exported.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-export-source-images: The source images provided to the Earth Observation job being exported.
-        --output-config=!: An object containing information about the output file.
+        --input-config=!: Input configuration information for the Earth Observation job.
+        --job-config=!: An object containing information about the job configuration.
+        --kms-key-id=: The Key Management Service key ID for server-side encryption.
+        --name=!: The name of the Earth Observation job.
+        --tags=: Each tag consists of a key and a value.
+    - name: tag-resource
+      description: The resource you want to tag.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to tag.
+        --tags=!: Each tag consists of a key and a value.
     - name: export-vector-enrichment-job
       description: Use this operation to copy results of a Vector Enrichment job to an Amazon S3 location.
       flags:
@@ -136,84 +217,3 @@ commands:
                 - OUTPUT
         positional:
             - - $files
-    - name: list-raster-data-collections
-      description: Use this operation to get raster data collections.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The total number of items to return.
-        --next-token=: If the previous response was truncated, you receive this token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-earth-observation-job
-      description: Use this operation to create an Earth observation job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique token that guarantees that the call to this API is idempotent.
-        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-config=!: Input configuration information for the Earth Observation job.
-        --job-config=!: An object containing information about the job configuration.
-        --kms-key-id=: The Key Management Service key ID for server-side encryption.
-        --name=!: The name of the Earth Observation job.
-        --tags=: Each tag consists of a key and a value.
-    - name: stop-vector-enrichment-job
-      description: Stops the Vector Enrichment job for a given job ARN.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Vector Enrichment job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-earth-observation-job
-      description: Get the details for a previously initiated Earth Observation job.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-vector-enrichment-job
-      description: Creates a Vector Enrichment job for the supplied job type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique token that guarantees that the call to this API is idempotent.
-        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that you specified for the job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-config=!: Input configuration information for the Vector Enrichment job.
-        --job-config=!: An object containing information about the job configuration.
-        --kms-key-id=: The Key Management Service key ID for server-side encryption.
-        --name=!: The name of the Vector Enrichment job.
-        --tags=: Each tag consists of a key and a value.
-    - name: get-raster-data-collection
-      description: Use this operation to get details of a specific raster data collection.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the raster data collection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-vector-enrichment-job
-      description: Retrieves details of a Vector Enrichment Job for a given job Amazon Resource Name (ARN).
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Vector Enrichment job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: search-raster-data-collection
-      description: Allows you run image query on a specific raster data collection to get a list of the satellite imagery matching the selected filters.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the raster data collection.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: If the previous response was truncated, you receive this token.
-        --raster-data-collection-query=!: RasterDataCollectionQuery consisting of [AreaOfInterest(AOI)](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_AreaOfInterest.html), [PropertyFilters](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_PropertyFilter.html) and [TimeRangeFilterInput](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_TimeRangeFilterInput.html) used in [SearchRasterDataCollection](https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_geospatial_SearchRasterDataCollection.html).
-    - name: stop-earth-observation-job
-      description: Use this operation to stop an existing earth observation job.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the Earth Observation job being stopped.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

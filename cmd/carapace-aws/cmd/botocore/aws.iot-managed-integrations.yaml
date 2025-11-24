@@ -1,8 +1,8 @@
 name: iot-managed-integrations
 description: Managed integrations for AWS IoT Device Management
 commands:
-    - name: list-provisioning-profiles
-      description: List the provisioning profiles within the Amazon Web Services account.
+    - name: list-destinations
+      description: List all notification destinations.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -12,33 +12,240 @@ commands:
         --next-token=: A token that can be used to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-connector-destination
-      description: Create a connector destination for connecting a cloud-to-cloud (C2C) connector to the customer's Amazon Web Services account.
+    - name: create-ota-task
+      description: Create an over-the-air (OTA) task to target a device.
       flags:
-        --auth-config=!: The authentication configuration details for the connector destination, including OAuth settings and other authentication parameters.
-        --auth-type=!: The authentication type used for the connector destination, which determines how credentials and access are managed.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
-        --cloud-connector-id=!: The identifier of the C2C connector.
-        --description=: A description of the connector destination.
+        --description=: The description of the over-the-air (OTA) task.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The display name of the connector destination.
-        --secrets-manager=!: The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.
+        --ota-mechanism=: The deployment mechanism for the over-the-air (OTA) task.
+        --ota-scheduling-config=: ""
+        --ota-target-query-string=: The query string to add things to the thing group.
+        --ota-task-execution-retry-config=: ""
+        --ota-type=!: The frequency type for the over-the-air (OTA) task.
+        --protocol=: The connection protocol the over-the-air (OTA) task uses to update the device.
+        --s3-url=!: The URL to the Amazon S3 bucket where the over-the-air (OTA) task is stored.
+        --tags=: A set of key/value pairs that are used to manage the over-the-air (OTA) task.
+        --target=: The device targeted for the over-the-air (OTA) task.
+        --task-configuration-id=: The identifier for the over-the-air (OTA) task configuration.
+      completion:
+        flag:
+            ota-mechanism:
+                - PUSH
+            ota-type:
+                - ONE_TIME
+                - CONTINUOUS
+            protocol:
+                - HTTP
+    - name: delete-credential-locker
+      description: Delete a credential locker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the credential locker.
+    - name: delete-event-log-configuration
+      description: Delete an event log configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the event log configuration.
+    - name: get-connector-destination
+      description: Get connector destination details linked to a cloud-to-cloud (C2C) connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the C2C connector destination.
+    - name: get-credential-locker
+      description: Get information on an existing credential locker
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the credential locker.
+    - name: get-destination
+      description: Gets a destination by name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the customer-managed destination.
+    - name: update-account-association
+      description: Updates the properties of an existing account association.
+      flags:
+        --account-association-id=!: The unique identifier of the account association to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description to assign to the account association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new name to assign to the account association.
+    - name: list-account-associations
+      description: Lists all account associations, with optional filtering by connector destination ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-destination-id=: The identifier of the connector destination to filter account associations by.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of account associations to return in a single response.
+        --next-token=: A token used for pagination of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-credential-lockers
+      description: List information on an existing credential locker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-event-log-configuration
+      description: Set the event log configuration for the account, resource type, or specific resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --event-log-level=!: The logging level for the event log configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=: The identifier of the resource for the event log configuration.
+        --resource-type=!: The type of resource for the event log configuration.
+      completion:
+        flag:
+            event-log-level:
+                - DEBUG
+                - ERROR
+                - INFO
+                - WARN
+    - name: delete-ota-task
+      description: Delete the over-the-air (OTA) task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the over-the-air (OTA) task.
+    - name: deregister-account-association
+      description: Deregister an account association from a managed thing.
+      flags:
+        --account-association-id=!: The unique identifier of the account association to be deregistered.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-thing-id=!: The identifier of the managed thing to be deregistered from the account association.
+    - name: get-managed-thing-capabilities
+      description: Get the capabilities for a managed thing using the device ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the device.
+    - name: get-managed-thing-connectivity-data
+      description: Get the connectivity status of a managed thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of a managed thing.
+    - name: update-cloud-connector
+      description: Update an existing cloud connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description to assign to the cloud connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the cloud connector to update.
+        --name=: The new display name to assign to the cloud connector.
+    - name: create-account-association
+      description: Creates a new account association via the destination id.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --connector-destination-id=!: The identifier of the connector destination.
+        --description=: A description of the account association request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the destination for the new account association.
+        --tags=: A set of key/value pairs that are used to manage the account association.
+    - name: create-ota-task-configuration
+      description: Create a configuraiton for the over-the-air (OTA) task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --description=: A description of the over-the-air (OTA) task configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the over-the-air (OTA) task.
+        --push-config=: Describes the type of configuration used for the over-the-air (OTA) task.
+    - name: list-notification-configurations
+      description: List all notification configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Add tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to which to add tags.
+        --tags=!: A set of key/value pairs that are used to manage the resource
+    - name: update-connector-destination
+      description: Updates the properties of an existing connector destination.
+      flags:
+        --auth-config=: The updated authentication configuration details for the connector destination.
+        --auth-type=: The new authentication type to use for the connector destination.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description to assign to the connector destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the connector destination to update.
+        --name=: The new display name to assign to the connector destination.
+        --secrets-manager=: The updated AWS Secrets Manager configuration for the connector destination.
       completion:
         flag:
             auth-type:
                 - OAUTH
-    - name: create-notification-configuration
-      description: Creates a notification configuration.
+    - name: create-cloud-connector
+      description: Creates a C2C (cloud-to-cloud) connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
-        --destination-name=!: The name of the destination for the notification configuration.
+        --description=: A description of the C2C connector.
+        --endpoint-config=!: The configuration details for the cloud connector endpoint, including connection parameters and authentication requirements.
+        --endpoint-type=: The type of endpoint used for the cloud connector, which defines how the connector communicates with external services.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The display name of the C2C connector.
+      completion:
+        flag:
+            endpoint-type:
+                - LAMBDA
+    - name: delete-account-association
+      description: Remove a third-party account association for an end user.
+      flags:
+        --account-association-id=!: The unique identifier of the account association to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-notification-configuration
+      description: Deletes a notification configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --event-type=!: The type of event triggering a device notification to the customer-managed destination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A set of key/value pairs that are used to manage the notification configuration.
       completion:
         flag:
             event-type:
@@ -52,20 +259,13 @@ commands:
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
-    - name: get-credential-locker
-      description: Get information on an existing credential locker
+    - name: get-provisioning-profile
+      description: Get a provisioning profile by template name.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the credential locker.
-    - name: get-managed-thing-state
-      description: Returns the managed thing state for the given device Id.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The id of the device.
+        --identifier=!: The provisioning template the device uses for the provisioning process.
     - name: update-notification-configuration
       description: Update a notification configuration.
       flags:
@@ -87,264 +287,13 @@ commands:
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
-    - name: delete-ota-task
-      description: Delete the over-the-air (OTA) task.
+    - name: delete-provisioning-profile
+      description: Delete a provisioning profile.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the over-the-air (OTA) task.
-    - name: get-runtime-log-configuration
-      description: Get the runtime log configuration for a specific managed thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The id for a managed thing.
-    - name: update-ota-task
-      description: Update an over-the-air (OTA) task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the over-the-air (OTA) task.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The over-the-air (OTA) task id.
-        --task-configuration-id=: The identifier for the over-the-air (OTA) task configuration.
-    - name: deregister-account-association
-      description: Deregister an account association from a managed thing.
-      flags:
-        --account-association-id=!: The unique identifier of the account association to be deregistered.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The identifier of the managed thing to be deregistered from the account association.
-    - name: create-ota-task-configuration
-      description: Create a configuraiton for the over-the-air (OTA) task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --description=: A description of the over-the-air (OTA) task configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the over-the-air (OTA) task.
-        --push-config=: Describes the type of configuration used for the over-the-air (OTA) task.
-    - name: create-provisioning-profile
-      description: Create a provisioning profile for a device to execute the provisioning flows using a provisioning template.
-      flags:
-        --ca-certificate=: The id of the certificate authority (CA) certificate.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the provisioning template.
-        --provisioning-type=!: The type of provisioning workflow the device uses for onboarding to IoT managed integrations.
-        --tags=: A set of key/value pairs that are used to manage the provisioning profile.
-      completion:
-        flag:
-            provisioning-type:
-                - FLEET_PROVISIONING
-                - JITR
-    - name: create-managed-thing
-      description: Creates a managed thing.
-      flags:
-        --authentication-material-type=!: The type of authentication material used for device connectivity setup requests.
-        --authentication-material=!: The authentication material defining the device connectivity setup requests.
-        --brand=: The brand of the device.
-        --capabilities=: The capabilities of the device such as light bulb.
-        --capability-report=: A report of the capabilities for the managed thing.
-        --capability-schemas=: The capability schemas that define the functionality and features supported by the managed thing, including device capabilities and their associated properties.
-        --classification=: The classification of the managed thing such as light bulb or thermostat.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --credential-locker-id=: The identifier of the credential for the managed thing.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --meta-data=: The metadata for the managed thing.
-        --model=: The model of the device.
-        --name=: The name of the managed thing representing the physical device.
-        --owner=: Owner of the device, usually an indication of whom the device belongs to.
-        --role=!: The type of device used.
-        --serial-number=: The serial number of the device.
-        --tags=: A set of key/value pairs that are used to manage the managed thing.
-      completion:
-        flag:
-            authentication-material-type:
-                - CUSTOM_PROTOCOL_QR_BAR_CODE
-                - WIFI_SETUP_QR_BAR_CODE
-                - ZWAVE_QR_BAR_CODE
-                - ZIGBEE_QR_BAR_CODE
-                - DISCOVERED_DEVICE
-            role:
-                - CONTROLLER
-                - DEVICE
-    - name: delete-ota-task-configuration
-      description: Delete the over-the-air (OTA) task configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the over-the-air (OTA) task configuration.
-    - name: get-event-log-configuration
-      description: Get an event log configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the event log configuration.
-    - name: list-tags-for-resource
-      description: List tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource for which to list tags.
-    - name: update-cloud-connector
-      description: Update an existing cloud connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description to assign to the cloud connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the cloud connector to update.
-        --name=: The new display name to assign to the cloud connector.
-    - name: get-cloud-connector
-      description: Get configuration details for a cloud connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the C2C connector.
-    - name: get-managed-thing-certificate
-      description: Retrieves the certificate PEM for a managed IoT thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the managed thing.
-    - name: list-connector-destinations
-      description: Lists all connector destinations, with optional filtering by cloud connector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-connector-id=: The identifier of the cloud connector to filter connector destinations by.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of connector destinations to return in a single response.
-        --next-token=: A token used for pagination of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-default-encryption-configuration
-      description: Sets the default encryption configuration for the Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-type=!: The type of encryption used for the encryption configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-arn=: The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use `KMS_BASED_ENCRYPTION`.
-      completion:
-        flag:
-            encryption-type:
-                - MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION
-                - CUSTOMER_KEY_ENCRYPTION
-    - name: update-event-log-configuration
-      description: Update an event log configuration by log configuration ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-log-level=!: The log level for the event in terms of severity.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The log configuration id.
-      completion:
-        flag:
-            event-log-level:
-                - DEBUG
-                - ERROR
-                - INFO
-                - WARN
-    - name: update-managed-thing
-      description: Update the attributes and capabilities associated with a managed thing.
-      flags:
-        --brand=: The brand of the device.
-        --capabilities=: The capabilities of the device such as light bulb.
-        --capability-report=: A report of the capabilities for the managed thing.
-        --capability-schemas=: The updated capability schemas that define the functionality and features supported by the managed thing.
-        --classification=: The classification of the managed thing such as light bulb or thermostat.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --credential-locker-id=: The identifier of the credential for the managed thing.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hub-network-mode=: The network mode for the hub-connected device.
-        --identifier=!: The id of the managed thing.
-        --meta-data=: The metadata for the managed thing.
-        --model=: The model of the device.
-        --name=: The name of the managed thing representing the physical device.
-        --owner=: Owner of the device, usually an indication of whom the device belongs to.
-        --serial-number=: The serial number of the device.
-      completion:
-        flag:
-            hub-network-mode:
-                - STANDARD
-                - NETWORK_WIDE_EXCLUSION
-    - name: create-credential-locker
-      description: Create a credential locker.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the credential locker.
-        --tags=: A set of key/value pairs that are used to manage the credential locker.
-    - name: get-provisioning-profile
-      description: Get a provisioning profile by template name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The provisioning template the device uses for the provisioning process.
-    - name: list-ota-task-executions
-      description: List all of the over-the-air (OTA) task executions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The over-the-air (OTA) task id.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: send-connector-event
-      description: Relays third-party device events for a connector such as a new device or a device state change event.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-device-id=: The third-party device id as defined by the connector.
-        --connector-id=!: The id of the connector between the third-party cloud provider and IoT managed integrations.
-        --device-discovery-id=: The id for the device discovery job.
-        --devices=: The list of devices.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --matter-endpoint=: The device endpoint.
-        --message=: The device state change event payload.
-        --operation-version=: The Open Connectivity Foundation (OCF) security specification version for the operation being requested on the managed thing.
-        --operation=!: The Open Connectivity Foundation (OCF) operation requested to be performed on the managed thing.
-        --status-code=: The status code of the Open Connectivity Foundation (OCF) operation being performed on the managed thing.
-        --trace-id=: The trace request identifier.
-        --user-id=: The id of the third-party cloud provider.
-      completion:
-        flag:
-            operation:
-                - DEVICE_COMMAND_RESPONSE
-                - DEVICE_DISCOVERY
-                - DEVICE_EVENT
-                - DEVICE_COMMAND_REQUEST
-    - name: tag-resource
-      description: Add tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to which to add tags.
-        --tags=!: A set of key/value pairs that are used to manage the resource
+        --identifier=!: The name of the provisioning template.
     - name: get-account-association
       description: Get an account association for an Amazon Web Services account linked to a customer-managed destination.
       flags:
@@ -352,73 +301,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-notification-configurations
-      description: List all notification configurations.
+    - name: get-cloud-connector
+      description: Get configuration details for a cloud connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-account-association-refresh
-      description: Initiates a refresh of an existing account association to update its authorization and connection status.
-      flags:
-        --account-association-id=!: The unique identifier of the account association to refresh.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-destination
-      description: Update a destination specified by name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delivery-destination-arn=: The Amazon Resource Name (ARN) of the customer-managed destination.
-        --delivery-destination-type=: The destination type for the customer-managed destination.
-        --description=: The description of the customer-managed destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the customer-managed destination.
-        --role-arn=: The Amazon Resource Name (ARN) of the delivery destination role.
-      completion:
-        flag:
-            delivery-destination-type:
-                - KINESIS
-    - name: delete-connector-destination
-      description: Delete a connector destination linked to a cloud-to-cloud (C2C) connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the connector destination.
-    - name: delete-event-log-configuration
-      description: Delete an event log configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the event log configuration.
-    - name: delete-notification-configuration
-      description: Deletes a notification configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-type=!: The type of event triggering a device notification to the customer-managed destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            event-type:
-                - DEVICE_COMMAND
-                - DEVICE_COMMAND_REQUEST
-                - DEVICE_DISCOVERY_STATUS
-                - DEVICE_EVENT
-                - DEVICE_LIFE_CYCLE
-                - DEVICE_STATE
-                - DEVICE_OTA
-                - CONNECTOR_ASSOCIATION
-                - ACCOUNT_ASSOCIATION
-                - CONNECTOR_ERROR_REPORT
+        --identifier=!: The identifier of the C2C connector.
     - name: list-event-log-configurations
       description: List all event log configurations for an account.
       flags:
@@ -430,158 +319,31 @@ commands:
         --next-token=: A token that can be used to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: register-custom-endpoint
-      description: Customers can request IoT managed integrations to manage the server trust for them or bring their own external server trusts for the custom domain.
+    - name: list-managed-thing-account-associations
+      description: Lists all account associations for a specific managed thing.
       flags:
+        --account-association-id=: The identifier of the account association to filter results by.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-device-discovery
-      description: This API is used to start device discovery for hub-connected and third-party-connected devices.
-      flags:
-        --account-association-id=: The identifier of the cloud-to-cloud account association to use for discovery of third-party devices.
-        --authentication-material-type=: The type of authentication material used for device discovery jobs.
-        --authentication-material=: The authentication material required to start the local device discovery job request.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --connector-association-identifier=: The id of the connector association.
-        --controller-identifier=: The id of the end-user's IoT hub.
-        --custom-protocol-detail=: Additional protocol-specific details required for device discovery, which vary based on the discovery type.
-        --discovery-type=!: The discovery type supporting the type of device to be discovered in the device discovery task request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A set of key/value pairs that are used to manage the device discovery request.
-      completion:
-        flag:
-            authentication-material-type:
-                - ZWAVE_INSTALL_CODE
-            discovery-type:
-                - ZWAVE
-                - ZIGBEE
-                - CLOUD
-                - CUSTOM
-    - name: delete-destination
-      description: Deletes a notification destination specified by name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The id of the customer-managed destination.
-    - name: get-device-discovery
-      description: Get the current state of a device discovery.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the device discovery job request.
-    - name: register-account-association
-      description: Registers an account association with a managed thing, establishing a connection between a device and a third-party account.
-      flags:
-        --account-association-id=!: The identifier of the account association to register with the managed thing.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --device-discovery-id=!: The identifier of the device discovery job associated with this registration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The identifier of the managed thing to register with the account association.
-    - name: send-managed-thing-command
-      description: Send the command to the device represented by the managed thing.
-      flags:
-        --account-association-id=: The identifier of the account association to use when sending a command to a managed thing.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-association-id=: The ID tracking the current discovery process for one connector association.
-        --endpoints=!: The device endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The id of the device.
-    - name: delete-managed-thing
-      description: Delete a managed thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: When set to `TRUE`, a forceful deteletion of the managed thing will occur.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the managed thing.
-        --no-force: When set to `TRUE`, a forceful deteletion of the managed thing will occur.
-    - name: get-managed-thing
-      description: Get details of a managed thing including its attributes and capabilities.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the managed thing.
-    - name: get-schema-version
-      description: Gets a schema version with the provided information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --format=: The format of the schema version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --schema-versioned-id=!: Schema id with a version specified.
-        --type=!: The type of schema version.
-      completion:
-        flag:
-            format:
-                - AWS
-                - ZCL
-                - CONNECTOR
-            type:
-                - capability
-                - definition
-    - name: list-account-associations
-      description: Lists all account associations, with optional filtering by connector destination ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connector-destination-id=: The identifier of the connector destination to filter account associations by.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-thing-id=: The identifier of the managed thing to list account associations for.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of account associations to return in a single response.
         --next-token=: A token used for pagination of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-device-discoveries
-      description: Lists all device discovery tasks, with optional filtering by type and status.
+    - name: list-managed-thing-schemas
+      description: List schemas associated with a managed thing.
       flags:
+        --capability-id-filter=: Filter on a capability id.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-id-filter=: Filter on an endpoint id.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The managed thing id.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of device discovery jobs to return in a single response.
-        --next-token=: A token used for pagination of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status-filter=: The status to filter device discovery jobs by.
-        --type-filter=: The discovery type to filter device discovery jobs by.
-      completion:
-        flag:
-            status-filter:
-                - RUNNING
-                - SUCCEEDED
-                - FAILED
-                - TIMED_OUT
-            type-filter:
-                - ZWAVE
-                - ZIGBEE
-                - CLOUD
-                - CUSTOM
-    - name: untag-resource
-      description: Remove tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to which to add tags.
-        --tag-keys=!: A list of tag keys to remove from the resource.
-    - name: list-discovered-devices
-      description: Lists all devices discovered during a specific device discovery task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the device discovery job to list discovered devices for.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of discovered devices to return in a single response.
-        --next-token=: A token used for pagination of results.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-managed-things
@@ -618,138 +380,110 @@ commands:
             role-filter:
                 - CONTROLLER
                 - DEVICE
-    - name: update-connector-destination
-      description: Updates the properties of an existing connector destination.
-      flags:
-        --auth-config=: The updated authentication configuration details for the connector destination.
-        --auth-type=: The new authentication type to use for the connector destination.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description to assign to the connector destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the connector destination to update.
-        --name=: The new display name to assign to the connector destination.
-        --secrets-manager=: The updated AWS Secrets Manager configuration for the connector destination.
-      completion:
-        flag:
-            auth-type:
-                - OAUTH
-    - name: get-managed-thing-meta-data
-      description: Get the metadata information for a managed thing.
+    - name: reset-runtime-log-configuration
+      description: Reset a runtime log configuration for a specific managed thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The managed thing id.
-    - name: get-notification-configuration
-      description: Get a notification configuration for a specified event type.
+        --managed-thing-id=!: The id of a managed thing.
+    - name: create-provisioning-profile
+      description: Create a provisioning profile for a device to execute the provisioning flows using a provisioning template.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-type=!: The type of event triggering a device notification to the customer-managed destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            event-type:
-                - DEVICE_COMMAND
-                - DEVICE_COMMAND_REQUEST
-                - DEVICE_DISCOVERY_STATUS
-                - DEVICE_EVENT
-                - DEVICE_LIFE_CYCLE
-                - DEVICE_STATE
-                - DEVICE_OTA
-                - CONNECTOR_ASSOCIATION
-                - ACCOUNT_ASSOCIATION
-                - CONNECTOR_ERROR_REPORT
-    - name: list-cloud-connectors
-      description: Returns a list of connectors filtered by its Lambda Amazon Resource Name (ARN) and `type`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lambda-arn=: The Amazon Resource Name (ARN) of the Lambda function to filter cloud connectors by.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --type=: The type of cloud connectors to filter by when listing available connectors.
-      completion:
-        flag:
-            type:
-                - LISTED
-                - UNLISTED
-    - name: create-event-log-configuration
-      description: Set the event log configuration for the account, resource type, or specific resource.
-      flags:
+        --ca-certificate=: The id of the certificate authority (CA) certificate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
-        --event-log-level=!: The logging level for the event log configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=: The identifier of the resource for the event log configuration.
-        --resource-type=!: The type of resource for the event log configuration.
+        --name=: The name of the provisioning template.
+        --provisioning-type=!: The type of provisioning workflow the device uses for onboarding to IoT managed integrations.
+        --tags=: A set of key/value pairs that are used to manage the provisioning profile.
       completion:
         flag:
-            event-log-level:
-                - DEBUG
-                - ERROR
-                - INFO
-                - WARN
-    - name: delete-credential-locker
-      description: Delete a credential locker.
+            provisioning-type:
+                - FLEET_PROVISIONING
+                - JITR
+    - name: delete-managed-thing
+      description: Delete a managed thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: When set to `TRUE`, a forceful deteletion of the managed thing will occur.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the managed thing.
+        --no-force: When set to `TRUE`, a forceful deteletion of the managed thing will occur.
+    - name: get-runtime-log-configuration
+      description: Get the runtime log configuration for a specific managed thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the credential locker.
-    - name: get-default-encryption-configuration
-      description: Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-account-association
-      description: Remove a third-party account association for an end user.
-      flags:
-        --account-association-id=!: The unique identifier of the account association to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-cloud-connector
-      description: Delete a cloud connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the cloud connector.
-    - name: delete-provisioning-profile
-      description: Delete a provisioning profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The name of the provisioning template.
-    - name: get-hub-configuration
-      description: Get a hub configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-managed-thing-connectivity-data
-      description: Get the connectivity status of a managed thing.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of a managed thing.
-    - name: get-ota-task
-      description: Get details of the over-the-air (OTA) task by its task id.
+        --managed-thing-id=!: The id for a managed thing.
+    - name: list-ota-task-executions
+      description: List all of the over-the-air (OTA) task executions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The over-the-air (OTA) task id.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-connector-destination
+      description: Create a connector destination for connecting a cloud-to-cloud (C2C) connector to the customer's Amazon Web Services account.
+      flags:
+        --auth-config=!: The authentication configuration details for the connector destination, including OAuth settings and other authentication parameters.
+        --auth-type=!: The authentication type used for the connector destination, which determines how credentials and access are managed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --cloud-connector-id=!: The identifier of the C2C connector.
+        --description=: A description of the connector destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The display name of the connector destination.
+        --secrets-manager=!: The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.
+      completion:
+        flag:
+            auth-type:
+                - OAUTH
+    - name: create-destination
+      description: Create a notification destination such as Kinesis Data Streams that receive events and notifications from Managed integrations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --delivery-destination-arn=!: The Amazon Resource Name (ARN) of the customer-managed destination.
+        --delivery-destination-type=!: The destination type for the customer-managed destination.
+        --description=: The description of the customer-managed destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the customer-managed destination.
+        --role-arn=!: The Amazon Resource Name (ARN) of the delivery destination role.
+        --tags=: A set of key/value pairs that are used to manage the destination.
+      completion:
+        flag:
+            delivery-destination-type:
+                - KINESIS
+    - name: get-managed-thing
+      description: Get details of a managed thing including its attributes and capabilities.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the managed thing.
+    - name: list-discovered-devices
+      description: Lists all devices discovered during a specific device discovery task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the device discovery job to list discovered devices for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of discovered devices to return in a single response.
+        --next-token=: A token used for pagination of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-schema-versions
       description: Lists schema versions with the provided information.
       flags:
@@ -774,58 +508,83 @@ commands:
             visibility:
                 - PUBLIC
                 - PRIVATE
-    - name: reset-runtime-log-configuration
-      description: Reset a runtime log configuration for a specific managed thing.
+    - name: put-hub-configuration
+      description: Update a hub configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The id of a managed thing.
-    - name: create-ota-task
-      description: Create an over-the-air (OTA) task to target a device.
+        --hub-token-timer-expiry-setting-in-seconds=!: A user-defined integer value that represents the hub token timer expiry setting in seconds.
+    - name: put-runtime-log-configuration
+      description: Set the runtime log configuration for a specific managed thing or for all managed things as a group.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --description=: The description of the over-the-air (OTA) task.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ota-mechanism=: The deployment mechanism for the over-the-air (OTA) task.
-        --ota-scheduling-config=: ""
-        --ota-target-query-string=: The query string to add things to the thing group.
-        --ota-task-execution-retry-config=: ""
-        --ota-type=!: The frequency type for the over-the-air (OTA) task.
-        --protocol=: The connection protocol the over-the-air (OTA) task uses to update the device.
-        --s3-url=!: The URL to the Amazon S3 bucket where the over-the-air (OTA) task is stored.
-        --tags=: A set of key/value pairs that are used to manage the over-the-air (OTA) task.
-        --target=: The device targeted for the over-the-air (OTA) task.
-        --task-configuration-id=: The identifier for the over-the-air (OTA) task configuration.
+        --managed-thing-id=!: The id for a managed thing.
+        --runtime-log-configurations=!: The runtime log configuration for a managed thing.
+    - name: send-connector-event
+      description: Relays third-party device events for a connector such as a new device or a device state change event.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-device-id=: The third-party device id as defined by the connector.
+        --connector-id=!: The id of the connector between the third-party cloud provider and IoT managed integrations.
+        --device-discovery-id=: The id for the device discovery job.
+        --devices=: The list of devices.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --matter-endpoint=: The device endpoint.
+        --message=: The device state change event payload.
+        --operation-version=: The Open Connectivity Foundation (OCF) security specification version for the operation being requested on the managed thing.
+        --operation=!: The Open Connectivity Foundation (OCF) operation requested to be performed on the managed thing.
+        --status-code=: The status code of the Open Connectivity Foundation (OCF) operation being performed on the managed thing.
+        --trace-id=: The trace request identifier.
+        --user-id=: The id of the third-party cloud provider.
       completion:
         flag:
-            ota-mechanism:
-                - PUSH
-            ota-type:
-                - ONE_TIME
-                - CONTINUOUS
-            protocol:
-                - HTTP
-    - name: get-destination
-      description: Gets a destination by name.
+            operation:
+                - DEVICE_COMMAND_RESPONSE
+                - DEVICE_DISCOVERY
+                - DEVICE_EVENT
+                - DEVICE_COMMAND_REQUEST
+    - name: delete-connector-destination
+      description: Delete a connector destination linked to a cloud-to-cloud (C2C) connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the customer-managed destination.
-    - name: list-credential-lockers
-      description: List information on an existing credential locker.
+        --identifier=!: The identifier of the connector destination.
+    - name: get-default-encryption-configuration
+      description: Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-device-discoveries
+      description: Lists all device discovery tasks, with optional filtering by type and status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
+        --max-results=: The maximum number of device discovery jobs to return in a single response.
+        --next-token=: A token used for pagination of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+        --status-filter=: The status to filter device discovery jobs by.
+        --type-filter=: The discovery type to filter device discovery jobs by.
+      completion:
+        flag:
+            status-filter:
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+                - TIMED_OUT
+            type-filter:
+                - ZWAVE
+                - ZIGBEE
+                - CLOUD
+                - CUSTOM
     - name: list-ota-tasks
       description: List all of the over-the-air (OTA) tasks.
       flags:
@@ -837,138 +596,147 @@ commands:
         --next-token=: A token that can be used to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-connector-destination
-      description: Get connector destination details linked to a cloud-to-cloud (C2C) connector.
+    - name: register-custom-endpoint
+      description: Customers can request IoT managed integrations to manage the server trust for them or bring their own external server trusts for the custom domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The identifier of the C2C connector destination.
-    - name: list-managed-thing-account-associations
-      description: Lists all account associations for a specific managed thing.
+    - name: create-managed-thing
+      description: Creates a managed thing.
       flags:
-        --account-association-id=: The identifier of the account association to filter results by.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=: The identifier of the managed thing to list account associations for.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of account associations to return in a single response.
-        --next-token=: A token used for pagination of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-runtime-log-configuration
-      description: Set the runtime log configuration for a specific managed thing or for all managed things as a group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --managed-thing-id=!: The id for a managed thing.
-        --runtime-log-configurations=!: The runtime log configuration for a managed thing.
-    - name: create-account-association
-      description: Creates a new account association via the destination id.
-      flags:
+        --authentication-material-type=!: The type of authentication material used for device connectivity setup requests.
+        --authentication-material=!: The authentication material defining the device connectivity setup requests.
+        --brand=: The brand of the device.
+        --capabilities=: The capabilities of the device such as light bulb.
+        --capability-report=: A report of the capabilities for the managed thing.
+        --capability-schemas=: The capability schemas that define the functionality and features supported by the managed thing, including device capabilities and their associated properties.
+        --classification=: The classification of the managed thing such as light bulb or thermostat.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
-        --connector-destination-id=!: The identifier of the connector destination.
-        --description=: A description of the account association request.
+        --credential-locker-id=: The identifier of the credential for the managed thing.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the destination for the new account association.
-        --tags=: A set of key/value pairs that are used to manage the account association.
-    - name: create-cloud-connector
-      description: Creates a C2C (cloud-to-cloud) connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --description=: A description of the C2C connector.
-        --endpoint-config=!: The configuration details for the cloud connector endpoint, including connection parameters and authentication requirements.
-        --endpoint-type=: The type of endpoint used for the cloud connector, which defines how the connector communicates with external services.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The display name of the C2C connector.
+        --meta-data=: The metadata for the managed thing.
+        --model=: The model of the device.
+        --name=: The name of the managed thing representing the physical device.
+        --owner=: Owner of the device, usually an indication of whom the device belongs to.
+        --role=!: The type of device used.
+        --serial-number=: The serial number of the device.
+        --tags=: A set of key/value pairs that are used to manage the managed thing.
       completion:
         flag:
-            endpoint-type:
-                - LAMBDA
-    - name: create-destination
-      description: Create a notification destination such as Kinesis Data Streams that receive events and notifications from Managed integrations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An idempotency token.
-        --delivery-destination-arn=!: The Amazon Resource Name (ARN) of the customer-managed destination.
-        --delivery-destination-type=!: The destination type for the customer-managed destination.
-        --description=: The description of the customer-managed destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the customer-managed destination.
-        --role-arn=!: The Amazon Resource Name (ARN) of the delivery destination role.
-        --tags=: A set of key/value pairs that are used to manage the destination.
-      completion:
-        flag:
-            delivery-destination-type:
-                - KINESIS
-    - name: get-managed-thing-capabilities
-      description: Get the capabilities for a managed thing using the device ID.
+            authentication-material-type:
+                - CUSTOM_PROTOCOL_QR_BAR_CODE
+                - WIFI_SETUP_QR_BAR_CODE
+                - ZWAVE_QR_BAR_CODE
+                - ZIGBEE_QR_BAR_CODE
+                - DISCOVERED_DEVICE
+            role:
+                - CONTROLLER
+                - DEVICE
+    - name: get-event-log-configuration
+      description: Get an event log configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The id of the device.
-    - name: list-destinations
-      description: List all notification destinations.
+        --id=!: The identifier of the event log configuration.
+    - name: register-account-association
+      description: Registers an account association with a managed thing, establishing a connection between a device and a third-party account.
       flags:
+        --account-association-id=!: The identifier of the account association to register with the managed thing.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --device-discovery-id=!: The identifier of the device discovery job associated with this registration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-hub-configuration
-      description: Update a hub configuration.
+        --managed-thing-id=!: The identifier of the managed thing to register with the account association.
+    - name: get-managed-thing-meta-data
+      description: Get the metadata information for a managed thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hub-token-timer-expiry-setting-in-seconds=!: A user-defined integer value that represents the hub token timer expiry setting in seconds.
-    - name: update-account-association
-      description: Updates the properties of an existing account association.
-      flags:
-        --account-association-id=!: The unique identifier of the account association to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description to assign to the account association.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name to assign to the account association.
-    - name: get-custom-endpoint
-      description: Returns the IoT managed integrations custom endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-ota-task-configuration
-      description: Get a configuraiton for the over-the-air (OTA) task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The over-the-air (OTA) task configuration id.
-    - name: list-managed-thing-schemas
-      description: List schemas associated with a managed thing.
-      flags:
-        --capability-id-filter=: Filter on a capability id.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-id-filter=: Filter on an endpoint id.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The managed thing id.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return at one time.
-        --next-token=: A token that can be used to retrieve the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+    - name: create-notification-configuration
+      description: Creates a notification configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --destination-name=!: The name of the destination for the notification configuration.
+        --event-type=!: The type of event triggering a device notification to the customer-managed destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A set of key/value pairs that are used to manage the notification configuration.
+      completion:
+        flag:
+            event-type:
+                - DEVICE_COMMAND
+                - DEVICE_COMMAND_REQUEST
+                - DEVICE_DISCOVERY_STATUS
+                - DEVICE_EVENT
+                - DEVICE_LIFE_CYCLE
+                - DEVICE_STATE
+                - DEVICE_OTA
+                - CONNECTOR_ASSOCIATION
+                - ACCOUNT_ASSOCIATION
+                - CONNECTOR_ERROR_REPORT
+    - name: delete-ota-task-configuration
+      description: Delete the over-the-air (OTA) task configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the over-the-air (OTA) task configuration.
+    - name: get-device-discovery
+      description: Get the current state of a device discovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The id of the device discovery job request.
+    - name: start-device-discovery
+      description: This API is used to start device discovery for hub-connected and third-party-connected devices.
+      flags:
+        --account-association-id=: The identifier of the cloud-to-cloud account association to use for discovery of third-party devices.
+        --authentication-material-type=: The type of authentication material used for device discovery jobs.
+        --authentication-material=: The authentication material required to start the local device discovery job request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --connector-association-identifier=: The id of the connector association.
+        --controller-identifier=: The id of the end-user's IoT hub.
+        --custom-protocol-detail=: Additional protocol-specific details required for device discovery, which vary based on the discovery type.
+        --discovery-type=!: The discovery type supporting the type of device to be discovered in the device discovery task request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A set of key/value pairs that are used to manage the device discovery request.
+      completion:
+        flag:
+            authentication-material-type:
+                - ZWAVE_INSTALL_CODE
+            discovery-type:
+                - ZWAVE
+                - ZIGBEE
+                - CLOUD
+                - CUSTOM
+    - name: get-schema-version
+      description: Gets a schema version with the provided information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=: The format of the schema version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema-versioned-id=!: Schema id with a version specified.
+        --type=!: The type of schema version.
+      completion:
+        flag:
+            format:
+                - AWS
+                - ZCL
+                - CONNECTOR
+            type:
+                - capability
+                - definition
     - name: list-ota-task-configurations
       description: List all of the over-the-air (OTA) task configurations.
       flags:
@@ -980,3 +748,235 @@ commands:
         --next-token=: A token that can be used to retrieve the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource for which to list tags.
+    - name: put-default-encryption-configuration
+      description: Sets the default encryption configuration for the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-type=!: The type of encryption used for the encryption configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Key Amazon Resource Name (ARN) of the AWS KMS key used for KMS encryption if you use `KMS_BASED_ENCRYPTION`.
+      completion:
+        flag:
+            encryption-type:
+                - MANAGED_INTEGRATIONS_DEFAULT_ENCRYPTION
+                - CUSTOMER_KEY_ENCRYPTION
+    - name: send-managed-thing-command
+      description: Send the command to the device represented by the managed thing.
+      flags:
+        --account-association-id=: The identifier of the account association to use when sending a command to a managed thing.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-association-id=: The ID tracking the current discovery process for one connector association.
+        --endpoints=!: The device endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-thing-id=!: The id of the device.
+    - name: start-account-association-refresh
+      description: Initiates a refresh of an existing account association to update its authorization and connection status.
+      flags:
+        --account-association-id=!: The unique identifier of the account association to refresh.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-ota-task
+      description: Update an over-the-air (OTA) task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the over-the-air (OTA) task.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The over-the-air (OTA) task id.
+        --task-configuration-id=: The identifier for the over-the-air (OTA) task configuration.
+    - name: get-managed-thing-certificate
+      description: Retrieves the certificate PEM for a managed IoT thing.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the managed thing.
+    - name: list-cloud-connectors
+      description: Returns a list of connectors filtered by its Lambda Amazon Resource Name (ARN) and `type`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lambda-arn=: The Amazon Resource Name (ARN) of the Lambda function to filter cloud connectors by.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: The type of cloud connectors to filter by when listing available connectors.
+      completion:
+        flag:
+            type:
+                - LISTED
+                - UNLISTED
+    - name: untag-resource
+      description: Remove tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to which to add tags.
+        --tag-keys=!: A list of tag keys to remove from the resource.
+    - name: get-hub-configuration
+      description: Get a hub configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-custom-endpoint
+      description: Returns the IoT managed integrations custom endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-notification-configuration
+      description: Get a notification configuration for a specified event type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-type=!: The type of event triggering a device notification to the customer-managed destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            event-type:
+                - DEVICE_COMMAND
+                - DEVICE_COMMAND_REQUEST
+                - DEVICE_DISCOVERY_STATUS
+                - DEVICE_EVENT
+                - DEVICE_LIFE_CYCLE
+                - DEVICE_STATE
+                - DEVICE_OTA
+                - CONNECTOR_ASSOCIATION
+                - ACCOUNT_ASSOCIATION
+                - CONNECTOR_ERROR_REPORT
+    - name: list-provisioning-profiles
+      description: List the provisioning profiles within the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return at one time.
+        --next-token=: A token that can be used to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-credential-locker
+      description: Create a credential locker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An idempotency token.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the credential locker.
+        --tags=: A set of key/value pairs that are used to manage the credential locker.
+    - name: delete-cloud-connector
+      description: Delete a cloud connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the cloud connector.
+    - name: delete-destination
+      description: Deletes a notification destination specified by name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The id of the customer-managed destination.
+    - name: get-managed-thing-state
+      description: Returns the managed thing state for the given device Id.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-thing-id=!: The id of the device.
+    - name: list-connector-destinations
+      description: Lists all connector destinations, with optional filtering by cloud connector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-connector-id=: The identifier of the cloud connector to filter connector destinations by.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of connector destinations to return in a single response.
+        --next-token=: A token used for pagination of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-destination
+      description: Update a destination specified by name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-destination-arn=: The Amazon Resource Name (ARN) of the customer-managed destination.
+        --delivery-destination-type=: The destination type for the customer-managed destination.
+        --description=: The description of the customer-managed destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the customer-managed destination.
+        --role-arn=: The Amazon Resource Name (ARN) of the delivery destination role.
+      completion:
+        flag:
+            delivery-destination-type:
+                - KINESIS
+    - name: update-event-log-configuration
+      description: Update an event log configuration by log configuration ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-log-level=!: The log level for the event in terms of severity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The log configuration id.
+      completion:
+        flag:
+            event-log-level:
+                - DEBUG
+                - ERROR
+                - INFO
+                - WARN
+    - name: get-ota-task
+      description: Get details of the over-the-air (OTA) task by its task id.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The over-the-air (OTA) task id.
+    - name: get-ota-task-configuration
+      description: Get a configuraiton for the over-the-air (OTA) task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The over-the-air (OTA) task configuration id.
+    - name: update-managed-thing
+      description: Update the attributes and capabilities associated with a managed thing.
+      flags:
+        --brand=: The brand of the device.
+        --capabilities=: The capabilities of the device such as light bulb.
+        --capability-report=: A report of the capabilities for the managed thing.
+        --capability-schemas=: The updated capability schemas that define the functionality and features supported by the managed thing.
+        --classification=: The classification of the managed thing such as light bulb or thermostat.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential-locker-id=: The identifier of the credential for the managed thing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hub-network-mode=: The network mode for the hub-connected device.
+        --identifier=!: The id of the managed thing.
+        --meta-data=: The metadata for the managed thing.
+        --model=: The model of the device.
+        --name=: The name of the managed thing representing the physical device.
+        --owner=: Owner of the device, usually an indication of whom the device belongs to.
+        --serial-number=: The serial number of the device.
+      completion:
+        flag:
+            hub-network-mode:
+                - STANDARD
+                - NETWORK_WIDE_EXCLUSION

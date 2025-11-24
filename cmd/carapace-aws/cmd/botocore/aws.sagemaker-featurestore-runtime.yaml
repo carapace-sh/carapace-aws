@@ -1,6 +1,22 @@
 name: sagemaker-featurestore-runtime
 description: Amazon SageMaker Feature Store Runtime
 commands:
+    - name: delete-record
+      description: Deletes a `Record` from a `FeatureGroup` in the `OnlineStore`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deletion-mode=: The name of the deletion mode for deleting the record.
+        --event-time=!: Timestamp indicating when the deletion event occurred.
+        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group to delete the record from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-identifier-value-as-string=!: The value for the `RecordIdentifier` that uniquely identifies the record, in string format.
+        --target-stores=: A list of stores from which you're deleting the record.
+      completion:
+        flag:
+            deletion-mode:
+                - SoftDelete
+                - HardDelete
     - name: get-record
       description: Use for `OnlineStore` serving from a `FeatureStore`.
       flags:
@@ -39,19 +55,3 @@ commands:
             expiration-time-response:
                 - Enabled
                 - Disabled
-    - name: delete-record
-      description: Deletes a `Record` from a `FeatureGroup` in the `OnlineStore`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --deletion-mode=: The name of the deletion mode for deleting the record.
-        --event-time=!: Timestamp indicating when the deletion event occurred.
-        --feature-group-name=!: The name or Amazon Resource Name (ARN) of the feature group to delete the record from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --record-identifier-value-as-string=!: The value for the `RecordIdentifier` that uniquely identifies the record, in string format.
-        --target-stores=: A list of stores from which you're deleting the record.
-      completion:
-        flag:
-            deletion-mode:
-                - SoftDelete
-                - HardDelete

@@ -1,46 +1,13 @@
 name: marketplace-catalog
 description: AWS Marketplace Catalog Service
 commands:
-    - name: list-tags-for-resource
-      description: Lists all tags that have been added to a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
+    - name: batch-describe-entities
+      description: Returns metadata and content for multiple entities.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-request-list=!: List of entity IDs and the catalogs the entities are present in.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Required.
-    - name: put-resource-policy
-      description: Attaches a resource-based policy to an entity.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy document to set; formatted in JSON.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the entity resource you want to associate with a resource policy.
-    - name: start-change-set
-      description: Allows you to request changes for your entities.
-      flags:
-        --catalog=!: The catalog related to the request.
-        --change-set-name=: Optional case sensitive string of up to 100 ASCII characters.
-        --change-set-tags=: A list of objects specifying each key name and value for the `ChangeSetTags` property.
-        --change-set=!: Array of `change` object.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique token to identify the request to ensure idempotency.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --intent=: The intent related to the request.
-      completion:
-        flag:
-            intent:
-                - VALIDATE
-                - APPLY
-    - name: tag-resource
-      description: Tags a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Required.
-        --tags=!: Required.
     - name: cancel-change-set
       description: Used to cancel an open change request.
       flags:
@@ -63,14 +30,6 @@ commands:
         --change-set-id=!: Required.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-entity
-      description: Returns the metadata and content of the entity.
-      flags:
-        --catalog=!: Required.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-id=!: Required.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-change-sets
       description: Returns the list of change sets owned by the account being used to make the call.
@@ -109,20 +68,38 @@ commands:
             ownership-type:
                 - SELF
                 - SHARED
-    - name: untag-resource
-      description: Removes a tag or list of tags from a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
+    - name: start-change-set
+      description: Allows you to request changes for your entities.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --change-set-name=: Optional case sensitive string of up to 100 ASCII characters.
+        --change-set-tags=: A list of objects specifying each key name and value for the `ChangeSetTags` property.
+        --change-set=!: Array of `change` object.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique token to identify the request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intent=: The intent related to the request.
+      completion:
+        flag:
+            intent:
+                - VALIDATE
+                - APPLY
+    - name: tag-resource
+      description: Tags a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Required.
-        --tag-keys=!: Required.
-    - name: batch-describe-entities
-      description: Returns metadata and content for multiple entities.
+        --tags=!: Required.
+    - name: describe-entity
+      description: Returns the metadata and content of the entity.
       flags:
+        --catalog=!: Required.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-request-list=!: List of entity IDs and the catalogs the entities are present in.
+        --entity-id=!: Required.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-resource-policy
       description: Gets a resource-based policy of an entity that is identified by its resource ARN.
@@ -131,3 +108,26 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the entity resource that is associated with the resource policy.
+    - name: list-tags-for-resource
+      description: Lists all tags that have been added to a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Required.
+    - name: put-resource-policy
+      description: Attaches a resource-based policy to an entity.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The policy document to set; formatted in JSON.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the entity resource you want to associate with a resource policy.
+    - name: untag-resource
+      description: Removes a tag or list of tags from a resource (either an [entity](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#catalog-api-entities) or [change set](https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Required.
+        --tag-keys=!: Required.

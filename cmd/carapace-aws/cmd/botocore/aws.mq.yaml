@@ -1,6 +1,181 @@
 name: mq
 description: AmazonMQ
 commands:
+    - name: create-configuration
+      description: Creates a new configuration for the specified configuration name.
+      flags:
+        --authentication-strategy=: Optional.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=!: Required.
+        --engine-version=: The broker engine version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Required.
+        --tags=: Create tags when creating the configuration.
+      completion:
+        flag:
+            authentication-strategy:
+                - SIMPLE
+                - LDAP
+                - CONFIG_MANAGED
+            engine-type:
+                - ACTIVEMQ
+                - RABBITMQ
+    - name: describe-broker-engine-types
+      description: Describe available engine types and versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=: Filter response by engine type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
+        --next-token=: The token that specifies the next page of results Amazon MQ should return.
+    - name: list-configuration-revisions
+      description: Returns a list of all revisions for the specified configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
+        --next-token=: The token that specifies the next page of results Amazon MQ should return.
+    - name: update-configuration
+      description: Updates the specified configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
+        --data=!: 'Amazon MQ for Active MQ: The base64-encoded XML configuration.'
+        --description=: The description of the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-user
+      description: Updates the information for an ActiveMQ user.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --console-access: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --groups=: The list of groups (20 maximum) to which the ActiveMQ user belongs.
+        --no-console-access: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+        --no-replication-user: Defines whether the user is intended for data replication.
+        --password=: The password of the user.
+        --replication-user: Defines whether the user is intended for data replication.
+        --username=!: The username of the ActiveMQ user.
+    - name: delete-configuration
+      description: Deletes the specified configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-tags
+      description: Removes a tag from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource tag.
+        --tag-keys=!: An array of tag keys to delete
+    - name: describe-broker
+      description: Returns information about the specified broker.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-broker-instance-options
+      description: Describe available broker instance options.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-type=: Filter response by engine type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-instance-type=: Filter response by host instance type.
+        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
+        --next-token=: The token that specifies the next page of results Amazon MQ should return.
+        --storage-type=: Filter response by storage type.
+    - name: describe-user
+      description: Returns information about an ActiveMQ user.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --username=!: The username of the ActiveMQ user.
+    - name: list-configurations
+      description: Returns a list of all configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
+        --next-token=: The token that specifies the next page of results Amazon MQ should return.
+    - name: list-users
+      description: Returns a list of all ActiveMQ users.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
+        --next-token=: The token that specifies the next page of results Amazon MQ should return.
+    - name: reboot-broker
+      description: Reboots a broker.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-user
+      description: Creates an ActiveMQ user.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --console-access: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --groups=: The list of groups (20 maximum) to which the ActiveMQ user belongs.
+        --no-console-access: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
+        --no-replication-user: Defines if this user is intended for CRDR replication purposes.
+        --password=!: Required.
+        --replication-user: Defines if this user is intended for CRDR replication purposes.
+        --username=!: The username of the ActiveMQ user.
+    - name: describe-configuration
+      description: Returns information about the specified configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-configuration-revision
+      description: Returns the specified configuration revision for the specified configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
+        --configuration-revision=!: The revision of the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags
+      description: Lists tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource tag.
+    - name: promote
+      description: Promotes a data replication replica broker to the primary broker role.
+      flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The Promote mode requested.
+      completion:
+        flag:
+            mode:
+                - SWITCHOVER
+                - FAILOVER
     - name: update-broker
       description: Adds a pending configuration change to a broker.
       flags:
@@ -28,162 +203,6 @@ commands:
             data-replication-mode:
                 - NONE
                 - CRDR
-    - name: delete-configuration
-      description: Deletes the specified configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-broker-engine-types
-      description: Describe available engine types and versions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-type=: Filter response by engine type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
-        --next-token=: The token that specifies the next page of results Amazon MQ should return.
-    - name: describe-broker-instance-options
-      description: Describe available broker instance options.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-type=: Filter response by engine type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --host-instance-type=: Filter response by host instance type.
-        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
-        --next-token=: The token that specifies the next page of results Amazon MQ should return.
-        --storage-type=: Filter response by storage type.
-    - name: list-configuration-revisions
-      description: Returns a list of all revisions for the specified configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
-        --next-token=: The token that specifies the next page of results Amazon MQ should return.
-    - name: update-configuration
-      description: Updates the specified configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
-        --data=!: 'Amazon MQ for Active MQ: The base64-encoded XML configuration.'
-        --description=: The description of the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-configuration
-      description: Creates a new configuration for the specified configuration name.
-      flags:
-        --authentication-strategy=: Optional.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-type=!: Required.
-        --engine-version=: The broker engine version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Required.
-        --tags=: Create tags when creating the configuration.
-      completion:
-        flag:
-            authentication-strategy:
-                - SIMPLE
-                - LDAP
-                - CONFIG_MANAGED
-            engine-type:
-                - ACTIVEMQ
-                - RABBITMQ
-    - name: create-user
-      description: Creates an ActiveMQ user.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --console-access: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --groups=: The list of groups (20 maximum) to which the ActiveMQ user belongs.
-        --no-console-access: Enables access to the ActiveMQ Web Console for the ActiveMQ user.
-        --no-replication-user: Defines if this user is intended for CRDR replication purposes.
-        --password=!: Required.
-        --replication-user: Defines if this user is intended for CRDR replication purposes.
-        --username=!: The username of the ActiveMQ user.
-    - name: delete-user
-      description: Deletes an ActiveMQ user.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --username=!: The username of the ActiveMQ user.
-    - name: list-brokers
-      description: Returns a list of all brokers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
-        --next-token=: The token that specifies the next page of results Amazon MQ should return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-configurations
-      description: Returns a list of all configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
-        --next-token=: The token that specifies the next page of results Amazon MQ should return.
-    - name: list-tags
-      description: Lists tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource tag.
-    - name: reboot-broker
-      description: Reboots a broker.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-user
-      description: Updates the information for an ActiveMQ user.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --console-access: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --groups=: The list of groups (20 maximum) to which the ActiveMQ user belongs.
-        --no-console-access: Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
-        --no-replication-user: Defines whether the user is intended for data replication.
-        --password=: The password of the user.
-        --replication-user: Defines whether the user is intended for data replication.
-        --username=!: The username of the ActiveMQ user.
-    - name: delete-broker
-      description: Deletes a broker.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-broker
-      description: Returns information about the specified broker.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-configuration-revision
-      description: Returns the specified configuration revision for the specified configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
-        --configuration-revision=!: The revision of the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-broker
       description: Creates a broker.
       flags:
@@ -240,48 +259,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource tag.
         --tags=: The key-value pair for the resource tag.
-    - name: delete-tags
-      description: Removes a tag from a resource.
+    - name: delete-broker
+      description: Deletes a broker.
       flags:
+        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource tag.
-        --tag-keys=!: An array of tag keys to delete
-    - name: describe-configuration
-      description: Returns information about the specified configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: The unique ID that Amazon MQ generates for the configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-user
-      description: Returns information about an ActiveMQ user.
+    - name: delete-user
+      description: Deletes an ActiveMQ user.
       flags:
         --broker-id=!: The unique ID that Amazon MQ generates for the broker.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --username=!: The username of the ActiveMQ user.
-    - name: list-users
-      description: Returns a list of all ActiveMQ users.
+    - name: list-brokers
+      description: Returns a list of all brokers.
       flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of brokers that Amazon MQ can return per page (20 by default).
         --next-token=: The token that specifies the next page of results Amazon MQ should return.
-    - name: promote
-      description: Promotes a data replication replica broker to the primary broker role.
-      flags:
-        --broker-id=!: The unique ID that Amazon MQ generates for the broker.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --mode=!: The Promote mode requested.
-      completion:
-        flag:
-            mode:
-                - SWITCHOVER
-                - FAILOVER
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

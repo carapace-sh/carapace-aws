@@ -1,6 +1,129 @@
 name: dax
 description: Amazon DynamoDB Accelerator (DAX)
 commands:
+    - name: decrease-replication-factor
+      description: Removes one or more nodes from a DAX cluster.
+      flags:
+        --availability-zones=: The Availability Zone(s) from which to remove nodes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the DAX cluster from which you want to remove nodes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-replication-factor=!: The new number of nodes for the DAX cluster.
+        --node-ids-to-remove=: The unique identifiers of the nodes to be removed from the cluster.
+    - name: describe-events
+      description: Returns events related to DAX clusters and parameter groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration=: The number of minutes' worth of events to retrieve.
+        --end-time=: The end of the time interval for which to retrieve events, specified in ISO 8601 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-name=: The identifier of the event source for which events will be returned.
+        --source-type=: The event source to retrieve events for.
+        --start-time=: The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            source-type:
+                - CLUSTER
+                - PARAMETER_GROUP
+                - SUBNET_GROUP
+    - name: list-tags
+      description: List all of the tags for a DAX cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: An optional token returned from a prior request.
+        --resource-name=!: The name of the DAX resource to which the tags belong.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Associates a set of tags with a DAX resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The name of the DAX resource to which tags should be added.
+        --tags=!: The tags to be assigned to the DAX resource.
+    - name: untag-resource
+      description: Removes the association of tags from a DAX resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The name of the DAX resource from which the tags should be removed.
+        --tag-keys=!: A list of tag keys.
+    - name: update-parameter-group
+      description: Modifies the parameters of a parameter group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-group-name=!: The name of the parameter group.
+        --parameter-name-values=!: An array of name-value pairs for the parameters in the group.
+    - name: create-subnet-group
+      description: Creates a new subnet group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the subnet group
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subnet-group-name=!: A name for the subnet group.
+        --subnet-ids=!: A list of VPC subnet IDs for the subnet group.
+    - name: delete-parameter-group
+      description: Deletes the specified parameter group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-group-name=!: The name of the parameter group to delete.
+    - name: delete-subnet-group
+      description: Deletes a subnet group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subnet-group-name=!: The name of the subnet group to delete.
+    - name: describe-subnet-groups
+      description: Returns a list of subnet group descriptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --subnet-group-names=: The name of the subnet group.
+    - name: update-cluster
+      description: Modifies the settings for a DAX cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the DAX cluster to be modified.
+        --description=: A description of the changes being made to the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notification-topic-arn=: The Amazon Resource Name (ARN) that identifies the topic.
+        --notification-topic-status=: The current state of the topic.
+        --parameter-group-name=: The name of a parameter group for this cluster.
+        --preferred-maintenance-window=: A range of time when maintenance of DAX cluster software will be performed.
+        --security-group-ids=: A list of user-specified security group IDs to be assigned to each node in the DAX cluster.
+    - name: update-subnet-group
+      description: Modifies an existing subnet group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the subnet group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subnet-group-name=!: The name of the subnet group.
+        --subnet-ids=: A list of subnet IDs in the subnet group.
     - name: create-cluster
       description: Creates a DAX cluster.
       flags:
@@ -31,39 +154,6 @@ commands:
                 - ipv4
                 - ipv6
                 - dual_stack
-    - name: delete-cluster
-      description: Deletes a previously provisioned DAX cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the cluster to be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-parameter-group
-      description: Deletes the specified parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-group-name=!: The name of the parameter group to delete.
-    - name: list-tags
-      description: List all of the tags for a DAX cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: An optional token returned from a prior request.
-        --resource-name=!: The name of the DAX resource to which the tags belong.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-subnet-group
-      description: Modifies an existing subnet group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the subnet group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-group-name=!: The name of the subnet group.
-        --subnet-ids=: A list of subnet IDs in the subnet group.
     - name: create-parameter-group
       description: Creates a new parameter group.
       flags:
@@ -72,44 +162,13 @@ commands:
         --description=: A description of the parameter group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --parameter-group-name=!: The name of the parameter group to apply to all of the clusters in this replication group.
-    - name: untag-resource
-      description: Removes the association of tags from a DAX resource.
+    - name: delete-cluster
+      description: Deletes a previously provisioned DAX cluster.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name of the cluster to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The name of the DAX resource from which the tags should be removed.
-        --tag-keys=!: A list of tag keys.
-    - name: update-parameter-group
-      description: Modifies the parameters of a parameter group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-group-name=!: The name of the parameter group.
-        --parameter-name-values=!: An array of name-value pairs for the parameters in the group.
-    - name: decrease-replication-factor
-      description: Removes one or more nodes from a DAX cluster.
-      flags:
-        --availability-zones=: The Availability Zone(s) from which to remove nodes.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the DAX cluster from which you want to remove nodes.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-replication-factor=!: The new number of nodes for the DAX cluster.
-        --node-ids-to-remove=: The unique identifiers of the nodes to be removed from the cluster.
-    - name: describe-clusters
-      description: Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-names=: The names of the DAX clusters being described.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: describe-default-parameters
       description: Returns the default system parameter information for the DAX caching software.
       flags:
@@ -120,6 +179,18 @@ commands:
         --max-results=: The maximum number of results to include in the response.
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-parameter-groups
+      description: Returns a list of parameter group descriptions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --parameter-group-names=: The names of the parameter groups.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-parameters
       description: Returns the detailed parameter list for a particular parameter group.
@@ -134,89 +205,6 @@ commands:
         --parameter-group-name=!: The name of the parameter group.
         --source=: How the parameter is defined.
         --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Associates a set of tags with a DAX resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The name of the DAX resource to which tags should be added.
-        --tags=!: The tags to be assigned to the DAX resource.
-    - name: update-cluster
-      description: Modifies the settings for a DAX cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-name=!: The name of the DAX cluster to be modified.
-        --description=: A description of the changes being made to the cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-topic-arn=: The Amazon Resource Name (ARN) that identifies the topic.
-        --notification-topic-status=: The current state of the topic.
-        --parameter-group-name=: The name of a parameter group for this cluster.
-        --preferred-maintenance-window=: A range of time when maintenance of DAX cluster software will be performed.
-        --security-group-ids=: A list of user-specified security group IDs to be assigned to each node in the DAX cluster.
-    - name: create-subnet-group
-      description: Creates a new subnet group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the subnet group
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-group-name=!: A name for the subnet group.
-        --subnet-ids=!: A list of VPC subnet IDs for the subnet group.
-    - name: delete-subnet-group
-      description: Deletes a subnet group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-group-name=!: The name of the subnet group to delete.
-    - name: describe-events
-      description: Returns events related to DAX clusters and parameter groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: The number of minutes' worth of events to retrieve.
-        --end-time=: The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-name=: The identifier of the event source for which events will be returned.
-        --source-type=: The event source to retrieve events for.
-        --start-time=: The beginning of the time interval to retrieve events for, specified in ISO 8601 format.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            source-type:
-                - CLUSTER
-                - PARAMETER_GROUP
-                - SUBNET_GROUP
-    - name: describe-parameter-groups
-      description: Returns a list of parameter group descriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --parameter-group-names=: The names of the parameter groups.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-subnet-groups
-      description: Returns a list of subnet group descriptions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --subnet-group-names=: The name of the subnet group.
     - name: increase-replication-factor
       description: Adds one or more nodes to a DAX cluster.
       flags:
@@ -226,6 +214,18 @@ commands:
         --cluster-name=!: The name of the DAX cluster that will receive additional nodes.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --new-replication-factor=!: The new number of nodes for the DAX cluster.
+    - name: describe-clusters
+      description: Returns information about all provisioned DAX clusters if no cluster identifier is specified, or about a specific DAX cluster if a cluster identifier is supplied.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-names=: The names of the DAX clusters being described.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: reboot-node
       description: Reboots a single node of a DAX cluster.
       flags:

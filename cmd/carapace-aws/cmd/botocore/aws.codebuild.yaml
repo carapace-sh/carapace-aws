@@ -1,27 +1,73 @@
 name: codebuild
 description: AWS CodeBuild
 commands:
-    - name: delete-build-batch
-      description: Deletes a batch build.
+    - name: batch-get-sandboxes
+      description: Gets information about the sandbox status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the batch build to delete.
-    - name: delete-report
-      description: Deletes a report.
+        --ids=!: A comma separated list of `sandboxIds` or `sandboxArns`.
+    - name: delete-fleet
+      description: Deletes a compute fleet.
       flags:
-        --arn=!: The ARN of the report to delete.
+        --arn=!: The ARN of the compute fleet.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-webhook
-      description: For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
+    - name: list-builds-for-project
+      description: Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
         --project-name=!: The name of the CodeBuild project.
+        --sort-order=: The order to sort the results in.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-sandboxes
+      description: Gets a list of sandboxes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of sandbox records to be retrieved.
+        --next-token=: The next token, if any, to get paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: The order in which sandbox records should be retrieved.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: start-command-execution
+      description: Starts a command execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --command=!: The command that needs to be executed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sandbox-id=!: A `sandboxId` or `sandboxArn`.
+        --type=: The command type.
+      completion:
+        flag:
+            type:
+                - SHELL
+    - name: start-sandbox-connection
+      description: Starts a sandbox connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sandbox-id=!: A `sandboxId` or `sandboxArn`.
     - name: update-project
       description: Changes the settings of a build project.
       flags:
@@ -51,86 +97,32 @@ commands:
         --tags=: An updated list of tag key and value pairs associated with this build project.
         --timeout-in-minutes=: The replacement value in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed.
         --vpc-config=: VpcConfig enables CodeBuild to access resources in an Amazon VPC.
-    - name: describe-code-coverages
-      description: Retrieves one or more code coverage reports.
+    - name: update-webhook
+      description: Updates the webhook associated with an CodeBuild build project.
       flags:
+        --branch-filter=: A regular expression used to determine which repository branches are built when a webhook is triggered.
+        --build-type=: Specifies the type of build this webhook will trigger.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-groups=: An array of arrays of `WebhookFilter` objects used to determine if a webhook event can trigger a build.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-line-coverage-percentage=: The maximum line coverage percentage to report.
-        --max-results=: The maximum number of results to return.
-        --min-line-coverage-percentage=: The minimum line coverage percentage to report.
-        --next-token=: The `nextToken` value returned from a previous call to `DescribeCodeCoverages`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --report-arn=!: The ARN of the report for which test cases are returned.
-        --sort-by=: Specifies how the results are sorted.
-        --sort-order=: Specifies if the results are sorted in ascending or descending order.
-        --starting-token=: A token to specify where to start paginating.
+        --no-rotate-secret: A boolean value that specifies whether the associated GitHub repository's secret token should be updated.
+        --project-name=!: The name of the CodeBuild project.
+        --pull-request-build-policy=: A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests.
+        --rotate-secret: A boolean value that specifies whether the associated GitHub repository's secret token should be updated.
       completion:
         flag:
-            sort-by:
-                - LINE_COVERAGE_PERCENTAGE
-                - FILE_PATH
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: get-report-group-trend
-      description: Analyzes and accumulates test report values for the specified test reports.
+            build-type:
+                - BUILD
+                - BUILD_BATCH
+                - RUNNER_BUILDKITE_BUILD
+    - name: batch-get-builds
+      description: Gets information about one or more builds.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --num-of-reports=: The number of reports to analyze.
-        --report-group-arn=!: The ARN of the report group that contains the reports to analyze.
-        --trend-field=!: The test report value to accumulate.
-      completion:
-        flag:
-            trend-field:
-                - PASS_RATE
-                - DURATION
-                - TOTAL
-                - LINE_COVERAGE
-                - LINES_COVERED
-                - LINES_MISSED
-                - BRANCH_COVERAGE
-                - BRANCHES_COVERED
-                - BRANCHES_MISSED
-    - name: batch-delete-builds
-      description: Deletes one or more builds.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: The IDs of the builds to delete.
-    - name: create-report-group
-      description: Creates a report group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-config=!: A `ReportExportConfig` object that contains information about where the report group test results are exported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the report group.
-        --tags=: A list of tag key and value pairs associated with this report group.
-        --type=!: The type of report group.
-      completion:
-        flag:
-            type:
-                - TEST
-                - CODE_COVERAGE
-    - name: describe-test-cases
-      description: Returns a list of details about test cases for a report.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `TestCaseFilter` object used to filter the returned reports.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of paginated test cases returned per response.
-        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --report-arn=!: The ARN of the report for which test cases are returned.
-        --starting-token=: A token to specify where to start paginating.
+        --ids=!: The IDs of the builds.
     - name: list-command-executions-for-sandbox
       description: Gets a list of command executions for a sandbox.
       flags:
@@ -149,32 +141,102 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: list-reports-for-report-group
-      description: Returns a list of ARNs for the reports that belong to a `ReportGroup`.
+    - name: list-curated-environment-images
+      description: Gets information about Docker images that are managed by CodeBuild.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `ReportFilter` object used to filter the returned reports.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-build-batch
+      description: Deletes a batch build.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the batch build to delete.
+    - name: delete-source-credentials
+      description: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the token.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-projects
+      description: Gets a list of build project names, with each build project name representing a single build project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of paginated reports in this report group returned per response.
-        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --report-group-arn=!: The ARN of the report group for which you want to return report ARNs.
-        --sort-order=: Use to specify whether the results are returned in ascending or descending order.
+        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
+        --sort-by=: The criterion to be used to list build project names.
+        --sort-order=: The order in which to list build projects.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            sort-by:
+                - NAME
+                - CREATED_TIME
+                - LAST_MODIFIED_TIME
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: delete-project
-      description: Deletes a build project.
+    - name: batch-get-build-batches
+      description: Retrieves information about one or more batch builds.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the build project.
+        --ids=!: An array that contains the batch build identifiers to retrieve.
+    - name: create-fleet
+      description: Creates a compute fleet.
+      flags:
+        --base-capacity=!: The initial number of machines allocated to the ﬂeet, which deﬁnes the number of builds that can run in parallel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-configuration=: The compute configuration of the compute fleet.
+        --compute-type=!: Information about the compute resources the compute fleet uses.
+        --environment-type=!: The environment type of the compute fleet.
+        --fleet-service-role=: The service role associated with the compute fleet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-id=: The Amazon Machine Image (AMI) of the compute fleet.
+        --name=!: The name of the compute fleet.
+        --overflow-behavior=: The compute fleet overflow behavior.
+        --proxy-configuration=: The proxy configuration of the compute fleet.
+        --scaling-configuration=: The scaling configuration of the compute fleet.
+        --tags=: A list of tag key and value pairs associated with this compute fleet.
+        --vpc-config=: ""
+      completion:
+        flag:
+            compute-type:
+                - BUILD_GENERAL1_SMALL
+                - BUILD_GENERAL1_MEDIUM
+                - BUILD_GENERAL1_LARGE
+                - BUILD_GENERAL1_XLARGE
+                - BUILD_GENERAL1_2XLARGE
+                - BUILD_LAMBDA_1GB
+                - BUILD_LAMBDA_2GB
+                - BUILD_LAMBDA_4GB
+                - BUILD_LAMBDA_8GB
+                - BUILD_LAMBDA_10GB
+                - ATTRIBUTE_BASED_COMPUTE
+                - CUSTOM_INSTANCE_TYPE
+            environment-type:
+                - WINDOWS_CONTAINER
+                - LINUX_CONTAINER
+                - LINUX_GPU_CONTAINER
+                - ARM_CONTAINER
+                - WINDOWS_SERVER_2019_CONTAINER
+                - WINDOWS_SERVER_2022_CONTAINER
+                - LINUX_LAMBDA_CONTAINER
+                - ARM_LAMBDA_CONTAINER
+                - LINUX_EC2
+                - ARM_EC2
+                - WINDOWS_EC2
+                - MAC_ARM
+            overflow-behavior:
+                - QUEUE
+                - ON_DEMAND
     - name: list-shared-report-groups
       description: Gets a list of report groups that are shared with other Amazon Web Services accounts or users.
       flags:
@@ -196,6 +258,14 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
+    - name: put-resource-policy
+      description: Stores a resource policy for the ARN of a `Project` or `ReportGroup` object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: A JSON-formatted resource policy.
+        --resource-arn=!: The ARN of the `Project` or `ReportGroup` resource you want to associate with a resource policy.
     - name: start-build
       description: Starts running a build with the settings defined in the project.
       flags:
@@ -280,12 +350,167 @@ commands:
                 - BITBUCKET
                 - GITHUB_ENTERPRISE
                 - NO_SOURCE
-    - name: list-curated-environment-images
-      description: Gets information about Docker images that are managed by CodeBuild.
+    - name: import-source-credentials
+      description: Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository.
+      flags:
+        --auth-type=!: The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-should-overwrite: Set to `false` to prevent overwriting the repository source credentials.
+        --server-type=!: The source provider used for this project.
+        --should-overwrite: Set to `false` to prevent overwriting the repository source credentials.
+        --token=!: For GitHub or GitHub Enterprise, this is the personal access token.
+        --username=: The Bitbucket username when the `authType` is BASIC\_AUTH.
+      completion:
+        flag:
+            auth-type:
+                - OAUTH
+                - BASIC_AUTH
+                - PERSONAL_ACCESS_TOKEN
+                - CODECONNECTIONS
+                - SECRETS_MANAGER
+            server-type:
+                - GITHUB
+                - BITBUCKET
+                - GITHUB_ENTERPRISE
+                - GITLAB
+                - GITLAB_SELF_MANAGED
+    - name: retry-build-batch
+      description: Restarts a failed batch build.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: Specifies the identifier of the batch build to restart.
+        --idempotency-token=: A unique, case sensitive identifier you provide to ensure the idempotency of the `RetryBuildBatch` request.
+        --retry-type=: Specifies the type of retry to perform.
+      completion:
+        flag:
+            retry-type:
+                - RETRY_ALL_BUILDS
+                - RETRY_FAILED_BUILDS
+    - name: create-project
+      description: Creates a build project.
+      flags:
+        --artifacts=!: Information about the build output artifacts for the build project.
+        --auto-retry-limit=: The maximum number of additional automatic retries after a failed build.
+        --badge-enabled: Set this to true to generate a publicly accessible URL for your project's build badge.
+        --build-batch-config=: A [ProjectBuildBatchConfig]() object that defines the batch build options for the project.
+        --cache=: Stores recently used information so that it can be quickly accessed at a later time.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --concurrent-build-limit=: The maximum number of concurrent builds that are allowed for this project.
+        --description=: A description that makes the build project easy to identify.
+        --encryption-key=: The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.
+        --environment=!: Information about the build environment for the build project.
+        --file-system-locations=: An array of `ProjectFileSystemLocation` objects for a CodeBuild build project.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logs-config=: Information about logs for the build project.
+        --name=!: The name of the build project.
+        --no-badge-enabled: Set this to true to generate a publicly accessible URL for your project's build badge.
+        --queued-timeout-in-minutes=: The number of minutes a build is allowed to be queued before it times out.
+        --secondary-artifacts=: An array of `ProjectArtifacts` objects.
+        --secondary-source-versions=: An array of `ProjectSourceVersion` objects.
+        --secondary-sources=: An array of `ProjectSource` objects.
+        --service-role=!: The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
+        --source-version=: A version of the build input to be built for this project.
+        --source=!: Information about the build input source code for the build project.
+        --tags=: A list of tag key and value pairs associated with this build project.
+        --timeout-in-minutes=: How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before it times out any build that has not been marked as completed.
+        --vpc-config=: VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+    - name: list-build-batches
+      description: Retrieves the identifiers of your build batches in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `BuildBatchFilter` object that specifies the filters for the search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The `nextToken` value returned from a previous call to `ListBuildBatches`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: Specifies the sort order of the returned items.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-sandboxes-for-project
+      description: Gets a list of sandboxes for a given project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of sandbox records to be retrieved.
+        --next-token=: The next token, if any, to get paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=!: The CodeBuild project name.
+        --sort-order=: The order in which sandbox records should be retrieved.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: stop-build-batch
+      description: Stops a running batch build.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the batch build to stop.
+    - name: create-report-group
+      description: Creates a report group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-config=!: A `ReportExportConfig` object that contains information about where the report group test results are exported.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the report group.
+        --tags=: A list of tag key and value pairs associated with this report group.
+        --type=!: The type of report group.
+      completion:
+        flag:
+            type:
+                - TEST
+                - CODE_COVERAGE
+    - name: list-build-batches-for-project
+      description: Retrieves the identifiers of the build batches for a specific project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `BuildBatchFilter` object that specifies the filters for the search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The `nextToken` value returned from a previous call to `ListBuildBatchesForProject`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-name=: The name of the project.
+        --sort-order=: Specifies the sort order of the returned items.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-builds
+      description: Gets a list of build IDs, with each build ID representing a single build.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
+        --sort-order=: The order to list build IDs.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
     - name: list-report-groups
       description: Gets a list ARNs for the report groups in the current Amazon Web Services account.
       flags:
@@ -308,80 +533,41 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: retry-build
-      description: Restarts a build.
+    - name: list-reports
+      description: Returns a list of ARNs for the reports in the current Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: Specifies the identifier of the build to restart.
-        --idempotency-token=: A unique, case sensitive identifier you provide to ensure the idempotency of the `RetryBuild` request.
-    - name: start-command-execution
-      description: Starts a command execution.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --command=!: The command that needs to be executed.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sandbox-id=!: A `sandboxId` or `sandboxArn`.
-        --type=: The command type.
-      completion:
-        flag:
-            type:
-                - SHELL
-    - name: list-build-batches
-      description: Retrieves the identifiers of your build batches in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `BuildBatchFilter` object that specifies the filters for the search.
+        --filter=: A `ReportFilter` object used to filter the returned reports.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The `nextToken` value returned from a previous call to `ListBuildBatches`.
+        --max-results=: The maximum number of paginated reports returned per response.
+        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort-order=: Specifies the sort order of the returned items.
+        --sort-order=: Specifies the sort order for the list of returned reports.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: retry-build-batch
-      description: Restarts a failed batch build.
+    - name: start-sandbox
+      description: Starts a sandbox.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=: Specifies the identifier of the batch build to restart.
-        --idempotency-token=: A unique, case sensitive identifier you provide to ensure the idempotency of the `RetryBuildBatch` request.
-        --retry-type=: Specifies the type of retry to perform.
-      completion:
-        flag:
-            retry-type:
-                - RETRY_ALL_BUILDS
-                - RETRY_FAILED_BUILDS
-    - name: update-project-visibility
-      description: Changes the public visibility for a project.
+        --idempotency-token=: A unique client token.
+        --project-name=: The CodeBuild project name.
+    - name: delete-report-group
+      description: Deletes a report group.
       flags:
+        --arn=!: The ARN of the report group to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-reports: If `true`, deletes any reports that belong to a report group before deleting the report group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-arn=!: The Amazon Resource Name (ARN) of the build project.
-        --project-visibility=!: ""
-        --resource-access-role=: The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for the project's builds.
-      completion:
-        flag:
-            project-visibility:
-                - PUBLIC_READ
-                - PRIVATE
-    - name: batch-get-build-batches
-      description: Retrieves information about one or more batch builds.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: An array that contains the batch build identifiers to retrieve.
+        --no-delete-reports: If `true`, deletes any reports that belong to a report group before deleting the report group.
     - name: delete-resource-policy
       description: Deletes a resource policy that is identified by its resource ARN.
       flags:
@@ -389,71 +575,124 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource that is associated with the resource policy.
-    - name: list-sandboxes
-      description: Gets a list of sandboxes.
+    - name: batch-get-fleets
+      description: Gets information about one or more compute fleets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --names=!: The names or ARNs of the compute fleets.
+    - name: delete-project
+      description: Deletes a build project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the build project.
+    - name: delete-webhook
+      description: For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code every time a code change is pushed to the repository.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-name=!: The name of the CodeBuild project.
+    - name: describe-code-coverages
+      description: Retrieves one or more code coverage reports.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of sandbox records to be retrieved.
-        --next-token=: The next token, if any, to get paginated results.
+        --max-line-coverage-percentage=: The maximum line coverage percentage to report.
+        --max-results=: The maximum number of results to return.
+        --min-line-coverage-percentage=: The minimum line coverage percentage to report.
+        --next-token=: The `nextToken` value returned from a previous call to `DescribeCodeCoverages`.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort-order=: The order in which sandbox records should be retrieved.
+        --report-arn=!: The ARN of the report for which test cases are returned.
+        --sort-by=: Specifies how the results are sorted.
+        --sort-order=: Specifies if the results are sorted in ascending or descending order.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - LINE_COVERAGE_PERCENTAGE
+                - FILE_PATH
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: invalidate-project-cache
+      description: Resets the cache for a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-name=!: The name of the CodeBuild build project that the cache is reset for.
+    - name: list-reports-for-report-group
+      description: Returns a list of ARNs for the reports that belong to a `ReportGroup`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `ReportFilter` object used to filter the returned reports.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of paginated reports in this report group returned per response.
+        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --report-group-arn=!: The ARN of the report group for which you want to return report ARNs.
+        --sort-order=: Use to specify whether the results are returned in ascending or descending order.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-    - name: update-report-group
-      description: Updates a report group.
-      flags:
-        --arn=!: The ARN of the report group to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-config=: Used to specify an updated export type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: An updated list of tag key and value pairs associated with this report group.
-    - name: list-fleets
-      description: Gets a list of compute fleet names with each compute fleet name representing a single compute fleet.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of paginated compute fleets returned per response.
-        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
-        --sort-by=: The criterion to be used to list compute fleet names.
-        --sort-order=: The order in which to list compute fleets.
-      completion:
-        flag:
-            sort-by:
-                - NAME
-                - CREATED_TIME
-                - LAST_MODIFIED_TIME
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: list-projects
-      description: Gets a list of build project names, with each build project name representing a single build project.
+    - name: list-shared-projects
+      description: Gets a list of projects that are shared with other Amazon Web Services accounts or users.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
-        --sort-by=: The criterion to be used to list build project names.
-        --sort-order=: The order in which to list build projects.
+        --max-results=: The maximum number of paginated shared build projects returned per response.
+        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The criterion to be used to list build projects shared with the current Amazon Web Services account or user.
+        --sort-order=: The order in which to list shared build projects.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
             sort-by:
-                - NAME
-                - CREATED_TIME
-                - LAST_MODIFIED_TIME
+                - ARN
+                - MODIFIED_TIME
             sort-order:
                 - ASCENDING
                 - DESCENDING
+    - name: create-webhook
+      description: For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.
+      flags:
+        --branch-filter=: A regular expression used to determine which repository branches are built when a webhook is triggered.
+        --build-type=: Specifies the type of build this webhook will trigger.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-groups=: An array of arrays of `WebhookFilter` objects used to determine which webhooks are triggered.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manual-creation: If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns `payloadUrl` and `secret` values for the webhook.
+        --no-manual-creation: If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns `payloadUrl` and `secret` values for the webhook.
+        --project-name=!: The name of the CodeBuild project.
+        --pull-request-build-policy=: A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests.
+        --scope-configuration=: The scope configuration for global or organization webhooks.
+      completion:
+        flag:
+            build-type:
+                - BUILD
+                - BUILD_BATCH
+                - RUNNER_BUILDKITE_BUILD
+    - name: list-source-credentials
+      description: Returns a list of `SourceCredentialsInfo` objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-build-batch
       description: Starts a batch build for a project.
       flags:
@@ -536,36 +775,6 @@ commands:
                 - BITBUCKET
                 - GITHUB_ENTERPRISE
                 - NO_SOURCE
-    - name: start-sandbox-connection
-      description: Starts a sandbox connection.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sandbox-id=!: A `sandboxId` or `sandboxArn`.
-    - name: batch-get-sandboxes
-      description: Gets information about the sandbox status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: A comma separated list of `sandboxIds` or `sandboxArns`.
-    - name: list-builds-for-project
-      description: Gets a list of build identifiers for the specified build project, with each build identifier representing a single build.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
-        --project-name=!: The name of the CodeBuild project.
-        --sort-order=: The order to sort the results in.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
     - name: batch-get-projects
       description: Gets information about one or more build projects.
       flags:
@@ -573,341 +782,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --names=!: The names or ARNs of the build projects.
-    - name: get-resource-policy
-      description: Gets a resource policy that is identified by its resource ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource that is associated with the resource policy.
-    - name: stop-build
-      description: Attempts to stop running a build.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the build.
-    - name: delete-report-group
-      description: Deletes a report group.
-      flags:
-        --arn=!: The ARN of the report group to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-reports: If `true`, deletes any reports that belong to a report group before deleting the report group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-delete-reports: If `true`, deletes any reports that belong to a report group before deleting the report group.
-    - name: import-source-credentials
-      description: Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository.
-      flags:
-        --auth-type=!: The type of authentication used to connect to a GitHub, GitHub Enterprise, GitLab, GitLab Self Managed, or Bitbucket repository.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-should-overwrite: Set to `false` to prevent overwriting the repository source credentials.
-        --server-type=!: The source provider used for this project.
-        --should-overwrite: Set to `false` to prevent overwriting the repository source credentials.
-        --token=!: For GitHub or GitHub Enterprise, this is the personal access token.
-        --username=: The Bitbucket username when the `authType` is BASIC\_AUTH.
-      completion:
-        flag:
-            auth-type:
-                - OAUTH
-                - BASIC_AUTH
-                - PERSONAL_ACCESS_TOKEN
-                - CODECONNECTIONS
-                - SECRETS_MANAGER
-            server-type:
-                - GITHUB
-                - BITBUCKET
-                - GITHUB_ENTERPRISE
-                - GITLAB
-                - GITLAB_SELF_MANAGED
-    - name: list-build-batches-for-project
-      description: Retrieves the identifiers of the build batches for a specific project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `BuildBatchFilter` object that specifies the filters for the search.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The `nextToken` value returned from a previous call to `ListBuildBatchesForProject`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-name=: The name of the project.
-        --sort-order=: Specifies the sort order of the returned items.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: list-source-credentials
-      description: Returns a list of `SourceCredentialsInfo` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-builds
-      description: Gets information about one or more builds.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ids=!: The IDs of the builds.
-    - name: delete-fleet
-      description: Deletes a compute fleet.
-      flags:
-        --arn=!: The ARN of the compute fleet.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: invalidate-project-cache
-      description: Resets the cache for a project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --project-name=!: The name of the CodeBuild build project that the cache is reset for.
-    - name: start-sandbox
-      description: Starts a sandbox.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: A unique client token.
-        --project-name=: The CodeBuild project name.
-    - name: create-project
-      description: Creates a build project.
-      flags:
-        --artifacts=!: Information about the build output artifacts for the build project.
-        --auto-retry-limit=: The maximum number of additional automatic retries after a failed build.
-        --badge-enabled: Set this to true to generate a publicly accessible URL for your project's build badge.
-        --build-batch-config=: A [ProjectBuildBatchConfig]() object that defines the batch build options for the project.
-        --cache=: Stores recently used information so that it can be quickly accessed at a later time.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --concurrent-build-limit=: The maximum number of concurrent builds that are allowed for this project.
-        --description=: A description that makes the build project easy to identify.
-        --encryption-key=: The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.
-        --environment=!: Information about the build environment for the build project.
-        --file-system-locations=: An array of `ProjectFileSystemLocation` objects for a CodeBuild build project.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logs-config=: Information about logs for the build project.
-        --name=!: The name of the build project.
-        --no-badge-enabled: Set this to true to generate a publicly accessible URL for your project's build badge.
-        --queued-timeout-in-minutes=: The number of minutes a build is allowed to be queued before it times out.
-        --secondary-artifacts=: An array of `ProjectArtifacts` objects.
-        --secondary-source-versions=: An array of `ProjectSourceVersion` objects.
-        --secondary-sources=: An array of `ProjectSource` objects.
-        --service-role=!: The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
-        --source-version=: A version of the build input to be built for this project.
-        --source=!: Information about the build input source code for the build project.
-        --tags=: A list of tag key and value pairs associated with this build project.
-        --timeout-in-minutes=: How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before it times out any build that has not been marked as completed.
-        --vpc-config=: VpcConfig enables CodeBuild to access resources in an Amazon VPC.
-    - name: list-builds
-      description: Gets a list of build IDs, with each build ID representing a single build.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
-        --sort-order=: The order to list build IDs.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: list-reports
-      description: Returns a list of ARNs for the reports in the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: A `ReportFilter` object used to filter the returned reports.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of paginated reports returned per response.
-        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-order=: Specifies the sort order for the list of returned reports.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: list-sandboxes-for-project
-      description: Gets a list of sandboxes for a given project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of sandbox records to be retrieved.
-        --next-token=: The next token, if any, to get paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --project-name=!: The CodeBuild project name.
-        --sort-order=: The order in which sandbox records should be retrieved.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: put-resource-policy
-      description: Stores a resource policy for the ARN of a `Project` or `ReportGroup` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: A JSON-formatted resource policy.
-        --resource-arn=!: The ARN of the `Project` or `ReportGroup` resource you want to associate with a resource policy.
-    - name: batch-get-fleets
-      description: Gets information about one or more compute fleets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --names=!: The names or ARNs of the compute fleets.
-    - name: batch-get-reports
-      description: Returns an array of reports.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --report-arns=!: An array of ARNs that identify the `Report` objects to return.
-    - name: create-fleet
-      description: Creates a compute fleet.
-      flags:
-        --base-capacity=!: The initial number of machines allocated to the ﬂeet, which deﬁnes the number of builds that can run in parallel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-configuration=: The compute configuration of the compute fleet.
-        --compute-type=!: Information about the compute resources the compute fleet uses.
-        --environment-type=!: The environment type of the compute fleet.
-        --fleet-service-role=: The service role associated with the compute fleet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-id=: The Amazon Machine Image (AMI) of the compute fleet.
-        --name=!: The name of the compute fleet.
-        --overflow-behavior=: The compute fleet overflow behavior.
-        --proxy-configuration=: The proxy configuration of the compute fleet.
-        --scaling-configuration=: The scaling configuration of the compute fleet.
-        --tags=: A list of tag key and value pairs associated with this compute fleet.
-        --vpc-config=: ""
-      completion:
-        flag:
-            compute-type:
-                - BUILD_GENERAL1_SMALL
-                - BUILD_GENERAL1_MEDIUM
-                - BUILD_GENERAL1_LARGE
-                - BUILD_GENERAL1_XLARGE
-                - BUILD_GENERAL1_2XLARGE
-                - BUILD_LAMBDA_1GB
-                - BUILD_LAMBDA_2GB
-                - BUILD_LAMBDA_4GB
-                - BUILD_LAMBDA_8GB
-                - BUILD_LAMBDA_10GB
-                - ATTRIBUTE_BASED_COMPUTE
-                - CUSTOM_INSTANCE_TYPE
-            environment-type:
-                - WINDOWS_CONTAINER
-                - LINUX_CONTAINER
-                - LINUX_GPU_CONTAINER
-                - ARM_CONTAINER
-                - WINDOWS_SERVER_2019_CONTAINER
-                - WINDOWS_SERVER_2022_CONTAINER
-                - LINUX_LAMBDA_CONTAINER
-                - ARM_LAMBDA_CONTAINER
-                - LINUX_EC2
-                - ARM_EC2
-                - WINDOWS_EC2
-                - MAC_ARM
-            overflow-behavior:
-                - QUEUE
-                - ON_DEMAND
-    - name: delete-source-credentials
-      description: Deletes a set of GitHub, GitHub Enterprise, or Bitbucket source credentials.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the token.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-webhook
-      description: For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.
-      flags:
-        --branch-filter=: A regular expression used to determine which repository branches are built when a webhook is triggered.
-        --build-type=: Specifies the type of build this webhook will trigger.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-groups=: An array of arrays of `WebhookFilter` objects used to determine which webhooks are triggered.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manual-creation: If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns `payloadUrl` and `secret` values for the webhook.
-        --no-manual-creation: If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and instead returns `payloadUrl` and `secret` values for the webhook.
-        --project-name=!: The name of the CodeBuild project.
-        --pull-request-build-policy=: A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests.
-        --scope-configuration=: The scope configuration for global or organization webhooks.
-      completion:
-        flag:
-            build-type:
-                - BUILD
-                - BUILD_BATCH
-                - RUNNER_BUILDKITE_BUILD
-    - name: stop-sandbox
-      description: Stops a sandbox.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: Information about the requested sandbox ID.
-    - name: update-webhook
-      description: Updates the webhook associated with an CodeBuild build project.
-      flags:
-        --branch-filter=: A regular expression used to determine which repository branches are built when a webhook is triggered.
-        --build-type=: Specifies the type of build this webhook will trigger.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-groups=: An array of arrays of `WebhookFilter` objects used to determine if a webhook event can trigger a build.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-rotate-secret: A boolean value that specifies whether the associated GitHub repository's secret token should be updated.
-        --project-name=!: The name of the CodeBuild project.
-        --pull-request-build-policy=: A PullRequestBuildPolicy object that defines comment-based approval requirements for triggering builds on pull requests.
-        --rotate-secret: A boolean value that specifies whether the associated GitHub repository's secret token should be updated.
-      completion:
-        flag:
-            build-type:
-                - BUILD
-                - BUILD_BATCH
-                - RUNNER_BUILDKITE_BUILD
-    - name: list-shared-projects
-      description: Gets a list of projects that are shared with other Amazon Web Services accounts or users.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of paginated shared build projects returned per response.
-        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The criterion to be used to list build projects shared with the current Amazon Web Services account or user.
-        --sort-order=: The order in which to list shared build projects.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            sort-by:
-                - ARN
-                - MODIFIED_TIME
-            sort-order:
-                - ASCENDING
-                - DESCENDING
-    - name: stop-build-batch
-      description: Stops a running batch build.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the batch build to stop.
     - name: update-fleet
       description: Updates a compute fleet.
       flags:
@@ -957,6 +831,60 @@ commands:
             overflow-behavior:
                 - QUEUE
                 - ON_DEMAND
+    - name: delete-report
+      description: Deletes a report.
+      flags:
+        --arn=!: The ARN of the report to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-resource-policy
+      description: Gets a resource policy that is identified by its resource ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource that is associated with the resource policy.
+    - name: list-fleets
+      description: Gets a list of compute fleet names with each compute fleet name representing a single compute fleet.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of paginated compute fleets returned per response.
+        --next-token=: During a previous call, if there are more than 100 items in the list, only the first 100 items are returned, along with a unique string called a *nextToken*.
+        --sort-by=: The criterion to be used to list compute fleet names.
+        --sort-order=: The order in which to list compute fleets.
+      completion:
+        flag:
+            sort-by:
+                - NAME
+                - CREATED_TIME
+                - LAST_MODIFIED_TIME
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: stop-build
+      description: Attempts to stop running a build.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the build.
+    - name: stop-sandbox
+      description: Stops a sandbox.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: Information about the requested sandbox ID.
+    - name: batch-delete-builds
+      description: Deletes one or more builds.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ids=!: The IDs of the builds to delete.
     - name: batch-get-command-executions
       description: Gets information about the command executions.
       flags:
@@ -972,3 +900,75 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --report-group-arns=!: An array of report group ARNs that identify the report groups to return.
+    - name: describe-test-cases
+      description: Returns a list of details about test cases for a report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A `TestCaseFilter` object used to filter the returned reports.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of paginated test cases returned per response.
+        --next-token=: During a previous call, the maximum number of items that can be returned is the value specified in `maxResults`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --report-arn=!: The ARN of the report for which test cases are returned.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-report-group-trend
+      description: Analyzes and accumulates test report values for the specified test reports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --num-of-reports=: The number of reports to analyze.
+        --report-group-arn=!: The ARN of the report group that contains the reports to analyze.
+        --trend-field=!: The test report value to accumulate.
+      completion:
+        flag:
+            trend-field:
+                - PASS_RATE
+                - DURATION
+                - TOTAL
+                - LINE_COVERAGE
+                - LINES_COVERED
+                - LINES_MISSED
+                - BRANCH_COVERAGE
+                - BRANCHES_COVERED
+                - BRANCHES_MISSED
+    - name: retry-build
+      description: Restarts a build.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=: Specifies the identifier of the build to restart.
+        --idempotency-token=: A unique, case sensitive identifier you provide to ensure the idempotency of the `RetryBuild` request.
+    - name: update-project-visibility
+      description: Changes the public visibility for a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-arn=!: The Amazon Resource Name (ARN) of the build project.
+        --project-visibility=!: ""
+        --resource-access-role=: The ARN of the IAM role that enables CodeBuild to access the CloudWatch Logs and Amazon S3 artifacts for the project's builds.
+      completion:
+        flag:
+            project-visibility:
+                - PUBLIC_READ
+                - PRIVATE
+    - name: update-report-group
+      description: Updates a report group.
+      flags:
+        --arn=!: The ARN of the report group to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-config=: Used to specify an updated export type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: An updated list of tag key and value pairs associated with this report group.
+    - name: batch-get-reports
+      description: Returns an array of reports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-arns=!: An array of ARNs that identify the `Report` objects to return.

@@ -1,33 +1,6 @@
 name: codeguru-reviewer
 description: Amazon CodeGuru Reviewer
 commands:
-    - name: associate-repository
-      description: Use to associate an Amazon Web Services CodeCommit repository or a repository managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-details=: 'A `KMSKeyDetails` object that contains:'
-        --repository=!: The repository to associate.
-        --tags=: An array of key-value pairs used to tag an associated repository.
-    - name: create-code-review
-      description: Use to create a code review with a [CodeReviewType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html) of `RepositoryAnalysis`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the code review.
-        --repository-association-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
-        --type=!: The type of code review to create.
-    - name: describe-code-review
-      description: Returns the metadata associated with the code review along with its status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: disassociate-repository
       description: Removes the association between Amazon CodeGuru Reviewer and a repository.
       flags:
@@ -52,6 +25,31 @@ commands:
             type:
                 - PullRequest
                 - RepositoryAnalysis
+    - name: list-recommendations
+      description: Returns the list of all recommendations for a completed code review.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results that are returned per call.
+        --next-token=: Pagination token.
+    - name: put-recommendation-feedback
+      description: Stores customer feedback for a CodeGuru Reviewer recommendation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reactions=!: List for storing reactions.
+        --recommendation-id=!: The recommendation ID that can be used to track the provided recommendations and then to collect the feedback.
+    - name: describe-repository-association
+      description: Returns a [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object that contains information about the requested repository association.
+      flags:
+        --association-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-recommendation-feedback
       description: Returns a list of [RecommendationFeedbackSummary](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html) objects that contain customer recommendation feedback for all CodeGuru Reviewer users.
       flags:
@@ -85,40 +83,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
-    - name: describe-recommendation-feedback
-      description: Describes the customer feedback for a CodeGuru Reviewer recommendation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recommendation-id=!: The recommendation ID that can be used to track the provided recommendations and then to collect the feedback.
-        --user-id=: Optional parameter to describe the feedback for a given user.
-    - name: describe-repository-association
-      description: Returns a [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object that contains information about the requested repository association.
-      flags:
-        --association-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-recommendations
-      description: Returns the list of all recommendations for a completed code review.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results that are returned per call.
-        --next-token=: Pagination token.
-    - name: put-recommendation-feedback
-      description: Stores customer feedback for a CodeGuru Reviewer recommendation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reactions=!: List for storing reactions.
-        --recommendation-id=!: The recommendation ID that can be used to track the provided recommendations and then to collect the feedback.
     - name: tag-resource
       description: Adds one or more tags to an associated repository.
       flags:
@@ -135,6 +99,42 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
         --tag-keys=!: A list of the keys for each tag you want to remove from an associated repository.
+    - name: associate-repository
+      description: Use to associate an Amazon Web Services CodeCommit repository or a repository managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate repository associations if there are failures and retries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-details=: 'A `KMSKeyDetails` object that contains:'
+        --repository=!: The repository to associate.
+        --tags=: An array of key-value pairs used to tag an associated repository.
+    - name: create-code-review
+      description: Use to create a code review with a [CodeReviewType](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html) of `RepositoryAnalysis`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of duplicate code reviews if there are failures and retries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the code review.
+        --repository-association-arn=!: The Amazon Resource Name (ARN) of the [RepositoryAssociation](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html) object.
+        --type=!: The type of code review to create.
+    - name: describe-code-review
+      description: Returns the metadata associated with the code review along with its status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-recommendation-feedback
+      description: Describes the customer feedback for a CodeGuru Reviewer recommendation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-arn=!: The Amazon Resource Name (ARN) of the [CodeReview](https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html) object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-id=!: The recommendation ID that can be used to track the provided recommendations and then to collect the feedback.
+        --user-id=: Optional parameter to describe the feedback for a given user.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

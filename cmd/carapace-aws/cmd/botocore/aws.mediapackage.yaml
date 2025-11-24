@@ -1,6 +1,48 @@
 name: mediapackage
 description: AWS Elemental MediaPackage
 commands:
+    - name: list-channels
+      description: Returns a collection of Channels.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Upper bound on number of records to return.
+        --next-token=: A token used to resume pagination from the end of a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-harvest-jobs
+      description: Returns a collection of HarvestJob records.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-channel-id=: When specified, the request will return only HarvestJobs associated with the given Channel ID.
+        --include-status=: When specified, the request will return only HarvestJobs in the given status.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The upper bound on the number of records to return.
+        --next-token=: A token used to resume pagination from the end of a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-origin-endpoints
+      description: Returns a collection of OriginEndpoint records.
+      flags:
+        --channel-id=: When specified, the request will return only OriginEndpoints associated with the given Channel ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The upper bound on the number of records to return.
+        --next-token=: A token used to resume pagination from the end of a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ""
     - name: tag-resource
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -8,6 +50,100 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: ""
         --tags=!: ""
+    - name: create-channel
+      description: Creates a new Channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A short text description of the Channel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the Channel.
+        --tags=: ""
+    - name: configure-logs
+      description: Changes the Channel's properities to configure log subscription
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --egress-access-logs=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the channel to log subscription.
+        --ingress-access-logs=: ""
+    - name: create-origin-endpoint
+      description: Creates a new OriginEndpoint record.
+      flags:
+        --authorization=: ""
+        --channel-id=!: The ID of the Channel that the OriginEndpoint will be associated with.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cmaf-package=: ""
+        --dash-package=: ""
+        --description=: A short text description of the OriginEndpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hls-package=: ""
+        --id=!: The ID of the OriginEndpoint.
+        --manifest-name=: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
+        --mss-package=: ""
+        --origination=: Control whether origination of video is allowed for this OriginEndpoint.
+        --startover-window-seconds=: Maximum duration (seconds) of content to retain for startover playback.
+        --tags=: ""
+        --time-delay-seconds=: Amount of delay (seconds) to enforce on the playback of live content.
+        --whitelist=: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
+      completion:
+        flag:
+            origination:
+                - ALLOW
+                - DENY
+    - name: delete-origin-endpoint
+      description: Deletes an existing OriginEndpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the OriginEndpoint to delete.
+    - name: describe-channel
+      description: Gets details about a Channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of a Channel.
+    - name: describe-origin-endpoint
+      description: Gets details about an existing OriginEndpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the OriginEndpoint.
+    - name: rotate-channel-credentials
+      description: Changes the Channel's first IngestEndpoint's username and password.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the channel to update.
+    - name: rotate-ingest-endpoint-credentials
+      description: Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the channel the IngestEndpoint is on.
+        --ingest-endpoint-id=!: The id of the IngestEndpoint whose credentials should be rotated
+    - name: update-channel
+      description: Updates an existing Channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A short text description of the Channel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the Channel to update.
+    - name: describe-harvest-job
+      description: Gets details about an existing HarvestJob.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the HarvestJob.
     - name: untag-resource
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -38,43 +174,6 @@ commands:
             origination:
                 - ALLOW
                 - DENY
-    - name: list-tags-for-resource
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: ""
-    - name: configure-logs
-      description: Changes the Channel's properities to configure log subscription
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --egress-access-logs=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the channel to log subscription.
-        --ingress-access-logs=: ""
-    - name: delete-origin-endpoint
-      description: Deletes an existing OriginEndpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the OriginEndpoint to delete.
-    - name: describe-channel
-      description: Gets details about a Channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of a Channel.
-    - name: update-channel
-      description: Updates an existing Channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A short text description of the Channel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the Channel to update.
     - name: create-harvest-job
       description: Creates a new HarvestJob record.
       flags:
@@ -86,59 +185,6 @@ commands:
         --origin-endpoint-id=!: The ID of the OriginEndpoint that the HarvestJob will harvest from.
         --s3-destination=!: ""
         --start-time=!: The start of the time-window which will be harvested
-    - name: create-origin-endpoint
-      description: Creates a new OriginEndpoint record.
-      flags:
-        --authorization=: ""
-        --channel-id=!: The ID of the Channel that the OriginEndpoint will be associated with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cmaf-package=: ""
-        --dash-package=: ""
-        --description=: A short text description of the OriginEndpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hls-package=: ""
-        --id=!: The ID of the OriginEndpoint.
-        --manifest-name=: A short string that will be used as the filename of the OriginEndpoint URL (defaults to "index").
-        --mss-package=: ""
-        --origination=: Control whether origination of video is allowed for this OriginEndpoint.
-        --startover-window-seconds=: Maximum duration (seconds) of content to retain for startover playback.
-        --tags=: ""
-        --time-delay-seconds=: Amount of delay (seconds) to enforce on the playback of live content.
-        --whitelist=: A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
-      completion:
-        flag:
-            origination:
-                - ALLOW
-                - DENY
-    - name: list-origin-endpoints
-      description: Returns a collection of OriginEndpoint records.
-      flags:
-        --channel-id=: When specified, the request will return only OriginEndpoints associated with the given Channel ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound on the number of records to return.
-        --next-token=: A token used to resume pagination from the end of a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: rotate-channel-credentials
-      description: Changes the Channel's first IngestEndpoint's username and password.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the channel to update.
-    - name: create-channel
-      description: Creates a new Channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A short text description of the Channel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the Channel.
-        --tags=: ""
     - name: delete-channel
       description: Deletes an existing Channel.
       flags:
@@ -146,49 +192,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the Channel to delete.
-    - name: describe-harvest-job
-      description: Gets details about an existing HarvestJob.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the HarvestJob.
-    - name: list-channels
-      description: Returns a collection of Channels.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Upper bound on number of records to return.
-        --next-token=: A token used to resume pagination from the end of a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-harvest-jobs
-      description: Returns a collection of HarvestJob records.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-channel-id=: When specified, the request will return only HarvestJobs associated with the given Channel ID.
-        --include-status=: When specified, the request will return only HarvestJobs in the given status.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The upper bound on the number of records to return.
-        --next-token=: A token used to resume pagination from the end of a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: rotate-ingest-endpoint-credentials
-      description: Rotate the IngestEndpoint's username and password, as specified by the IngestEndpoint's id.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the channel the IngestEndpoint is on.
-        --ingest-endpoint-id=!: The id of the IngestEndpoint whose credentials should be rotated
-    - name: describe-origin-endpoint
-      description: Gets details about an existing OriginEndpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the OriginEndpoint.

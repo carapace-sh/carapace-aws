@@ -1,6 +1,141 @@
 name: datapipeline
 description: AWS Data Pipeline
 commands:
+    - name: activate-pipeline
+      description: Validates the specified pipeline and starts processing pipeline tasks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-values=: A list of parameter values to pass to the pipeline at activation.
+        --pipeline-id=!: The ID of the pipeline.
+        --start-timestamp=: The date and time to resume the pipeline.
+    - name: add-tags
+      description: Adds or modifies tags for the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-id=!: The ID of the pipeline.
+        --tags=!: The tags to add, as key/value pairs.
+    - name: describe-pipelines
+      description: Retrieves metadata about one or more pipelines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-ids=!: The IDs of the pipelines to describe.
+    - name: list-pipelines
+      description: Lists the pipeline identifiers for all active pipelines that you have permission to access.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The starting point for the results to be returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --starting-token=: A token to specify where to start paginating.
+    - name: report-task-progress
+      description: Task runners call `ReportTaskProgress` when assigned a task to acknowledge that it has the task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fields=: Key-value pairs that define the properties of the ReportTaskProgressInput object.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The ID of the task assigned to the task runner.
+    - name: deactivate-pipeline
+      description: Deactivates the specified running pipeline.
+      flags:
+        --cancel-active: Indicates whether to cancel any running objects.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-cancel-active: Indicates whether to cancel any running objects.
+        --pipeline-id=!: The ID of the pipeline.
+    - name: poll-for-task
+      description: Task runners call `PollForTask` to receive a task to perform from AWS Data Pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hostname=: The public DNS name of the calling task runner.
+        --instance-identity=: Identity information for the EC2 instance that is hosting the task runner.
+        --worker-group=!: The type of task the task runner is configured to accept and process.
+    - name: put-pipeline-definition
+      description: Adds tasks, schedules, and preconditions to the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-objects=: The parameter objects used with the pipeline.
+        --parameter-values=: The parameter values used with the pipeline.
+        --pipeline-id=!: The ID of the pipeline.
+        --pipeline-objects=!: The objects that define the pipeline.
+    - name: query-objects
+      description: Queries the specified pipeline for the names of objects that match the specified set of conditions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of object names that `QueryObjects` will return in a single call.
+        --marker=: The starting point for the results to be returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --objects-query=: The query that defines the objects to be returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pipeline-id=!: The ID of the pipeline.
+        --sphere=!: Indicates whether the query applies to components or instances.
+        --starting-token=: A token to specify where to start paginating.
+    - name: remove-tags
+      description: Removes existing tags from the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-id=!: The ID of the pipeline.
+        --tag-keys=!: The keys of the tags to remove.
+    - name: create-pipeline
+      description: Creates a new, empty pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description for the pipeline.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the pipeline.
+        --tags=: A list of tags to associate with the pipeline at creation.
+        --unique-id=!: A unique identifier.
+    - name: evaluate-expression
+      description: Task runners call `EvaluateExpression` to evaluate a string in the context of the specified object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expression=!: The expression to evaluate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-id=!: The ID of the object.
+        --pipeline-id=!: The ID of the pipeline.
+    - name: get-pipeline-definition
+      description: Gets the definition of the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-id=!: The ID of the pipeline.
+        --pipeline-version=: The version of the pipeline definition to retrieve.
+    - name: validate-pipeline-definition
+      description: Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-objects=: The parameter objects used with the pipeline.
+        --parameter-values=: The parameter values used with the pipeline.
+        --pipeline-id=!: The ID of the pipeline.
+        --pipeline-objects=!: The objects that define the pipeline changes to validate against the pipeline.
+    - name: delete-pipeline
+      description: Deletes a pipeline, its pipeline definition, and its run history.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-id=!: The ID of the pipeline.
     - name: describe-objects
       description: Gets the object definitions for a set of objects associated with the pipeline.
       flags:
@@ -14,16 +149,24 @@ commands:
         --object-ids=!: The IDs of the pipeline objects that contain the definitions to be described.
         --pipeline-id=!: The ID of the pipeline that contains the object definitions.
         --starting-token=: A token to specify where to start paginating.
-    - name: put-pipeline-definition
-      description: Adds tasks, schedules, and preconditions to the specified pipeline.
+    - name: report-task-runner-heartbeat
+      description: Task runners call `ReportTaskRunnerHeartbeat` every 15 minutes to indicate that they are operational.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-objects=: The parameter objects used with the pipeline.
-        --parameter-values=: The parameter values used with the pipeline.
-        --pipeline-id=!: The ID of the pipeline.
-        --pipeline-objects=!: The objects that define the pipeline.
+        --hostname=: The public DNS name of the task runner.
+        --taskrunner-id=!: The ID of the task runner.
+        --worker-group=: The type of task the task runner is configured to accept and process.
+    - name: set-status
+      description: Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-ids=!: The IDs of the objects.
+        --pipeline-id=!: The ID of the pipeline that contains the objects.
+        --status=!: The status to be set on all the objects specified in `objectIds`.
     - name: set-task-status
       description: Task runners call `SetTaskStatus` to notify AWS Data Pipeline that a task is completed and provide information about the final status.
       flags:
@@ -41,146 +184,3 @@ commands:
                 - FINISHED
                 - FAILED
                 - "FALSE"
-    - name: delete-pipeline
-      description: Deletes a pipeline, its pipeline definition, and its run history.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-id=!: The ID of the pipeline.
-    - name: evaluate-expression
-      description: Task runners call `EvaluateExpression` to evaluate a string in the context of the specified object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --expression=!: The expression to evaluate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-id=!: The ID of the object.
-        --pipeline-id=!: The ID of the pipeline.
-    - name: list-pipelines
-      description: Lists the pipeline identifiers for all active pipelines that you have permission to access.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: The starting point for the results to be returned.
-        --max-items=: The  total number of items to return in the command's output.
-        --starting-token=: A token to specify where to start paginating.
-    - name: set-status
-      description: Requests that the status of the specified physical or logical pipeline objects be updated in the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --object-ids=!: The IDs of the objects.
-        --pipeline-id=!: The ID of the pipeline that contains the objects.
-        --status=!: The status to be set on all the objects specified in `objectIds`.
-    - name: add-tags
-      description: Adds or modifies tags for the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-id=!: The ID of the pipeline.
-        --tags=!: The tags to add, as key/value pairs.
-    - name: create-pipeline
-      description: Creates a new, empty pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description for the pipeline.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name for the pipeline.
-        --tags=: A list of tags to associate with the pipeline at creation.
-        --unique-id=!: A unique identifier.
-    - name: describe-pipelines
-      description: Retrieves metadata about one or more pipelines.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-ids=!: The IDs of the pipelines to describe.
-    - name: remove-tags
-      description: Removes existing tags from the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-id=!: The ID of the pipeline.
-        --tag-keys=!: The keys of the tags to remove.
-    - name: report-task-progress
-      description: Task runners call `ReportTaskProgress` when assigned a task to acknowledge that it has the task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fields=: Key-value pairs that define the properties of the ReportTaskProgressInput object.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --task-id=!: The ID of the task assigned to the task runner.
-    - name: report-task-runner-heartbeat
-      description: Task runners call `ReportTaskRunnerHeartbeat` every 15 minutes to indicate that they are operational.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hostname=: The public DNS name of the task runner.
-        --taskrunner-id=!: The ID of the task runner.
-        --worker-group=: The type of task the task runner is configured to accept and process.
-    - name: validate-pipeline-definition
-      description: Validates the specified pipeline definition to ensure that it is well formed and can be run without error.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-objects=: The parameter objects used with the pipeline.
-        --parameter-values=: The parameter values used with the pipeline.
-        --pipeline-id=!: The ID of the pipeline.
-        --pipeline-objects=!: The objects that define the pipeline changes to validate against the pipeline.
-    - name: activate-pipeline
-      description: Validates the specified pipeline and starts processing pipeline tasks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-values=: A list of parameter values to pass to the pipeline at activation.
-        --pipeline-id=!: The ID of the pipeline.
-        --start-timestamp=: The date and time to resume the pipeline.
-    - name: deactivate-pipeline
-      description: Deactivates the specified running pipeline.
-      flags:
-        --cancel-active: Indicates whether to cancel any running objects.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-cancel-active: Indicates whether to cancel any running objects.
-        --pipeline-id=!: The ID of the pipeline.
-    - name: get-pipeline-definition
-      description: Gets the definition of the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pipeline-id=!: The ID of the pipeline.
-        --pipeline-version=: The version of the pipeline definition to retrieve.
-    - name: poll-for-task
-      description: Task runners call `PollForTask` to receive a task to perform from AWS Data Pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hostname=: The public DNS name of the calling task runner.
-        --instance-identity=: Identity information for the EC2 instance that is hosting the task runner.
-        --worker-group=!: The type of task the task runner is configured to accept and process.
-    - name: query-objects
-      description: Queries the specified pipeline for the names of objects that match the specified set of conditions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --limit=: The maximum number of object names that `QueryObjects` will return in a single call.
-        --marker=: The starting point for the results to be returned.
-        --max-items=: The  total number of items to return in the command's output.
-        --objects-query=: The query that defines the objects to be returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --pipeline-id=!: The ID of the pipeline.
-        --sphere=!: Indicates whether the query applies to components or instances.
-        --starting-token=: A token to specify where to start paginating.

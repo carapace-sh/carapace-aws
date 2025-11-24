@@ -1,6 +1,18 @@
 name: chatbot
 description: AWS Chatbot
 commands:
+    - name: list-microsoft-teams-channel-configurations
+      description: Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --team-id=: The ID of the Microsoft Teams authorized with AWS Chatbot.
     - name: associate-to-configuration
       description: Links a resource (for example, a custom action) to a channel configuration.
       flags:
@@ -9,6 +21,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource=!: The resource Amazon Resource Name (ARN) to link.
+    - name: delete-microsoft-teams-channel-configuration
+      description: Deletes a Microsoft Teams channel configuration for AWS Chatbot
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-chime-webhook-configuration
       description: Creates an AWS Chatbot configuration for Amazon Chime.
       flags:
@@ -22,59 +41,51 @@ commands:
         --tags=: A map of tags assigned to a resource.
         --webhook-description=!: A description of the webhook.
         --webhook-url=!: The URL for the Amazon Chime webhook.
-    - name: delete-chime-webhook-configuration
-      description: Deletes a Amazon Chime webhook configuration for AWS Chatbot.
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-microsoft-teams-channel-configuration
-      description: Deletes a Microsoft Teams channel configuration for AWS Chatbot
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-slack-user-identity
-      description: Deletes a user level permission for a Slack channel configuration.
-      flags:
-        --chat-configuration-arn=!: The ARN of the SlackChannelConfiguration associated with the user identity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
-        --slack-user-id=!: The ID of the user in Slack
-    - name: describe-slack-workspaces
-      description: List all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot.
+    - name: get-custom-action
+      description: Returns a custom action.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-action-arn=!: Returns the fully defined Amazon Resource Name (ARN) of the custom action.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-microsoft-teams-channel-configuration
-      description: Creates an AWS Chatbot configuration for Microsoft Teams.
+    - name: get-microsoft-teams-channel-configuration
+      description: Returns a Microsoft Teams channel configuration in an AWS account.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-microsoft-teams-user-identity
+      description: Identifes a user level permission for a channel configuration.
+      flags:
+        --chat-configuration-arn=!: The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The Microsoft Teams user ID.
+    - name: update-microsoft-teams-channel-configuration
+      description: Updates an Microsoft Teams channel configuration.
       flags:
         --channel-id=!: The ID of the Microsoft Teams channel.
         --channel-name=: The name of the Microsoft Teams channel.
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the TeamsChannelConfiguration to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-name=!: The name of the configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --guardrail-policy-arns=: The list of IAM policy ARNs that are applied as channel guardrails.
-        --iam-role-arn=!: A user-defined role that AWS Chatbot assumes.
+        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
         --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
         --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
         --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-        --tags=: A map of tags assigned to a resource.
-        --team-id=!: The ID of the Microsoft Teams authorized with AWS Chatbot.
-        --team-name=: The name of the Microsoft Teams Team.
-        --tenant-id=!: The ID of the Microsoft Teams tenant.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: tag-resource
+      description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the configuration.
+        --tags=!: A list of tags to apply to the configuration.
     - name: create-slack-channel-configuration
       description: Creates an AWS Chatbot confugration for Slack.
       flags:
@@ -92,17 +103,38 @@ commands:
         --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
         --tags=: A map of tags assigned to a resource.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: delete-custom-action
-      description: Deletes a custom action.
+    - name: delete-microsoft-teams-configured-team
+      description: Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-action-arn=!: The fully defined ARN of the custom action.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-slack-channel-configurations
-      description: Lists Slack channel configurations optionally filtered by ChatConfigurationArn
+        --team-id=!: The ID of the Microsoft Teams team authorized with AWS Chatbot.
+    - name: delete-slack-user-identity
+      description: Deletes a user level permission for a Slack channel configuration.
       flags:
-        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.
+        --chat-configuration-arn=!: The ARN of the SlackChannelConfiguration associated with the user identity to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
+        --slack-user-id=!: The ID of the user in Slack
+    - name: delete-slack-workspace-authorization
+      description: Deletes the Slack workspace authorization that allows channels to be configured in that workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
+    - name: get-account-preferences
+      description: Returns AWS Chatbot account preferences.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-custom-actions
+      description: Lists custom actions defined in this account.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -111,11 +143,34 @@ commands:
         --next-token=: An optional token returned from a prior request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-account-preferences
-      description: Returns AWS Chatbot account preferences.
+    - name: update-account-preferences
+      description: Updates AWS Chatbot account preferences.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-training-data-collection-enabled: Turns on training data collection.
+        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
+        --training-data-collection-enabled: Turns on training data collection.
+        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: create-custom-action
+      description: Creates a custom action that can be invoked as an alias or as a button on a notification.
+      flags:
+        --action-name=!: The name of the custom action.
+        --alias-name=: The name used to invoke this action in a chat channel.
+        --attachments=: Defines when this custom action button should be attached to a notification.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A map of tags assigned to a resource.
+    - name: delete-custom-action
+      description: Deletes a custom action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-action-arn=!: The fully defined ARN of the custom action.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-associations
       description: Lists resources associated with a channel configuration.
@@ -137,191 +192,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The value of the resource that will have the tag removed.
         --tag-keys=!: TagKeys are key-value pairs assigned to ARNs that can be used to group and search for resources by type.
-    - name: update-account-preferences
-      description: Updates AWS Chatbot account preferences.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-training-data-collection-enabled: Turns on training data collection.
-        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
-        --training-data-collection-enabled: Turns on training data collection.
-        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
-    - name: delete-microsoft-teams-configured-team
-      description: Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --team-id=!: The ID of the Microsoft Teams team authorized with AWS Chatbot.
-    - name: describe-slack-user-identities
-      description: Lists all Slack user identities with a mapped role.
-      flags:
-        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: disassociate-from-configuration
-      description: Unlink a resource, for example a custom action, from a channel configuration.
-      flags:
-        --chat-configuration=!: The channel configuration the resource is being disassociated from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource=!: The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.
-    - name: list-microsoft-teams-configured-teams
-      description: Lists all authorized Microsoft Teams for an AWS Account
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-microsoft-teams-user-identities
-      description: A list all Microsoft Teams user identities with a mapped role.
-      flags:
-        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-microsoft-teams-user-identity
-      description: Identifes a user level permission for a channel configuration.
-      flags:
-        --chat-configuration-arn=!: The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The Microsoft Teams user ID.
-    - name: get-custom-action
-      description: Returns a custom action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-action-arn=!: Returns the fully defined Amazon Resource Name (ARN) of the custom action.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-slack-channel-configuration
-      description: Deletes a Slack channel configuration for AWS Chatbot
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-microsoft-teams-channel-configurations
-      description: Lists all AWS Chatbot Microsoft Teams channel configurations in an AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --team-id=: The ID of the Microsoft Teams authorized with AWS Chatbot.
-    - name: create-custom-action
-      description: Creates a custom action that can be invoked as an alias or as a button on a notification.
-      flags:
-        --action-name=!: The name of the custom action.
-        --alias-name=: The name used to invoke this action in a chat channel.
-        --attachments=: Defines when this custom action button should be attached to a notification.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --definition=!: The definition of the command to run when invoked as an alias or as an action button.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A map of tags assigned to a resource.
-    - name: list-custom-actions
-      description: Lists custom actions defined in this account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-slack-workspace-authorization
-      description: Deletes the Slack workspace authorization that allows channels to be configured in that workspace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --slack-team-id=!: The ID of the Slack workspace authorized with AWS Chatbot.
-    - name: describe-chime-webhook-configurations
-      description: Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn
-      flags:
-        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: An optional token returned from a prior request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-microsoft-teams-channel-configuration
-      description: Returns a Microsoft Teams channel configuration in an AWS account.
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to list tags for.
-    - name: tag-resource
-      description: Attaches a key-value pair to a resource, as identified by its Amazon Resource Name (ARN).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the configuration.
-        --tags=!: A list of tags to apply to the configuration.
-    - name: update-chime-webhook-configuration
-      description: Updates a Amazon Chime webhook configuration.
-      flags:
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
-        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
-        --sns-topic-arns=: The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
-        --webhook-description=: A description of the webhook.
-        --webhook-url=: The URL for the Amazon Chime webhook.
-    - name: update-microsoft-teams-channel-configuration
-      description: Updates an Microsoft Teams channel configuration.
-      flags:
-        --channel-id=!: The ID of the Microsoft Teams channel.
-        --channel-name=: The name of the Microsoft Teams channel.
-        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the TeamsChannelConfiguration to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-policy-arns=: The list of IAM policy ARNs that are applied as channel guardrails.
-        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
-        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
-        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
-        --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
-        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
     - name: update-custom-action
       description: Updates a custom action.
       flags:
@@ -347,3 +217,133 @@ commands:
         --slack-channel-name=: The name of the Slack channel.
         --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
         --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: delete-chime-webhook-configuration
+      description: Deletes a Amazon Chime webhook configuration for AWS Chatbot.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-slack-channel-configuration
+      description: Deletes a Slack channel configuration for AWS Chatbot
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the SlackChannelConfiguration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-from-configuration
+      description: Unlink a resource, for example a custom action, from a channel configuration.
+      flags:
+        --chat-configuration=!: The channel configuration the resource is being disassociated from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The resource (for example, a custom action) Amazon Resource Name (ARN) to unlink.
+    - name: list-microsoft-teams-user-identities
+      description: A list all Microsoft Teams user identities with a mapped role.
+      flags:
+        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the MicrosoftTeamsChannelConfiguration associated with the user identities to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-chime-webhook-configuration
+      description: Updates a Amazon Chime webhook configuration.
+      flags:
+        --chat-configuration-arn=!: The Amazon Resource Name (ARN) of the ChimeWebhookConfiguration to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=: A user-defined role that AWS Chatbot assumes.
+        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
+        --sns-topic-arns=: The ARNs of the SNS topics that deliver notifications to AWS Chatbot.
+        --webhook-description=: A description of the webhook.
+        --webhook-url=: The URL for the Amazon Chime webhook.
+    - name: describe-chime-webhook-configurations
+      description: Lists Amazon Chime webhook configurations optionally filtered by ChatConfigurationArn
+      flags:
+        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a ChimeWebhookConfiguration to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-microsoft-teams-configured-teams
+      description: Lists all authorized Microsoft Teams for an AWS Account
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all of the tags associated with the Amazon Resource Name (ARN) that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to list tags for.
+    - name: create-microsoft-teams-channel-configuration
+      description: Creates an AWS Chatbot configuration for Microsoft Teams.
+      flags:
+        --channel-id=!: The ID of the Microsoft Teams channel.
+        --channel-name=: The name of the Microsoft Teams channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-name=!: The name of the configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-policy-arns=: The list of IAM policy ARNs that are applied as channel guardrails.
+        --iam-role-arn=!: A user-defined role that AWS Chatbot assumes.
+        --logging-level=: Logging levels include `ERROR`, `INFO`, or `NONE`.
+        --no-user-authorization-required: Enables use of a user role requirement in your chat configuration.
+        --sns-topic-arns=: The Amazon Resource Names (ARNs) of the SNS topics that deliver notifications to AWS Chatbot.
+        --tags=: A map of tags assigned to a resource.
+        --team-id=!: The ID of the Microsoft Teams authorized with AWS Chatbot.
+        --team-name=: The name of the Microsoft Teams Team.
+        --tenant-id=!: The ID of the Microsoft Teams tenant.
+        --user-authorization-required: Enables use of a user role requirement in your chat configuration.
+    - name: describe-slack-channel-configurations
+      description: Lists Slack channel configurations optionally filtered by ChatConfigurationArn
+      flags:
+        --chat-configuration-arn=: An optional Amazon Resource Name (ARN) of a SlackChannelConfiguration to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-slack-user-identities
+      description: Lists all Slack user identities with a mapped role.
+      flags:
+        --chat-configuration-arn=: The Amazon Resource Name (ARN) of the SlackChannelConfiguration associated with the user identities to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-slack-workspaces
+      description: List all authorized Slack workspaces connected to the AWS Account onboarded with AWS Chatbot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: An optional token returned from a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.

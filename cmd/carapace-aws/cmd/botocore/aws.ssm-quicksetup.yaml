@@ -1,32 +1,39 @@
 name: ssm-quicksetup
 description: AWS Systems Manager QuickSetup
 commands:
-    - name: list-configurations
-      description: Returns configurations deployed by Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.
+    - name: get-configuration
+      description: Returns details about the specified configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-definition-id=: The ID of the configuration definition.
-        --filters=: Filters the results returned by the request.
+        --configuration-id=!: A service generated identifier for the configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manager-arn=: The ARN of the configuration manager.
-        --max-items=: Specifies the maximum number of configurations that are returned by the request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: The token to use when requesting a specific set of items from a list.
+    - name: get-configuration-manager
+      description: Returns a configuration manager.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manager-arn=!: The ARN of the configuration manager.
+    - name: get-service-settings
+      description: Returns settings configured for Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-quick-setup-types
       description: Returns the available Quick Setup types.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-resource
-      description: Assigns key-value pairs of metadata to Amazon Web Services resources.
+    - name: list-tags-for-resource
+      description: Returns tags assigned to the resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to tag.
-        --tags=!: Key-value pairs of metadata to assign to the resource.
+        --resource-arn=!: The ARN of the resource the tag is assigned to.
     - name: update-configuration-definition
       description: Updates a Quick Setup configuration definition.
       flags:
@@ -39,26 +46,36 @@ commands:
         --manager-arn=!: The ARN of the configuration manager associated with the definition to update.
         --parameters=: The parameters for the configuration definition type.
         --type-version=: The version of the Quick Setup type to use.
-    - name: get-configuration
-      description: Returns details about the specified configuration.
+    - name: list-configuration-managers
+      description: Returns Quick Setup configuration managers.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration-id=!: A service generated identifier for the configuration.
+        --filters=: Filters the results returned by the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-service-settings
-      description: Returns settings configured for Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.
+        --max-items=: Specifies the maximum number of configuration managers that are returned by the request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: The token to use when requesting a specific set of items from a list.
+    - name: list-configurations
+      description: Returns configurations deployed by Quick Setup in the requesting Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-definition-id=: The ID of the configuration definition.
+        --filters=: Filters the results returned by the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manager-arn=: The ARN of the configuration manager.
+        --max-items=: Specifies the maximum number of configurations that are returned by the request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: The token to use when requesting a specific set of items from a list.
+    - name: tag-resource
+      description: Assigns key-value pairs of metadata to Amazon Web Services resources.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: Returns tags assigned to the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource the tag is assigned to.
+        --resource-arn=!: The ARN of the resource to tag.
+        --tags=!: Key-value pairs of metadata to assign to the resource.
     - name: untag-resource
       description: Removes tags from the specified resource.
       flags:
@@ -100,20 +117,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --manager-arn=!: The ID of the configuration manager.
-    - name: get-configuration-manager
-      description: Returns a configuration manager.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manager-arn=!: The ARN of the configuration manager.
-    - name: list-configuration-managers
-      description: Returns Quick Setup configuration managers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters the results returned by the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: Specifies the maximum number of configuration managers that are returned by the request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: The token to use when requesting a specific set of items from a list.
