@@ -141,6 +141,7 @@ func CamelCaseToDash(s string) string {
 		"stop-ic-d10-cm-inference-job":              "stop-icd10-cm-inference-job",
 		"tape-ar-ns":                                "tape-arns",
 		"target-group-ar-ns":                        "target-group-arns",
+		"volume-ar-ns":                              "volume-arns",
 		"vtl-device-ar-ns":                          "vtl-device-arns",
 	}
 	if replacement, ok := quickfix[s]; ok {
