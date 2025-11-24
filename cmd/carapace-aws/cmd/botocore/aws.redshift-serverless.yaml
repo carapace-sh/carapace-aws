@@ -1,6 +1,275 @@
 name: redshift-serverless
 description: Redshift Serverless
 commands:
+    - name: get-reservation
+      description: Gets an Amazon Redshift Serverless reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reservation-id=!: The ID of the reservation to retrieve.
+    - name: convert-recovery-point-to-snapshot
+      description: Converts a recovery point to a snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-point-id=!: The unique identifier of the recovery point.
+        --retention-period=: How long to retain the snapshot.
+        --snapshot-name=!: The name of the snapshot.
+        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the created snapshot.
+    - name: create-namespace
+      description: Creates a namespace in Amazon Redshift Serverless.
+      flags:
+        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+        --admin-user-password=: The password of the administrator for the first database created in the namespace.
+        --admin-username=: The username of the administrator for the first database created in the namespace.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-name=: The name of the first database created in the namespace.
+        --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-roles=: A list of IAM roles to associate with the namespace.
+        --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
+        --log-exports=: The types of logs the namespace can export.
+        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
+        --namespace-name=!: The name of the namespace.
+        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
+        --redshift-idc-application-arn=: The ARN for the Redshift application that integrates with IAM Identity Center.
+        --tags=: A list of tag instances.
+    - name: delete-scheduled-action
+      description: Deletes a scheduled action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scheduled-action-name=!: The name of the scheduled action to delete.
+    - name: list-namespaces
+      description: Returns information about a list of specified namespaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListNamespaces` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListNamespaces` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-endpoint-access
+      description: Updates an Amazon Redshift Serverless managed endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the VPC endpoint to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-security-group-ids=: The list of VPC security groups associated with the endpoint after the endpoint is modified.
+    - name: create-custom-domain-association
+      description: Creates a custom domain association for Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-certificate-arn=!: The custom domain name’s certificate Amazon resource name (ARN).
+        --custom-domain-name=!: The custom domain name to associate with the workgroup.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup associated with the database.
+    - name: list-scheduled-actions
+      description: Returns a list of scheduled actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --namespace-name=: The name of namespace associated with the scheduled action to retrieve.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-snapshot
+      description: Deletes a snapshot from Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-name=!: The name of the snapshot to be deleted.
+    - name: get-resource-policy
+      description: Returns a resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return.
+    - name: list-endpoint-access
+      description: Returns an array of `EndpointAccess` objects and relevant information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListEndpointAccess` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListEndpointAccess` operations, which returns results in the next page.
+        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --vpc-id=: The unique identifier of the virtual private cloud with access to Amazon Redshift Serverless.
+        --workgroup-name=: The name of the workgroup associated with the VPC endpoint to return.
+    - name: tag-resource
+      description: Assigns one or more tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
+        --tags=!: The map of the key-value pairs used to tag the resource.
+    - name: get-reservation-offering
+      description: Returns the reservation offering.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --offering-id=!: The identifier for the offering..
+    - name: get-scheduled-action
+      description: Returns information about a scheduled action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scheduled-action-name=!: The name of the scheduled action.
+    - name: delete-usage-limit
+      description: Deletes a usage limit from Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --usage-limit-id=!: The unique identifier of the usage limit to delete.
+    - name: delete-workgroup
+      description: Deletes a workgroup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup to be deleted.
+    - name: get-credentials
+      description: Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-name=: The custom domain name associated with the workgroup.
+        --db-name=: The name of the database to get temporary authorization to log on to.
+        --duration-seconds=: The number of seconds until the returned temporary password expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=: The name of the workgroup associated with the database.
+    - name: list-table-restore-status
+      description: Returns information about an array of `TableRestoreStatus` objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --namespace-name=: The namespace from which to list all of the statuses of `RestoreTableFromSnapshot` operations .
+        --next-token=: If your initial `ListTableRestoreStatus` operation returns a nextToken, you can include the returned `nextToken` in following `ListTableRestoreStatus` operations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workgroup-name=: The workgroup from which to list all of the statuses of `RestoreTableFromSnapshot` operations.
+    - name: update-custom-domain-association
+      description: Updates an Amazon Redshift Serverless certificate associated with a custom domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-certificate-arn=!: The custom domain name’s certificate Amazon resource name (ARN).
+        --custom-domain-name=!: The custom domain name associated with the workgroup.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup associated with the database.
+    - name: update-snapshot-copy-configuration
+      description: Updates a snapshot copy configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-copy-configuration-id=!: The ID of the snapshot copy configuration to update.
+        --snapshot-retention-period=: The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.
+    - name: delete-snapshot-copy-configuration
+      description: Deletes a snapshot copy configuration
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-copy-configuration-id=!: The ID of the snapshot copy configuration to delete.
+    - name: create-reservation
+      description: Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.
+      flags:
+        --capacity=!: The number of Redshift Processing Units (RPUs) to reserve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --offering-id=!: The ID of the offering associated with the reservation.
+    - name: create-workgroup
+      description: Creates an workgroup in Amazon Redshift Serverless.
+      flags:
+        --base-capacity=: The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-parameters=: An array of parameters to set for advanced control over a database.
+        --enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address-type=: The IP address type that the workgroup supports.
+        --max-capacity=: The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries.
+        --namespace-name=!: The name of the namespace to associate with the workgroup.
+        --no-enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
+        --no-publicly-accessible: A value that specifies whether the workgroup can be accessed from a public network.
+        --port=: The custom port to use when connecting to a workgroup.
+        --price-performance-target=: An object that represents the price performance target settings for the workgroup.
+        --publicly-accessible: A value that specifies whether the workgroup can be accessed from a public network.
+        --security-group-ids=: An array of security group IDs to associate with the workgroup.
+        --subnet-ids=: An array of VPC subnet IDs to associate with the workgroup.
+        --tags=: A array of tag instances.
+        --track-name=: An optional parameter for the name of the track for the workgroup.
+        --workgroup-name=!: The name of the created workgroup.
+    - name: delete-endpoint-access
+      description: Deletes an Amazon Redshift Serverless managed VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the VPC endpoint to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-lakehouse-configuration
+      description: Modifies the lakehouse configuration for a namespace.
+      flags:
+        --catalog-name=: The name of the Glue Data Catalog that will be associated with the namespace enabled with Amazon Redshift federated permissions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: A boolean value that, if `true`, validates the request without actually updating the lakehouse configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lakehouse-idc-application-arn=: The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.
+        --lakehouse-idc-registration=: Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.
+        --lakehouse-registration=: Specifies whether to register or deregister the namespace with Amazon Redshift federated permissions.
+        --namespace-name=!: The name of the namespace whose lakehouse configuration you want to modify.
+        --no-dry-run: A boolean value that, if `true`, validates the request without actually updating the lakehouse configuration.
+      completion:
+        flag:
+            lakehouse-idc-registration:
+                - Associate
+                - Disassociate
+            lakehouse-registration:
+                - Register
+                - Deregister
+    - name: update-namespace
+      description: Updates a namespace with the specified settings.
+      flags:
+        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+        --admin-user-password=: The password of the administrator for the first database created in the namespace.
+        --admin-username=: The username of the administrator for the first database created in the namespace.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-roles=: A list of IAM roles to associate with the namespace.
+        --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
+        --log-exports=: The types of logs the namespace can export.
+        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
+        --namespace-name=!: The name of the namespace to update.
+        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
     - name: create-usage-limit
       description: Creates a usage limit for a specified Amazon Redshift Serverless usage type.
       flags:
@@ -25,13 +294,6 @@ commands:
             usage-type:
                 - serverless-compute
                 - cross-region-datasharing
-    - name: get-reservation-offering
-      description: Returns the reservation offering.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --offering-id=!: The identifier for the offering..
     - name: get-snapshot
       description: Returns information about a specific snapshot.
       flags:
@@ -41,30 +303,13 @@ commands:
         --owner-account=: The owner Amazon Web Services account of a snapshot shared with another user.
         --snapshot-arn=: The Amazon Resource Name (ARN) of the snapshot to return.
         --snapshot-name=: The name of the snapshot to return.
-    - name: update-custom-domain-association
-      description: Updates an Amazon Redshift Serverless certificate associated with a custom domain.
+    - name: get-table-restore-status
+      description: Returns information about a `TableRestoreStatus` object.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-certificate-arn=!: The custom domain name’s certificate Amazon resource name (ARN).
-        --custom-domain-name=!: The custom domain name associated with the workgroup.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup associated with the database.
-    - name: update-scheduled-action
-      description: Updates a scheduled action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: Specifies whether to enable the scheduled action.
-        --end-time=: The end time in UTC of the scheduled action to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enabled: Specifies whether to enable the scheduled action.
-        --role-arn=: The ARN of the IAM role to assume to run the scheduled action.
-        --schedule=: The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action.
-        --scheduled-action-description=: The descripion of the scheduled action to update to.
-        --scheduled-action-name=!: The name of the scheduled action to update to.
-        --start-time=: The start time in UTC of the scheduled action to update to.
-        --target-action=: ""
+        --table-restore-request-id=!: The ID of the `RestoreTableFromSnapshot` request to return status for.
     - name: update-usage-limit
       description: Update a usage limit in Amazon Redshift Serverless.
       flags:
@@ -80,67 +325,26 @@ commands:
                 - log
                 - emit-metric
                 - deactivate
-    - name: get-credentials
-      description: Returns a database user name and temporary password with temporary authorization to log in to Amazon Redshift Serverless.
+    - name: get-recovery-point
+      description: Returns information about a recovery point.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-name=: The custom domain name associated with the workgroup.
-        --db-name=: The name of the database to get temporary authorization to log on to.
-        --duration-seconds=: The number of seconds until the returned temporary password expires.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=: The name of the workgroup associated with the database.
-    - name: list-scheduled-actions
-      description: Returns a list of scheduled actions.
+        --recovery-point-id=!: The unique identifier of the recovery point to return information for.
+    - name: list-custom-domain-associations
+      description: Lists custom domain associations for Amazon Redshift Serverless.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-certificate-arn=: The custom domain name’s certificate Amazon resource name (ARN).
+        --custom-domain-name=: The custom domain name associated with the workgroup.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --namespace-name=: The name of namespace associated with the scheduled action to retrieve.
-        --next-token=: If `nextToken` is returned, there are more results available.
+        --next-token=: When `nextToken` is returned, there are more results available.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-snapshot
-      description: Creates a snapshot of all databases in a namespace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The namespace to create a snapshot for.
-        --retention-period=: How long to retain the created snapshot.
-        --snapshot-name=!: The name of the snapshot.
-        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the snapshot.
-    - name: delete-custom-domain-association
-      description: Deletes a custom domain association for Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-name=!: The custom domain name associated with the workgroup.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup associated with the database.
-    - name: get-namespace
-      description: Returns information about a namespace in Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The name of the namespace to retrieve information for.
-    - name: get-scheduled-action
-      description: Returns information about a scheduled action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scheduled-action-name=!: The name of the scheduled action.
-    - name: get-workgroup
-      description: Returns information about a specific workgroup.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup to return information for.
     - name: list-snapshots
       description: Returns a list of snapshots.
       flags:
@@ -156,6 +360,210 @@ commands:
         --owner-account=: The owner Amazon Web Services account of the snapshot.
         --page-size=: The size of each page to get in the AWS service call.
         --start-time=: The time when the creation of the snapshot was initiated.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Creates or updates a resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The policy to create or update.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
+    - name: restore-table-from-snapshot
+      description: Restores a table from a snapshot to your Amazon Redshift Serverless instance.
+      flags:
+        --activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: The namespace of the snapshot to restore from.
+        --new-table-name=!: The name of the table to create from the restore operation.
+        --no-activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
+        --snapshot-name=!: The name of the snapshot to restore the table from.
+        --source-database-name=!: The name of the source database that contains the table being restored.
+        --source-schema-name=: The name of the source schema that contains the table being restored.
+        --source-table-name=!: The name of the source table being restored.
+        --target-database-name=: The name of the database to restore the table to.
+        --target-schema-name=: The name of the schema to restore the table to.
+        --workgroup-name=!: The workgroup to restore the table to.
+    - name: restore-table-from-recovery-point
+      description: Restores a table from a recovery point to your Amazon Redshift Serverless instance.
+      flags:
+        --activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: Namespace of the recovery point to restore from.
+        --new-table-name=!: The name of the table to create from the restore operation.
+        --no-activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
+        --recovery-point-id=!: The ID of the recovery point to restore the table from.
+        --source-database-name=!: The name of the source database that contains the table being restored.
+        --source-schema-name=: The name of the source schema that contains the table being restored.
+        --source-table-name=!: The name of the source table being restored.
+        --target-database-name=: The name of the database to restore the table to.
+        --target-schema-name=: The name of the schema to restore the table to.
+        --workgroup-name=!: The workgroup to restore the table to.
+    - name: delete-resource-policy
+      description: Deletes the specified resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the policy to delete.
+    - name: get-custom-domain-association
+      description: Gets information about a specific custom domain association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-name=!: The custom domain name associated with the workgroup.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup associated with the database.
+    - name: get-endpoint-access
+      description: Returns information, such as the name, about a VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the VPC endpoint to return information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-usage-limit
+      description: Returns information about a usage limit.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --usage-limit-id=!: The unique identifier of the usage limit to return information for.
+    - name: get-workgroup
+      description: Returns information about a specific workgroup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup to return information for.
+    - name: create-endpoint-access
+      description: Creates an Amazon Redshift Serverless managed VPC endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the VPC endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+        --subnet-ids=!: The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.
+        --vpc-security-group-ids=: The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+        --workgroup-name=!: The name of the workgroup to associate with the VPC endpoint.
+    - name: restore-from-recovery-point
+      description: Restore the data from a recovery point.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: The name of the namespace to restore data into.
+        --recovery-point-id=!: The unique identifier of the recovery point to restore from.
+        --workgroup-name=!: The name of the workgroup used to restore data.
+    - name: restore-from-snapshot
+      description: Restores a namespace from a snapshot.
+      flags:
+        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials.
+        --namespace-name=!: The name of the namespace to restore the snapshot to.
+        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials.
+        --owner-account=: The Amazon Web Services account that owns the snapshot.
+        --snapshot-arn=: The Amazon Resource Name (ARN) of the snapshot to restore from.
+        --snapshot-name=: The name of the snapshot to restore from.
+        --workgroup-name=!: The name of the workgroup used to restore the snapshot.
+    - name: get-namespace
+      description: Returns information about a namespace in Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: The name of the namespace to retrieve information for.
+    - name: list-managed-workgroups
+      description: Returns information about a list of specified managed workgroups in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-arn=: The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-scheduled-action
+      description: Updates a scheduled action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled: Specifies whether to enable the scheduled action.
+        --end-time=: The end time in UTC of the scheduled action to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enabled: Specifies whether to enable the scheduled action.
+        --role-arn=: The ARN of the IAM role to assume to run the scheduled action.
+        --schedule=: The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action.
+        --scheduled-action-description=: The descripion of the scheduled action to update to.
+        --scheduled-action-name=!: The name of the scheduled action to update to.
+        --start-time=: The start time in UTC of the scheduled action to update to.
+        --target-action=: ""
+    - name: create-scheduled-action
+      description: Creates a scheduled action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled: Indicates whether the schedule is enabled.
+        --end-time=: The end time in UTC when the schedule is no longer active.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: The name of the namespace for which to create a scheduled action.
+        --no-enabled: Indicates whether the schedule is enabled.
+        --role-arn=!: The ARN of the IAM role to assume to run the scheduled action.
+        --schedule=!: The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action.
+        --scheduled-action-description=: The description of the scheduled action.
+        --scheduled-action-name=!: The name of the scheduled action.
+        --start-time=: The start time in UTC when the schedule is active.
+        --target-action=!: ""
+    - name: list-snapshot-copy-configurations
+      description: Returns a list of snapshot copy configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --namespace-name=: The namespace from which to list all snapshot copy configurations.
+        --next-token=: If `nextToken` is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags assigned to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
+    - name: list-tracks
+      description: List the Amazon Redshift Serverless versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of response records to return in each call.
+        --next-token=: If your initial `ListTracksRequest` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListTracksRequest` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-workgroups
+      description: Returns information about a list of specified workgroups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial ListWorkgroups operation returns a `nextToken`, you can include the returned `nextToken` in following ListNamespaces operations, which returns results in the next page.
+        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: update-workgroup
       description: Updates a workgroup with the specified configuration settings.
@@ -177,28 +585,6 @@ commands:
         --subnet-ids=: An array of VPC subnet IDs to associate with the workgroup.
         --track-name=: An optional parameter for the name of the track for the workgroup.
         --workgroup-name=!: The name of the workgroup to update.
-    - name: create-custom-domain-association
-      description: Creates a custom domain association for Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-certificate-arn=!: The custom domain name’s certificate Amazon resource name (ARN).
-        --custom-domain-name=!: The custom domain name to associate with the workgroup.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup associated with the database.
-    - name: list-custom-domain-associations
-      description: Lists custom domain associations for Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-certificate-arn=: The custom domain name’s certificate Amazon resource name (ARN).
-        --custom-domain-name=: The custom domain name associated with the workgroup.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: When `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: untag-resource
       description: Removes a tag or set of tags from a resource.
       flags:
@@ -207,188 +593,24 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
         --tag-keys=!: The tag or set of tags to remove from the resource.
-    - name: update-namespace
-      description: Updates a namespace with the specified settings.
-      flags:
-        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
-        --admin-user-password=: The password of the administrator for the first database created in the namespace.
-        --admin-username=: The username of the administrator for the first database created in the namespace.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-roles=: A list of IAM roles to associate with the namespace.
-        --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
-        --log-exports=: The types of logs the namespace can export.
-        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
-        --namespace-name=!: The name of the namespace to update.
-        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
-    - name: delete-snapshot-copy-configuration
-      description: Deletes a snapshot copy configuration
+    - name: update-snapshot
+      description: Updates a snapshot.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-copy-configuration-id=!: The ID of the snapshot copy configuration to delete.
-    - name: list-workgroups
-      description: Returns information about a list of specified workgroups.
+        --retention-period=: The new retention period of the snapshot.
+        --snapshot-name=!: The name of the snapshot.
+    - name: create-snapshot-copy-configuration
+      description: Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-kms-key-id=: The KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.
+        --destination-region=!: The destination Amazon Web Services Region that you want to copy snapshots to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial ListWorkgroups operation returns a `nextToken`, you can include the returned `nextToken` in following ListNamespaces operations, which returns results in the next page.
-        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Assigns one or more tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
-        --tags=!: The map of the key-value pairs used to tag the resource.
-    - name: create-workgroup
-      description: Creates an workgroup in Amazon Redshift Serverless.
-      flags:
-        --base-capacity=: The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-parameters=: An array of parameters to set for advanced control over a database.
-        --enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address-type=: The IP address type that the workgroup supports.
-        --max-capacity=: The maximum data-warehouse capacity Amazon Redshift Serverless uses to serve queries.
-        --namespace-name=!: The name of the namespace to associate with the workgroup.
-        --no-enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
-        --no-publicly-accessible: A value that specifies whether the workgroup can be accessed from a public network.
-        --port=: The custom port to use when connecting to a workgroup.
-        --price-performance-target=: An object that represents the price performance target settings for the workgroup.
-        --publicly-accessible: A value that specifies whether the workgroup can be accessed from a public network.
-        --security-group-ids=: An array of security group IDs to associate with the workgroup.
-        --subnet-ids=: An array of VPC subnet IDs to associate with the workgroup.
-        --tags=: A array of tag instances.
-        --track-name=: An optional parameter for the name of the track for the workgroup.
-        --workgroup-name=!: The name of the created workgroup.
-    - name: get-endpoint-access
-      description: Returns information, such as the name, about a VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-name=!: The name of the VPC endpoint to return information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-endpoint-access
-      description: Returns an array of `EndpointAccess` objects and relevant information.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListEndpointAccess` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListEndpointAccess` operations, which returns results in the next page.
-        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --vpc-id=: The unique identifier of the virtual private cloud with access to Amazon Redshift Serverless.
-        --workgroup-name=: The name of the workgroup associated with the VPC endpoint to return.
-    - name: list-tags-for-resource
-      description: Lists the tags assigned to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
-    - name: update-lakehouse-configuration
-      description: Modifies the lakehouse configuration for a namespace.
-      flags:
-        --catalog-name=: The name of the Glue Data Catalog that will be associated with the namespace enabled with Amazon Redshift federated permissions.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: A boolean value that, if `true`, validates the request without actually updating the lakehouse configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lakehouse-idc-application-arn=: The Amazon Resource Name (ARN) of the IAM Identity Center application used for enabling Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.
-        --lakehouse-idc-registration=: Modifies the Amazon Web Services IAM Identity Center trusted identity propagation on a namespace enabled with Amazon Redshift federated permissions.
-        --lakehouse-registration=: Specifies whether to register or deregister the namespace with Amazon Redshift federated permissions.
-        --namespace-name=!: The name of the namespace whose lakehouse configuration you want to modify.
-        --no-dry-run: A boolean value that, if `true`, validates the request without actually updating the lakehouse configuration.
-      completion:
-        flag:
-            lakehouse-idc-registration:
-                - Associate
-                - Disassociate
-            lakehouse-registration:
-                - Register
-                - Deregister
-    - name: create-namespace
-      description: Creates a namespace in Amazon Redshift Serverless.
-      flags:
-        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
-        --admin-user-password=: The password of the administrator for the first database created in the namespace.
-        --admin-username=: The username of the administrator for the first database created in the namespace.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-name=: The name of the first database created in the namespace.
-        --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-roles=: A list of IAM roles to associate with the namespace.
-        --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
-        --log-exports=: The types of logs the namespace can export.
-        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
-        --namespace-name=!: The name of the namespace.
-        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
-        --redshift-idc-application-arn=: The ARN for the Redshift application that integrates with IAM Identity Center.
-        --tags=: A list of tag instances.
-    - name: delete-workgroup
-      description: Deletes a workgroup.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup to be deleted.
-    - name: update-endpoint-access
-      description: Updates an Amazon Redshift Serverless managed endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-name=!: The name of the VPC endpoint to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-security-group-ids=: The list of VPC security groups associated with the endpoint after the endpoint is modified.
-    - name: create-scheduled-action
-      description: Creates a scheduled action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: Indicates whether the schedule is enabled.
-        --end-time=: The end time in UTC when the schedule is no longer active.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The name of the namespace for which to create a scheduled action.
-        --no-enabled: Indicates whether the schedule is enabled.
-        --role-arn=!: The ARN of the IAM role to assume to run the scheduled action.
-        --schedule=!: The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action.
-        --scheduled-action-description=: The description of the scheduled action.
-        --scheduled-action-name=!: The name of the scheduled action.
-        --start-time=: The start time in UTC when the schedule is active.
-        --target-action=!: ""
-    - name: get-track
-      description: Get the Redshift Serverless version for a specified track.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --track-name=!: The name of the track of which its version is fetched.
-    - name: list-namespaces
-      description: Returns information about a list of specified namespaces.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial `ListNamespaces` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListNamespaces` operations, which returns results in the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --namespace-name=!: The name of the namespace to copy snapshots from.
+        --snapshot-retention-period=: The retention period of the snapshots that you copy to the destination Amazon Web Services Region.
     - name: list-recovery-points
       description: Returns an array of recovery points.
       flags:
@@ -404,8 +626,8 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --start-time=: The time when the recovery point's creation was initiated.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-reservation-offerings
-      description: Returns the current reservation offerings in your account.
+    - name: list-reservations
+      description: Returns a list of Reservation objects.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -415,219 +637,6 @@ commands:
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-snapshot
-      description: Updates a snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retention-period=: The new retention period of the snapshot.
-        --snapshot-name=!: The name of the snapshot.
-    - name: update-snapshot-copy-configuration
-      description: Updates a snapshot copy configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-copy-configuration-id=!: The ID of the snapshot copy configuration to update.
-        --snapshot-retention-period=: The new retention period of how long to keep a snapshot in the destination Amazon Web Services Region.
-    - name: delete-endpoint-access
-      description: Deletes an Amazon Redshift Serverless managed VPC endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-name=!: The name of the VPC endpoint to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-managed-workgroups
-      description: Returns information about a list of specified managed workgroups in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --next-token=: If your initial ListManagedWorkgroups operation returns a nextToken, you can include the returned nextToken in following ListManagedWorkgroups operations, which returns results in the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-arn=: The Amazon Resource Name (ARN) for the managed workgroup in the Glue Data Catalog.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-namespace
-      description: Deletes a namespace from Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --final-snapshot-name=: The name of the snapshot to be created before the namespace is deleted.
-        --final-snapshot-retention-period=: How long to retain the final snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The name of the namespace to delete.
-    - name: delete-resource-policy
-      description: Deletes the specified resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the policy to delete.
-    - name: put-resource-policy
-      description: Creates or updates a resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy to create or update.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the account to create or update a resource policy for.
-    - name: convert-recovery-point-to-snapshot
-      description: Converts a recovery point to a snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-id=!: The unique identifier of the recovery point.
-        --retention-period=: How long to retain the snapshot.
-        --snapshot-name=!: The name of the snapshot.
-        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the created snapshot.
-    - name: get-custom-domain-association
-      description: Gets information about a specific custom domain association.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-domain-name=!: The custom domain name associated with the workgroup.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workgroup-name=!: The name of the workgroup associated with the database.
-    - name: get-table-restore-status
-      description: Returns information about a `TableRestoreStatus` object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --table-restore-request-id=!: The ID of the `RestoreTableFromSnapshot` request to return status for.
-    - name: list-snapshot-copy-configurations
-      description: Returns a list of snapshot copy configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --namespace-name=: The namespace from which to list all snapshot copy configurations.
-        --next-token=: If `nextToken` is returned, there are more results available.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-table-restore-status
-      description: Returns information about an array of `TableRestoreStatus` objects.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: An optional parameter that specifies the maximum number of results to return.
-        --namespace-name=: The namespace from which to list all of the statuses of `RestoreTableFromSnapshot` operations .
-        --next-token=: If your initial `ListTableRestoreStatus` operation returns a nextToken, you can include the returned `nextToken` in following `ListTableRestoreStatus` operations.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --workgroup-name=: The workgroup from which to list all of the statuses of `RestoreTableFromSnapshot` operations.
-    - name: create-snapshot-copy-configuration
-      description: Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-kms-key-id=: The KMS key to use to encrypt your snapshots in the destination Amazon Web Services Region.
-        --destination-region=!: The destination Amazon Web Services Region that you want to copy snapshots to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The name of the namespace to copy snapshots from.
-        --snapshot-retention-period=: The retention period of the snapshots that you copy to the destination Amazon Web Services Region.
-    - name: get-resource-policy
-      description: Returns a resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to return.
-    - name: get-usage-limit
-      description: Returns information about a usage limit.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --usage-limit-id=!: The unique identifier of the usage limit to return information for.
-    - name: list-tracks
-      description: List the Amazon Redshift Serverless versions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of response records to return in each call.
-        --next-token=: If your initial `ListTracksRequest` operation returns a `nextToken`, you can include the returned `nextToken` in following `ListTracksRequest` operations, which returns results in the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: restore-from-snapshot
-      description: Restores a namespace from a snapshot.
-      flags:
-        --admin-password-secret-kms-key-id=: The ID of the Key Management Service (KMS) key used to encrypt and store the namespace's admin credentials secret.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials.
-        --namespace-name=!: The name of the namespace to restore the snapshot to.
-        --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the restored snapshot's admin credentials.
-        --owner-account=: The Amazon Web Services account that owns the snapshot.
-        --snapshot-arn=: The Amazon Resource Name (ARN) of the snapshot to restore from.
-        --snapshot-name=: The name of the snapshot to restore from.
-        --workgroup-name=!: The name of the workgroup used to restore the snapshot.
-    - name: restore-table-from-recovery-point
-      description: Restores a table from a recovery point to your Amazon Redshift Serverless instance.
-      flags:
-        --activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: Namespace of the recovery point to restore from.
-        --new-table-name=!: The name of the table to create from the restore operation.
-        --no-activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
-        --recovery-point-id=!: The ID of the recovery point to restore the table from.
-        --source-database-name=!: The name of the source database that contains the table being restored.
-        --source-schema-name=: The name of the source schema that contains the table being restored.
-        --source-table-name=!: The name of the source table being restored.
-        --target-database-name=: The name of the database to restore the table to.
-        --target-schema-name=: The name of the schema to restore the table to.
-        --workgroup-name=!: The workgroup to restore the table to.
-    - name: restore-table-from-snapshot
-      description: Restores a table from a snapshot to your Amazon Redshift Serverless instance.
-      flags:
-        --activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The namespace of the snapshot to restore from.
-        --new-table-name=!: The name of the table to create from the restore operation.
-        --no-activate-case-sensitive-identifier: Indicates whether name identifiers for database, schema, and table are case sensitive.
-        --snapshot-name=!: The name of the snapshot to restore the table from.
-        --source-database-name=!: The name of the source database that contains the table being restored.
-        --source-schema-name=: The name of the source schema that contains the table being restored.
-        --source-table-name=!: The name of the source table being restored.
-        --target-database-name=: The name of the database to restore the table to.
-        --target-schema-name=: The name of the schema to restore the table to.
-        --workgroup-name=!: The workgroup to restore the table to.
-    - name: delete-scheduled-action
-      description: Deletes a scheduled action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scheduled-action-name=!: The name of the scheduled action to delete.
-    - name: delete-snapshot
-      description: Deletes a snapshot from Amazon Redshift Serverless.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-name=!: The name of the snapshot to be deleted.
-    - name: get-reservation
-      description: Gets an Amazon Redshift Serverless reservation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reservation-id=!: The ID of the reservation to retrieve.
     - name: list-usage-limits
       description: Lists all usage limits within Amazon Redshift Serverless.
       flags:
@@ -646,42 +655,42 @@ commands:
             usage-type:
                 - serverless-compute
                 - cross-region-datasharing
-    - name: create-endpoint-access
-      description: Creates an Amazon Redshift Serverless managed VPC endpoint.
+    - name: delete-namespace
+      description: Deletes a namespace from Amazon Redshift Serverless.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-name=!: The name of the VPC endpoint.
+        --final-snapshot-name=: The name of the snapshot to be created before the namespace is deleted.
+        --final-snapshot-retention-period=: How long to retain the final snapshot.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
-        --subnet-ids=!: The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.
-        --vpc-security-group-ids=: The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
-        --workgroup-name=!: The name of the workgroup to associate with the VPC endpoint.
-    - name: get-recovery-point
-      description: Returns information about a recovery point.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-point-id=!: The unique identifier of the recovery point to return information for.
-    - name: create-reservation
-      description: Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.
-      flags:
-        --capacity=!: The number of Redshift Processing Units (RPUs) to reserve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --offering-id=!: The ID of the offering associated with the reservation.
-    - name: delete-usage-limit
-      description: Deletes a usage limit from Amazon Redshift Serverless.
+        --namespace-name=!: The name of the namespace to delete.
+    - name: get-track
+      description: Get the Redshift Serverless version for a specified track.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --usage-limit-id=!: The unique identifier of the usage limit to delete.
-    - name: list-reservations
-      description: Returns a list of Reservation objects.
+        --track-name=!: The name of the track of which its version is fetched.
+    - name: create-snapshot
+      description: Creates a snapshot of all databases in a namespace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --namespace-name=!: The namespace to create a snapshot for.
+        --retention-period=: How long to retain the created snapshot.
+        --snapshot-name=!: The name of the snapshot.
+        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the snapshot.
+    - name: delete-custom-domain-association
+      description: Deletes a custom domain association for Amazon Redshift Serverless.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-domain-name=!: The custom domain name associated with the workgroup.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workgroup-name=!: The name of the workgroup associated with the database.
+    - name: list-reservation-offerings
+      description: Returns the current reservation offerings in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -691,12 +700,3 @@ commands:
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: restore-from-recovery-point
-      description: Restore the data from a recovery point.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --namespace-name=!: The name of the namespace to restore data into.
-        --recovery-point-id=!: The unique identifier of the recovery point to restore from.
-        --workgroup-name=!: The name of the workgroup used to restore data.

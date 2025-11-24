@@ -1,71 +1,6 @@
 name: connectcampaignsv2
 description: AmazonConnectCampaignServiceV2
 commands:
-    - name: stop-campaign
-      description: Stops a campaign for the specified Amazon Connect account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: update-campaign-source
-      description: Updates the campaign source with a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --source=!: ""
-    - name: get-instance-communication-limits
-      description: Get the instance communication limits.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-campaign-state
-      description: Get state of a campaign for the specified Amazon Connect account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: list-connect-instance-integrations
-      description: Provides summary information about the integration under the specified Connect instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Untag a resource.
-      flags:
-        --arn=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tag-keys=!: ""
-    - name: update-campaign-communication-limits
-      description: Updates the communication limits config for a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --communication-limits-override=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: put-instance-communication-limits
-      description: Put the instance communication limits.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --communication-limits-config=!: ""
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-instance-onboarding-job
       description: Onboard the specific Amazon Connect instance to Connect Campaigns.
       flags:
@@ -74,6 +9,59 @@ commands:
         --connect-instance-id=!: ""
         --encryption-config=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-campaign
+      description: Describes the specific campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: resume-campaign
+      description: Stops a campaign for the specified Amazon Connect account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: delete-campaign-communication-limits
+      description: Deletes the communication limits config for a campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+      completion:
+        flag:
+            config:
+                - ALL_CHANNEL_SUBTYPES
+    - name: list-campaigns
+      description: Provides summary information about the campaigns under the specified Amazon Connect account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: stop-campaign
+      description: Stops a campaign for the specified Amazon Connect account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: tag-resource
+      description: Tag a resource.
+      flags:
+        --arn=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: ""
     - name: update-campaign-channel-subtype-config
       description: Updates the channel subtype config of a campaign.
       flags:
@@ -82,14 +70,45 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
-    - name: update-campaign-schedule
-      description: Updates the schedule for a campaign.
+    - name: update-campaign-flow-association
+      description: Updates the campaign flow associated with a campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-campaign-flow-arn=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: update-campaign-name
+      description: Updates the name of a campaign.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
-        --schedule=!: ""
+        --name=!: ""
+    - name: update-campaign-source
+      description: Updates the campaign source with a campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --source=!: ""
+    - name: create-campaign
+      description: Creates a campaign for the specified Amazon Connect account.
+      flags:
+        --channel-subtype-config=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --communication-limits-override=: ""
+        --communication-time-config=: ""
+        --connect-campaign-flow-arn=: ""
+        --connect-instance-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: ""
+        --schedule=: ""
+        --source=: ""
+        --tags=: ""
     - name: delete-campaign-channel-subtype-config
       description: Deletes the channel subtype config of a campaign.
       flags:
@@ -104,6 +123,64 @@ commands:
                 - TELEPHONY
                 - SMS
                 - EMAIL
+    - name: delete-connect-instance-integration
+      description: Delete the integration for the specified Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-instance-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-identifier=!: ""
+    - name: list-connect-instance-integrations
+      description: Provides summary information about the integration under the specified Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-instance-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List tags for a resource.
+      flags:
+        --arn=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-instance-communication-limits
+      description: Put the instance communication limits.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --communication-limits-config=!: ""
+        --connect-instance-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-campaign-communication-limits
+      description: Updates the communication limits config for a campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --communication-limits-override=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+    - name: update-campaign-schedule
+      description: Updates the schedule for a campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --schedule=!: ""
+    - name: delete-campaign
+      description: Deletes a campaign from the specified Amazon Connect account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
     - name: delete-campaign-communication-time
       description: Deletes the communication time config for a campaign.
       flags:
@@ -125,115 +202,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
-    - name: update-campaign-name
-      description: Updates the name of a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-        --name=!: ""
-    - name: get-instance-onboarding-job-status
-      description: Get the specific instance onboarding job status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-campaigns
-      description: Provides summary information about the campaigns under the specified Amazon Connect account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Tag a resource.
-      flags:
-        --arn=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: ""
-    - name: update-campaign-communication-time
-      description: Updates the communication time config for a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --communication-time-config=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: create-campaign
-      description: Creates a campaign for the specified Amazon Connect account.
-      flags:
-        --channel-subtype-config=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --communication-limits-override=: ""
-        --communication-time-config=: ""
-        --connect-campaign-flow-arn=: ""
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: ""
-        --schedule=: ""
-        --source=: ""
-        --tags=: ""
-    - name: delete-campaign
-      description: Deletes a campaign from the specified Amazon Connect account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: delete-campaign-communication-limits
-      description: Deletes the communication limits config for a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-      completion:
-        flag:
-            config:
-                - ALL_CHANNEL_SUBTYPES
-    - name: resume-campaign
-      description: Stops a campaign for the specified Amazon Connect account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: update-campaign-flow-association
-      description: Updates the campaign flow associated with a campaign.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-campaign-flow-arn=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: ""
-    - name: delete-connect-instance-integration
-      description: Delete the integration for the specified Amazon Connect instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --connect-instance-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --integration-identifier=!: ""
-    - name: get-campaign-state-batch
-      description: Get state of campaigns for the specified Amazon Connect account.
-      flags:
-        --campaign-ids=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-connect-instance-config
-      description: Get the specific Connect instance config.
+    - name: delete-instance-onboarding-job
+      description: Delete the Connect Campaigns onboarding job for the specified Amazon Connect instance.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -254,14 +224,28 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
         --outbound-requests=!: ""
-    - name: put-profile-outbound-request-batch
-      description: Takes in a list of profile outbound requests to be placed as part of an outbound campaign.
+    - name: untag-resource
+      description: Untag a resource.
+      flags:
+        --arn=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!: ""
+    - name: get-campaign-state
+      description: Get state of a campaign for the specified Amazon Connect account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
-        --profile-outbound-requests=!: ""
+    - name: get-campaign-state-batch
+      description: Get state of campaigns for the specified Amazon Connect account.
+      flags:
+        --campaign-ids=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-connect-instance-config
       description: Deletes a connect instance config from the specified AWS account.
       flags:
@@ -275,27 +259,35 @@ commands:
             campaign-deletion-policy:
                 - RETAIN_ALL
                 - DELETE_ALL
-    - name: delete-instance-onboarding-job
-      description: Delete the Connect Campaigns onboarding job for the specified Amazon Connect instance.
+    - name: get-instance-communication-limits
+      description: Get the instance communication limits.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --connect-instance-id=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: List tags for a resource.
+    - name: get-instance-onboarding-job-status
+      description: Get the specific instance onboarding job status.
       flags:
-        --arn=!: ""
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-instance-id=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-campaign
-      description: Describes the specific campaign.
+    - name: update-campaign-communication-time
+      description: Updates the communication time config for a campaign.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --communication-time-config=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: ""
+    - name: get-connect-instance-config
+      description: Get the specific Connect instance config.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connect-instance-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: put-connect-instance-integration
       description: Put or update the integration for the specified Amazon Connect instance.
       flags:
@@ -304,3 +296,11 @@ commands:
         --connect-instance-id=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --integration-config=!: ""
+    - name: put-profile-outbound-request-batch
+      description: Takes in a list of profile outbound requests to be placed as part of an outbound campaign.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ""
+        --profile-outbound-requests=!: ""

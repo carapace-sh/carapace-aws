@@ -1,25 +1,21 @@
 name: emr-containers
 description: Amazon EMR Containers
 commands:
-    - name: create-security-configuration
-      description: Creates a security configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The client idempotency token to use when creating the security configuration.
-        --container-provider=: The container provider associated with the security configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the security configuration.
-        --security-configuration-data=!: Security configuration input for the request.
-        --tags=: The tags to add to the security configuration.
-    - name: describe-managed-endpoint
-      description: Displays detailed information about a managed endpoint.
+    - name: cancel-job-run
+      description: Cancels a job run.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: This output displays ID of the managed endpoint.
-        --virtual-cluster-id=!: The ID of the endpoint's virtual cluster.
+        --id=!: The ID of the job run to cancel.
+        --virtual-cluster-id=!: The ID of the virtual cluster for which the job run will be canceled.
+    - name: describe-security-configuration
+      description: Displays detailed information about a specified security configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the security configuration.
     - name: describe-virtual-cluster
       description: Displays detailed information about a specified virtual cluster.
       flags:
@@ -43,67 +39,6 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --states=: The states of the job run.
         --virtual-cluster-id=!: The ID of the virtual cluster for which to list the job run.
-    - name: list-tags-for-resource
-      description: Lists the tags assigned to the resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of tagged resources.
-    - name: create-managed-endpoint
-      description: Creates a managed endpoint.
-      flags:
-        --certificate-arn=: The certificate ARN provided by users for the managed endpoint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The client idempotency token for this create call.
-        --configuration-overrides=: The configuration settings that will be used to override existing configurations.
-        --execution-role-arn=!: The ARN of the execution role.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the managed endpoint.
-        --release-label=!: The Amazon EMR release version.
-        --tags=: The tags of the managed endpoint.
-        --type=!: The type of the managed endpoint.
-        --virtual-cluster-id=!: The ID of the virtual cluster for which a managed endpoint is created.
-    - name: create-virtual-cluster
-      description: Creates a virtual cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The client token of the virtual cluster.
-        --container-provider=!: The container provider of the virtual cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The specified name of the virtual cluster.
-        --security-configuration-id=: The ID of the security configuration.
-        --tags=: The tags assigned to the virtual cluster.
-    - name: delete-job-template
-      description: Deletes a job template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the job template that will be deleted.
-    - name: describe-job-run
-      description: Displays detailed information about a job run.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the job run request.
-        --virtual-cluster-id=!: The ID of the virtual cluster for which the job run is submitted.
-    - name: get-managed-endpoint-session-credentials
-      description: Generate a session token to connect to a managed endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The client idempotency token of the job run request.
-        --credential-type=!: Type of the token requested.
-        --duration-in-seconds=: Duration in seconds for which the session token is valid.
-        --endpoint-identifier=!: The ARN of the managed endpoint for which the request is submitted.
-        --execution-role-arn=!: The IAM Execution Role ARN that will be used by the job run.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-context=: String identifier used to separate sections of the execution logs uploaded to S3.
-        --virtual-cluster-identifier=!: The ARN of the Virtual Cluster which the Managed Endpoint belongs to.
     - name: list-job-templates
       description: Lists job templates based on a set of parameters.
       flags:
@@ -130,6 +65,95 @@ commands:
         --next-token=: The token for the next set of security configurations to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: untag-resource
+      description: Removes tags from resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of resources.
+        --tag-keys=!: The tag keys of the resources.
+    - name: delete-job-template
+      description: Deletes a job template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the job template that will be deleted.
+    - name: describe-job-run
+      description: Displays detailed information about a job run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the job run request.
+        --virtual-cluster-id=!: The ID of the virtual cluster for which the job run is submitted.
+    - name: list-managed-endpoints
+      description: Lists managed endpoints based on a set of parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: The date and time after which the endpoints are created.
+        --created-before=: The date and time before which the endpoints are created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of managed endpoints that can be listed.
+        --next-token=: The token for the next set of managed endpoints to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --states=: The states of the managed endpoints.
+        --types=: The types of the managed endpoints.
+        --virtual-cluster-id=!: The ID of the virtual cluster.
+    - name: tag-resource
+      description: Assigns tags to resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of resources.
+        --tags=!: The tags assigned to resources.
+    - name: create-job-template
+      description: Creates a job template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The client token of the job template.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-template-data=!: The job template data which holds values of StartJobRun API request.
+        --kms-key-arn=: The KMS key ARN used to encrypt the job template.
+        --name=!: The specified name of the job template.
+        --tags=: The tags that are associated with the job template.
+    - name: create-security-configuration
+      description: Creates a security configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The client idempotency token to use when creating the security configuration.
+        --container-provider=: The container provider associated with the security configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the security configuration.
+        --security-configuration-data=!: Security configuration input for the request.
+        --tags=: The tags to add to the security configuration.
+    - name: describe-job-template
+      description: Displays detailed information about a specified job template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the job template that will be described.
+    - name: get-managed-endpoint-session-credentials
+      description: Generate a session token to connect to a managed endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The client idempotency token of the job run request.
+        --credential-type=!: Type of the token requested.
+        --duration-in-seconds=: Duration in seconds for which the session token is valid.
+        --endpoint-identifier=!: The ARN of the managed endpoint for which the request is submitted.
+        --execution-role-arn=!: The IAM Execution Role ARN that will be used by the job run.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-context=: String identifier used to separate sections of the execution logs uploaded to S3.
+        --virtual-cluster-identifier=!: The ARN of the Virtual Cluster which the Managed Endpoint belongs to.
     - name: list-virtual-clusters
       description: Lists information about the specified virtual cluster.
       flags:
@@ -152,14 +176,40 @@ commands:
         flag:
             container-provider-type:
                 - EKS
-    - name: cancel-job-run
-      description: Cancels a job run.
+    - name: create-managed-endpoint
+      description: Creates a managed endpoint.
+      flags:
+        --certificate-arn=: The certificate ARN provided by users for the managed endpoint.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The client idempotency token for this create call.
+        --configuration-overrides=: The configuration settings that will be used to override existing configurations.
+        --execution-role-arn=!: The ARN of the execution role.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the managed endpoint.
+        --release-label=!: The Amazon EMR release version.
+        --tags=: The tags of the managed endpoint.
+        --type=!: The type of the managed endpoint.
+        --virtual-cluster-id=!: The ID of the virtual cluster for which a managed endpoint is created.
+    - name: create-virtual-cluster
+      description: Creates a virtual cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: The client token of the virtual cluster.
+        --container-provider=!: The container provider of the virtual cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The specified name of the virtual cluster.
+        --security-configuration-id=: The ID of the security configuration.
+        --tags=: The tags assigned to the virtual cluster.
+    - name: delete-managed-endpoint
+      description: Deletes a managed endpoint.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the job run to cancel.
-        --virtual-cluster-id=!: The ID of the virtual cluster for which the job run will be canceled.
+        --id=!: The ID of the managed endpoint.
+        --virtual-cluster-id=!: The ID of the endpoint's virtual cluster.
     - name: delete-virtual-cluster
       description: Deletes a virtual cluster.
       flags:
@@ -167,20 +217,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the virtual cluster that will be deleted.
-    - name: describe-job-template
-      description: Displays detailed information about a specified job template.
+    - name: describe-managed-endpoint
+      description: Displays detailed information about a managed endpoint.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the job template that will be described.
-    - name: describe-security-configuration
-      description: Displays detailed information about a specified security configuration.
+        --id=!: This output displays ID of the managed endpoint.
+        --virtual-cluster-id=!: The ID of the endpoint's virtual cluster.
+    - name: list-tags-for-resource
+      description: Lists the tags assigned to the resources.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the security configuration.
+        --resource-arn=!: The ARN of tagged resources.
     - name: start-job-run
       description: Starts a job run.
       flags:
@@ -198,54 +249,3 @@ commands:
         --retry-policy-configuration=: The retry policy configuration for the job run.
         --tags=: The tags assigned to job runs.
         --virtual-cluster-id=!: The virtual cluster ID for which the job run request is submitted.
-    - name: tag-resource
-      description: Assigns tags to resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of resources.
-        --tags=!: The tags assigned to resources.
-    - name: untag-resource
-      description: Removes tags from resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of resources.
-        --tag-keys=!: The tag keys of the resources.
-    - name: create-job-template
-      description: Creates a job template.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The client token of the job template.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-template-data=!: The job template data which holds values of StartJobRun API request.
-        --kms-key-arn=: The KMS key ARN used to encrypt the job template.
-        --name=!: The specified name of the job template.
-        --tags=: The tags that are associated with the job template.
-    - name: delete-managed-endpoint
-      description: Deletes a managed endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the managed endpoint.
-        --virtual-cluster-id=!: The ID of the endpoint's virtual cluster.
-    - name: list-managed-endpoints
-      description: Lists managed endpoints based on a set of parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --created-after=: The date and time after which the endpoints are created.
-        --created-before=: The date and time before which the endpoints are created.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of managed endpoints that can be listed.
-        --next-token=: The token for the next set of managed endpoints to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --states=: The states of the managed endpoints.
-        --types=: The types of the managed endpoints.
-        --virtual-cluster-id=!: The ID of the virtual cluster.

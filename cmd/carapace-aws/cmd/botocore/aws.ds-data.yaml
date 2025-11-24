@@ -1,29 +1,6 @@
 name: ds-data
 description: AWS Directory Service Data
 commands:
-    - name: create-user
-      description: Creates a new user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that’s associated with the user.
-        --email-address=: The email address of the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --given-name=: The first name of the user.
-        --other-attributes=: An expression that defines one or more attribute names with the data type and value of each attribute.
-        --sam-account-name=!: The name of the user.
-        --surname=: The last name of the user.
-    - name: describe-user
-      description: Returns information about a specific user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --other-attributes=: One or more attribute names to be returned for the user.
-        --realm=: The domain name that's associated with the user.
-        --sam-account-name=!: The name of the user.
     - name: disable-user
       description: Deactivates an active user account.
       flags:
@@ -33,6 +10,73 @@ commands:
         --directory-id=!: The identifier (ID) of the directory that's associated with the user.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --sam-account-name=!: The name of the user.
+    - name: add-group-member
+      description: Adds an existing user, group, or computer as a group member.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group.
+        --member-name=!: The `SAMAccountName` of the user, group, or computer to add as a group member.
+        --member-realm=: The domain name that's associated with the group member.
+    - name: create-group
+      description: Creates a new group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-scope=: The scope of the AD group.
+        --group-type=: The AD group type.
+        --other-attributes=: An expression that defines one or more attributes with the data type and value of each attribute.
+        --sam-account-name=!: The name of the group.
+      completion:
+        flag:
+            group-scope:
+                - DomainLocal
+                - Global
+                - Universal
+                - BuiltinLocal
+            group-type:
+                - Distribution
+                - Security
+    - name: describe-group
+      description: Returns information about a specific group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The Identifier (ID) of the directory associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --other-attributes=: One or more attributes to be returned for the group.
+        --realm=: The domain name that's associated with the group.
+        --sam-account-name=!: The name of the group.
+    - name: delete-group
+      description: Deletes a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sam-account-name=!: The name of the group.
+    - name: list-group-members
+      description: Returns member information for the specified group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per request.
+        --member-realm=: The domain name that's associated with the group member.
+        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --realm=: The domain name that's associated with the group.
+        --sam-account-name=!: The name of the group.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-groups
       description: Returns group information for the specified directory.
       flags:
@@ -45,6 +89,21 @@ commands:
         --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
         --page-size=: The size of each page to get in the AWS service call.
         --realm=: The domain name associated with the directory.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-groups-for-member
+      description: Returns group information for the specified member.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per request.
+        --member-realm=: The domain name that's associated with the group member.
+        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --realm=: The domain name that's associated with the group.
+        --sam-account-name=!: The `SAMAccountName` of the user, group, or computer that's a member of the group.
         --starting-token=: A token to specify where to start paginating.
     - name: list-users
       description: Returns user information for the specified directory.
@@ -59,6 +118,79 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --realm=: The domain name that's associated with the user.
         --starting-token=: A token to specify where to start paginating.
+    - name: remove-group-member
+      description: Removes a member from a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the member.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group.
+        --member-name=!: The `SAMAccountName` of the user, group, or computer to remove from the group.
+        --member-realm=: The domain name that's associated with the group member.
+    - name: search-groups
+      description: Searches the specified directory for a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per request.
+        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --realm=: The domain name that's associated with the group.
+        --search-attributes=!: One or more data attributes that are used to search for a group.
+        --search-string=!: The attribute value that you want to search for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-users
+      description: Searches the specified directory for a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to be returned per request.
+        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --realm=: The domain name that's associated with the user.
+        --search-attributes=!: One or more data attributes that are used to search for a user.
+        --search-string=!: The attribute value that you want to search for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-user
+      description: Creates a new user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that’s associated with the user.
+        --email-address=: The email address of the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --given-name=: The first name of the user.
+        --other-attributes=: An expression that defines one or more attribute names with the data type and value of each attribute.
+        --sam-account-name=!: The name of the user.
+        --surname=: The last name of the user.
+    - name: delete-user
+      description: Deletes a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sam-account-name=!: The name of the user.
+    - name: describe-user
+      description: Returns information about a specific user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --other-attributes=: One or more attribute names to be returned for the user.
+        --realm=: The domain name that's associated with the user.
+        --sam-account-name=!: The name of the user.
     - name: update-group
       description: Updates group information.
       flags:
@@ -106,135 +238,3 @@ commands:
                 - ADD
                 - REPLACE
                 - REMOVE
-    - name: create-group
-      description: Creates a new group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-scope=: The scope of the AD group.
-        --group-type=: The AD group type.
-        --other-attributes=: An expression that defines one or more attributes with the data type and value of each attribute.
-        --sam-account-name=!: The name of the group.
-      completion:
-        flag:
-            group-scope:
-                - DomainLocal
-                - Global
-                - Universal
-                - BuiltinLocal
-            group-type:
-                - Distribution
-                - Security
-    - name: delete-group
-      description: Deletes a group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sam-account-name=!: The name of the group.
-    - name: describe-group
-      description: Returns information about a specific group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The Identifier (ID) of the directory associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --other-attributes=: One or more attributes to be returned for the group.
-        --realm=: The domain name that's associated with the group.
-        --sam-account-name=!: The name of the group.
-    - name: search-users
-      description: Searches the specified directory for a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per request.
-        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --realm=: The domain name that's associated with the user.
-        --search-attributes=!: One or more data attributes that are used to search for a user.
-        --search-string=!: The attribute value that you want to search for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: add-group-member
-      description: Adds an existing user, group, or computer as a group member.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group.
-        --member-name=!: The `SAMAccountName` of the user, group, or computer to add as a group member.
-        --member-realm=: The domain name that's associated with the group member.
-    - name: delete-user
-      description: Deletes a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sam-account-name=!: The name of the user.
-    - name: list-group-members
-      description: Returns member information for the specified group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per request.
-        --member-realm=: The domain name that's associated with the group member.
-        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --realm=: The domain name that's associated with the group.
-        --sam-account-name=!: The name of the group.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-groups-for-member
-      description: Returns group information for the specified member.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the member.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per request.
-        --member-realm=: The domain name that's associated with the group member.
-        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --realm=: The domain name that's associated with the group.
-        --sam-account-name=!: The `SAMAccountName` of the user, group, or computer that's a member of the group.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-group-member
-      description: Removes a member from a group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the member.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group.
-        --member-name=!: The `SAMAccountName` of the user, group, or computer to remove from the group.
-        --member-realm=: The domain name that's associated with the group member.
-    - name: search-groups
-      description: Searches the specified directory for a group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to be returned per request.
-        --next-token=: An encoded paging token for paginated calls that can be passed back to retrieve the next page.
-        --page-size=: The size of each page to get in the AWS service call.
-        --realm=: The domain name that's associated with the group.
-        --search-attributes=!: One or more data attributes that are used to search for a group.
-        --search-string=!: The attribute value that you want to search for.
-        --starting-token=: A token to specify where to start paginating.

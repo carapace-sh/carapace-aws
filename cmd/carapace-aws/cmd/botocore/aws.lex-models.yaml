@@ -1,44 +1,63 @@
 name: lex-models
 description: Amazon Lex Model Building Service
 commands:
-    - name: get-export
-      description: Exports the contents of a Amazon Lex resource in a specified format.
+    - name: create-bot-version
+      description: Creates a new version of the bot based on the `$LATEST` version.
+      flags:
+        --checksum=: Identifies a specific revision of the `$LATEST` version of the bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the bot that you want to create a new version of.
+    - name: delete-intent-version
+      description: Deletes a specific version of an intent.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-type=!: The format of the exported data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the bot to export.
-        --resource-type=!: The type of resource to export.
-        --resource-version=!: The version of the bot to export.
-      completion:
-        flag:
-            export-type:
-                - ALEXA_SKILLS_KIT
-                - LEX
-            resource-type:
-                - BOT
-                - INTENT
-                - SLOT_TYPE
-    - name: get-slot-type-versions
-      description: Gets information about all versions of a slot type.
+        --intent-version=!: The version of the intent to delete.
+        --name=!: The name of the intent.
+    - name: get-bot-channel-association
+      description: Returns information about the association between an Amazon Lex bot and a messaging platform.
+      flags:
+        --bot-alias=!: An alias pointing to the specific version of the Amazon Lex bot to which this association is being made.
+        --bot-name=!: The name of the Amazon Lex bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the association between the bot and the channel.
+    - name: get-intent-versions
+      description: Gets information about all of the versions of an intent.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of slot type versions to return in the response.
-        --name=!: The name of the slot type for which versions should be returned.
-        --next-token=: A pagination token for fetching the next page of slot type versions.
+        --max-results=: The maximum number of intent versions to return in the response.
+        --name=!: The name of the intent for which versions should be returned.
+        --next-token=: A pagination token for fetching the next page of intent versions.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Gets a list of tags associated with the specified resource.
+    - name: get-slot-types
+      description: 'Returns slot type information as follows:'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to get a list of tags for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of slot types to return in the response.
+        --name-contains=: Substring to match in slot type names.
+        --next-token=: A pagination token that fetches the next page of slot types.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-intent-version
+      description: Creates a new version of an intent based on the `$LATEST` version of the intent.
+      flags:
+        --checksum=: Checksum of the `$LATEST` version of the intent that should be used to create the new version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the intent that you want to create a new version of.
     - name: delete-bot-channel-association
       description: Deletes the association between an Amazon Lex bot and a messaging platform.
       flags:
@@ -48,28 +67,83 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the association.
-    - name: delete-slot-type-version
-      description: Deletes a specific version of a slot type.
+    - name: delete-slot-type
+      description: Deletes all versions of the slot type, including the `$LATEST` version.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the slot type.
-        --slot-type-version=!: The version of the slot type to delete.
-    - name: get-bot-channel-associations
-      description: Returns a list of all of the channels associated with the specified bot.
+    - name: get-intents
+      description: 'Returns intent information as follows:'
       flags:
-        --bot-alias=!: An alias pointing to the specific version of the Amazon Lex bot to which this association is being made.
-        --bot-name=!: The name of the Amazon Lex bot in the association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of associations to return in the response.
-        --name-contains=: Substring to match in channel association names.
-        --next-token=: A pagination token for fetching the next page of associations.
+        --max-results=: The maximum number of intents to return in the response.
+        --name-contains=: Substring to match in intent names.
+        --next-token=: A pagination token that fetches the next page of intents.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Gets a list of tags associated with the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to get a list of tags for.
+    - name: delete-bot
+      description: Deletes all versions of the bot, including the `$LATEST` version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the bot.
+    - name: get-bot-aliases
+      description: Returns a list of aliases for a specified Amazon Lex bot.
+      flags:
+        --bot-name=!: The name of the bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of aliases to return in the response.
+        --name-contains=: Substring to match in bot alias names.
+        --next-token=: A pagination token for fetching the next page of aliases.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-migration
+      description: Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-id=!: The unique identifier of the migration to view.
+    - name: get-migrations
+      description: Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of migrations to return in the response.
+        --migration-status-equals=: Filters the list to contain only migrations in the specified state.
+        --next-token=: A pagination token that fetches the next page of migrations.
+        --sort-by-attribute=: The field to sort the list of migrations by.
+        --sort-by-order=: The order so sort the list.
+        --v1-bot-name-contains=: Filters the list to contain only bots whose name contains the specified string.
+      completion:
+        flag:
+            migration-status-equals:
+                - IN_PROGRESS
+                - COMPLETED
+                - FAILED
+            sort-by-attribute:
+                - V1_BOT_NAME
+                - MIGRATION_DATE_TIME
+            sort-by-order:
+                - ASCENDING
+                - DESCENDING
     - name: put-slot-type
       description: Creates a custom slot type or replaces an existing custom slot type.
       flags:
@@ -109,122 +183,45 @@ commands:
                 - BOT
                 - INTENT
                 - SLOT_TYPE
-    - name: start-migration
-      description: Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2.
+    - name: delete-bot-version
+      description: Deletes a specific version of a bot.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-strategy=!: The strategy used to conduct the migration.
-        --v1-bot-name=!: The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
-        --v1-bot-version=!: The version of the bot to migrate to Amazon Lex V2.
-        --v2-bot-name=!: The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to.
-        --v2-bot-role=!: The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
-      completion:
-        flag:
-            migration-strategy:
-                - CREATE_NEW
-                - UPDATE_EXISTING
-    - name: untag-resource
-      description: Removes tags from a bot, bot alias or bot channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove the tags from.
-        --tag-keys=!: A list of tag keys to remove from the resource.
-    - name: get-bot-aliases
-      description: Returns a list of aliases for a specified Amazon Lex bot.
-      flags:
-        --bot-name=!: The name of the bot.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of aliases to return in the response.
-        --name-contains=: Substring to match in bot alias names.
-        --next-token=: A pagination token for fetching the next page of aliases.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-import
-      description: Gets information about an import job started with the `StartImport` operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-id=!: The identifier of the import job information to return.
-    - name: get-intent-versions
-      description: Gets information about all of the versions of an intent.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of intent versions to return in the response.
-        --name=!: The name of the intent for which versions should be returned.
-        --next-token=: A pagination token for fetching the next page of intent versions.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-intents
-      description: 'Returns intent information as follows:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of intents to return in the response.
-        --name-contains=: Substring to match in intent names.
-        --next-token=: A pagination token that fetches the next page of intents.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-slot-types
-      description: 'Returns slot type information as follows:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of slot types to return in the response.
-        --name-contains=: Substring to match in slot type names.
-        --next-token=: A pagination token that fetches the next page of slot types.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds the specified tags to the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
-        --tags=!: A list of tag keys to add to the resource.
-    - name: create-slot-type-version
-      description: Creates a new version of a slot type based on the `$LATEST` version of the specified slot type.
-      flags:
-        --checksum=: Checksum for the `$LATEST` version of the slot type that you want to publish.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the slot type that you want to create a new version for.
-    - name: get-bot
-      description: Returns metadata information for a specific bot.
-      flags:
+        --bot-version=!: The version of the bot to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the bot.
-        --version-or-alias=!: The version or alias of the bot.
-    - name: get-builtin-slot-types
-      description: Gets a list of built-in slot types that meet the specified criteria.
+    - name: get-bots
+      description: 'Returns bot information as follows:'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locale=: A list of locales that the slot type supports.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of slot types to return in the response.
-        --next-token=: A pagination token that fetches the next page of slot types.
+        --max-results=: The maximum number of bots to return in the response that the request will return.
+        --name-contains=: Substring to match in bot names.
+        --next-token=: A pagination token that fetches the next page of bots.
         --page-size=: The size of each page to get in the AWS service call.
-        --signature-contains=: Substring to match in built-in slot type signatures.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-builtin-intent
+      description: Returns information about a built-in intent.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --signature=!: The unique identifier for a built-in intent.
+    - name: get-builtin-intents
+      description: Gets a list of built-in intents that meet the specified criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale=: A list of locales that the intent supports.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of intents to return in the response.
+        --next-token=: A pagination token that fetches the next page of intents.
+        --page-size=: The size of each page to get in the AWS service call.
+        --signature-contains=: Substring to match in built-in intent signatures.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
@@ -242,14 +239,26 @@ commands:
                 - it-IT
                 - ja-JP
                 - ko-KR
-    - name: get-intent
-      description: Returns information about an intent.
+    - name: get-slot-type
+      description: Returns information about a specific version of a slot type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --intent-version=!: The version of the intent.
-        --name=!: The name of the intent.
+        --name=!: The name of the slot type.
+        --slot-type-version=!: The version of the slot type.
+    - name: get-slot-type-versions
+      description: Gets information about all versions of a slot type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of slot type versions to return in the response.
+        --name=!: The name of the slot type for which versions should be returned.
+        --next-token=: A pagination token for fetching the next page of slot type versions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-bot
       description: Creates an Amazon Lex conversational bot or replaces an existing bot.
       flags:
@@ -295,14 +304,49 @@ commands:
             process-behavior:
                 - SAVE
                 - BUILD
-    - name: delete-bot-alias
-      description: Deletes an alias for the specified bot.
+    - name: tag-resource
+      description: Adds the specified tags to the specified resource.
       flags:
-        --bot-name=!: The name of the bot that the alias points to.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the alias to delete.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
+        --tags=!: A list of tag keys to add to the resource.
+    - name: create-slot-type-version
+      description: Creates a new version of a slot type based on the `$LATEST` version of the specified slot type.
+      flags:
+        --checksum=: Checksum for the `$LATEST` version of the slot type that you want to publish.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the slot type that you want to create a new version for.
+    - name: get-export
+      description: Exports the contents of a Amazon Lex resource in a specified format.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-type=!: The format of the exported data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the bot to export.
+        --resource-type=!: The type of resource to export.
+        --resource-version=!: The version of the bot to export.
+      completion:
+        flag:
+            export-type:
+                - ALEXA_SKILLS_KIT
+                - LEX
+            resource-type:
+                - BOT
+                - INTENT
+                - SLOT_TYPE
+    - name: get-intent
+      description: Returns information about an intent.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intent-version=!: The version of the intent.
+        --name=!: The name of the intent.
     - name: get-utterances-view
       description: Use the `GetUtterancesView` operation to get information about the utterances that your users have made to your bot.
       flags:
@@ -317,6 +361,19 @@ commands:
             status-type:
                 - Detected
                 - Missed
+    - name: put-bot-alias
+      description: Creates an alias for the specified version of the bot or replaces an alias for the specified bot.
+      flags:
+        --bot-name=!: The name of the bot.
+        --bot-version=!: The version of the bot.
+        --checksum=: Identifies a specific revision of the `$LATEST` version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-logs=: Settings for conversation logs for the alias.
+        --description=: A description of the alias.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the alias.
+        --tags=: A list of tags to add to the bot alias.
     - name: put-intent
       description: Creates an intent or replaces an existing intent.
       flags:
@@ -340,77 +397,14 @@ commands:
         --rejection-statement=: When the user answers "no" to the question defined in `confirmationPrompt`, Amazon Lex responds with this statement to acknowledge that the intent was canceled.
         --sample-utterances=: An array of utterances (strings) that a user might say to signal the intent.
         --slots=: An array of intent slots.
-    - name: put-bot-alias
-      description: Creates an alias for the specified version of the bot or replaces an alias for the specified bot.
+    - name: delete-bot-alias
+      description: Deletes an alias for the specified bot.
       flags:
-        --bot-name=!: The name of the bot.
-        --bot-version=!: The version of the bot.
-        --checksum=: Identifies a specific revision of the `$LATEST` version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-logs=: Settings for conversation logs for the alias.
-        --description=: A description of the alias.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the alias.
-        --tags=: A list of tags to add to the bot alias.
-    - name: get-migration
-      description: Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot.
-      flags:
+        --bot-name=!: The name of the bot that the alias points to.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-id=!: The unique identifier of the migration to view.
-    - name: delete-bot
-      description: Deletes all versions of the bot, including the `$LATEST` version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the bot.
-    - name: get-bot-alias
-      description: Returns information about an Amazon Lex bot alias.
-      flags:
-        --bot-name=!: The name of the bot.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the bot alias.
-    - name: get-bots
-      description: 'Returns bot information as follows:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of bots to return in the response that the request will return.
-        --name-contains=: Substring to match in bot names.
-        --next-token=: A pagination token that fetches the next page of bots.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-slot-type
-      description: Returns information about a specific version of a slot type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the slot type.
-        --slot-type-version=!: The version of the slot type.
-    - name: create-bot-version
-      description: Creates a new version of the bot based on the `$LATEST` version.
-      flags:
-        --checksum=: Identifies a specific revision of the `$LATEST` version of the bot.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the bot that you want to create a new version of.
-    - name: delete-bot-version
-      description: Deletes a specific version of a bot.
-      flags:
-        --bot-version=!: The version of the bot to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the bot.
+        --name=!: The name of the alias to delete.
     - name: delete-intent
       description: Deletes all versions of the intent, including the `$LATEST` version.
       flags:
@@ -418,14 +412,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the intent.
-    - name: delete-intent-version
-      description: Deletes a specific version of an intent.
+    - name: delete-slot-type-version
+      description: Deletes a specific version of a slot type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --intent-version=!: The version of the intent to delete.
-        --name=!: The name of the intent.
+        --name=!: The name of the slot type.
+        --slot-type-version=!: The version of the slot type to delete.
+    - name: delete-utterances
+      description: Deletes stored utterances.
+      flags:
+        --bot-name=!: The name of the bot that stored the utterances.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The unique identifier for the user that made the utterances.
     - name: get-bot-versions
       description: Gets information about all of the versions of a bot.
       flags:
@@ -438,18 +440,18 @@ commands:
         --next-token=: A pagination token for fetching the next page of bot versions.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-builtin-intents
-      description: Gets a list of built-in intents that meet the specified criteria.
+    - name: get-builtin-slot-types
+      description: Gets a list of built-in slot types that meet the specified criteria.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locale=: A list of locales that the intent supports.
+        --locale=: A list of locales that the slot type supports.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of intents to return in the response.
-        --next-token=: A pagination token that fetches the next page of intents.
+        --max-results=: The maximum number of slot types to return in the response.
+        --next-token=: A pagination token that fetches the next page of slot types.
         --page-size=: The size of each page to get in the AWS service call.
-        --signature-contains=: Substring to match in built-in intent signatures.
+        --signature-contains=: Substring to match in built-in slot type signatures.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
@@ -467,66 +469,64 @@ commands:
                 - it-IT
                 - ja-JP
                 - ko-KR
-    - name: get-migrations
-      description: Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+    - name: start-migration
+      description: Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of migrations to return in the response.
-        --migration-status-equals=: Filters the list to contain only migrations in the specified state.
-        --next-token=: A pagination token that fetches the next page of migrations.
-        --sort-by-attribute=: The field to sort the list of migrations by.
-        --sort-by-order=: The order so sort the list.
-        --v1-bot-name-contains=: Filters the list to contain only bots whose name contains the specified string.
+        --migration-strategy=!: The strategy used to conduct the migration.
+        --v1-bot-name=!: The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
+        --v1-bot-version=!: The version of the bot to migrate to Amazon Lex V2.
+        --v2-bot-name=!: The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to.
+        --v2-bot-role=!: The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
       completion:
         flag:
-            migration-status-equals:
-                - IN_PROGRESS
-                - COMPLETED
-                - FAILED
-            sort-by-attribute:
-                - V1_BOT_NAME
-                - MIGRATION_DATE_TIME
-            sort-by-order:
-                - ASCENDING
-                - DESCENDING
-    - name: create-intent-version
-      description: Creates a new version of an intent based on the `$LATEST` version of the intent.
-      flags:
-        --checksum=: Checksum of the `$LATEST` version of the intent that should be used to create the new version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the intent that you want to create a new version of.
-    - name: delete-slot-type
-      description: Deletes all versions of the slot type, including the `$LATEST` version.
+            migration-strategy:
+                - CREATE_NEW
+                - UPDATE_EXISTING
+    - name: get-bot
+      description: Returns metadata information for a specific bot.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the slot type.
-    - name: delete-utterances
-      description: Deletes stored utterances.
+        --name=!: The name of the bot.
+        --version-or-alias=!: The version or alias of the bot.
+    - name: get-bot-alias
+      description: Returns information about an Amazon Lex bot alias.
       flags:
-        --bot-name=!: The name of the bot that stored the utterances.
+        --bot-name=!: The name of the bot.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The unique identifier for the user that made the utterances.
-    - name: get-bot-channel-association
-      description: Returns information about the association between an Amazon Lex bot and a messaging platform.
+        --name=!: The name of the bot alias.
+    - name: get-bot-channel-associations
+      description: Returns a list of all of the channels associated with the specified bot.
       flags:
         --bot-alias=!: An alias pointing to the specific version of the Amazon Lex bot to which this association is being made.
-        --bot-name=!: The name of the Amazon Lex bot.
+        --bot-name=!: The name of the Amazon Lex bot in the association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the association between the bot and the channel.
-    - name: get-builtin-intent
-      description: Returns information about a built-in intent.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of associations to return in the response.
+        --name-contains=: Substring to match in channel association names.
+        --next-token=: A pagination token for fetching the next page of associations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-import
+      description: Gets information about an import job started with the `StartImport` operation.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signature=!: The unique identifier for a built-in intent.
+        --import-id=!: The identifier of the import job information to return.
+    - name: untag-resource
+      description: Removes tags from a bot, bot alias or bot channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove the tags from.
+        --tag-keys=!: A list of tag keys to remove from the resource.

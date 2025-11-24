@@ -1,31 +1,96 @@
 name: elasticache
 description: Amazon ElastiCache
 commands:
-    - name: describe-cache-subnet-groups
-      description: Returns a list of cache subnet group descriptions.
+    - name: batch-apply-update-action
+      description: Apply the service update.
       flags:
-        --cache-subnet-group-name=: The name of the cache subnet group to return details for.
+        --cache-cluster-ids=: The cache cluster IDs
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-group-ids=: The replication group IDs
+        --service-update-name=!: The unique ID of the service update
+    - name: create-snapshot
+      description: Creates a copy of an entire cluster or replication group at a specific moment in time.
+      flags:
+        --cache-cluster-id=: The identifier of an existing cluster.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ID of the KMS key used to encrypt the snapshot.
+        --replication-group-id=: The identifier of an existing replication group.
+        --snapshot-name=!: A name for the snapshot being created.
+        --tags=: A list of tags to be added to this resource.
+    - name: delete-user
+      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Deletes a user.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The ID of the user.
+    - name: describe-reserved-cache-nodes
+      description: Returns information about reserved cache nodes for this account, or about a specified reserved cache node.
+      flags:
+        --cache-node-type=: The cache node type filter value.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration=: The duration filter value, specified in years or seconds.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional marker returned from a prior request.
         --max-items=: The  total number of items to return in the command's output.
         --max-records=: The maximum number of records to include in the response.
+        --offering-type=: The offering type filter value.
         --page-size=: The size of each page to get in the AWS service call.
+        --product-description=: The product description filter value.
+        --reserved-cache-node-id=: The reserved cache node identifier filter value.
+        --reserved-cache-nodes-offering-id=: The offering identifier filter value.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-global-replication-groups
-      description: Returns information about a particular global replication group.
+    - name: describe-reserved-cache-nodes-offerings
+      description: Lists available reserved cache node offerings.
+      flags:
+        --cache-node-type=: The cache node type filter value.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration=: Duration filter value, specified in years or seconds.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --offering-type=: The offering type filter value.
+        --page-size=: The size of each page to get in the AWS service call.
+        --product-description=: The product description filter value.
+        --reserved-cache-nodes-offering-id=: The offering identifier filter value.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-serverless-cache-snapshots
+      description: Returns information about serverless cache snapshots.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-id=: The name of the Global datastore
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of records to include in the response.
+        --next-token=: An optional marker returned from a prior request to support pagination of results from this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --serverless-cache-name=: The identifier of serverless cache.
+        --serverless-cache-snapshot-name=: The identifier of the serverless cache’s snapshot.
+        --snapshot-type=: The type of snapshot that is being described.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-snapshots
+      description: Returns information about cluster or replication group snapshots.
+      flags:
+        --cache-cluster-id=: A user-supplied cluster identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional marker returned from a prior request.
         --max-items=: The  total number of items to return in the command's output.
         --max-records=: The maximum number of records to include in the response.
-        --no-show-member-info: Returns the list of members that comprise the Global datastore.
+        --no-show-node-group-config: A Boolean value which if true, the node group (shard) configuration is included in the snapshot description.
         --page-size=: The size of each page to get in the AWS service call.
-        --show-member-info: Returns the list of members that comprise the Global datastore.
+        --replication-group-id=: A user-supplied replication group identifier.
+        --show-node-group-config: A Boolean value which if true, the node group (shard) configuration is included in the snapshot description.
+        --snapshot-name=: A user-supplied name of the snapshot.
+        --snapshot-source=: If set to `system`, the output shows snapshots that were automatically created by ElastiCache.
         --starting-token=: A token to specify where to start paginating.
     - name: modify-cache-cluster
       description: Modifies the settings for a cluster.
@@ -70,20 +135,128 @@ commands:
             ip-discovery:
                 - ipv4
                 - ipv6
-    - name: create-cache-parameter-group
-      description: Creates a new Amazon ElastiCache cache parameter group.
+    - name: delete-replication-group
+      description: Deletes an existing replication group.
       flags:
-        --cache-parameter-group-family=!: The name of the cache parameter group family that the cache parameter group can be used with.
-        --cache-parameter-group-name=!: A user-specified name for the cache parameter group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: A user-specified description for the cache parameter group.
+        --final-snapshot-identifier=: The name of a final node group (shard) snapshot.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of tags to be added to this resource.
-    - name: delete-cache-security-group
-      description: Deletes a cache security group.
+        --no-retain-primary-cluster: If set to `true`, all of the read replicas are deleted, but the primary node is retained.
+        --replication-group-id=!: The identifier for the cluster to be deleted.
+        --retain-primary-cluster: If set to `true`, all of the read replicas are deleted, but the primary node is retained.
+    - name: delete-snapshot
+      description: Deletes an existing snapshot.
       flags:
-        --cache-security-group-name=!: The name of the cache security group to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-name=!: The name of the snapshot to be deleted.
+    - name: describe-cache-clusters
+      description: Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.
+      flags:
+        --cache-cluster-id=: The user-supplied cluster identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --no-show-cache-clusters-not-in-replication-groups: 'An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.'
+        --no-show-cache-node-info: An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.
+        --page-size=: The size of each page to get in the AWS service call.
+        --show-cache-clusters-not-in-replication-groups: 'An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.'
+        --show-cache-node-info: An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.
+        --starting-token=: A token to specify where to start paginating.
+    - name: disassociate-global-replication-group
+      description: Remove a secondary cluster from the Global datastore using the Global datastore name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-id=!: The name of the Global datastore
+        --replication-group-id=!: The name of the secondary cluster you wish to remove from the Global datastore
+        --replication-group-region=!: The Amazon region of secondary cluster you wish to remove from the Global datastore
+    - name: modify-replication-group
+      description: Modifies the settings for a replication group.
+      flags:
+        --apply-immediately: If `true`, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the replication group.
+        --auth-token-update-strategy=: Specifies the strategy to use to update the AUTH token.
+        --auth-token=: Reserved parameter.
+        --auto-minor-version-upgrade: If you are running Valkey or Redis OSS engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign.
+        --automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
+        --cache-node-type=: A valid cache node type that you want to scale this replication group to.
+        --cache-parameter-group-name=: The name of the cache parameter group to apply to all of the clusters in this replication group.
+        --cache-security-group-names=: A list of cache security group names to authorize for the clusters in this replication group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-mode=: Enabled or Disabled.
+        --engine-version=: The upgraded version of the cache engine to be run on the clusters in the replication group.
+        --engine=: Modifies the engine listed in a replication group message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-discovery=: The network type you choose when modifying a cluster, either `ipv4` | `ipv6`.
+        --log-delivery-configurations=: Specifies the destination, format and type of the logs.
+        --multi-az-enabled: A flag to indicate MultiAZ is enabled.
+        --no-apply-immediately: If `true`, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the replication group.
+        --no-auto-minor-version-upgrade: If you are running Valkey or Redis OSS engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign.
+        --no-automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
+        --no-multi-az-enabled: A flag to indicate MultiAZ is enabled.
+        --no-remove-user-groups: Removes the user group associated with this replication group.
+        --no-transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
+        --node-group-id=: Deprecated.
+        --notification-topic-arn=: The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
+        --notification-topic-status=: The status of the Amazon SNS notification topic for the replication group.
+        --preferred-maintenance-window=: Specifies the weekly time range during which maintenance on the cluster is performed.
+        --primary-cluster-id=: For replication groups with a single primary, if this parameter is specified, ElastiCache promotes the specified cluster in the specified replication group to the primary role.
+        --remove-user-groups: Removes the user group associated with this replication group.
+        --replication-group-description=: A description for the replication group.
+        --replication-group-id=!: The identifier of the replication group to modify.
+        --security-group-ids=: Specifies the VPC Security Groups associated with the clusters in the replication group.
+        --snapshot-retention-limit=: The number of days for which ElastiCache retains automatic node group (shard) snapshots before deleting them.
+        --snapshot-window=: The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of the node group (shard) specified by `SnapshottingClusterId`.
+        --snapshotting-cluster-id=: The cluster ID that is used as the daily snapshot source for the replication group.
+        --transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
+        --transit-encryption-mode=: A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
+        --user-group-ids-to-add=: The ID of the user group you are associating with the replication group.
+        --user-group-ids-to-remove=: The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.
+      completion:
+        flag:
+            auth-token-update-strategy:
+                - SET
+                - ROTATE
+                - DELETE
+            cluster-mode:
+                - enabled
+                - disabled
+                - compatible
+            ip-discovery:
+                - ipv4
+                - ipv6
+            transit-encryption-mode:
+                - preferred
+                - required
+    - name: remove-tags-from-resource
+      description: Removes the tags identified by the `TagKeys` list from the named resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-name=!: The Amazon Resource Name (ARN) of the resource from which you want the tags removed, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
+        --tag-keys=!: A list of `TagKeys` identifying the tags you want removed from the named resource.
+    - name: reset-cache-parameter-group
+      description: Modifies the parameters of a cache parameter group to the engine or system default value.
+      flags:
+        --cache-parameter-group-name=!: The name of the cache parameter group to reset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-reset-all-parameters: If `true`, all parameters in the cache parameter group are reset to their default values.
+        --parameter-name-values=: An array of parameter names to reset to their default values.
+        --reset-all-parameters: If `true`, all parameters in the cache parameter group are reset to their default values.
+    - name: delete-cache-parameter-group
+      description: Deletes the specified cache parameter group.
+      flags:
+        --cache-parameter-group-name=!: The name of the cache parameter group to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -94,6 +267,138 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --serverless-cache-snapshot-name=!: Idenfitier of the snapshot to be deleted.
+    - name: delete-cache-cluster
+      description: Deletes a previously provisioned cluster.
+      flags:
+        --cache-cluster-id=!: The cluster identifier for the cluster to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --final-snapshot-identifier=: The user-supplied name of a final cluster snapshot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-global-replication-group
+      description: 'Deleting a Global datastore is a two-step process:'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-id=!: The name of the Global datastore
+        --no-retain-primary-replication-group!: The primary replication group is retained as a standalone replication group.
+        --retain-primary-replication-group!: The primary replication group is retained as a standalone replication group.
+    - name: describe-users
+      description: Returns a list of users.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=: The engine.
+        --filters=: Filter to determine the list of User IDs to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=: The ID of the user.
+    - name: modify-replication-group-shard-configuration
+      description: Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.
+      flags:
+        --apply-immediately!: Indicates that the shard reconfiguration process begins immediately.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-apply-immediately!: Indicates that the shard reconfiguration process begins immediately.
+        --node-group-count=!: The number of node groups (shards) that results from the modification of the shard configuration.
+        --node-groups-to-remove=: If the value of `NodeGroupCount` is less than the current number of node groups (shards), then either `NodeGroupsToRemove` or `NodeGroupsToRetain` is required.
+        --node-groups-to-retain=: If the value of `NodeGroupCount` is less than the current number of node groups (shards), then either `NodeGroupsToRemove` or `NodeGroupsToRetain` is required.
+        --replication-group-id=!: The name of the Valkey or Redis OSS (cluster mode enabled) cluster (replication group) on which the shards are to be configured.
+        --resharding-configuration=: Specifies the preferred availability zones for each node group in the cluster.
+    - name: create-global-replication-group
+      description: Global Datastore offers fully managed, fast, reliable and secure cross-region replication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-description=: Provides details of the Global datastore
+        --global-replication-group-id-suffix=!: The suffix name of a Global datastore.
+        --primary-replication-group-id=!: The name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.
+    - name: describe-cache-security-groups
+      description: Returns a list of cache security group descriptions.
+      flags:
+        --cache-security-group-name=: The name of the cache security group to return details for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: purchase-reserved-cache-nodes-offering
+      description: Allows you to purchase a reserved cache node offering.
+      flags:
+        --cache-node-count=: The number of cache node instances to reserve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reserved-cache-node-id=: A customer-specified identifier to track this reservation.
+        --reserved-cache-nodes-offering-id=!: The ID of the reserved cache node offering to purchase.
+        --tags=: A list of tags to be added to this resource.
+    - name: test-migration
+      description: Async API to test connection between source and target replication group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-node-endpoint-list=!: List of endpoints from which data should be migrated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-group-id=!: The ID of the replication group to which data is to be migrated.
+    - name: start-migration
+      description: Start the migration of data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-node-endpoint-list=!: List of endpoints from which data should be migrated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-group-id=!: The ID of the replication group to which data should be migrated.
+    - name: create-user
+      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user.'
+      flags:
+        --access-string=!: Access permissions string used for this user.
+        --authentication-mode=: Specifies how to authenticate the user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=!: The options are valkey or redis.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-no-password-required: Indicates a password is not required for this user.
+        --no-password-required: Indicates a password is not required for this user.
+        --passwords=: Passwords used for this user.
+        --tags=: A list of tags to be added to this resource.
+        --user-id=!: The ID of the user.
+        --user-name=!: The username of the user.
+    - name: describe-global-replication-groups
+      description: Returns information about a particular global replication group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-id=: The name of the Global datastore
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --no-show-member-info: Returns the list of members that comprise the Global datastore.
+        --page-size=: The size of each page to get in the AWS service call.
+        --show-member-info: Returns the list of members that comprise the Global datastore.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-serverless-caches
+      description: Returns information about a specific serverless cache.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of records in the response.
+        --next-token=: An optional marker returned from a prior request to support pagination of results from this operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --serverless-cache-name=: The identifier for the serverless cache.
+        --starting-token=: A token to specify where to start paginating.
     - name: export-serverless-cache-snapshot
       description: Provides the functionality to export the serverless cache snapshot data to Amazon S3.
       flags:
@@ -102,31 +407,98 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --s3-bucket-name=!: Name of the Amazon S3 bucket to export the snapshot to.
         --serverless-cache-snapshot-name=!: The identifier of the serverless cache snapshot to be exported to S3.
-    - name: reboot-cache-cluster
-      description: Reboots some, or all, of the cache nodes within a provisioned cluster.
+    - name: modify-cache-parameter-group
+      description: Modifies the parameters of a cache parameter group.
       flags:
-        --cache-cluster-id=!: The cluster identifier.
-        --cache-node-ids-to-reboot=!: A list of cache node IDs to reboot.
+        --cache-parameter-group-name=!: The name of the cache parameter group to modify.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: remove-tags-from-resource
-      description: Removes the tags identified by the `TagKeys` list from the named resource.
+        --parameter-name-values=!: An array of parameter names and values for the parameter update.
+    - name: modify-user
+      description: Changes user password(s) and/or access string.
+      flags:
+        --access-string=: Access permissions string used for this user.
+        --append-access-string=: Adds additional user permissions to the access string.
+        --authentication-mode=: Specifies how to authenticate the user.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=: Modifies the engine listed for a user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-no-password-required: Indicates no password is required for the user.
+        --no-password-required: Indicates no password is required for the user.
+        --passwords=: The passwords belonging to the user.
+        --user-id=!: The ID of the user.
+    - name: create-cache-cluster
+      description: Creates a cluster.
+      flags:
+        --auth-token=: '**Reserved parameter.** The password used to access a password protected server.'
+        --auto-minor-version-upgrade: If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes to opt-in to the next auto minor version upgrade campaign.
+        --az-mode=: Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.
+        --cache-cluster-id=!: The node group (shard) identifier.
+        --cache-node-type=: The compute and memory capacity of the nodes in the node group (shard).
+        --cache-parameter-group-name=: The name of the parameter group to associate with this cluster.
+        --cache-security-group-names=: A list of security group names to associate with this cluster.
+        --cache-subnet-group-name=: The name of the subnet group to be used for the cluster.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-version=: The version number of the cache engine to be used for this cluster.
+        --engine=: The name of the cache engine to be used for this cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-discovery=: The network type you choose when modifying a cluster, either `ipv4` | `ipv6`.
+        --log-delivery-configurations=: Specifies the destination, format and type of the logs.
+        --network-type=: Must be either `ipv4` | `ipv6` | `dual_stack`.
+        --no-auto-minor-version-upgrade: If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes to opt-in to the next auto minor version upgrade campaign.
+        --no-transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
+        --notification-topic-arn=: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
+        --num-cache-nodes=: The initial number of cache nodes that the cluster has.
+        --outpost-mode=: Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.
+        --port=: The port number on which each of the cache nodes accepts connections.
+        --preferred-availability-zone=: The EC2 Availability Zone in which the cluster is created.
+        --preferred-availability-zones=: A list of the Availability Zones in which cache nodes are created.
+        --preferred-maintenance-window=: Specifies the weekly time range during which maintenance on the cluster is performed.
+        --preferred-outpost-arn=: The outpost ARN in which the cache cluster is created.
+        --preferred-outpost-arns=: The outpost ARNs in which the cache cluster is created.
+        --replication-group-id=: The ID of the replication group to which this cluster should belong.
+        --security-group-ids=: One or more VPC security groups associated with the cluster.
+        --snapshot-arns=: A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Valkey or Redis OSS RDB snapshot file stored in Amazon S3.
+        --snapshot-name=: The name of a Valkey or Redis OSS snapshot from which to restore data into the new node group (shard).
+        --snapshot-retention-limit=: The number of days for which ElastiCache retains automatic snapshots before deleting them.
+        --snapshot-window=: The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).
+        --tags=: A list of tags to be added to this resource.
+        --transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
+      completion:
+        flag:
+            az-mode:
+                - single-az
+                - cross-az
+            ip-discovery:
+                - ipv4
+                - ipv6
+            network-type:
+                - ipv4
+                - ipv6
+                - dual_stack
+            outpost-mode:
+                - single-outpost
+                - cross-outpost
+    - name: create-user-group
+      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user group.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=!: Sets the engine listed in a user group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The Amazon Resource Name (ARN) of the resource from which you want the tags removed, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-        --tag-keys=!: A list of `TagKeys` identifying the tags you want removed from the named resource.
-    - name: batch-stop-update-action
-      description: Stop the service update.
+        --tags=: A list of tags to be added to this resource.
+        --user-group-id=!: The ID of the user group.
+        --user-ids=: The list of user IDs that belong to the user group.
+    - name: delete-cache-subnet-group
+      description: Deletes a cache subnet group.
       flags:
-        --cache-cluster-ids=: The cache cluster IDs
+        --cache-subnet-group-name=!: The name of the cache subnet group to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-ids=: The replication group IDs
-        --service-update-name=!: The unique ID of the service update
     - name: describe-cache-parameter-groups
       description: Returns a list of cache parameter group descriptions.
       flags:
@@ -139,18 +511,15 @@ commands:
         --max-records=: The maximum number of records to include in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-engine-default-parameters
-      description: Returns the default engine and system parameter information for the specified cache engine.
+    - name: modify-cache-subnet-group
+      description: Modifies an existing cache subnet group.
       flags:
-        --cache-parameter-group-family=!: The name of the cache parameter group family.
+        --cache-subnet-group-description=: A description of the cache subnet group.
+        --cache-subnet-group-name=!: The name for the cache subnet group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --subnet-ids=: The EC2 subnet IDs for the cache subnet group.
     - name: modify-serverless-cache
       description: This API modifies the attributes of a serverless cache.
       flags:
@@ -168,107 +537,24 @@ commands:
         --serverless-cache-name=!: User-provided identifier for the serverless cache to be modified.
         --snapshot-retention-limit=: The number of days for which Elasticache retains automatic snapshots before deleting them.
         --user-group-id=: The identifier of the UserGroup to be associated with the serverless cache.
-    - name: describe-reserved-cache-nodes-offerings
-      description: Lists available reserved cache node offerings.
-      flags:
-        --cache-node-type=: The cache node type filter value.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: Duration filter value, specified in years or seconds.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --offering-type=: The offering type filter value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --product-description=: The product description filter value.
-        --reserved-cache-nodes-offering-id=: The offering identifier filter value.
-        --starting-token=: A token to specify where to start paginating.
-    - name: increase-node-groups-in-global-replication-group
-      description: Increase the number of node groups in the Global datastore
-      flags:
-        --apply-immediately!: Indicates that the process begins immediately.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-id=!: The name of the Global datastore
-        --no-apply-immediately!: Indicates that the process begins immediately.
-        --node-group-count=!: Total number of node groups you want
-        --regional-configurations=: Describes the replication group IDs, the Amazon regions where they are stored and the shard configuration for each that comprise the Global datastore
-    - name: rebalance-slots-in-global-replication-group
-      description: Redistribute slots to ensure uniform distribution across existing shards in the cluster.
-      flags:
-        --apply-immediately!: If `True`, redistribution is applied immediately.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-id=!: The name of the Global datastore
-        --no-apply-immediately!: If `True`, redistribution is applied immediately.
-    - name: complete-migration
-      description: Complete the migration of data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: Forces the migration to stop without ensuring that data is in sync.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: Forces the migration to stop without ensuring that data is in sync.
-        --replication-group-id=!: The ID of the replication group to which data is being migrated.
-    - name: create-cache-security-group
-      description: Creates a new cache security group.
-      flags:
-        --cache-security-group-name=!: A name for the cache security group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: A description for the cache security group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of tags to be added to this resource.
-    - name: create-snapshot
-      description: Creates a copy of an entire cluster or replication group at a specific moment in time.
-      flags:
-        --cache-cluster-id=: The identifier of an existing cluster.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The ID of the KMS key used to encrypt the snapshot.
-        --replication-group-id=: The identifier of an existing replication group.
-        --snapshot-name=!: A name for the snapshot being created.
-        --tags=: A list of tags to be added to this resource.
-    - name: describe-cache-security-groups
-      description: Returns a list of cache security group descriptions.
-      flags:
-        --cache-security-group-name=: The name of the cache security group to return details for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-user
-      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user.'
-      flags:
-        --access-string=!: Access permissions string used for this user.
-        --authentication-mode=: Specifies how to authenticate the user.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=!: The options are valkey or redis.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-no-password-required: Indicates a password is not required for this user.
-        --no-password-required: Indicates a password is not required for this user.
-        --passwords=: Passwords used for this user.
-        --tags=: A list of tags to be added to this resource.
-        --user-id=!: The ID of the user.
-        --user-name=!: The username of the user.
-    - name: disassociate-global-replication-group
-      description: Remove a secondary cluster from the Global datastore using the Global datastore name.
+    - name: add-tags-to-resource
+      description: A tag is a key-value pair where the key and value are case-sensitive.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-id=!: The name of the Global datastore
-        --replication-group-id=!: The name of the secondary cluster you wish to remove from the Global datastore
-        --replication-group-region=!: The Amazon region of secondary cluster you wish to remove from the Global datastore
+        --resource-name=!: The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
+        --tags=!: A list of tags to be added to this resource.
+    - name: copy-serverless-cache-snapshot
+      description: Creates a copy of an existing serverless cache’s snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The identifier of the KMS key used to encrypt the target snapshot.
+        --source-serverless-cache-snapshot-name=!: The identifier of the existing serverless cache’s snapshot to be copied.
+        --tags=: A list of tags to be added to the target snapshot resource.
+        --target-serverless-cache-snapshot-name=!: The identifier for the snapshot to be created.
     - name: modify-user-group
       description: Changes the list of users that belong to the user group.
       flags:
@@ -279,16 +565,139 @@ commands:
         --user-group-id=!: The ID of the user group.
         --user-ids-to-add=: The list of user IDs to add to the user group.
         --user-ids-to-remove=: The list of user IDs to remove from the user group.
-    - name: purchase-reserved-cache-nodes-offering
-      description: Allows you to purchase a reserved cache node offering.
+    - name: increase-replica-count
+      description: Dynamically increases the number of replicas in a Valkey or Redis OSS (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Valkey or Redis OSS (cluster mode enabled) replication group.
       flags:
-        --cache-node-count=: The number of cache node instances to reserve.
+        --apply-immediately!: If `True`, the number of replica nodes is increased immediately.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reserved-cache-node-id=: A customer-specified identifier to track this reservation.
-        --reserved-cache-nodes-offering-id=!: The ID of the reserved cache node offering to purchase.
+        --new-replica-count=: The number of read replica nodes you want at the completion of this operation.
+        --no-apply-immediately!: If `True`, the number of replica nodes is increased immediately.
+        --replica-configuration=: A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS (cluster mode enabled) replication group.
+        --replication-group-id=!: The id of the replication group to which you want to add replica nodes.
+    - name: list-allowed-node-type-modifications
+      description: Lists all available node types that you can scale with your cluster's replication group's current node type.
+      flags:
+        --cache-cluster-id=: The name of the cluster you want to scale up to a larger node instanced type.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-group-id=: The name of the replication group want to scale up to a larger node type.
+    - name: authorize-cache-security-group-ingress
+      description: Allows network ingress to a cache security group.
+      flags:
+        --cache-security-group-name=!: The cache security group that allows network ingress.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ec2-security-group-name=!: The Amazon EC2 security group to be authorized for ingress to the cache security group.
+        --ec2-security-group-owner-id=!: The Amazon account number of the Amazon EC2 security group owner.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-stop-update-action
+      description: Stop the service update.
+      flags:
+        --cache-cluster-ids=: The cache cluster IDs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-group-ids=: The replication group IDs
+        --service-update-name=!: The unique ID of the service update
+    - name: create-cache-subnet-group
+      description: Creates a new cache subnet group.
+      flags:
+        --cache-subnet-group-description=!: A description for the cache subnet group.
+        --cache-subnet-group-name=!: A name for the cache subnet group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subnet-ids=!: A list of VPC subnet IDs for the cache subnet group.
         --tags=: A list of tags to be added to this resource.
+    - name: describe-engine-default-parameters
+      description: Returns the default engine and system parameter information for the specified cache engine.
+      flags:
+        --cache-parameter-group-family=!: The name of the cache parameter group family.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: failover-global-replication-group
+      description: Used to failover the primary region to a secondary region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-id=!: The name of the Global datastore
+        --primary-region=!: The Amazon region of the primary cluster of the Global datastore
+        --primary-replication-group-id=!: The name of the primary replication group
+    - name: create-cache-security-group
+      description: Creates a new cache security group.
+      flags:
+        --cache-security-group-name=!: A name for the cache security group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: A description for the cache security group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of tags to be added to this resource.
+    - name: create-serverless-cache
+      description: Creates a serverless cache.
+      flags:
+        --cache-usage-limits=: Sets the cache usage limits for storage and ElastiCache Processing Units for the cache.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --daily-snapshot-time=: The daily time that snapshots will be created from the new serverless cache.
+        --description=: User-provided description for the serverless cache.
+        --engine=!: The name of the cache engine to be used for creating the serverless cache.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: ARN of the customer managed key for encrypting the data at rest.
+        --major-engine-version=: The version of the cache engine that will be used to create the serverless cache.
+        --security-group-ids=: A list of the one or more VPC security groups to be associated with the serverless cache.
+        --serverless-cache-name=!: User-provided identifier for the serverless cache.
+        --snapshot-arns-to-restore=: The ARN(s) of the snapshot that the new serverless cache will be created from.
+        --snapshot-retention-limit=: The number of snapshots that will be retained for the serverless cache that is being created.
+        --subnet-ids=: A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed.
+        --tags=: The list of tags (key, value) pairs to be added to the serverless cache resource.
+        --user-group-id=: The identifier of the UserGroup to be associated with the serverless cache.
+    - name: decrease-replica-count
+      description: Dynamically decreases the number of replicas in a Valkey or Redis OSS (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Valkey or Redis OSS (cluster mode enabled) replication group.
+      flags:
+        --apply-immediately!: If `True`, the number of replica nodes is decreased immediately.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --new-replica-count=: The number of read replica nodes you want at the completion of this operation.
+        --no-apply-immediately!: If `True`, the number of replica nodes is decreased immediately.
+        --replica-configuration=: A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS replication group.
+        --replicas-to-remove=: A list of the node ids to remove from the replication group or node group (shard).
+        --replication-group-id=!: The id of the replication group from which you want to remove replica nodes.
+    - name: modify-global-replication-group
+      description: Modifies the settings for a Global datastore.
+      flags:
+        --apply-immediately!: This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible.
+        --automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
+        --cache-node-type=: A valid cache node type that you want to scale this Global datastore to.
+        --cache-parameter-group-name=: The name of the cache parameter group to use with the Global datastore.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-version=: The upgraded version of the cache engine to be run on the clusters in the Global datastore.
+        --engine=: Modifies the engine listed in a global replication group message.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-description=: A description of the Global datastore
+        --global-replication-group-id=!: The name of the Global datastore
+        --no-apply-immediately!: This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible.
+        --no-automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
+    - name: rebalance-slots-in-global-replication-group
+      description: Redistribute slots to ensure uniform distribution across existing shards in the cluster.
+      flags:
+        --apply-immediately!: If `True`, redistribution is applied immediately.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-replication-group-id=!: The name of the Global datastore
+        --no-apply-immediately!: If `True`, redistribution is applied immediately.
     - name: revoke-cache-security-group-ingress
       description: Revokes ingress from a cache security group.
       flags:
@@ -298,6 +707,14 @@ commands:
         --ec2-security-group-name=!: The name of the Amazon EC2 security group to revoke access from.
         --ec2-security-group-owner-id=!: The Amazon account number of the Amazon EC2 security group owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: test-failover
+      description: Represents the input of a `TestFailover` operation which tests automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --node-group-id=!: The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested.
+        --replication-group-id=!: 'The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.'
     - name: create-replication-group
       description: Creates a Valkey or Redis OSS (cluster mode disabled) or a Valkey or Redis OSS (cluster mode enabled) replication group.
       flags:
@@ -365,16 +782,54 @@ commands:
             transit-encryption-mode:
                 - preferred
                 - required
-    - name: create-cache-subnet-group
-      description: Creates a new cache subnet group.
+    - name: describe-cache-parameters
+      description: Returns the detailed parameter list for a particular cache parameter group.
       flags:
-        --cache-subnet-group-description=!: A description for the cache subnet group.
-        --cache-subnet-group-name=!: A name for the cache subnet group.
+        --cache-parameter-group-name=!: The name of a specific cache parameter group to return details for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: A list of VPC subnet IDs for the cache subnet group.
-        --tags=: A list of tags to be added to this resource.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source=: The parameter types to return.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-replication-groups
+      description: Returns information about a particular replication group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-group-id=: The identifier for the replication group to be described.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-service-updates
+      description: Returns details of the service updates
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-update-name=: The unique ID of the service update
+        --service-update-status=: The status of the service update
+        --starting-token=: A token to specify where to start paginating.
+    - name: create-serverless-cache-snapshot
+      description: This API creates a copy of an entire ServerlessCache at a specific moment in time.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ID of the KMS key used to encrypt the snapshot.
+        --serverless-cache-name=!: The name of an existing serverless cache.
+        --serverless-cache-snapshot-name=!: The name for the snapshot being created.
+        --tags=: A list of tags to be added to the snapshot resource.
     - name: decrease-node-groups-in-global-replication-group
       description: Decreases the number of node groups in a Global datastore
       flags:
@@ -387,18 +842,20 @@ commands:
         --global-replication-group-id=!: The name of the Global datastore
         --no-apply-immediately!: Indicates that the shard reconfiguration process begins immediately.
         --node-group-count=!: The number of node groups (shards) that results from the modification of the shard configuration
-    - name: decrease-replica-count
-      description: Dynamically decreases the number of replicas in a Valkey or Redis OSS (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Valkey or Redis OSS (cluster mode enabled) replication group.
+    - name: delete-cache-security-group
+      description: Deletes a cache security group.
       flags:
-        --apply-immediately!: If `True`, the number of replica nodes is decreased immediately.
+        --cache-security-group-name=!: The name of the cache security group to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-replica-count=: The number of read replica nodes you want at the completion of this operation.
-        --no-apply-immediately!: If `True`, the number of replica nodes is decreased immediately.
-        --replica-configuration=: A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS replication group.
-        --replicas-to-remove=: A list of the node ids to remove from the replication group or node group (shard).
-        --replication-group-id=!: The id of the replication group from which you want to remove replica nodes.
+    - name: delete-user-group
+      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Deletes a user group.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-group-id=!: The ID of the user group.
     - name: describe-cache-engine-versions
       description: Returns a list of the available cache engines and their versions.
       flags:
@@ -415,19 +872,48 @@ commands:
         --no-default-only: If `true`, specifies that only the default version of the specified engine or engine and major version combination is to be returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: describe-service-updates
-      description: Returns details of the service updates
+    - name: describe-update-actions
+      description: Returns details of the update actions
+      flags:
+        --cache-cluster-ids=: The cache cluster IDs
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine=: The Elasticache engine to which the update applies.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional marker returned from a prior request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response
+        --no-show-node-level-update-status: Dictates whether to include node level update status in the response
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-group-ids=: The replication group IDs
+        --service-update-name=: The unique ID of the service update
+        --service-update-status=: The status of the service update
+        --service-update-time-range=: The range of time specified to search for service updates that are in available status
+        --show-node-level-update-status: Dictates whether to include node level update status in the response
+        --starting-token=: A token to specify where to start paginating.
+        --update-action-status=: The status of the update action.
+    - name: describe-user-groups
+      description: Returns a list of user groups.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional marker returned from a prior request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response
+        --max-records=: The maximum number of records to include in the response.
         --page-size=: The size of each page to get in the AWS service call.
-        --service-update-name=: The unique ID of the service update
-        --service-update-status=: The status of the service update
         --starting-token=: A token to specify where to start paginating.
+        --user-group-id=: The ID of the user group.
+    - name: create-cache-parameter-group
+      description: Creates a new Amazon ElastiCache cache parameter group.
+      flags:
+        --cache-parameter-group-family=!: The name of the cache parameter group family that the cache parameter group can be used with.
+        --cache-parameter-group-name=!: A user-specified name for the cache parameter group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: A user-specified description for the cache parameter group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of tags to be added to this resource.
     - name: list-tags-for-resource
       description: Lists all tags currently on a named resource.
       flags:
@@ -435,127 +921,57 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The Amazon Resource Name (ARN) of the resource for which you want the list of tags, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-    - name: modify-replication-group
-      description: Modifies the settings for a replication group.
+    - name: increase-node-groups-in-global-replication-group
+      description: Increase the number of node groups in the Global datastore
       flags:
-        --apply-immediately: If `true`, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the replication group.
-        --auth-token-update-strategy=: Specifies the strategy to use to update the AUTH token.
-        --auth-token=: Reserved parameter.
-        --auto-minor-version-upgrade: If you are running Valkey or Redis OSS engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign.
-        --automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
-        --cache-node-type=: A valid cache node type that you want to scale this replication group to.
-        --cache-parameter-group-name=: The name of the cache parameter group to apply to all of the clusters in this replication group.
-        --cache-security-group-names=: A list of cache security group names to authorize for the clusters in this replication group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-mode=: Enabled or Disabled.
-        --engine-version=: The upgraded version of the cache engine to be run on the clusters in the replication group.
-        --engine=: Modifies the engine listed in a replication group message.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-discovery=: The network type you choose when modifying a cluster, either `ipv4` | `ipv6`.
-        --log-delivery-configurations=: Specifies the destination, format and type of the logs.
-        --multi-az-enabled: A flag to indicate MultiAZ is enabled.
-        --no-apply-immediately: If `true`, this parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible, regardless of the `PreferredMaintenanceWindow` setting for the replication group.
-        --no-auto-minor-version-upgrade: If you are running Valkey or Redis OSS engine version 6.0 or later, set this parameter to yes if you want to opt-in to the next auto minor version upgrade campaign.
-        --no-automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
-        --no-multi-az-enabled: A flag to indicate MultiAZ is enabled.
-        --no-remove-user-groups: Removes the user group associated with this replication group.
-        --no-transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
-        --node-group-id=: Deprecated.
-        --notification-topic-arn=: The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications are sent.
-        --notification-topic-status=: The status of the Amazon SNS notification topic for the replication group.
-        --preferred-maintenance-window=: Specifies the weekly time range during which maintenance on the cluster is performed.
-        --primary-cluster-id=: For replication groups with a single primary, if this parameter is specified, ElastiCache promotes the specified cluster in the specified replication group to the primary role.
-        --remove-user-groups: Removes the user group associated with this replication group.
-        --replication-group-description=: A description for the replication group.
-        --replication-group-id=!: The identifier of the replication group to modify.
-        --security-group-ids=: Specifies the VPC Security Groups associated with the clusters in the replication group.
-        --snapshot-retention-limit=: The number of days for which ElastiCache retains automatic node group (shard) snapshots before deleting them.
-        --snapshot-window=: The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of the node group (shard) specified by `SnapshottingClusterId`.
-        --snapshotting-cluster-id=: The cluster ID that is used as the daily snapshot source for the replication group.
-        --transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
-        --transit-encryption-mode=: A setting that allows you to migrate your clients to use in-transit encryption, with no downtime.
-        --user-group-ids-to-add=: The ID of the user group you are associating with the replication group.
-        --user-group-ids-to-remove=: The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.
-      completion:
-        flag:
-            auth-token-update-strategy:
-                - SET
-                - ROTATE
-                - DELETE
-            cluster-mode:
-                - enabled
-                - disabled
-                - compatible
-            ip-discovery:
-                - ipv4
-                - ipv6
-            transit-encryption-mode:
-                - preferred
-                - required
-    - name: failover-global-replication-group
-      description: Used to failover the primary region to a secondary region.
-      flags:
+        --apply-immediately!: Indicates that the process begins immediately.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-replication-group-id=!: The name of the Global datastore
-        --primary-region=!: The Amazon region of the primary cluster of the Global datastore
-        --primary-replication-group-id=!: The name of the primary replication group
-    - name: list-allowed-node-type-modifications
-      description: Lists all available node types that you can scale with your cluster's replication group's current node type.
+        --no-apply-immediately!: Indicates that the process begins immediately.
+        --node-group-count=!: Total number of node groups you want
+        --regional-configurations=: Describes the replication group IDs, the Amazon regions where they are stored and the shard configuration for each that comprise the Global datastore
+    - name: delete-serverless-cache
+      description: Deletes a specified existing serverless cache.
       flags:
-        --cache-cluster-id=: The name of the cluster you want to scale up to a larger node instanced type.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --final-snapshot-name=: Name of the final snapshot to be taken before the serverless cache is deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-id=: The name of the replication group want to scale up to a larger node type.
-    - name: modify-user
-      description: Changes user password(s) and/or access string.
+        --serverless-cache-name=!: The identifier of the serverless cache to be deleted.
+    - name: complete-migration
+      description: Complete the migration of data.
       flags:
-        --access-string=: Access permissions string used for this user.
-        --append-access-string=: Adds additional user permissions to the access string.
-        --authentication-mode=: Specifies how to authenticate the user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=: Modifies the engine listed for a user.
+        --force: Forces the migration to stop without ensuring that data is in sync.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-no-password-required: Indicates no password is required for the user.
-        --no-password-required: Indicates no password is required for the user.
-        --passwords=: The passwords belonging to the user.
-        --user-id=!: The ID of the user.
-    - name: test-failover
-      description: Represents the input of a `TestFailover` operation which tests automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).
+        --no-force: Forces the migration to stop without ensuring that data is in sync.
+        --replication-group-id=!: The ID of the replication group to which data is being migrated.
+    - name: copy-snapshot
+      description: Makes a copy of an existing snapshot.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --node-group-id=!: The name of the node group (called shard in the console) in this replication group on which automatic failover is to be tested.
-        --replication-group-id=!: 'The name of the replication group (console: cluster) whose automatic failover is being tested by this operation.'
-    - name: create-user-group
-      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 to 7.1: Creates a user group.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=!: Sets the engine listed in a user group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ID of the KMS key used to encrypt the target snapshot.
+        --source-snapshot-name=!: The name of an existing snapshot from which to make a copy.
         --tags=: A list of tags to be added to this resource.
-        --user-group-id=!: The ID of the user group.
-        --user-ids=: The list of user IDs that belong to the user group.
-    - name: describe-users
-      description: Returns a list of users.
+        --target-bucket=: The Amazon S3 bucket to which the snapshot is exported.
+        --target-snapshot-name=!: A name for the snapshot copy.
+    - name: describe-cache-subnet-groups
+      description: Returns a list of cache subnet group descriptions.
       flags:
+        --cache-subnet-group-name=: The name of the cache subnet group to return details for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=: The engine.
-        --filters=: Filter to determine the list of User IDs to return.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional marker returned from a prior request.
         --max-items=: The  total number of items to return in the command's output.
         --max-records=: The maximum number of records to include in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --user-id=: The ID of the user.
     - name: describe-events
       description: Returns events related to clusters, cache security groups, and cache parameter groups.
       flags:
@@ -584,433 +1000,41 @@ commands:
                 - serverless-cache-snapshot
                 - user
                 - user-group
-    - name: describe-update-actions
-      description: Returns details of the update actions
+    - name: reboot-cache-cluster
+      description: Reboots some, or all, of the cache nodes within a provisioned cluster.
       flags:
-        --cache-cluster-ids=: The cache cluster IDs
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine=: The Elasticache engine to which the update applies.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response
-        --no-show-node-level-update-status: Dictates whether to include node level update status in the response
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-group-ids=: The replication group IDs
-        --service-update-name=: The unique ID of the service update
-        --service-update-status=: The status of the service update
-        --service-update-time-range=: The range of time specified to search for service updates that are in available status
-        --show-node-level-update-status: Dictates whether to include node level update status in the response
-        --starting-token=: A token to specify where to start paginating.
-        --update-action-status=: The status of the update action.
-    - name: authorize-cache-security-group-ingress
-      description: Allows network ingress to a cache security group.
-      flags:
-        --cache-security-group-name=!: The cache security group that allows network ingress.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ec2-security-group-name=!: The Amazon EC2 security group to be authorized for ingress to the cache security group.
-        --ec2-security-group-owner-id=!: The Amazon account number of the Amazon EC2 security group owner.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: copy-serverless-cache-snapshot
-      description: Creates a copy of an existing serverless cache’s snapshot.
-      flags:
+        --cache-cluster-id=!: The cluster identifier.
+        --cache-node-ids-to-reboot=!: A list of cache node IDs to reboot.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The identifier of the KMS key used to encrypt the target snapshot.
-        --source-serverless-cache-snapshot-name=!: The identifier of the existing serverless cache’s snapshot to be copied.
-        --tags=: A list of tags to be added to the target snapshot resource.
-        --target-serverless-cache-snapshot-name=!: The identifier for the snapshot to be created.
-    - name: create-cache-cluster
-      description: Creates a cluster.
-      flags:
-        --auth-token=: '**Reserved parameter.** The password used to access a password protected server.'
-        --auto-minor-version-upgrade: If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes to opt-in to the next auto minor version upgrade campaign.
-        --az-mode=: Specifies whether the nodes in this Memcached cluster are created in a single Availability Zone or created across multiple Availability Zones in the cluster's region.
-        --cache-cluster-id=!: The node group (shard) identifier.
-        --cache-node-type=: The compute and memory capacity of the nodes in the node group (shard).
-        --cache-parameter-group-name=: The name of the parameter group to associate with this cluster.
-        --cache-security-group-names=: A list of security group names to associate with this cluster.
-        --cache-subnet-group-name=: The name of the subnet group to be used for the cluster.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-version=: The version number of the cache engine to be used for this cluster.
-        --engine=: The name of the cache engine to be used for this cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-discovery=: The network type you choose when modifying a cluster, either `ipv4` | `ipv6`.
-        --log-delivery-configurations=: Specifies the destination, format and type of the logs.
-        --network-type=: Must be either `ipv4` | `ipv6` | `dual_stack`.
-        --no-auto-minor-version-upgrade: If you are running Valkey 7.2 and above or Redis OSS engine version 6.0 and above, set this parameter to yes to opt-in to the next auto minor version upgrade campaign.
-        --no-transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
-        --notification-topic-arn=: The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS) topic to which notifications are sent.
-        --num-cache-nodes=: The initial number of cache nodes that the cluster has.
-        --outpost-mode=: Specifies whether the nodes in the cluster are created in a single outpost or across multiple outposts.
-        --port=: The port number on which each of the cache nodes accepts connections.
-        --preferred-availability-zone=: The EC2 Availability Zone in which the cluster is created.
-        --preferred-availability-zones=: A list of the Availability Zones in which cache nodes are created.
-        --preferred-maintenance-window=: Specifies the weekly time range during which maintenance on the cluster is performed.
-        --preferred-outpost-arn=: The outpost ARN in which the cache cluster is created.
-        --preferred-outpost-arns=: The outpost ARNs in which the cache cluster is created.
-        --replication-group-id=: The ID of the replication group to which this cluster should belong.
-        --security-group-ids=: One or more VPC security groups associated with the cluster.
-        --snapshot-arns=: A single-element string list containing an Amazon Resource Name (ARN) that uniquely identifies a Valkey or Redis OSS RDB snapshot file stored in Amazon S3.
-        --snapshot-name=: The name of a Valkey or Redis OSS snapshot from which to restore data into the new node group (shard).
-        --snapshot-retention-limit=: The number of days for which ElastiCache retains automatic snapshots before deleting them.
-        --snapshot-window=: The daily time range (in UTC) during which ElastiCache begins taking a daily snapshot of your node group (shard).
-        --tags=: A list of tags to be added to this resource.
-        --transit-encryption-enabled: A flag that enables in-transit encryption when set to true.
-      completion:
-        flag:
-            az-mode:
-                - single-az
-                - cross-az
-            ip-discovery:
-                - ipv4
-                - ipv6
-            network-type:
-                - ipv4
-                - ipv6
-                - dual_stack
-            outpost-mode:
-                - single-outpost
-                - cross-outpost
-    - name: delete-cache-subnet-group
-      description: Deletes a cache subnet group.
-      flags:
-        --cache-subnet-group-name=!: The name of the cache subnet group to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-serverless-cache
-      description: Deletes a specified existing serverless cache.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --final-snapshot-name=: Name of the final snapshot to be taken before the serverless cache is deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --serverless-cache-name=!: The identifier of the serverless cache to be deleted.
-    - name: describe-cache-parameters
-      description: Returns the detailed parameter list for a particular cache parameter group.
-      flags:
-        --cache-parameter-group-name=!: The name of a specific cache parameter group to return details for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source=: The parameter types to return.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-serverless-cache-snapshots
-      description: Returns information about serverless cache snapshots.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of records to include in the response.
-        --next-token=: An optional marker returned from a prior request to support pagination of results from this operation.
-        --page-size=: The size of each page to get in the AWS service call.
-        --serverless-cache-name=: The identifier of serverless cache.
-        --serverless-cache-snapshot-name=: The identifier of the serverless cache’s snapshot.
-        --snapshot-type=: The type of snapshot that is being described.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-user-groups
-      description: Returns a list of user groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-group-id=: The ID of the user group.
-    - name: delete-cache-parameter-group
-      description: Deletes the specified cache parameter group.
-      flags:
-        --cache-parameter-group-name=!: The name of the cache parameter group to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: modify-cache-parameter-group
-      description: Modifies the parameters of a cache parameter group.
-      flags:
-        --cache-parameter-group-name=!: The name of the cache parameter group to modify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameter-name-values=!: An array of parameter names and values for the parameter update.
-    - name: start-migration
-      description: Start the migration of data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-node-endpoint-list=!: List of endpoints from which data should be migrated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-id=!: The ID of the replication group to which data should be migrated.
-    - name: describe-replication-groups
-      description: Returns information about a particular replication group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-group-id=: The identifier for the replication group to be described.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-serverless-caches
-      description: Returns information about a specific serverless cache.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of records in the response.
-        --next-token=: An optional marker returned from a prior request to support pagination of results from this operation.
-        --page-size=: The size of each page to get in the AWS service call.
-        --serverless-cache-name=: The identifier for the serverless cache.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-global-replication-group
-      description: Global Datastore offers fully managed, fast, reliable and secure cross-region replication.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-description=: Provides details of the Global datastore
-        --global-replication-group-id-suffix=!: The suffix name of a Global datastore.
-        --primary-replication-group-id=!: The name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.
-    - name: delete-global-replication-group
-      description: 'Deleting a Global datastore is a two-step process:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-id=!: The name of the Global datastore
-        --no-retain-primary-replication-group!: The primary replication group is retained as a standalone replication group.
-        --retain-primary-replication-group!: The primary replication group is retained as a standalone replication group.
-    - name: delete-replication-group
-      description: Deletes an existing replication group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --final-snapshot-identifier=: The name of a final node group (shard) snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-retain-primary-cluster: If set to `true`, all of the read replicas are deleted, but the primary node is retained.
-        --replication-group-id=!: The identifier for the cluster to be deleted.
-        --retain-primary-cluster: If set to `true`, all of the read replicas are deleted, but the primary node is retained.
-    - name: delete-user-group
-      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Deletes a user group.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-group-id=!: The ID of the user group.
-    - name: reset-cache-parameter-group
-      description: Modifies the parameters of a cache parameter group to the engine or system default value.
-      flags:
-        --cache-parameter-group-name=!: The name of the cache parameter group to reset.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-reset-all-parameters: If `true`, all parameters in the cache parameter group are reset to their default values.
-        --parameter-name-values=: An array of parameter names to reset to their default values.
-        --reset-all-parameters: If `true`, all parameters in the cache parameter group are reset to their default values.
-    - name: add-tags-to-resource
-      description: A tag is a key-value pair where the key and value are case-sensitive.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-name=!: The Amazon Resource Name (ARN) of the resource to which the tags are to be added, for example `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
-        --tags=!: A list of tags to be added to this resource.
-    - name: copy-snapshot
-      description: Makes a copy of an existing snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The ID of the KMS key used to encrypt the target snapshot.
-        --source-snapshot-name=!: The name of an existing snapshot from which to make a copy.
-        --tags=: A list of tags to be added to this resource.
-        --target-bucket=: The Amazon S3 bucket to which the snapshot is exported.
-        --target-snapshot-name=!: A name for the snapshot copy.
-    - name: create-serverless-cache
-      description: Creates a serverless cache.
-      flags:
-        --cache-usage-limits=: Sets the cache usage limits for storage and ElastiCache Processing Units for the cache.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --daily-snapshot-time=: The daily time that snapshots will be created from the new serverless cache.
-        --description=: User-provided description for the serverless cache.
-        --engine=!: The name of the cache engine to be used for creating the serverless cache.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: ARN of the customer managed key for encrypting the data at rest.
-        --major-engine-version=: The version of the cache engine that will be used to create the serverless cache.
-        --security-group-ids=: A list of the one or more VPC security groups to be associated with the serverless cache.
-        --serverless-cache-name=!: User-provided identifier for the serverless cache.
-        --snapshot-arns-to-restore=: The ARN(s) of the snapshot that the new serverless cache will be created from.
-        --snapshot-retention-limit=: The number of snapshots that will be retained for the serverless cache that is being created.
-        --subnet-ids=: A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed.
-        --tags=: The list of tags (key, value) pairs to be added to the serverless cache resource.
-        --user-group-id=: The identifier of the UserGroup to be associated with the serverless cache.
-    - name: delete-user
-      description: 'For Valkey engine version 7.2 onwards and Redis OSS 6.0 onwards: Deletes a user.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The ID of the user.
-    - name: describe-snapshots
-      description: Returns information about cluster or replication group snapshots.
-      flags:
-        --cache-cluster-id=: A user-supplied cluster identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --no-show-node-group-config: A Boolean value which if true, the node group (shard) configuration is included in the snapshot description.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-group-id=: A user-supplied replication group identifier.
-        --show-node-group-config: A Boolean value which if true, the node group (shard) configuration is included in the snapshot description.
-        --snapshot-name=: A user-supplied name of the snapshot.
-        --snapshot-source=: If set to `system`, the output shows snapshots that were automatically created by ElastiCache.
-        --starting-token=: A token to specify where to start paginating.
-    - name: modify-cache-subnet-group
-      description: Modifies an existing cache subnet group.
-      flags:
-        --cache-subnet-group-description=: A description of the cache subnet group.
-        --cache-subnet-group-name=!: The name for the cache subnet group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=: The EC2 subnet IDs for the cache subnet group.
-    - name: modify-replication-group-shard-configuration
-      description: Modifies a replication group's shards (node groups) by allowing you to add shards, remove shards, or rebalance the keyspaces among existing shards.
-      flags:
-        --apply-immediately!: Indicates that the shard reconfiguration process begins immediately.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-apply-immediately!: Indicates that the shard reconfiguration process begins immediately.
-        --node-group-count=!: The number of node groups (shards) that results from the modification of the shard configuration.
-        --node-groups-to-remove=: If the value of `NodeGroupCount` is less than the current number of node groups (shards), then either `NodeGroupsToRemove` or `NodeGroupsToRetain` is required.
-        --node-groups-to-retain=: If the value of `NodeGroupCount` is less than the current number of node groups (shards), then either `NodeGroupsToRemove` or `NodeGroupsToRetain` is required.
-        --replication-group-id=!: The name of the Valkey or Redis OSS (cluster mode enabled) cluster (replication group) on which the shards are to be configured.
-        --resharding-configuration=: Specifies the preferred availability zones for each node group in the cluster.
-    - name: create-serverless-cache-snapshot
-      description: This API creates a copy of an entire ServerlessCache at a specific moment in time.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The ID of the KMS key used to encrypt the snapshot.
-        --serverless-cache-name=!: The name of an existing serverless cache.
-        --serverless-cache-snapshot-name=!: The name for the snapshot being created.
-        --tags=: A list of tags to be added to the snapshot resource.
-    - name: delete-cache-cluster
-      description: Deletes a previously provisioned cluster.
-      flags:
-        --cache-cluster-id=!: The cluster identifier for the cluster to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --final-snapshot-identifier=: The user-supplied name of a final cluster snapshot.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-reserved-cache-nodes
-      description: Returns information about reserved cache nodes for this account, or about a specified reserved cache node.
-      flags:
-        --cache-node-type=: The cache node type filter value.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: The duration filter value, specified in years or seconds.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --offering-type=: The offering type filter value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --product-description=: The product description filter value.
-        --reserved-cache-node-id=: The reserved cache node identifier filter value.
-        --reserved-cache-nodes-offering-id=: The offering identifier filter value.
-        --starting-token=: A token to specify where to start paginating.
-    - name: increase-replica-count
-      description: Dynamically increases the number of replicas in a Valkey or Redis OSS (cluster mode disabled) replication group or the number of replica nodes in one or more node groups (shards) of a Valkey or Redis OSS (cluster mode enabled) replication group.
-      flags:
-        --apply-immediately!: If `True`, the number of replica nodes is increased immediately.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --new-replica-count=: The number of read replica nodes you want at the completion of this operation.
-        --no-apply-immediately!: If `True`, the number of replica nodes is increased immediately.
-        --replica-configuration=: A list of `ConfigureShard` objects that can be used to configure each shard in a Valkey or Redis OSS (cluster mode enabled) replication group.
-        --replication-group-id=!: The id of the replication group to which you want to add replica nodes.
-    - name: modify-global-replication-group
-      description: Modifies the settings for a Global datastore.
-      flags:
-        --apply-immediately!: This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible.
-        --automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
-        --cache-node-type=: A valid cache node type that you want to scale this Global datastore to.
-        --cache-parameter-group-name=: The name of the cache parameter group to use with the Global datastore.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-version=: The upgraded version of the cache engine to be run on the clusters in the Global datastore.
-        --engine=: Modifies the engine listed in a global replication group message.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --global-replication-group-description=: A description of the Global datastore
-        --global-replication-group-id=!: The name of the Global datastore
-        --no-apply-immediately!: This parameter causes the modifications in this request and any pending modifications to be applied, asynchronously and as soon as possible.
-        --no-automatic-failover-enabled: Determines whether a read replica is automatically promoted to read/write primary if the existing primary encounters a failure.
-    - name: batch-apply-update-action
-      description: Apply the service update.
-      flags:
-        --cache-cluster-ids=: The cache cluster IDs
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-ids=: The replication group IDs
-        --service-update-name=!: The unique ID of the service update
-    - name: delete-snapshot
-      description: Deletes an existing snapshot.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --snapshot-name=!: The name of the snapshot to be deleted.
-    - name: describe-cache-clusters
-      description: Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.
-      flags:
-        --cache-cluster-id=: The user-supplied cluster identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional marker returned from a prior request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --no-show-cache-clusters-not-in-replication-groups: 'An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.'
-        --no-show-cache-node-info: An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.
-        --page-size=: The size of each page to get in the AWS service call.
-        --show-cache-clusters-not-in-replication-groups: 'An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.'
-        --show-cache-node-info: An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.
-        --starting-token=: A token to specify where to start paginating.
-    - name: test-migration
-      description: Async API to test connection between source and target replication group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-node-endpoint-list=!: List of endpoints from which data should be migrated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-id=!: The ID of the replication group to which data is to be migrated.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: replication-group-available
+          description: Returns information about a particular replication group.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --marker=: An optional marker returned from a prior request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-records=: The maximum number of records to include in the response.
+            --page-size=: The size of each page to get in the AWS service call.
+            --replication-group-id=: The identifier for the replication group to be described.
+            --starting-token=: A token to specify where to start paginating.
+        - name: replication-group-deleted
+          description: Returns information about a particular replication group.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --marker=: An optional marker returned from a prior request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-records=: The maximum number of records to include in the response.
+            --page-size=: The size of each page to get in the AWS service call.
+            --replication-group-id=: The identifier for the replication group to be described.
+            --starting-token=: A token to specify where to start paginating.
         - name: cache-cluster-available
           description: Returns information about all provisioned clusters if no cluster identifier is specified, or about a specific cache cluster if a cluster identifier is supplied.
           flags:
@@ -1042,28 +1066,4 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --show-cache-clusters-not-in-replication-groups: 'An optional flag that can be included in the `DescribeCacheCluster` request to show only nodes (API/CLI: clusters) that are not members of a replication group.'
             --show-cache-node-info: An optional flag that can be included in the `DescribeCacheCluster` request to retrieve information about the individual cache nodes.
-            --starting-token=: A token to specify where to start paginating.
-        - name: replication-group-available
-          description: Returns information about a particular replication group.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: An optional marker returned from a prior request.
-            --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of records to include in the response.
-            --page-size=: The size of each page to get in the AWS service call.
-            --replication-group-id=: The identifier for the replication group to be described.
-            --starting-token=: A token to specify where to start paginating.
-        - name: replication-group-deleted
-          description: Returns information about a particular replication group.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: An optional marker returned from a prior request.
-            --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of records to include in the response.
-            --page-size=: The size of each page to get in the AWS service call.
-            --replication-group-id=: The identifier for the replication group to be described.
             --starting-token=: A token to specify where to start paginating.

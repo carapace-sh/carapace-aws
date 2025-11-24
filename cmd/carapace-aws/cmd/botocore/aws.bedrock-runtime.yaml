@@ -1,6 +1,25 @@
 name: bedrock-runtime
 description: Amazon Bedrock Runtime
 commands:
+    - name: apply-guardrail
+      description: The action to apply a guardrail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: The content details used in the request to apply the guardrail.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The guardrail identifier used in the request to apply the guardrail.
+        --guardrail-version=!: The guardrail version used in the request to apply the guardrail.
+        --output-scope=: Specifies the scope of the output that you get in the response.
+        --source=!: The source of data used in the request to apply the guardrail.
+      completion:
+        flag:
+            output-scope:
+                - INTERVENTIONS
+                - FULL
+            source:
+                - INPUT
+                - OUTPUT
     - name: count-tokens
       description: Returns the token count for a given inference request.
       flags:
@@ -9,6 +28,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input=!: The input for which to count tokens.
         --model-id=!: The unique identifier or ARN of the foundation model to use for token counting.
+    - name: get-async-invoke
+      description: Retrieve information about an asynchronous invocation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-arn=!: The invocation's ARN.
     - name: invoke-model
       description: Invokes the specified Amazon Bedrock model to run inference using the prompt and inference parameters provided in the request body.
       flags:
@@ -63,43 +89,6 @@ commands:
                 - InProgress
                 - Completed
                 - Failed
-    - name: start-async-invoke
-      description: Starts an asynchronous invocation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: Specify idempotency token to ensure that requests are not duplicated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model to invoke.
-        --model-input=!: Input to send to the model.
-        --output-data-config=!: Where to store the output.
-        --tags=: Tags to apply to the invocation.
-    - name: apply-guardrail
-      description: The action to apply a guardrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content=!: The content details used in the request to apply the guardrail.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The guardrail identifier used in the request to apply the guardrail.
-        --guardrail-version=!: The guardrail version used in the request to apply the guardrail.
-        --output-scope=: Specifies the scope of the output that you get in the response.
-        --source=!: The source of data used in the request to apply the guardrail.
-      completion:
-        flag:
-            output-scope:
-                - INTERVENTIONS
-                - FULL
-            source:
-                - INPUT
-                - OUTPUT
-    - name: get-async-invoke
-      description: Retrieve information about an asynchronous invocation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-arn=!: The invocation's ARN.
     - name: converse
       description: Sends messages to the specified Amazon Bedrock model.
       flags:
@@ -118,3 +107,14 @@ commands:
         --service-tier=: Specifies the processing tier configuration used for serving the request.
         --system=: A prompt that provides instructions or context to the model about the task it should perform, or the persona it should adopt during the conversation.
         --tool-config=: Configuration information for the tools that the model can use when generating a response.
+    - name: start-async-invoke
+      description: Starts an asynchronous invocation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: Specify idempotency token to ensure that requests are not duplicated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: The model to invoke.
+        --model-input=!: Input to send to the model.
+        --output-data-config=!: Where to store the output.
+        --tags=: Tags to apply to the invocation.

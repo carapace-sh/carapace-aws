@@ -1,28 +1,31 @@
 name: cloudtrail
 description: AWS CloudTrail
 commands:
-    - name: delete-resource-policy
-      description: Deletes the resource-based policy attached to the CloudTrail event data store, dashboard, or channel.
+    - name: start-dashboard-refresh
+      description: Starts a refresh of the specified dashboard.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The name or ARN of the dashboard.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel you're deleting the resource-based policy from.
-    - name: list-dashboards
-      description: Returns information about all dashboards in the account, in the current Region.
+        --query-parameter-values=: The query parameter values for the dashboard
+    - name: stop-event-data-store-ingestion
+      description: Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of dashboards to display on a single page.
-        --name-prefix=: Specify a name prefix to filter on.
-        --next-token=: A token you can use to get the next page of dashboard results.
-        --type=: 'Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.'
-      completion:
-        flag:
-            type:
-                - MANAGED
-                - CUSTOM
+    - name: create-channel
+      description: Creates a channel for CloudTrail to ingest events from a partner or external source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=!: One or more event data stores to which events arriving through a channel will be logged.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the channel.
+        --source=!: The name of the partner or external event source.
+        --tags=: ""
     - name: list-queries
       description: Returns a list of queries and query statuses for the past seven days.
       flags:
@@ -44,24 +47,6 @@ commands:
                 - FAILED
                 - CANCELLED
                 - TIMED_OUT
-    - name: start-import
-      description: Starts an import of logged trail events from a source S3 bucket to a destination event data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=: The ARN of the destination event data store.
-        --end-event-time=: Use with `StartEventTime` to bound a `StartImport` request, and limit imported trail events to only those events logged within a specified time period.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-id=: The ID of the import.
-        --import-source=: The source S3 bucket for the import.
-        --start-event-time=: Use with `EndEventTime` to bound a `StartImport` request, and limit imported trail events to only those events logged within a specified time period.
-    - name: start-logging
-      description: Starts the recording of Amazon Web Services API calls and log file delivery for a trail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls.
     - name: start-query
       description: Starts a CloudTrail Lake query.
       flags:
@@ -73,15 +58,29 @@ commands:
         --query-alias=: The alias that identifies a query template.
         --query-parameters=: The query parameters for the specified `QueryAlias`.
         --query-statement=: The SQL code of your query.
-    - name: update-channel
-      description: Updates a channel specified by a required channel ARN or UUID.
+    - name: get-insight-selectors
+      description: Describes the settings for the Insights event selectors that you configured for your trail or event data store.
       flags:
-        --channel=!: The ARN or ID (the ARN suffix) of the channel that you want to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=: The ARNs of event data stores that you want to log events arriving through the channel.
+        --event-data-store=: Specifies the ARN (or ID suffix of the ARN) of the event data store for which you want to get Insights selectors.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Changes the name of the channel.
+        --trail-name=: Specifies the name of the trail or trail ARN.
+    - name: get-resource-policy
+      description: Retrieves the JSON text of the resource-based policy document attached to the CloudTrail event data store, dashboard, or channel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.
+    - name: add-tags
+      description: Adds one or more tags to a trail, event data store, dashboard, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: Specifies the ARN of the trail, event data store, dashboard, or channel to which one or more tags will be added.
+        --tags-list=!: Contains a list of tags, up to a limit of 50
     - name: deregister-organization-delegated-admin
       description: Removes CloudTrail delegated administrator permissions from a member account in an organization.
       flags:
@@ -89,35 +88,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --delegated-admin-account-id=!: A delegated administrator account ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-event-data-stores
-      description: Returns information about all event data stores in the account, in the current Region.
+    - name: enable-federation
+      description: Enables Lake query federation on the specified event data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.
+        --federation-role-arn=!: The ARN of the federation role to use for the event data store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-import
+      description: Returns information about a specific import.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of event data stores to display on a single page.
-        --next-token=: A token you can use to get the next page of event data store results.
-    - name: list-imports
-      description: Returns information on all imports, or a select set of imports by `ImportStatus` or `Destination`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination=: The ARN of the destination event data store.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-status=: The status of the import.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of imports to display on a single page.
-        --next-token=: A token you can use to get the next page of import results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            import-status:
-                - INITIALIZING
-                - IN_PROGRESS
-                - FAILED
-                - STOPPED
-                - COMPLETED
+        --import-id=!: The ID for the import.
     - name: list-insights-data
       description: Returns Insights events generated on a trail that logs data events.
       flags:
@@ -138,66 +123,69 @@ commands:
         flag:
             data-type:
                 - InsightsEvents
-    - name: get-event-selectors
-      description: Describes the settings for the event selectors that you configured for your trail.
+    - name: search-sample-queries
+      description: Searches sample queries and returns a list of sample queries that are sorted by relevance.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trail-name=!: Specifies the name of the trail or trail ARN.
-    - name: get-trail-status
-      description: Returns a JSON-formatted list of information about the specified trail.
+        --max-results=: The maximum number of results to return on a single page.
+        --next-token=: A token you can use to get the next page of results.
+        --search-phrase=!: The natural language phrase to use for the semantic search.
+    - name: get-event-data-store
+      description: Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store about which you want information.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the name or the CloudTrail ARN of the trail for which you are requesting status.
-    - name: delete-event-data-store
-      description: Disables the event data store specified by `EventDataStore`, which accepts an event data store ARN.
+    - name: get-query-results
+      description: Gets event data results of a query.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or the ID suffix of the ARN) of the event data store to delete.
+        --event-data-store-owner-account-id=: The account ID of the event data store owner.
+        --event-data-store=: The ARN (or ID suffix of the ARN) of the event data store against which the query was run.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-trails
-      description: Lists trails that are in the current account.
+        --max-query-results=: The maximum number of query results to display on a single page.
+        --next-token=: A token you can use to get the next page of query results.
+        --query-id=!: The ID of the query for which you want to get results.
+    - name: lookup-events
+      description: Looks up [management events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events) or [CloudTrail Insights events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events) that are captured by CloudTrail.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: Specifies that only events that occur before or at the specified time are returned.
+        --event-category=: Specifies the event category.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookup-attributes=: Contains a list of lookup attributes.
         --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of events to return.
         --next-token=: The token to use to get the next page of results after a previous API call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: Specifies that only events that occur after or at the specified time are returned.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-trail
-      description: Deletes a trail.
+      completion:
+        flag:
+            event-category:
+                - insight
+    - name: put-resource-policy
+      description: Attaches a resource-based permission policy to a CloudTrail event data store, dashboard, or channel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the name or the CloudTrail ARN of the trail to be deleted.
-    - name: generate-query
-      description: Generates a query from a natural language prompt.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.
+        --resource-policy=!: A JSON-formatted string for an Amazon Web Services resource-based policy.
+    - name: update-channel
+      description: Updates a channel specified by a required channel ARN or UUID.
       flags:
+        --channel=!: The ARN or ID (the ARN suffix) of the channel that you want to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-stores=!: The ARN (or ID suffix of the ARN) of the event data store that you want to query.
+        --destinations=: The ARNs of event data stores that you want to log events arriving through the channel.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prompt=!: The prompt that you want to use to generate the query.
-    - name: get-insight-selectors
-      description: Describes the settings for the Insights event selectors that you configured for your trail or event data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=: Specifies the ARN (or ID suffix of the ARN) of the event data store for which you want to get Insights selectors.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trail-name=: Specifies the name of the trail or trail ARN.
-    - name: stop-logging
-      description: Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services API calls.
+        --name=: Changes the name of the channel.
     - name: update-event-data-store
       description: Updates an event data store.
       flags:
@@ -221,102 +209,13 @@ commands:
             billing-mode:
                 - EXTENDABLE_RETENTION_PRICING
                 - FIXED_RETENTION_PRICING
-    - name: get-event-data-store
-      description: Returns information about an event data store specified as either an ARN or the ID portion of the ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store about which you want information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-dashboard
-      description: Updates the specified dashboard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dashboard-id=!: The name or ARN of the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
-        --refresh-schedule=: The refresh schedule configuration for the dashboard.
-        --termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
-        --widgets=: An array of widgets for the dashboard.
-    - name: update-trail
-      description: Updates trail settings that control what events you are logging, and how to handle log files.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-logs-log-group-arn=: Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered.
-        --cloud-watch-logs-role-arn=: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
-        --enable-log-file-validation: Specifies whether log file validation is enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-global-service-events: Specifies whether the trail is publishing events from global services such as IAM to the log files.
-        --is-multi-region-trail: Specifies whether the trail applies only to the current Region or to all Regions.
-        --is-organization-trail: Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account.
-        --kms-key-id=: Specifies the KMS key ID to use to encrypt the logs and digest files delivered by CloudTrail.
-        --name=!: Specifies the name of the trail or trail ARN.
-        --no-enable-log-file-validation: Specifies whether log file validation is enabled.
-        --no-include-global-service-events: Specifies whether the trail is publishing events from global services such as IAM to the log files.
-        --no-is-multi-region-trail: Specifies whether the trail applies only to the current Region or to all Regions.
-        --no-is-organization-trail: Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account.
-        --s3-bucket-name=: Specifies the name of the Amazon S3 bucket designated for publishing log files.
-        --s3-key-prefix=: Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery.
-        --sns-topic-name=: Specifies the name or ARN of the Amazon SNS topic defined for notification of log file delivery.
-    - name: list-channels
-      description: Lists the channels in the current account, and their source names.
+    - name: get-trail-status
+      description: Returns a JSON-formatted list of information about the specified trail.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of CloudTrail channels to display on a single page.
-        --next-token=: The token to use to get the next page of results after a previous API call.
-    - name: list-insights-metric-data
-      description: Returns Insights metrics data for trails that have enabled Insights.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-type=: Type of data points to return.
-        --end-time=: Specifies, in UTC, the end time for time-series data.
-        --error-code=: Conditionally required if the `InsightType` parameter is set to `ApiErrorRateInsight`.
-        --event-name=!: The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.
-        --event-source=!: The Amazon Web Services service to which the request was made, such as `iam.amazonaws.com` or `s3.amazonaws.com`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --insight-type=!: The type of CloudTrail Insights event, which is either `ApiCallRateInsight` or `ApiErrorRateInsight`.
-        --max-results=: The maximum number of data points to return.
-        --next-token=: Returned if all datapoints can't be returned in a single call.
-        --period=: Granularity of data to retrieve, in seconds.
-        --start-time=: Specifies, in UTC, the start time for time-series data.
-        --trail-name=: The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data.
-      completion:
-        flag:
-            data-type:
-                - FillWithZeros
-                - NonZeroData
-            insight-type:
-                - ApiCallRateInsight
-                - ApiErrorRateInsight
-    - name: put-resource-policy
-      description: Attaches a resource-based permission policy to a CloudTrail event data store, dashboard, or channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.
-        --resource-policy=!: A JSON-formatted string for an Amazon Web Services resource-based policy.
-    - name: start-dashboard-refresh
-      description: Starts a refresh of the specified dashboard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dashboard-id=!: The name or ARN of the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-parameter-values=: The query parameter values for the dashboard
-    - name: add-tags
-      description: Adds one or more tags to a trail, event data store, dashboard, or channel, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: Specifies the ARN of the trail, event data store, dashboard, or channel to which one or more tags will be added.
-        --tags-list=!: Contains a list of tags, up to a limit of 50
+        --name=!: Specifies the name or the CloudTrail ARN of the trail for which you are requesting status.
     - name: create-event-data-store
       description: Creates a new event data store.
       flags:
@@ -342,86 +241,57 @@ commands:
             billing-mode:
                 - EXTENDABLE_RETENTION_PRICING
                 - FIXED_RETENTION_PRICING
-    - name: disable-federation
-      description: Disables Lake query federation on the specified event data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-event-configuration
-      description: Retrieves the current event configuration settings for the specified event data store or trail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=: The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trail-name=: The name of the trail for which you want to retrieve event configuration settings.
-    - name: get-trail
-      description: Returns settings information for a specified trail.
+    - name: delete-resource-policy
+      description: Deletes the resource-based policy attached to the CloudTrail event data store, dashboard, or channel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.
-    - name: search-sample-queries
-      description: Searches sample queries and returns a list of sample queries that are sorted by relevance.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel you're deleting the resource-based policy from.
+    - name: list-channels
+      description: Lists the channels in the current account, and their source names.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return on a single page.
-        --next-token=: A token you can use to get the next page of results.
-        --search-phrase=!: The natural language phrase to use for the semantic search.
-    - name: put-event-configuration
-      description: Updates the event configuration settings for the specified event data store or trail.
-      flags:
-        --aggregation-configurations=: The list of aggregation configurations that you want to configure for the trail.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --context-key-selectors=: A list of context key selectors that will be included to provide enriched event data.
-        --event-data-store=: The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which event configuration settings are updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-event-size=: The maximum allowed size for events to be stored in the specified event data store.
-        --trail-name=: The name of the trail for which you want to update event configuration settings.
-      completion:
-        flag:
-            max-event-size:
-                - Standard
-                - Large
-    - name: restore-event-data-store
-      description: Restores a deleted event data store specified by `EventDataStore`, which accepts an event data store ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or the ID suffix of the ARN) of the event data store that you want to restore.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-dashboard
-      description: Creates a custom dashboard or the Highlights dashboard.
+        --max-results=: The maximum number of CloudTrail channels to display on a single page.
+        --next-token=: The token to use to get the next page of results after a previous API call.
+    - name: remove-tags
+      description: Removes the specified tags from a trail, event data store, dashboard, or channel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the dashboard.
-        --no-termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
-        --refresh-schedule=: The refresh schedule configuration for the dashboard.
-        --tags-list=: ""
-        --termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
-        --widgets=: An array of widgets for a custom dashboard.
-    - name: get-channel
-      description: Returns information about a specific channel.
-      flags:
-        --channel=!: The ARN or `UUID` of a channel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-import
-      description: Returns information about a specific import.
+        --resource-id=!: Specifies the ARN of the trail, event data store, dashboard, or channel from which tags should be removed.
+        --tags-list=!: Specifies a list of tags to be removed.
+    - name: update-trail
+      description: Updates trail settings that control what events you are logging, and how to handle log files.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-logs-log-group-arn=: Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered.
+        --cloud-watch-logs-role-arn=: Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
+        --enable-log-file-validation: Specifies whether log file validation is enabled.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-id=!: The ID for the import.
+        --include-global-service-events: Specifies whether the trail is publishing events from global services such as IAM to the log files.
+        --is-multi-region-trail: Specifies whether the trail applies only to the current Region or to all Regions.
+        --is-organization-trail: Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account.
+        --kms-key-id=: Specifies the KMS key ID to use to encrypt the logs and digest files delivered by CloudTrail.
+        --name=!: Specifies the name of the trail or trail ARN.
+        --no-enable-log-file-validation: Specifies whether log file validation is enabled.
+        --no-include-global-service-events: Specifies whether the trail is publishing events from global services such as IAM to the log files.
+        --no-is-multi-region-trail: Specifies whether the trail applies only to the current Region or to all Regions.
+        --no-is-organization-trail: Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account.
+        --s3-bucket-name=: Specifies the name of the Amazon S3 bucket designated for publishing log files.
+        --s3-key-prefix=: Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery.
+        --sns-topic-name=: Specifies the name or ARN of the Amazon SNS topic defined for notification of log file delivery.
+    - name: delete-channel
+      description: Deletes a channel.
+      flags:
+        --channel=!: The ARN or the `UUID` value of the channel that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-trails
       description: Retrieves settings for one or more trails associated with the current Region for your account.
       flags:
@@ -431,84 +301,72 @@ commands:
         --include-shadow-trails: Specifies whether to include shadow trails in the response.
         --no-include-shadow-trails: Specifies whether to include shadow trails in the response.
         --trail-name-list=: Specifies a list of trail names, trail ARNs, or both, of the trails to describe.
-    - name: enable-federation
-      description: Enables Lake query federation on the specified event data store.
+    - name: start-event-data-store-ingestion
+      description: Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to enable Lake query federation.
-        --federation-role-arn=!: The ARN of the federation role to use for the event data store.
+        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-insight-selectors
-      description: Lets you enable Insights event logging on specific event categories by specifying the Insights selectors that you want to enable on an existing trail or event data store.
+    - name: cancel-query
+      description: Cancels a query if the query is not in a terminated state, such as `CANCELLED`, `FAILED`, `TIMED_OUT`, or `FINISHED`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=: The ARN (or ID suffix of the ARN) of the source event data store for which you want to change or add Insights selectors.
+        --event-data-store-owner-account-id=: The account ID of the event data store owner.
+        --event-data-store=: The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --insight-selectors=!: Contains the Insights types you want to log on a specific category of events on a trail or event data store.
-        --insights-destination=: The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events.
-        --trail-name=: The name of the CloudTrail trail for which you want to change or add Insights selectors.
-    - name: remove-tags
-      description: Removes the specified tags from a trail, event data store, dashboard, or channel.
+        --query-id=!: The ID of the query that you want to cancel.
+    - name: disable-federation
+      description: Disables Lake query federation on the specified event data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to disable Lake query federation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-channel
+      description: Returns information about a specific channel.
+      flags:
+        --channel=!: The ARN or `UUID` of a channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tags
+      description: Lists the tags for the specified trails, event data stores, dashboards, or channels in the current Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: Specifies the ARN of the trail, event data store, dashboard, or channel from which tags should be removed.
-        --tags-list=!: Specifies a list of tags to be removed.
-    - name: lookup-events
-      description: Looks up [management events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events) or [CloudTrail Insights events](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events) that are captured by CloudTrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: Specifies that only events that occur before or at the specified time are returned.
-        --event-category=: Specifies the event category.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lookup-attributes=: Contains a list of lookup attributes.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of events to return.
-        --next-token=: The token to use to get the next page of results after a previous API call.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: Specifies that only events that occur after or at the specified time are returned.
+        --next-token=: Reserved for future use.
+        --resource-id-list=!: Specifies a list of trail, event data store, dashboard, or channel ARNs whose tags will be listed.
         --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            event-category:
-                - insight
-    - name: put-event-selectors
-      description: Configures event selectors (also referred to as *basic event selectors*) or advanced event selectors for your trail.
-      flags:
-        --advanced-event-selectors=: Specifies the settings for advanced event selectors.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-selectors=: Specifies the settings for your event selectors.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trail-name=!: Specifies the name of the trail or trail ARN.
-    - name: create-channel
-      description: Creates a channel for CloudTrail to ingest events from a partner or external source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=!: One or more event data stores to which events arriving through a channel will be logged.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the channel.
-        --source=!: The name of the partner or external event source.
-        --tags=: ""
-    - name: delete-channel
-      description: Deletes a channel.
-      flags:
-        --channel=!: The ARN or the `UUID` value of the channel that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: register-organization-delegated-admin
-      description: Registers an organization’s member account as the CloudTrail [delegated administrator](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html).
+    - name: get-trail
+      description: Returns settings information for a specified trail.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-account-id=!: An organization member account ID that you want to designate as a delegated administrator.
+        --name=!: The name or the Amazon Resource Name (ARN) of the trail for which you want to retrieve settings information.
+    - name: list-import-failures
+      description: Returns a list of failures for the specified import.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-id=!: The ID of the import.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of failures to display on a single page.
+        --next-token=: A token you can use to get the next page of import failures.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: restore-event-data-store
+      description: Restores a deleted event data store specified by `EventDataStore`, which accepts an event data store ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or the ID suffix of the ARN) of the event data store that you want to restore.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-trail
       description: Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket.
       flags:
@@ -531,6 +389,59 @@ commands:
         --s3-key-prefix=: Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated for log file delivery.
         --sns-topic-name=: Specifies the name or ARN of the Amazon SNS topic defined for notification of log file delivery.
         --tags-list=: ""
+    - name: list-dashboards
+      description: Returns information about all dashboards in the account, in the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of dashboards to display on a single page.
+        --name-prefix=: Specify a name prefix to filter on.
+        --next-token=: A token you can use to get the next page of dashboard results.
+        --type=: 'Specify a dashboard type to filter on: `CUSTOM` or `MANAGED`.'
+      completion:
+        flag:
+            type:
+                - MANAGED
+                - CUSTOM
+    - name: put-insight-selectors
+      description: Lets you enable Insights event logging on specific event categories by specifying the Insights selectors that you want to enable on an existing trail or event data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=: The ARN (or ID suffix of the ARN) of the source event data store for which you want to change or add Insights selectors.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --insight-selectors=!: Contains the Insights types you want to log on a specific category of events on a trail or event data store.
+        --insights-destination=: The ARN (or ID suffix of the ARN) of the destination event data store that logs Insights events.
+        --trail-name=: The name of the CloudTrail trail for which you want to change or add Insights selectors.
+    - name: register-organization-delegated-admin
+      description: Registers an organization’s member account as the CloudTrail [delegated administrator](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-delegated-administrator.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-account-id=!: An organization member account ID that you want to designate as a delegated administrator.
+    - name: stop-logging
+      description: Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services API calls.
+    - name: get-event-selectors
+      description: Describes the settings for the event selectors that you configured for your trail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trail-name=!: Specifies the name of the trail or trail ARN.
+    - name: delete-event-data-store
+      description: Disables the event data store specified by `EventDataStore`, which accepts an event data store ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=!: The ARN (or the ID suffix of the ARN) of the event data store to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-query
       description: Returns metadata about a query, including query run time in milliseconds, number of events scanned and matched, and query status.
       flags:
@@ -542,83 +453,6 @@ commands:
         --query-alias=: The alias that identifies a query template.
         --query-id=: The query ID.
         --refresh-id=: The ID of the dashboard refresh.
-    - name: get-resource-policy
-      description: Retrieves the JSON text of the resource-based policy document attached to the CloudTrail event data store, dashboard, or channel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the CloudTrail event data store, dashboard, or channel attached to the resource-based policy.
-    - name: stop-event-data-store-ingestion
-      description: Stops the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to stop ingestion.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-import
-      description: Stops a specified import.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-id=!: The ID of the import.
-    - name: cancel-query
-      description: Cancels a query if the query is not in a terminated state, such as `CANCELLED`, `FAILED`, `TIMED_OUT`, or `FINISHED`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store-owner-account-id=: The account ID of the event data store owner.
-        --event-data-store=: The ARN (or the ID suffix of the ARN) of an event data store on which the specified query is running.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-id=!: The ID of the query that you want to cancel.
-    - name: get-dashboard
-      description: Returns the specified dashboard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dashboard-id=!: The name or ARN for the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-import-failures
-      description: Returns a list of failures for the specified import.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --import-id=!: The ID of the import.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of failures to display on a single page.
-        --next-token=: A token you can use to get the next page of import failures.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags
-      description: Lists the tags for the specified trails, event data stores, dashboards, or channels in the current Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: Reserved for future use.
-        --resource-id-list=!: Specifies a list of trail, event data store, dashboard, or channel ARNs whose tags will be listed.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-dashboard
-      description: Deletes the specified dashboard.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dashboard-id=!: The name or ARN for the dashboard.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-query-results
-      description: Gets event data results of a query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store-owner-account-id=: The account ID of the event data store owner.
-        --event-data-store=: The ARN (or ID suffix of the ARN) of the event data store against which the query was run.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-query-results=: The maximum number of query results to display on a single page.
-        --next-token=: A token you can use to get the next page of query results.
-        --query-id=!: The ID of the query for which you want to get results.
     - name: list-public-keys
       description: Returns all public keys whose private keys were used to sign the digest files within the specified time range.
       flags:
@@ -630,10 +464,176 @@ commands:
         --next-token=: Reserved for future use.
         --start-time=: Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-event-data-store-ingestion
-      description: Starts the ingestion of live events on an event data store specified as either an ARN or the ID portion of the ARN.
+    - name: generate-query
+      description: Generates a query from a natural language prompt.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-data-store=!: The ARN (or ID suffix of the ARN) of the event data store for which you want to start ingestion.
+        --event-data-stores=!: The ARN (or ID suffix of the ARN) of the event data store that you want to query.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --prompt=!: The prompt that you want to use to generate the query.
+    - name: get-dashboard
+      description: Returns the specified dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The name or ARN for the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-import
+      description: Stops a specified import.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-id=!: The ID of the import.
+    - name: update-dashboard
+      description: Updates the specified dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The name or ARN of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
+        --refresh-schedule=: The refresh schedule configuration for the dashboard.
+        --termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
+        --widgets=: An array of widgets for the dashboard.
+    - name: create-dashboard
+      description: Creates a custom dashboard or the Highlights dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the dashboard.
+        --no-termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
+        --refresh-schedule=: The refresh schedule configuration for the dashboard.
+        --tags-list=: ""
+        --termination-protection-enabled: Specifies whether termination protection is enabled for the dashboard.
+        --widgets=: An array of widgets for a custom dashboard.
+    - name: delete-trail
+      description: Deletes a trail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies the name or the CloudTrail ARN of the trail to be deleted.
+    - name: list-event-data-stores
+      description: Returns information about all event data stores in the account, in the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of event data stores to display on a single page.
+        --next-token=: A token you can use to get the next page of event data store results.
+    - name: start-import
+      description: Starts an import of logged trail events from a source S3 bucket to a destination event data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=: The ARN of the destination event data store.
+        --end-event-time=: Use with `StartEventTime` to bound a `StartImport` request, and limit imported trail events to only those events logged within a specified time period.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-id=: The ID of the import.
+        --import-source=: The source S3 bucket for the import.
+        --start-event-time=: Use with `EndEventTime` to bound a `StartImport` request, and limit imported trail events to only those events logged within a specified time period.
+    - name: start-logging
+      description: Starts the recording of Amazon Web Services API calls and log file delivery for a trail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls.
+    - name: delete-dashboard
+      description: Deletes the specified dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The name or ARN for the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-event-configuration
+      description: Retrieves the current event configuration settings for the specified event data store or trail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-data-store=: The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which you want to retrieve event configuration settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trail-name=: The name of the trail for which you want to retrieve event configuration settings.
+    - name: list-imports
+      description: Returns information on all imports, or a select set of imports by `ImportStatus` or `Destination`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination=: The ARN of the destination event data store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-status=: The status of the import.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of imports to display on a single page.
+        --next-token=: A token you can use to get the next page of import results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            import-status:
+                - INITIALIZING
+                - IN_PROGRESS
+                - FAILED
+                - STOPPED
+                - COMPLETED
+    - name: put-event-configuration
+      description: Updates the event configuration settings for the specified event data store or trail.
+      flags:
+        --aggregation-configurations=: The list of aggregation configurations that you want to configure for the trail.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-key-selectors=: A list of context key selectors that will be included to provide enriched event data.
+        --event-data-store=: The Amazon Resource Name (ARN) or ID suffix of the ARN of the event data store for which event configuration settings are updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-event-size=: The maximum allowed size for events to be stored in the specified event data store.
+        --trail-name=: The name of the trail for which you want to update event configuration settings.
+      completion:
+        flag:
+            max-event-size:
+                - Standard
+                - Large
+    - name: put-event-selectors
+      description: Configures event selectors (also referred to as *basic event selectors*) or advanced event selectors for your trail.
+      flags:
+        --advanced-event-selectors=: Specifies the settings for advanced event selectors.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-selectors=: Specifies the settings for your event selectors.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trail-name=!: Specifies the name of the trail or trail ARN.
+    - name: list-insights-metric-data
+      description: Returns Insights metrics data for trails that have enabled Insights.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-type=: Type of data points to return.
+        --end-time=: Specifies, in UTC, the end time for time-series data.
+        --error-code=: Conditionally required if the `InsightType` parameter is set to `ApiErrorRateInsight`.
+        --event-name=!: The name of the event, typically the Amazon Web Services API on which unusual levels of activity were recorded.
+        --event-source=!: The Amazon Web Services service to which the request was made, such as `iam.amazonaws.com` or `s3.amazonaws.com`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --insight-type=!: The type of CloudTrail Insights event, which is either `ApiCallRateInsight` or `ApiErrorRateInsight`.
+        --max-results=: The maximum number of data points to return.
+        --next-token=: Returned if all datapoints can't be returned in a single call.
+        --period=: Granularity of data to retrieve, in seconds.
+        --start-time=: Specifies, in UTC, the start time for time-series data.
+        --trail-name=: The Amazon Resource Name(ARN) or name of the trail for which you want to retrieve Insights metrics data.
+      completion:
+        flag:
+            data-type:
+                - FillWithZeros
+                - NonZeroData
+            insight-type:
+                - ApiCallRateInsight
+                - ApiErrorRateInsight
+    - name: list-trails
+      description: Lists trails that are in the current account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The token to use to get the next page of results after a previous API call.
+        --starting-token=: A token to specify where to start paginating.

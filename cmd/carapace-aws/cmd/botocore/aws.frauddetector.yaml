@@ -1,57 +1,32 @@
 name: frauddetector
 description: Amazon Fraud Detector
 commands:
-    - name: delete-detector-version
-      description: Deletes the detector version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the parent detector for the detector version to delete.
-        --detector-version-id=!: The ID of the detector version to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-batch-import-jobs
-      description: Gets all batch import jobs or a specific job of the specified ID.
+    - name: cancel-batch-prediction-job
+      description: Cancels the specified batch prediction job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=: The ID of the batch import job to get.
-        --max-results=: The maximum number of objects to return for request.
-        --next-token=: The next token from the previous request.
-    - name: get-batch-prediction-jobs
-      description: Gets all batch prediction jobs or a specific job if you specify a job ID.
+        --job-id=!: The ID of the batch prediction job to cancel.
+    - name: create-batch-import-job
+      description: Creates a batch import job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-type-name=!: The name of the event type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=!: The ARN of the IAM role created for Amazon S3 bucket that holds your data file.
+        --input-path=!: The URI that points to the Amazon S3 location of your data file.
+        --job-id=!: The ID of the batch import job.
+        --output-path=!: The URI that points to the Amazon S3 location for storing your results.
+        --tags=: A collection of key-value pairs associated with this request.
+    - name: delete-entity-type
+      description: Deletes an entity type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=: The batch prediction job for which to get the details.
-        --max-results=: The maximum number of objects to return for the request.
-        --next-token=: The next token from the previous request.
-    - name: delete-variable
-      description: Deletes a variable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the variable to delete.
-    - name: get-external-models
-      description: Gets the details for one or more Amazon SageMaker models that have been imported into the service.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --model-endpoint=: The Amazon SageMaker model endpoint.
-        --next-token=: The next page token for the request.
-    - name: get-labels
-      description: Gets all labels or a specific label if name is provided.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=: The name of the label or labels to get.
-        --next-token=: The next token for the subsequent request.
+        --name=!: The name of the entity type to delete.
     - name: get-model-version
       description: Gets the details of the specified model version.
       flags:
@@ -67,32 +42,6 @@ commands:
                 - ONLINE_FRAUD_INSIGHTS
                 - TRANSACTION_FRAUD_INSIGHTS
                 - ACCOUNT_TAKEOVER_INSIGHTS
-    - name: tag-resource
-      description: Assigns tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The resource ARN.
-        --tags=!: The tags to assign to the resource.
-    - name: update-detector-version
-      description: Updates a detector version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The detector version description.
-        --detector-id=!: The parent detector ID for the detector version you want to update.
-        --detector-version-id=!: The detector version ID.
-        --external-model-endpoints=!: The Amazon SageMaker model endpoints to include in the detector version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-versions=: The model versions to include in the detector version.
-        --rule-execution-mode=: The rule execution mode to add to the detector.
-        --rules=!: The rules to include in the detector version.
-      completion:
-        flag:
-            rule-execution-mode:
-                - ALL_MATCHED
-                - FIRST_MATCHED
     - name: batch-get-variable
       description: Gets a batch of variables.
       flags:
@@ -100,79 +49,31 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --names=!: The list of variable names to get.
-    - name: create-model-version
-      description: Creates a version of the model using the specified model type and model id.
+    - name: create-variable
+      description: Creates a variable.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --external-events-detail=: Details of the external events data used for model version training.
+        --data-source=!: The source of the data.
+        --data-type=!: The data type of the variable.
+        --default-value=!: The default value for the variable when no value is received.
+        --description=: The description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingested-events-detail=: Details of the ingested events data used for model version training.
-        --model-id=!: The model ID.
-        --model-type=!: The model type.
+        --name=!: The name of the variable.
         --tags=: A collection of key and value pairs.
-        --training-data-schema=!: The training data schema.
-        --training-data-source=!: The training data source location in Amazon S3.
+        --variable-type=: The variable type.
       completion:
         flag:
-            model-type:
-                - ONLINE_FRAUD_INSIGHTS
-                - TRANSACTION_FRAUD_INSIGHTS
-                - ACCOUNT_TAKEOVER_INSIGHTS
-            training-data-source:
-                - EXTERNAL_EVENTS
-                - INGESTED_EVENTS
-    - name: create-rule
-      description: Creates a rule for use with the specified detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The rule description.
-        --detector-id=!: The detector ID for the rule's parent detector.
-        --expression=!: The rule expression.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language=!: The language of the rule.
-        --outcomes=!: The outcome or outcomes returned when the rule expression matches.
-        --rule-id=!: The rule ID.
-        --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            language:
-                - DETECTORPL
-    - name: delete-detector
-      description: Deletes the detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-label
-      description: Creates or updates label.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The label description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The label name.
-        --tags=: A collection of key and value pairs.
-    - name: update-model-version
-      description: Updates a model version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --external-events-detail=: The details of the external events data used for training the model version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingested-events-detail=: The details of the ingested event used for training the model version.
-        --major-version-number=!: The major version number.
-        --model-id=!: The model ID.
-        --model-type=!: The model type.
-        --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            model-type:
-                - ONLINE_FRAUD_INSIGHTS
-                - TRANSACTION_FRAUD_INSIGHTS
-                - ACCOUNT_TAKEOVER_INSIGHTS
+            data-source:
+                - EVENT
+                - MODEL_SCORE
+                - EXTERNAL_MODEL_SCORE
+            data-type:
+                - STRING
+                - INTEGER
+                - FLOAT
+                - BOOLEAN
+                - DATETIME
     - name: delete-event
       description: Deletes the specified event.
       flags:
@@ -183,6 +84,14 @@ commands:
         --event-type-name=!: The name of the event type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-delete-audit-history: Specifies whether or not to delete any predictions associated with the event.
+    - name: get-event
+      description: Retrieves details of events stored with Amazon Fraud Detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The ID of the event to retrieve.
+        --event-type-name=!: The event type of the event to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-model
       description: Updates model description.
       flags:
@@ -198,27 +107,32 @@ commands:
                 - ONLINE_FRAUD_INSIGHTS
                 - TRANSACTION_FRAUD_INSIGHTS
                 - ACCOUNT_TAKEOVER_INSIGHTS
-    - name: delete-events-by-event-type
-      description: Deletes all events of a particular event type.
+    - name: update-variable
+      description: Updates a variable.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-type-name=!: The name of the event type.
+        --default-value=: The new default value of the variable.
+        --description=: The new description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-model
-      description: Deletes a model.
+        --name=!: The name of the variable.
+        --variable-type=: The variable type.
+    - name: list-tags-for-resource
+      description: Lists all tags associated with the resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID of the model to delete.
-        --model-type=!: The model type of the model to delete.
-      completion:
-        flag:
-            model-type:
-                - ONLINE_FRAUD_INSIGHTS
-                - TRANSACTION_FRAUD_INSIGHTS
-                - ACCOUNT_TAKEOVER_INSIGHTS
+        --max-results=: The maximum number of objects to return for the request.
+        --next-token=: The next token from the previous results.
+        --resource-arn=!: The ARN that specifies the resource whose tags you want to list.
+    - name: delete-event-type
+      description: Deletes an event type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the event type to delete.
     - name: get-detector-version
       description: Gets a particular detector version.
       flags:
@@ -227,133 +141,31 @@ commands:
         --detector-id=!: The detector ID.
         --detector-version-id=!: The detector version ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-kms-encryption-key
-      description: Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
+    - name: update-rule-metadata
+      description: Updates a rule's metadata.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The rule description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-encryption-key-arn=!: The KMS encryption key ARN.
-    - name: get-detectors
-      description: Gets all detectors or a single detector if a `detectorId` is specified.
+        --rule=!: The rule to update.
+    - name: create-model
+      description: Creates a model using the specified model type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=: The detector ID.
+        --description=: The model description.
+        --event-type-name=!: The name of the event type.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --next-token=: The next token for the subsequent request.
-    - name: put-event-type
-      description: Creates or updates an event type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the event type.
-        --entity-types=!: The entity type for the event type.
-        --event-ingestion=: Specifies if ingestion is enabled or disabled.
-        --event-orchestration=: Enables or disables event orchestration.
-        --event-variables=!: The event type variables.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --labels=: The event type labels.
-        --name=!: The name.
+        --model-id=!: The model ID.
+        --model-type=!: The model type.
         --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            event-ingestion:
-                - ENABLED
-                - DISABLED
-    - name: delete-list
-      description: Deletes the list, provided it is not used in a rule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the list to delete.
-    - name: batch-create-variable
-      description: Creates a batch of variables.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A collection of key and value pairs.
-        --variable-entries=!: The list of variables for the batch create variable request.
-    - name: delete-label
-      description: Deletes a label.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the label to delete.
-    - name: get-event
-      description: Retrieves details of events stored with Amazon Fraud Detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-id=!: The ID of the event to retrieve.
-        --event-type-name=!: The event type of the event to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-list-elements
-      description: Gets all the elements in the specified list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=!: The name of the list.
-        --next-token=: The next token for the subsequent request.
-    - name: get-models
-      description: Gets one or more models.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --model-id=: The model ID.
-        --model-type=: The model type.
-        --next-token=: The next token for the subsequent request.
       completion:
         flag:
             model-type:
                 - ONLINE_FRAUD_INSIGHTS
                 - TRANSACTION_FRAUD_INSIGHTS
                 - ACCOUNT_TAKEOVER_INSIGHTS
-    - name: update-rule-version
-      description: Updates a rule version resulting in a new rule version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description.
-        --expression=!: The rule expression.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language=!: The language.
-        --outcomes=!: The outcomes.
-        --rule=!: The rule to update.
-        --tags=: The tags to assign to the rule version.
-      completion:
-        flag:
-            language:
-                - DETECTORPL
-    - name: cancel-batch-prediction-job
-      description: Cancels the specified batch prediction job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the batch prediction job to cancel.
-    - name: create-batch-prediction-job
-      description: Creates a batch prediction job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-name=!: The name of the detector.
-        --detector-version=: The detector version.
-        --event-type-name=!: The name of the event type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: The ARN of the IAM role to use for this job request.
-        --input-path=!: The Amazon S3 location of your training file.
-        --job-id=!: The ID of the batch prediction job.
-        --output-path=!: The Amazon S3 location of your output file.
-        --tags=: A collection of key and value pairs.
     - name: describe-model-versions
       description: Gets all of the model versions for the specified model type or for the specified model type and model ID.
       flags:
@@ -371,51 +183,19 @@ commands:
                 - ONLINE_FRAUD_INSIGHTS
                 - TRANSACTION_FRAUD_INSIGHTS
                 - ACCOUNT_TAKEOVER_INSIGHTS
-    - name: get-entity-types
-      description: Gets all entity types or a specific entity type if a name is specified.
+    - name: send-event
+      description: Stores events in Amazon Fraud Detector without generating fraud predictions for those events.
       flags:
+        --assigned-label=: The label to associate with the event.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entities=!: An array of entities.
+        --event-id=!: The event ID to upload.
+        --event-timestamp=!: The timestamp that defines when the event under evaluation occurred.
+        --event-type-name=!: The event type name of the event.
+        --event-variables=!: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=: The name.
-        --next-token=: The next token for the subsequent request.
-    - name: get-lists-metadata
-      description: Gets the metadata of either all the lists under the account or the specified list.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=: The name of the list.
-        --next-token=: The next token for the subsequent request.
-    - name: list-tags-for-resource
-      description: Lists all tags associated with the resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --next-token=: The next token from the previous results.
-        --resource-arn=!: The ARN that specifies the resource whose tags you want to list.
-    - name: put-entity-type
-      description: Creates or updates an entity type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the entity type.
-        --tags=: A collection of key and value pairs.
-    - name: update-detector-version-metadata
-      description: Updates the detector version's description.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: The description.
-        --detector-id=!: The detector ID.
-        --detector-version-id=!: The detector version ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label-timestamp=: The timestamp associated with the label.
     - name: create-list
       description: Creates a list.
       flags:
@@ -442,6 +222,192 @@ commands:
                 - ONLINE_FRAUD_INSIGHTS
                 - TRANSACTION_FRAUD_INSIGHTS
                 - ACCOUNT_TAKEOVER_INSIGHTS
+    - name: get-event-types
+      description: Gets all event types or a specific event type if name is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=: The name.
+        --next-token=: The next token for the subsequent request.
+    - name: get-external-models
+      description: Gets the details for one or more Amazon SageMaker models that have been imported into the service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --model-endpoint=: The Amazon SageMaker model endpoint.
+        --next-token=: The next page token for the request.
+    - name: get-models
+      description: Gets one or more models.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --model-id=: The model ID.
+        --model-type=: The model type.
+        --next-token=: The next token for the subsequent request.
+      completion:
+        flag:
+            model-type:
+                - ONLINE_FRAUD_INSIGHTS
+                - TRANSACTION_FRAUD_INSIGHTS
+                - ACCOUNT_TAKEOVER_INSIGHTS
+    - name: delete-batch-import-job
+      description: Deletes the specified batch import job ID record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the batch import job to delete.
+    - name: delete-model
+      description: Deletes a model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: The model ID of the model to delete.
+        --model-type=!: The model type of the model to delete.
+      completion:
+        flag:
+            model-type:
+                - ONLINE_FRAUD_INSIGHTS
+                - TRANSACTION_FRAUD_INSIGHTS
+                - ACCOUNT_TAKEOVER_INSIGHTS
+    - name: delete-variable
+      description: Deletes a variable.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the variable to delete.
+    - name: get-batch-import-jobs
+      description: Gets all batch import jobs or a specific job of the specified ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=: The ID of the batch import job to get.
+        --max-results=: The maximum number of objects to return for request.
+        --next-token=: The next token from the previous request.
+    - name: get-list-elements
+      description: Gets all the elements in the specified list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=!: The name of the list.
+        --next-token=: The next token for the subsequent request.
+    - name: get-rules
+      description: Get all rules for a detector (paginated) if `ruleId` and `ruleVersion` are not specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of rules to return for the request.
+        --next-token=: The next page token.
+        --rule-id=: The rule ID.
+        --rule-version=: The rule version.
+    - name: get-variables
+      description: Gets all of the variables or the specific variable.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The max size per page determined for the get variable request.
+        --name=: The name of the variable.
+        --next-token=: The next page token of the get variable request.
+    - name: list-event-predictions
+      description: Gets a list of past predictions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=: The detector ID.
+        --detector-version-id=: The detector version ID.
+        --event-id=: The event ID.
+        --event-type=: The event type associated with the detector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of predictions to return for the request.
+        --next-token=: Identifies the next page of results to return.
+        --prediction-time-range=: The time period for when the predictions were generated.
+    - name: create-rule
+      description: Creates a rule for use with the specified detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The rule description.
+        --detector-id=!: The detector ID for the rule's parent detector.
+        --expression=!: The rule expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=!: The language of the rule.
+        --outcomes=!: The outcome or outcomes returned when the rule expression matches.
+        --rule-id=!: The rule ID.
+        --tags=: A collection of key and value pairs.
+      completion:
+        flag:
+            language:
+                - DETECTORPL
+    - name: delete-outcome
+      description: Deletes an outcome.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the outcome to delete.
+    - name: get-lists-metadata
+      description: Gets the metadata of either all the lists under the account or the specified list.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=: The name of the list.
+        --next-token=: The next token for the subsequent request.
+    - name: put-event-type
+      description: Creates or updates an event type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the event type.
+        --entity-types=!: The entity type for the event type.
+        --event-ingestion=: Specifies if ingestion is enabled or disabled.
+        --event-orchestration=: Enables or disables event orchestration.
+        --event-variables=!: The event type variables.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --labels=: The event type labels.
+        --name=!: The name.
+        --tags=: A collection of key and value pairs.
+      completion:
+        flag:
+            event-ingestion:
+                - ENABLED
+                - DISABLED
+    - name: get-delete-events-by-event-type-status
+      description: Retrieves the status of a `DeleteEventsByEventType` action.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-type-name=!: Name of event type for which to get the deletion status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-kms-encryption-key
+      description: Gets the encryption key if a KMS key has been specified to be used to encrypt content in Amazon Fraud Detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-create-variable
+      description: Creates a batch of variables.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A collection of key and value pairs.
+        --variable-entries=!: The list of variables for the batch create variable request.
     - name: delete-rule
       description: Deletes the rule.
       flags:
@@ -449,6 +415,29 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule=!: ""
+    - name: get-outcomes
+      description: Gets one or more outcomes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=: The name of the outcome or outcomes to get.
+        --next-token=: The next page token for the request.
+    - name: create-batch-prediction-job
+      description: Creates a batch prediction job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-name=!: The name of the detector.
+        --detector-version=: The detector version.
+        --event-type-name=!: The name of the event type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-role-arn=!: The ARN of the IAM role to use for this job request.
+        --input-path=!: The Amazon S3 location of your training file.
+        --job-id=!: The ID of the batch prediction job.
+        --output-path=!: The Amazon S3 location of your output file.
+        --tags=: A collection of key and value pairs.
     - name: describe-detector
       description: Gets all versions for a specified detector.
       flags:
@@ -458,6 +447,204 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return for the request.
         --next-token=: The next token from the previous response.
+    - name: get-entity-types
+      description: Gets all entity types or a specific entity type if a name is specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=: The name.
+        --next-token=: The next token for the subsequent request.
+    - name: put-detector
+      description: Creates or updates a detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the detector.
+        --detector-id=!: The detector ID.
+        --event-type-name=!: The name of the event type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A collection of key and value pairs.
+    - name: update-detector-version-status
+      description: Updates the detector version’s status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID.
+        --detector-version-id=!: The detector version ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --status=!: The new status.
+      completion:
+        flag:
+            status:
+                - DRAFT
+                - ACTIVE
+                - INACTIVE
+    - name: update-model-version
+      description: Updates a model version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --external-events-detail=: The details of the external events data used for training the model version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingested-events-detail=: The details of the ingested event used for training the model version.
+        --major-version-number=!: The major version number.
+        --model-id=!: The model ID.
+        --model-type=!: The model type.
+        --tags=: A collection of key and value pairs.
+      completion:
+        flag:
+            model-type:
+                - ONLINE_FRAUD_INSIGHTS
+                - TRANSACTION_FRAUD_INSIGHTS
+                - ACCOUNT_TAKEOVER_INSIGHTS
+    - name: get-labels
+      description: Gets all labels or a specific label if name is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --name=: The name of the label or labels to get.
+        --next-token=: The next token for the subsequent request.
+    - name: put-entity-type
+      description: Creates or updates an entity type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the entity type.
+        --tags=: A collection of key and value pairs.
+    - name: cancel-batch-import-job
+      description: Cancels an in-progress batch import job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of an in-progress batch import job to cancel.
+    - name: create-detector-version
+      description: Creates a detector version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the detector version.
+        --detector-id=!: The ID of the detector under which you want to create a new version.
+        --external-model-endpoints=: The Amazon Sagemaker model endpoints to include in the detector version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-versions=: The model versions to include in the detector version.
+        --rule-execution-mode=: The rule execution mode for the rules included in the detector version.
+        --rules=!: The rules to include in the detector version.
+        --tags=: A collection of key and value pairs.
+      completion:
+        flag:
+            rule-execution-mode:
+                - ALL_MATCHED
+                - FIRST_MATCHED
+    - name: delete-detector
+      description: Deletes the detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the detector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-batch-prediction-jobs
+      description: Gets all batch prediction jobs or a specific job if you specify a job ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=: The batch prediction job for which to get the details.
+        --max-results=: The maximum number of objects to return for the request.
+        --next-token=: The next token from the previous request.
+    - name: get-detectors
+      description: Gets all detectors or a single detector if a `detectorId` is specified.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=: The detector ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of objects to return for the request.
+        --next-token=: The next token for the subsequent request.
+    - name: get-event-prediction
+      description: Evaluates an event against a detector version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID.
+        --detector-version-id=: The detector version ID.
+        --entities=!: The entity type (associated with the detector's event type) and specific entity ID representing who performed the event.
+        --event-id=!: The unique ID used to identify the event.
+        --event-timestamp=!: Timestamp that defines when the event under evaluation occurred.
+        --event-type-name=!: The event type associated with the detector specified for the prediction.
+        --event-variables=!: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+        --external-model-endpoint-data-blobs=: The Amazon SageMaker model endpoint input data blobs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-event-prediction-metadata
+      description: Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID.
+        --detector-version-id=!: The detector version ID.
+        --event-id=!: The event ID.
+        --event-type-name=!: The event type associated with the detector specified for the prediction.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --prediction-timestamp=!: The timestamp that defines when the prediction was generated.
+    - name: put-external-model
+      description: Creates or updates an Amazon SageMaker model endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-configuration=!: The model endpoint input configuration.
+        --invoke-model-endpoint-role-arn=!: The IAM role used to invoke the model endpoint.
+        --model-endpoint-status=!: The model endpoint’s status in Amazon Fraud Detector.
+        --model-endpoint=!: The model endpoints name.
+        --model-source=!: The source of the model.
+        --output-configuration=!: The model endpoint output configuration.
+        --tags=: A collection of key and value pairs.
+      completion:
+        flag:
+            model-endpoint-status:
+                - ASSOCIATED
+                - DISSOCIATED
+            model-source:
+                - SAGEMAKER
+    - name: put-kms-encryption-key
+      description: Specifies the KMS key to be used to encrypt content in Amazon Fraud Detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-encryption-key-arn=!: The KMS encryption key ARN.
+    - name: put-label
+      description: Creates or updates label.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The label description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The label name.
+        --tags=: A collection of key and value pairs.
+    - name: put-outcome
+      description: Creates or updates an outcome.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The outcome description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the outcome.
+        --tags=: A collection of key and value pairs.
+    - name: tag-resource
+      description: Assigns tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The resource ARN.
+        --tags=!: The tags to assign to the resource.
     - name: update-event-label
       description: Updates the specified event with a new label.
       flags:
@@ -485,6 +672,122 @@ commands:
                 - REPLACE
                 - APPEND
                 - REMOVE
+    - name: delete-batch-prediction-job
+      description: Deletes a batch prediction job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The ID of the batch prediction job to delete.
+    - name: delete-detector-version
+      description: Deletes the detector version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the parent detector for the detector version to delete.
+        --detector-version-id=!: The ID of the detector version to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-events-by-event-type
+      description: Deletes all events of a particular event type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-type-name=!: The name of the event type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-detector-version
+      description: Updates a detector version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The detector version description.
+        --detector-id=!: The parent detector ID for the detector version you want to update.
+        --detector-version-id=!: The detector version ID.
+        --external-model-endpoints=!: The Amazon SageMaker model endpoints to include in the detector version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-versions=: The model versions to include in the detector version.
+        --rule-execution-mode=: The rule execution mode to add to the detector.
+        --rules=!: The rules to include in the detector version.
+      completion:
+        flag:
+            rule-execution-mode:
+                - ALL_MATCHED
+                - FIRST_MATCHED
+    - name: update-detector-version-metadata
+      description: Updates the detector version's description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=!: The description.
+        --detector-id=!: The detector ID.
+        --detector-version-id=!: The detector version ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-model-version
+      description: Creates a version of the model using the specified model type and model id.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --external-events-detail=: Details of the external events data used for model version training.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingested-events-detail=: Details of the ingested events data used for model version training.
+        --model-id=!: The model ID.
+        --model-type=!: The model type.
+        --tags=: A collection of key and value pairs.
+        --training-data-schema=!: The training data schema.
+        --training-data-source=!: The training data source location in Amazon S3.
+      completion:
+        flag:
+            model-type:
+                - ONLINE_FRAUD_INSIGHTS
+                - TRANSACTION_FRAUD_INSIGHTS
+                - ACCOUNT_TAKEOVER_INSIGHTS
+            training-data-source:
+                - EXTERNAL_EVENTS
+                - INGESTED_EVENTS
+    - name: delete-external-model
+      description: Removes a SageMaker model from Amazon Fraud Detector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-endpoint=!: The endpoint of the Amazon Sagemaker model to delete.
+    - name: delete-list
+      description: Deletes the list, provided it is not used in a rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the list to delete.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource from which to remove the tag.
+        --tag-keys=!: The resource ARN.
+    - name: update-rule-version
+      description: Updates a rule version resulting in a new rule version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description.
+        --expression=!: The rule expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=!: The language.
+        --outcomes=!: The outcomes.
+        --rule=!: The rule to update.
+        --tags=: The tags to assign to the rule version.
+      completion:
+        flag:
+            language:
+                - DETECTORPL
+    - name: delete-label
+      description: Deletes a label.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the label to delete.
     - name: update-model-version-status
       description: Updates the status of a model version.
       flags:
@@ -505,306 +808,3 @@ commands:
                 - ACTIVE
                 - INACTIVE
                 - TRAINING_CANCELLED
-    - name: cancel-batch-import-job
-      description: Cancels an in-progress batch import job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of an in-progress batch import job to cancel.
-    - name: delete-entity-type
-      description: Deletes an entity type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the entity type to delete.
-    - name: get-rules
-      description: Get all rules for a detector (paginated) if `ruleId` and `ruleVersion` are not specified.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of rules to return for the request.
-        --next-token=: The next page token.
-        --rule-id=: The rule ID.
-        --rule-version=: The rule version.
-    - name: get-event-prediction
-      description: Evaluates an event against a detector version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID.
-        --detector-version-id=: The detector version ID.
-        --entities=!: The entity type (associated with the detector's event type) and specific entity ID representing who performed the event.
-        --event-id=!: The unique ID used to identify the event.
-        --event-timestamp=!: Timestamp that defines when the event under evaluation occurred.
-        --event-type-name=!: The event type associated with the detector specified for the prediction.
-        --event-variables=!: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
-        --external-model-endpoint-data-blobs=: The Amazon SageMaker model endpoint input data blobs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-kms-encryption-key
-      description: Gets the encryption key if a KMS key has been specified to be used to encrypt content in Amazon Fraud Detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-outcome
-      description: Creates or updates an outcome.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The outcome description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the outcome.
-        --tags=: A collection of key and value pairs.
-    - name: send-event
-      description: Stores events in Amazon Fraud Detector without generating fraud predictions for those events.
-      flags:
-        --assigned-label=: The label to associate with the event.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entities=!: An array of entities.
-        --event-id=!: The event ID to upload.
-        --event-timestamp=!: The timestamp that defines when the event under evaluation occurred.
-        --event-type-name=!: The event type name of the event.
-        --event-variables=!: Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label-timestamp=: The timestamp associated with the label.
-    - name: update-rule-metadata
-      description: Updates a rule's metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: The rule description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --rule=!: The rule to update.
-    - name: delete-outcome
-      description: Deletes an outcome.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the outcome to delete.
-    - name: get-event-types
-      description: Gets all event types or a specific event type if name is provided.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=: The name.
-        --next-token=: The next token for the subsequent request.
-    - name: put-external-model
-      description: Creates or updates an Amazon SageMaker model endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-configuration=!: The model endpoint input configuration.
-        --invoke-model-endpoint-role-arn=!: The IAM role used to invoke the model endpoint.
-        --model-endpoint-status=!: The model endpoint’s status in Amazon Fraud Detector.
-        --model-endpoint=!: The model endpoints name.
-        --model-source=!: The source of the model.
-        --output-configuration=!: The model endpoint output configuration.
-        --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            model-endpoint-status:
-                - ASSOCIATED
-                - DISSOCIATED
-            model-source:
-                - SAGEMAKER
-    - name: get-delete-events-by-event-type-status
-      description: Retrieves the status of a `DeleteEventsByEventType` action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-type-name=!: Name of event type for which to get the deletion status.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-variables
-      description: Gets all of the variables or the specific variable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The max size per page determined for the get variable request.
-        --name=: The name of the variable.
-        --next-token=: The next page token of the get variable request.
-    - name: put-detector
-      description: Creates or updates a detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the detector.
-        --detector-id=!: The detector ID.
-        --event-type-name=!: The name of the event type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A collection of key and value pairs.
-    - name: update-detector-version-status
-      description: Updates the detector version’s status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID.
-        --detector-version-id=!: The detector version ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --status=!: The new status.
-      completion:
-        flag:
-            status:
-                - DRAFT
-                - ACTIVE
-                - INACTIVE
-    - name: create-batch-import-job
-      description: Creates a batch import job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --event-type-name=!: The name of the event type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-role-arn=!: The ARN of the IAM role created for Amazon S3 bucket that holds your data file.
-        --input-path=!: The URI that points to the Amazon S3 location of your data file.
-        --job-id=!: The ID of the batch import job.
-        --output-path=!: The URI that points to the Amazon S3 location for storing your results.
-        --tags=: A collection of key-value pairs associated with this request.
-    - name: create-model
-      description: Creates a model using the specified model type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The model description.
-        --event-type-name=!: The name of the event type.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model ID.
-        --model-type=!: The model type.
-        --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            model-type:
-                - ONLINE_FRAUD_INSIGHTS
-                - TRANSACTION_FRAUD_INSIGHTS
-                - ACCOUNT_TAKEOVER_INSIGHTS
-    - name: delete-batch-prediction-job
-      description: Deletes a batch prediction job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the batch prediction job to delete.
-    - name: delete-external-model
-      description: Removes a SageMaker model from Amazon Fraud Detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-endpoint=!: The endpoint of the Amazon Sagemaker model to delete.
-    - name: get-outcomes
-      description: Gets one or more outcomes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of objects to return for the request.
-        --name=: The name of the outcome or outcomes to get.
-        --next-token=: The next page token for the request.
-    - name: create-variable
-      description: Creates a variable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source=!: The source of the data.
-        --data-type=!: The data type of the variable.
-        --default-value=!: The default value for the variable when no value is received.
-        --description=: The description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the variable.
-        --tags=: A collection of key and value pairs.
-        --variable-type=: The variable type.
-      completion:
-        flag:
-            data-source:
-                - EVENT
-                - MODEL_SCORE
-                - EXTERNAL_MODEL_SCORE
-            data-type:
-                - STRING
-                - INTEGER
-                - FLOAT
-                - BOOLEAN
-                - DATETIME
-    - name: delete-event-type
-      description: Deletes an event type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the event type to delete.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource from which to remove the tag.
-        --tag-keys=!: The resource ARN.
-    - name: create-detector-version
-      description: Creates a detector version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the detector version.
-        --detector-id=!: The ID of the detector under which you want to create a new version.
-        --external-model-endpoints=: The Amazon Sagemaker model endpoints to include in the detector version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-versions=: The model versions to include in the detector version.
-        --rule-execution-mode=: The rule execution mode for the rules included in the detector version.
-        --rules=!: The rules to include in the detector version.
-        --tags=: A collection of key and value pairs.
-      completion:
-        flag:
-            rule-execution-mode:
-                - ALL_MATCHED
-                - FIRST_MATCHED
-    - name: delete-batch-import-job
-      description: Deletes the specified batch import job ID record.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The ID of the batch import job to delete.
-    - name: get-event-prediction-metadata
-      description: Gets details of the past fraud predictions for the specified event ID, event type, detector ID, and detector version ID that was generated in the specified time period.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID.
-        --detector-version-id=!: The detector version ID.
-        --event-id=!: The event ID.
-        --event-type-name=!: The event type associated with the detector specified for the prediction.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prediction-timestamp=!: The timestamp that defines when the prediction was generated.
-    - name: list-event-predictions
-      description: Gets a list of past predictions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=: The detector ID.
-        --detector-version-id=: The detector version ID.
-        --event-id=: The event ID.
-        --event-type=: The event type associated with the detector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of predictions to return for the request.
-        --next-token=: Identifies the next page of results to return.
-        --prediction-time-range=: The time period for when the predictions were generated.
-    - name: update-variable
-      description: Updates a variable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-value=: The new default value of the variable.
-        --description=: The new description.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the variable.
-        --variable-type=: The variable type.

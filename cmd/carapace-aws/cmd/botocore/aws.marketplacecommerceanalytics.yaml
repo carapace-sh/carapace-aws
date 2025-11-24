@@ -1,6 +1,24 @@
 name: marketplacecommerceanalytics
 description: AWS Marketplace Commerce Analytics
 commands:
+    - name: start-support-data-export
+      description: '*This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-defined-values=: '*This target has been deprecated.* (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.'
+        --data-set-type=!: '*This target has been deprecated.* Specifies the data set type to be written to the output csv file.'
+        --destination-s3-bucket-name=!: '*This target has been deprecated.* The name (friendly name, not ARN) of the destination S3 bucket.'
+        --destination-s3-prefix=: '*This target has been deprecated.* (Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems.'
+        --from-date=!: '*This target has been deprecated.* The start date from which to retrieve the data set in UTC.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-name-arn=!: '*This target has been deprecated.* The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided AWS services.'
+        --sns-topic-arn=!: '*This target has been deprecated.* Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.'
+      completion:
+        flag:
+            data-set-type:
+                - customer_support_contacts_data
+                - test_customer_support_contacts_data
     - name: generate-data-set
       description: Given a data set type and data set publication date, asynchronously publishes the requested data set to the specified S3 bucket and notifies the specified SNS topic once the data is available.
       flags:
@@ -42,21 +60,3 @@ commands:
                 - customer_profile_by_geography
                 - sales_compensation_billed_revenue
                 - us_sales_and_use_tax_records
-    - name: start-support-data-export
-      description: '*This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-defined-values=: '*This target has been deprecated.* (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.'
-        --data-set-type=!: '*This target has been deprecated.* Specifies the data set type to be written to the output csv file.'
-        --destination-s3-bucket-name=!: '*This target has been deprecated.* The name (friendly name, not ARN) of the destination S3 bucket.'
-        --destination-s3-prefix=: '*This target has been deprecated.* (Optional) The desired S3 prefix for the published data set, similar to a directory path in standard file systems.'
-        --from-date=!: '*This target has been deprecated.* The start date from which to retrieve the data set in UTC.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-name-arn=!: '*This target has been deprecated.* The Amazon Resource Name (ARN) of the Role with an attached permissions policy to interact with the provided AWS services.'
-        --sns-topic-arn=!: '*This target has been deprecated.* Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.'
-      completion:
-        flag:
-            data-set-type:
-                - customer_support_contacts_data
-                - test_customer_support_contacts_data

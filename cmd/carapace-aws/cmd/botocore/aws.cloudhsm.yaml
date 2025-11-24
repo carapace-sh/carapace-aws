@@ -1,22 +1,29 @@
 name: cloudhsm
 description: Amazon CloudHSM
 commands:
-    - name: add-tags-to-resource
+    - name: delete-luna-client
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-arn=!: The ARN of the client to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-hsm
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
-        --tag-list=!: One or more tags.
-    - name: create-luna-client
+        --hsm-arn=: The ARN of the HSM.
+        --hsm-serial-number=: The serial number of the HSM.
+    - name: describe-luna-client
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
-        --certificate=!: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
+        --certificate-fingerprint=: The certificate fingerprint.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-arn=: The ARN of the client.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --label=: The label for the client.
     - name: get-config
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
@@ -31,14 +38,44 @@ commands:
             client-version:
                 - "5.1"
                 - "5.3"
-    - name: list-hapgs
+    - name: list-available-zones
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: modify-hapg
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hapg-arn=!: The ARN of the high-availability partition group to modify.
+        --label=: The new label for the high-availability partition group.
+        --partition-serial-list=: The list of partition serial numbers to make members of the high-availability partition group.
+    - name: create-luna-client
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --certificate=!: The contents of a Base64-Encoded X.509 v3 certificate to be installed on the HSMs used by this client.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label=: The label for the client.
+    - name: delete-hsm
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hsm-arn=!: The ARN of the HSM to delete.
+    - name: list-hsms
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The `NextToken` value from a previous call to `ListHapgs`.
+        --next-token=: The `NextToken` value from a previous call to `ListHsms`.
         --starting-token=: A token to specify where to start paginating.
     - name: modify-hsm
       description: This is documentation for **AWS CloudHSM Classic**.
@@ -52,6 +89,29 @@ commands:
         --iam-role-arn=: The new IAM role ARN.
         --subnet-id=: The new identifier of the subnet that the HSM is in.
         --syslog-ip=: The new IP address for the syslog monitoring server.
+    - name: add-tags-to-resource
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS CloudHSM resource to tag.
+        --tag-list=!: One or more tags.
+    - name: list-tags-for-resource
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
+    - name: modify-luna-client
+      description: This is documentation for **AWS CloudHSM Classic**.
+      flags:
+        --certificate=!: The new certificate for the client.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-arn=!: The ARN of the client.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: remove-tags-from-resource
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
@@ -67,45 +127,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --label=!: The label of the new high-availability partition group.
-    - name: delete-hsm
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hsm-arn=!: The ARN of the HSM to delete.
-    - name: list-available-zones
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-hsms
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: The `NextToken` value from a previous call to `ListHsms`.
-        --starting-token=: A token to specify where to start paginating.
-    - name: modify-hapg
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hapg-arn=!: The ARN of the high-availability partition group to modify.
-        --label=: The new label for the high-availability partition group.
-        --partition-serial-list=: The list of partition serial numbers to make members of the high-availability partition group.
-    - name: modify-luna-client
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --certificate=!: The new certificate for the client.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-arn=!: The ARN of the client.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-hapg
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
@@ -113,14 +134,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hapg-arn=!: The ARN of the high-availability partition group to describe.
-    - name: describe-hsm
+    - name: list-hapgs
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hsm-arn=: The ARN of the HSM.
-        --hsm-serial-number=: The serial number of the HSM.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: The `NextToken` value from a previous call to `ListHapgs`.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-luna-clients
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
@@ -130,13 +152,6 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: The `NextToken` value from a previous call to `ListLunaClients`.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS CloudHSM resource.
     - name: create-hsm
       description: This is documentation for **AWS CloudHSM Classic**.
       flags:
@@ -162,18 +177,3 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hapg-arn=!: The ARN of the high-availability partition group to delete.
-    - name: delete-luna-client
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-arn=!: The ARN of the client to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-luna-client
-      description: This is documentation for **AWS CloudHSM Classic**.
-      flags:
-        --certificate-fingerprint=: The certificate fingerprint.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-arn=: The ARN of the client.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

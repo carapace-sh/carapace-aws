@@ -1,437 +1,6 @@
 name: guardduty
 description: Amazon GuardDuty
 commands:
-    - name: get-trusted-entity-set
-      description: Retrieves the trusted entity set associated with the specified `trustedEntitySetId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector associated with this trusted entity set.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trusted-entity-set-id=!: The unique ID that helps GuardDuty identify the trusted entity set.
-    - name: accept-invitation
-      description: Accepts the invitation to be monitored by a GuardDuty administrator account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invitation-id=!: The value that is used to validate the administrator account to the member account.
-        --master-id=!: The account ID of the GuardDuty administrator account whose invitation you're accepting.
-    - name: archive-findings
-      description: Archives GuardDuty findings that are specified by the list of finding IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
-        --finding-ids=!: The IDs of the findings that you want to archive.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-trusted-entity-set
-      description: Deletes the trusted entity set that is associated with the specified `trustedEntitySetId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector associated with the trusted entity set resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trusted-entity-set-id=!: The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.
-    - name: get-malware-scan
-      description: Retrieves the detailed information for a specific malware scan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-id=!: A unique identifier that gets generated when you invoke the API without any error.
-    - name: get-malware-scan-settings
-      description: Returns the details of the malware scan settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with this scan.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-threat-intel-set
-      description: Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --threat-intel-set-id=!: The unique ID of the threatIntelSet that you want to get.
-    - name: list-invitations
-      description: Lists all GuardDuty membership invitations that were sent to the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-malware-protection-plan
-      description: Updates an existing Malware Protection plan resource.
-      flags:
-        --actions=: Information about whether the tags will be added to the S3 object after scanning.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --malware-protection-plan-id=!: A unique identifier associated with the Malware Protection plan.
-        --protected-resource=: Information about the protected resource that is associated with the created Malware Protection plan.
-        --role=: Amazon Resource Name (ARN) of the IAM role with permissions to scan and add tags to the associated protected resource.
-    - name: delete-members
-      description: Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
-      flags:
-        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-master-account
-      description: Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-organization-statistics
-      description: Retrieves how many active member accounts have each feature enabled within GuardDuty.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-coverage
-      description: Lists coverage details for your GuardDuty account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector whose coverage details you want to retrieve.
-        --filter-criteria=: Represents the criteria used to filter the coverage details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-criteria=: Represents the criteria used to sort the coverage details.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-trusted-entity-sets
-      description: Lists the trusted entity sets associated with the specified GuardDuty detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector that is associated with this threat entity set.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-monitoring-members
-      description: Stops GuardDuty monitoring for the specified member accounts.
-      flags:
-        --account-ids=!: A list of account IDs for the member accounts to stop monitoring.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector associated with the GuardDuty administrator account that is monitoring member accounts.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-member-detectors
-      description: Contains information on member accounts to be updated.
-      flags:
-        --account-ids=!: A list of member account IDs to be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-sources=: Describes which data sources will be updated.
-        --detector-id=!: The detector ID of the administrator account.
-        --features=: A list of features that will be updated for the specified member accounts.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-organization-admin-accounts
-      description: Lists the accounts designated as GuardDuty delegated administrators.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --next-token=: A token to use for paginating results that are returned in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: invite-members
-      description: Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API.
-      flags:
-        --account-ids=!: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account with which you want to invite members.
-        --disable-email-notification: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message=: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
-        --no-disable-email-notification: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
-    - name: create-sample-findings
-      description: Generates sample findings of types specified by the list of finding types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector for which you need to create sample findings.
-        --finding-types=: The types of sample findings to generate.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: decline-invitations
-      description: Declines invitations sent to the current member account by Amazon Web Services accounts specified by their account IDs.
-      flags:
-        --account-ids=!: A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-publishing-destination
-      description: Deletes the publishing definition with the specified `destinationId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-id=!: The ID of the publishing destination to delete.
-        --detector-id=!: The unique ID of the detector associated with the publishing destination to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-findings-statistics
-      description: Lists GuardDuty findings statistics for the specified detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector whose findings statistics you want to retrieve.
-        --finding-criteria=: Represents the criteria that is used for querying findings.
-        --finding-statistic-types=: The types of finding statistics to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-by=: Displays the findings statistics grouped by one of the listed valid values.
-        --max-results=: The maximum number of results to be returned in the response.
-        --order-by=: Displays the sorted findings in the requested order.
-      completion:
-        flag:
-            group-by:
-                - ACCOUNT
-                - DATE
-                - FINDING_TYPE
-                - RESOURCE
-                - SEVERITY
-            order-by:
-                - ASC
-                - DESC
-    - name: list-detectors
-      description: Lists detectorIds of all the existing Amazon GuardDuty detector resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-threat-intel-sets
-      description: Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
-        --next-token=: You can use this parameter to paginate results in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-malware-scan
-      description: Initiates the malware scan.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the create request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Amazon Resource Name (ARN) of the resource for which you invoked the API.
-        --scan-configuration=: Contains information about the configuration to be used for the malware scan.
-    - name: unarchive-findings
-      description: Unarchives GuardDuty findings specified by the `findingIds`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector associated with the findings to unarchive.
-        --finding-ids=!: The IDs of the findings to unarchive.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-administrator-account
-      description: Provides the details of the GuardDuty administrator account associated with the current GuardDuty member account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-remaining-free-trial-days
-      description: Provides the number of days left for each data source used in the free trial period.
-      flags:
-        --account-ids=: A list of account identifiers of the GuardDuty member account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-threat-intel-set
-      description: Updates the ThreatIntelSet specified by the ThreatIntelSet ID.
-      flags:
-        --activate: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to update.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The updated URI of the file that contains the ThreateIntelSet.
-        --name=: The unique ID that specifies the ThreatIntelSet that you want to update.
-        --no-activate: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
-        --threat-intel-set-id=!: The unique ID that specifies the ThreatIntelSet that you want to update.
-    - name: update-trusted-entity-set
-      description: Updates the trusted entity set associated with the specified `trustedEntitySetId`.
-      flags:
-        --activate: A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The URI of the file that contains the trusted entity set.
-        --name=: A user-friendly name to identify the trusted entity set.
-        --no-activate: A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set.
-        --trusted-entity-set-id=!: The ID returned by GuardDuty after updating the trusted entity set resource.
-    - name: create-malware-protection-plan
-      description: Creates a new Malware Protection plan for the protected resource.
-      flags:
-        --actions=: Information about whether the tags will be added to the S3 object after scanning.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the create request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --protected-resource=!: Information about the protected resource that is associated with the created Malware Protection plan.
-        --role=!: Amazon Resource Name (ARN) of the IAM role that has the permissions to scan and add tags to the associated protected resource.
-        --tags=: Tags added to the Malware Protection plan resource.
-    - name: get-members
-      description: Retrieves GuardDuty member accounts (of the current GuardDuty administrator account) specified by the account IDs.
-      flags:
-        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-threat-entity-sets
-      description: Lists the threat entity sets associated with the specified GuardDuty detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector that is associated with this threat entity set.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-malware-scan-settings
-      description: Updates the malware scan settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that specifies the GuardDuty service where you want to update scan settings.
-        --ebs-snapshot-preservation=: An enum value representing possible snapshot preservation settings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scan-resource-criteria=: Represents the criteria to be used in the filter for selecting resources to scan.
-      completion:
-        flag:
-            ebs-snapshot-preservation:
-                - NO_RETENTION
-                - RETENTION_WITH_FINDING
-    - name: create-threat-entity-set
-      description: Creates a new threat entity set.
-      flags:
-        --activate!: A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to generate findings.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the create request.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --format=!: The format of the file that contains the threat entity set.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=!: The URI of the file that contains the threat entity set.
-        --name=!: A user-friendly name to identify the threat entity set.
-        --no-activate!: A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to generate findings.
-        --tags=: The tags to be added to a new threat entity set resource.
-      completion:
-        flag:
-            format:
-                - TXT
-                - STIX
-                - OTX_CSV
-                - ALIEN_VAULT
-                - PROOF_POINT
-                - FIRE_EYE
-    - name: get-ip-set
-      description: Retrieves the IPSet specified by the `ipSetId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the IPSet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-set-id=!: The unique ID of the IPSet to retrieve.
-    - name: list-findings
-      description: Lists GuardDuty findings for the specified detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to list.
-        --finding-criteria=: Represents the criteria used for querying findings.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-criteria=: Represents the criteria used for sorting findings.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the given GuardDuty resource.
-    - name: send-object-malware-scan
-      description: Initiates a malware scan for a specific S3 object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --s3-object=: The S3 object information for the object you want to scan.
-    - name: tag-resource
-      description: Adds tags to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag to.
-        --tags=!: The tags to be added to a resource.
-    - name: accept-administrator-invitation
-      description: Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
-      flags:
-        --administrator-id=!: The account ID of the GuardDuty administrator account whose invitation you're accepting.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invitation-id=!: The value that is used to validate the administrator account to the member account.
-    - name: create-detector
-      description: Creates a single GuardDuty detector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the create request.
-        --data-sources=: Describes which data sources will be enabled for the detector.
-        --enable!: A Boolean value that specifies whether the detector is to be enabled.
-        --features=: A list of features that will be configured for the detector.
-        --finding-publishing-frequency=: A value that specifies how frequently updated findings are exported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable!: A Boolean value that specifies whether the detector is to be enabled.
-        --tags=: The tags to be added to a new detector resource.
-      completion:
-        flag:
-            finding-publishing-frequency:
-                - FIFTEEN_MINUTES
-                - ONE_HOUR
-                - SIX_HOURS
     - name: create-ip-set
       description: Creates a new IPSet, which is called a trusted IP list in the console user interface.
       flags:
@@ -456,6 +25,191 @@ commands:
                 - ALIEN_VAULT
                 - PROOF_POINT
                 - FIRE_EYE
+    - name: get-threat-entity-set
+      description: Retrieves the threat entity set associated with the specified `threatEntitySetId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector associated with the threat entity set resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-entity-set-id=!: The unique ID that helps GuardDuty identify the threat entity set.
+    - name: untag-resource
+      description: Removes tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the resource to remove tags from.
+        --tag-keys=!: The tag keys to remove from the resource.
+    - name: delete-threat-entity-set
+      description: Deletes the threat entity set that is associated with the specified `threatEntitySetId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector associated with the threat entity set resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-entity-set-id=!: The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.
+    - name: get-members
+      description: Retrieves GuardDuty member accounts (of the current GuardDuty administrator account) specified by the account IDs.
+      flags:
+        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-detectors
+      description: Lists detectorIds of all the existing Amazon GuardDuty detector resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-malware-scans
+      description: Returns a list of malware scans.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: Represents the criteria used to filter the malware scan entries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-criteria=: Represents the criteria used for sorting malware scan entries.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-threat-entity-set
+      description: Updates the threat entity set associated with the specified `threatEntitySetId`.
+      flags:
+        --activate: A boolean value that indicates whether GuardDuty is to start using this updated threat entity set.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The URI of the file that contains the trusted entity set.
+        --name=: A user-friendly name to identify the trusted entity set.
+        --no-activate: A boolean value that indicates whether GuardDuty is to start using this updated threat entity set.
+        --threat-entity-set-id=!: The ID returned by GuardDuty after updating the threat entity set resource.
+    - name: update-threat-intel-set
+      description: Updates the ThreatIntelSet specified by the ThreatIntelSet ID.
+      flags:
+        --activate: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detectorID that specifies the GuardDuty service whose ThreatIntelSet you want to update.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The updated URI of the file that contains the ThreateIntelSet.
+        --name=: The unique ID that specifies the ThreatIntelSet that you want to update.
+        --no-activate: The updated Boolean value that specifies whether the ThreateIntelSet is active or not.
+        --threat-intel-set-id=!: The unique ID that specifies the ThreatIntelSet that you want to update.
+    - name: list-filters
+      description: Returns a paginated list of the current filters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that is associated with the filter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: archive-findings
+      description: Archives GuardDuty findings that are specified by the list of finding IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to archive.
+        --finding-ids=!: The IDs of the findings that you want to archive.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-findings-statistics
+      description: Lists GuardDuty findings statistics for the specified detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the detector whose findings statistics you want to retrieve.
+        --finding-criteria=: Represents the criteria that is used for querying findings.
+        --finding-statistic-types=: The types of finding statistics to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=: Displays the findings statistics grouped by one of the listed valid values.
+        --max-results=: The maximum number of results to be returned in the response.
+        --order-by=: Displays the sorted findings in the requested order.
+      completion:
+        flag:
+            group-by:
+                - ACCOUNT
+                - DATE
+                - FINDING_TYPE
+                - RESOURCE
+                - SEVERITY
+            order-by:
+                - ASC
+                - DESC
+    - name: get-invitations-count
+      description: Returns the count of all GuardDuty membership invitations that were sent to the current member account except the currently accepted invitation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-ip-sets
+      description: Lists the IPSets of the GuardDuty service specified by the detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that is associated with IPSet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the given GuardDuty resource.
+    - name: list-threat-intel-sets
+      description: Lists the ThreatIntelSets of the GuardDuty service specified by the detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter to paginate results in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-malware-scan
+      description: Initiates the malware scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the create request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Amazon Resource Name (ARN) of the resource for which you invoked the API.
+        --scan-configuration=: Contains information about the configuration to be used for the malware scan.
+    - name: update-malware-scan-settings
+      description: Updates the malware scan settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that specifies the GuardDuty service where you want to update scan settings.
+        --ebs-snapshot-preservation=: An enum value representing possible snapshot preservation settings.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-resource-criteria=: Represents the criteria to be used in the filter for selecting resources to scan.
+      completion:
+        flag:
+            ebs-snapshot-preservation:
+                - NO_RETENTION
+                - RETENTION_WITH_FINDING
     - name: create-members
       description: Creates member accounts of the current Amazon Web Services account by specifying a list of Amazon Web Services account IDs.
       flags:
@@ -464,38 +218,42 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to associate member accounts.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-ip-set
-      description: Deletes the IPSet specified by the `ipSetId`.
+    - name: get-malware-scan-settings
+      description: Returns the details of the malware scan settings.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector associated with the IPSet.
+        --detector-id=!: The unique ID of the detector that is associated with this scan.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-set-id=!: The unique ID of the IPSet to delete.
-    - name: delete-invitations
-      description: Deletes invitations sent to the current member account by Amazon Web Services accounts specified by their account IDs.
-      flags:
-        --account-ids=!: A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to delete invitations from.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-organization-configuration
-      description: Returns information about the account selected as the delegated administrator for GuardDuty.
+    - name: list-malware-protection-plans
+      description: Lists the Malware Protection plan IDs associated with the protected resources in your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID of the delegated administrator for which you need to retrieve the information.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
         --next-token=: You can use this parameter when paginating results.
-    - name: disassociate-members
-      description: Disassociates GuardDuty member accounts (from the current administrator account) specified by the account IDs.
+    - name: list-publishing-destinations
+      description: Returns a list of publishing destinations associated with the specified `detectorId`.
       flags:
-        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.
+        --detector-id=!: The detector ID for which you want to retrieve the publishing destination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to use for paginating results that are returned in the response.
+    - name: update-ip-set
+      description: Updates the IPSet specified by the IPSet ID.
+      flags:
+        --activate: The updated Boolean value that specifies whether the IPSet is active or not.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detectorID that specifies the GuardDuty service whose IPSet you want to update.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-set-id=!: The unique ID that specifies the IPSet that you want to update.
+        --location=: The updated URI of the file that contains the IPSet.
+        --name=: The unique ID that specifies the IPSet that you want to update.
+        --no-activate: The updated Boolean value that specifies whether the IPSet is active or not.
     - name: create-filter
       description: Creates a filter using the specified finding criteria.
       flags:
@@ -515,30 +273,68 @@ commands:
             action:
                 - NOOP
                 - ARCHIVE
-    - name: delete-threat-intel-set
-      description: Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
+    - name: create-malware-protection-plan
+      description: Creates a new Malware Protection plan for the protected resource.
+      flags:
+        --actions=: Information about whether the tags will be added to the S3 object after scanning.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the create request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protected-resource=!: Information about the protected resource that is associated with the created Malware Protection plan.
+        --role=!: Amazon Resource Name (ARN) of the IAM role that has the permissions to scan and add tags to the associated protected resource.
+        --tags=: Tags added to the Malware Protection plan resource.
+    - name: delete-publishing-destination
+      description: Deletes the publishing definition with the specified `destinationId`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
+        --destination-id=!: The ID of the publishing destination to delete.
+        --detector-id=!: The unique ID of the detector associated with the publishing destination to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --threat-intel-set-id=!: The unique ID of the threatIntelSet that you want to delete.
-    - name: disable-organization-admin-account
-      description: Removes the existing GuardDuty delegated administrator of the organization.
+    - name: get-remaining-free-trial-days
+      description: Provides the number of days left for each data source used in the free trial period.
       flags:
-        --admin-account-id=!: The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated administrator.
+        --account-ids=: A list of account identifiers of the GuardDuty member account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-coverage-statistics
-      description: Retrieves aggregated statistics for your account.
+    - name: list-threat-entity-sets
+      description: Lists the threat entity sets associated with the specified GuardDuty detector ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector.
-        --filter-criteria=: Represents the criteria used to filter the coverage statistics.
+        --detector-id=!: The unique ID of the GuardDuty detector that is associated with this threat entity set.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --statistics-type=!: Represents the statistics type used to aggregate the coverage details.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-publishing-destination
+      description: Updates information about the publishing destination specified by the `destinationId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-id=!: The ID of the publishing destination to update.
+        --destination-properties=: A `DestinationProperties` object that includes the `DestinationArn` and `KmsKeyArn` of the publishing destination.
+        --detector-id=!: The ID of the detector associated with the publishing destinations to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-detector
+      description: Deletes an Amazon GuardDuty detector that is specified by the detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-administrator-account
+      description: Provides the details of the GuardDuty administrator account associated with the current GuardDuty member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-filter
       description: Returns the details of the filter specified by the filter name.
       flags:
@@ -547,82 +343,63 @@ commands:
         --detector-id=!: The unique ID of the detector that is associated with this filter.
         --filter-name=!: The name of the filter you want to get.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-invitations-count
-      description: Returns the count of all GuardDuty membership invitations that were sent to the current member account except the currently accepted invitation.
+    - name: get-ip-set
+      description: Retrieves the IPSet specified by the `ipSetId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that is associated with the IPSet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-set-id=!: The unique ID of the IPSet to retrieve.
+    - name: send-object-malware-scan
+      description: Initiates a malware scan for a specific S3 object.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-detector
-      description: Retrieves a GuardDuty detector specified by the detectorId.
+        --s3-object=: The S3 object information for the object you want to scan.
+    - name: unarchive-findings
+      description: Unarchives GuardDuty findings specified by the `findingIds`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that you want to get.
+        --detector-id=!: The ID of the detector associated with the findings to unarchive.
+        --finding-ids=!: The IDs of the findings to unarchive.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-organization-configuration
-      description: Configures the delegated administrator account with the provided values.
+    - name: create-detector
+      description: Creates a single GuardDuty detector.
       flags:
-        --auto-enable: Represents whether to automatically enable member accounts in the organization.
-        --auto-enable-organization-members=: Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-sources=: Describes which data sources will be updated.
-        --detector-id=!: The ID of the detector that configures the delegated administrator.
-        --features=: A list of features that will be configured for the organization.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-auto-enable: Represents whether to automatically enable member accounts in the organization.
-      completion:
-        flag:
-            auto-enable-organization-members:
-                - NEW
-                - ALL
-                - NONE
-    - name: disassociate-from-administrator-account
-      description: Disassociates the current GuardDuty member account from its administrator account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-monitoring-members
-      description: Turns on GuardDuty monitoring of the specified member accounts.
-      flags:
-        --account-ids=!: A list of account IDs of the GuardDuty member accounts to start monitoring.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-publishing-destination
-      description: Creates a publishing destination where you can export your GuardDuty findings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: The idempotency token for the request.
-        --destination-properties=!: The properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.
-        --destination-type=!: The type of resource for the publishing destination.
-        --detector-id=!: The ID of the GuardDuty detector associated with the publishing destination.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to be added to a new publishing destination resource.
-      completion:
-        flag:
-            destination-type:
-                - S3
-    - name: create-threat-intel-set
-      description: Creates a new ThreatIntelSet.
-      flags:
-        --activate!: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The idempotency token for the create request.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a `threatIntelSet`.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --format=!: The format of the file that contains the ThreatIntelSet.
+        --data-sources=: Describes which data sources will be enabled for the detector.
+        --enable!: A Boolean value that specifies whether the detector is to be enabled.
+        --features=: A list of features that will be configured for the detector.
+        --finding-publishing-frequency=: A value that specifies how frequently updated findings are exported.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=!: The URI of the file that contains the ThreatIntelSet.
-        --name=!: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
-        --no-activate!: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
-        --tags=: The tags to be added to a new threat list resource.
+        --no-enable!: A Boolean value that specifies whether the detector is to be enabled.
+        --tags=: The tags to be added to a new detector resource.
+      completion:
+        flag:
+            finding-publishing-frequency:
+                - FIFTEEN_MINUTES
+                - ONE_HOUR
+                - SIX_HOURS
+    - name: create-threat-entity-set
+      description: Creates a new threat entity set.
+      flags:
+        --activate!: A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to generate findings.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the create request.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a threat entity set.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --format=!: The format of the file that contains the threat entity set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=!: The URI of the file that contains the threat entity set.
+        --name=!: A user-friendly name to identify the threat entity set.
+        --no-activate!: A boolean value that indicates whether GuardDuty should start using the uploaded threat entity set to generate findings.
+        --tags=: The tags to be added to a new threat entity set resource.
       completion:
         flag:
             format:
@@ -632,13 +409,6 @@ commands:
                 - ALIEN_VAULT
                 - PROOF_POINT
                 - FIRE_EYE
-    - name: delete-detector
-      description: Deletes an Amazon GuardDuty detector that is specified by the detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-malware-scans
       description: Returns a list of malware scans.
       flags:
@@ -653,142 +423,20 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --sort-criteria=: Represents the criteria used for sorting scan entries.
         --starting-token=: A token to specify where to start paginating.
-    - name: disassociate-from-master-account
-      description: Disassociates the current GuardDuty member account from its administrator account.
+    - name: list-findings
+      description: Lists GuardDuty findings for the specified detector ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to list.
+        --finding-criteria=: Represents the criteria used for querying findings.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-findings
-      description: Describes Amazon GuardDuty findings specified by finding IDs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to retrieve.
-        --finding-ids=!: The IDs of the findings that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
         --sort-criteria=: Represents the criteria used for sorting findings.
-    - name: get-threat-entity-set
-      description: Retrieves the threat entity set associated with the specified `threatEntitySetId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector associated with the threat entity set resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --threat-entity-set-id=!: The unique ID that helps GuardDuty identify the threat entity set.
-    - name: list-ip-sets
-      description: Lists the IPSets of the GuardDuty service specified by the detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with IPSet.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-filters
-      description: Returns a paginated list of the current filters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the filter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-malware-protection-plans
-      description: Lists the Malware Protection plan IDs associated with the protected resources in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --next-token=: You can use this parameter when paginating results.
-    - name: list-malware-scans
-      description: Returns a list of malware scans.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-criteria=: Represents the criteria used to filter the malware scan entries.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-criteria=: Represents the criteria used for sorting malware scan entries.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-members
-      description: Lists details about all member accounts for the current GuardDuty administrator account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the member.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
-        --next-token=: You can use this parameter when paginating results.
-        --only-associated=: Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) for the resource to remove tags from.
-        --tag-keys=!: The tag keys to remove from the resource.
-    - name: update-detector
-      description: Updates the GuardDuty detector specified by the detector ID.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-sources=: Describes which data sources will be updated.
-        --detector-id=!: The unique ID of the detector to update.
-        --enable: Specifies whether the detector is enabled or not enabled.
-        --features=: Provides the features that will be updated for the detector.
-        --finding-publishing-frequency=: An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable: Specifies whether the detector is enabled or not enabled.
-      completion:
-        flag:
-            finding-publishing-frequency:
-                - FIFTEEN_MINUTES
-                - ONE_HOUR
-                - SIX_HOURS
-    - name: update-ip-set
-      description: Updates the IPSet specified by the IPSet ID.
-      flags:
-        --activate: The updated Boolean value that specifies whether the IPSet is active or not.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detectorID that specifies the GuardDuty service whose IPSet you want to update.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-set-id=!: The unique ID that specifies the IPSet that you want to update.
-        --location=: The updated URI of the file that contains the IPSet.
-        --name=: The unique ID that specifies the IPSet that you want to update.
-        --no-activate: The updated Boolean value that specifies whether the IPSet is active or not.
-    - name: describe-publishing-destination
-      description: Returns information about the publishing destination specified by the provided `destinationId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-id=!: The ID of the publishing destination to retrieve.
-        --detector-id=!: The unique ID of the detector associated with the publishing destination to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-member-detectors
-      description: Describes which data sources are enabled for the member account's detector.
-      flags:
-        --account-ids=!: A list of member account IDs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID for the administrator account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-filter
       description: Updates the filter specified by the filter name.
       flags:
@@ -806,38 +454,155 @@ commands:
             action:
                 - NOOP
                 - ARCHIVE
-    - name: update-findings-feedback
-      description: Marks the specified GuardDuty findings as useful or not useful.
+    - name: decline-invitations
+      description: Declines invitations sent to the current member account by Amazon Web Services accounts specified by their account IDs.
+      flags:
+        --account-ids=!: A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to decline invitations from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-members
+      description: Deletes GuardDuty member accounts (to the current GuardDuty administrator account) specified by the account IDs.
+      flags:
+        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-threat-intel-set
+      description: Retrieves the ThreatIntelSet that is specified by the ThreatIntelSet ID.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comments=: Additional feedback about the GuardDuty findings.
-        --detector-id=!: The ID of the detector that is associated with the findings for which you want to update the feedback.
-        --feedback=!: The feedback for the finding.
-        --finding-ids=!: The IDs of the findings that you want to mark as useful or not useful.
+        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-intel-set-id=!: The unique ID of the threatIntelSet that you want to get.
+    - name: get-trusted-entity-set
+      description: Retrieves the trusted entity set associated with the specified `trustedEntitySetId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the GuardDuty detector associated with this trusted entity set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trusted-entity-set-id=!: The unique ID that helps GuardDuty identify the trusted entity set.
+    - name: list-trusted-entity-sets
+      description: Lists the trusted entity sets associated with the specified GuardDuty detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the GuardDuty detector that is associated with this threat entity set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-monitoring-members
+      description: Turns on GuardDuty monitoring of the specified member accounts.
+      flags:
+        --account-ids=!: A list of account IDs of the GuardDuty member accounts to start monitoring.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty administrator account associated with the member accounts to monitor.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-monitoring-members
+      description: Stops GuardDuty monitoring for the specified member accounts.
+      flags:
+        --account-ids=!: A list of account IDs for the member accounts to stop monitoring.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector associated with the GuardDuty administrator account that is monitoring member accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-trusted-entity-set
+      description: Deletes the trusted entity set that is associated with the specified `trustedEntitySetId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector associated with the trusted entity set resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --trusted-entity-set-id=!: The unique ID that helps GuardDuty identify which trusted entity set needs to be deleted.
+    - name: get-detector
+      description: Retrieves a GuardDuty detector specified by the detectorId.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that you want to get.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-member-detectors
+      description: Describes which data sources are enabled for the member account's detector.
+      flags:
+        --account-ids=!: A list of member account IDs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID for the administrator account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: invite-members
+      description: Invites Amazon Web Services accounts to become members of an organization administered by the Amazon Web Services account that invokes this API.
+      flags:
+        --account-ids=!: A list of account IDs of the accounts that you want to invite to GuardDuty as members.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account with which you want to invite members.
+        --disable-email-notification: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message=: The invitation message that you want to send to the accounts that you're inviting to GuardDuty as members.
+        --no-disable-email-notification: A Boolean value that specifies whether you want to disable email notification to the accounts that you are inviting to GuardDuty as members.
+    - name: accept-administrator-invitation
+      description: Accepts the invitation to be a member account and get monitored by a GuardDuty administrator account that sent the invitation.
+      flags:
+        --administrator-id=!: The account ID of the GuardDuty administrator account whose invitation you're accepting.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invitation-id=!: The value that is used to validate the administrator account to the member account.
+    - name: create-publishing-destination
+      description: Creates a publishing destination where you can export your GuardDuty findings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the request.
+        --destination-properties=!: The properties of the publishing destination, including the ARNs for the destination and the KMS key used for encryption.
+        --destination-type=!: The type of resource for the publishing destination.
+        --detector-id=!: The ID of the GuardDuty detector associated with the publishing destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags to be added to a new publishing destination resource.
       completion:
         flag:
-            feedback:
-                - USEFUL
-                - NOT_USEFUL
-    - name: update-publishing-destination
-      description: Updates information about the publishing destination specified by the `destinationId`.
+            destination-type:
+                - S3
+    - name: create-trusted-entity-set
+      description: Creates a new trusted entity set.
+      flags:
+        --activate!: A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: The idempotency token for the create request.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a trusted entity set.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --format=!: The format of the file that contains the trusted entity set.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=!: The URI of the file that contains the threat entity set.
+        --name=!: A user-friendly name to identify the trusted entity set.
+        --no-activate!: A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.
+        --tags=: The tags to be added to a new trusted entity set resource.
+      completion:
+        flag:
+            format:
+                - TXT
+                - STIX
+                - OTX_CSV
+                - ALIEN_VAULT
+                - PROOF_POINT
+                - FIRE_EYE
+    - name: delete-ip-set
+      description: Deletes the IPSet specified by the `ipSetId`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-id=!: The ID of the publishing destination to update.
-        --destination-properties=: A `DestinationProperties` object that includes the `DestinationArn` and `KmsKeyArn` of the publishing destination.
-        --detector-id=!: The ID of the detector associated with the publishing destinations to update.
+        --detector-id=!: The unique ID of the detector associated with the IPSet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-threat-entity-set
-      description: Deletes the threat entity set that is associated with the specified `threatEntitySetId`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector associated with the threat entity set resource.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --threat-entity-set-id=!: The unique ID that helps GuardDuty identify which threat entity set needs to be deleted.
+        --ip-set-id=!: The unique ID of the IPSet to delete.
     - name: get-malware-protection-plan
       description: Retrieves the Malware Protection plan details associated with a Malware Protection plan ID.
       flags:
@@ -866,43 +631,157 @@ commands:
                 - TOP_RESOURCES
                 - SUM_BY_FEATURES
                 - TOP_ACCOUNTS_BY_FEATURE
-    - name: list-publishing-destinations
-      description: Returns a list of publishing destinations associated with the specified `detectorId`.
+    - name: list-members
+      description: Lists details about all member accounts for the current GuardDuty administrator account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The detector ID for which you want to retrieve the publishing destination.
+        --detector-id=!: The unique ID of the detector that is associated with the member.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --only-associated=: Specifies whether to only return associated members or to return all members (including members who haven't been invited yet or have been disassociated).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: tag-resource
+      description: Adds tags to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) for the GuardDuty resource to apply a tag to.
+        --tags=!: The tags to be added to a resource.
+    - name: delete-invitations
+      description: Deletes invitations sent to the current member account by Amazon Web Services accounts specified by their account IDs.
+      flags:
+        --account-ids=!: A list of account IDs of the Amazon Web Services accounts that sent invitations to the current member account that you want to delete invitations from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-malware-protection-plan
+      description: Deletes the Malware Protection plan ID associated with the Malware Protection plan resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --malware-protection-plan-id=!: A unique identifier associated with Malware Protection plan resource.
+    - name: delete-threat-intel-set
+      description: Deletes the ThreatIntelSet specified by the ThreatIntelSet ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector that is associated with the threatIntelSet.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-intel-set-id=!: The unique ID of the threatIntelSet that you want to delete.
+    - name: disassociate-from-master-account
+      description: Disassociates the current GuardDuty member account from its administrator account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-organization-admin-account
+      description: Designates an Amazon Web Services account within the organization as your GuardDuty delegated administrator.
+      flags:
+        --admin-account-id=!: The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-coverage
+      description: Lists coverage details for your GuardDuty account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector whose coverage details you want to retrieve.
+        --filter-criteria=: Represents the criteria used to filter the coverage details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: A token to use for paginating results that are returned in the response.
-    - name: update-threat-entity-set
-      description: Updates the threat entity set associated with the specified `threatEntitySetId`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-criteria=: Represents the criteria used to sort the coverage details.
+        --starting-token=: A token to specify where to start paginating.
+    - name: delete-filter
+      description: Deletes the filter specified by the filter name.
       flags:
-        --activate: A boolean value that indicates whether GuardDuty is to start using this updated threat entity set.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.
-        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --detector-id=!: The unique ID of the detector that is associated with the filter.
+        --filter-name=!: The name of the filter that you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=: The URI of the file that contains the trusted entity set.
-        --name=: A user-friendly name to identify the trusted entity set.
-        --no-activate: A boolean value that indicates whether GuardDuty is to start using this updated threat entity set.
-        --threat-entity-set-id=!: The ID returned by GuardDuty after updating the threat entity set resource.
-    - name: create-trusted-entity-set
-      description: Creates a new trusted entity set.
+    - name: disassociate-members
+      description: Disassociates GuardDuty member accounts (from the current administrator account) specified by the account IDs.
       flags:
-        --activate!: A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.
+        --account-ids=!: A list of account IDs of the GuardDuty member accounts that you want to disassociate from the administrator account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account whose members you want to disassociate from the administrator account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-coverage-statistics
+      description: Retrieves aggregated statistics for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the GuardDuty detector.
+        --filter-criteria=: Represents the criteria used to filter the coverage statistics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --statistics-type=!: Represents the statistics type used to aggregate the coverage details.
+    - name: get-malware-scan
+      description: Retrieves the detailed information for a specific malware scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-id=!: A unique identifier that gets generated when you invoke the API without any error.
+    - name: get-organization-statistics
+      description: Retrieves how many active member accounts have each feature enabled within GuardDuty.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-detector
+      description: Updates the GuardDuty detector specified by the detector ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-sources=: Describes which data sources will be updated.
+        --detector-id=!: The unique ID of the detector to update.
+        --enable: Specifies whether the detector is enabled or not enabled.
+        --features=: Provides the features that will be updated for the detector.
+        --finding-publishing-frequency=: An enum value that specifies how frequently findings are exported, such as to CloudWatch Events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable: Specifies whether the detector is enabled or not enabled.
+      completion:
+        flag:
+            finding-publishing-frequency:
+                - FIFTEEN_MINUTES
+                - ONE_HOUR
+                - SIX_HOURS
+    - name: accept-invitation
+      description: Accepts the invitation to be monitored by a GuardDuty administrator account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invitation-id=!: The value that is used to validate the administrator account to the member account.
+        --master-id=!: The account ID of the GuardDuty administrator account whose invitation you're accepting.
+    - name: create-threat-intel-set
+      description: Creates a new ThreatIntelSet.
+      flags:
+        --activate!: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The idempotency token for the create request.
-        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a trusted entity set.
+        --detector-id=!: The unique ID of the detector of the GuardDuty account for which you want to create a `threatIntelSet`.
         --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
-        --format=!: The format of the file that contains the trusted entity set.
+        --format=!: The format of the file that contains the ThreatIntelSet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location=!: The URI of the file that contains the threat entity set.
-        --name=!: A user-friendly name to identify the trusted entity set.
-        --no-activate!: A boolean value that indicates whether GuardDuty is to start using the uploaded trusted entity set.
-        --tags=: The tags to be added to a new trusted entity set resource.
+        --location=!: The URI of the file that contains the ThreatIntelSet.
+        --name=!: A user-friendly ThreatIntelSet name displayed in all findings that are generated by activity that involves IP addresses included in this ThreatIntelSet.
+        --no-activate!: A Boolean value that indicates whether GuardDuty is to start using the uploaded ThreatIntelSet.
+        --tags=: The tags to be added to a new threat list resource.
       completion:
         flag:
             format:
@@ -912,25 +791,146 @@ commands:
                 - ALIEN_VAULT
                 - PROOF_POINT
                 - FIRE_EYE
-    - name: delete-filter
-      description: Deletes the filter specified by the filter name.
+    - name: disable-organization-admin-account
+      description: Removes the existing GuardDuty delegated administrator of the organization.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --detector-id=!: The unique ID of the detector that is associated with the filter.
-        --filter-name=!: The name of the filter that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-malware-protection-plan
-      description: Deletes the Malware Protection plan ID associated with the Malware Protection plan resource.
-      flags:
+        --admin-account-id=!: The Amazon Web Services Account ID for the organizations account to be disabled as a GuardDuty delegated administrator.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --malware-protection-plan-id=!: A unique identifier associated with Malware Protection plan resource.
-    - name: enable-organization-admin-account
-      description: Designates an Amazon Web Services account within the organization as your GuardDuty delegated administrator.
+    - name: disassociate-from-administrator-account
+      description: Disassociates the current GuardDuty member account from its administrator account.
       flags:
-        --admin-account-id=!: The Amazon Web Services account ID for the organization account to be enabled as a GuardDuty delegated administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-member-detectors
+      description: Contains information on member accounts to be updated.
+      flags:
+        --account-ids=!: A list of member account IDs to be updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-sources=: Describes which data sources will be updated.
+        --detector-id=!: The detector ID of the administrator account.
+        --features=: A list of features that will be updated for the specified member accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-trusted-entity-set
+      description: Updates the trusted entity set associated with the specified `trustedEntitySetId`.
+      flags:
+        --activate: A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the GuardDuty detector associated with the threat entity set that you want to update.
+        --expected-bucket-owner=: The Amazon Web Services account ID that owns the Amazon S3 bucket specified in the **location** parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: The URI of the file that contains the trusted entity set.
+        --name=: A user-friendly name to identify the trusted entity set.
+        --no-activate: A boolean value that indicates whether GuardDuty is to start using this updated trusted entity set.
+        --trusted-entity-set-id=!: The ID returned by GuardDuty after updating the trusted entity set resource.
+    - name: describe-publishing-destination
+      description: Returns information about the publishing destination specified by the provided `destinationId`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-id=!: The ID of the publishing destination to retrieve.
+        --detector-id=!: The unique ID of the detector associated with the publishing destination to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-master-account
+      description: Provides the details for the GuardDuty administrator account associated with the current GuardDuty member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The unique ID of the detector of the GuardDuty member account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-invitations
+      description: Lists all GuardDuty membership invitations that were sent to the current Amazon Web Services account.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-findings-feedback
+      description: Marks the specified GuardDuty findings as useful or not useful.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comments=: Additional feedback about the GuardDuty findings.
+        --detector-id=!: The ID of the detector that is associated with the findings for which you want to update the feedback.
+        --feedback=!: The feedback for the finding.
+        --finding-ids=!: The IDs of the findings that you want to mark as useful or not useful.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            feedback:
+                - USEFUL
+                - NOT_USEFUL
+    - name: update-malware-protection-plan
+      description: Updates an existing Malware Protection plan resource.
+      flags:
+        --actions=: Information about whether the tags will be added to the S3 object after scanning.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --malware-protection-plan-id=!: A unique identifier associated with the Malware Protection plan.
+        --protected-resource=: Information about the protected resource that is associated with the created Malware Protection plan.
+        --role=: Amazon Resource Name (ARN) of the IAM role with permissions to scan and add tags to the associated protected resource.
+    - name: create-sample-findings
+      description: Generates sample findings of types specified by the list of finding types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the detector for which you need to create sample findings.
+        --finding-types=: The types of sample findings to generate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-organization-configuration
+      description: Returns information about the account selected as the delegated administrator for GuardDuty.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The detector ID of the delegated administrator for which you need to retrieve the information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: You can use this parameter to indicate the maximum number of items that you want in the response.
+        --next-token=: You can use this parameter when paginating results.
+    - name: get-findings
+      description: Describes Amazon GuardDuty findings specified by finding IDs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --detector-id=!: The ID of the detector that specifies the GuardDuty service whose findings you want to retrieve.
+        --finding-ids=!: The IDs of the findings that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sort-criteria=: Represents the criteria used for sorting findings.
+    - name: list-organization-admin-accounts
+      description: Lists the accounts designated as GuardDuty delegated administrators.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-organization-configuration
+      description: Configures the delegated administrator account with the provided values.
+      flags:
+        --auto-enable: Represents whether to automatically enable member accounts in the organization.
+        --auto-enable-organization-members=: Indicates the auto-enablement configuration of GuardDuty for the member accounts in the organization.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-sources=: Describes which data sources will be updated.
+        --detector-id=!: The ID of the detector that configures the delegated administrator.
+        --features=: A list of features that will be configured for the organization.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-enable: Represents whether to automatically enable member accounts in the organization.
+      completion:
+        flag:
+            auto-enable-organization-members:
+                - NEW
+                - ALL
+                - NONE
