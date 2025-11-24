@@ -78,7 +78,7 @@ func init() {
 				carapace.Gen(operationCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
 					// TODO same for deeper wait subcommands
 					if flag != nil && flag.Value.Type() == "string" {
-						if _, ok := botoCommand.Completion.Flag[flag.Name]; !ok {
+						if _, ok := subCmd.Completion.Flag[flag.Name]; !ok {
 							return common.ActionBridgeAwsCompleter()
 						}
 					}
