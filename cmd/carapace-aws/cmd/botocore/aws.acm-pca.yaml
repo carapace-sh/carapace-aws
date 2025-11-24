@@ -1,6 +1,116 @@
 name: acm-pca
 description: AWS Certificate Manager Private Certificate Authority
 commands:
+    - name: create-certificate-authority
+      description: Creates a root or subordinate private certificate authority (CA).
+      flags:
+        --certificate-authority-configuration=!: Name and bit size of the private key algorithm, the name of the signing algorithm, and X.500 certificate subject information.
+        --certificate-authority-type=!: The type of the certificate authority.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: Custom string that can be used to distinguish between calls to the **CreateCertificateAuthority** action.
+        --key-storage-security-standard=: Specifies a cryptographic key management compliance standard for handling and protecting CA keys.
+        --revocation-configuration=: Contains information to enable support for Online Certificate Status Protocol (OCSP), certificate revocation list (CRL), both protocols, or neither.
+        --tags=: Key-value pairs that will be attached to the new private CA.
+        --usage-mode=: Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly.
+      completion:
+        flag:
+            certificate-authority-type:
+                - ROOT
+                - SUBORDINATE
+            key-storage-security-standard:
+                - FIPS_140_2_LEVEL_2_OR_HIGHER
+                - FIPS_140_2_LEVEL_3_OR_HIGHER
+                - CCPC_LEVEL_1_OR_HIGHER
+            usage-mode:
+                - GENERAL_PURPOSE
+                - SHORT_LIVED_CERTIFICATE
+    - name: create-certificate-authority-audit-report
+      description: Creates an audit report that lists every time that your CA private key is used to issue a certificate.
+      flags:
+        --audit-report-response-format=!: The format in which to create the report.
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the CA to be audited.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --s3-bucket-name=!: The name of the S3 bucket that will contain the audit report.
+      completion:
+        flag:
+            audit-report-response-format:
+                - JSON
+                - CSV
+    - name: create-permission
+      description: Grants one or more permissions on a private CA to the Certificate Manager (ACM) service principal (`acm.amazonaws.com`).
+      flags:
+        --actions=!: The actions that the specified Amazon Web Services service principal can use.
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the CA that grants the permissions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: The Amazon Web Services service or identity that receives the permission.
+        --source-account=: The ID of the calling account.
+    - name: delete-certificate-authority
+      description: Deletes a private certificate authority (CA).
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permanent-deletion-time-in-days=: The number of days to make a CA restorable after it has been deleted.
+    - name: delete-permission
+      description: Revokes permissions on a private CA granted to the Certificate Manager (ACM) service principal (acm.amazonaws.com).
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Number (ARN) of the private CA that issued the permissions.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: The Amazon Web Services service or identity that will have its CA permissions revoked.
+        --source-account=: The Amazon Web Services account that calls this action.
+    - name: delete-policy
+      description: Deletes the resource-based policy attached to a private CA.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Number (ARN) of the private CA that will have its policy deleted.
+    - name: describe-certificate-authority
+      description: Lists information about your private certificate authority (CA) or one that has been shared with you.
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-certificate-authority-audit-report
+      description: Lists information about a specific audit report created by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action.
+      flags:
+        --audit-report-id=!: The report ID returned by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action.
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the private CA.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-certificate
+      description: Retrieves a certificate from your private CA or one that has been shared with you.
+      flags:
+        --certificate-arn=!: The ARN of the issued certificate.
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-certificate-authority-certificate
+      description: Retrieves the certificate and certificate chain for your private certificate authority (CA) or one that has been shared with you.
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of your private CA.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-certificate-authority-csr
+      description: Retrieves the certificate signing request (CSR) for your private certificate authority (CA).
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-policy
       description: Retrieves the resource-based policy attached to a private CA.
       flags:
@@ -8,6 +118,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Number (ARN) of the private CA that will have its policy retrieved.
+    - name: import-certificate-authority-certificate
+      description: Imports a signed private CA certificate into Amazon Web Services Private CA.
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
+        --certificate-chain=: A PEM-encoded file that contains all of your certificates, other than the certificate you're importing, chaining up to your root CA.
+        --certificate=!: The PEM-encoded certificate for a private CA.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: issue-certificate
       description: Uses your private certificate authority (CA), or one that has been shared with you, to issue a client certificate.
       flags:
@@ -35,50 +154,23 @@ commands:
                 - ML_DSA_44
                 - ML_DSA_65
                 - ML_DSA_87
-    - name: create-certificate-authority-audit-report
-      description: Creates an audit report that lists every time that your CA private key is used to issue a certificate.
+    - name: list-certificate-authorities
+      description: Lists the private certificate authorities that you created by using the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
       flags:
-        --audit-report-response-format=!: The format in which to create the report.
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the CA to be audited.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --s3-bucket-name=!: The name of the S3 bucket that will contain the audit report.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
+        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-owner=: Use this parameter to filter the returned set of certificate authorities based on their owner.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            audit-report-response-format:
-                - JSON
-                - CSV
-    - name: delete-policy
-      description: Deletes the resource-based policy attached to a private CA.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Number (ARN) of the private CA that will have its policy deleted.
-    - name: describe-certificate-authority-audit-report
-      description: Lists information about a specific audit report created by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action.
-      flags:
-        --audit-report-id=!: The report ID returned by calling the [CreateCertificateAuthorityAuditReport](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html) action.
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the private CA.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-certificate
-      description: Retrieves a certificate from your private CA or one that has been shared with you.
-      flags:
-        --certificate-arn=!: The ARN of the issued certificate.
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-certificate-authority-certificate
-      description: Retrieves the certificate and certificate chain for your private certificate authority (CA) or one that has been shared with you.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of your private CA.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            resource-owner:
+                - SELF
+                - OTHER_ACCOUNTS
     - name: list-permissions
       description: List all permissions on a private CA, if any, granted to the Certificate Manager (ACM) service principal (acm.amazonaws.com).
       flags:
@@ -91,25 +183,26 @@ commands:
         --next-token=: When paginating results, use this parameter in a subsequent request after you receive a response with truncated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-permission
-      description: Grants one or more permissions on a private CA to the Certificate Manager (ACM) service principal (`acm.amazonaws.com`).
+    - name: list-tags
+      description: Lists the tags, if any, that are associated with your private CA or one that has been shared with you.
       flags:
-        --actions=!: The actions that the specified Amazon Web Services service principal can use.
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) of the CA that grants the permissions.
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal=!: The Amazon Web Services service or identity that receives the permission.
-        --source-account=: The ID of the calling account.
-    - name: delete-permission
-      description: Revokes permissions on a private CA granted to the Certificate Manager (ACM) service principal (acm.amazonaws.com).
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response.
+        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-policy
+      description: Attaches a resource-based policy to a private CA.
       flags:
-        --certificate-authority-arn=!: The Amazon Resource Number (ARN) of the private CA that issued the permissions.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal=!: The Amazon Web Services service or identity that will have its CA permissions revoked.
-        --source-account=: The Amazon Web Services account that calls this action.
+        --policy=!: The path and file name of a JSON-formatted IAM policy to attach to the specified private CA resource.
+        --resource-arn=!: The Amazon Resource Number (ARN) of the private CA to associate with the policy.
     - name: restore-certificate-authority
       description: Restores a certificate authority (CA) that is in the `DELETED` state.
       flags:
@@ -137,6 +230,14 @@ commands:
                 - CESSATION_OF_OPERATION
                 - PRIVILEGE_WITHDRAWN
                 - A_A_COMPROMISE
+    - name: tag-certificate-authority
+      description: Adds one or more tags to your private CA.
+      flags:
+        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: List of tags to be associated with the CA.
     - name: untag-certificate-authority
       description: Remove one or more tags from your private CA.
       flags:
@@ -164,107 +265,6 @@ commands:
                 - DISABLED
                 - EXPIRED
                 - FAILED
-    - name: get-certificate-authority-csr
-      description: Retrieves the certificate signing request (CSR) for your private certificate authority (CA).
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-certificate-authority
-      description: Creates a root or subordinate private certificate authority (CA).
-      flags:
-        --certificate-authority-configuration=!: Name and bit size of the private key algorithm, the name of the signing algorithm, and X.500 certificate subject information.
-        --certificate-authority-type=!: The type of the certificate authority.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: Custom string that can be used to distinguish between calls to the **CreateCertificateAuthority** action.
-        --key-storage-security-standard=: Specifies a cryptographic key management compliance standard for handling and protecting CA keys.
-        --revocation-configuration=: Contains information to enable support for Online Certificate Status Protocol (OCSP), certificate revocation list (CRL), both protocols, or neither.
-        --tags=: Key-value pairs that will be attached to the new private CA.
-        --usage-mode=: Specifies whether the CA issues general-purpose certificates that typically require a revocation mechanism, or short-lived certificates that may optionally omit revocation because they expire quickly.
-      completion:
-        flag:
-            certificate-authority-type:
-                - ROOT
-                - SUBORDINATE
-            key-storage-security-standard:
-                - FIPS_140_2_LEVEL_2_OR_HIGHER
-                - FIPS_140_2_LEVEL_3_OR_HIGHER
-                - CCPC_LEVEL_1_OR_HIGHER
-            usage-mode:
-                - GENERAL_PURPOSE
-                - SHORT_LIVED_CERTIFICATE
-    - name: delete-certificate-authority
-      description: Deletes a private certificate authority (CA).
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --permanent-deletion-time-in-days=: The number of days to make a CA restorable after it has been deleted.
-    - name: describe-certificate-authority
-      description: Lists information about your private certificate authority (CA) or one that has been shared with you.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags
-      description: Lists the tags, if any, that are associated with your private CA or one that has been shared with you.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response.
-        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-policy
-      description: Attaches a resource-based policy to a private CA.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The path and file name of a JSON-formatted IAM policy to attach to the specified private CA resource.
-        --resource-arn=!: The Amazon Resource Number (ARN) of the private CA to associate with the policy.
-    - name: import-certificate-authority-certificate
-      description: Imports a signed private CA certificate into Amazon Web Services Private CA.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-        --certificate-chain=: A PEM-encoded file that contains all of your certificates, other than the certificate you're importing, chaining up to your root CA.
-        --certificate=!: The PEM-encoded certificate for a private CA.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-certificate-authorities
-      description: Lists the private certificate authorities that you created by using the [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html) action.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter when paginating results to specify the maximum number of items to return in the response on each page.
-        --next-token=: Use this parameter when paginating results in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-owner=: Use this parameter to filter the returned set of certificate authorities based on their owner.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            resource-owner:
-                - SELF
-                - OTHER_ACCOUNTS
-    - name: tag-certificate-authority
-      description: Adds one or more tags to your private CA.
-      flags:
-        --certificate-authority-arn=!: The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority](https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: List of tags to be associated with the CA.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

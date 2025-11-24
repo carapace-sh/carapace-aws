@@ -1,6 +1,29 @@
 name: route53domains
 description: Amazon Route 53 Domains
 commands:
+    - name: accept-domain-transfer-from-another-aws-account
+      description: Accepts the transfer of a domain from another Amazon Web Services account to the currentAmazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --password=!: The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
+    - name: associate-delegation-signer-to-domain
+      description: Creates a delegation signer (DS) record in the registry zone for this domain name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --signing-attributes=!: The information about a key, including the algorithm, public key-value, and flags.
+    - name: cancel-domain-transfer-to-another-aws-account
+      description: Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: check-domain-availability
       description: This operation checks the availability of one domain name.
       flags:
@@ -9,12 +32,78 @@ commands:
         --domain-name=!: The name of the domain that you want to get availability for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idn-lang-code=: Reserved for future use.
+    - name: check-domain-transferability
+      description: Checks whether a domain name can be transferred to Amazon Route 53.
+      flags:
+        --auth-code=: If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-domain
       description: This operation deletes the specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: Name of the domain to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-tags-for-domain
+      description: This operation deletes the specified tags for a domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain for which you want to delete one or more tags.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags-to-delete=!: A list of tag keys to delete.
+    - name: disable-domain-auto-renew
+      description: This operation disables automatic renewal of domain registration for the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to disable automatic renewal for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disable-domain-transfer-lock
+      description: This operation removes the transfer lock on the domain (specifically the `clientTransferProhibited` status) to allow domain transfers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to remove the transfer lock for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-delegation-signer-from-domain
+      description: Deletes a delegation signer (DS) record in the registry zone for this domain name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: An internal identification number assigned to each DS record after it’s created.
+    - name: enable-domain-auto-renew
+      description: This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to enable automatic renewal for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-domain-transfer-lock
+      description: This operation sets the transfer lock on the domain (specifically the `clientTransferProhibited` status) to prevent domain transfers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to set the transfer lock for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-contact-reachability-status
+      description: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=: The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-domain-detail
+      description: This operation returns detailed information about a specified domain that is associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to get detailed information about.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-domain-suggestions
       description: The GetDomainSuggestions operation returns a list of suggested domain names.
@@ -26,17 +115,24 @@ commands:
         --no-only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
         --only-available!: If `OnlyAvailable` is `true`, Route 53 returns only domain names that are available.
         --suggestion-count=!: The number of suggested domain names that you want Route 53 to return.
-    - name: view-billing
-      description: Returns all the domain-related billing records for the current Amazon Web Services account for a specified period
+    - name: get-operation-detail
+      description: This operation returns the current status of an operation that is not completed.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=: The end date and time for the time period for which you want a list of billing records.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: For an initial request for a list of billing records, omit this element.
-        --max-items=: The number of billing records to be returned.
+        --operation-id=!: The identifier for the operation for which you want to get the status.
+    - name: list-domains
+      description: This operation returns all the domain names registered with Amazon Route 53 for the current Amazon Web Services account if no filtering conditions are used.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-conditions=: A complex type that contains information about the filters applied during the `ListDomains` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: For an initial request for a list of domains, omit this element.
+        --max-items=: Number of domains to be returned.
         --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: The beginning date and time for the time period for which you want a list of billing records.
+        --sort-condition=: A complex type that contains information about the requested ordering of domains in the returned list.
         --starting-token=: A token to specify where to start paginating.
     - name: list-operations
       description: Returns information about all of the operations that return an operation ID and that have ever been performed on domains that were registered by the current account.
@@ -60,12 +156,91 @@ commands:
             sort-order:
                 - ASC
                 - DESC
+    - name: list-prices
+      description: 'Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: For an initial request for a list of prices, omit this element.
+        --max-items=: Number of `Prices` to be returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --tld=: The TLD for which you want to receive the pricing information.
+    - name: list-tags-for-domain
+      description: This operation returns all of the tags that are associated with the specified domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain for which you want to get a list of tags.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: push-domain
+      description: Moves a domain from Amazon Web Services to another registrar.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: Name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target=!: New IPS tag for the domain.
+    - name: register-domain
+      description: This operation registers a domain.
+      flags:
+        --admin-contact=!: Provides detailed contact information.
+        --auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
+        --billing-contact=: Provides detailed contact information.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The domain name that you want to register.
+        --duration-in-years=!: The number of years that you want to register the domain for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idn-lang-code=: Reserved for future use.
+        --no-auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
+        --no-privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
+        --no-privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
+        --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
+        --registrant-contact=!: Provides detailed contact information.
+        --tech-contact=!: Provides detailed contact information.
+    - name: reject-domain-transfer-from-another-aws-account
+      description: Rejects the transfer of a domain from another Amazon Web Services account to the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: renew-domain
+      description: This operation renews a domain for the specified number of years.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --current-expiry-year=!: The year when the registration for the domain is set to expire.
+        --domain-name=!: The name of the domain that you want to renew.
+        --duration-in-years=: The number of years that you want to renew the domain for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: resend-contact-reachability-email
       description: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation resends the confirmation email to the current email address for the registrant contact.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=: The name of the domain for which you want Route 53 to resend a confirmation email to the registrant contact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: resend-operation-authorization
+      description: Resend the form of authorization email for this operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-id=!: Operation ID.
+    - name: retrieve-domain-auth-code
+      description: This operation returns the authorization code for the domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain that you want to get an authorization code for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: transfer-domain
       description: Transfers a domain from another registrar to Amazon Route 53.
@@ -92,140 +267,26 @@ commands:
         --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
         --registrant-contact=!: Provides detailed contact information.
         --tech-contact=!: Provides detailed contact information.
-    - name: update-tags-for-domain
-      description: This operation adds or updates tags for a specified domain.
+    - name: transfer-domain-to-another-aws-account
+      description: Transfers a domain from the current Amazon Web Services account to another Amazon Web Services account.
       flags:
+        --account-id=!: The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, `111122223333`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain for which you want to add or update tags.
+        --domain-name=!: The name of the domain that you want to transfer from the current Amazon Web Services account to another account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags-to-update=: A list of the tag keys and values that you want to add or update.
-    - name: accept-domain-transfer-from-another-aws-account
-      description: Accepts the transfer of a domain from another Amazon Web Services account to the currentAmazon Web Services account.
+    - name: update-domain-contact
+      description: This operation updates the contact information for a particular domain.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --password=!: The password that was returned by the [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-    - name: check-domain-transferability
-      description: Checks whether a domain name can be transferred to Amazon Route 53.
-      flags:
-        --auth-code=: If the registrar for the top-level domain (TLD) requires an authorization code to transfer the domain, the code that you got from the current registrar for the domain.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to transfer to Route 53. The top-level domain (TLD), such as .com, must be a TLD that Route 53 supports.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disable-domain-transfer-lock
-      description: This operation removes the transfer lock on the domain (specifically the `clientTransferProhibited` status) to allow domain transfers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to remove the transfer lock for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: register-domain
-      description: This operation registers a domain.
-      flags:
-        --admin-contact=!: Provides detailed contact information.
-        --auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
+        --admin-contact=: Provides detailed contact information.
         --billing-contact=: Provides detailed contact information.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain name that you want to register.
-        --duration-in-years=!: The number of years that you want to register the domain for.
+        --consent=: Customer's consent for the owner change request.
+        --domain-name=!: The name of the domain that you want to update contact information for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idn-lang-code=: Reserved for future use.
-        --no-auto-renew: Indicates whether the domain will be automatically renewed (`true`) or not (`false`).
-        --no-privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
-        --no-privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-admin-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-billing-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-registrant-contact: Whether you want to conceal contact information from WHOIS queries.
-        --privacy-protect-tech-contact: Whether you want to conceal contact information from WHOIS queries.
-        --registrant-contact=!: Provides detailed contact information.
-        --tech-contact=!: Provides detailed contact information.
-    - name: retrieve-domain-auth-code
-      description: This operation returns the authorization code for the domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to get an authorization code for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: associate-delegation-signer-to-domain
-      description: Creates a delegation signer (DS) record in the registry zone for this domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signing-attributes=!: The information about a key, including the algorithm, public key-value, and flags.
-    - name: cancel-domain-transfer-to-another-aws-account
-      description: Cancels the transfer of a domain from the current Amazon Web Services account to another Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain for which you want to cancel the transfer to another Amazon Web Services account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-prices
-      description: 'Lists the following prices for either all the TLDs supported by Route 53, or the specified TLD:'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: For an initial request for a list of prices, omit this element.
-        --max-items=: Number of `Prices` to be returned.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --tld=: The TLD for which you want to receive the pricing information.
-    - name: resend-operation-authorization
-      description: Resend the form of authorization email for this operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: Operation ID.
-    - name: update-domain-nameservers
-      description: This operation replaces the current set of name servers for the domain with the specified set of name servers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to change name servers for.
-        --fi-auth-key=: The authorization key for .fi domains
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nameservers=!: A list of new name servers for the domain.
-    - name: disable-domain-auto-renew
-      description: This operation disables automatic renewal of domain registration for the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to disable automatic renewal for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-operation-detail
-      description: This operation returns the current status of an operation that is not completed.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation-id=!: The identifier for the operation for which you want to get the status.
-    - name: push-domain
-      description: Moves a domain from Amazon Web Services to another registrar.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target=!: New IPS tag for the domain.
-    - name: renew-domain
-      description: This operation renews a domain for the specified number of years.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --current-expiry-year=!: The year when the registration for the domain is set to expire.
-        --domain-name=!: The name of the domain that you want to renew.
-        --duration-in-years=: The number of years that you want to renew the domain for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registrant-contact=: Provides detailed contact information.
+        --tech-contact=: Provides detailed contact information.
     - name: update-domain-contact-privacy
       description: This operation updates the specified domain contact's privacy setting.
       flags:
@@ -241,93 +302,32 @@ commands:
         --no-tech-privacy: Whether you want to conceal contact information from WHOIS queries.
         --registrant-privacy: Whether you want to conceal contact information from WHOIS queries.
         --tech-privacy: Whether you want to conceal contact information from WHOIS queries.
-    - name: enable-domain-auto-renew
-      description: This operation configures Amazon Route 53 to automatically renew the specified domain before the domain registration expires.
+    - name: update-domain-nameservers
+      description: This operation replaces the current set of name servers for the domain with the specified set of name servers.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to enable automatic renewal for.
+        --domain-name=!: The name of the domain that you want to change name servers for.
+        --fi-auth-key=: The authorization key for .fi domains
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-domain-detail
-      description: This operation returns detailed information about a specified domain that is associated with the current Amazon Web Services account.
+        --nameservers=!: A list of new name servers for the domain.
+    - name: update-tags-for-domain
+      description: This operation adds or updates tags for a specified domain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to get detailed information about.
+        --domain-name=!: The domain for which you want to add or update tags.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-tags-for-domain
-      description: This operation deletes the specified tags for a domain.
+        --tags-to-update=: A list of the tag keys and values that you want to add or update.
+    - name: view-billing
+      description: Returns all the domain-related billing records for the current Amazon Web Services account for a specified period
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain for which you want to delete one or more tags.
+        --end-time=: The end date and time for the time period for which you want a list of billing records.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags-to-delete=!: A list of tag keys to delete.
-    - name: list-tags-for-domain
-      description: This operation returns all of the tags that are associated with the specified domain.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The domain for which you want to get a list of tags.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: reject-domain-transfer-from-another-aws-account
-      description: Rejects the transfer of a domain from another Amazon Web Services account to the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that was specified when another Amazon Web Services account submitted a [TransferDomainToAnotherAwsAccount](https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html) request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: transfer-domain-to-another-aws-account
-      description: Transfers a domain from the current Amazon Web Services account to another Amazon Web Services account.
-      flags:
-        --account-id=!: The account ID of the Amazon Web Services account that you want to transfer the domain to, for example, `111122223333`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to transfer from the current Amazon Web Services account to another account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: enable-domain-transfer-lock
-      description: This operation sets the transfer lock on the domain (specifically the `clientTransferProhibited` status) to prevent domain transfers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: The name of the domain that you want to set the transfer lock for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-domains
-      description: This operation returns all the domain names registered with Amazon Route 53 for the current Amazon Web Services account if no filtering conditions are used.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-conditions=: A complex type that contains information about the filters applied during the `ListDomains` request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: For an initial request for a list of domains, omit this element.
-        --max-items=: Number of domains to be returned.
+        --marker=: For an initial request for a list of billing records, omit this element.
+        --max-items=: The number of billing records to be returned.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort-condition=: A complex type that contains information about the requested ordering of domains in the returned list.
+        --start-time=: The beginning date and time for the time period for which you want a list of billing records.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-domain-contact
-      description: This operation updates the contact information for a particular domain.
-      flags:
-        --admin-contact=: Provides detailed contact information.
-        --billing-contact=: Provides detailed contact information.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consent=: Customer's consent for the owner change request.
-        --domain-name=!: The name of the domain that you want to update contact information for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --registrant-contact=: Provides detailed contact information.
-        --tech-contact=: Provides detailed contact information.
-    - name: disassociate-delegation-signer-from-domain
-      description: Deletes a delegation signer (DS) record in the registry zone for this domain name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=!: Name of the domain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: An internal identification number assigned to each DS record after it’s created.
-    - name: get-contact-reachability-status
-      description: For operations that require confirmation that the email address for the registrant contact is valid, such as registering a new domain, this operation returns information about whether the registrant contact has responded.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-name=: The name of the domain for which you want to know whether the registrant contact has confirmed that the email address is valid.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

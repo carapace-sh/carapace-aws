@@ -347,9 +347,13 @@ func parseService(name, folder string) command.Command {
 					break
 				}
 			}
+			// TODO sort in carapace-spec
+			slices.SortFunc(waitCmd.Commands, func(a, b command.Command) int { return strings.Compare(a.Name, b.Name) })
 		}
 		cmd.Commands = append(cmd.Commands, waitCmd)
 	}
+	// TODO sort in carapace-spec
+	slices.SortFunc(cmd.Commands, func(a, b command.Command) int { return strings.Compare(a.Name, b.Name) })
 	return cmd
 }
 

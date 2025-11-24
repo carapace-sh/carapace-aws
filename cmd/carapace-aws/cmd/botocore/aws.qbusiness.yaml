@@ -1,352 +1,46 @@
 name: qbusiness
 description: QBusiness
 commands:
-    - name: create-plugin
-      description: Creates an Amazon Q Business plugin.
+    - name: associate-permission
+      description: Adds or updates a permission policy for a Amazon Q Business application, allowing cross-account access for an ISV.
       flags:
-        --application-id=!: The identifier of the application that will contain the plugin.
-        --auth-configuration=!: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create your Amazon Q Business plugin.
-        --custom-plugin-configuration=: Contains configuration for a custom plugin.
-        --display-name=!: A the name for your plugin.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --server-url=: The source URL used for plugin configuration.
-        --tags=: A list of key-value pairs that identify or categorize the data source connector.
-        --type=!: The type of plugin you want to create.
-      completion:
-        flag:
-            type:
-                - SERVICE_NOW
-                - SALESFORCE
-                - JIRA
-                - ZENDESK
-                - CUSTOM
-                - QUICKSIGHT
-                - SERVICENOW_NOW_PLATFORM
-                - JIRA_CLOUD
-                - SALESFORCE_CRM
-                - ZENDESK_SUITE
-                - ATLASSIAN_CONFLUENCE
-                - GOOGLE_CALENDAR
-                - MICROSOFT_TEAMS
-                - MICROSOFT_EXCHANGE
-                - PAGERDUTY_ADVANCE
-                - SMARTSHEET
-                - ASANA
-    - name: delete-index
-      description: Deletes an Amazon Q Business index.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application the Amazon Q Business index is linked to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the Amazon Q Business index.
-    - name: get-document-content
-      description: Retrieves the content of a document that was ingested into Amazon Q Business.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application containing the document.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source from which the document was ingested.
-        --document-id=!: The unique identifier of the document that is indexed via BatchPutDocument API or file-upload or connector sync.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index where documents are indexed.
-        --output-format=: Document outputFormat.
-      completion:
-        flag:
-            output-format:
-                - RAW
-                - EXTRACTED
-    - name: list-tags-for-resource
-      description: Gets a list of tags associated with a specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to get a list of tags for.
-    - name: put-feedback
-      description: Enables your end user to provide feedback on their Amazon Q Business generated chat responses.
-      flags:
-        --application-id=!: The identifier of the application associated with the feedback.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-id=!: The identifier of the conversation the feedback is attached to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-copied-at=: The timestamp for when the feedback was recorded.
-        --message-id=!: The identifier of the chat message that the feedback was given for.
-        --message-usefulness=: The feedback usefulness value given by the user to the chat message.
-        --user-id=: The identifier of the user giving the feedback.
-    - name: update-plugin
-      description: Updates an Amazon Q Business plugin.
-      flags:
-        --application-id=!: The identifier of the application the plugin is attached to.
-        --auth-configuration=: The authentication configuration the plugin is using.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-plugin-configuration=: The configuration for a custom plugin.
-        --display-name=: The name of the plugin.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --plugin-id=!: The identifier of the plugin.
-        --server-url=: The source URL used for plugin configuration.
-        --state=: The status of the plugin.
-      completion:
-        flag:
-            state:
-                - ENABLED
-                - DISABLED
-    - name: create-index
-      description: Creates an Amazon Q Business index.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application using the index.
-        --capacity-configuration=: The capacity units you want to provision for your index.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create an index.
-        --description=: A description for the Amazon Q Business index.
-        --display-name=!: A name for the Amazon Q Business index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A list of key-value pairs that identify or categorize the index.
-        --type=: The index type that's suitable for your needs.
-      completion:
-        flag:
-            type:
-                - ENTERPRISE
-                - STARTER
-    - name: delete-conversation
-      description: Deletes an Amazon Q Business web experience conversation.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application associated with the conversation.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-id=!: The identifier of the Amazon Q Business web experience conversation being deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=: The identifier of the user who is deleting the conversation.
-    - name: get-group
-      description: Describes a group by group name.
-      flags:
-        --application-id=!: The identifier of the application id the group is attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source the group is attached to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group.
-        --index-id=!: The identifier of the index the group is attached to.
-    - name: get-retriever
-      description: Gets information about an existing retriever used by an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retriever-id=!: The identifier of the retriever.
-    - name: list-data-source-sync-jobs
-      description: Get information about an Amazon Q Business data source connector synchronization.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application connected to the data source.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The identifier of the data source connector.
-        --end-time=: The end time of the data source connector sync.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used with the Amazon Q Business data source connector.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of synchronization jobs to return in the response.
-        --next-token=: If the `maxResults` response was incpmplete because there is more data to retriever, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-time=: The start time of the data source connector sync.
-        --starting-token=: A token to specify where to start paginating.
-        --status-filter=: Only returns synchronization jobs with the `Status` field equal to the specified status.
-      completion:
-        flag:
-            status-filter:
-                - FAILED
-                - SUCCEEDED
-                - SYNCING
-                - INCOMPLETE
-                - STOPPING
-                - ABORTED
-                - SYNCING_INDEXING
-    - name: list-plugin-actions
-      description: Lists configured Amazon Q Business actions for a specific plugin in an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application the plugin is attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of plugin actions to return.
-        --next-token=: If the number of plugin actions returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugin actions.
-        --page-size=: The size of each page to get in the AWS service call.
-        --plugin-id=!: The identifier of the Amazon Q Business plugin.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-data-source
-      description: Updates an existing Amazon Q Business data source connector.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application the data source is attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: ""
-        --data-source-id=!: The identifier of the data source connector.
-        --description=: The description of the data source connector.
-        --display-name=: A name of the data source connector.
-        --document-enrichment-configuration=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index attached to the data source connector.
-        --media-extraction-configuration=: The configuration for extracting information from media in documents for your data source.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
-        --sync-schedule=: The chosen update frequency for your data source.
-        --vpc-configuration=: ""
-    - name: update-subscription
-      description: Updates the pricing tier for an Amazon Q Business subscription.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application where the subscription update should take effect.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscription-id=!: The identifier of the Amazon Q Business subscription to be updated.
-        --type=!: The type of the Amazon Q Business subscription to be updated.
-      completion:
-        flag:
-            type:
-                - Q_LITE
-                - Q_BUSINESS
-    - name: create-subscription
-      description: Subscribes an IAM Identity Center user or a group to a pricing tier for an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application the subscription should be added to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create a subscription for your Amazon Q Business application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal=!: The IAM Identity Center `UserId` or `GroupId` of a user or group in the IAM Identity Center instance connected to the Amazon Q Business application.
-        --type=!: The type of Amazon Q Business subscription you want to create.
-      completion:
-        flag:
-            type:
-                - Q_LITE
-                - Q_BUSINESS
-    - name: list-subscriptions
-      description: Lists all subscriptions created in an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application linked to the subscription.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Amazon Q Business subscriptions to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: put-group
-      description: Create, or updates, a mapping of users—who have access to a document—to groups.
-      flags:
-        --application-id=!: The identifier of the application in which the user and group mapping belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source for which you want to map users to their groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-members=!: ""
-        --group-name=!: The list that contains your users or sub groups that belong the same group.
-        --index-id=!: The identifier of the index in which you want to map users to their groups.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains your list of users that belong to a group.
-        --type=!: The type of the group.
-      completion:
-        flag:
-            type:
-                - INDEX
-                - DATASOURCE
-    - name: create-web-experience
-      description: Creates an Amazon Q Business web experience.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business web experience.
-        --browser-extension-configuration=: The browser extension configuration for an Amazon Q Business web experience.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token you provide to identify a request to create an Amazon Q Business web experience.
-        --customization-configuration=: Sets the custom logo, favicon, font, and color used in the Amazon Q web experience.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider-configuration=: Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
-        --origins=: Sets the website domain origins that are allowed to embed the Amazon Q Business web experience.
-        --role-arn=: The Amazon Resource Name (ARN) of the service role attached to your web experience.
-        --sample-prompts-control-mode=: Determines whether sample prompts are enabled in the web experience for an end user.
-        --subtitle=: A subtitle to personalize your Amazon Q Business web experience.
-        --tags=: A list of key-value pairs that identify or categorize your Amazon Q Business web experience.
-        --title=: The title for your Amazon Q Business web experience.
-        --welcome-message=: The customized welcome message for end users of an Amazon Q Business web experience.
-      completion:
-        flag:
-            sample-prompts-control-mode:
-                - ENABLED
-                - DISABLED
-    - name: delete-data-source
-      description: Deletes an Amazon Q Business data source connector.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application used with the data source connector.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The identifier of the data source connector that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used with the data source connector.
-    - name: delete-plugin
-      description: Deletes an Amazon Q Business plugin.
-      flags:
-        --application-id=!: The identifier the application attached to the Amazon Q Business plugin.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --plugin-id=!: The identifier of the plugin being deleted.
-    - name: disassociate-permission
-      description: Removes a permission policy from a Amazon Q Business application, revoking the cross-account access that was previously granted to an ISV.
-      flags:
+        --actions=!: The list of Amazon Q Business actions that the ISV is allowed to perform.
         --application-id=!: The unique identifier of the Amazon Q Business application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=: The conditions that restrict when the permission is effective.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --statement-id=!: The statement ID of the permission to remove.
-    - name: get-media
-      description: Returns the image bytes corresponding to a media object.
+        --principal=!: The Amazon Resource Name of the IAM role for the ISV that is being granted permission.
+        --statement-id=!: A unique identifier for the policy statement.
+    - name: batch-delete-document
+      description: Asynchronously deletes one or more documents added using the `BatchPutDocument` API from an Amazon Q Business index.
       flags:
-        --application-id=!: The identifier of the Amazon Q Business which contains the media object.
+        --application-id=!: The identifier of the Amazon Q Business application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-id=!: The identifier of the Amazon Q Business conversation.
+        --data-source-sync-id=: The identifier of the data source sync during which the documents were deleted.
+        --documents=!: Documents deleted from the Amazon Q Business index.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-id=!: The identifier of the media object.
-        --message-id=!: The identifier of the Amazon Q Business message.
-    - name: list-indices
-      description: Lists the Amazon Q Business indices you have created.
+        --index-id=!: The identifier of the Amazon Q Business index that contains the documents to delete.
+    - name: batch-put-document
+      description: Adds one or more documents to an Amazon Q Business index.
       flags:
-        --application-id=!: The identifier of the Amazon Q Business application connected to the index.
+        --application-id=!: The identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-sync-id=: The identifier of the data source sync during which the documents were added.
+        --documents=!: One or more documents to add to the index.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the Amazon Q Business index to add the documents to.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.
+    - name: cancel-subscription
+      description: Unsubscribes a user or a group from their pricing tier in an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application for which the subscription is being cancelled.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of indices to return.
-        --next-token=: If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-chat-controls-configuration
-      description: Updates a set of chat controls configured for an existing Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the application for which the chat controls are configured.
-        --blocked-phrases-configuration-update=: The phrases blocked from chat by your chat control configuration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to update a Amazon Q Business application chat configuration.
-        --creator-mode-configuration=: The configuration details for `CREATOR_MODE`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hallucination-reduction-configuration=: The hallucination reduction settings for your application.
-        --orchestration-configuration=: The chat response orchestration settings for your application.
-        --response-scope=: The response scope configured for your application.
-        --topic-configurations-to-create-or-update=: The configured topic specific chat controls you want to update.
-        --topic-configurations-to-delete=: The configured topic specific chat controls you want to delete.
-      completion:
-        flag:
-            response-scope:
-                - ENTERPRISE_CONTENT_ONLY
-                - EXTENDED_KNOWLEDGE_ENABLED
+        --subscription-id=!: The identifier of the Amazon Q Business subscription being cancelled.
     - name: chat-sync
       description: Starts or continues a non-streaming Amazon Q Business conversation.
       flags:
@@ -372,326 +66,17 @@ commands:
                 - RETRIEVAL_MODE
                 - CREATOR_MODE
                 - PLUGIN_MODE
-    - name: delete-chat-response-configuration
-      description: Deletes a specified chat response configuration from an Amazon Q Business application.
+    - name: check-document-access
+      description: Verifies if a user has access permissions for a specified document and returns the actual ACL attached to the document.
       flags:
-        --application-id=!: The unique identifier of theAmazon Q Business application from which to delete the chat response configuration.
-        --chat-response-configuration-id=!: The unique identifier of the chat response configuration to delete from the specified application.
+        --application-id=!: The unique identifier of the application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The unique identifier of the data source.
+        --document-id=!: The unique identifier of the document.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-chat-controls-configuration
-      description: Gets information about chat controls configured for an existing Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the application for which the chat controls are configured.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of configured chat controls to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-data-source-sync-job
-      description: Starts a data source connector synchronization job.
-      flags:
-        --application-id=!: The identifier of Amazon Q Business application the data source is connected to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The identifier of the data source connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used with the data source connector.
-    - name: update-index
-      description: Updates an Amazon Q Business index.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application connected to the index.
-        --capacity-configuration=: The storage capacity units you want to provision for your Amazon Q Business index.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the Amazon Q Business index.
-        --display-name=: The name of the Amazon Q Business index.
-        --document-attribute-configurations=: Configuration information for document metadata or fields.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the Amazon Q Business index.
-    - name: create-data-accessor
-      description: Creates a new data accessor for an ISV to access data from a Amazon Q Business application.
-      flags:
-        --action-configurations=!: A list of action configurations specifying the allowed actions and any associated filters.
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --authentication-detail=: The authentication configuration details for the data accessor.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --display-name=!: A friendly name for the data accessor.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal=!: The Amazon Resource Name (ARN) of the IAM role for the ISV that will be accessing the data.
-        --tags=: The tags to associate with the data accessor.
-    - name: delete-data-accessor
-      description: Deletes a specified data accessor.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-accessor-id=!: The unique identifier of the data accessor to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-data-accessor
-      description: Retrieves information about a specified data accessor.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-accessor-id=!: The unique identifier of the data accessor to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-conversations
-      description: Lists one or more Amazon Q Business conversations.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Amazon Q Business conversations to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-id=: The identifier of the user involved in the Amazon Q Business web experience conversation.
-    - name: list-documents
-      description: A list of documents attached to an index.
-      flags:
-        --application-id=!: The identifier of the application id the documents are attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-ids=: The identifier of the data sources the documents are attached to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index the documents are attached to.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of documents to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-plugins
-      description: Lists configured Amazon Q Business plugins.
-      flags:
-        --application-id=!: The identifier of the application the plugin is attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of documents to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-web-experience
-      description: Deletes an Amazon Q Business web experience.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application linked to the Amazon Q Business web experience.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --web-experience-id=!: The identifier of the Amazon Q Business web experience being deleted.
-    - name: get-policy
-      description: Retrieves the current permission policy for a Amazon Q Business application.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-groups
-      description: Provides a list of groups that are mapped to users.
-      flags:
-        --application-id=!: The identifier of the application for getting a list of groups mapped to users.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source for getting a list of groups mapped to users.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for getting a list of groups mapped to users.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of returned groups that are mapped to users.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --updated-earlier-than=!: The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.
-    - name: update-application
-      description: Updates an existing Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --attachments-configuration=: An option to allow end users to upload files directly during chat.
-        --auto-subscription-configuration=: An option to enable updating the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description for the Amazon Q Business application.
-        --display-name=: A name for the Amazon Q Business application.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-center-instance-arn=: The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
-        --personalization-configuration=: Configuration information about chat response personalization.
-        --q-apps-configuration=: An option to allow end users to create and use Amazon Q Apps in the web experience.
-        --role-arn=: An Amazon Web Services Identity and Access Management (IAM) role that gives Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
-    - name: delete-application
-      description: Deletes an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-user
-      description: Deletes a user by email id.
-      flags:
-        --application-id=!: The identifier of the application from which the user is being deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user email being deleted.
-    - name: get-data-source
-      description: Gets information about an existing Amazon Q Business data source connector.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The identifier of the data source connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identfier of the index used with the data source connector.
-    - name: list-chat-response-configurations
-      description: Retrieves a list of all chat response configurations available in a specified Amazon Q Business application.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application for which to list available chat response configurations.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of chat response configurations to return in a single response.
-        --next-token=: A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified `maxResults` value.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-plugin-type-metadata
-      description: Lists metadata for all Amazon Q Business plugin types.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of plugin metadata items to return.
-        --next-token=: If the metadata returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of metadata.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-retrievers
-      description: Lists the retriever used by an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of retrievers returned.
-        --next-token=: If the number of retrievers returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes a tag from an Amazon Q Business application or a data source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application, or data source to remove the tag from.
-        --tag-keys=!: A list of tag keys to remove from the Amazon Q Business application or data source.
-    - name: create-retriever
-      description: Adds a retriever to your Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of your Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create your Amazon Q Business application retriever.
-        --configuration=!: ""
-        --display-name=!: The name of your retriever.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --role-arn=: The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
-        --tags=: A list of key-value pairs that identify or categorize the retriever.
-        --type=!: The type of retriever you are using.
-      completion:
-        flag:
-            type:
-                - NATIVE_INDEX
-                - KENDRA_INDEX
-    - name: update-user
-      description: Updates a information associated with a user id.
-      flags:
-        --application-id=!: The identifier of the application the user is attached to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-aliases-to-delete=: The user aliases attached to the user id that are to be deleted.
-        --user-aliases-to-update=: The user aliases attached to the user id that are to be updated.
-        --user-id=!: The email id attached to the user.
-    - name: batch-delete-document
-      description: Asynchronously deletes one or more documents added using the `BatchPutDocument` API from an Amazon Q Business index.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-sync-id=: The identifier of the data source sync during which the documents were deleted.
-        --documents=!: Documents deleted from the Amazon Q Business index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the Amazon Q Business index that contains the documents to delete.
-    - name: create-user
-      description: Creates a universally unique identifier (UUID) mapped to a list of local user ids within an application.
-      flags:
-        --application-id=!: The identifier of the application for which the user mapping will be created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create your Amazon Q Business user mapping.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-aliases=: The list of user aliases in the mapping.
-        --user-id=!: The user emails attached to a user mapping.
-    - name: delete-attachment
-      description: Deletes an attachment associated with a specific Amazon Q Business conversation.
-      flags:
-        --application-id=!: The unique identifier for the Amazon Q Business application environment.
-        --attachment-id=!: The unique identifier for the attachment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-id=!: The unique identifier of the conversation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=: The unique identifier of the user involved in the conversation.
-    - name: update-retriever
-      description: Updates the retriever used for your Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of your Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: ""
-        --display-name=: The name of your retriever.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retriever-id=!: The identifier of your retriever.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources.
-    - name: delete-retriever
-      description: Deletes the retriever used by an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --retriever-id=!: The identifier of the retriever being deleted.
-    - name: list-messages
-      description: Gets a list of messages associated with an Amazon Q Business web experience.
-      flags:
-        --application-id=!: The identifier for the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversation-id=!: The identifier of the Amazon Q Business web experience conversation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of messages to return.
-        --next-token=: If the number of messages returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of messages.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-id=: The identifier of the user involved in the Amazon Q Business web experience conversation.
-    - name: cancel-subscription
-      description: Unsubscribes a user or a group from their pricing tier in an Amazon Q Business application.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application for which the subscription is being cancelled.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscription-id=!: The identifier of the Amazon Q Business subscription being cancelled.
+        --index-id=!: The unique identifier of the index.
+        --user-id=!: The unique identifier of the user.
     - name: create-anonymous-web-experience-url
       description: Creates a unique URL for anonymous Amazon Q Business web experience.
       flags:
@@ -701,70 +86,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-duration-in-minutes=: The duration of the session associated with the unique URL for the web experience.
         --web-experience-id=!: The identifier of the web experience.
-    - name: delete-group
-      description: Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group.
-      flags:
-        --application-id=!: The identifier of the application in which the group mapping belongs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source linked to the group
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-name=!: The name of the group you want to delete.
-        --index-id=!: The identifier of the index you want to delete the group from.
-    - name: get-plugin
-      description: Gets information about an existing Amazon Q Business plugin.
-      flags:
-        --application-id=!: The identifier of the application which contains the plugin.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --plugin-id=!: The identifier of the plugin.
-    - name: search-relevant-content
-      description: Searches for relevant content in a Amazon Q Business application based on a query.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application to search.
-        --attribute-filter=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-source=!: The source of content to search in.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --query-text=!: The text to search for.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-data-source-sync-job
-      description: Stops an Amazon Q Business data source connector synchronization job already in progress.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application that the data source is connected to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The identifier of the data source connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used with the Amazon Q Business data source connector.
-    - name: update-data-accessor
-      description: Updates an existing data accessor.
-      flags:
-        --action-configurations=!: The updated list of action configurations specifying the allowed actions and any associated filters.
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --authentication-detail=: The updated authentication configuration details for the data accessor.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-accessor-id=!: The unique identifier of the data accessor to update.
-        --display-name=: The updated friendly name for the data accessor.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-put-document
-      description: Adds one or more documents to an Amazon Q Business index.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-sync-id=: The identifier of the data source sync during which the documents were added.
-        --documents=!: One or more documents to add to the index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the Amazon Q Business index to add the documents to.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.
     - name: create-application
       description: Creates an Amazon Q Business application.
       flags:
@@ -804,72 +125,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --response-configurations=!: A collection of response configuration settings that define how Amazon Q Business will generate and format responses to user queries in chat interactions.
         --tags=: A list of key-value pairs to apply as tags to the new chat response configuration, enabling categorization and management of resources across Amazon Web Services services.
-    - name: list-plugin-type-actions
-      description: Lists configured Amazon Q Business actions for any plugin type—both built-in and custom.
+    - name: create-data-accessor
+      description: Creates a new data accessor for an ISV to access data from a Amazon Q Business application.
       flags:
+        --action-configurations=!: A list of action configurations specifying the allowed actions and any associated filters.
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --authentication-detail=: The authentication configuration details for the data accessor.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --display-name=!: A friendly name for the data accessor.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of plugins to return.
-        --next-token=: If the number of plugins returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugins.
-        --page-size=: The size of each page to get in the AWS service call.
-        --plugin-type=!: The type of the plugin.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            plugin-type:
-                - SERVICE_NOW
-                - SALESFORCE
-                - JIRA
-                - ZENDESK
-                - CUSTOM
-                - QUICKSIGHT
-                - SERVICENOW_NOW_PLATFORM
-                - JIRA_CLOUD
-                - SALESFORCE_CRM
-                - ZENDESK_SUITE
-                - ATLASSIAN_CONFLUENCE
-                - GOOGLE_CALENDAR
-                - MICROSOFT_TEAMS
-                - MICROSOFT_EXCHANGE
-                - PAGERDUTY_ADVANCE
-                - SMARTSHEET
-                - ASANA
-    - name: update-chat-response-configuration
-      description: Updates an existing chat response configuration in an Amazon Q Business application.
-      flags:
-        --application-id=!: The unique identifier of the Amazon Q Business application containing the chat response configuration to update.
-        --chat-response-configuration-id=!: The unique identifier of the chat response configuration to update within the specified application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --display-name=: The new human-readable name to assign to the chat response configuration, making it easier to identify among multiple configurations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --response-configurations=!: The updated collection of response configuration settings that define how Amazon Q Business generates and formats responses to user queries.
-    - name: update-web-experience
-      description: Updates an Amazon Q Business web experience.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application attached to the web experience.
-        --authentication-configuration=: The authentication configuration of the Amazon Q Business web experience.
-        --browser-extension-configuration=: The browser extension configuration for an Amazon Q Business web experience.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customization-configuration=: Updates the custom logo, favicon, font, and color used in the Amazon Q web experience.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-provider-configuration=: Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
-        --origins=: Updates the website domain origins that are allowed to embed the Amazon Q Business web experience.
-        --role-arn=: The Amazon Resource Name (ARN) of the role with permission to access the Amazon Q Business web experience and required resources.
-        --sample-prompts-control-mode=: Determines whether sample prompts are enabled in the web experience for an end user.
-        --subtitle=: The subtitle of the Amazon Q Business web experience.
-        --title=: The title of the Amazon Q Business web experience.
-        --web-experience-id=!: The identifier of the Amazon Q Business web experience.
-        --welcome-message=: A customized welcome message for an end user in an Amazon Q Business web experience.
-      completion:
-        flag:
-            sample-prompts-control-mode:
-                - ENABLED
-                - DISABLED
+        --principal=!: The Amazon Resource Name (ARN) of the IAM role for the ISV that will be accessing the data.
+        --tags=: The tags to associate with the data accessor.
     - name: create-data-source
       description: Creates a data source connector for an Amazon Q Business application.
       flags:
@@ -888,33 +156,141 @@ commands:
         --sync-schedule=: Sets the frequency for Amazon Q Business to check the documents in your data source repository and update your index.
         --tags=: A list of key-value pairs that identify or categorize the data source connector.
         --vpc-configuration=: Configuration information for an Amazon VPC (Virtual Private Cloud) to connect to your data source.
-    - name: get-application
-      description: Gets information about an existing Amazon Q Business application.
+    - name: create-index
+      description: Creates an Amazon Q Business index.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application using the index.
+        --capacity-configuration=: The capacity units you want to provision for your index.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create an index.
+        --description=: A description for the Amazon Q Business index.
+        --display-name=!: A name for the Amazon Q Business index.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that identify or categorize the index.
+        --type=: The index type that's suitable for your needs.
+      completion:
+        flag:
+            type:
+                - ENTERPRISE
+                - STARTER
+    - name: create-plugin
+      description: Creates an Amazon Q Business plugin.
+      flags:
+        --application-id=!: The identifier of the application that will contain the plugin.
+        --auth-configuration=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create your Amazon Q Business plugin.
+        --custom-plugin-configuration=: Contains configuration for a custom plugin.
+        --display-name=!: A the name for your plugin.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --server-url=: The source URL used for plugin configuration.
+        --tags=: A list of key-value pairs that identify or categorize the data source connector.
+        --type=!: The type of plugin you want to create.
+      completion:
+        flag:
+            type:
+                - SERVICE_NOW
+                - SALESFORCE
+                - JIRA
+                - ZENDESK
+                - CUSTOM
+                - QUICKSIGHT
+                - SERVICENOW_NOW_PLATFORM
+                - JIRA_CLOUD
+                - SALESFORCE_CRM
+                - ZENDESK_SUITE
+                - ATLASSIAN_CONFLUENCE
+                - GOOGLE_CALENDAR
+                - MICROSOFT_TEAMS
+                - MICROSOFT_EXCHANGE
+                - PAGERDUTY_ADVANCE
+                - SMARTSHEET
+                - ASANA
+    - name: create-retriever
+      description: Adds a retriever to your Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of your Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create your Amazon Q Business application retriever.
+        --configuration=!: ""
+        --display-name=!: The name of your retriever.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=: The ARN of an IAM role used by Amazon Q Business to access the basic authentication credentials stored in a Secrets Manager secret.
+        --tags=: A list of key-value pairs that identify or categorize the retriever.
+        --type=!: The type of retriever you are using.
+      completion:
+        flag:
+            type:
+                - NATIVE_INDEX
+                - KENDRA_INDEX
+    - name: create-subscription
+      description: Subscribes an IAM Identity Center user or a group to a pricing tier for an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application the subscription should be added to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create a subscription for your Amazon Q Business application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --principal=!: The IAM Identity Center `UserId` or `GroupId` of a user or group in the IAM Identity Center instance connected to the Amazon Q Business application.
+        --type=!: The type of Amazon Q Business subscription you want to create.
+      completion:
+        flag:
+            type:
+                - Q_LITE
+                - Q_BUSINESS
+    - name: create-user
+      description: Creates a universally unique identifier (UUID) mapped to a list of local user ids within an application.
+      flags:
+        --application-id=!: The identifier of the application for which the user mapping will be created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create your Amazon Q Business user mapping.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-aliases=: The list of user aliases in the mapping.
+        --user-id=!: The user emails attached to a user mapping.
+    - name: create-web-experience
+      description: Creates an Amazon Q Business web experience.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business web experience.
+        --browser-extension-configuration=: The browser extension configuration for an Amazon Q Business web experience.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token you provide to identify a request to create an Amazon Q Business web experience.
+        --customization-configuration=: Sets the custom logo, favicon, font, and color used in the Amazon Q web experience.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
+        --origins=: Sets the website domain origins that are allowed to embed the Amazon Q Business web experience.
+        --role-arn=: The Amazon Resource Name (ARN) of the service role attached to your web experience.
+        --sample-prompts-control-mode=: Determines whether sample prompts are enabled in the web experience for an end user.
+        --subtitle=: A subtitle to personalize your Amazon Q Business web experience.
+        --tags=: A list of key-value pairs that identify or categorize your Amazon Q Business web experience.
+        --title=: The title for your Amazon Q Business web experience.
+        --welcome-message=: The customized welcome message for end users of an Amazon Q Business web experience.
+      completion:
+        flag:
+            sample-prompts-control-mode:
+                - ENABLED
+                - DISABLED
+    - name: delete-application
+      description: Deletes an Amazon Q Business application.
       flags:
         --application-id=!: The identifier of the Amazon Q Business application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-user
-      description: Describes the universally unique identifier (UUID) associated with a local user in a data source.
+    - name: delete-attachment
+      description: Deletes an attachment associated with a specific Amazon Q Business conversation.
       flags:
-        --application-id=!: The identifier of the application connected to the user.
+        --application-id=!: The unique identifier for the Amazon Q Business application environment.
+        --attachment-id=!: The unique identifier for the attachment.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=!: The unique identifier of the conversation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user email address attached to the user.
-    - name: list-web-experiences
-      description: Lists one or more Amazon Q Business Web Experiences.
-      flags:
-        --application-id=!: The identifier of the Amazon Q Business application linked to the listed web experiences.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of Amazon Q Business Web Experiences to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --user-id=: The unique identifier of the user involved in the conversation.
     - name: delete-chat-controls-configuration
       description: Deletes chat controls configured for an existing Amazon Q Business application.
       flags:
@@ -922,6 +298,117 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-chat-response-configuration
+      description: Deletes a specified chat response configuration from an Amazon Q Business application.
+      flags:
+        --application-id=!: The unique identifier of theAmazon Q Business application from which to delete the chat response configuration.
+        --chat-response-configuration-id=!: The unique identifier of the chat response configuration to delete from the specified application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-conversation
+      description: Deletes an Amazon Q Business web experience conversation.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application associated with the conversation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=!: The identifier of the Amazon Q Business web experience conversation being deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=: The identifier of the user who is deleting the conversation.
+    - name: delete-data-accessor
+      description: Deletes a specified data accessor.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-accessor-id=!: The unique identifier of the data accessor to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-data-source
+      description: Deletes an Amazon Q Business data source connector.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application used with the data source connector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The identifier of the data source connector that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used with the data source connector.
+    - name: delete-group
+      description: Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group.
+      flags:
+        --application-id=!: The identifier of the application in which the group mapping belongs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source linked to the group
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group you want to delete.
+        --index-id=!: The identifier of the index you want to delete the group from.
+    - name: delete-index
+      description: Deletes an Amazon Q Business index.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application the Amazon Q Business index is linked to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the Amazon Q Business index.
+    - name: delete-plugin
+      description: Deletes an Amazon Q Business plugin.
+      flags:
+        --application-id=!: The identifier the application attached to the Amazon Q Business plugin.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plugin-id=!: The identifier of the plugin being deleted.
+    - name: delete-retriever
+      description: Deletes the retriever used by an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retriever-id=!: The identifier of the retriever being deleted.
+    - name: delete-user
+      description: Deletes a user by email id.
+      flags:
+        --application-id=!: The identifier of the application from which the user is being deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The user email being deleted.
+    - name: delete-web-experience
+      description: Deletes an Amazon Q Business web experience.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application linked to the Amazon Q Business web experience.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --web-experience-id=!: The identifier of the Amazon Q Business web experience being deleted.
+    - name: disassociate-permission
+      description: Removes a permission policy from a Amazon Q Business application, revoking the cross-account access that was previously granted to an ISV.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --statement-id=!: The statement ID of the permission to remove.
+    - name: get-application
+      description: Gets information about an existing Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-chat-controls-configuration
+      description: Gets information about chat controls configured for an existing Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the application for which the chat controls are configured.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of configured chat controls to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-chat-response-configuration
       description: Retrieves detailed information about a specific chat response configuration from an Amazon Q Business application.
       flags:
@@ -930,6 +417,49 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-data-accessor
+      description: Retrieves information about a specified data accessor.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-accessor-id=!: The unique identifier of the data accessor to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-data-source
+      description: Gets information about an existing Amazon Q Business data source connector.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The identifier of the data source connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identfier of the index used with the data source connector.
+    - name: get-document-content
+      description: Retrieves the content of a document that was ingested into Amazon Q Business.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application containing the document.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source from which the document was ingested.
+        --document-id=!: The unique identifier of the document that is indexed via BatchPutDocument API or file-upload or connector sync.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index where documents are indexed.
+        --output-format=: Document outputFormat.
+      completion:
+        flag:
+            output-format:
+                - RAW
+                - EXTRACTED
+    - name: get-group
+      description: Describes a group by group name.
+      flags:
+        --application-id=!: The identifier of the application id the group is attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source the group is attached to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-name=!: The name of the group.
+        --index-id=!: The identifier of the index the group is attached to.
     - name: get-index
       description: Gets information about an existing Amazon Q Business index.
       flags:
@@ -938,61 +468,47 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --index-id=!: The identifier of the Amazon Q Business index you want information on.
-    - name: list-data-accessors
-      description: Lists the data accessors for a Amazon Q Business application.
+    - name: get-media
+      description: Returns the image bytes corresponding to a media object.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business which contains the media object.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=!: The identifier of the Amazon Q Business conversation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-id=!: The identifier of the media object.
+        --message-id=!: The identifier of the Amazon Q Business message.
+    - name: get-plugin
+      description: Gets information about an existing Amazon Q Business plugin.
+      flags:
+        --application-id=!: The identifier of the application which contains the plugin.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plugin-id=!: The identifier of the plugin.
+    - name: get-policy
+      description: Retrieves the current permission policy for a Amazon Q Business application.
       flags:
         --application-id=!: The unique identifier of the Amazon Q Business application.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-data-sources
-      description: Lists the Amazon Q Business data source connectors that you have created.
+    - name: get-retriever
+      description: Gets information about an existing retriever used by an Amazon Q Business application.
       flags:
-        --application-id=!: The identifier of the Amazon Q Business application linked to the data source connectors.
+        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used with one or more data source connectors.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of data source connectors to return.
-        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Adds the specified tag to the specified Amazon Q Business application or data source resource.
+        --retriever-id=!: The identifier of the retriever.
+    - name: get-user
+      description: Describes the universally unique identifier (UUID) associated with a local user in a data source.
       flags:
+        --application-id=!: The identifier of the application connected to the user.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to tag.
-        --tags=!: A list of tag keys to add to the Amazon Q Business application or data source.
-    - name: associate-permission
-      description: Adds or updates a permission policy for a Amazon Q Business application, allowing cross-account access for an ISV.
-      flags:
-        --actions=!: The list of Amazon Q Business actions that the ISV is allowed to perform.
-        --application-id=!: The unique identifier of the Amazon Q Business application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conditions=: The conditions that restrict when the permission is effective.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --principal=!: The Amazon Resource Name of the IAM role for the ISV that is being granted permission.
-        --statement-id=!: A unique identifier for the policy statement.
-    - name: check-document-access
-      description: Verifies if a user has access permissions for a specified document and returns the actual ACL attached to the document.
-      flags:
-        --application-id=!: The unique identifier of the application.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The unique identifier of the data source.
-        --document-id=!: The unique identifier of the document.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The unique identifier of the index.
-        --user-id=!: The unique identifier of the user.
+        --user-id=!: The user email address attached to the user.
     - name: get-web-experience
       description: Gets information about an existing Amazon Q Business web experience.
       flags:
@@ -1026,3 +542,487 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --user-id=: The unique identifier of the user involved in the Amazon Q Business web experience conversation.
+    - name: list-chat-response-configurations
+      description: Retrieves a list of all chat response configurations available in a specified Amazon Q Business application.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application for which to list available chat response configurations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of chat response configurations to return in a single response.
+        --next-token=: A pagination token used to retrieve the next set of results when the number of configurations exceeds the specified `maxResults` value.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-conversations
+      description: Lists one or more Amazon Q Business conversations.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of Amazon Q Business conversations to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=: The identifier of the user involved in the Amazon Q Business web experience conversation.
+    - name: list-data-accessors
+      description: Lists the data accessors for a Amazon Q Business application.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-source-sync-jobs
+      description: Get information about an Amazon Q Business data source connector synchronization.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application connected to the data source.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The identifier of the data source connector.
+        --end-time=: The end time of the data source connector sync.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used with the Amazon Q Business data source connector.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of synchronization jobs to return in the response.
+        --next-token=: If the `maxResults` response was incpmplete because there is more data to retriever, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=: The start time of the data source connector sync.
+        --starting-token=: A token to specify where to start paginating.
+        --status-filter=: Only returns synchronization jobs with the `Status` field equal to the specified status.
+      completion:
+        flag:
+            status-filter:
+                - FAILED
+                - SUCCEEDED
+                - SYNCING
+                - INCOMPLETE
+                - STOPPING
+                - ABORTED
+                - SYNCING_INDEXING
+    - name: list-data-sources
+      description: Lists the Amazon Q Business data source connectors that you have created.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application linked to the data source connectors.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used with one or more data source connectors.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data source connectors to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-documents
+      description: A list of documents attached to an index.
+      flags:
+        --application-id=!: The identifier of the application id the documents are attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-ids=: The identifier of the data sources the documents are attached to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index the documents are attached to.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of documents to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-groups
+      description: Provides a list of groups that are mapped to users.
+      flags:
+        --application-id=!: The identifier of the application for getting a list of groups mapped to users.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source for getting a list of groups mapped to users.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for getting a list of groups mapped to users.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of returned groups that are mapped to users.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --updated-earlier-than=!: The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.
+    - name: list-indices
+      description: Lists the Amazon Q Business indices you have created.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application connected to the index.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of indices to return.
+        --next-token=: If the maxResults response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-messages
+      description: Gets a list of messages associated with an Amazon Q Business web experience.
+      flags:
+        --application-id=!: The identifier for the Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=!: The identifier of the Amazon Q Business web experience conversation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of messages to return.
+        --next-token=: If the number of messages returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of messages.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=: The identifier of the user involved in the Amazon Q Business web experience conversation.
+    - name: list-plugin-actions
+      description: Lists configured Amazon Q Business actions for a specific plugin in an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application the plugin is attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of plugin actions to return.
+        --next-token=: If the number of plugin actions returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugin actions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --plugin-id=!: The identifier of the Amazon Q Business plugin.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-plugin-type-actions
+      description: Lists configured Amazon Q Business actions for any plugin type—both built-in and custom.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of plugins to return.
+        --next-token=: If the number of plugins returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of plugins.
+        --page-size=: The size of each page to get in the AWS service call.
+        --plugin-type=!: The type of the plugin.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            plugin-type:
+                - SERVICE_NOW
+                - SALESFORCE
+                - JIRA
+                - ZENDESK
+                - CUSTOM
+                - QUICKSIGHT
+                - SERVICENOW_NOW_PLATFORM
+                - JIRA_CLOUD
+                - SALESFORCE_CRM
+                - ZENDESK_SUITE
+                - ATLASSIAN_CONFLUENCE
+                - GOOGLE_CALENDAR
+                - MICROSOFT_TEAMS
+                - MICROSOFT_EXCHANGE
+                - PAGERDUTY_ADVANCE
+                - SMARTSHEET
+                - ASANA
+    - name: list-plugin-type-metadata
+      description: Lists metadata for all Amazon Q Business plugin types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of plugin metadata items to return.
+        --next-token=: If the metadata returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of metadata.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-plugins
+      description: Lists configured Amazon Q Business plugins.
+      flags:
+        --application-id=!: The identifier of the application the plugin is attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of documents to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-retrievers
+      description: Lists the retriever used by an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application using the retriever.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of retrievers returned.
+        --next-token=: If the number of retrievers returned exceeds `maxResults`, Amazon Q Business returns a next token as a pagination token to retrieve the next set of retrievers.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-subscriptions
+      description: Lists all subscriptions created in an Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application linked to the subscription.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of Amazon Q Business subscriptions to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Gets a list of tags associated with a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to get a list of tags for.
+    - name: list-web-experiences
+      description: Lists one or more Amazon Q Business Web Experiences.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application linked to the listed web experiences.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of Amazon Q Business Web Experiences to return.
+        --next-token=: If the `maxResults` response was incomplete because there is more data to retrieve, Amazon Q Business returns a pagination token in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-feedback
+      description: Enables your end user to provide feedback on their Amazon Q Business generated chat responses.
+      flags:
+        --application-id=!: The identifier of the application associated with the feedback.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=!: The identifier of the conversation the feedback is attached to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-copied-at=: The timestamp for when the feedback was recorded.
+        --message-id=!: The identifier of the chat message that the feedback was given for.
+        --message-usefulness=: The feedback usefulness value given by the user to the chat message.
+        --user-id=: The identifier of the user giving the feedback.
+    - name: put-group
+      description: Create, or updates, a mapping of users—who have access to a document—to groups.
+      flags:
+        --application-id=!: The identifier of the application in which the user and group mapping belongs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source for which you want to map users to their groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-members=!: ""
+        --group-name=!: The list that contains your users or sub groups that belong the same group.
+        --index-id=!: The identifier of the index in which you want to map users to their groups.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains your list of users that belong to a group.
+        --type=!: The type of the group.
+      completion:
+        flag:
+            type:
+                - INDEX
+                - DATASOURCE
+    - name: search-relevant-content
+      description: Searches for relevant content in a Amazon Q Business application based on a query.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application to search.
+        --attribute-filter=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-source=!: The source of content to search in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --query-text=!: The text to search for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-data-source-sync-job
+      description: Starts a data source connector synchronization job.
+      flags:
+        --application-id=!: The identifier of Amazon Q Business application the data source is connected to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The identifier of the data source connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used with the data source connector.
+    - name: stop-data-source-sync-job
+      description: Stops an Amazon Q Business data source connector synchronization job already in progress.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application that the data source is connected to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The identifier of the data source connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used with the Amazon Q Business data source connector.
+    - name: tag-resource
+      description: Adds the specified tag to the specified Amazon Q Business application or data source resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application or data source to tag.
+        --tags=!: A list of tag keys to add to the Amazon Q Business application or data source.
+    - name: untag-resource
+      description: Removes a tag from an Amazon Q Business application or a data source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon Q Business application, or data source to remove the tag from.
+        --tag-keys=!: A list of tag keys to remove from the Amazon Q Business application or data source.
+    - name: update-application
+      description: Updates an existing Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application.
+        --attachments-configuration=: An option to allow end users to upload files directly during chat.
+        --auto-subscription-configuration=: An option to enable updating the default subscription type assigned to an Amazon Q Business application using IAM identity federation for user management.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description for the Amazon Q Business application.
+        --display-name=: A name for the Amazon Q Business application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-center-instance-arn=: The Amazon Resource Name (ARN) of the IAM Identity Center instance you are either creating for—or connecting to—your Amazon Q Business application.
+        --personalization-configuration=: Configuration information about chat response personalization.
+        --q-apps-configuration=: An option to allow end users to create and use Amazon Q Apps in the web experience.
+        --role-arn=: An Amazon Web Services Identity and Access Management (IAM) role that gives Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
+    - name: update-chat-controls-configuration
+      description: Updates a set of chat controls configured for an existing Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of the application for which the chat controls are configured.
+        --blocked-phrases-configuration-update=: The phrases blocked from chat by your chat control configuration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to update a Amazon Q Business application chat configuration.
+        --creator-mode-configuration=: The configuration details for `CREATOR_MODE`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hallucination-reduction-configuration=: The hallucination reduction settings for your application.
+        --orchestration-configuration=: The chat response orchestration settings for your application.
+        --response-scope=: The response scope configured for your application.
+        --topic-configurations-to-create-or-update=: The configured topic specific chat controls you want to update.
+        --topic-configurations-to-delete=: The configured topic specific chat controls you want to delete.
+      completion:
+        flag:
+            response-scope:
+                - ENTERPRISE_CONTENT_ONLY
+                - EXTENDED_KNOWLEDGE_ENABLED
+    - name: update-chat-response-configuration
+      description: Updates an existing chat response configuration in an Amazon Q Business application.
+      flags:
+        --application-id=!: The unique identifier of the Amazon Q Business application containing the chat response configuration to update.
+        --chat-response-configuration-id=!: The unique identifier of the chat response configuration to update within the specified application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --display-name=: The new human-readable name to assign to the chat response configuration, making it easier to identify among multiple configurations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --response-configurations=!: The updated collection of response configuration settings that define how Amazon Q Business generates and formats responses to user queries.
+    - name: update-data-accessor
+      description: Updates an existing data accessor.
+      flags:
+        --action-configurations=!: The updated list of action configurations specifying the allowed actions and any associated filters.
+        --application-id=!: The unique identifier of the Amazon Q Business application.
+        --authentication-detail=: The updated authentication configuration details for the data accessor.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-accessor-id=!: The unique identifier of the data accessor to update.
+        --display-name=: The updated friendly name for the data accessor.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-data-source
+      description: Updates an existing Amazon Q Business data source connector.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application the data source is attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: ""
+        --data-source-id=!: The identifier of the data source connector.
+        --description=: The description of the data source connector.
+        --display-name=: A name of the data source connector.
+        --document-enrichment-configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index attached to the data source connector.
+        --media-extraction-configuration=: The configuration for extracting information from media in documents for your data source.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
+        --sync-schedule=: The chosen update frequency for your data source.
+        --vpc-configuration=: ""
+    - name: update-index
+      description: Updates an Amazon Q Business index.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application connected to the index.
+        --capacity-configuration=: The storage capacity units you want to provision for your Amazon Q Business index.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the Amazon Q Business index.
+        --display-name=: The name of the Amazon Q Business index.
+        --document-attribute-configurations=: Configuration information for document metadata or fields.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the Amazon Q Business index.
+    - name: update-plugin
+      description: Updates an Amazon Q Business plugin.
+      flags:
+        --application-id=!: The identifier of the application the plugin is attached to.
+        --auth-configuration=: The authentication configuration the plugin is using.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-plugin-configuration=: The configuration for a custom plugin.
+        --display-name=: The name of the plugin.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plugin-id=!: The identifier of the plugin.
+        --server-url=: The source URL used for plugin configuration.
+        --state=: The status of the plugin.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
+    - name: update-retriever
+      description: Updates the retriever used for your Amazon Q Business application.
+      flags:
+        --application-id=!: The identifier of your Amazon Q Business application.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: ""
+        --display-name=: The name of your retriever.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retriever-id=!: The identifier of your retriever.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the retriever and required resources.
+    - name: update-subscription
+      description: Updates the pricing tier for an Amazon Q Business subscription.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application where the subscription update should take effect.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-id=!: The identifier of the Amazon Q Business subscription to be updated.
+        --type=!: The type of the Amazon Q Business subscription to be updated.
+      completion:
+        flag:
+            type:
+                - Q_LITE
+                - Q_BUSINESS
+    - name: update-user
+      description: Updates a information associated with a user id.
+      flags:
+        --application-id=!: The identifier of the application the user is attached to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-aliases-to-delete=: The user aliases attached to the user id that are to be deleted.
+        --user-aliases-to-update=: The user aliases attached to the user id that are to be updated.
+        --user-id=!: The email id attached to the user.
+    - name: update-web-experience
+      description: Updates an Amazon Q Business web experience.
+      flags:
+        --application-id=!: The identifier of the Amazon Q Business application attached to the web experience.
+        --authentication-configuration=: The authentication configuration of the Amazon Q Business web experience.
+        --browser-extension-configuration=: The browser extension configuration for an Amazon Q Business web experience.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customization-configuration=: Updates the custom logo, favicon, font, and color used in the Amazon Q web experience.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Information about the identity provider (IdP) used to authenticate end users of an Amazon Q Business web experience.
+        --origins=: Updates the website domain origins that are allowed to embed the Amazon Q Business web experience.
+        --role-arn=: The Amazon Resource Name (ARN) of the role with permission to access the Amazon Q Business web experience and required resources.
+        --sample-prompts-control-mode=: Determines whether sample prompts are enabled in the web experience for an end user.
+        --subtitle=: The subtitle of the Amazon Q Business web experience.
+        --title=: The title of the Amazon Q Business web experience.
+        --web-experience-id=!: The identifier of the Amazon Q Business web experience.
+        --welcome-message=: A customized welcome message for an end user in an Amazon Q Business web experience.
+      completion:
+        flag:
+            sample-prompts-control-mode:
+                - ENABLED
+                - DISABLED

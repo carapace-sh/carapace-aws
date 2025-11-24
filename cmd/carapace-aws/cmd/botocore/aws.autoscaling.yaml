@@ -1,6 +1,14 @@
 name: autoscaling
 description: Auto Scaling
 commands:
+    - name: attach-instances
+      description: Attaches one or more EC2 instances to the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=: The IDs of the instances.
     - name: attach-load-balancer-target-groups
       description: This API operation is superseded by [AttachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html), which can attach multiple traffic sources types.
       flags:
@@ -9,72 +17,59 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-group-arns=!: The Amazon Resource Names (ARNs) of the target groups.
-    - name: create-launch-configuration
-      description: Creates a launch configuration.
-      flags:
-        --associate-public-ip-address: Specifies whether to assign a public IPv4 address to the group's instances.
-        --block-device-mappings=: The block device mapping entries that define the block devices to attach to the instances at launch.
-        --classic-link-vpc-id=: Available for backward compatibility.
-        --classic-link-vpc-security-groups=: Available for backward compatibility.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --ebs-optimized: Specifies whether the launch configuration is optimized for EBS I/O (`true`) or not (`false`).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-instance-profile=: The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance.
-        --image-id=: The ID of the Amazon Machine Image (AMI) that was assigned during registration.
-        --instance-id=: The ID of the instance to use to create the launch configuration.
-        --instance-monitoring=: Controls whether instances in this group are launched with detailed (`true`) or basic (`false`) monitoring.
-        --instance-type=: Specifies the instance type of the EC2 instance.
-        --kernel-id=: The ID of the kernel associated with the AMI.
-        --key-name=: The name of the key pair.
-        --launch-configuration-name=!: The name of the launch configuration.
-        --metadata-options=: The metadata options for the instances.
-        --no-associate-public-ip-address: Specifies whether to assign a public IPv4 address to the group's instances.
-        --no-ebs-optimized: Specifies whether the launch configuration is optimized for EBS I/O (`true`) or not (`false`).
-        --placement-tenancy=: The tenancy of the instance, either `default` or `dedicated`.
-        --ramdisk-id=: The ID of the RAM disk to select.
-        --security-groups=: A list that contains the security group IDs to assign to the instances in the Auto Scaling group.
-        --spot-price=: The maximum hourly price to be paid for any Spot Instance launched to fulfill the request.
-        --user-data=: The user data to make available to the launched EC2 instances.
-    - name: describe-scaling-activities
-      description: Gets information about the scaling activities in the account and Region.
-      flags:
-        --activity-ids=: The activity IDs of the desired scaling activities.
-        --auto-scaling-group-name=: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-deleted-groups: Indicates whether to include scaling activity from deleted Auto Scaling groups.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --no-include-deleted-groups: Indicates whether to include scaling activity from deleted Auto Scaling groups.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-scaling-process-types
-      description: Describes the scaling process types for use with the [ResumeProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html) and [SuspendProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html) APIs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: enable-metrics-collection
-      description: Enables group metrics collection for the specified Auto Scaling group.
+    - name: attach-load-balancers
+      description: This API operation is superseded by [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API\_AttachTrafficSources.html](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html), which can attach multiple traffic sources types.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --granularity=!: The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch.
-        --metrics=: Identifies the metrics to enable.
-    - name: record-lifecycle-action-heartbeat
-      description: Records a heartbeat for the lifecycle action associated with the specified token or instance.
+        --load-balancer-names=!: The names of the load balancers.
+    - name: attach-traffic-sources
+      description: Attaches one or more traffic sources to the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-skip-zonal-shift-validation: If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones.
+        --skip-zonal-shift-validation: If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones.
+        --traffic-sources=!: The unique identifiers of one or more traffic sources.
+    - name: batch-delete-scheduled-action
+      description: Deletes one or more scheduled actions for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scheduled-action-names=!: The names of the scheduled actions to delete.
+    - name: batch-put-scheduled-update-group-action
+      description: Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scheduled-update-group-actions=!: One or more scheduled actions.
+    - name: cancel-instance-refresh
+      description: Cancels an instance refresh or rollback that is in progress.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-wait-for-transitioning-instances: When cancelling an instance refresh, this indicates whether to wait for in-flight launches and terminations to complete.
+        --wait-for-transitioning-instances: When cancelling an instance refresh, this indicates whether to wait for in-flight launches and terminations to complete.
+    - name: complete-lifecycle-action
+      description: Completes the lifecycle action for the specified token or instance with the specified result.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=: The ID of the instance.
-        --lifecycle-action-token=: A token that uniquely identifies a specific lifecycle action associated with an instance.
+        --lifecycle-action-result=!: The action for the group to take.
+        --lifecycle-action-token=: A universally unique identifier (UUID) that identifies a specific lifecycle action associated with an instance.
         --lifecycle-hook-name=!: The name of the lifecycle hook.
     - name: create-auto-scaling-group
       description: '**We strongly recommend using a launch template when calling this operation to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.**'
@@ -118,6 +113,64 @@ commands:
         --termination-policies=: A policy or a list of policies that are used to select the instance to terminate.
         --traffic-sources=: The list of traffic sources to attach to this Auto Scaling group.
         --vpc-zone-identifier=: A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.
+    - name: create-launch-configuration
+      description: Creates a launch configuration.
+      flags:
+        --associate-public-ip-address: Specifies whether to assign a public IPv4 address to the group's instances.
+        --block-device-mappings=: The block device mapping entries that define the block devices to attach to the instances at launch.
+        --classic-link-vpc-id=: Available for backward compatibility.
+        --classic-link-vpc-security-groups=: Available for backward compatibility.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ebs-optimized: Specifies whether the launch configuration is optimized for EBS I/O (`true`) or not (`false`).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iam-instance-profile=: The name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance.
+        --image-id=: The ID of the Amazon Machine Image (AMI) that was assigned during registration.
+        --instance-id=: The ID of the instance to use to create the launch configuration.
+        --instance-monitoring=: Controls whether instances in this group are launched with detailed (`true`) or basic (`false`) monitoring.
+        --instance-type=: Specifies the instance type of the EC2 instance.
+        --kernel-id=: The ID of the kernel associated with the AMI.
+        --key-name=: The name of the key pair.
+        --launch-configuration-name=!: The name of the launch configuration.
+        --metadata-options=: The metadata options for the instances.
+        --no-associate-public-ip-address: Specifies whether to assign a public IPv4 address to the group's instances.
+        --no-ebs-optimized: Specifies whether the launch configuration is optimized for EBS I/O (`true`) or not (`false`).
+        --placement-tenancy=: The tenancy of the instance, either `default` or `dedicated`.
+        --ramdisk-id=: The ID of the RAM disk to select.
+        --security-groups=: A list that contains the security group IDs to assign to the instances in the Auto Scaling group.
+        --spot-price=: The maximum hourly price to be paid for any Spot Instance launched to fulfill the request.
+        --user-data=: The user data to make available to the launched EC2 instances.
+    - name: create-or-update-tags
+      description: Creates or updates tags for the specified Auto Scaling group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: One or more tags.
+    - name: delete-auto-scaling-group
+      description: Deletes the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-delete: Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-delete: Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated.
+    - name: delete-launch-configuration
+      description: Deletes the specified launch configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-name=!: The name of the launch configuration.
+    - name: delete-lifecycle-hook
+      description: Deletes the specified lifecycle hook.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-hook-name=!: The name of the lifecycle hook.
     - name: delete-notification-configuration
       description: Deletes the specified notification.
       flags:
@@ -126,6 +179,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --topic-arn=!: The Amazon Resource Name (ARN) of the Amazon SNS topic.
+    - name: delete-policy
+      description: Deletes the specified scaling policy.
+      flags:
+        --auto-scaling-group-name=: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-name=!: The name or Amazon Resource Name (ARN) of the policy.
     - name: delete-scheduled-action
       description: Deletes the specified scheduled action.
       flags:
@@ -134,12 +195,103 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scheduled-action-name=!: The name of the action to delete.
+    - name: delete-tags
+      description: Deletes the specified tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: One or more tags.
+    - name: delete-warm-pool
+      description: Deletes the warm pool for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-delete: Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-delete: Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated.
+    - name: describe-account-limits
+      description: Describes the current Amazon EC2 Auto Scaling resource quotas for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-adjustment-types
+      description: Describes the available adjustment types for step scaling and simple scaling policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-auto-scaling-groups
+      description: Gets information about the Auto Scaling groups in the account and Region.
+      flags:
+        --auto-scaling-group-names=: The names of the Auto Scaling groups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: One or more filters to limit the results based on specific tags.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-instances: Specifies whether to include information about Amazon EC2 instances in the response.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --no-include-instances: Specifies whether to include information about Amazon EC2 instances in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-auto-scaling-instances
+      description: Gets information about the Auto Scaling instances in the account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=: The IDs of the instances.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-auto-scaling-notification-types
+      description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-instance-refreshes
+      description: Gets information about the instance refreshes for the specified Auto Scaling group from the previous six weeks.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-refresh-ids=: One or more instance refresh IDs.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+    - name: describe-launch-configurations
+      description: Gets information about the launch configurations in the account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --launch-configuration-names=: The launch configuration names.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-lifecycle-hook-types
       description: Describes the available types of lifecycle hooks.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-lifecycle-hooks
+      description: Gets information about the lifecycle hooks for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-hook-names=: The names of one or more lifecycle hooks.
     - name: describe-load-balancer-target-groups
       description: This API operation is superseded by [DescribeTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can describe multiple traffic sources types.
       flags:
@@ -152,41 +304,67 @@ commands:
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: resume-processes
-      description: Resumes the specified suspended auto scaling processes, or all suspended process, for the specified Auto Scaling group.
+    - name: describe-load-balancers
+      description: This API operation is superseded by [DescribeTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can describe multiple traffic sources types.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-processes=: 'One or more of the following processes:'
-    - name: attach-traffic-sources
-      description: Attaches one or more traffic sources to the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-skip-zonal-shift-validation: If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones.
-        --skip-zonal-shift-validation: If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones.
-        --traffic-sources=!: The unique identifiers of one or more traffic sources.
-    - name: create-or-update-tags
-      description: Creates or updates tags for the specified Auto Scaling group.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-metric-collection-types
+      description: Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: One or more tags.
-    - name: delete-policy
-      description: Deletes the specified scaling policy.
+    - name: describe-notification-configurations
+      description: Gets information about the Amazon SNS notifications that are configured for one or more Auto Scaling groups.
+      flags:
+        --auto-scaling-group-names=: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-policies
+      description: Gets information about the scaling policies in the account and Region.
       flags:
         --auto-scaling-group-name=: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-name=!: The name or Amazon Resource Name (ARN) of the policy.
-    - name: describe-auto-scaling-notification-types
-      description: Describes the notification types that are supported by Amazon EC2 Auto Scaling.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to be returned with each call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-names=: The names of one or more policies.
+        --policy-types=: One or more policy types.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-scaling-activities
+      description: Gets information about the scaling activities in the account and Region.
+      flags:
+        --activity-ids=: The activity IDs of the desired scaling activities.
+        --auto-scaling-group-name=: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-deleted-groups: Indicates whether to include scaling activity from deleted Auto Scaling groups.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of items to return with this call.
+        --next-token=: The token for the next set of items to return.
+        --no-include-deleted-groups: Indicates whether to include scaling activity from deleted Auto Scaling groups.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-scaling-process-types
+      description: Describes the scaling process types for use with the [ResumeProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_ResumeProcesses.html) and [SuspendProcesses](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_SuspendProcesses.html) APIs.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -206,123 +384,6 @@ commands:
         --scheduled-action-names=: The names of one or more scheduled actions.
         --start-time=: The earliest scheduled start time to return.
         --starting-token=: A token to specify where to start paginating.
-    - name: rollback-instance-refresh
-      description: Cancels an instance refresh that is in progress and rolls back any changes that it made.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: set-instance-health
-      description: Sets the health status of the specified instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-status=!: The health status of the instance.
-        --instance-id=!: The ID of the instance.
-        --no-should-respect-grace-period: If the Auto Scaling group of the specified instance has a `HealthCheckGracePeriod` specified for the group, by default, this call respects the grace period.
-        --should-respect-grace-period: If the Auto Scaling group of the specified instance has a `HealthCheckGracePeriod` specified for the group, by default, this call respects the grace period.
-    - name: set-instance-protection
-      description: Updates the instance protection settings of the specified instances.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=!: One or more instance IDs.
-        --no-protected-from-scale-in!: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
-        --protected-from-scale-in!: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
-    - name: describe-instance-refreshes
-      description: Gets information about the instance refreshes for the specified Auto Scaling group from the previous six weeks.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-refresh-ids=: One or more instance refresh IDs.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-    - name: describe-notification-configurations
-      description: Gets information about the Amazon SNS notifications that are configured for one or more Auto Scaling groups.
-      flags:
-        --auto-scaling-group-names=: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: detach-traffic-sources
-      description: Detaches one or more traffic sources from the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --traffic-sources=!: The unique identifiers of one or more traffic sources.
-    - name: suspend-processes
-      description: Suspends the specified auto scaling processes, or all processes, for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scaling-processes=: 'One or more of the following processes:'
-    - name: describe-launch-configurations
-      description: Gets information about the launch configurations in the account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-names=: The launch configuration names.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-auto-scaling-groups
-      description: Gets information about the Auto Scaling groups in the account and Region.
-      flags:
-        --auto-scaling-group-names=: The names of the Auto Scaling groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters to limit the results based on specific tags.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-instances: Specifies whether to include information about Amazon EC2 instances in the response.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --no-include-instances: Specifies whether to include information about Amazon EC2 instances in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: complete-lifecycle-action
-      description: Completes the lifecycle action for the specified token or instance with the specified result.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=: The ID of the instance.
-        --lifecycle-action-result=!: The action for the group to take.
-        --lifecycle-action-token=: A universally unique identifier (UUID) that identifies a specific lifecycle action associated with an instance.
-        --lifecycle-hook-name=!: The name of the lifecycle hook.
-    - name: describe-account-limits
-      description: Describes the current Amazon EC2 Auto Scaling resource quotas for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-lifecycle-hooks
-      description: Gets information about the lifecycle hooks for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-hook-names=: The names of one or more lifecycle hooks.
     - name: describe-tags
       description: Describes the specified tags.
       flags:
@@ -335,6 +396,12 @@ commands:
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: describe-termination-policy-types
+      description: Describes the termination policies supported by Amazon EC2 Auto Scaling.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-traffic-sources
       description: Gets information about the traffic sources for the specified Auto Scaling group.
       flags:
@@ -357,47 +424,67 @@ commands:
         --next-token=: The token for the next set of instances to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: get-predictive-scaling-forecast
-      description: Retrieves the forecast data for a predictive scaling policy.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The exclusive end time of the time range for the forecast data to get.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-name=!: The name of the policy.
-        --start-time=!: The inclusive start time of the time range for the forecast data to get.
-    - name: delete-tags
-      description: Deletes the specified tags.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: One or more tags.
-    - name: describe-adjustment-types
-      description: Describes the available adjustment types for step scaling and simple scaling policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-load-balancers
-      description: This API operation is superseded by [DescribeTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can describe multiple traffic sources types.
+    - name: detach-instances
+      description: Removes one or more instances from the specified Auto Scaling group.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-metric-collection-types
-      description: Describes the available CloudWatch metrics for Amazon EC2 Auto Scaling.
+        --instance-ids=: The IDs of the instances.
+        --no-should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
+        --should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
+    - name: detach-load-balancer-target-groups
+      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can detach multiple traffic sources types.
       flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-group-arns=!: The Amazon Resource Names (ARN) of the target groups.
+    - name: detach-load-balancers
+      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html), which can detach multiple traffic sources types.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-names=!: The names of the load balancers.
+    - name: detach-traffic-sources
+      description: Detaches one or more traffic sources from the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --traffic-sources=!: The unique identifiers of one or more traffic sources.
+    - name: disable-metrics-collection
+      description: Disables group metrics collection for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metrics=: Identifies the metrics to disable.
+    - name: enable-metrics-collection
+      description: Enables group metrics collection for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity=!: The frequency at which Amazon EC2 Auto Scaling sends aggregated data to CloudWatch.
+        --metrics=: Identifies the metrics to enable.
+    - name: enter-standby
+      description: Moves the specified instances into the standby state.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=: The IDs of the instances.
+        --no-should-decrement-desired-capacity!: Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to `Standby` mode.
+        --should-decrement-desired-capacity!: Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to `Standby` mode.
     - name: execute-policy
       description: Executes the specified policy.
       flags:
@@ -410,88 +497,6 @@ commands:
         --metric-value=: The metric value to compare to `BreachThreshold`.
         --no-honor-cooldown: Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before executing the policy.
         --policy-name=!: The name or ARN of the policy.
-    - name: start-instance-refresh
-      description: Starts an instance refresh.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-configuration=: The desired configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --preferences=: Sets your preferences for the instance refresh so that it performs as expected when you start it.
-        --strategy=: The strategy to use for the instance refresh.
-      completion:
-        flag:
-            strategy:
-                - Rolling
-                - ReplaceRootVolume
-    - name: put-warm-pool
-      description: Creates or updates a warm pool for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-reuse-policy=: Indicates whether instances in the Auto Scaling group can be returned to the warm pool on scale in.
-        --max-group-prepared-capacity=: Specifies the maximum number of instances that are allowed to be in the warm pool or in any state except `Terminated` for the Auto Scaling group.
-        --min-size=: Specifies the minimum number of instances to maintain in the warm pool.
-        --pool-state=: Sets the instance state to transition to after the lifecycle actions are complete.
-      completion:
-        flag:
-            pool-state:
-                - Stopped
-                - Running
-                - Hibernated
-    - name: attach-instances
-      description: Attaches one or more EC2 instances to the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The IDs of the instances.
-    - name: attach-load-balancers
-      description: This API operation is superseded by [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API\_AttachTrafficSources.html](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html), which can attach multiple traffic sources types.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The names of the load balancers.
-    - name: batch-delete-scheduled-action
-      description: Deletes one or more scheduled actions for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scheduled-action-names=!: The names of the scheduled actions to delete.
-    - name: delete-warm-pool
-      description: Deletes the warm pool for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-delete: Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-delete: Specifies that the warm pool is to be deleted along with all of its associated instances, without waiting for all instances to be terminated.
-    - name: detach-load-balancers
-      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html), which can detach multiple traffic sources types.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The names of the load balancers.
-    - name: terminate-instance-in-auto-scaling-group
-      description: Terminates the specified instance and optionally adjusts the desired group size.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-id=!: The ID of the instance.
-        --no-should-decrement-desired-capacity!: Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
-        --should-decrement-desired-capacity!: Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
     - name: exit-standby
       description: Moves the specified instances out of the standby state.
       flags:
@@ -500,40 +505,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-ids=: The IDs of the instances.
-    - name: delete-lifecycle-hook
-      description: Deletes the specified lifecycle hook.
+    - name: get-predictive-scaling-forecast
+      description: Retrieves the forecast data for a predictive scaling policy.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The exclusive end time of the time range for the forecast data to get.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-hook-name=!: The name of the lifecycle hook.
-    - name: detach-load-balancer-target-groups
-      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can detach multiple traffic sources types.
+        --policy-name=!: The name of the policy.
+        --start-time=!: The inclusive start time of the time range for the forecast data to get.
+    - name: launch-instances
+      description: Launches a specified number of instances in an Auto Scaling group.
       flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --auto-scaling-group-name=!: The name of the Auto Scaling group to launch instances into.
+        --availability-zone-ids=: A list of Availability Zone IDs where instances should be launched.
+        --availability-zones=: The Availability Zones for the instance launch.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --target-group-arns=!: The Amazon Resource Names (ARN) of the target groups.
-    - name: disable-metrics-collection
-      description: Disables group metrics collection for the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metrics=: Identifies the metrics to disable.
-    - name: enter-standby
-      description: Moves the specified instances into the standby state.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The IDs of the instances.
-        --no-should-decrement-desired-capacity!: Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to `Standby` mode.
-        --should-decrement-desired-capacity!: Indicates whether to decrement the desired capacity of the Auto Scaling group by the number of instances moved to `Standby` mode.
+        --requested-capacity=!: The number of instances to launch.
+        --retry-strategy=: Specifies whether to retry asynchronously if the synchronous launch fails.
+        --subnet-ids=: The subnet IDs for the instance launch.
+      completion:
+        flag:
+            retry-strategy:
+                - retry-with-group-configuration
+                - none
     - name: put-lifecycle-hook
       description: Creates or updates a lifecycle hook for the specified Auto Scaling group.
       flags:
@@ -578,6 +577,126 @@ commands:
         --scaling-adjustment=: The amount by which to scale, based on the specified adjustment type.
         --step-adjustments=: A set of adjustments that enable you to scale based on the size of the alarm breach.
         --target-tracking-configuration=: A target tracking scaling policy.
+    - name: put-scheduled-update-group-action
+      description: Creates or updates a scheduled scaling action for an Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-capacity=: The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
+        --end-time=: The date and time for the recurring schedule to end, in UTC.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-size=: The maximum size of the Auto Scaling group.
+        --min-size=: The minimum size of the Auto Scaling group.
+        --recurrence=: The recurring schedule for this action.
+        --scheduled-action-name=!: The name of this scaling action.
+        --start-time=: The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in UTC/GMT only and in quotes (for example, `"2021-06-01T00:00:00Z"`).
+        --time-zone=: Specifies the time zone for a cron expression.
+        --time=: This property is no longer used.
+    - name: put-warm-pool
+      description: Creates or updates a warm pool for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-reuse-policy=: Indicates whether instances in the Auto Scaling group can be returned to the warm pool on scale in.
+        --max-group-prepared-capacity=: Specifies the maximum number of instances that are allowed to be in the warm pool or in any state except `Terminated` for the Auto Scaling group.
+        --min-size=: Specifies the minimum number of instances to maintain in the warm pool.
+        --pool-state=: Sets the instance state to transition to after the lifecycle actions are complete.
+      completion:
+        flag:
+            pool-state:
+                - Stopped
+                - Running
+                - Hibernated
+    - name: record-lifecycle-action-heartbeat
+      description: Records a heartbeat for the lifecycle action associated with the specified token or instance.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=: The ID of the instance.
+        --lifecycle-action-token=: A token that uniquely identifies a specific lifecycle action associated with an instance.
+        --lifecycle-hook-name=!: The name of the lifecycle hook.
+    - name: resume-processes
+      description: Resumes the specified suspended auto scaling processes, or all suspended process, for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-processes=: 'One or more of the following processes:'
+    - name: rollback-instance-refresh
+      description: Cancels an instance refresh that is in progress and rolls back any changes that it made.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: set-desired-capacity
+      description: Sets the size of the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-capacity=!: The desired capacity is the initial capacity of the Auto Scaling group after this operation completes and the capacity it attempts to maintain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --honor-cooldown: Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.
+        --no-honor-cooldown: Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.
+    - name: set-instance-health
+      description: Sets the health status of the specified instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-status=!: The health status of the instance.
+        --instance-id=!: The ID of the instance.
+        --no-should-respect-grace-period: If the Auto Scaling group of the specified instance has a `HealthCheckGracePeriod` specified for the group, by default, this call respects the grace period.
+        --should-respect-grace-period: If the Auto Scaling group of the specified instance has a `HealthCheckGracePeriod` specified for the group, by default, this call respects the grace period.
+    - name: set-instance-protection
+      description: Updates the instance protection settings of the specified instances.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=!: One or more instance IDs.
+        --no-protected-from-scale-in!: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
+        --protected-from-scale-in!: Indicates whether the instance is protected from termination by Amazon EC2 Auto Scaling when scaling in.
+    - name: start-instance-refresh
+      description: Starts an instance refresh.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-configuration=: The desired configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --preferences=: Sets your preferences for the instance refresh so that it performs as expected when you start it.
+        --strategy=: The strategy to use for the instance refresh.
+      completion:
+        flag:
+            strategy:
+                - Rolling
+                - ReplaceRootVolume
+    - name: suspend-processes
+      description: Suspends the specified auto scaling processes, or all processes, for the specified Auto Scaling group.
+      flags:
+        --auto-scaling-group-name=!: The name of the Auto Scaling group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scaling-processes=: 'One or more of the following processes:'
+    - name: terminate-instance-in-auto-scaling-group
+      description: Terminates the specified instance and optionally adjusts the desired group size.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The ID of the instance.
+        --no-should-decrement-desired-capacity!: Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
+        --should-decrement-desired-capacity!: Indicates whether terminating the instance also decrements the size of the Auto Scaling group.
     - name: update-auto-scaling-group
       description: '**We strongly recommend that all Auto Scaling groups use launch templates to ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2.**'
       flags:
@@ -614,122 +733,3 @@ commands:
         --skip-zonal-shift-validation: If you enable zonal shift with cross-zone disabled load balancers, capacity could become imbalanced across Availability Zones.
         --termination-policies=: A policy or a list of policies that are used to select the instances to terminate.
         --vpc-zone-identifier=: A comma-separated list of subnet IDs for a virtual private cloud (VPC).
-    - name: describe-policies
-      description: Gets information about the scaling policies in the account and Region.
-      flags:
-        --auto-scaling-group-name=: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to be returned with each call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-names=: The names of one or more policies.
-        --policy-types=: One or more policy types.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-auto-scaling-instances
-      description: Gets information about the Auto Scaling instances in the account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The IDs of the instances.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of items to return with this call.
-        --next-token=: The token for the next set of items to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: batch-put-scheduled-update-group-action
-      description: Creates or updates one or more scheduled scaling actions for an Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scheduled-update-group-actions=!: One or more scheduled actions.
-    - name: detach-instances
-      description: Removes one or more instances from the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The IDs of the instances.
-        --no-should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
-        --should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
-    - name: put-scheduled-update-group-action
-      description: Creates or updates a scheduled scaling action for an Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-capacity=: The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.
-        --end-time=: The date and time for the recurring schedule to end, in UTC.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-size=: The maximum size of the Auto Scaling group.
-        --min-size=: The minimum size of the Auto Scaling group.
-        --recurrence=: The recurring schedule for this action.
-        --scheduled-action-name=!: The name of this scaling action.
-        --start-time=: The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in UTC/GMT only and in quotes (for example, `"2021-06-01T00:00:00Z"`).
-        --time-zone=: Specifies the time zone for a cron expression.
-        --time=: This property is no longer used.
-    - name: cancel-instance-refresh
-      description: Cancels an instance refresh or rollback that is in progress.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-wait-for-transitioning-instances: When cancelling an instance refresh, this indicates whether to wait for in-flight launches and terminations to complete.
-        --wait-for-transitioning-instances: When cancelling an instance refresh, this indicates whether to wait for in-flight launches and terminations to complete.
-    - name: delete-auto-scaling-group
-      description: Deletes the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-delete: Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-delete: Specifies that the group is to be deleted along with all instances associated with the group, without waiting for all instances to be terminated.
-    - name: describe-termination-policy-types
-      description: Describes the termination policies supported by Amazon EC2 Auto Scaling.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: launch-instances
-      description: Launches a specified number of instances in an Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group to launch instances into.
-        --availability-zone-ids=: A list of Availability Zone IDs where instances should be launched.
-        --availability-zones=: The Availability Zones for the instance launch.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --requested-capacity=!: The number of instances to launch.
-        --retry-strategy=: Specifies whether to retry asynchronously if the synchronous launch fails.
-        --subnet-ids=: The subnet IDs for the instance launch.
-      completion:
-        flag:
-            retry-strategy:
-                - retry-with-group-configuration
-                - none
-    - name: delete-launch-configuration
-      description: Deletes the specified launch configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-name=!: The name of the launch configuration.
-    - name: set-desired-capacity
-      description: Sets the size of the specified Auto Scaling group.
-      flags:
-        --auto-scaling-group-name=!: The name of the Auto Scaling group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-capacity=!: The desired capacity is the initial capacity of the Auto Scaling group after this operation completes and the capacity it attempts to maintain.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --honor-cooldown: Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.
-        --no-honor-cooldown: Indicates whether Amazon EC2 Auto Scaling waits for the cooldown period to complete before initiating a scaling activity to set your Auto Scaling group to its new capacity.

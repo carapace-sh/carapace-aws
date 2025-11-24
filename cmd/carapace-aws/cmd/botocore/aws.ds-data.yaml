@@ -1,15 +1,6 @@
 name: ds-data
 description: AWS Directory Service Data
 commands:
-    - name: disable-user
-      description: Deactivates an active user account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sam-account-name=!: The name of the user.
     - name: add-group-member
       description: Adds an existing user, group, or computer as a group member.
       flags:
@@ -43,6 +34,37 @@ commands:
             group-type:
                 - Distribution
                 - Security
+    - name: create-user
+      description: Creates a new user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that’s associated with the user.
+        --email-address=: The email address of the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --given-name=: The first name of the user.
+        --other-attributes=: An expression that defines one or more attribute names with the data type and value of each attribute.
+        --sam-account-name=!: The name of the user.
+        --surname=: The last name of the user.
+    - name: delete-group
+      description: Deletes a group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sam-account-name=!: The name of the group.
+    - name: delete-user
+      description: Deletes a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sam-account-name=!: The name of the user.
     - name: describe-group
       description: Returns information about a specific group.
       flags:
@@ -53,15 +75,25 @@ commands:
         --other-attributes=: One or more attributes to be returned for the group.
         --realm=: The domain name that's associated with the group.
         --sam-account-name=!: The name of the group.
-    - name: delete-group
-      description: Deletes a group.
+    - name: describe-user
+      description: Returns information about a specific user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --other-attributes=: One or more attribute names to be returned for the user.
+        --realm=: The domain name that's associated with the user.
+        --sam-account-name=!: The name of the user.
+    - name: disable-user
+      description: Deactivates an active user account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the group.
+        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sam-account-name=!: The name of the group.
+        --sam-account-name=!: The name of the user.
     - name: list-group-members
       description: Returns member information for the specified group.
       flags:
@@ -159,38 +191,6 @@ commands:
         --search-attributes=!: One or more data attributes that are used to search for a user.
         --search-string=!: The attribute value that you want to search for.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-user
-      description: Creates a new user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that’s associated with the user.
-        --email-address=: The email address of the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --given-name=: The first name of the user.
-        --other-attributes=: An expression that defines one or more attribute names with the data type and value of each attribute.
-        --sam-account-name=!: The name of the user.
-        --surname=: The last name of the user.
-    - name: delete-user
-      description: Deletes a user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique and case-sensitive identifier that you provide to make sure the idempotency of the request, so multiple identical calls have the same effect as one single call.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sam-account-name=!: The name of the user.
-    - name: describe-user
-      description: Returns information about a specific user.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --directory-id=!: The identifier (ID) of the directory that's associated with the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --other-attributes=: One or more attribute names to be returned for the user.
-        --realm=: The domain name that's associated with the user.
-        --sam-account-name=!: The name of the user.
     - name: update-group
       description: Updates group information.
       flags:

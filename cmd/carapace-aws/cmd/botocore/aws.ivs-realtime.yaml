@@ -1,10 +1,91 @@
 name: ivs-realtime
 description: Amazon Interactive Video Service RealTime
 commands:
+    - name: create-encoder-configuration
+      description: Creates an EncoderConfiguration object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Optional name to identify the resource.
+        --tags=: Tags attached to the resource.
+        --video=: Video configuration.
+    - name: create-ingest-configuration
+      description: Creates a new IngestConfiguration resource, used to specify the ingest protocol for a stage.
+      flags:
+        --attributes=: Application-provided attributes to store in the IngestConfiguration and attach to a stage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingest-protocol=!: Type of ingest protocol that the user employs to broadcast.
+        --insecure-ingest: Whether the stage allows insecure RTMP ingest.
+        --name=: Optional name that can be specified for the IngestConfiguration being created.
+        --no-insecure-ingest: Whether the stage allows insecure RTMP ingest.
+        --stage-arn=: ARN of the stage with which the IngestConfiguration is associated.
+        --tags=: Tags attached to the resource.
+        --user-id=: Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems.
+      completion:
+        flag:
+            ingest-protocol:
+                - RTMP
+                - RTMPS
+    - name: create-participant-token
+      description: Creates an additional token for a specified stage.
+      flags:
+        --attributes=: Application-provided attributes to encode into the token and attach to a stage.
+        --capabilities=: Set of capabilities that the user is allowed to perform in the stage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration=: Duration (in minutes), after which the token expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stage-arn=!: ARN of the stage to which this token is scoped.
+        --user-id=: Name that can be specified to help identify the token.
+    - name: create-stage
+      description: Creates a new stage (and optionally participant tokens).
+      flags:
+        --auto-participant-recording-configuration=: Configuration object for individual participant recording, to attach to the new stage.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Optional name that can be specified for the stage being created.
+        --participant-token-configurations=: Array of participant token configuration objects to attach to the new stage.
+        --tags=: Tags attached to the resource.
+    - name: create-storage-configuration
+      description: Creates a new storage configuration, used to enable recording to Amazon S3.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Storage configuration name.
+        --s3=!: A complex type that contains a storage configuration for where recorded video will be stored.
+        --tags=: Tags attached to the resource.
     - name: delete-encoder-configuration
       description: Deletes an EncoderConfiguration resource.
       flags:
         --arn=!: ARN of the EncoderConfiguration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-ingest-configuration
+      description: Deletes a specified IngestConfiguration, so it can no longer be used to broadcast.
+      flags:
+        --arn=!: ARN of the IngestConfiguration.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: Optional field to force deletion of the IngestConfiguration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: Optional field to force deletion of the IngestConfiguration.
+    - name: delete-public-key
+      description: Deletes the specified public key used to sign stage participant tokens.
+      flags:
+        --arn=!: ARN of the public key to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-stage
+      description: Shuts down and deletes the specified stage (disconnecting all participants).
+      flags:
+        --arn=!: ARN of the stage to be deleted.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -15,6 +96,83 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disconnect-participant
+      description: Disconnects a specified participant from a specified stage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --participant-id=!: Identifier of the participant to be disconnected.
+        --reason=: Description of why this participant is being disconnected.
+        --stage-arn=!: ARN of the stage to which the participant is attached.
+    - name: get-composition
+      description: Get information about the specified Composition resource.
+      flags:
+        --arn=!: ARN of the Composition resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-encoder-configuration
+      description: Gets information about the specified EncoderConfiguration resource.
+      flags:
+        --arn=!: ARN of the EncoderConfiguration resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-ingest-configuration
+      description: Gets information about the specified IngestConfiguration.
+      flags:
+        --arn=!: ARN of the ingest for which the information is to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-participant
+      description: Gets information about the specified participant token.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --participant-id=!: Unique identifier for the participant.
+        --session-id=!: ID of a session within the stage.
+        --stage-arn=!: Stage ARN.
+    - name: get-public-key
+      description: Gets information for the specified public key.
+      flags:
+        --arn=!: ARN of the public key for which the information is to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-stage
+      description: Gets information for the specified stage.
+      flags:
+        --arn=!: ARN of the stage for which the information is to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-stage-session
+      description: Gets information for the specified stage session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: ID of a session within the stage.
+        --stage-arn=!: ARN of the stage for which the information is to be retrieved.
+    - name: get-storage-configuration
+      description: Gets the storage configuration for the specified ARN.
+      flags:
+        --arn=!: ARN of the storage configuration to be retrieved.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: import-public-key
+      description: Import a public key to be used for signing stage participant tokens.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Name of the public key to be imported.
+        --public-key-material=!: The content of the public key to be imported.
+        --tags=: Tags attached to the resource.
     - name: list-compositions
       description: Gets summary information about all Compositions in your account, in the AWS region where the API request is processed.
       flags:
@@ -25,6 +183,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of results to return.
         --next-token=: The first Composition to retrieve.
+    - name: list-encoder-configurations
+      description: Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return.
+        --next-token=: The first encoder configuration to retrieve.
     - name: list-ingest-configurations
       description: Lists all IngestConfigurations in your account, in the AWS region where the API request is processed.
       flags:
@@ -67,113 +233,6 @@ commands:
         --participant-id=!: Participant ID of the publisher that has been replicated.
         --source-stage-arn=!: ARN of the stage where the participant is publishing.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-composition
-      description: Starts a Composition from a stage based on the configuration provided in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destinations=!: Array of destination configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --idempotency-token=: Idempotency token.
-        --layout=: Layout object to configure composition parameters.
-        --stage-arn=!: ARN of the stage to be used for compositing.
-        --tags=: Tags attached to the resource.
-    - name: stop-composition
-      description: Stops and deletes a Composition resource.
-      flags:
-        --arn=!: ARN of the Composition.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-stage
-      description: Shuts down and deletes the specified stage (disconnecting all participants).
-      flags:
-        --arn=!: ARN of the stage to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: import-public-key
-      description: Import a public key to be used for signing stage participant tokens.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Name of the public key to be imported.
-        --public-key-material=!: The content of the public key to be imported.
-        --tags=: Tags attached to the resource.
-    - name: tag-resource
-      description: Adds or updates tags for the AWS resource with the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be tagged.
-        --tags=!: Array of tags to be added or updated.
-    - name: update-stage
-      description: Updates a stage’s configuration.
-      flags:
-        --arn=!: ARN of the stage to be updated.
-        --auto-participant-recording-configuration=: Configuration object for individual participant recording, to attach to the stage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Name of the stage to be updated.
-    - name: create-ingest-configuration
-      description: Creates a new IngestConfiguration resource, used to specify the ingest protocol for a stage.
-      flags:
-        --attributes=: Application-provided attributes to store in the IngestConfiguration and attach to a stage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingest-protocol=!: Type of ingest protocol that the user employs to broadcast.
-        --insecure-ingest: Whether the stage allows insecure RTMP ingest.
-        --name=: Optional name that can be specified for the IngestConfiguration being created.
-        --no-insecure-ingest: Whether the stage allows insecure RTMP ingest.
-        --stage-arn=: ARN of the stage with which the IngestConfiguration is associated.
-        --tags=: Tags attached to the resource.
-        --user-id=: Customer-assigned name to help identify the participant using the IngestConfiguration; this can be used to link a participant to a user in the customer’s own systems.
-      completion:
-        flag:
-            ingest-protocol:
-                - RTMP
-                - RTMPS
-    - name: create-participant-token
-      description: Creates an additional token for a specified stage.
-      flags:
-        --attributes=: Application-provided attributes to encode into the token and attach to a stage.
-        --capabilities=: Set of capabilities that the user is allowed to perform in the stage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: Duration (in minutes), after which the token expires.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-arn=!: ARN of the stage to which this token is scoped.
-        --user-id=: Name that can be specified to help identify the token.
-    - name: create-stage
-      description: Creates a new stage (and optionally participant tokens).
-      flags:
-        --auto-participant-recording-configuration=: Configuration object for individual participant recording, to attach to the new stage.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Optional name that can be specified for the stage being created.
-        --participant-token-configurations=: Array of participant token configuration objects to attach to the new stage.
-        --tags=: Tags attached to the resource.
-    - name: disconnect-participant
-      description: Disconnects a specified participant from a specified stage.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --participant-id=!: Identifier of the participant to be disconnected.
-        --reason=: Description of why this participant is being disconnected.
-        --stage-arn=!: ARN of the stage to which the participant is attached.
-    - name: get-composition
-      description: Get information about the specified Composition resource.
-      flags:
-        --arn=!: ARN of the Composition resource.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-participants
       description: Lists all participants in a specified stage session.
       flags:
@@ -211,71 +270,15 @@ commands:
         --next-token=: The first public key to retrieve.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: create-encoder-configuration
-      description: Creates an EncoderConfiguration object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Optional name to identify the resource.
-        --tags=: Tags attached to the resource.
-        --video=: Video configuration.
-    - name: get-storage-configuration
-      description: Gets the storage configuration for the specified ARN.
-      flags:
-        --arn=!: ARN of the storage configuration to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-participant-replication
-      description: Stops a replicated participant session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --destination-stage-arn=!: ARN of the stage where the participant has been replicated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --participant-id=!: Participant ID of the publisher that has been replicated.
-        --source-stage-arn=!: ARN of the stage where the participant is publishing.
-    - name: get-stage-session
-      description: Gets information for the specified stage session.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --session-id=!: ID of a session within the stage.
-        --stage-arn=!: ARN of the stage for which the information is to be retrieved.
-    - name: list-encoder-configurations
-      description: Gets summary information about all EncoderConfigurations in your account, in the AWS region where the API request is processed.
+    - name: list-stage-sessions
+      description: Gets all sessions for a specified stage.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of results to return.
-        --next-token=: The first encoder configuration to retrieve.
-    - name: list-tags-for-resource
-      description: Gets information about AWS tags for the specified ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to be retrieved.
-    - name: update-ingest-configuration
-      description: Updates a specified IngestConfiguration.
-      flags:
-        --arn=!: ARN of the IngestConfiguration, for which the related stage ARN needs to be updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --stage-arn=: Stage ARN that needs to be updated.
-    - name: delete-ingest-configuration
-      description: Deletes a specified IngestConfiguration, so it can no longer be used to broadcast.
-      flags:
-        --arn=!: ARN of the IngestConfiguration.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: Optional field to force deletion of the IngestConfiguration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: Optional field to force deletion of the IngestConfiguration.
+        --next-token=: The first stage session to retrieve.
+        --stage-arn=!: Stage ARN.
     - name: list-stages
       description: Gets summary information about all stages in your account, in the AWS region where the API request is processed.
       flags:
@@ -292,45 +295,24 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Maximum number of storage configurations to return.
         --next-token=: The first storage configuration to retrieve.
-    - name: list-stage-sessions
-      description: Gets all sessions for a specified stage.
+    - name: list-tags-for-resource
+      description: Gets information about AWS tags for the specified ARN.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of results to return.
-        --next-token=: The first stage session to retrieve.
-        --stage-arn=!: Stage ARN.
-    - name: get-ingest-configuration
-      description: Gets information about the specified IngestConfiguration.
-      flags:
-        --arn=!: ARN of the ingest for which the information is to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-public-key
-      description: Deletes the specified public key used to sign stage participant tokens.
-      flags:
-        --arn=!: ARN of the public key to be deleted.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-participant
-      description: Gets information about the specified participant token.
+        --resource-arn=!: The ARN of the resource to be retrieved.
+    - name: start-composition
+      description: Starts a Composition from a stage based on the configuration provided in the request.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destinations=!: Array of destination configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --participant-id=!: Unique identifier for the participant.
-        --session-id=!: ID of a session within the stage.
-        --stage-arn=!: Stage ARN.
-    - name: get-stage
-      description: Gets information for the specified stage.
-      flags:
-        --arn=!: ARN of the stage for which the information is to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idempotency-token=: Idempotency token.
+        --layout=: Layout object to configure composition parameters.
+        --stage-arn=!: ARN of the stage to be used for compositing.
+        --tags=: Tags attached to the resource.
     - name: start-participant-replication
       description: Starts replicating a publishing participant from a source stage to a destination stage.
       flags:
@@ -342,6 +324,30 @@ commands:
         --participant-id=!: Participant ID of the publisher that will be replicated.
         --reconnect-window-seconds=: If the participant disconnects and then reconnects within the specified interval, replication will continue to be `ACTIVE`.
         --source-stage-arn=!: ARN of the stage where the participant is publishing.
+    - name: stop-composition
+      description: Stops and deletes a Composition resource.
+      flags:
+        --arn=!: ARN of the Composition.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-participant-replication
+      description: Stops a replicated participant session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-stage-arn=!: ARN of the stage where the participant has been replicated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --participant-id=!: Participant ID of the publisher that has been replicated.
+        --source-stage-arn=!: ARN of the stage where the participant is publishing.
+    - name: tag-resource
+      description: Adds or updates tags for the AWS resource with the specified ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to be tagged.
+        --tags=!: Array of tags to be added or updated.
     - name: untag-resource
       description: Removes tags from the resource with the specified ARN.
       flags:
@@ -350,26 +356,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource to be untagged.
         --tag-keys=!: Array of tag keys (strings) for the tags to be removed.
-    - name: create-storage-configuration
-      description: Creates a new storage configuration, used to enable recording to Amazon S3.
+    - name: update-ingest-configuration
+      description: Updates a specified IngestConfiguration.
       flags:
+        --arn=!: ARN of the IngestConfiguration, for which the related stage ARN needs to be updated.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: Storage configuration name.
-        --s3=!: A complex type that contains a storage configuration for where recorded video will be stored.
-        --tags=: Tags attached to the resource.
-    - name: get-encoder-configuration
-      description: Gets information about the specified EncoderConfiguration resource.
+        --stage-arn=: Stage ARN that needs to be updated.
+    - name: update-stage
+      description: Updates a stage’s configuration.
       flags:
-        --arn=!: ARN of the EncoderConfiguration resource.
+        --arn=!: ARN of the stage to be updated.
+        --auto-participant-recording-configuration=: Configuration object for individual participant recording, to attach to the stage.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-public-key
-      description: Gets information for the specified public key.
-      flags:
-        --arn=!: ARN of the public key for which the information is to be retrieved.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Name of the stage to be updated.

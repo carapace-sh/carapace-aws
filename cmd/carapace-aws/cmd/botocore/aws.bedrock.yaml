@@ -1,6 +1,170 @@
 name: bedrock
 description: Amazon Bedrock
 commands:
+    - name: batch-delete-evaluation-job
+      description: Deletes a batch of evaluation jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifiers=!: A list of one or more evaluation job Amazon Resource Names (ARNs) you want to delete.
+    - name: cancel-automated-reasoning-policy-build-workflow
+      description: Cancels a running Automated Reasoning policy build workflow.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to cancel.
+    - name: create-automated-reasoning-policy
+      description: Creates an Automated Reasoning policy for Amazon Bedrock Guardrails.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than once.
+        --description=: A description of the Automated Reasoning policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The identifier of the KMS key to use for encrypting the automated reasoning policy and its associated artifacts.
+        --name=!: A unique name for the Automated Reasoning policy.
+        --policy-definition=: The policy definition that contains the formal logic rules, variables, and custom variable types used to validate foundation model responses in your application.
+        --tags=: A list of tags to associate with the Automated Reasoning policy.
+    - name: create-automated-reasoning-policy-test-case
+      description: Creates a test for an Automated Reasoning policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --confidence-threshold=: The minimum confidence level for logic validation.
+        --expected-aggregated-findings-result=!: The expected result of the Automated Reasoning check.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guard-content=!: The output content that's validated by the Automated Reasoning policy.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to create the test.
+        --query-content=: The input query or prompt that generated the content.
+      completion:
+        flag:
+            expected-aggregated-findings-result:
+                - VALID
+                - INVALID
+                - SATISFIABLE
+                - IMPOSSIBLE
+                - TRANSLATION_AMBIGUOUS
+                - TOO_COMPLEX
+                - NO_TRANSLATION
+    - name: create-automated-reasoning-policy-version
+      description: Creates a new version of an existing Automated Reasoning policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --last-updated-definition-hash=!: The hash of the current policy definition used as a concurrency token to ensure the policy hasn't been modified since you last retrieved it.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to create a version.
+        --tags=: A list of tags to associate with the policy version.
+    - name: create-custom-model
+      description: Creates a new custom model in Amazon Bedrock.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-kms-key-arn=: The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the custom model.
+        --model-name=!: A unique name for the custom model.
+        --model-source-config=!: The data source for the model.
+        --model-tags=: A list of key-value pairs to associate with the custom model resource.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf.
+    - name: create-custom-model-deployment
+      description: Deploys a custom model for on-demand inference in Amazon Bedrock.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: A description for the custom model deployment to help you identify its purpose.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-arn=!: The Amazon Resource Name (ARN) of the custom model to deploy for on-demand inference.
+        --model-deployment-name=!: The name for the custom model deployment.
+        --tags=: Tags to assign to the custom model deployment.
+    - name: create-evaluation-job
+      description: Creates an evaluation job.
+      flags:
+        --application-type=: Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base (retrieval and response generation).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --customer-encryption-key-id=: Specify your customer managed encryption key Amazon Resource Name (ARN) that will be used to encrypt your evaluation job.
+        --evaluation-config=!: Contains the configuration details of either an automated or human-based evaluation job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-config=!: Contains the configuration details of the inference model for the evaluation job.
+        --job-description=: A description of the evaluation job.
+        --job-name=!: A name for the evaluation job.
+        --job-tags=: Tags to attach to the model evaluation job.
+        --output-data-config=!: Contains the configuration details of the Amazon S3 bucket for storing the results of the evaluation job.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can assume to perform tasks on your behalf.
+      completion:
+        flag:
+            application-type:
+                - ModelEvaluation
+                - RagEvaluation
+    - name: create-foundation-model-agreement
+      description: Request a model access agreement for the specified model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: Model Id of the model for the access request.
+        --offer-token=!: An offer token encapsulates the information for an offer.
+    - name: create-guardrail
+      description: Creates a guardrail to block topics and to implement safeguards for your generative AI applications.
+      flags:
+        --automated-reasoning-policy-config=: Optional configuration for integrating Automated Reasoning policies with the new guardrail.
+        --blocked-input-messaging=!: The message to return when the guardrail blocks a prompt.
+        --blocked-outputs-messaging=!: The message to return when the guardrail blocks a model response.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than once.
+        --content-policy-config=: The content filter policies to configure for the guardrail.
+        --contextual-grounding-policy-config=: The contextual grounding policy configuration used to create a guardrail.
+        --cross-region-config=: The system-defined guardrail profile that you're using with your guardrail.
+        --description=: A description of the guardrail.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ARN of the KMS key that you use to encrypt the guardrail.
+        --name=!: The name to give the guardrail.
+        --sensitive-information-policy-config=: The sensitive information policy to configure for the guardrail.
+        --tags=: The tags that you want to attach to the guardrail.
+        --topic-policy-config=: The topic policies to configure for the guardrail.
+        --word-policy-config=: The word policy you configure for the guardrail.
+    - name: create-guardrail-version
+      description: Creates a version of the guardrail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than once.
+        --description=: A description of the guardrail version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The unique identifier of the guardrail.
+    - name: create-inference-profile
+      description: Creates an application inference profile to track metrics and costs when invoking a model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description for the inference profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-profile-name=!: A name for the inference profile.
+        --model-source=!: The foundation model or system-defined inference profile that the inference profile will track metrics and costs for.
+        --tags=: An array of objects, each of which contains a tag and its value.
+    - name: create-marketplace-model-endpoint
+      description: Creates an endpoint for a model from Amazon Bedrock Marketplace.
+      flags:
+        --accept-eula: Indicates whether you accept the end-user license agreement (EULA) for the model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --endpoint-config=!: The configuration for the endpoint, including the number and type of instances to use.
+        --endpoint-name=!: The name of the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-source-identifier=!: The ARN of the model from Amazon Bedrock Marketplace that you want to deploy to the endpoint.
+        --no-accept-eula: Indicates whether you accept the end-user license agreement (EULA) for the model.
+        --tags=: An array of key-value pairs to apply to the underlying Amazon SageMaker endpoint.
     - name: create-model-copy-job
       description: Copies a model to another region so that it can be used there.
       flags:
@@ -40,6 +204,66 @@ commands:
                 - CONTINUED_PRE_TRAINING
                 - DISTILLATION
                 - IMPORTED
+    - name: create-model-import-job
+      description: Creates a model import job to import model that you have customized in other environments, such as Amazon SageMaker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --imported-model-kms-key-id=: The imported model is encrypted at rest using this key.
+        --imported-model-name=!: The name of the imported model.
+        --imported-model-tags=: Tags to attach to the imported model.
+        --job-name=!: The name of the import job.
+        --job-tags=: Tags to attach to this import job.
+        --model-data-source=!: The data source for the imported model.
+        --role-arn=!: The Amazon Resource Name (ARN) of the model import job.
+        --vpc-config=: VPC configuration parameters for the private Virtual Private Cloud (VPC) that contains the resources you are using for the import job.
+    - name: create-model-invocation-job
+      description: Creates a batch inference job to invoke a model on multiple prompts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: Details about the location of the input to the batch inference job.
+        --job-name=!: A name to give the batch inference job.
+        --model-id=!: The unique identifier of the foundation model to use for the batch inference job.
+        --output-data-config=!: Details about the location of the output of the batch inference job.
+        --role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference.
+        --tags=: Any tags to associate with the batch inference job.
+        --timeout-duration-in-hours=: The number of hours after which to force the batch inference job to time out.
+        --vpc-config=: The configuration of the Virtual Private Cloud (VPC) for the data in the batch inference job.
+    - name: create-prompt-router
+      description: Creates a prompt router that manages the routing of requests between multiple foundation models based on the routing criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure idempotency of your requests.
+        --description=: An optional description of the prompt router to help identify its purpose.
+        --fallback-model=!: The default model to use when the routing criteria is not met.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --models=!: A list of foundation models that the prompt router can route requests to.
+        --prompt-router-name=!: The name of the prompt router.
+        --routing-criteria=!: The criteria, which is the response quality difference, used to determine how incoming requests are routed to different models.
+        --tags=: An array of key-value pairs to apply to this resource as tags.
+    - name: create-provisioned-model-throughput
+      description: Creates dedicated throughput for a base or custom model with the model units and for the duration that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --commitment-duration=: The commitment duration requested for the Provisioned Throughput.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: The Amazon Resource Name (ARN) or name of the model to associate with this Provisioned Throughput.
+        --model-units=!: Number of model units to allocate.
+        --provisioned-model-name=!: The name for this Provisioned Throughput.
+        --tags=: Tags to associate with this Provisioned Throughput.
+      completion:
+        flag:
+            commitment-duration:
+                - OneMonth
+                - SixMonths
     - name: delete-automated-reasoning-policy
       description: Deletes an Automated Reasoning policy or policy version.
       flags:
@@ -49,6 +273,138 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-force: Specifies whether to force delete the automated reasoning policy even if it has active resources.
         --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to delete.
+    - name: delete-automated-reasoning-policy-build-workflow
+      description: Deletes an Automated Reasoning policy build workflow and its associated artifacts.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --last-updated-at=!: The timestamp when the build workflow was last updated.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to delete.
+    - name: delete-automated-reasoning-policy-test-case
+      description: Deletes an Automated Reasoning policy test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --last-updated-at=!: The timestamp when the test was last updated.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
+        --test-case-id=!: The unique identifier of the test to delete.
+    - name: delete-custom-model
+      description: Deletes a custom model that you created earlier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-identifier=!: Name of the model to delete.
+    - name: delete-custom-model-deployment
+      description: Deletes a custom model deployment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-model-deployment-identifier=!: The Amazon Resource Name (ARN) or name of the custom model deployment to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-enforced-guardrail-configuration
+      description: Deletes the account-level enforced guardrail configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-id=!: Unique ID for the account enforced configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-foundation-model-agreement
+      description: Delete the model access agreement for the specified model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: Model Id of the model access to delete.
+    - name: delete-guardrail
+      description: Deletes a guardrail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The unique identifier of the guardrail.
+        --guardrail-version=: The version of the guardrail.
+    - name: delete-imported-model
+      description: Deletes a custom model that you imported earlier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-identifier=!: Name of the imported model to delete.
+    - name: delete-inference-profile
+      description: Deletes an application inference profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-profile-identifier=!: The Amazon Resource Name (ARN) or ID of the application inference profile to delete.
+    - name: delete-marketplace-model-endpoint
+      description: Deletes an endpoint for a model from Amazon Bedrock Marketplace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-model-invocation-logging-configuration
+      description: Delete the invocation logging.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-prompt-router
+      description: Deletes a specified prompt router.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --prompt-router-arn=!: The Amazon Resource Name (ARN) of the prompt router to delete.
+    - name: delete-provisioned-model-throughput
+      description: Deletes a Provisioned Throughput.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
+    - name: deregister-marketplace-model-endpoint
+      description: Deregisters an endpoint for a model from Amazon Bedrock Marketplace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to deregister.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: export-automated-reasoning-policy-version
+      description: Exports the policy definition for an Automated Reasoning policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to export.
+    - name: get-automated-reasoning-policy
+      description: Retrieves details about an Automated Reasoning policy or policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to retrieve.
+    - name: get-automated-reasoning-policy-annotations
+      description: Retrieves the current annotations for an Automated Reasoning policy build workflow.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow whose annotations you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose annotations you want to retrieve.
+    - name: get-automated-reasoning-policy-build-workflow
+      description: Retrieves detailed information about an Automated Reasoning policy build workflow, including its status, configuration, and metadata.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to retrieve.
     - name: get-automated-reasoning-policy-build-workflow-result-assets
       description: Retrieves the resulting assets from a completed Automated Reasoning policy build workflow, including build logs, quality reports, and generated policy artifacts.
       flags:
@@ -65,6 +421,303 @@ commands:
                 - QUALITY_REPORT
                 - POLICY_DEFINITION
                 - GENERATED_TEST_CASES
+    - name: get-automated-reasoning-policy-next-scenario
+      description: Retrieves the next test scenario for validating an Automated Reasoning policy.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow associated with the test scenarios.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which you want to get the next test scenario.
+    - name: get-automated-reasoning-policy-test-case
+      description: Retrieves details about a specific Automated Reasoning policy test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
+        --test-case-id=!: The unique identifier of the test to retrieve.
+    - name: get-automated-reasoning-policy-test-result
+      description: Retrieves the test result for a specific Automated Reasoning policy test.
+      flags:
+        --build-workflow-id=!: The build workflow identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy.
+        --test-case-id=!: The unique identifier of the test for which to retrieve results.
+    - name: get-custom-model
+      description: Get the properties associated with a Amazon Bedrock custom model that you have created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-identifier=!: Name or Amazon Resource Name (ARN) of the custom model.
+    - name: get-custom-model-deployment
+      description: Retrieves information about a custom model deployment, including its status, configuration, and metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-model-deployment-identifier=!: The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-evaluation-job
+      description: Gets information about an evaluation job, such as the status of the job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: The Amazon Resource Name (ARN) of the evaluation job you want get information on.
+    - name: get-foundation-model
+      description: Get details about a Amazon Bedrock foundation model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-identifier=!: The model identifier.
+    - name: get-foundation-model-availability
+      description: Get information about the Foundation model availability.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-id=!: The model Id of the foundation model.
+    - name: get-guardrail
+      description: Gets details about a guardrail.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The unique identifier of the guardrail for which to get details.
+        --guardrail-version=: The version of the guardrail for which to get details.
+    - name: get-imported-model
+      description: Gets properties associated with a customized model you imported.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-identifier=!: Name or Amazon Resource Name (ARN) of the imported model.
+    - name: get-inference-profile
+      description: Gets information about an inference profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-profile-identifier=!: The ID or Amazon Resource Name (ARN) of the inference profile.
+    - name: get-marketplace-model-endpoint
+      description: Retrieves details about a specific endpoint for a model from Amazon Bedrock Marketplace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to get information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-model-copy-job
+      description: Retrieves information about a model copy job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-arn=!: The Amazon Resource Name (ARN) of the model copy job.
+    - name: get-model-customization-job
+      description: Retrieves the properties associated with a model-customization job, including the status of the job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: Identifier for the customization job.
+    - name: get-model-import-job
+      description: Retrieves the properties associated with import model job, including the status of the job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: The identifier of the import job.
+    - name: get-model-invocation-job
+      description: Gets details about a batch inference job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: The Amazon Resource Name (ARN) of the batch inference job.
+    - name: get-model-invocation-logging-configuration
+      description: Get the current configuration values for model invocation logging.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-prompt-router
+      description: Retrieves details about a prompt router.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --prompt-router-arn=!: The prompt router's ARN
+    - name: get-provisioned-model-throughput
+      description: Returns details for a Provisioned Throughput.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
+    - name: get-use-case-for-model-access
+      description: Get usecase for model access.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-automated-reasoning-policies
+      description: Lists all Automated Reasoning policies in your account, with optional filtering by policy ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of policies to return in a single call.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-arn=: Optional filter to list only the policy versions with the specified Amazon Resource Name (ARN).
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-automated-reasoning-policy-build-workflows
+      description: Lists all build workflows for an Automated Reasoning policy, showing the history of policy creation and modification attempts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of build workflows to return in a single response.
+        --next-token=: A pagination token from a previous request to continue listing build workflows from where the previous request left off.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflows you want to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-automated-reasoning-policy-test-cases
+      description: Lists tests for an Automated Reasoning policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tests to return in a single call.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to list tests.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-automated-reasoning-policy-test-results
+      description: Lists test results for an Automated Reasoning policy, showing how the policy performed against various test scenarios and validation checks.
+      flags:
+        --build-workflow-id=!: The unique identifier of the build workflow whose test results you want to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of test results to return in a single response.
+        --next-token=: A pagination token from a previous request to continue listing test results from where the previous request left off.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose test results you want to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-custom-model-deployments
+      description: Lists custom model deployments in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: Filters deployments created after the specified date and time.
+        --created-before=: Filters deployments created before the specified date and time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --model-arn-equals=: Filters deployments by the Amazon Resource Name (ARN) of the associated custom model.
+        --name-contains=: Filters deployments whose names contain the specified string.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort the results by.
+        --sort-order=: The sort order for the results.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: Filters deployments by status.
+      completion:
+        flag:
+            sort-by:
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - Creating
+                - Active
+                - Failed
+    - name: list-custom-models
+      description: Returns a list of the custom models that you have created with the `CreateModelCustomizationJob` operation.
+      flags:
+        --base-model-arn-equals=: Return custom models only if the base model Amazon Resource Name (ARN) matches this parameter.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: Return custom models created after the specified time.
+        --creation-time-before=: Return custom models created before the specified time.
+        --foundation-model-arn-equals=: Return custom models only if the foundation model Amazon Resource Name (ARN) matches this parameter.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-owned: Return custom models depending on if the current account owns them (`true`) or if they were shared with the current account (`false`).
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --model-status=: The status of them model to filter results by.
+        --name-contains=: Return custom models only if the job name contains these characters.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --no-is-owned: Return custom models depending on if the current account owns them (`true`) or if they were shared with the current account (`false`).
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort by in the returned list of models.
+        --sort-order=: The sort order of the results.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            model-status:
+                - Active
+                - Creating
+                - Failed
+            sort-by:
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+    - name: list-enforced-guardrails-configuration
+      description: Lists the account-level enforced guardrail configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Opaque continuation token of previous paginated response.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-evaluation-jobs
+      description: Lists all existing evaluation jobs.
+      flags:
+        --application-type-equals=: A filter to only list evaluation jobs that are either model evaluations or knowledge base evaluations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter to only list evaluation jobs created after a specified time.
+        --creation-time-before=: A filter to only list evaluation jobs created before a specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --name-contains=: A filter to only list evaluation jobs that contain a specified string in the job name.
+        --next-token=: Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: Specifies a creation time to sort the list of evaluation jobs by when they were created.
+        --sort-order=: Specifies whether to sort the list of evaluation jobs by either ascending or descending order.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: A filter to only list evaluation jobs that are of a certain status.
+      completion:
+        flag:
+            application-type-equals:
+                - ModelEvaluation
+                - RagEvaluation
+            sort-by:
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
+                - Stopping
+                - Stopped
+                - Deleting
     - name: list-foundation-model-agreement-offers
       description: Get the offers associated with the specified model.
       flags:
@@ -113,312 +766,6 @@ commands:
         --next-token=: If there are more results than were returned in the response, the response returns a `nextToken` that you can send in another `ListGuardrails` request to see the next batch of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: update-automated-reasoning-policy-test-case
-      description: Updates an existing Automated Reasoning policy test.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --confidence-threshold=: The updated minimum confidence level for logic validation.
-        --expected-aggregated-findings-result=!: The updated expected result of the Automated Reasoning check.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guard-content=!: The updated content to be validated by the Automated Reasoning policy.
-        --last-updated-at=!: The timestamp when the test was last updated.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
-        --query-content=: The updated input query or prompt that generated the content.
-        --test-case-id=!: The unique identifier of the test to update.
-      completion:
-        flag:
-            expected-aggregated-findings-result:
-                - VALID
-                - INVALID
-                - SATISFIABLE
-                - IMPOSSIBLE
-                - TRANSLATION_AMBIGUOUS
-                - TOO_COMPLEX
-                - NO_TRANSLATION
-    - name: create-marketplace-model-endpoint
-      description: Creates an endpoint for a model from Amazon Bedrock Marketplace.
-      flags:
-        --accept-eula: Indicates whether you accept the end-user license agreement (EULA) for the model.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --endpoint-config=!: The configuration for the endpoint, including the number and type of instances to use.
-        --endpoint-name=!: The name of the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-source-identifier=!: The ARN of the model from Amazon Bedrock Marketplace that you want to deploy to the endpoint.
-        --no-accept-eula: Indicates whether you accept the end-user license agreement (EULA) for the model.
-        --tags=: An array of key-value pairs to apply to the underlying Amazon SageMaker endpoint.
-    - name: get-custom-model-deployment
-      description: Retrieves information about a custom model deployment, including its status, configuration, and metadata.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-model-deployment-identifier=!: The Amazon Resource Name (ARN) or name of the custom model deployment to retrieve information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-guardrail
-      description: Gets details about a guardrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The unique identifier of the guardrail for which to get details.
-        --guardrail-version=: The version of the guardrail for which to get details.
-    - name: get-model-customization-job
-      description: Retrieves the properties associated with a model-customization job, including the status of the job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: Identifier for the customization job.
-    - name: get-provisioned-model-throughput
-      description: Returns details for a Provisioned Throughput.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
-    - name: get-use-case-for-model-access
-      description: Get usecase for model access.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-automated-reasoning-policies
-      description: Lists all Automated Reasoning policies in your account, with optional filtering by policy ARN.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of policies to return in a single call.
-        --next-token=: The pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-arn=: Optional filter to list only the policy versions with the specified Amazon Resource Name (ARN).
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-guardrail-version
-      description: Creates a version of the guardrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than once.
-        --description=: A description of the guardrail version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The unique identifier of the guardrail.
-    - name: delete-custom-model-deployment
-      description: Deletes a custom model deployment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --custom-model-deployment-identifier=!: The Amazon Resource Name (ARN) or name of the custom model deployment to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-enforced-guardrail-configuration
-      description: Sets the account-level enforced guardrail configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=: Unique ID for the account enforced configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-inference-config=!: Account-level enforced guardrail input configuration.
-    - name: start-automated-reasoning-policy-build-workflow
-      description: Starts a new build workflow for an Automated Reasoning policy.
-      flags:
-        --build-workflow-type=!: The type of build workflow to start (e.g., DOCUMENT\_INGESTION for processing new documents, POLICY\_REPAIR for fixing existing policies).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than once.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to start the build workflow.
-        --source-content=!: The source content for the build workflow, such as documents to analyze or repair instructions for existing policies.
-      completion:
-        flag:
-            build-workflow-type:
-                - INGEST_CONTENT
-                - REFINE_POLICY
-                - IMPORT_POLICY
-    - name: get-custom-model
-      description: Get the properties associated with a Amazon Bedrock custom model that you have created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-identifier=!: Name or Amazon Resource Name (ARN) of the custom model.
-    - name: get-evaluation-job
-      description: Gets information about an evaluation job, such as the status of the job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: The Amazon Resource Name (ARN) of the evaluation job you want get information on.
-    - name: get-model-invocation-job
-      description: Gets details about a batch inference job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: The Amazon Resource Name (ARN) of the batch inference job.
-    - name: cancel-automated-reasoning-policy-build-workflow
-      description: Cancels a running Automated Reasoning policy build workflow.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow to cancel.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to cancel.
-    - name: create-foundation-model-agreement
-      description: Request a model access agreement for the specified model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: Model Id of the model for the access request.
-        --offer-token=!: An offer token encapsulates the information for an offer.
-    - name: create-inference-profile
-      description: Creates an application inference profile to track metrics and costs when invoking a model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --description=: A description for the inference profile.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-profile-name=!: A name for the inference profile.
-        --model-source=!: The foundation model or system-defined inference profile that the inference profile will track metrics and costs for.
-        --tags=: An array of objects, each of which contains a tag and its value.
-    - name: create-model-invocation-job
-      description: Creates a batch inference job to invoke a model on multiple prompts.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: Details about the location of the input to the batch inference job.
-        --job-name=!: A name to give the batch inference job.
-        --model-id=!: The unique identifier of the foundation model to use for the batch inference job.
-        --output-data-config=!: Details about the location of the output of the batch inference job.
-        --role-arn=!: The Amazon Resource Name (ARN) of the service role with permissions to carry out and manage batch inference.
-        --tags=: Any tags to associate with the batch inference job.
-        --timeout-duration-in-hours=: The number of hours after which to force the batch inference job to time out.
-        --vpc-config=: The configuration of the Virtual Private Cloud (VPC) for the data in the batch inference job.
-    - name: delete-marketplace-model-endpoint
-      description: Deletes an endpoint for a model from Amazon Bedrock Marketplace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-automated-reasoning-policy-test-results
-      description: Lists test results for an Automated Reasoning policy, showing how the policy performed against various test scenarios and validation checks.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow whose test results you want to list.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of test results to return in a single response.
-        --next-token=: A pagination token from a previous request to continue listing test results from where the previous request left off.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose test results you want to list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-automated-reasoning-policy-test-case
-      description: Creates a test for an Automated Reasoning policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --confidence-threshold=: The minimum confidence level for logic validation.
-        --expected-aggregated-findings-result=!: The expected result of the Automated Reasoning check.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guard-content=!: The output content that's validated by the Automated Reasoning policy.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to create the test.
-        --query-content=: The input query or prompt that generated the content.
-      completion:
-        flag:
-            expected-aggregated-findings-result:
-                - VALID
-                - INVALID
-                - SATISFIABLE
-                - IMPOSSIBLE
-                - TRANSLATION_AMBIGUOUS
-                - TOO_COMPLEX
-                - NO_TRANSLATION
-    - name: delete-foundation-model-agreement
-      description: Delete the model access agreement for the specified model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: Model Id of the model access to delete.
-    - name: delete-model-invocation-logging-configuration
-      description: Delete the invocation logging.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-marketplace-model-endpoints
-      description: Lists the endpoints for models from Amazon Bedrock Marketplace in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --model-source-equals=: If specified, only endpoints for the given model source identifier are returned.
-        --next-token=: The token for the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-guardrail
-      description: Updates a guardrail with the values you specify.
-      flags:
-        --automated-reasoning-policy-config=: Updated configuration for Automated Reasoning policies associated with the guardrail.
-        --blocked-input-messaging=!: The message to return when the guardrail blocks a prompt.
-        --blocked-outputs-messaging=!: The message to return when the guardrail blocks a model response.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-policy-config=: The content policy to configure for the guardrail.
-        --contextual-grounding-policy-config=: The contextual grounding policy configuration used to update a guardrail.
-        --cross-region-config=: The system-defined guardrail profile that you're using with your guardrail.
-        --description=: A description of the guardrail.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The unique identifier of the guardrail.
-        --kms-key-id=: The ARN of the KMS key with which to encrypt the guardrail.
-        --name=!: A name for the guardrail.
-        --sensitive-information-policy-config=: The sensitive information policy to configure for the guardrail.
-        --topic-policy-config=: The topic policy to configure for the guardrail.
-        --word-policy-config=: The word policy to configure for the guardrail.
-    - name: delete-automated-reasoning-policy-build-workflow
-      description: Deletes an Automated Reasoning policy build workflow and its associated artifacts.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --last-updated-at=!: The timestamp when the build workflow was last updated.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to delete.
-    - name: delete-automated-reasoning-policy-test-case
-      description: Deletes an Automated Reasoning policy test.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --last-updated-at=!: The timestamp when the test was last updated.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
-        --test-case-id=!: The unique identifier of the test to delete.
-    - name: get-automated-reasoning-policy
-      description: Retrieves details about an Automated Reasoning policy or policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to retrieve.
-    - name: get-automated-reasoning-policy-build-workflow
-      description: Retrieves detailed information about an Automated Reasoning policy build workflow, including its status, configuration, and metadata.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflow you want to retrieve.
     - name: list-imported-models
       description: Returns a list of models you've imported.
       flags:
@@ -442,146 +789,6 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
-    - name: list-model-import-jobs
-      description: Returns a list of import jobs you've submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creation-time-after=: Return import jobs that were created after the specified time.
-        --creation-time-before=: Return import jobs that were created before the specified time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --name-contains=: Return imported jobs only if the job name contains these characters.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The field to sort by in the returned list of imported jobs.
-        --sort-order=: Specifies whether to sort the results in ascending or descending order.
-        --starting-token=: A token to specify where to start paginating.
-        --status-equals=: Return imported jobs with the specified status.
-      completion:
-        flag:
-            sort-by:
-                - CreationTime
-            sort-order:
-                - Ascending
-                - Descending
-            status-equals:
-                - InProgress
-                - Completed
-                - Failed
-    - name: tag-resource
-      description: Associate tags with a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
-        --tags=!: Tags to associate with the resource.
-    - name: update-automated-reasoning-policy
-      description: Updates an existing Automated Reasoning policy with new rules, variables, or configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The updated description for the Automated Reasoning policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The updated name for the Automated Reasoning policy.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to update.
-        --policy-definition=!: The updated policy definition containing the formal logic rules, variables, and types.
-    - name: create-automated-reasoning-policy-version
-      description: Creates a new version of an existing Automated Reasoning policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --last-updated-definition-hash=!: The hash of the current policy definition used as a concurrency token to ensure the policy hasn't been modified since you last retrieved it.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to create a version.
-        --tags=: A list of tags to associate with the policy version.
-    - name: create-custom-model
-      description: Creates a new custom model in Amazon Bedrock.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-kms-key-arn=: The Amazon Resource Name (ARN) of the customer managed KMS key to encrypt the custom model.
-        --model-name=!: A unique name for the custom model.
-        --model-source-config=!: The data source for the model.
-        --model-tags=: A list of key-value pairs to associate with the custom model resource.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock assumes to perform tasks on your behalf.
-    - name: create-custom-model-deployment
-      description: Deploys a custom model for on-demand inference in Amazon Bedrock.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --description=: A description for the custom model deployment to help you identify its purpose.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-arn=!: The Amazon Resource Name (ARN) of the custom model to deploy for on-demand inference.
-        --model-deployment-name=!: The name for the custom model deployment.
-        --tags=: Tags to assign to the custom model deployment.
-    - name: delete-provisioned-model-throughput
-      description: Deletes a Provisioned Throughput.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
-    - name: get-marketplace-model-endpoint
-      description: Retrieves details about a specific endpoint for a model from Amazon Bedrock Marketplace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to get information about.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-automated-reasoning-policy-build-workflows
-      description: Lists all build workflows for an Automated Reasoning policy, showing the history of policy creation and modification attempts.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of build workflows to return in a single response.
-        --next-token=: A pagination token from a previous request to continue listing build workflows from where the previous request left off.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose build workflows you want to list.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-evaluation-jobs
-      description: Lists all existing evaluation jobs.
-      flags:
-        --application-type-equals=: A filter to only list evaluation jobs that are either model evaluations or knowledge base evaluations.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creation-time-after=: A filter to only list evaluation jobs created after a specified time.
-        --creation-time-before=: A filter to only list evaluation jobs created before a specified time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return.
-        --name-contains=: A filter to only list evaluation jobs that contain a specified string in the job name.
-        --next-token=: Continuation token from the previous response, for Amazon Bedrock to list the next set of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: Specifies a creation time to sort the list of evaluation jobs by when they were created.
-        --sort-order=: Specifies whether to sort the list of evaluation jobs by either ascending or descending order.
-        --starting-token=: A token to specify where to start paginating.
-        --status-equals=: A filter to only list evaluation jobs that are of a certain status.
-      completion:
-        flag:
-            application-type-equals:
-                - ModelEvaluation
-                - RagEvaluation
-            sort-by:
-                - CreationTime
-            sort-order:
-                - Ascending
-                - Descending
-            status-equals:
-                - InProgress
-                - Completed
-                - Failed
-                - Stopping
-                - Stopped
-                - Deleting
     - name: list-inference-profiles
       description: Returns a list of inference profiles that you can use.
       flags:
@@ -599,121 +806,18 @@ commands:
             type-equals:
                 - SYSTEM_DEFINED
                 - APPLICATION
-    - name: batch-delete-evaluation-job
-      description: Deletes a batch of evaluation jobs.
+    - name: list-marketplace-model-endpoints
+      description: Lists the endpoints for models from Amazon Bedrock Marketplace in your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifiers=!: A list of one or more evaluation job Amazon Resource Names (ARNs) you want to delete.
-    - name: create-model-import-job
-      description: Creates a model import job to import model that you have customized in other environments, such as Amazon SageMaker.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --imported-model-kms-key-id=: The imported model is encrypted at rest using this key.
-        --imported-model-name=!: The name of the imported model.
-        --imported-model-tags=: Tags to attach to the imported model.
-        --job-name=!: The name of the import job.
-        --job-tags=: Tags to attach to this import job.
-        --model-data-source=!: The data source for the imported model.
-        --role-arn=!: The Amazon Resource Name (ARN) of the model import job.
-        --vpc-config=: VPC configuration parameters for the private Virtual Private Cloud (VPC) that contains the resources you are using for the import job.
-    - name: delete-prompt-router
-      description: Deletes a specified prompt router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prompt-router-arn=!: The Amazon Resource Name (ARN) of the prompt router to delete.
-    - name: get-automated-reasoning-policy-annotations
-      description: Retrieves the current annotations for an Automated Reasoning policy build workflow.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow whose annotations you want to retrieve.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose annotations you want to retrieve.
-    - name: get-foundation-model-availability
-      description: Get information about the Foundation model availability.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The model Id of the foundation model.
-    - name: get-model-invocation-logging-configuration
-      description: Get the current configuration values for model invocation logging.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-prompt-router
-      description: Retrieves details about a prompt router.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --prompt-router-arn=!: The prompt router's ARN
-    - name: list-enforced-guardrails-configuration
-      description: Lists the account-level enforced guardrail configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: Opaque continuation token of previous paginated response.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-guardrail
-      description: Creates a guardrail to block topics and to implement safeguards for your generative AI applications.
-      flags:
-        --automated-reasoning-policy-config=: Optional configuration for integrating Automated Reasoning policies with the new guardrail.
-        --blocked-input-messaging=!: The message to return when the guardrail blocks a prompt.
-        --blocked-outputs-messaging=!: The message to return when the guardrail blocks a model response.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than once.
-        --content-policy-config=: The content filter policies to configure for the guardrail.
-        --contextual-grounding-policy-config=: The contextual grounding policy configuration used to create a guardrail.
-        --cross-region-config=: The system-defined guardrail profile that you're using with your guardrail.
-        --description=: A description of the guardrail.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The ARN of the KMS key that you use to encrypt the guardrail.
-        --name=!: The name to give the guardrail.
-        --sensitive-information-policy-config=: The sensitive information policy to configure for the guardrail.
-        --tags=: The tags that you want to attach to the guardrail.
-        --topic-policy-config=: The topic policies to configure for the guardrail.
-        --word-policy-config=: The word policy you configure for the guardrail.
-    - name: list-custom-model-deployments
-      description: Lists custom model deployments in your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --created-after=: Filters deployments created after the specified date and time.
-        --created-before=: Filters deployments created before the specified date and time.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
-        --model-arn-equals=: Filters deployments by the Amazon Resource Name (ARN) of the associated custom model.
-        --name-contains=: Filters deployments whose names contain the specified string.
+        --model-source-equals=: If specified, only endpoints for the given model source identifier are returned.
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The field to sort the results by.
-        --sort-order=: The sort order for the results.
         --starting-token=: A token to specify where to start paginating.
-        --status-equals=: Filters deployments by status.
-      completion:
-        flag:
-            sort-by:
-                - CreationTime
-            sort-order:
-                - Ascending
-                - Descending
-            status-equals:
-                - Creating
-                - Active
-                - Failed
     - name: list-model-copy-jobs
       description: Returns a list of model copy jobs that you have submitted.
       flags:
@@ -744,102 +848,6 @@ commands:
                 - InProgress
                 - Completed
                 - Failed
-    - name: list-prompt-routers
-      description: Retrieves a list of prompt routers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of prompt routers to return in one page of results.
-        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --type=: The type of the prompt routers, such as whether it's default or custom.
-      completion:
-        flag:
-            type:
-                - custom
-                - default
-    - name: list-tags-for-resource
-      description: List the tags associated with the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-    - name: start-automated-reasoning-policy-test-workflow
-      description: Initiates a test workflow to validate Automated Reasoning policy tests.
-      flags:
-        --build-workflow-id=!: The build workflow identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to test.
-        --test-case-ids=: The list of test identifiers to run.
-    - name: delete-imported-model
-      description: Deletes a custom model that you imported earlier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-identifier=!: Name of the imported model to delete.
-    - name: get-automated-reasoning-policy-test-result
-      description: Retrieves the test result for a specific Automated Reasoning policy test.
-      flags:
-        --build-workflow-id=!: The build workflow identifier.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy.
-        --test-case-id=!: The unique identifier of the test for which to retrieve results.
-    - name: get-model-copy-job
-      description: Retrieves information about a model copy job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-arn=!: The Amazon Resource Name (ARN) of the model copy job.
-    - name: get-model-import-job
-      description: Retrieves the properties associated with import model job, including the status of the job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: The identifier of the import job.
-    - name: list-custom-models
-      description: Returns a list of the custom models that you have created with the `CreateModelCustomizationJob` operation.
-      flags:
-        --base-model-arn-equals=: Return custom models only if the base model Amazon Resource Name (ARN) matches this parameter.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --creation-time-after=: Return custom models created after the specified time.
-        --creation-time-before=: Return custom models created before the specified time.
-        --foundation-model-arn-equals=: Return custom models only if the foundation model Amazon Resource Name (ARN) matches this parameter.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --is-owned: Return custom models depending on if the current account owns them (`true`) or if they were shared with the current account (`false`).
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in the response.
-        --model-status=: The status of them model to filter results by.
-        --name-contains=: Return custom models only if the job name contains these characters.
-        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
-        --no-is-owned: Return custom models depending on if the current account owns them (`true`) or if they were shared with the current account (`false`).
-        --page-size=: The size of each page to get in the AWS service call.
-        --sort-by=: The field to sort by in the returned list of models.
-        --sort-order=: The sort order of the results.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            model-status:
-                - Active
-                - Creating
-                - Failed
-            sort-by:
-                - CreationTime
-            sort-order:
-                - Ascending
-                - Descending
     - name: list-model-customization-jobs
       description: Returns a list of model customization jobs that you have submitted.
       flags:
@@ -870,6 +878,34 @@ commands:
                 - Failed
                 - Stopping
                 - Stopped
+    - name: list-model-import-jobs
+      description: Returns a list of import jobs you've submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: Return import jobs that were created after the specified time.
+        --creation-time-before=: Return import jobs that were created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --name-contains=: Return imported jobs only if the job name contains these characters.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort by in the returned list of imported jobs.
+        --sort-order=: Specifies whether to sort the results in ascending or descending order.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: Return imported jobs with the specified status.
+      completion:
+        flag:
+            sort-by:
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
     - name: list-model-invocation-jobs
       description: Lists all batch inference jobs in the account.
       flags:
@@ -905,102 +941,23 @@ commands:
                 - Expired
                 - Validating
                 - Scheduled
-    - name: put-model-invocation-logging-configuration
-      description: Set the configuration values for model invocation logging.
+    - name: list-prompt-routers
+      description: Retrieves a list of prompt routers.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-config=!: The logging configuration values to set.
-    - name: delete-enforced-guardrail-configuration
-      description: Deletes the account-level enforced guardrail configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-id=!: Unique ID for the account enforced configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: register-marketplace-model-endpoint
-      description: Registers an existing Amazon SageMaker endpoint with Amazon Bedrock Marketplace, allowing it to be used with Amazon Bedrock APIs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-identifier=!: The ARN of the Amazon SageMaker endpoint you want to register with Amazon Bedrock Marketplace.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-source-identifier=!: The ARN of the model from Amazon Bedrock Marketplace that is deployed on the endpoint.
-    - name: stop-evaluation-job
-      description: Stops an evaluation job that is current being created or running.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: The Amazon Resource Name (ARN) of the evaluation job you want to stop.
-    - name: stop-model-customization-job
-      description: Stops an active model customization job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: Job identifier of the job to stop.
-    - name: untag-resource
-      description: Remove one or more tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to untag.
-        --tag-keys=!: Tag keys of the tags to remove from the resource.
-    - name: update-marketplace-model-endpoint
-      description: Updates the configuration of an existing endpoint for a model from Amazon Bedrock Marketplace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to update.
-        --endpoint-config=!: The new configuration for the endpoint, including the number and type of instances to use.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-inference-profile
-      description: Deletes an application inference profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-profile-identifier=!: The Amazon Resource Name (ARN) or ID of the application inference profile to delete.
-    - name: create-evaluation-job
-      description: Creates an evaluation job.
-      flags:
-        --application-type=: Specifies whether the evaluation job is for evaluating a model or evaluating a knowledge base (retrieval and response generation).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --customer-encryption-key-id=: Specify your customer managed encryption key Amazon Resource Name (ARN) that will be used to encrypt your evaluation job.
-        --evaluation-config=!: Contains the configuration details of either an automated or human-based evaluation job.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-config=!: Contains the configuration details of the inference model for the evaluation job.
-        --job-description=: A description of the evaluation job.
-        --job-name=!: A name for the evaluation job.
-        --job-tags=: Tags to attach to the model evaluation job.
-        --output-data-config=!: Contains the configuration details of the Amazon S3 bucket for storing the results of the evaluation job.
-        --role-arn=!: The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can assume to perform tasks on your behalf.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of prompt routers to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: The type of the prompt routers, such as whether it's default or custom.
       completion:
         flag:
-            application-type:
-                - ModelEvaluation
-                - RagEvaluation
-    - name: delete-custom-model
-      description: Deletes a custom model that you created earlier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-identifier=!: Name of the model to delete.
-    - name: get-automated-reasoning-policy-test-case
-      description: Retrieves details about a specific Automated Reasoning policy test.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
-        --test-case-id=!: The unique identifier of the test to retrieve.
+            type:
+                - custom
+                - default
     - name: list-provisioned-model-throughputs
       description: Lists the Provisioned Throughputs in the account.
       flags:
@@ -1031,127 +988,28 @@ commands:
                 - InService
                 - Updating
                 - Failed
-    - name: stop-model-invocation-job
-      description: Stops a batch inference job.
+    - name: list-tags-for-resource
+      description: List the tags associated with the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-identifier=!: The Amazon Resource Name (ARN) of the batch inference job to stop.
-    - name: create-automated-reasoning-policy
-      description: Creates an Automated Reasoning policy for Amazon Bedrock Guardrails.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: put-enforced-guardrail-configuration
+      description: Sets the account-level enforced guardrail configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than once.
-        --description=: A description of the Automated Reasoning policy.
+        --config-id=: Unique ID for the account enforced configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The identifier of the KMS key to use for encrypting the automated reasoning policy and its associated artifacts.
-        --name=!: A unique name for the Automated Reasoning policy.
-        --policy-definition=: The policy definition that contains the formal logic rules, variables, and custom variable types used to validate foundation model responses in your application.
-        --tags=: A list of tags to associate with the Automated Reasoning policy.
-    - name: create-provisioned-model-throughput
-      description: Creates dedicated throughput for a base or custom model with the model units and for the duration that you specify.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
-        --commitment-duration=: The commitment duration requested for the Provisioned Throughput.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-id=!: The Amazon Resource Name (ARN) or name of the model to associate with this Provisioned Throughput.
-        --model-units=!: Number of model units to allocate.
-        --provisioned-model-name=!: The name for this Provisioned Throughput.
-        --tags=: Tags to associate with this Provisioned Throughput.
-      completion:
-        flag:
-            commitment-duration:
-                - OneMonth
-                - SixMonths
-    - name: deregister-marketplace-model-endpoint
-      description: Deregisters an endpoint for a model from Amazon Bedrock Marketplace.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to deregister.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-foundation-model
-      description: Get details about a Amazon Bedrock foundation model.
+        --guardrail-inference-config=!: Account-level enforced guardrail input configuration.
+    - name: put-model-invocation-logging-configuration
+      description: Set the configuration values for model invocation logging.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-identifier=!: The model identifier.
-    - name: get-imported-model
-      description: Gets properties associated with a customized model you imported.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-identifier=!: Name or Amazon Resource Name (ARN) of the imported model.
-    - name: get-inference-profile
-      description: Gets information about an inference profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inference-profile-identifier=!: The ID or Amazon Resource Name (ARN) of the inference profile.
-    - name: update-provisioned-model-throughput
-      description: Updates the name or associated model for a Provisioned Throughput.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-model-id=: The Amazon Resource Name (ARN) of the new model to associate with this Provisioned Throughput.
-        --desired-provisioned-model-name=: The new name for this Provisioned Throughput.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.
-    - name: create-prompt-router
-      description: Creates a prompt router that manages the routing of requests between multiple foundation models based on the routing criteria.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure idempotency of your requests.
-        --description=: An optional description of the prompt router to help identify its purpose.
-        --fallback-model=!: The default model to use when the routing criteria is not met.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --models=!: A list of foundation models that the prompt router can route requests to.
-        --prompt-router-name=!: The name of the prompt router.
-        --routing-criteria=!: The criteria, which is the response quality difference, used to determine how incoming requests are routed to different models.
-        --tags=: An array of key-value pairs to apply to this resource as tags.
-    - name: delete-guardrail
-      description: Deletes a guardrail.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --guardrail-identifier=!: The unique identifier of the guardrail.
-        --guardrail-version=: The version of the guardrail.
-    - name: export-automated-reasoning-policy-version
-      description: Exports the policy definition for an Automated Reasoning policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to export.
-    - name: get-automated-reasoning-policy-next-scenario
-      description: Retrieves the next test scenario for validating an Automated Reasoning policy.
-      flags:
-        --build-workflow-id=!: The unique identifier of the build workflow associated with the test scenarios.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which you want to get the next test scenario.
-    - name: list-automated-reasoning-policy-test-cases
-      description: Lists tests for an Automated Reasoning policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tests to return in a single call.
-        --next-token=: The pagination token from a previous request to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to list tests.
-        --starting-token=: A token to specify where to start paginating.
+        --logging-config=!: The logging configuration values to set.
     - name: put-use-case-for-model-access
       description: Put usecase for model access.
       flags:
@@ -1159,6 +1017,87 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --form-data=!: Put customer profile Request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: register-marketplace-model-endpoint
+      description: Registers an existing Amazon SageMaker endpoint with Amazon Bedrock Marketplace, allowing it to be used with Amazon Bedrock APIs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-identifier=!: The ARN of the Amazon SageMaker endpoint you want to register with Amazon Bedrock Marketplace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-source-identifier=!: The ARN of the model from Amazon Bedrock Marketplace that is deployed on the endpoint.
+    - name: start-automated-reasoning-policy-build-workflow
+      description: Starts a new build workflow for an Automated Reasoning policy.
+      flags:
+        --build-workflow-type=!: The type of build workflow to start (e.g., DOCUMENT\_INGESTION for processing new documents, POLICY\_REPAIR for fixing existing policies).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy for which to start the build workflow.
+        --source-content=!: The source content for the build workflow, such as documents to analyze or repair instructions for existing policies.
+      completion:
+        flag:
+            build-workflow-type:
+                - INGEST_CONTENT
+                - REFINE_POLICY
+                - IMPORT_POLICY
+    - name: start-automated-reasoning-policy-test-workflow
+      description: Initiates a test workflow to validate Automated Reasoning policy tests.
+      flags:
+        --build-workflow-id=!: The build workflow identifier.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to test.
+        --test-case-ids=: The list of test identifiers to run.
+    - name: stop-evaluation-job
+      description: Stops an evaluation job that is current being created or running.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: The Amazon Resource Name (ARN) of the evaluation job you want to stop.
+    - name: stop-model-customization-job
+      description: Stops an active model customization job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: Job identifier of the job to stop.
+    - name: stop-model-invocation-job
+      description: Stops a batch inference job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-identifier=!: The Amazon Resource Name (ARN) of the batch inference job to stop.
+    - name: tag-resource
+      description: Associate tags with a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
+        --tags=!: Tags to associate with the resource.
+    - name: untag-resource
+      description: Remove one or more tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to untag.
+        --tag-keys=!: Tag keys of the tags to remove from the resource.
+    - name: update-automated-reasoning-policy
+      description: Updates an existing Automated Reasoning policy with new rules, variables, or configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description for the Automated Reasoning policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name for the Automated Reasoning policy.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy to update.
+        --policy-definition=!: The updated policy definition containing the formal logic rules, variables, and types.
     - name: update-automated-reasoning-policy-annotations
       description: Updates the annotations for an Automated Reasoning policy build workflow.
       flags:
@@ -1169,3 +1108,64 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --last-updated-annotation-set-hash=!: The hash value of the annotation set that you're updating.
         --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy whose annotations you want to update.
+    - name: update-automated-reasoning-policy-test-case
+      description: Updates an existing Automated Reasoning policy test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --confidence-threshold=: The updated minimum confidence level for logic validation.
+        --expected-aggregated-findings-result=!: The updated expected result of the Automated Reasoning check.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guard-content=!: The updated content to be validated by the Automated Reasoning policy.
+        --last-updated-at=!: The timestamp when the test was last updated.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the Automated Reasoning policy that contains the test.
+        --query-content=: The updated input query or prompt that generated the content.
+        --test-case-id=!: The unique identifier of the test to update.
+      completion:
+        flag:
+            expected-aggregated-findings-result:
+                - VALID
+                - INVALID
+                - SATISFIABLE
+                - IMPOSSIBLE
+                - TRANSLATION_AMBIGUOUS
+                - TOO_COMPLEX
+                - NO_TRANSLATION
+    - name: update-guardrail
+      description: Updates a guardrail with the values you specify.
+      flags:
+        --automated-reasoning-policy-config=: Updated configuration for Automated Reasoning policies associated with the guardrail.
+        --blocked-input-messaging=!: The message to return when the guardrail blocks a prompt.
+        --blocked-outputs-messaging=!: The message to return when the guardrail blocks a model response.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-policy-config=: The content policy to configure for the guardrail.
+        --contextual-grounding-policy-config=: The contextual grounding policy configuration used to update a guardrail.
+        --cross-region-config=: The system-defined guardrail profile that you're using with your guardrail.
+        --description=: A description of the guardrail.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --guardrail-identifier=!: The unique identifier of the guardrail.
+        --kms-key-id=: The ARN of the KMS key with which to encrypt the guardrail.
+        --name=!: A name for the guardrail.
+        --sensitive-information-policy-config=: The sensitive information policy to configure for the guardrail.
+        --topic-policy-config=: The topic policy to configure for the guardrail.
+        --word-policy-config=: The word policy to configure for the guardrail.
+    - name: update-marketplace-model-endpoint
+      description: Updates the configuration of an existing endpoint for a model from Amazon Bedrock Marketplace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to update.
+        --endpoint-config=!: The new configuration for the endpoint, including the number and type of instances to use.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-provisioned-model-throughput
+      description: Updates the name or associated model for a Provisioned Throughput.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-model-id=: The Amazon Resource Name (ARN) of the new model to associate with this Provisioned Throughput.
+        --desired-provisioned-model-name=: The new name for this Provisioned Throughput.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provisioned-model-id=!: The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.

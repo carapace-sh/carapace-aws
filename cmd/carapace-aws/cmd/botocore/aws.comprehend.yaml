@@ -31,13 +31,102 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: delete-endpoint
-      description: Deletes a model-specific endpoint for a previously-trained custom model.
+    - name: batch-detect-key-phrases
+      description: Detects the key noun phrases found in a batch of documents.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input documents.
+        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: batch-detect-sentiment
+      description: Inspects a batch of documents and returns an inference of the prevailing sentiment, `POSITIVE`, `NEUTRAL`, `MIXED`, or `NEGATIVE`, in each one.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input documents.
+        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: batch-detect-syntax
+      description: Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input documents.
+        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+    - name: batch-detect-targeted-sentiment
+      description: Inspects a batch of documents and returns a sentiment analysis for each entity identified in the documents.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input documents.
+        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: classify-document
+      description: Creates a classification request to analyze a single document in real-time.
+      flags:
+        --bytes=: Use the `Bytes` parameter to input a text, PDF, Word or image file.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-reader-config=: Provides configuration parameters to override the default actions for extracting text from PDF documents and image files.
+        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --text=: The document text to be analyzed.
     - name: contains-pii-entities
       description: Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
       flags:
@@ -61,28 +150,43 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: describe-dataset
-      description: Returns information about the dataset that you specify.
+    - name: create-dataset
+      description: Creates a dataset to upload training or test data for a model associated with a flywheel.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dataset-arn=!: The ARN of the dataset.
+        --client-request-token=: A unique identifier for the request.
+        --dataset-name=!: Name of the dataset.
+        --dataset-type=: The dataset type.
+        --description=: Description of the dataset.
+        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive the data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-endpoint
-      description: Gets the properties associated with a specific endpoint.
+        --input-data-config=!: Information about the input data configuration.
+        --tags=: Tags for the dataset.
+      completion:
+        flag:
+            dataset-type:
+                - TRAIN
+                - TEST
+    - name: create-document-classifier
+      description: Creates a new document classifier that you can use to categorize documents.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being described.
+        --client-request-token=: A unique identifier for the request.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
+        --document-classifier-name=!: The name of the document classifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: detect-toxic-content
-      description: Performs toxicity analysis on the list of text strings that you provide as input.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input text.
-        --text-segments=!: A list of up to 10 text strings.
+        --input-data-config=!: Specifies the format and location of the input data for the job.
+        --language-code=!: The language of the input documents.
+        --mode=: Indicates the mode in which the classifier will be trained.
+        --model-kms-key-id=: ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+        --model-policy=: The resource-based policy to attach to your custom document classifier model.
+        --output-data-config=: Specifies the location for the output files from a custom classifier job.
+        --tags=: Tags to associate with the document classifier.
+        --version-name=: The version name given to the newly created classifier.
+        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
+        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier.
       completion:
         flag:
             language-code:
@@ -98,41 +202,22 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: import-model
-      description: Creates a new custom model that replicates a source custom model that you import.
+            mode:
+                - MULTI_CLASS
+                - MULTI_LABEL
+    - name: create-endpoint
+      description: Creates a model-specific endpoint for synchronous inference for a previously trained custom model For information about endpoints, see [Managing endpoints](https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend permission to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+        --client-request-token=: An idempotency token provided by the customer.
+        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+        --desired-inference-units=!: The desired number of inference units to be used by the model using this endpoint.
+        --endpoint-name=!: This is the descriptive suffix that becomes part of the `EndpointArn` used for all subsequent requests to this resource.
+        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be attached.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-kms-key-id=: ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
-        --model-name=: The name to assign to the custom model that is created in Amazon Comprehend by this import.
-        --source-model-arn=!: The Amazon Resource Name (ARN) of the custom model to import.
-        --tags=: Tags to associate with the custom model that is created by this import.
-        --version-name=: The version name given to the custom model that is created by this import.
-    - name: list-flywheels
-      description: Gets a list of the flywheels that you have created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the flywheels that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of results to return in a response.
-        --next-token=: Identifies the next page of results to return.
-    - name: start-dominant-language-detection-job
-      description: Starts an asynchronous dominant language detection job for a collection of documents.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: Specifies the format and location of the input data for the job.
-        --job-name=: An identifier for the job.
-        --output-data-config=!: Specifies where to send the output files.
-        --tags=: Tags to associate with the dominant language detection job.
-        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
-        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job.
+        --model-arn=: The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
+        --tags=: Tags to associate with the endpoint.
     - name: create-entity-recognizer
       description: Creates an entity recognizer using submitted files.
       flags:
@@ -165,6 +250,47 @@ commands:
                 - ko
                 - zh
                 - zh-TW
+    - name: create-flywheel
+      description: A flywheel is an Amazon Web Services resource that orchestrates the ongoing training of a model for custom classification or custom entity recognition.
+      flags:
+        --active-model-arn=: To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for the request.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend the permissions required to access the flywheel data in the data lake.
+        --data-lake-s3-uri=!: Enter the S3 location for the data lake.
+        --data-security-config=: Data security configurations.
+        --flywheel-name=!: Name for the flywheel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-type=: The model type.
+        --tags=: The tags to associate with this flywheel.
+        --task-config=: Configuration about the model associated with the flywheel.
+      completion:
+        flag:
+            model-type:
+                - DOCUMENT_CLASSIFIER
+                - ENTITY_RECOGNIZER
+    - name: delete-document-classifier
+      description: Deletes a previously created document classifier
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-endpoint
+      description: Deletes a model-specific endpoint for a previously-trained custom model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-entity-recognizer
+      description: Deletes an entity recognizer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-flywheel
       description: Deletes a flywheel.
       flags:
@@ -172,6 +298,99 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-resource-policy
+      description: Deletes a resource-based policy that is attached to a custom model.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-revision-id=: The revision ID of the policy to delete.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.
+    - name: describe-dataset
+      description: Returns information about the dataset that you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-arn=!: The ARN of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-document-classification-job
+      description: Gets the properties associated with a document classification job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-document-classifier
+      description: Gets the properties associated with a document classifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-dominant-language-detection-job
+      description: Gets the properties associated with a dominant language detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-endpoint
+      description: Gets the properties associated with a specific endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being described.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-entities-detection-job
+      description: Gets the properties associated with an entities detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-entity-recognizer
+      description: Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-events-detection-job
+      description: Gets the status and details of an events detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the events detection job.
+    - name: describe-flywheel
+      description: Provides configuration information about the flywheel.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-flywheel-iteration
+      description: Retrieve the configuration properties of a flywheel iteration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flywheel-arn=!: ""
+        --flywheel-iteration-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-key-phrases-detection-job
+      description: Gets the properties associated with a key phrases detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-pii-entities-detection-job
+      description: Gets the properties associated with a PII entities detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
     - name: describe-resource-policy
       description: Gets the details of a resource-based policy that is attached to a custom model, including the JSON body of the policy.
       flags:
@@ -179,32 +398,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the custom model version that has the resource policy.
-    - name: list-targeted-sentiment-detection-jobs
-      description: Gets a list of targeted sentiment detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-    - name: batch-detect-syntax
-      description: Inspects the text of a batch of documents for the syntax and part of speech of the words in the document and returns information about them.
+    - name: describe-sentiment-detection-job
+      description: Gets the properties associated with a sentiment detection job.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input documents.
-        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-targeted-sentiment-detection-job
+      description: Gets the properties associated with a targeted sentiment detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+    - name: describe-topics-detection-job
+      description: Gets the properties associated with a topic detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier assigned by the user to the detection job.
+    - name: detect-dominant-language
+      description: Determines the dominant language of the input text.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --text=!: A UTF-8 text string.
     - name: detect-entities
       description: Detects named entities in input text when you use the pre-trained model.
       flags:
@@ -216,6 +437,52 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --language-code=: The language of the input documents.
         --text=: A UTF-8 text string.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: detect-key-phrases
+      description: Detects the key noun phrases found in the text.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input documents.
+        --text=!: A UTF-8 text string.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: detect-pii-entities
+      description: Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input text.
+        --text=!: A UTF-8 text string.
       completion:
         flag:
             language-code:
@@ -254,21 +521,14 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: start-key-phrases-detection-job
-      description: Starts an asynchronous key phrase detection job for a collection of documents.
+    - name: detect-syntax
+      description: Inspects text for syntax and the part of speech of words in the document.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: Specifies the format and location of the input data for the job.
-        --job-name=: The identifier of the job.
-        --language-code=!: The language of the input documents.
-        --output-data-config=!: Specifies where to send the output files.
-        --tags=: Tags to associate with the key phrases detection job.
-        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
-        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job.
+        --language-code=!: The language code of the input documents.
+        --text=!: A UTF-8 string.
       completion:
         flag:
             language-code:
@@ -278,182 +538,6 @@ commands:
                 - de
                 - it
                 - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-    - name: list-key-phrases-detection-jobs
-      description: Get a list of key phrase detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-entity-recognizer
-      description: Deletes an entity recognizer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-key-phrases-detection-job
-      description: Gets the properties associated with a key phrases detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
-    - name: describe-targeted-sentiment-detection-job
-      description: Gets the properties associated with a targeted sentiment detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
-    - name: describe-topics-detection-job
-      description: Gets the properties associated with a topic detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier assigned by the user to the detection job.
-    - name: describe-document-classifier
-      description: Gets the properties associated with a document classifier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-pii-entities-detection-job
-      description: Starts an asynchronous PII entity detection job for a collection of documents.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: The input properties for a PII entities detection job.
-        --job-name=: The identifier of the job.
-        --language-code=!: The language of the input documents.
-        --mode=!: Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
-        --output-data-config=!: Provides conﬁguration parameters for the output of PII entity detection jobs.
-        --redaction-config=: Provides configuration parameters for PII entity redaction.
-        --tags=: Tags to associate with the PII entities detection job.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-            mode:
-                - ONLY_REDACTION
-                - ONLY_OFFSETS
-    - name: stop-training-document-classifier
-      description: Stops a document classifier training job while in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-dataset
-      description: Creates a dataset to upload training or test data for a model associated with a flywheel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for the request.
-        --dataset-name=!: Name of the dataset.
-        --dataset-type=: The dataset type.
-        --description=: Description of the dataset.
-        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel of the flywheel to receive the data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: Information about the input data configuration.
-        --tags=: Tags for the dataset.
-      completion:
-        flag:
-            dataset-type:
-                - TRAIN
-                - TEST
-    - name: delete-resource-policy
-      description: Deletes a resource-based policy that is attached to a custom model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-revision-id=: The revision ID of the policy to delete.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the custom model version that has the policy to delete.
-    - name: list-datasets
-      description: List the datasets that you have configured in this Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the datasets to be returned in the response.
-        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of results to return in a response.
-        --next-token=: Identifies the next page of results to return.
-    - name: list-endpoints
-      description: Gets a list of all existing endpoints that you've created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the endpoints that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-events-detection-job
-      description: Stops an events detection job in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the events detection job to stop.
-    - name: update-endpoint
-      description: Updates information about the specified endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-data-access-role-arn=: Data access role ARN to use in case the new model is encrypted with a customer CMK.
-        --desired-inference-units=: The desired number of inference units to be used by the model using this endpoint.
-        --desired-model-arn=: The ARN of the new model to use when updating an existing endpoint.
-        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being updated.
-        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: classify-document
-      description: Creates a classification request to analyze a single document in real-time.
-      flags:
-        --bytes=: Use the `Bytes` parameter to input a text, PDF, Word or image file.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-reader-config=: Provides configuration parameters to override the default actions for extracting text from PDF documents and image files.
-        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --text=: The document text to be analyzed.
-    - name: describe-document-classification-job
-      description: Gets the properties associated with a document classification job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
     - name: detect-targeted-sentiment
       description: Inspects the input text and returns a sentiment analysis for each entity identified in the text.
       flags:
@@ -477,12 +561,101 @@ commands:
                 - ko
                 - zh
                 - zh-TW
+    - name: detect-toxic-content
+      description: Performs toxicity analysis on the list of text strings that you provide as input.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the input text.
+        --text-segments=!: A list of up to 10 text strings.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: import-model
+      description: Creates a new custom model that replicates a source custom model that you import.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend permission to use Amazon Key Management Service (KMS) to encrypt or decrypt the custom model.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-kms-key-id=: ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
+        --model-name=: The name to assign to the custom model that is created in Amazon Comprehend by this import.
+        --source-model-arn=!: The Amazon Resource Name (ARN) of the custom model to import.
+        --tags=: Tags to associate with the custom model that is created by this import.
+        --version-name=: The version name given to the custom model that is created by this import.
+    - name: list-datasets
+      description: List the datasets that you have configured in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the datasets to be returned in the response.
+        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return in a response.
+        --next-token=: Identifies the next page of results to return.
+    - name: list-document-classification-jobs
+      description: Gets a list of the documentation classification jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-document-classifier-summaries
+      description: Gets a list of summaries of the document classifiers that you have created
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return on each page.
+        --next-token=: Identifies the next page of results to return.
     - name: list-document-classifiers
       description: Gets a list of the document classifiers that you have created.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-dominant-language-detection-jobs
+      description: Gets a list of the dominant language detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters that jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-endpoints
+      description: Gets a list of all existing endpoints that you've created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the endpoints that are returned.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in each page.
@@ -501,6 +674,106 @@ commands:
         --next-token=: Identifies the next page of results to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-entity-recognizer-summaries
+      description: Gets a list of summaries for the entity recognizers that you have created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return on each page.
+        --next-token=: Identifies the next page of results to return.
+    - name: list-entity-recognizers
+      description: Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the list of entities returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return on each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-events-detection-jobs
+      description: Gets a list of the events detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+    - name: list-flywheel-iteration-history
+      description: Information about the history of a flywheel iteration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filter the flywheel iteration history based on creation time.
+        --flywheel-arn=!: The ARN of the flywheel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of iteration history results to return
+        --next-token=: Next token
+    - name: list-flywheels
+      description: Gets a list of the flywheels that you have created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the flywheels that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return in a response.
+        --next-token=: Identifies the next page of results to return.
+    - name: list-key-phrases-detection-jobs
+      description: Get a list of key phrase detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-pii-entities-detection-jobs
+      description: Gets a list of the PII entity detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-sentiment-detection-jobs
+      description: Gets a list of sentiment detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all tags associated with a given Amazon Comprehend resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.
+    - name: list-targeted-sentiment-detection-jobs
+      description: Gets a list of targeted sentiment detection jobs that you have submitted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters the jobs that are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in each page.
+        --next-token=: Identifies the next page of results to return.
     - name: list-topics-detection-jobs
       description: Gets a list of the topic detection jobs that you have submitted.
       flags:
@@ -513,109 +786,15 @@ commands:
         --next-token=: Identifies the next page of results to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: start-sentiment-detection-job
-      description: Starts an asynchronous sentiment detection job for a collection of documents.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-data-config=!: Specifies the format and location of the input data for the job.
-        --job-name=: The identifier of the job.
-        --language-code=!: The language of the input documents.
-        --output-data-config=!: Specifies where to send the output files.
-        --tags=: Tags to associate with the sentiment detection job.
-        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
-        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-    - name: delete-document-classifier
-      description: Deletes a previously created document classifier
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-detect-sentiment
-      description: Inspects a batch of documents and returns an inference of the prevailing sentiment, `POSITIVE`, `NEUTRAL`, `MIXED`, or `NEGATIVE`, in each one.
+    - name: put-resource-policy
+      description: Attaches a resource-based policy to a custom model.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input documents.
-        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-    - name: create-endpoint
-      description: Creates a model-specific endpoint for synchronous inference for a previously trained custom model For information about endpoints, see [Managing endpoints](https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: An idempotency token provided by the customer.
-        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
-        --desired-inference-units=!: The desired number of inference units to be used by the model using this endpoint.
-        --endpoint-name=!: This is the descriptive suffix that becomes part of the `EndpointArn` used for all subsequent requests to this resource.
-        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel to which the endpoint will be attached.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-arn=: The Amazon Resource Number (ARN) of the model to which the endpoint will be attached.
-        --tags=: Tags to associate with the endpoint.
-    - name: describe-sentiment-detection-job
-      description: Gets the properties associated with a sentiment detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
-    - name: detect-key-phrases
-      description: Detects the key noun phrases found in the text.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input documents.
-        --text=!: A UTF-8 text string.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
+        --policy-revision-id=: The revision ID that Amazon Comprehend assigned to the policy that you are updating.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the custom model to attach the policy to.
+        --resource-policy=!: The JSON resource-based policy to attach to your custom model.
     - name: start-document-classification-job
       description: Starts an asynchronous document classification job using a custom classification model.
       flags:
@@ -632,57 +811,20 @@ commands:
         --tags=: Tags to associate with the document classification job.
         --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
         --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job.
-    - name: start-flywheel-iteration
-      description: Start the flywheel iteration.This operation uses any new datasets to train a new model version.
+    - name: start-dominant-language-detection-job
+      description: Starts an asynchronous dominant language detection job for a collection of documents.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique identifier for the request.
-        --flywheel-arn=!: The ARN of the flywheel.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-pii-entities-detection-job
-      description: Gets the properties associated with a PII entities detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
-    - name: detect-syntax
-      description: Inspects text for syntax and the part of speech of words in the document.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language code of the input documents.
-        --text=!: A UTF-8 string.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-    - name: list-entity-recognizers
-      description: Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the list of entities returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return on each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists all tags associated with a given Amazon Comprehend resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource you are querying.
+        --input-data-config=!: Specifies the format and location of the input data for the job.
+        --job-name=: An identifier for the job.
+        --output-data-config=!: Specifies where to send the output files.
+        --tags=: Tags to associate with the dominant language detection job.
+        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
+        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job.
     - name: start-entities-detection-job
       description: Starts an asynchronous entity detection job for a collection of documents.
       flags:
@@ -744,59 +886,59 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: stop-entities-detection-job
-      description: Stops an entities detection job in progress.
+    - name: start-flywheel-iteration
+      description: Start the flywheel iteration.This operation uses any new datasets to train a new model version.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the entities detection job to stop.
-    - name: stop-sentiment-detection-job
-      description: Stops a sentiment detection job in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the sentiment detection job to stop.
-    - name: create-flywheel
-      description: A flywheel is an Amazon Web Services resource that orchestrates the ongoing training of a model for custom classification or custom entity recognition.
-      flags:
-        --active-model-arn=: To associate an existing model with the flywheel, specify the Amazon Resource Number (ARN) of the model version.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique identifier for the request.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend the permissions required to access the flywheel data in the data lake.
-        --data-lake-s3-uri=!: Enter the S3 location for the data lake.
-        --data-security-config=: Data security configurations.
-        --flywheel-name=!: Name for the flywheel.
+        --flywheel-arn=!: The ARN of the flywheel.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --model-type=: The model type.
-        --tags=: The tags to associate with this flywheel.
-        --task-config=: Configuration about the model associated with the flywheel.
-      completion:
-        flag:
-            model-type:
-                - DOCUMENT_CLASSIFIER
-                - ENTITY_RECOGNIZER
-    - name: create-document-classifier
-      description: Creates a new document classifier that you can use to categorize documents.
+    - name: start-key-phrases-detection-job
+      description: Starts an asynchronous key phrase detection job for a collection of documents.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A unique identifier for the request.
         --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
-        --document-classifier-name=!: The name of the document classifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-data-config=!: Specifies the format and location of the input data for the job.
+        --job-name=: The identifier of the job.
         --language-code=!: The language of the input documents.
-        --mode=: Indicates the mode in which the classifier will be trained.
-        --model-kms-key-id=: ID for the KMS key that Amazon Comprehend uses to encrypt trained custom models.
-        --model-policy=: The resource-based policy to attach to your custom document classifier model.
-        --output-data-config=: Specifies the location for the output files from a custom classifier job.
-        --tags=: Tags to associate with the document classifier.
-        --version-name=: The version name given to the newly created classifier.
+        --output-data-config=!: Specifies where to send the output files.
+        --tags=: Tags to associate with the key phrases detection job.
         --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
-        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom classifier.
+        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job.
+      completion:
+        flag:
+            language-code:
+                - en
+                - es
+                - fr
+                - de
+                - it
+                - pt
+                - ar
+                - hi
+                - ja
+                - ko
+                - zh
+                - zh-TW
+    - name: start-pii-entities-detection-job
+      description: Starts an asynchronous PII entity detection job for a collection of documents.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for the request.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: The input properties for a PII entities detection job.
+        --job-name=: The identifier of the job.
+        --language-code=!: The language of the input documents.
+        --mode=!: Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+        --output-data-config=!: Provides conﬁguration parameters for the output of PII entity detection jobs.
+        --redaction-config=: Provides configuration parameters for PII entity redaction.
+        --tags=: Tags to associate with the PII entities detection job.
       completion:
         flag:
             language-code:
@@ -813,136 +955,10 @@ commands:
                 - zh
                 - zh-TW
             mode:
-                - MULTI_CLASS
-                - MULTI_LABEL
-    - name: list-events-detection-jobs
-      description: Gets a list of the events detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-    - name: stop-targeted-sentiment-detection-job
-      description: Stops a targeted sentiment detection job in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the targeted sentiment detection job to stop.
-    - name: tag-resource
-      description: Associates a specific tag with an Amazon Comprehend resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags.
-        --tags=!: Tags being associated with a specific Amazon Comprehend resource.
-    - name: untag-resource
-      description: Removes a specific tag associated with an Amazon Comprehend resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from which you want to remove the tags.
-        --tag-keys=!: The initial part of a key-value pair that forms a tag being removed from a given resource.
-    - name: update-flywheel
-      description: Update the configuration information for an existing flywheel.
-      flags:
-        --active-model-arn=: The Amazon Resource Number (ARN) of the active model version.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend permission to access the flywheel data.
-        --data-security-config=: Flywheel data security configuration.
-        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-entity-recognizer-summaries
-      description: Gets a list of summaries for the entity recognizers that you have created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return on each page.
-        --next-token=: Identifies the next page of results to return.
-    - name: describe-flywheel
-      description: Provides configuration information about the flywheel.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-dominant-language-detection-job
-      description: Gets the properties associated with a dominant language detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
-    - name: detect-dominant-language
-      description: Determines the dominant language of the input text.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --text=!: A UTF-8 text string.
-    - name: list-dominant-language-detection-jobs
-      description: Gets a list of the dominant language detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters that jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-pii-entities-detection-jobs
-      description: Gets a list of the PII entity detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-sentiment-detection-jobs
-      description: Gets a list of sentiment detection jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-flywheel-iteration-history
-      description: Information about the history of a flywheel iteration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filter the flywheel iteration history based on creation time.
-        --flywheel-arn=!: The ARN of the flywheel.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: Maximum number of iteration history results to return
-        --next-token=: Next token
-    - name: put-resource-policy
-      description: Attaches a resource-based policy to a custom model.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-revision-id=: The revision ID that Amazon Comprehend assigned to the policy that you are updating.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the custom model to attach the policy to.
-        --resource-policy=!: The JSON resource-based policy to attach to your custom model.
-    - name: start-topics-detection-job
-      description: Starts an asynchronous topic detection job.
+                - ONLY_REDACTION
+                - ONLY_OFFSETS
+    - name: start-sentiment-detection-job
+      description: Starts an asynchronous sentiment detection job for a collection of documents.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -951,19 +967,11 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-data-config=!: Specifies the format and location of the input data for the job.
         --job-name=: The identifier of the job.
-        --number-of-topics=: The number of topics to detect.
+        --language-code=!: The language of the input documents.
         --output-data-config=!: Specifies where to send the output files.
-        --tags=: Tags to associate with the topics detection job.
+        --tags=: Tags to associate with the sentiment detection job.
         --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
-        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job.
-    - name: batch-detect-targeted-sentiment
-      description: Inspects a batch of documents and returns a sentiment analysis for each entity identified in the documents.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input documents.
-        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
+        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job.
       completion:
         flag:
             language-code:
@@ -979,115 +987,6 @@ commands:
                 - ko
                 - zh
                 - zh-TW
-    - name: describe-flywheel-iteration
-      description: Retrieve the configuration properties of a flywheel iteration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flywheel-arn=!: ""
-        --flywheel-iteration-id=!: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-document-classifier-summaries
-      description: Gets a list of summaries of the document classifiers that you have created
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return on each page.
-        --next-token=: Identifies the next page of results to return.
-    - name: stop-dominant-language-detection-job
-      description: Stops a dominant language detection job in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the dominant language detection job to stop.
-    - name: stop-pii-entities-detection-job
-      description: Stops a PII entities detection job in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the PII entities detection job to stop.
-    - name: stop-training-entity-recognizer
-      description: Stops an entity recognizer training job while in progress.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer currently being trained.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-detect-key-phrases
-      description: Detects the key noun phrases found in a batch of documents.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input documents.
-        --text-list=!: A list containing the UTF-8 encoded text of the input documents.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-    - name: describe-entity-recognizer
-      description: Provides details about an entity recognizer including status, S3 buckets containing training data, recognizer metadata, metrics, and so on.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-events-detection-job
-      description: Gets the status and details of an events detection job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier of the events detection job.
-    - name: detect-pii-entities
-      description: Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --language-code=!: The language of the input text.
-        --text=!: A UTF-8 text string.
-      completion:
-        flag:
-            language-code:
-                - en
-                - es
-                - fr
-                - de
-                - it
-                - pt
-                - ar
-                - hi
-                - ja
-                - ko
-                - zh
-                - zh-TW
-    - name: list-document-classification-jobs
-      description: Gets a list of the documentation classification jobs that you have submitted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: Filters the jobs that are returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in each page.
-        --next-token=: Identifies the next page of results to return.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: start-targeted-sentiment-detection-job
       description: Starts an asynchronous targeted sentiment detection job for a collection of documents.
       flags:
@@ -1118,6 +1017,42 @@ commands:
                 - ko
                 - zh
                 - zh-TW
+    - name: start-topics-detection-job
+      description: Starts an asynchronous topic detection job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique identifier for the request.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend read access to your input data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: Specifies the format and location of the input data for the job.
+        --job-name=: The identifier of the job.
+        --number-of-topics=: The number of topics to detect.
+        --output-data-config=!: Specifies where to send the output files.
+        --tags=: Tags to associate with the topics detection job.
+        --volume-kms-key-id=: ID for the Amazon Web Services Key Management Service (KMS) key that Amazon Comprehend uses to encrypt data on the storage volume attached to the ML compute instance(s) that process the analysis job.
+        --vpc-config=: Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job.
+    - name: stop-dominant-language-detection-job
+      description: Stops a dominant language detection job in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the dominant language detection job to stop.
+    - name: stop-entities-detection-job
+      description: Stops an entities detection job in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the entities detection job to stop.
+    - name: stop-events-detection-job
+      description: Stops an events detection job in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the events detection job to stop.
     - name: stop-key-phrases-detection-job
       description: Stops a key phrases detection job in progress.
       flags:
@@ -1125,10 +1060,75 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The identifier of the key phrases detection job to stop.
-    - name: describe-entities-detection-job
-      description: Gets the properties associated with an entities detection job.
+    - name: stop-pii-entities-detection-job
+      description: Stops a PII entities detection job in progress.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The identifier that Amazon Comprehend generated for the job.
+        --job-id=!: The identifier of the PII entities detection job to stop.
+    - name: stop-sentiment-detection-job
+      description: Stops a sentiment detection job in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the sentiment detection job to stop.
+    - name: stop-targeted-sentiment-detection-job
+      description: Stops a targeted sentiment detection job in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The identifier of the targeted sentiment detection job to stop.
+    - name: stop-training-document-classifier
+      description: Stops a document classifier training job while in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-classifier-arn=!: The Amazon Resource Name (ARN) that identifies the document classifier currently being trained.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-training-entity-recognizer
+      description: Stops an entity recognizer training job while in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-recognizer-arn=!: The Amazon Resource Name (ARN) that identifies the entity recognizer currently being trained.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: tag-resource
+      description: Associates a specific tag with an Amazon Comprehend resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource to which you want to associate the tags.
+        --tags=!: Tags being associated with a specific Amazon Comprehend resource.
+    - name: untag-resource
+      description: Removes a specific tag associated with an Amazon Comprehend resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the given Amazon Comprehend resource from which you want to remove the tags.
+        --tag-keys=!: The initial part of a key-value pair that forms a tag being removed from a given resource.
+    - name: update-endpoint
+      description: Updates information about the specified endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --desired-data-access-role-arn=: Data access role ARN to use in case the new model is encrypted with a customer CMK.
+        --desired-inference-units=: The desired number of inference units to be used by the model using this endpoint.
+        --desired-model-arn=: The ARN of the new model to use when updating an existing endpoint.
+        --endpoint-arn=!: The Amazon Resource Number (ARN) of the endpoint being updated.
+        --flywheel-arn=: The Amazon Resource Number (ARN) of the flywheel
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-flywheel
+      description: Update the configuration information for an existing flywheel.
+      flags:
+        --active-model-arn=: The Amazon Resource Number (ARN) of the active model version.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend permission to access the flywheel data.
+        --data-security-config=: Flywheel data security configuration.
+        --flywheel-arn=!: The Amazon Resource Number (ARN) of the flywheel to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

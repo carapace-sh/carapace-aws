@@ -1,6 +1,14 @@
 name: dms
 description: AWS Database Migration Service
 commands:
+    - name: add-tags-to-resource
+      description: Adds metadata tags to an DMS resource, including replication instance, endpoint, subnet group, and migration task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Identifies the DMS resource to which tags should be added.
+        --tags=!: One or more tags to be assigned to the resource.
     - name: apply-pending-maintenance-action
       description: Applies a pending maintenance action to a resource (for example, to a replication instance).
       flags:
@@ -10,428 +18,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --opt-in-type=!: A value that specifies the type of opt-in request, or undoes an opt-in request.
         --replication-instance-arn=!: The Amazon Resource Name (ARN) of the DMS resource that the pending maintenance action applies to.
-    - name: describe-engine-versions
-      description: Returns information about the replication instance versions used in the project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-    - name: describe-pending-maintenance-actions
-      description: Returns a list of upcoming maintenance events for replication instances in your account in the current Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-        --replication-instance-arn=: The Amazon Resource Name (ARN) of the replication instance.
-    - name: describe-certificates
-      description: Provides a description of the certificate.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the certificates described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: export-metadata-model-assessment
-      description: Saves a copy of a database migration assessment report to your Amazon S3 bucket.
-      flags:
-        --assessment-report-types=: The file format of the assessment file.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-name=: The name of the assessment file to create in your Amazon S3 bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to assess.
-    - name: list-tags-for-resource
-      description: Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, subnet group, and migration task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn-list=: List of ARNs that identify multiple DMS resources that you want to list tags for.
-        --resource-arn=: The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for.
-    - name: refresh-schemas
-      description: Populates the schema for the specified endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
-    - name: start-metadata-model-conversion
-      description: Converts your source database objects to a format compatible with the target database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to convert.
-    - name: create-instance-profile
-      description: Creates the instance profile using the specified parameters.
-      flags:
-        --availability-zone=: The Availability Zone where the instance profile will be created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A user-friendly description of the instance profile.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-profile-name=: A user-friendly name for the instance profile.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.
-        --network-type=: Specifies the network type for the instance profile.
-        --no-publicly-accessible: Specifies the accessibility options for the instance profile.
-        --publicly-accessible: Specifies the accessibility options for the instance profile.
-        --subnet-group-identifier=: A subnet group to associate with the instance profile.
-        --tags=: One or more tags to be assigned to the instance profile.
-        --vpc-security-groups=: Specifies the VPC security group names to be used with the instance profile.
-    - name: create-replication-task
-      description: Creates a replication task using the specified parameters.
-      flags:
-        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
-        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
-        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-type=!: The migration type.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of a replication instance.
-        --replication-task-identifier=!: An identifier for the replication task.
-        --replication-task-settings=: Overall settings for the task, in JSON format.
-        --resource-identifier=: A friendly name for the resource identifier at the end of the `EndpointArn` response parameter that is returned in the created `Endpoint` object.
-        --source-endpoint-arn=!: An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.
-        --table-mappings=!: The table mappings for the task, in JSON format.
-        --tags=: One or more tags to be assigned to the replication task.
-        --target-endpoint-arn=!: An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
-        --task-data=: Supplemental information that the task requires to migrate the data for certain source and target endpoints.
-      completion:
-        flag:
-            migration-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: describe-table-statistics
-      description: Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to table statistics.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
-        --starting-token=: A token to specify where to start paginating.
-    - name: modify-replication-task
-      description: Modifies the specified replication task.
-      flags:
-        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
-        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
-        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-type=: The migration type.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
-        --replication-task-identifier=: The replication task identifier.
-        --replication-task-settings=: JSON file that contains settings for the task, such as task metadata settings.
-        --table-mappings=: When using the CLI or boto3, provide the path of the JSON file that contains the table mappings.
-        --task-data=: Supplemental information that the task requires to migrate the data for certain source and target endpoints.
-      completion:
-        flag:
-            migration-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: run-fleet-advisor-lsa-analysis
+    - name: batch-start-recommendations
       description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data=: Provides information about source databases to analyze.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: start-metadata-model-export-to-target
-      description: Applies converted database objects to your target database.
+    - name: cancel-metadata-model-conversion
+      description: Cancels a single metadata model conversion operation that was started with `StartMetadataModelConversion`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --no-overwrite-extension-pack: Whether to overwrite the migration project extension pack.
-        --overwrite-extension-pack: Whether to overwrite the migration project extension pack.
-        --selection-rules=!: A value that specifies the database objects to export.
-    - name: create-replication-subnet-group
-      description: Creates a replication subnet group given a list of the subnet IDs in a VPC.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-subnet-group-description=!: The description for the subnet group.
-        --replication-subnet-group-identifier=!: The name for the replication subnet group.
-        --subnet-ids=!: Two or more subnet IDs to be assigned to the subnet group.
-        --tags=: One or more tags to be assigned to the subnet group.
-    - name: describe-replication-task-individual-assessments
-      description: Returns a paginated list of individual assessments based on filter settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the individual assessments described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-    - name: describe-replication-tasks
-      description: Returns information about replication tasks for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to replication tasks.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --no-without-settings: An option to set to avoid returning information about settings.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --without-settings: An option to set to avoid returning information about settings.
-    - name: stop-replication-task
-      description: Stops the replication task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-arn=!: The Amazon Resource Name(ARN) of the replication task to be stopped.
-    - name: describe-metadata-model-children
-      description: Gets a list of child metadata models for the specified metadata model in the database hierarchy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that indicates where the next page should start.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of metadata model children to include in the response.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --origin=!: Specifies whether to retrieve metadata from the source or target tree.
-        --page-size=: The size of each page to get in the AWS service call.
-        --selection-rules=!: The JSON string that specifies which metadata model's children to retrieve.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            origin:
-                - SOURCE
-                - TARGET
-    - name: describe-metadata-model-conversions
-      description: Returns a paginated list of metadata model conversions for a migration project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model conversions described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: describe-orderable-replication-instances
-      description: Returns information about the replication instance types that can be created in the specified region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-replication-task-assessment-results
-      description: Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --replication-task-arn=: The Amazon Resource Name (ARN) string that uniquely identifies the task.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-replication-task
-      description: Starts the replication task.
-      flags:
-        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
-        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
-        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task to be started.
-        --start-replication-task-type=!: The type of replication task to start.
-      completion:
-        flag:
-            start-replication-task-type:
-                - start-replication
-                - resume-processing
-                - reload-target
-    - name: start-replication-task-assessment-run
-      description: Starts a new premigration assessment run for one or more individual assessments of a migration task.
-      flags:
-        --assessment-run-name=!: Unique name to identify the assessment run.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --exclude=: Space-separated list of names for specific individual assessments that you want to exclude.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-only=: Space-separated list of names for specific individual assessments that you want to include.
-        --replication-task-arn=!: Amazon Resource Name (ARN) of the migration task associated with the premigration assessment run that you want to start.
-        --result-encryption-mode=: Encryption mode that you can specify to encrypt the results of this assessment run.
-        --result-kms-key-arn=: ARN of a custom KMS encryption key that you specify when you set `ResultEncryptionMode` to `"SSE_KMS`".
-        --result-location-bucket=!: Amazon S3 bucket where you want DMS to store the results of this assessment run.
-        --result-location-folder=: Folder within an Amazon S3 bucket where you want DMS to store the results of this assessment run.
-        --service-access-role-arn=!: ARN of the service role needed to start the assessment run.
-        --tags=: One or more tags to be assigned to the premigration assessment run that you want to start.
-    - name: update-subscriptions-to-event-bridge
-      description: Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-move: When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-move: When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.
-    - name: describe-account-attributes
-      description: Lists all of the DMS attributes for a customer account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-metadata-model-assessments
-      description: Returns a paginated list of metadata model assessments for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model assessments described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project.
-    - name: describe-metadata-model-exports-as-script
-      description: Returns a paginated list of metadata model exports.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model exports described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: describe-recommendations
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the target engine recommendations described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: The maximum number of records to include in the response.
-        --next-token=: Specifies the unique pagination token that makes it possible to display the next page of results.
-    - name: describe-replication-subnet-groups
-      description: Returns information about the replication subnet groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to replication subnet groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: modify-data-migration
-      description: Modifies an existing DMS data migration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to modify.
-        --data-migration-name=: The new name for the data migration.
-        --data-migration-type=: The new migration type for the data migration.
-        --enable-cloudwatch-logs: Whether to enable Cloudwatch logs for the data migration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enable-cloudwatch-logs: Whether to enable Cloudwatch logs for the data migration.
-        --number-of-jobs=: The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.
-        --selection-rules=: A JSON-formatted string that defines what objects to include and exclude from the migration.
-        --service-access-role-arn=: The new service access role ARN for the data migration.
-        --source-data-settings=: The new information about the source data provider for the data migration.
-        --target-data-settings=: The new information about the target data provider for the data migration.
-      completion:
-        flag:
-            data-migration-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: start-extension-pack-association
-      description: Applies the extension pack to your target database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: cancel-replication-task-assessment-run
-      description: Cancels a single premigration assessment run.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-assessment-run-arn=!: Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
-    - name: describe-instance-profiles
-      description: Returns a paginated list of instance profiles for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the instance profiles described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-    - name: start-recommendations
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-id=!: The identifier of the source database to analyze and provide recommendations for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --settings=!: The settings in JSON format that Fleet Advisor uses to determine target engine recommendations.
-    - name: start-replication-task-assessment
-      description: Starts the replication task assessment for unsupported data types in the source database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
-    - name: delete-data-migration
-      description: Deletes the specified data migration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-endpoints
-      description: Returns information about the endpoints for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the endpoints.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-target-selection-rules
-      description: Converts source selection rules into their target counterparts for schema conversion operations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: The JSON string representing the source selection rules for conversion.
+        --request-identifier=!: The identifier for the metadata model conversion operation to cancel.
     - name: cancel-metadata-model-creation
       description: Cancels a single metadata model creation operation that was started with `StartMetadataModelCreation`.
       flags:
@@ -440,116 +41,48 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         --request-identifier=!: The identifier for the metadata model creation operation to cancel.
-    - name: describe-fleet-advisor-schema-object-summary
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'If you specify any of the following filters, the output includes information for only those schema objects that meet the filter criteria:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
-    - name: modify-replication-subnet-group
-      description: Modifies the settings for the specified replication subnet group.
+    - name: cancel-replication-task-assessment-run
+      description: Cancels a single premigration assessment run.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-subnet-group-description=: A description for the replication instance subnet group.
-        --replication-subnet-group-identifier=!: The name of the replication instance subnet group.
-        --subnet-ids=!: A list of subnet IDs.
-    - name: delete-certificate
-      description: Deletes the specified certificate.
+        --replication-task-assessment-run-arn=!: Amazon Resource Name (ARN) of the premigration assessment run to be canceled.
+    - name: create-data-migration
+      description: Creates a data migration using the provided settings.
       flags:
-        --certificate-arn=!: The Amazon Resource Name (ARN) of the certificate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration-name=: A user-friendly name for the data migration.
+        --data-migration-type=!: Specifies if the data migration is full-load only, change data capture (CDC) only, or full-load and CDC.
+        --enable-cloudwatch-logs: Specifies whether to enable CloudWatch logs for the data migration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-fleet-advisor-databases
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+        --migration-project-identifier=!: An identifier for the migration project.
+        --no-enable-cloudwatch-logs: Specifies whether to enable CloudWatch logs for the data migration.
+        --number-of-jobs=: The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.
+        --selection-rules=: An optional JSON string specifying what tables, views, and schemas to include or exclude from the migration.
+        --service-access-role-arn=!: The Amazon Resource Name (ARN) for the service access role that you want to use to create the data migration.
+        --source-data-settings=: Specifies information about the source data provider.
+        --tags=: One or more tags to be assigned to the data migration.
+        --target-data-settings=: Specifies information about the target data provider.
+      completion:
+        flag:
+            data-migration-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: create-data-provider
+      description: Creates a data provider using the provided settings.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --database-ids=!: The IDs of the Fleet Advisor collector databases to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-fleet-advisor-collectors
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: Sets the maximum number of records returned in the response.
-        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
-    - name: import-certificate
-      description: Uploads the specified certificate.
-      flags:
-        --certificate-identifier=!: A customer-assigned name for the certificate.
-        --certificate-pem=: The contents of a `.pem` file, which contains an X.509 certificate.
-        --certificate-wallet=: The location of an imported Oracle Wallet certificate for use with SSL.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: An KMS key identifier that is used to encrypt the certificate.
-        --tags=: The tags associated with the certificate.
-    - name: stop-replication
-      description: For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-config-arn=!: The Amazon Resource Name of the replication to stop.
-    - name: create-event-subscription
-      description: Creates an DMS event notification subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: A Boolean value; set to `true` to activate the subscription, or set to `false` to create the subscription but not activate it.
-        --event-categories=: A list of event categories for a source type that you want to subscribe to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enabled: A Boolean value; set to `true` to activate the subscription, or set to `false` to create the subscription but not activate it.
-        --sns-topic-arn=!: The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification.
-        --source-ids=: A list of identifiers for which DMS provides notification events.
-        --source-type=: The type of DMS resource that generates the events.
-        --subscription-name=!: The name of the DMS event notification subscription.
-        --tags=: One or more tags to be assigned to the event subscription.
-    - name: describe-conversion-configuration
-      description: Returns configuration parameters for a schema conversion project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the schema conversion project to describe.
-    - name: modify-conversion-configuration
-      description: Modifies the specified schema conversion configuration using the provided parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversion-configuration=!: The new conversion configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: describe-fleet-advisor-lsa-analysis
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: Sets the maximum number of records returned in the response.
-        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
-    - name: modify-data-provider
-      description: Modifies the specified data provider using the provided settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-provider-identifier=!: The identifier of the data provider.
-        --data-provider-name=: The name of the data provider.
+        --data-provider-name=: A user-friendly name for the data provider.
         --description=: A user-friendly description of the data provider.
-        --engine=: The type of database engine for the data provider.
-        --exact-settings: If this attribute is Y, the current call to `ModifyDataProvider` replaces all existing data provider settings with the exact settings that you specify in this call.
+        --engine=!: The type of database engine for the data provider.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-exact-settings: If this attribute is Y, the current call to `ModifyDataProvider` replaces all existing data provider settings with the exact settings that you specify in this call.
         --no-virtual: Indicates whether the data provider is virtual.
-        --settings=: The settings in JSON format for a data provider.
+        --settings=!: The settings in JSON format for a data provider.
+        --tags=: One or more tags to be assigned to the data provider.
         --virtual: Indicates whether the data provider is virtual.
     - name: create-endpoint
       description: Creates an endpoint using the provided settings.
@@ -602,6 +135,165 @@ commands:
                 - require
                 - verify-ca
                 - verify-full
+    - name: create-event-subscription
+      description: Creates an DMS event notification subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled: A Boolean value; set to `true` to activate the subscription, or set to `false` to create the subscription but not activate it.
+        --event-categories=: A list of event categories for a source type that you want to subscribe to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enabled: A Boolean value; set to `true` to activate the subscription, or set to `false` to create the subscription but not activate it.
+        --sns-topic-arn=!: The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification.
+        --source-ids=: A list of identifiers for which DMS provides notification events.
+        --source-type=: The type of DMS resource that generates the events.
+        --subscription-name=!: The name of the DMS event notification subscription.
+        --tags=: One or more tags to be assigned to the event subscription.
+    - name: create-fleet-advisor-collector
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-name=!: The name of your Fleet Advisor collector (for example, `sample-collector`).
+        --description=: A summary description of your Fleet Advisor collector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --s3-bucket-name=!: The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
+        --service-access-role-arn=!: The IAM role that grants permissions to access the specified Amazon S3 bucket.
+    - name: create-instance-profile
+      description: Creates the instance profile using the specified parameters.
+      flags:
+        --availability-zone=: The Availability Zone where the instance profile will be created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A user-friendly description of the instance profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-profile-name=: A user-friendly name for the instance profile.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.
+        --network-type=: Specifies the network type for the instance profile.
+        --no-publicly-accessible: Specifies the accessibility options for the instance profile.
+        --publicly-accessible: Specifies the accessibility options for the instance profile.
+        --subnet-group-identifier=: A subnet group to associate with the instance profile.
+        --tags=: One or more tags to be assigned to the instance profile.
+        --vpc-security-groups=: Specifies the VPC security group names to be used with the instance profile.
+    - name: create-migration-project
+      description: Creates the migration project using the specified parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A user-friendly description of the migration project.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-profile-identifier=!: The identifier of the associated instance profile.
+        --migration-project-name=: A user-friendly name for the migration project.
+        --schema-conversion-application-attributes=: The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
+        --source-data-provider-descriptors=!: Information about the source data provider, including the name, ARN, and Secrets Manager parameters.
+        --tags=: One or more tags to be assigned to the migration project.
+        --target-data-provider-descriptors=!: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+        --transformation-rules=: The settings in JSON format for migration rules.
+    - name: create-replication-config
+      description: Creates a configuration that you can later provide to configure and start an DMS Serverless replication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-config=!: Configuration parameters for provisioning an DMS Serverless replication.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-config-identifier=!: A unique identifier that you want to use to create a `ReplicationConfigArn` that is returned as part of the output from this action.
+        --replication-settings=: Optional JSON settings for DMS Serverless replications that are provisioned using this replication configuration.
+        --replication-type=!: The type of DMS Serverless replication to provision using this replication configuration.
+        --resource-identifier=: Optional unique value or name that you set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource.
+        --source-endpoint-arn=!: The Amazon Resource Name (ARN) of the source endpoint for this DMS Serverless replication configuration.
+        --supplemental-settings=: Optional JSON settings for specifying supplemental data.
+        --table-mappings=!: JSON table mappings for DMS Serverless replications that are provisioned using this replication configuration.
+        --tags=: One or more optional tags associated with resources used by the DMS Serverless replication.
+        --target-endpoint-arn=!: The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
+      completion:
+        flag:
+            replication-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: create-replication-instance
+      description: Creates the replication instance using the specified parameters.
+      flags:
+        --allocated-storage=: The amount of storage (in gigabytes) to be initially allocated for the replication instance.
+        --auto-minor-version-upgrade: A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window.
+        --availability-zone=: The Availability Zone where the replication instance will be created.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dns-name-servers=: A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database.
+        --engine-version=: The engine version number of the replication instance.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kerberos-authentication-settings=: Specifies the settings required for kerberos authentication when creating the replication instance.
+        --kms-key-id=: An KMS key identifier that is used to encrypt the data on the replication instance.
+        --multi-az: Specifies whether the replication instance is a Multi-AZ deployment.
+        --network-type=: The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing.
+        --no-auto-minor-version-upgrade: A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window.
+        --no-multi-az: Specifies whether the replication instance is a Multi-AZ deployment.
+        --no-publicly-accessible: Specifies the accessibility options for the replication instance.
+        --preferred-maintenance-window=: The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
+        --publicly-accessible: Specifies the accessibility options for the replication instance.
+        --replication-instance-class=!: The compute and memory capacity of the replication instance as defined for the specified replication instance class.
+        --replication-instance-identifier=!: The replication instance identifier.
+        --replication-subnet-group-identifier=: A subnet group to associate with the replication instance.
+        --resource-identifier=: A friendly name for the resource identifier at the end of the `EndpointArn` response parameter that is returned in the created `Endpoint` object.
+        --tags=: One or more tags to be assigned to the replication instance.
+        --vpc-security-group-ids=: Specifies the VPC security group to be used with the replication instance.
+    - name: create-replication-subnet-group
+      description: Creates a replication subnet group given a list of the subnet IDs in a VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-subnet-group-description=!: The description for the subnet group.
+        --replication-subnet-group-identifier=!: The name for the replication subnet group.
+        --subnet-ids=!: Two or more subnet IDs to be assigned to the subnet group.
+        --tags=: One or more tags to be assigned to the subnet group.
+    - name: create-replication-task
+      description: Creates a replication task using the specified parameters.
+      flags:
+        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
+        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
+        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-type=!: The migration type.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of a replication instance.
+        --replication-task-identifier=!: An identifier for the replication task.
+        --replication-task-settings=: Overall settings for the task, in JSON format.
+        --resource-identifier=: A friendly name for the resource identifier at the end of the `EndpointArn` response parameter that is returned in the created `Endpoint` object.
+        --source-endpoint-arn=!: An Amazon Resource Name (ARN) that uniquely identifies the source endpoint.
+        --table-mappings=!: The table mappings for the task, in JSON format.
+        --tags=: One or more tags to be assigned to the replication task.
+        --target-endpoint-arn=!: An Amazon Resource Name (ARN) that uniquely identifies the target endpoint.
+        --task-data=: Supplemental information that the task requires to migrate the data for certain source and target endpoints.
+      completion:
+        flag:
+            migration-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: delete-certificate
+      description: Deletes the specified certificate.
+      flags:
+        --certificate-arn=!: The Amazon Resource Name (ARN) of the certificate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-connection
+      description: Deletes the connection between a replication instance and an endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
+    - name: delete-data-migration
+      description: Deletes the specified data migration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-data-provider
       description: Deletes the specified data provider.
       flags:
@@ -609,6 +301,62 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-provider-identifier=!: The identifier of the data provider to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-endpoint
+      description: Deletes the specified endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-event-subscription
+      description: Deletes an DMS event subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-name=!: The name of the DMS event notification subscription to be deleted.
+    - name: delete-fleet-advisor-collector
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-referenced-id=!: The reference ID of the Fleet Advisor collector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-fleet-advisor-databases
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-ids=!: The IDs of the Fleet Advisor collector databases to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-instance-profile
+      description: Deletes the specified instance profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-profile-identifier=!: The identifier of the instance profile to delete.
+    - name: delete-migration-project
+      description: Deletes the specified migration project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project to delete.
+    - name: delete-replication-config
+      description: Deletes an DMS Serverless replication configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-config-arn=!: The replication config to delete.
+    - name: delete-replication-instance
+      description: Deletes the specified replication instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance to be deleted.
     - name: delete-replication-subnet-group
       description: Deletes a subnet group.
       flags:
@@ -616,6 +364,612 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-subnet-group-identifier=!: The subnet group name of the replication instance.
+    - name: delete-replication-task
+      description: Deletes the specified replication task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task to be deleted.
+    - name: delete-replication-task-assessment-run
+      description: Deletes the record of a single premigration assessment run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-assessment-run-arn=!: Amazon Resource Name (ARN) of the premigration assessment run to be deleted.
+    - name: describe-account-attributes
+      description: Lists all of the DMS attributes for a customer account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-applicable-individual-assessments
+      description: Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Optional pagination token provided by a previous request.
+        --max-records=: Maximum number of records to include in the response.
+        --migration-type=: Name of the migration type that each provided individual assessment must support.
+        --replication-config-arn=: Amazon Resource Name (ARN) of a serverless replication on which you want to base the default list of individual assessments.
+        --replication-instance-arn=: ARN of a replication instance on which you want to base the default list of individual assessments.
+        --replication-task-arn=: Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.
+        --source-engine-name=: Name of a database engine that the specified replication instance supports as a source.
+        --target-engine-name=: Name of a database engine that the specified replication instance supports as a target.
+      completion:
+        flag:
+            migration-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: describe-certificates
+      description: Provides a description of the certificate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the certificates described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-connections
+      description: Describes the status of the connections that have been made between the replication instance and an endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filters applied to the connection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-conversion-configuration
+      description: Returns configuration parameters for a schema conversion project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the schema conversion project to describe.
+    - name: describe-data-migrations
+      description: Returns information about data migrations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the data migrations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --no-without-settings: An option to set to avoid returning information about settings.
+        --no-without-statistics: An option to set to avoid returning information about statistics.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --without-settings: An option to set to avoid returning information about settings.
+        --without-statistics: An option to set to avoid returning information about statistics.
+    - name: describe-data-providers
+      description: Returns a paginated list of data providers for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the data providers described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-endpoint-settings
+      description: Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engine-name=!: The database engine used for your source or target endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-endpoint-types
+      description: Returns information about the type of endpoints available.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the endpoint types.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-endpoints
+      description: Returns information about the endpoints for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the endpoints.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-engine-versions
+      description: Returns information about the replication instance versions used in the project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-event-categories
+      description: Lists categories for all event source types, or, if specified, for a specified source type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the event categories.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-type=: The type of DMS resource that generates events.
+    - name: describe-event-subscriptions
+      description: Lists all the event subscriptions for a customer account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to event subscriptions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --subscription-name=: The name of the DMS event subscription to be described.
+    - name: describe-events
+      description: Lists events for a given source identifier and source type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration=: The duration of the events to be listed.
+        --end-time=: The end time for the events to be listed.
+        --event-categories=: A list of event categories for the source type that you've chosen.
+        --filters=: Filters applied to events.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-identifier=: The identifier of an event source.
+        --source-type=: The type of DMS resource that generates events.
+        --start-time=: The start time for the events to be listed.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            source-type:
+                - replication-instance
+    - name: describe-extension-pack-associations
+      description: Returns a paginated list of extension pack associations for the specified migration project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the extension pack associations described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the migration project.
+    - name: describe-fleet-advisor-collectors
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'If you specify any of the following filters, the output includes information for only those collectors that meet the filter criteria:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: Sets the maximum number of records returned in the response.
+        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
+    - name: describe-fleet-advisor-databases
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: Sets the maximum number of records returned in the response.
+        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
+    - name: describe-fleet-advisor-lsa-analysis
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: Sets the maximum number of records returned in the response.
+        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
+    - name: describe-fleet-advisor-schema-object-summary
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'If you specify any of the following filters, the output includes information for only those schema objects that meet the filter criteria:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
+    - name: describe-fleet-advisor-schemas
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: Sets the maximum number of records returned in the response.
+        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
+    - name: describe-instance-profiles
+      description: Returns a paginated list of instance profiles for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the instance profiles described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-metadata-model
+      description: Gets detailed information about the specified metadata model, including its definition and corresponding converted objects in the target database if applicable.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --origin=!: Specifies whether to retrieve metadata from the source or target tree.
+        --selection-rules=!: The JSON string that specifies which metadata model to retrieve.
+      completion:
+        flag:
+            origin:
+                - SOURCE
+                - TARGET
+    - name: describe-metadata-model-assessments
+      description: Returns a paginated list of metadata model assessments for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model assessments described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project.
+    - name: describe-metadata-model-children
+      description: Gets a list of child metadata models for the specified metadata model in the database hierarchy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that indicates where the next page should start.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of metadata model children to include in the response.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --origin=!: Specifies whether to retrieve metadata from the source or target tree.
+        --page-size=: The size of each page to get in the AWS service call.
+        --selection-rules=!: The JSON string that specifies which metadata model's children to retrieve.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            origin:
+                - SOURCE
+                - TARGET
+    - name: describe-metadata-model-conversions
+      description: Returns a paginated list of metadata model conversions for a migration project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model conversions described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: describe-metadata-model-creations
+      description: Returns a paginated list of metadata model creation requests for a migration project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model creation requests described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of metadata model creation requests to include in the response.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-metadata-model-exports-as-script
+      description: Returns a paginated list of metadata model exports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model exports described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: describe-metadata-model-exports-to-target
+      description: Returns a paginated list of metadata model exports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model exports described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: describe-metadata-model-imports
+      description: Returns a paginated list of metadata model imports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the metadata model imports described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: A paginated list of metadata model imports.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: describe-migration-projects
+      description: Returns a paginated list of migration projects for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the migration projects described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-orderable-replication-instances
+      description: Returns information about the replication instance types that can be created in the specified region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-pending-maintenance-actions
+      description: Returns a list of upcoming maintenance events for replication instances in your account in the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+        --replication-instance-arn=: The Amazon Resource Name (ARN) of the replication instance.
+    - name: describe-recommendation-limitations
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the limitations described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: The maximum number of records to include in the response.
+        --next-token=: Specifies the unique pagination token that makes it possible to display the next page of results.
+    - name: describe-recommendations
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the target engine recommendations described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-records=: The maximum number of records to include in the response.
+        --next-token=: Specifies the unique pagination token that makes it possible to display the next page of results.
+    - name: describe-refresh-schemas-status
+      description: Returns the status of the RefreshSchemas operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-replication-configs
+      description: Returns one or more existing DMS Serverless replication configurations as a list of structures.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the replication configs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-replication-instance-task-logs
+      description: Returns information about the task logs for the specified task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
+    - name: describe-replication-instances
+      description: Returns information about replication instances for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to replication instances.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-replication-subnet-groups
+      description: Returns information about the replication subnet groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to replication subnet groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-replication-table-statistics
+      description: Returns table and schema statistics for one or more provisioned replications that use a given DMS Serverless replication configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the replication table statistics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+        --replication-config-arn=!: The replication config to describe.
+    - name: describe-replication-task-assessment-results
+      description: Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-task-arn=: The Amazon Resource Name (ARN) string that uniquely identifies the task.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-replication-task-assessment-runs
+      description: Returns a paginated list of premigration assessment runs based on filter settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the premigration assessment runs described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-replication-task-individual-assessments
+      description: Returns a paginated list of individual assessments based on filter settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the individual assessments described in the form of key-value pairs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-replication-tasks
+      description: Returns information about replication tasks for your account in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to replication tasks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --no-without-settings: An option to set to avoid returning information about settings.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --without-settings: An option to set to avoid returning information about settings.
+    - name: describe-replications
+      description: Provides details on replication progress by returning status information for one or more provisioned DMS Serverless replications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to the replications.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-records=: The maximum number of records to include in the response.
+    - name: describe-schemas
+      description: Returns information about the schema for the specified endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-table-statistics
+      description: Returns table statistics on the database migration task, including table name, rows inserted, rows updated, and rows deleted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Filters applied to table statistics.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: An optional pagination token provided by a previous request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-records=: The maximum number of records to include in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
+        --starting-token=: A token to specify where to start paginating.
+    - name: export-metadata-model-assessment
+      description: Saves a copy of a database migration assessment report to your Amazon S3 bucket.
+      flags:
+        --assessment-report-types=: The file format of the assessment file.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-name=: The name of the assessment file to create in your Amazon S3 bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --selection-rules=!: A value that specifies the database objects to assess.
+    - name: get-target-selection-rules
+      description: Converts source selection rules into their target counterparts for schema conversion operations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --selection-rules=!: The JSON string representing the source selection rules for conversion.
+    - name: import-certificate
+      description: Uploads the specified certificate.
+      flags:
+        --certificate-identifier=!: A customer-assigned name for the certificate.
+        --certificate-pem=: The contents of a `.pem` file, which contains an X.509 certificate.
+        --certificate-wallet=: The location of an imported Oracle Wallet certificate for use with SSL.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: An KMS key identifier that is used to encrypt the certificate.
+        --tags=: The tags associated with the certificate.
+    - name: list-tags-for-resource
+      description: Lists all metadata tags attached to an DMS resource, including replication instance, endpoint, subnet group, and migration task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn-list=: List of ARNs that identify multiple DMS resources that you want to list tags for.
+        --resource-arn=: The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for.
+    - name: modify-conversion-configuration
+      description: Modifies the specified schema conversion configuration using the provided parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversion-configuration=!: The new conversion configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: modify-data-migration
+      description: Modifies an existing DMS data migration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to modify.
+        --data-migration-name=: The new name for the data migration.
+        --data-migration-type=: The new migration type for the data migration.
+        --enable-cloudwatch-logs: Whether to enable Cloudwatch logs for the data migration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-cloudwatch-logs: Whether to enable Cloudwatch logs for the data migration.
+        --number-of-jobs=: The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.
+        --selection-rules=: A JSON-formatted string that defines what objects to include and exclude from the migration.
+        --service-access-role-arn=: The new service access role ARN for the data migration.
+        --source-data-settings=: The new information about the source data provider for the data migration.
+        --target-data-settings=: The new information about the target data provider for the data migration.
+      completion:
+        flag:
+            data-migration-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: modify-data-provider
+      description: Modifies the specified data provider using the provided settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-provider-identifier=!: The identifier of the data provider.
+        --data-provider-name=: The name of the data provider.
+        --description=: A user-friendly description of the data provider.
+        --engine=: The type of database engine for the data provider.
+        --exact-settings: If this attribute is Y, the current call to `ModifyDataProvider` replaces all existing data provider settings with the exact settings that you specify in this call.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-exact-settings: If this attribute is Y, the current call to `ModifyDataProvider` replaces all existing data provider settings with the exact settings that you specify in this call.
+        --no-virtual: Indicates whether the data provider is virtual.
+        --settings=: The settings in JSON format for a data provider.
+        --virtual: Indicates whether the data provider is virtual.
     - name: modify-endpoint
       description: Modifies the specified endpoint.
       flags:
@@ -667,134 +1021,48 @@ commands:
                 - require
                 - verify-ca
                 - verify-full
-    - name: reboot-replication-instance
-      description: Reboots a replication instance.
+    - name: modify-event-subscription
+      description: Modifies an existing DMS event notification subscription.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force-failover: If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.
-        --force-planned-failover: If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.
+        --enabled: A Boolean value; set to **true** to activate the subscription.
+        --event-categories=: A list of event categories for a source type that you want to subscribe to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force-failover: If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.
-        --no-force-planned-failover: If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
-    - name: reload-replication-tables
-      description: Reloads the target database table with the source data for a given DMS Serverless replication configuration.
+        --no-enabled: A Boolean value; set to **true** to activate the subscription.
+        --sns-topic-arn=: The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification.
+        --source-type=: The type of DMS resource that generates the events you want to subscribe to.
+        --subscription-name=!: The name of the DMS event notification subscription to be modified.
+    - name: modify-instance-profile
+      description: Modifies the specified instance profile using the provided parameters.
+      flags:
+        --availability-zone=: The Availability Zone where the instance profile runs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A user-friendly description for the instance profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-profile-identifier=!: The identifier of the instance profile.
+        --instance-profile-name=: A user-friendly name for the instance profile.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.
+        --network-type=: Specifies the network type for the instance profile.
+        --no-publicly-accessible: Specifies the accessibility options for the instance profile.
+        --publicly-accessible: Specifies the accessibility options for the instance profile.
+        --subnet-group-identifier=: A subnet group to associate with the instance profile.
+        --vpc-security-groups=: Specifies the VPC security groups to be used with the instance profile.
+    - name: modify-migration-project
+      description: Modifies the specified migration project using the provided parameters.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A user-friendly description of the migration project.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reload-option=: Options for reload.
-        --replication-config-arn=!: The Amazon Resource Name of the replication config for which to reload tables.
-        --tables-to-reload=!: The list of tables to reload.
-      completion:
-        flag:
-            reload-option:
-                - data-reload
-                - validate-only
-    - name: describe-schemas
-      description: Returns information about the schema for the specified endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: stop-data-migration
-      description: Stops the specified data migration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-metadata-model-conversion
-      description: Cancels a single metadata model conversion operation that was started with `StartMetadataModelConversion`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --request-identifier=!: The identifier for the metadata model conversion operation to cancel.
-    - name: create-replication-instance
-      description: Creates the replication instance using the specified parameters.
-      flags:
-        --allocated-storage=: The amount of storage (in gigabytes) to be initially allocated for the replication instance.
-        --auto-minor-version-upgrade: A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window.
-        --availability-zone=: The Availability Zone where the replication instance will be created.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dns-name-servers=: A list of custom DNS name servers supported for the replication instance to access your on-premise source or target database.
-        --engine-version=: The engine version number of the replication instance.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kerberos-authentication-settings=: Specifies the settings required for kerberos authentication when creating the replication instance.
-        --kms-key-id=: An KMS key identifier that is used to encrypt the data on the replication instance.
-        --multi-az: Specifies whether the replication instance is a Multi-AZ deployment.
-        --network-type=: The type of IP address protocol used by a replication instance, such as IPv4 only or Dual-stack that supports both IPv4 and IPv6 addressing.
-        --no-auto-minor-version-upgrade: A value that indicates whether minor engine upgrades are applied automatically to the replication instance during the maintenance window.
-        --no-multi-az: Specifies whether the replication instance is a Multi-AZ deployment.
-        --no-publicly-accessible: Specifies the accessibility options for the replication instance.
-        --preferred-maintenance-window=: The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
-        --publicly-accessible: Specifies the accessibility options for the replication instance.
-        --replication-instance-class=!: The compute and memory capacity of the replication instance as defined for the specified replication instance class.
-        --replication-instance-identifier=!: The replication instance identifier.
-        --replication-subnet-group-identifier=: A subnet group to associate with the replication instance.
-        --resource-identifier=: A friendly name for the resource identifier at the end of the `EndpointArn` response parameter that is returned in the created `Endpoint` object.
-        --tags=: One or more tags to be assigned to the replication instance.
-        --vpc-security-group-ids=: Specifies the VPC security group to be used with the replication instance.
-    - name: delete-replication-config
-      description: Deletes an DMS Serverless replication configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-config-arn=!: The replication config to delete.
-    - name: describe-endpoint-settings
-      description: Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --engine-name=!: The database engine used for your source or target endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-    - name: describe-event-categories
-      description: Lists categories for all event source types, or, if specified, for a specified source type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the event categories.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-type=: The type of DMS resource that generates events.
-    - name: describe-migration-projects
-      description: Returns a paginated list of migration projects for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the migration projects described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-    - name: test-connection
-      description: Tests the connection between the replication instance and the endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
-    - name: describe-replication-task-assessment-runs
-      description: Returns a paginated list of premigration assessment runs based on filter settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the premigration assessment runs described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
+        --instance-profile-identifier=: The name or Amazon Resource Name (ARN) for the instance profile.
+        --migration-project-identifier=!: The identifier of the migration project.
+        --migration-project-name=: A user-friendly name for the migration project.
+        --schema-conversion-application-attributes=: The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
+        --source-data-provider-descriptors=: Information about the source data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+        --target-data-provider-descriptors=: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
+        --transformation-rules=: The settings in JSON format for migration rules.
     - name: modify-replication-config
       description: Modifies an existing DMS Serverless replication configuration that you can use to start a replication.
       flags:
@@ -816,558 +1084,6 @@ commands:
                 - full-load
                 - cdc
                 - full-load-and-cdc
-    - name: describe-replications
-      description: Provides details on replication progress by returning status information for one or more provisioned DMS Serverless replications.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the replications.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-    - name: modify-event-subscription
-      description: Modifies an existing DMS event notification subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: A Boolean value; set to **true** to activate the subscription.
-        --event-categories=: A list of event categories for a source type that you want to subscribe to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-enabled: A Boolean value; set to **true** to activate the subscription.
-        --sns-topic-arn=: The Amazon Resource Name (ARN) of the Amazon SNS topic created for event notification.
-        --source-type=: The type of DMS resource that generates the events you want to subscribe to.
-        --subscription-name=!: The name of the DMS event notification subscription to be modified.
-    - name: describe-data-migrations
-      description: Returns information about data migrations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the data migrations.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --no-without-settings: An option to set to avoid returning information about settings.
-        --no-without-statistics: An option to set to avoid returning information about statistics.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --without-settings: An option to set to avoid returning information about settings.
-        --without-statistics: An option to set to avoid returning information about statistics.
-    - name: describe-endpoint-types
-      description: Returns information about the type of endpoints available.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the endpoint types.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-events
-      description: Lists events for a given source identifier and source type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --duration=: The duration of the events to be listed.
-        --end-time=: The end time for the events to be listed.
-        --event-categories=: A list of event categories for the source type that you've chosen.
-        --filters=: Filters applied to events.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --source-identifier=: The identifier of an event source.
-        --source-type=: The type of DMS resource that generates events.
-        --start-time=: The start time for the events to be listed.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            source-type:
-                - replication-instance
-    - name: start-metadata-model-creation
-      description: Creates source metadata model of the given type with the specified properties for schema conversion operations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-model-name=!: The name of the metadata model.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --properties=!: The properties of metadata model in JSON format.
-        --selection-rules=!: The JSON string that specifies the location where the metadata model will be created.
-    - name: describe-replication-configs
-      description: Returns one or more existing DMS Serverless replication configurations as a list of structures.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the replication configs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-    - name: describe-metadata-model-creations
-      description: Returns a paginated list of metadata model creation requests for a migration project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model creation requests described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of metadata model creation requests to include in the response.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-metadata-model-exports-to-target
-      description: Returns a paginated list of metadata model exports.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model exports described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: create-migration-project
-      description: Creates the migration project using the specified parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A user-friendly description of the migration project.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-profile-identifier=!: The identifier of the associated instance profile.
-        --migration-project-name=: A user-friendly name for the migration project.
-        --schema-conversion-application-attributes=: The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
-        --source-data-provider-descriptors=!: Information about the source data provider, including the name, ARN, and Secrets Manager parameters.
-        --tags=: One or more tags to be assigned to the migration project.
-        --target-data-provider-descriptors=!: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
-        --transformation-rules=: The settings in JSON format for migration rules.
-    - name: remove-tags-from-resource
-      description: Removes metadata tags from an DMS resource, including replication instance, endpoint, subnet group, and migration task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: An DMS resource from which you want to remove tag(s).
-        --tag-keys=!: The tag key (name) of the tag to be removed.
-    - name: create-data-provider
-      description: Creates a data provider using the provided settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-provider-name=: A user-friendly name for the data provider.
-        --description=: A user-friendly description of the data provider.
-        --engine=!: The type of database engine for the data provider.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-virtual: Indicates whether the data provider is virtual.
-        --settings=!: The settings in JSON format for a data provider.
-        --tags=: One or more tags to be assigned to the data provider.
-        --virtual: Indicates whether the data provider is virtual.
-    - name: delete-event-subscription
-      description: Deletes an DMS event subscription.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscription-name=!: The name of the DMS event notification subscription to be deleted.
-    - name: delete-replication-task-assessment-run
-      description: Deletes the record of a single premigration assessment run.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-assessment-run-arn=!: Amazon Resource Name (ARN) of the premigration assessment run to be deleted.
-    - name: describe-fleet-advisor-databases
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'If you specify any of the following filters, the output includes information for only those databases that meet the filter criteria:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: Sets the maximum number of records returned in the response.
-        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
-    - name: start-metadata-model-import
-      description: Loads the metadata for all the dependent database objects of the parent object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --no-refresh: If `true`, DMS loads metadata for the specified objects from the source database.
-        --origin=!: Whether to load metadata to the source or target database.
-        --refresh: If `true`, DMS loads metadata for the specified objects from the source database.
-        --selection-rules=!: A value that specifies the database objects to import.
-      completion:
-        flag:
-            origin:
-                - SOURCE
-                - TARGET
-    - name: delete-replication-task
-      description: Deletes the specified replication task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task to be deleted.
-    - name: delete-endpoint
-      description: Deletes the specified endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-replication-table-statistics
-      description: Returns table and schema statistics for one or more provisioned replications that use a given DMS Serverless replication configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the replication table statistics.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-        --replication-config-arn=!: The replication config to describe.
-    - name: start-metadata-model-assessment
-      description: Creates a database migration assessment report by assessing the migration complexity for your source database.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to assess.
-    - name: start-replication
-      description: For a given DMS Serverless replication configuration, DMS connects to the source endpoint and collects the metadata to analyze the replication workload.
-      flags:
-        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
-        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
-        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --premigration-assessment-settings=: User-defined settings for the premigration assessment.
-        --replication-config-arn=!: The Amazon Resource Name of the replication for which to start replication.
-        --start-replication-type=!: The replication type.
-    - name: delete-instance-profile
-      description: Deletes the specified instance profile.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-profile-identifier=!: The identifier of the instance profile to delete.
-    - name: describe-fleet-advisor-schemas
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'If you specify any of the following filters, the output includes information for only those schemas that meet the filter criteria:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: Sets the maximum number of records returned in the response.
-        --next-token=: If `NextToken` is returned by a previous response, there are more results available.
-    - name: start-data-migration
-      description: Starts the specified data migration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to start.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --start-type=!: Specifies the start type for the data migration.
-      completion:
-        flag:
-            start-type:
-                - reload-target
-                - resume-processing
-                - start-replication
-    - name: describe-metadata-model-imports
-      description: Returns a paginated list of metadata model imports.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the metadata model imports described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: A paginated list of metadata model imports.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-    - name: describe-recommendation-limitations
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the limitations described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-records=: The maximum number of records to include in the response.
-        --next-token=: Specifies the unique pagination token that makes it possible to display the next page of results.
-    - name: reload-tables
-      description: Reloads the target database table with the source data.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reload-option=: Options for reload.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
-        --tables-to-reload=!: The name and schema of the table to be reloaded.
-      completion:
-        flag:
-            reload-option:
-                - data-reload
-                - validate-only
-    - name: create-data-migration
-      description: Creates a data migration using the provided settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-migration-name=: A user-friendly name for the data migration.
-        --data-migration-type=!: Specifies if the data migration is full-load only, change data capture (CDC) only, or full-load and CDC.
-        --enable-cloudwatch-logs: Specifies whether to enable CloudWatch logs for the data migration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: An identifier for the migration project.
-        --no-enable-cloudwatch-logs: Specifies whether to enable CloudWatch logs for the data migration.
-        --number-of-jobs=: The number of parallel jobs that trigger parallel threads to unload the tables from the source, and then load them to the target.
-        --selection-rules=: An optional JSON string specifying what tables, views, and schemas to include or exclude from the migration.
-        --service-access-role-arn=!: The Amazon Resource Name (ARN) for the service access role that you want to use to create the data migration.
-        --source-data-settings=: Specifies information about the source data provider.
-        --tags=: One or more tags to be assigned to the data migration.
-        --target-data-settings=: Specifies information about the target data provider.
-      completion:
-        flag:
-            data-migration-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: delete-migration-project
-      description: Deletes the specified migration project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project to delete.
-    - name: delete-replication-instance
-      description: Deletes the specified replication instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance to be deleted.
-    - name: create-replication-config
-      description: Creates a configuration that you can later provide to configure and start an DMS Serverless replication.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-config=!: Configuration parameters for provisioning an DMS Serverless replication.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-config-identifier=!: A unique identifier that you want to use to create a `ReplicationConfigArn` that is returned as part of the output from this action.
-        --replication-settings=: Optional JSON settings for DMS Serverless replications that are provisioned using this replication configuration.
-        --replication-type=!: The type of DMS Serverless replication to provision using this replication configuration.
-        --resource-identifier=: Optional unique value or name that you set for a given resource that can be used to construct an Amazon Resource Name (ARN) for that resource.
-        --source-endpoint-arn=!: The Amazon Resource Name (ARN) of the source endpoint for this DMS Serverless replication configuration.
-        --supplemental-settings=: Optional JSON settings for specifying supplemental data.
-        --table-mappings=!: JSON table mappings for DMS Serverless replications that are provisioned using this replication configuration.
-        --tags=: One or more optional tags associated with resources used by the DMS Serverless replication.
-        --target-endpoint-arn=!: The Amazon Resource Name (ARN) of the target endpoint for this DMS serverless replication configuration.
-      completion:
-        flag:
-            replication-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: describe-data-providers
-      description: Returns a paginated list of data providers for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the data providers described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-    - name: modify-migration-project
-      description: Modifies the specified migration project using the provided parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A user-friendly description of the migration project.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-profile-identifier=: The name or Amazon Resource Name (ARN) for the instance profile.
-        --migration-project-identifier=!: The identifier of the migration project.
-        --migration-project-name=: A user-friendly name for the migration project.
-        --schema-conversion-application-attributes=: The schema conversion application attributes, including the Amazon S3 bucket name and Amazon S3 role ARN.
-        --source-data-provider-descriptors=: Information about the source data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
-        --target-data-provider-descriptors=: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
-        --transformation-rules=: The settings in JSON format for migration rules.
-    - name: create-fleet-advisor-collector
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collector-name=!: The name of your Fleet Advisor collector (for example, `sample-collector`).
-        --description=: A summary description of your Fleet Advisor collector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --s3-bucket-name=!: The Amazon S3 bucket that the Fleet Advisor collector uses to store inventory metadata.
-        --service-access-role-arn=!: The IAM role that grants permissions to access the specified Amazon S3 bucket.
-    - name: delete-connection
-      description: Deletes the connection between a replication instance and an endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
-    - name: delete-fleet-advisor-collector
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collector-referenced-id=!: The reference ID of the Fleet Advisor collector to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-applicable-individual-assessments
-      description: Provides a list of individual assessments that you can specify for a new premigration assessment run, given one or more parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Optional pagination token provided by a previous request.
-        --max-records=: Maximum number of records to include in the response.
-        --migration-type=: Name of the migration type that each provided individual assessment must support.
-        --replication-config-arn=: Amazon Resource Name (ARN) of a serverless replication on which you want to base the default list of individual assessments.
-        --replication-instance-arn=: ARN of a replication instance on which you want to base the default list of individual assessments.
-        --replication-task-arn=: Amazon Resource Name (ARN) of a migration task on which you want to base the default list of individual assessments.
-        --source-engine-name=: Name of a database engine that the specified replication instance supports as a source.
-        --target-engine-name=: Name of a database engine that the specified replication instance supports as a target.
-      completion:
-        flag:
-            migration-type:
-                - full-load
-                - cdc
-                - full-load-and-cdc
-    - name: describe-replication-instance-task-logs
-      description: Returns information about the task logs for the specified task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-records=: The maximum number of records to include in the response.
-        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
-    - name: modify-instance-profile
-      description: Modifies the specified instance profile using the provided parameters.
-      flags:
-        --availability-zone=: The Availability Zone where the instance profile runs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A user-friendly description for the instance profile.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-profile-identifier=!: The identifier of the instance profile.
-        --instance-profile-name=: A user-friendly name for the instance profile.
-        --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key that is used to encrypt the connection parameters for the instance profile.
-        --network-type=: Specifies the network type for the instance profile.
-        --no-publicly-accessible: Specifies the accessibility options for the instance profile.
-        --publicly-accessible: Specifies the accessibility options for the instance profile.
-        --subnet-group-identifier=: A subnet group to associate with the instance profile.
-        --vpc-security-groups=: Specifies the VPC security groups to be used with the instance profile.
-    - name: move-replication-task
-      description: Moves a replication task from its current replication instance to a different target replication instance using the specified parameters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-task-arn=!: The Amazon Resource Name (ARN) of the task that you want to move.
-        --target-replication-instance-arn=!: The ARN of the replication instance where you want to move the task to.
-    - name: add-tags-to-resource
-      description: Adds metadata tags to an DMS resource, including replication instance, endpoint, subnet group, and migration task.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Identifies the DMS resource to which tags should be added.
-        --tags=!: One or more tags to be assigned to the resource.
-    - name: describe-connections
-      description: Describes the status of the connections that have been made between the replication instance and an endpoint.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters applied to the connection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-metadata-model
-      description: Gets detailed information about the specified metadata model, including its definition and corresponding converted objects in the target database if applicable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --origin=!: Specifies whether to retrieve metadata from the source or target tree.
-        --selection-rules=!: The JSON string that specifies which metadata model to retrieve.
-      completion:
-        flag:
-            origin:
-                - SOURCE
-                - TARGET
-    - name: describe-refresh-schemas-status
-      description: Returns the status of the RefreshSchemas operation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-replication-instances
-      description: Returns information about replication instances for your account in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to replication instances.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-metadata-model-export-as-script
-      description: Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-name=: The name of the model file to create in the Amazon S3 bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --origin=!: Whether to export the metadata model from the source or the target.
-        --selection-rules=!: A value that specifies the database objects to export.
-      completion:
-        flag:
-            origin:
-                - SOURCE
-                - TARGET
-    - name: batch-start-recommendations
-      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data=: Provides information about source databases to analyze.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-event-subscriptions
-      description: Lists all the event subscriptions for a customer account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to event subscriptions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: An optional pagination token provided by a previous request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of records to include in the response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --subscription-name=: The name of the DMS event subscription to be described.
-    - name: describe-extension-pack-associations
-      description: Returns a paginated list of extension pack associations for the specified migration project.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters applied to the extension pack associations described in the form of key-value pairs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the migration project.
     - name: modify-replication-instance
       description: Modifies the replication instance to apply new settings.
       flags:
@@ -1391,9 +1107,305 @@ commands:
         --replication-instance-class=: The compute and memory capacity of the replication instance as defined for the specified replication instance class.
         --replication-instance-identifier=: The replication instance identifier.
         --vpc-security-group-ids=: Specifies the VPC security group to be used with the replication instance.
+    - name: modify-replication-subnet-group
+      description: Modifies the settings for the specified replication subnet group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-subnet-group-description=: A description for the replication instance subnet group.
+        --replication-subnet-group-identifier=!: The name of the replication instance subnet group.
+        --subnet-ids=!: A list of subnet IDs.
+    - name: modify-replication-task
+      description: Modifies the specified replication task.
+      flags:
+        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
+        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
+        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-type=: The migration type.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
+        --replication-task-identifier=: The replication task identifier.
+        --replication-task-settings=: JSON file that contains settings for the task, such as task metadata settings.
+        --table-mappings=: When using the CLI or boto3, provide the path of the JSON file that contains the table mappings.
+        --task-data=: Supplemental information that the task requires to migrate the data for certain source and target endpoints.
+      completion:
+        flag:
+            migration-type:
+                - full-load
+                - cdc
+                - full-load-and-cdc
+    - name: move-replication-task
+      description: Moves a replication task from its current replication instance to a different target replication instance using the specified parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the task that you want to move.
+        --target-replication-instance-arn=!: The ARN of the replication instance where you want to move the task to.
+    - name: reboot-replication-instance
+      description: Reboots a replication instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-failover: If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.
+        --force-planned-failover: If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-failover: If this parameter is `true`, the reboot is conducted through a Multi-AZ failover.
+        --no-force-planned-failover: If this parameter is `true`, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
+    - name: refresh-schemas
+      description: Populates the schema for the specified endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
+    - name: reload-replication-tables
+      description: Reloads the target database table with the source data for a given DMS Serverless replication configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reload-option=: Options for reload.
+        --replication-config-arn=!: The Amazon Resource Name of the replication config for which to reload tables.
+        --tables-to-reload=!: The list of tables to reload.
+      completion:
+        flag:
+            reload-option:
+                - data-reload
+                - validate-only
+    - name: reload-tables
+      description: Reloads the target database table with the source data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reload-option=: Options for reload.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
+        --tables-to-reload=!: The name and schema of the table to be reloaded.
+      completion:
+        flag:
+            reload-option:
+                - data-reload
+                - validate-only
+    - name: remove-tags-from-resource
+      description: Removes metadata tags from an DMS resource, including replication instance, endpoint, subnet group, and migration task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: An DMS resource from which you want to remove tag(s).
+        --tag-keys=!: The tag key (name) of the tag to be removed.
+    - name: run-fleet-advisor-lsa-analysis
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-data-migration
+      description: Starts the specified data migration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to start.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --start-type=!: Specifies the start type for the data migration.
+      completion:
+        flag:
+            start-type:
+                - reload-target
+                - resume-processing
+                - start-replication
+    - name: start-extension-pack-association
+      description: Applies the extension pack to your target database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+    - name: start-metadata-model-assessment
+      description: Creates a database migration assessment report by assessing the migration complexity for your source database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --selection-rules=!: A value that specifies the database objects to assess.
+    - name: start-metadata-model-conversion
+      description: Converts your source database objects to a format compatible with the target database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --selection-rules=!: A value that specifies the database objects to convert.
+    - name: start-metadata-model-creation
+      description: Creates source metadata model of the given type with the specified properties for schema conversion operations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata-model-name=!: The name of the metadata model.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --properties=!: The properties of metadata model in JSON format.
+        --selection-rules=!: The JSON string that specifies the location where the metadata model will be created.
+    - name: start-metadata-model-export-as-script
+      description: Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-name=: The name of the model file to create in the Amazon S3 bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --origin=!: Whether to export the metadata model from the source or the target.
+        --selection-rules=!: A value that specifies the database objects to export.
+      completion:
+        flag:
+            origin:
+                - SOURCE
+                - TARGET
+    - name: start-metadata-model-export-to-target
+      description: Applies converted database objects to your target database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --no-overwrite-extension-pack: Whether to overwrite the migration project extension pack.
+        --overwrite-extension-pack: Whether to overwrite the migration project extension pack.
+        --selection-rules=!: A value that specifies the database objects to export.
+    - name: start-metadata-model-import
+      description: Loads the metadata for all the dependent database objects of the parent object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
+        --no-refresh: If `true`, DMS loads metadata for the specified objects from the source database.
+        --origin=!: Whether to load metadata to the source or target database.
+        --refresh: If `true`, DMS loads metadata for the specified objects from the source database.
+        --selection-rules=!: A value that specifies the database objects to import.
+      completion:
+        flag:
+            origin:
+                - SOURCE
+                - TARGET
+    - name: start-recommendations
+      description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --database-id=!: The identifier of the source database to analyze and provide recommendations for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --settings=!: The settings in JSON format that Fleet Advisor uses to determine target engine recommendations.
+    - name: start-replication
+      description: For a given DMS Serverless replication configuration, DMS connects to the source endpoint and collects the metadata to analyze the replication workload.
+      flags:
+        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
+        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
+        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --premigration-assessment-settings=: User-defined settings for the premigration assessment.
+        --replication-config-arn=!: The Amazon Resource Name of the replication for which to start replication.
+        --start-replication-type=!: The replication type.
+    - name: start-replication-task
+      description: Starts the replication task.
+      flags:
+        --cdc-start-position=: Indicates when you want a change data capture (CDC) operation to start.
+        --cdc-start-time=: Indicates the start time for a change data capture (CDC) operation.
+        --cdc-stop-position=: Indicates when you want a change data capture (CDC) operation to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task to be started.
+        --start-replication-task-type=!: The type of replication task to start.
+      completion:
+        flag:
+            start-replication-task-type:
+                - start-replication
+                - resume-processing
+                - reload-target
+    - name: start-replication-task-assessment
+      description: Starts the replication task assessment for unsupported data types in the source database.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-arn=!: The Amazon Resource Name (ARN) of the replication task.
+    - name: start-replication-task-assessment-run
+      description: Starts a new premigration assessment run for one or more individual assessments of a migration task.
+      flags:
+        --assessment-run-name=!: Unique name to identify the assessment run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclude=: Space-separated list of names for specific individual assessments that you want to exclude.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-only=: Space-separated list of names for specific individual assessments that you want to include.
+        --replication-task-arn=!: Amazon Resource Name (ARN) of the migration task associated with the premigration assessment run that you want to start.
+        --result-encryption-mode=: Encryption mode that you can specify to encrypt the results of this assessment run.
+        --result-kms-key-arn=: ARN of a custom KMS encryption key that you specify when you set `ResultEncryptionMode` to `"SSE_KMS`".
+        --result-location-bucket=!: Amazon S3 bucket where you want DMS to store the results of this assessment run.
+        --result-location-folder=: Folder within an Amazon S3 bucket where you want DMS to store the results of this assessment run.
+        --service-access-role-arn=!: ARN of the service role needed to start the assessment run.
+        --tags=: One or more tags to be assigned to the premigration assessment run that you want to start.
+    - name: stop-data-migration
+      description: Stops the specified data migration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration-identifier=!: The identifier (name or ARN) of the data migration to stop.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-replication
+      description: For a given DMS Serverless replication configuration, DMS stops any and all ongoing DMS Serverless replications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-config-arn=!: The Amazon Resource Name of the replication to stop.
+    - name: stop-replication-task
+      description: Stops the replication task.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-task-arn=!: The Amazon Resource Name(ARN) of the replication task to be stopped.
+    - name: test-connection
+      description: Tests the connection between the replication instance and the endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-arn=!: The Amazon Resource Name (ARN) string that uniquely identifies the endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-instance-arn=!: The Amazon Resource Name (ARN) of the replication instance.
+    - name: update-subscriptions-to-event-bridge
+      description: Migrates 10 active and enabled Amazon SNS subscriptions at a time and converts them to corresponding Amazon EventBridge rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force-move: When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-move: When set to true, this operation migrates DMS subscriptions for Amazon SNS notifications no matter what your replication instance version is.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: endpoint-deleted
+          description: Returns information about the endpoints for your account in the current region.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --filters=: Filters applied to the endpoints.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --marker=: An optional pagination token provided by a previous request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-records=: The maximum number of records to include in the response.
+            --page-size=: The size of each page to get in the AWS service call.
+            --starting-token=: A token to specify where to start paginating.
         - name: replication-instance-available
           description: Returns information about replication instances for your account in the current region.
           flags:
@@ -1418,7 +1430,7 @@ commands:
             --max-records=: The maximum number of records to include in the response.
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
-        - name: replication-task-ready
+        - name: replication-task-deleted
           description: Returns information about replication tasks for your account in the current region.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1432,7 +1444,7 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
             --without-settings: An option to set to avoid returning information about settings.
-        - name: replication-task-stopped
+        - name: replication-task-ready
           description: Returns information about replication tasks for your account in the current region.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1460,7 +1472,7 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
             --without-settings: An option to set to avoid returning information about settings.
-        - name: replication-task-deleted
+        - name: replication-task-stopped
           description: Returns information about replication tasks for your account in the current region.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -1480,18 +1492,6 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=: The filters applied to the connection.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: An optional pagination token provided by a previous request.
-            --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of records to include in the response.
-            --page-size=: The size of each page to get in the AWS service call.
-            --starting-token=: A token to specify where to start paginating.
-        - name: endpoint-deleted
-          description: Returns information about the endpoints for your account in the current region.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --filters=: Filters applied to the endpoints.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous request.
             --max-items=: The  total number of items to return in the command's output.

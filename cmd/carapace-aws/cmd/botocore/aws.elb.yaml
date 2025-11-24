@@ -1,21 +1,22 @@
 name: elb
 description: Elastic Load Balancing
 commands:
-    - name: describe-load-balancer-policies
-      description: Describes the specified policies.
+    - name: add-tags
+      description: Adds the specified tags to the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=: The name of the load balancer.
-        --policy-names=: The names of the policies.
-    - name: describe-load-balancer-policy-types
-      description: Describes the specified load balancer policy types or all load balancer policy types.
+        --load-balancer-names=!: The name of the load balancer.
+        --tags=!: The tags.
+    - name: apply-security-groups-to-load-balancer
+      description: Associates one or more security groups with your load balancer in a virtual private cloud (VPC).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy-type-names=: The names of the policy types.
+        --load-balancer-name=!: The name of the load balancer.
+        --security-groups=!: The IDs of the security groups to associate with the load balancer.
     - name: attach-load-balancer-to-subnets
       description: Adds one or more subnets to the set of configured subnets for the specified load balancer.
       flags:
@@ -24,6 +25,45 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
         --subnets=!: The IDs of the subnets to add.
+    - name: configure-health-check
+      description: Specifies the health check settings to use when evaluating the health state of your EC2 instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check=!: The configuration information.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: create-app-cookie-stickiness-policy
+      description: Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cookie-name=!: The name of the application cookie used for stickiness.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --policy-name=!: The name of the policy being created.
+    - name: create-lb-cookie-stickiness-policy
+      description: Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cookie-expiration-period=: The time period, in seconds, after which the cookie should be considered stale.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+        --policy-name=!: The name of the policy being created.
+    - name: create-load-balancer
+      description: Creates a Classic Load Balancer.
+      flags:
+        --availability-zones=: One or more Availability Zones from the same region as the load balancer.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listeners=!: The listeners.
+        --load-balancer-name=!: The name of the load balancer.
+        --scheme=: The type of a load balancer.
+        --security-groups=: The IDs of the security groups to assign to the load balancer.
+        --subnets=: The IDs of the subnets in your VPC to attach to the load balancer.
+        --tags=: A list of tags to assign to the load balancer.
     - name: create-load-balancer-listeners
       description: Creates one or more listeners for the specified load balancer.
       flags:
@@ -32,33 +72,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --listeners=!: The listeners.
         --load-balancer-name=!: The name of the load balancer.
-    - name: describe-instance-health
-      description: Describes the state of the specified instances with respect to the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instances=: The IDs of the instances.
-        --load-balancer-name=!: The name of the load balancer.
-    - name: modify-load-balancer-attributes
-      description: Modifies the attributes of the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-attributes=!: The attributes for the load balancer.
-        --load-balancer-name=!: The name of the load balancer.
-    - name: set-load-balancer-policies-of-listener
-      description: Replaces the current set of policies for the specified load balancer port with the specified set of policies.
+    - name: create-load-balancer-policy
+      description: Creates a policy with the specified attributes for the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-        --load-balancer-port=!: The external port of the load balancer.
-        --policy-names=!: The names of the policies.
-    - name: describe-load-balancer-attributes
-      description: Describes the attributes for the specified load balancer.
+        --policy-attributes=: The policy attributes.
+        --policy-name=!: The name of the load balancer policy to be created.
+        --policy-type-name=!: The name of the base policy type.
+    - name: delete-load-balancer
+      description: Deletes the specified load balancer.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -80,6 +105,65 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
         --policy-name=!: The name of the policy.
+    - name: deregister-instances-from-load-balancer
+      description: Deregisters the specified instances from the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instances=!: The IDs of the instances.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-account-limits
+      description: Describes the current Elastic Load Balancing resource limits for your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-instance-health
+      description: Describes the state of the specified instances with respect to the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instances=: The IDs of the instances.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-load-balancer-attributes
+      description: Describes the attributes for the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=!: The name of the load balancer.
+    - name: describe-load-balancer-policies
+      description: Describes the specified policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-name=: The name of the load balancer.
+        --policy-names=: The names of the policies.
+    - name: describe-load-balancer-policy-types
+      description: Describes the specified load balancer policy types or all load balancer policy types.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-type-names=: The names of the policy types.
+    - name: describe-load-balancers
+      description: Describes the specified the load balancers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-names=: The names of the load balancers.
+        --marker=: The marker for the next set of results.
+        --max-items=: The  total number of items to return in the command's output.
+        --page-size=: The maximum number of results to return with this call (a number from 1 to 400).
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-tags
       description: Describes the tags associated with the specified load balancers.
       flags:
@@ -111,6 +195,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
+    - name: modify-load-balancer-attributes
+      description: Modifies the attributes of the specified load balancer.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --load-balancer-attributes=!: The attributes for the load balancer.
+        --load-balancer-name=!: The name of the load balancer.
     - name: register-instances-with-load-balancer
       description: Adds the specified instances to the specified load balancer.
       flags:
@@ -118,30 +210,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instances=!: The IDs of the instances.
-        --load-balancer-name=!: The name of the load balancer.
-    - name: configure-health-check
-      description: Specifies the health check settings to use when evaluating the health state of your EC2 instances.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check=!: The configuration information.
-        --load-balancer-name=!: The name of the load balancer.
-    - name: create-app-cookie-stickiness-policy
-      description: Generates a stickiness policy with sticky session lifetimes that follow that of an application-generated cookie.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cookie-name=!: The name of the application cookie used for stickiness.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-        --policy-name=!: The name of the policy being created.
-    - name: delete-load-balancer
-      description: Deletes the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
     - name: remove-tags
       description: Removes one or more tags from the specified load balancer.
@@ -151,44 +219,6 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-names=!: The name of the load balancer.
         --tags=!: The list of tag keys to remove.
-    - name: create-lb-cookie-stickiness-policy
-      description: Generates a stickiness policy with sticky session lifetimes controlled by the lifetime of the browser (user-agent) or a specified expiration period.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cookie-expiration-period=: The time period, in seconds, after which the cookie should be considered stale.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-        --policy-name=!: The name of the policy being created.
-    - name: deregister-instances-from-load-balancer
-      description: Deregisters the specified instances from the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instances=!: The IDs of the instances.
-        --load-balancer-name=!: The name of the load balancer.
-    - name: describe-account-limits
-      description: Describes the current Elastic Load Balancing resource limits for your AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: The marker for the next set of results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The maximum number of results to return with this call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: describe-load-balancers
-      description: Describes the specified the load balancers.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=: The names of the load balancers.
-        --marker=: The marker for the next set of results.
-        --max-items=: The  total number of items to return in the command's output.
-        --page-size=: The maximum number of results to return with this call (a number from 1 to 400).
-        --starting-token=: A token to specify where to start paginating.
     - name: set-load-balancer-listener-ssl-certificate
       description: Sets the certificate that terminates the specified listener's SSL connections.
       flags:
@@ -207,49 +237,19 @@ commands:
         --instance-port=!: The port number associated with the EC2 instance.
         --load-balancer-name=!: The name of the load balancer.
         --policy-names=!: The names of the policies.
-    - name: create-load-balancer-policy
-      description: Creates a policy with the specified attributes for the specified load balancer.
+    - name: set-load-balancer-policies-of-listener
+      description: Replaces the current set of policies for the specified load balancer port with the specified set of policies.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --load-balancer-name=!: The name of the load balancer.
-        --policy-attributes=: The policy attributes.
-        --policy-name=!: The name of the load balancer policy to be created.
-        --policy-type-name=!: The name of the base policy type.
-    - name: add-tags
-      description: Adds the specified tags to the specified load balancer.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-names=!: The name of the load balancer.
-        --tags=!: The tags.
-    - name: apply-security-groups-to-load-balancer
-      description: Associates one or more security groups with your load balancer in a virtual private cloud (VPC).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --load-balancer-name=!: The name of the load balancer.
-        --security-groups=!: The IDs of the security groups to associate with the load balancer.
-    - name: create-load-balancer
-      description: Creates a Classic Load Balancer.
-      flags:
-        --availability-zones=: One or more Availability Zones from the same region as the load balancer.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listeners=!: The listeners.
-        --load-balancer-name=!: The name of the load balancer.
-        --scheme=: The type of a load balancer.
-        --security-groups=: The IDs of the security groups to assign to the load balancer.
-        --subnets=: The IDs of the subnets in your VPC to attach to the load balancer.
-        --tags=: A list of tags to assign to the load balancer.
+        --load-balancer-port=!: The external port of the load balancer.
+        --policy-names=!: The names of the policies.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: instance-deregistered
+        - name: any-instance-in-service
           description: Describes the state of the specified instances with respect to the specified load balancer.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -257,7 +257,7 @@ commands:
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --instances=: The IDs of the instances.
             --load-balancer-name=!: The name of the load balancer.
-        - name: any-instance-in-service
+        - name: instance-deregistered
           description: Describes the state of the specified instances with respect to the specified load balancer.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.

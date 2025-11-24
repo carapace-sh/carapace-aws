@@ -1,6 +1,122 @@
 name: s3vectors
 description: Amazon S3 Vectors
 commands:
+    - name: create-index
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-type=!: The data type of the vectors to be inserted into the vector index.
+        --dimension=!: The dimensions of the vectors to be inserted into the vector index.
+        --distance-metric=!: The distance metric to be used for similarity search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the vector index to create.
+        --metadata-configuration=: The metadata configuration for the vector index.
+        --vector-bucket-arn=: The Amazon Resource Name (ARN) of the vector bucket to create the vector index in.
+        --vector-bucket-name=: The name of the vector bucket to create the vector index in.
+      completion:
+        flag:
+            data-type:
+                - float32
+            distance-metric:
+                - euclidean
+                - cosine
+    - name: create-vector-bucket
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: The encryption configuration for the vector bucket.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vector-bucket-name=!: The name of the vector bucket to create.
+    - name: delete-index
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-arn=: The ARN of the vector index to delete.
+        --index-name=: The name of the vector index to delete.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
+    - name: delete-vector-bucket
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vector-bucket-arn=: The ARN of the vector bucket to delete.
+        --vector-bucket-name=: The name of the vector bucket to delete.
+    - name: delete-vector-bucket-policy
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vector-bucket-arn=: The ARN of the vector bucket to delete the policy from.
+        --vector-bucket-name=: The name of the vector bucket to delete the policy from.
+    - name: delete-vectors
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-arn=: The ARN of the vector index that contains a vector you want to delete.
+        --index-name=: The name of the vector index that contains a vector you want to delete.
+        --keys=!: The keys of the vectors to delete.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
+    - name: get-index
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-arn=: The ARN of the vector index.
+        --index-name=: The name of the vector index.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
+    - name: get-vector-bucket
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vector-bucket-arn=: The ARN of the vector bucket to retrieve information about.
+        --vector-bucket-name=: The name of the vector bucket to retrieve information about.
+    - name: get-vector-bucket-policy
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vector-bucket-arn=: The ARN of the vector bucket.
+        --vector-bucket-name=: The name of the vector bucket.
+    - name: get-vectors
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-arn=: The ARN of the vector index.
+        --index-name=: The name of the vector index.
+        --keys=!: The names of the vectors you want to return attributes for.
+        --no-return-data: Indicates whether to include the vector data in the response.
+        --no-return-metadata: Indicates whether to include metadata in the response.
+        --return-data: Indicates whether to include the vector data in the response.
+        --return-metadata: Indicates whether to include metadata in the response.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
+    - name: list-indexes
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to be returned in the response.
+        --next-token=: The previous pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: Limits the response to vector indexes that begin with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
+        --vector-bucket-arn=: The ARN of the vector bucket that contains the vector indexes.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector indexes.
     - name: list-vector-buckets
       description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
       flags:
@@ -33,6 +149,25 @@ commands:
         --segment-index=: For a parallel `ListVectors` request, `segmentIndex` is the index of the segment from which to list vectors in the current request.
         --starting-token=: A token to specify where to start paginating.
         --vector-bucket-name=: The name of the vector bucket.
+    - name: put-vector-bucket-policy
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The `JSON` that defines the policy.
+        --vector-bucket-arn=: The Amazon Resource Name (ARN) of the vector bucket.
+        --vector-bucket-name=: The name of the vector bucket.
+    - name: put-vectors
+      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-arn=: The ARN of the vector index where you want to write vectors.
+        --index-name=: The name of the vector index where you want to write vectors.
+        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
+        --vectors=!: The vectors to add to a vector index.
     - name: query-vectors
       description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
       flags:
@@ -49,138 +184,3 @@ commands:
         --return-metadata: Indicates whether to include metadata in the response.
         --top-k=!: The number of results to return for each query.
         --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-    - name: create-index
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-type=!: The data type of the vectors to be inserted into the vector index.
-        --dimension=!: The dimensions of the vectors to be inserted into the vector index.
-        --distance-metric=!: The distance metric to be used for similarity search.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-name=!: The name of the vector index to create.
-        --metadata-configuration=: The metadata configuration for the vector index.
-        --vector-bucket-arn=: The Amazon Resource Name (ARN) of the vector bucket to create the vector index in.
-        --vector-bucket-name=: The name of the vector bucket to create the vector index in.
-      completion:
-        flag:
-            data-type:
-                - float32
-            distance-metric:
-                - euclidean
-                - cosine
-    - name: delete-index
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-arn=: The ARN of the vector index to delete.
-        --index-name=: The name of the vector index to delete.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-    - name: delete-vectors
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-arn=: The ARN of the vector index that contains a vector you want to delete.
-        --index-name=: The name of the vector index that contains a vector you want to delete.
-        --keys=!: The keys of the vectors to delete.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-    - name: put-vector-bucket-policy
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The `JSON` that defines the policy.
-        --vector-bucket-arn=: The Amazon Resource Name (ARN) of the vector bucket.
-        --vector-bucket-name=: The name of the vector bucket.
-    - name: delete-vector-bucket
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vector-bucket-arn=: The ARN of the vector bucket to delete.
-        --vector-bucket-name=: The name of the vector bucket to delete.
-    - name: delete-vector-bucket-policy
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vector-bucket-arn=: The ARN of the vector bucket to delete the policy from.
-        --vector-bucket-name=: The name of the vector bucket to delete the policy from.
-    - name: get-index
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-arn=: The ARN of the vector index.
-        --index-name=: The name of the vector index.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-    - name: get-vectors
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-arn=: The ARN of the vector index.
-        --index-name=: The name of the vector index.
-        --keys=!: The names of the vectors you want to return attributes for.
-        --no-return-data: Indicates whether to include the vector data in the response.
-        --no-return-metadata: Indicates whether to include metadata in the response.
-        --return-data: Indicates whether to include the vector data in the response.
-        --return-metadata: Indicates whether to include metadata in the response.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-    - name: list-indexes
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to be returned in the response.
-        --next-token=: The previous pagination token.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix=: Limits the response to vector indexes that begin with the specified prefix.
-        --starting-token=: A token to specify where to start paginating.
-        --vector-bucket-arn=: The ARN of the vector bucket that contains the vector indexes.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector indexes.
-    - name: get-vector-bucket-policy
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vector-bucket-arn=: The ARN of the vector bucket.
-        --vector-bucket-name=: The name of the vector bucket.
-    - name: put-vectors
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-arn=: The ARN of the vector index where you want to write vectors.
-        --index-name=: The name of the vector index where you want to write vectors.
-        --vector-bucket-name=: The name of the vector bucket that contains the vector index.
-        --vectors=!: The vectors to add to a vector index.
-    - name: create-vector-bucket
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-configuration=: The encryption configuration for the vector bucket.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vector-bucket-name=!: The name of the vector bucket to create.
-    - name: get-vector-bucket
-      description: Amazon S3 Vectors is in preview release for Amazon S3 and is subject to change.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vector-bucket-arn=: The ARN of the vector bucket to retrieve information about.
-        --vector-bucket-name=: The name of the vector bucket to retrieve information about.
