@@ -117,6 +117,7 @@ func CamelCaseToDash(s string) string {
 		"pool-ar-ns":                                "pool-arns",
 		"provider-ar-ns":                            "provider-arns",
 		"recovery-instance-i-ds":                    "recovery-instance-ids",
+		"replication-configuration-template-i-ds":   "replication-configuration-template-ids",
 		"replication-servers-security-groups-i-ds":  "replication-servers-security-groups-ids",
 		"retrieve-a-zs":                             "retrieve-azs",
 		"saml-provider-ar-ns":                       "saml-provider-arns",
