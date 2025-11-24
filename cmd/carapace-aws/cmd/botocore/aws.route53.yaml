@@ -1,203 +1,32 @@
 name: route53
 description: Amazon Route 53
 commands:
-    - name: list-vpc-association-authorizations
-      description: Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because you've submitted one or more `CreateVPCAssociationAuthorization` requests.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone for which you want a list of VPCs that can be associated with the hosted zone.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: '*Optional*: An integer that specifies the maximum number of VPCs that you want Amazon Route 53 to return.'
-        --next-token=: '*Optional*: If a response includes a `NextToken` element, there are more VPCs that can be associated with the specified hosted zone.'
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-hosted-zone-comment
-      description: Updates the comment for a specified hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: The new comment for the hosted zone.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID for the hosted zone that you want to update the comment for.
-    - name: deactivate-key-signing-key
-      description: Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC.
+    - name: activate-key-signing-key
+      description: Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosted-zone-id=!: A unique string used to identify a hosted zone.
         --name=!: A string used to identify a key-signing key (KSK).
-    - name: list-cidr-collections
-      description: Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only).
+    - name: associate-vpc-with-hosted-zone
+      description: Associates an Amazon VPC with a private hosted zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: '*Optional:* A comment about the association request.'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of CIDR collections to return in the response.
-        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-traffic-policy-instance
-      description: After you submit a `UpdateTrafficPolicyInstance` request, there's a brief delay while Route 53 creates the resource record sets that are specified in the traffic policy definition.
+        --hosted-zone-id=!: The ID of the private hosted zone that you want to associate an Amazon VPC with.
+        --vpc=!: A complex type that contains information about the VPC that you want to associate with a private hosted zone.
+    - name: change-cidr-collection
+      description: Creates, changes, or deletes CIDR blocks within a collection.
       flags:
+        --changes=!: Information about changes to a CIDR collection.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-version=: A sequential counter that Amazon Route 53 sets to 1 when you create a collection and increments it by 1 each time you update the collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy instance that you want to update.
-        --traffic-policy-id=!: The ID of the traffic policy that you want Amazon Route 53 to use to update resource record sets for the specified traffic policy instance.
-        --traffic-policy-version=!: The version of the traffic policy that you want Amazon Route 53 to use to update resource record sets for the specified traffic policy instance.
-        --ttl=!: The TTL that you want Amazon Route 53 to assign to all of the updated resource record sets.
-    - name: delete-key-signing-key
-      description: Deletes a key-signing key (KSK).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: A unique string used to identify a hosted zone.
-        --name=!: A string used to identify a key-signing key (KSK).
-    - name: get-geo-location
-      description: Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --continent-code=: For geolocation resource record sets, a two-letter abbreviation that identifies a continent.
-        --country-code=: Amazon Route 53 uses the two-letter country codes that are specified in [ISO standard 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subdivision-code=: The code for the subdivision, such as a particular state within the United States.
-    - name: get-hosted-zone-limit
-      description: Gets the specified limit for a specified hosted zone, for example, the maximum number of records that you can create in the hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that you want to get a limit for.
-        --type=!: The limit that you want to get.
-      completion:
-        flag:
-            type:
-                - MAX_RRSETS_BY_ZONE
-                - MAX_VPCS_ASSOCIATED_BY_ZONE
-    - name: create-traffic-policy
-      description: Creates a traffic policy, which you use to create multiple DNS resource record sets for one domain name (such as example.com) or one subdomain name (such as www.example.com).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: (Optional) Any comments that you want to include about the traffic policy.
-        --document=!: The definition of this traffic policy in JSON format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the traffic policy.
-    - name: delete-hosted-zone
-      description: Deletes a hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the hosted zone you want to delete.
-    - name: disable-hosted-zone-dnssec
-      description: Disables DNSSEC signing in a specific hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: A unique string used to identify a hosted zone.
-    - name: get-query-logging-config
-      description: Gets information about a specified configuration for DNS query logging.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the configuration for DNS query logging that you want to get information about.
-    - name: list-resource-record-sets
-      description: Lists the resource record sets in a specified hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that contains the resource record sets that you want to list.
-        --max-items=: (Optional) The maximum number of resource records sets to include in the response body for this request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --start-record-identifier=: '*Resource record sets that have a routing policy other than simple:* If results were truncated for a given DNS name and type, specify the value of `NextRecordIdentifier` from the previous response to get the next resource record set that has the current DNS name and type.'
-        --start-record-name=: The first name in the lexicographic ordering of resource record sets that you want to list.
-        --start-record-type=: The type of resource record set to begin the record listing from.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            start-record-type:
-                - SOA
-                - A
-                - TXT
-                - NS
-                - CNAME
-                - MX
-                - NAPTR
-                - PTR
-                - SRV
-                - SPF
-                - AAAA
-                - CAA
-                - DS
-                - TLSA
-                - SSHFP
-                - SVCB
-                - HTTPS
-    - name: list-traffic-policy-instances-by-hosted-zone
-      description: Gets information about the traffic policy instances that you created in a specified hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that you want to list traffic policy instances for.
-        --max-items=: The maximum number of traffic policy instances to be included in the response body for this request.
-        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response is true, you have more traffic policy instances.
-        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response is true, you have more traffic policy instances.
-      completion:
-        flag:
-            traffic-policy-instance-type-marker:
-                - SOA
-                - A
-                - TXT
-                - NS
-                - CNAME
-                - MX
-                - NAPTR
-                - PTR
-                - SRV
-                - SPF
-                - AAAA
-                - CAA
-                - DS
-                - TLSA
-                - SSHFP
-                - SVCB
-                - HTTPS
-    - name: create-traffic-policy-instance
-      description: Creates resource record sets in a specified hosted zone based on the settings in a specified traffic policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
-        --name=!: The domain name (such as example.com) or subdomain name (such as www.example.com) for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
-        --traffic-policy-id=!: The ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
-        --traffic-policy-version=!: The version of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
-        --ttl=!: (Optional) The TTL that you want Amazon Route 53 to assign to all of the resource record sets that it creates in the specified hosted zone.
-    - name: disassociate-vpc-from-hosted-zone
-      description: Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: '*Optional:* A comment about the disassociation request.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the private hosted zone that you want to disassociate a VPC from.
-        --vpc=!: A complex type that contains information about the VPC that you're disassociating from the specified hosted zone.
-    - name: get-health-check-count
-      description: Retrieves the number of health checks that are associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The UUID of the CIDR collection to update.
     - name: change-resource-record-sets
       description: Creates, changes, or deletes a resource record set, which contains authoritative DNS information for a specified domain name or subdomain name.
       flags:
@@ -206,6 +35,48 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosted-zone-id=!: The ID of the hosted zone that contains the resource record sets that you want to change.
+    - name: change-tags-for-resource
+      description: Adds, edits, or deletes tags for a health check or a hosted zone.
+      flags:
+        --add-tags=: A complex type that contains a list of the tags that you want to add to the specified health check or hosted zone and/or the tags that you want to edit `Value` for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remove-tag-keys=: A complex type that contains a list of the tags that you want to delete from the specified health check or hosted zone.
+        --resource-id=!: The ID of the resource for which you want to add, change, or delete tags.
+        --resource-type=!: The type of the resource.
+      completion:
+        flag:
+            resource-type:
+                - healthcheck
+                - hostedzone
+    - name: create-cidr-collection
+      description: Creates a CIDR collection in the current Amazon Web Services account.
+      flags:
+        --caller-reference=!: A client-specific token that allows requests to be securely retried so that the intended outcome will only occur once, retries receive a similar response, and there are no additional edge cases to handle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique identifier for the account that can be used to reference the collection from other API calls.
+    - name: create-health-check
+      description: Creates a new health check.
+      flags:
+        --caller-reference=!: 'A unique string that identifies the request and that allows you to retry a failed `CreateHealthCheck` request without the risk of creating two identical health checks:'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-config=!: A complex type that contains settings for a new health check.
+    - name: create-hosted-zone
+      description: Creates a new public or private hosted zone.
+      flags:
+        --caller-reference=!: A unique string that identifies the request and that allows failed `CreateHostedZone` requests to be retried without the risk of executing the operation twice.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delegation-set-id=: If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-config=: '(Optional) A complex type that contains the following optional values:'
+        --name=!: The name of the domain.
+        --vpc=: (Private hosted zones only) A complex type that contains information about the Amazon VPC that you're associating with this hosted zone.
     - name: create-key-signing-key
       description: Creates a new key-signing key (KSK) associated with a hosted zone.
       flags:
@@ -217,6 +88,74 @@ commands:
         --key-management-service-arn=!: The Amazon resource name (ARN) for a customer managed key in Key Management Service (KMS).
         --name=!: A string used to identify a key-signing key (KSK).
         --status=!: A string specifying the initial status of the key-signing key (KSK).
+    - name: create-query-logging-config
+      description: Creates a configuration for DNS query logging.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-watch-logs-log-group-arn=!: The Amazon Resource Name (ARN) for the log group that you want to Amazon Route 53 to send query logs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that you want to log queries for.
+    - name: create-reusable-delegation-set
+      description: Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones that were created by the same Amazon Web Services account.
+      flags:
+        --caller-reference=!: A unique string that identifies the request, and that allows you to retry failed `CreateReusableDelegationSet` requests without the risk of executing the operation twice.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=: If you want to mark the delegation set for an existing hosted zone as reusable, the ID for that hosted zone.
+    - name: create-traffic-policy
+      description: Creates a traffic policy, which you use to create multiple DNS resource record sets for one domain name (such as example.com) or one subdomain name (such as www.example.com).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: (Optional) Any comments that you want to include about the traffic policy.
+        --document=!: The definition of this traffic policy in JSON format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the traffic policy.
+    - name: create-traffic-policy-instance
+      description: Creates resource record sets in a specified hosted zone based on the settings in a specified traffic policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that you want Amazon Route 53 to create resource record sets in by using the configuration in a traffic policy.
+        --name=!: The domain name (such as example.com) or subdomain name (such as www.example.com) for which Amazon Route 53 responds to DNS queries by using the resource record sets that Route 53 creates for this traffic policy instance.
+        --traffic-policy-id=!: The ID of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
+        --traffic-policy-version=!: The version of the traffic policy that you want to use to create resource record sets in the specified hosted zone.
+        --ttl=!: (Optional) The TTL that you want Amazon Route 53 to assign to all of the resource record sets that it creates in the specified hosted zone.
+    - name: create-traffic-policy-version
+      description: Creates a new version of an existing traffic policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: The comment that you specified in the `CreateTrafficPolicyVersion` request, if any.
+        --document=!: The definition of this version of the traffic policy, in JSON format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the traffic policy for which you want to create a new version.
+    - name: create-vpc-association-authorization
+      description: Authorizes the Amazon Web Services account that created a specified VPC to submit an `AssociateVPCWithHostedZone` request to associate the VPC with a specified hosted zone that was created by a different account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the private hosted zone that you want to authorize associating a VPC with.
+        --vpc=!: A complex type that contains the VPC ID and region for the VPC that you want to authorize associating with your hosted zone.
+    - name: deactivate-key-signing-key
+      description: Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: A unique string used to identify a hosted zone.
+        --name=!: A string used to identify a key-signing key (KSK).
+    - name: delete-cidr-collection
+      description: Deletes a CIDR collection in the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The UUID of the collection to delete.
     - name: delete-health-check
       description: Deletes a health check.
       flags:
@@ -224,67 +163,50 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-id=!: The ID of the health check that you want to delete.
-    - name: get-reusable-delegation-set-limit
-      description: Gets the maximum number of hosted zones that you can associate with the specified reusable delegation set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delegation-set-id=!: The ID of the delegation set that you want to get the limit for.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --type=!: Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum number of hosted zones that you can associate with the specified reusable delegation set.
-      completion:
-        flag:
-            type:
-                - MAX_ZONES_BY_REUSABLE_DELEGATION_SET
-    - name: get-traffic-policy-instance-count
-      description: Gets the number of traffic policy instances that are associated with the current Amazon Web Services account.
+    - name: delete-hosted-zone
+      description: Deletes a hosted zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: test-dns-answer
-      description: Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --edn-s0-client-subnet-mask=: If you specify an IP address for `edns0clientsubnetip`, you can optionally specify the number of bits of the IP address that you want the checking tool to include in the DNS query.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that you want Amazon Route 53 to simulate a query for.
-        --record-name=!: The name of the resource record set that you want Amazon Route 53 to simulate a query for.
-        --record-type=!: The type of the resource record set.
-        --resolver-ip=: If you want to simulate a request from a specific DNS resolver, specify the IP address for that resolver.
-      completion:
-        flag:
-            record-type:
-                - SOA
-                - A
-                - TXT
-                - NS
-                - CNAME
-                - MX
-                - NAPTR
-                - PTR
-                - SRV
-                - SPF
-                - AAAA
-                - CAA
-                - DS
-                - TLSA
-                - SSHFP
-                - SVCB
-                - HTTPS
-    - name: list-query-logging-configs
-      description: Lists the configurations for DNS query logging that are associated with the current Amazon Web Services account or the configuration that is associated with a specified hosted zone.
+        --id=!: The ID of the hosted zone you want to delete.
+    - name: delete-key-signing-key
+      description: Deletes a key-signing key (KSK).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=: (Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in `HostedZoneId`.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: (Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request.
-        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` query logging configurations, use `NextToken` to get the second and subsequent pages of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --hosted-zone-id=!: A unique string used to identify a hosted zone.
+        --name=!: A string used to identify a key-signing key (KSK).
+    - name: delete-query-logging-config
+      description: Deletes a configuration for DNS query logging.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the configuration that you want to delete.
+    - name: delete-reusable-delegation-set
+      description: Deletes a reusable delegation set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the reusable delegation set that you want to delete.
+    - name: delete-traffic-policy
+      description: Deletes a traffic policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the traffic policy that you want to delete.
+        --traffic-policy-version=!: The version number of the traffic policy that you want to delete.
+    - name: delete-traffic-policy-instance
+      description: Deletes a traffic policy instance and all of the resource record sets that Amazon Route 53 created when you created the instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the traffic policy instance that you want to delete.
     - name: delete-vpc-association-authorization
       description: Removes authorization to submit an `AssociateVPCWithHostedZone` request to associate a specified VPC with a hosted zone that was created by a different account.
       flags:
@@ -293,73 +215,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosted-zone-id=!: When removing authorization to associate a VPC that was created by one Amazon Web Services account with a hosted zone that was created with a different Amazon Web Services account, the ID of the hosted zone.
         --vpc=!: When removing authorization to associate a VPC that was created by one Amazon Web Services account with a hosted zone that was created with a different Amazon Web Services account, a complex type that includes the ID and region of the VPC.
-    - name: get-change
-      description: Returns the current status of a change batch request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the change batch request.
-    - name: get-dnssec
-      description: Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.
+    - name: disable-hosted-zone-dnssec
+      description: Disables DNSSEC signing in a specific hosted zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosted-zone-id=!: A unique string used to identify a hosted zone.
-    - name: list-traffic-policy-instances
-      description: Gets information about the traffic policy instances that you created by using the current Amazon Web Services account.
+    - name: disassociate-vpc-from-hosted-zone
+      description: Disassociates an Amazon Virtual Private Cloud (Amazon VPC) from an Amazon Route 53 private hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: '*Optional:* A comment about the disassociation request.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the private hosted zone that you want to disassociate a VPC from.
+        --vpc=!: A complex type that contains information about the VPC that you're disassociating from the specified hosted zone.
+    - name: enable-hosted-zone-dnssec
+      description: Enables DNSSEC signing in a specific hosted zone.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-        --max-items=: The maximum number of traffic policy instances that you want Amazon Route 53 to return in response to a `ListTrafficPolicyInstances` request.
-        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-      completion:
-        flag:
-            traffic-policy-instance-type-marker:
-                - SOA
-                - A
-                - TXT
-                - NS
-                - CNAME
-                - MX
-                - NAPTR
-                - PTR
-                - SRV
-                - SPF
-                - AAAA
-                - CAA
-                - DS
-                - TLSA
-                - SSHFP
-                - SVCB
-                - HTTPS
-    - name: associate-vpc-with-hosted-zone
-      description: Associates an Amazon VPC with a private hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: '*Optional:* A comment about the association request.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the private hosted zone that you want to associate an Amazon VPC with.
-        --vpc=!: A complex type that contains information about the VPC that you want to associate with a private hosted zone.
-    - name: delete-reusable-delegation-set
-      description: Deletes a reusable delegation set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the reusable delegation set that you want to delete.
-    - name: delete-traffic-policy-instance
-      description: Deletes a traffic policy instance and all of the resource record sets that Amazon Route 53 created when you created the instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy instance that you want to delete.
+        --hosted-zone-id=!: A unique string used to identify a hosted zone.
     - name: get-account-limit
       description: Gets the specified limit for the current account, for example, the maximum number of health checks that you can create using the account.
       flags:
@@ -375,33 +253,48 @@ commands:
                 - MAX_TRAFFIC_POLICY_INSTANCES_BY_OWNER
                 - MAX_REUSABLE_DELEGATION_SETS_BY_OWNER
                 - MAX_TRAFFIC_POLICIES_BY_OWNER
-    - name: get-health-check-status
-      description: Gets status of a specified health check.
+    - name: get-change
+      description: Returns the current status of a change batch request.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-id=!: The ID for the health check that you want the current status for.
-    - name: change-cidr-collection
-      description: Creates, changes, or deletes CIDR blocks within a collection.
+        --id=!: The ID of the change batch request.
+    - name: get-checker-ip-ranges
+      description: Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.
       flags:
-        --changes=!: Information about changes to a CIDR collection.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-version=: A sequential counter that Amazon Route 53 sets to 1 when you create a collection and increments it by 1 each time you update the collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The UUID of the CIDR collection to update.
-    - name: create-hosted-zone
-      description: Creates a new public or private hosted zone.
+    - name: get-dnssec
+      description: Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.
       flags:
-        --caller-reference=!: A unique string that identifies the request and that allows failed `CreateHostedZone` requests to be retried without the risk of executing the operation twice.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delegation-set-id=: If you want to associate a reusable delegation set with this hosted zone, the ID that Amazon Route 53 assigned to the reusable delegation set when you created it.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-config=: '(Optional) A complex type that contains the following optional values:'
-        --name=!: The name of the domain.
-        --vpc=: (Private hosted zones only) A complex type that contains information about the Amazon VPC that you're associating with this hosted zone.
+        --hosted-zone-id=!: A unique string used to identify a hosted zone.
+    - name: get-geo-location
+      description: Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation resource record sets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --continent-code=: For geolocation resource record sets, a two-letter abbreviation that identifies a continent.
+        --country-code=: Amazon Route 53 uses the two-letter country codes that are specified in [ISO standard 3166-1 alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subdivision-code=: The code for the subdivision, such as a particular state within the United States.
+    - name: get-health-check
+      description: Gets information about a specified health check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-id=!: The identifier that Amazon Route 53 assigned to the health check when you created it.
+    - name: get-health-check-count
+      description: Retrieves the number of health checks that are associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-health-check-last-failure-reason
       description: Gets the reason that a specified health check failed most recently.
       flags:
@@ -409,6 +302,142 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-id=!: The ID for the health check for which you want the last failure reason.
+    - name: get-health-check-status
+      description: Gets status of a specified health check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-id=!: The ID for the health check that you want the current status for.
+    - name: get-hosted-zone
+      description: Gets information about a specified hosted zone including the four name servers assigned to the hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the hosted zone that you want to get information about.
+    - name: get-hosted-zone-count
+      description: Retrieves the number of hosted zones that are associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-hosted-zone-limit
+      description: Gets the specified limit for a specified hosted zone, for example, the maximum number of records that you can create in the hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that you want to get a limit for.
+        --type=!: The limit that you want to get.
+      completion:
+        flag:
+            type:
+                - MAX_RRSETS_BY_ZONE
+                - MAX_VPCS_ASSOCIATED_BY_ZONE
+    - name: get-query-logging-config
+      description: Gets information about a specified configuration for DNS query logging.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the configuration for DNS query logging that you want to get information about.
+    - name: get-reusable-delegation-set
+      description: Retrieves information about a specified reusable delegation set, including the four name servers that are assigned to the delegation set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the reusable delegation set that you want to get a list of name servers for.
+    - name: get-reusable-delegation-set-limit
+      description: Gets the maximum number of hosted zones that you can associate with the specified reusable delegation set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delegation-set-id=!: The ID of the delegation set that you want to get the limit for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --type=!: Specify `MAX_ZONES_BY_REUSABLE_DELEGATION_SET` to get the maximum number of hosted zones that you can associate with the specified reusable delegation set.
+      completion:
+        flag:
+            type:
+                - MAX_ZONES_BY_REUSABLE_DELEGATION_SET
+    - name: get-traffic-policy
+      description: Gets information about a specific traffic policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the traffic policy that you want to get information about.
+        --traffic-policy-version=!: The version number of the traffic policy that you want to get information about.
+    - name: get-traffic-policy-instance
+      description: Gets information about a specified traffic policy instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the traffic policy instance that you want to get information about.
+    - name: get-traffic-policy-instance-count
+      description: Gets the number of traffic policy instances that are associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-cidr-blocks
+      description: Returns a paginated list of location objects and their CIDR blocks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The UUID of the CIDR collection.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location-name=: The name of the CIDR collection location.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results you want returned.
+        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-cidr-collections
+      description: Returns a paginated list of CIDR collections in the Amazon Web Services account (metadata only).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of CIDR collections to return in the response.
+        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-cidr-locations
+      description: Returns a paginated list of CIDR locations for the given collection (metadata only, does not include CIDR blocks).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The CIDR collection ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of CIDR collection locations to return in the response.
+        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-geo-locations
+      description: Retrieves a list of supported geographic locations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: (Optional) The maximum number of geolocations to be included in the response body for this request.
+        --start-continent-code=: The code for the continent with which you want to start listing locations that Amazon Route 53 supports for geolocation.
+        --start-country-code=: The code for the country with which you want to start listing locations that Amazon Route 53 supports for geolocation.
+        --start-subdivision-code=: The code for the state of the United States with which you want to start listing locations that Amazon Route 53 supports for geolocation.
+    - name: list-health-checks
+      description: Retrieve a list of the health checks that are associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: If the value of `IsTruncated` in the previous response was `true`, you have more health checks.
+        --max-items=: The maximum number of health checks that you want `ListHealthChecks` to return in response to the current request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-hosted-zones
       description: Retrieves a list of the public and private hosted zones that are associated with the current Amazon Web Services account.
       flags:
@@ -425,176 +454,15 @@ commands:
         flag:
             hosted-zone-type:
                 - PrivateHostedZone
-    - name: activate-key-signing-key
-      description: Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC.
+    - name: list-hosted-zones-by-name
+      description: Retrieves a list of your hosted zones in lexicographic order.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dns-name=: (Optional) For your first request to `ListHostedZonesByName`, include the `dnsname` parameter only if you want to specify the name of the first hosted zone in the response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: A unique string used to identify a hosted zone.
-        --name=!: A string used to identify a key-signing key (KSK).
-    - name: enable-hosted-zone-dnssec
-      description: Enables DNSSEC signing in a specific hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: A unique string used to identify a hosted zone.
-    - name: get-hosted-zone
-      description: Gets information about a specified hosted zone including the four name servers assigned to the hosted zone.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the hosted zone that you want to get information about.
-    - name: get-reusable-delegation-set
-      description: Retrieves information about a specified reusable delegation set, including the four name servers that are assigned to the delegation set.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the reusable delegation set that you want to get a list of name servers for.
-    - name: get-traffic-policy
-      description: Gets information about a specific traffic policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy that you want to get information about.
-        --traffic-policy-version=!: The version number of the traffic policy that you want to get information about.
-    - name: list-traffic-policy-instances-by-policy
-      description: Gets information about the traffic policy instances that you created by using a specify traffic policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-        --max-items=: The maximum number of traffic policy instances to be included in the response body for this request.
-        --traffic-policy-id=!: The ID of the traffic policy for which you want to list traffic policy instances.
-        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
-        --traffic-policy-version=!: The version of the traffic policy for which you want to list traffic policy instances.
-      completion:
-        flag:
-            traffic-policy-instance-type-marker:
-                - SOA
-                - A
-                - TXT
-                - NS
-                - CNAME
-                - MX
-                - NAPTR
-                - PTR
-                - SRV
-                - SPF
-                - AAAA
-                - CAA
-                - DS
-                - TLSA
-                - SSHFP
-                - SVCB
-                - HTTPS
-    - name: update-traffic-policy-comment
-      description: Updates the comment for a specified traffic policy version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=!: The new comment for the specified traffic policy and version.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The value of `Id` for the traffic policy that you want to update the comment for.
-        --traffic-policy-version=!: The value of `Version` for the traffic policy that you want to update the comment for.
-    - name: create-health-check
-      description: Creates a new health check.
-      flags:
-        --caller-reference=!: 'A unique string that identifies the request and that allows you to retry a failed `CreateHealthCheck` request without the risk of creating two identical health checks:'
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-config=!: A complex type that contains settings for a new health check.
-    - name: create-query-logging-config
-      description: Creates a configuration for DNS query logging.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cloud-watch-logs-log-group-arn=!: The Amazon Resource Name (ARN) for the log group that you want to Amazon Route 53 to send query logs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the hosted zone that you want to log queries for.
-    - name: get-traffic-policy-instance
-      description: Gets information about a specified traffic policy instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy instance that you want to get information about.
-    - name: list-traffic-policies
-      description: Gets information about the latest version for every traffic policy that is associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: (Optional) The maximum number of traffic policies that you want Amazon Route 53 to return in response to this request.
-        --traffic-policy-id-marker=: (Conditional) For your first request to `ListTrafficPolicies`, don't include the `TrafficPolicyIdMarker` parameter.
-    - name: update-health-check
-      description: Updates an existing health check.
-      flags:
-        --alarm-identifier=: A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.
-        --child-health-checks=: A complex type that contains one `ChildHealthCheck` element for each health check that you want to associate with a `CALCULATED` health check.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disabled: Stops Route 53 from performing health checks.
-        --enable-sni: Specify whether you want Amazon Route 53 to send the value of `FullyQualifiedDomainName` to the endpoint in the `client_hello` message during `TLS` negotiation.
-        --failure-threshold=: The number of consecutive health checks that an endpoint must pass or fail for Amazon Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa.
-        --fully-qualified-domain-name=: Amazon Route 53 behavior depends on whether you specify a value for `IPAddress`.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-id=!: The ID for the health check for which you want detailed information.
-        --health-check-version=: A sequential counter that Amazon Route 53 sets to `1` when you create a health check and increments by 1 each time you update settings for the health check.
-        --health-threshold=: The number of child health checks that are associated with a `CALCULATED` health that Amazon Route 53 must consider healthy for the `CALCULATED` health check to be considered healthy.
-        --insufficient-data-health-status=: 'When CloudWatch has insufficient data about the metric to determine the alarm state, the status that you want Amazon Route 53 to assign to the health check:'
-        --inverted: Specify whether you want Amazon Route 53 to invert the status of a health check, for example, to consider a health check unhealthy when it otherwise would be considered healthy.
-        --ip-address=: The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to perform health checks on.
-        --no-disabled: Stops Route 53 from performing health checks.
-        --no-enable-sni: Specify whether you want Amazon Route 53 to send the value of `FullyQualifiedDomainName` to the endpoint in the `client_hello` message during `TLS` negotiation.
-        --no-inverted: Specify whether you want Amazon Route 53 to invert the status of a health check, for example, to consider a health check unhealthy when it otherwise would be considered healthy.
-        --port=: The port on the endpoint that you want Amazon Route 53 to perform health checks on.
-        --regions=: A complex type that contains one `Region` element for each region that you want Amazon Route 53 health checkers to check the specified endpoint from.
-        --reset-elements=: A complex type that contains one `ResettableElementName` element for each element that you want to reset to the default value.
-        --resource-path=: The path that you want Amazon Route 53 to request when performing health checks.
-        --search-string=: If the value of `Type` is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`, the string that you want Amazon Route 53 to search for in the response body from the specified resource.
-      completion:
-        flag:
-            insufficient-data-health-status:
-                - Healthy
-                - Unhealthy
-                - LastKnownStatus
-    - name: create-cidr-collection
-      description: Creates a CIDR collection in the current Amazon Web Services account.
-      flags:
-        --caller-reference=!: A client-specific token that allows requests to be securely retried so that the intended outcome will only occur once, retries receive a similar response, and there are no additional edge cases to handle.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A unique identifier for the account that can be used to reference the collection from other API calls.
-    - name: create-vpc-association-authorization
-      description: Authorizes the Amazon Web Services account that created a specified VPC to submit an `AssociateVPCWithHostedZone` request to associate the VPC with a specified hosted zone that was created by a different account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=!: The ID of the private hosted zone that you want to authorize associating a VPC with.
-        --vpc=!: A complex type that contains the VPC ID and region for the VPC that you want to authorize associating with your hosted zone.
-    - name: list-tags-for-resources
-      description: Lists tags for up to 10 health checks or hosted zones.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-ids=!: A complex type that contains the ResourceId element for each resource for which you want to get a list of tags.
-        --resource-type=!: The type of the resources.
-      completion:
-        flag:
-            resource-type:
-                - healthcheck
-                - hostedzone
+        --hosted-zone-id=: (Optional) For your first request to `ListHostedZonesByName`, do not include the `hostedzoneid` parameter.
+        --max-items=: The maximum number of hosted zones to be included in the response body for this request.
     - name: list-hosted-zones-by-vpc
       description: Lists all the private hosted zones that a specified VPC is associated with, regardless of which Amazon Web Services account or Amazon Web Services service owns the hosted zones.
       flags:
@@ -653,68 +521,59 @@ commands:
                 - eu-isoe-west-1
                 - ap-southeast-6
                 - us-isob-west-1
-    - name: change-tags-for-resource
-      description: Adds, edits, or deletes tags for a health check or a hosted zone.
+    - name: list-query-logging-configs
+      description: Lists the configurations for DNS query logging that are associated with the current Amazon Web Services account or the configuration that is associated with a specified hosted zone.
       flags:
-        --add-tags=: A complex type that contains a list of the tags that you want to add to the specified health check or hosted zone and/or the tags that you want to edit `Value` for.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --remove-tag-keys=: A complex type that contains a list of the tags that you want to delete from the specified health check or hosted zone.
-        --resource-id=!: The ID of the resource for which you want to add, change, or delete tags.
-        --resource-type=!: The type of the resource.
+        --hosted-zone-id=: (Optional) If you want to list the query logging configuration that is associated with a hosted zone, specify the ID in `HostedZoneId`.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: (Optional) The maximum number of query logging configurations that you want Amazon Route 53 to return in response to the current request.
+        --next-token=: (Optional) If the current Amazon Web Services account has more than `MaxResults` query logging configurations, use `NextToken` to get the second and subsequent pages of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-resource-record-sets
+      description: Lists the resource record sets in a specified hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that contains the resource record sets that you want to list.
+        --max-items=: (Optional) The maximum number of resource records sets to include in the response body for this request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-record-identifier=: '*Resource record sets that have a routing policy other than simple:* If results were truncated for a given DNS name and type, specify the value of `NextRecordIdentifier` from the previous response to get the next resource record set that has the current DNS name and type.'
+        --start-record-name=: The first name in the lexicographic ordering of resource record sets that you want to list.
+        --start-record-type=: The type of resource record set to begin the record listing from.
+        --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
-            resource-type:
-                - healthcheck
-                - hostedzone
-    - name: delete-query-logging-config
-      description: Deletes a configuration for DNS query logging.
+            start-record-type:
+                - SOA
+                - A
+                - TXT
+                - NS
+                - CNAME
+                - MX
+                - NAPTR
+                - PTR
+                - SRV
+                - SPF
+                - AAAA
+                - CAA
+                - DS
+                - TLSA
+                - SSHFP
+                - SVCB
+                - HTTPS
+    - name: list-reusable-delegation-sets
+      description: Retrieves a list of the reusable delegation sets that are associated with the current Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the configuration that you want to delete.
-    - name: delete-traffic-policy
-      description: Deletes a traffic policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy that you want to delete.
-        --traffic-policy-version=!: The version number of the traffic policy that you want to delete.
-    - name: get-health-check
-      description: Gets information about a specified health check.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --health-check-id=!: The identifier that Amazon Route 53 assigned to the health check when you created it.
-    - name: list-cidr-blocks
-      description: Returns a paginated list of location objects and their CIDR blocks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-id=!: The UUID of the CIDR collection.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --location-name=: The name of the CIDR collection location.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Maximum number of results you want returned.
-        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-cidr-locations
-      description: Returns a paginated list of CIDR locations for the given collection (metadata only, does not include CIDR blocks).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collection-id=!: The CIDR collection ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of CIDR collection locations to return in the response.
-        --next-token=: An opaque pagination token to indicate where the service is to begin enumerating results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --marker=: If the value of `IsTruncated` in the previous response was `true`, you have more reusable delegation sets.
+        --max-items=: The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request.
     - name: list-tags-for-resource
       description: Lists tags for one health check or hosted zone.
       flags:
@@ -728,6 +587,119 @@ commands:
             resource-type:
                 - healthcheck
                 - hostedzone
+    - name: list-tags-for-resources
+      description: Lists tags for up to 10 health checks or hosted zones.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-ids=!: A complex type that contains the ResourceId element for each resource for which you want to get a list of tags.
+        --resource-type=!: The type of the resources.
+      completion:
+        flag:
+            resource-type:
+                - healthcheck
+                - hostedzone
+    - name: list-traffic-policies
+      description: Gets information about the latest version for every traffic policy that is associated with the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: (Optional) The maximum number of traffic policies that you want Amazon Route 53 to return in response to this request.
+        --traffic-policy-id-marker=: (Conditional) For your first request to `ListTrafficPolicies`, don't include the `TrafficPolicyIdMarker` parameter.
+    - name: list-traffic-policy-instances
+      description: Gets information about the traffic policy instances that you created by using the current Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+        --max-items=: The maximum number of traffic policy instances that you want Amazon Route 53 to return in response to a `ListTrafficPolicyInstances` request.
+        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+      completion:
+        flag:
+            traffic-policy-instance-type-marker:
+                - SOA
+                - A
+                - TXT
+                - NS
+                - CNAME
+                - MX
+                - NAPTR
+                - PTR
+                - SRV
+                - SPF
+                - AAAA
+                - CAA
+                - DS
+                - TLSA
+                - SSHFP
+                - SVCB
+                - HTTPS
+    - name: list-traffic-policy-instances-by-hosted-zone
+      description: Gets information about the traffic policy instances that you created in a specified hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that you want to list traffic policy instances for.
+        --max-items=: The maximum number of traffic policy instances to be included in the response body for this request.
+        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response is true, you have more traffic policy instances.
+        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response is true, you have more traffic policy instances.
+      completion:
+        flag:
+            traffic-policy-instance-type-marker:
+                - SOA
+                - A
+                - TXT
+                - NS
+                - CNAME
+                - MX
+                - NAPTR
+                - PTR
+                - SRV
+                - SPF
+                - AAAA
+                - CAA
+                - DS
+                - TLSA
+                - SSHFP
+                - SVCB
+                - HTTPS
+    - name: list-traffic-policy-instances-by-policy
+      description: Gets information about the traffic policy instances that you created by using a specify traffic policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+        --max-items=: The maximum number of traffic policy instances to be included in the response body for this request.
+        --traffic-policy-id=!: The ID of the traffic policy for which you want to list traffic policy instances.
+        --traffic-policy-instance-name-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+        --traffic-policy-instance-type-marker=: If the value of `IsTruncated` in the previous response was `true`, you have more traffic policy instances.
+        --traffic-policy-version=!: The version of the traffic policy for which you want to list traffic policy instances.
+      completion:
+        flag:
+            traffic-policy-instance-type-marker:
+                - SOA
+                - A
+                - TXT
+                - NS
+                - CNAME
+                - MX
+                - NAPTR
+                - PTR
+                - SRV
+                - SPF
+                - AAAA
+                - CAA
+                - DS
+                - TLSA
+                - SSHFP
+                - SVCB
+                - HTTPS
     - name: list-traffic-policy-versions
       description: Gets information about all of the versions for a specified traffic policy.
       flags:
@@ -737,79 +709,107 @@ commands:
         --id=!: Specify the value of `Id` of the traffic policy for which you want to list all versions.
         --max-items=: The maximum number of traffic policy versions that you want Amazon Route 53 to include in the response body for this request.
         --traffic-policy-version-marker=: For your first request to `ListTrafficPolicyVersions`, don't include the `TrafficPolicyVersionMarker` parameter.
-    - name: get-checker-ip-ranges
-      description: Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.
+    - name: list-vpc-association-authorizations
+      description: Gets a list of the VPCs that were created by other accounts and that can be associated with a specified hosted zone because you've submitted one or more `CreateVPCAssociationAuthorization` requests.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-geo-locations
-      description: Retrieves a list of supported geographic locations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: (Optional) The maximum number of geolocations to be included in the response body for this request.
-        --start-continent-code=: The code for the continent with which you want to start listing locations that Amazon Route 53 supports for geolocation.
-        --start-country-code=: The code for the country with which you want to start listing locations that Amazon Route 53 supports for geolocation.
-        --start-subdivision-code=: The code for the state of the United States with which you want to start listing locations that Amazon Route 53 supports for geolocation.
-    - name: list-hosted-zones-by-name
-      description: Retrieves a list of your hosted zones in lexicographic order.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dns-name=: (Optional) For your first request to `ListHostedZonesByName`, include the `dnsname` parameter only if you want to specify the name of the first hosted zone in the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=: (Optional) For your first request to `ListHostedZonesByName`, do not include the `hostedzoneid` parameter.
-        --max-items=: The maximum number of hosted zones to be included in the response body for this request.
-    - name: create-traffic-policy-version
-      description: Creates a new version of an existing traffic policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: The comment that you specified in the `CreateTrafficPolicyVersion` request, if any.
-        --document=!: The definition of this version of the traffic policy, in JSON format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The ID of the traffic policy for which you want to create a new version.
-    - name: delete-cidr-collection
-      description: Deletes a CIDR collection in the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The UUID of the collection to delete.
-    - name: get-hosted-zone-count
-      description: Retrieves the number of hosted zones that are associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-health-checks
-      description: Retrieve a list of the health checks that are associated with the current Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: If the value of `IsTruncated` in the previous response was `true`, you have more health checks.
-        --max-items=: The maximum number of health checks that you want `ListHealthChecks` to return in response to the current request.
-        --page-size=: The size of each page to get in the AWS service call.
+        --hosted-zone-id=!: The ID of the hosted zone for which you want a list of VPCs that can be associated with the hosted zone.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: '*Optional*: An integer that specifies the maximum number of VPCs that you want Amazon Route 53 to return.'
+        --next-token=: '*Optional*: If a response includes a `NextToken` element, there are more VPCs that can be associated with the specified hosted zone.'
         --starting-token=: A token to specify where to start paginating.
-    - name: list-reusable-delegation-sets
-      description: Retrieves a list of the reusable delegation sets that are associated with the current Amazon Web Services account.
+    - name: test-dns-answer
+      description: Gets the value that Amazon Route 53 returns in response to a DNS request for a specified record name and type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --edn-s0-client-subnet-mask=: If you specify an IP address for `edns0clientsubnetip`, you can optionally specify the number of bits of the IP address that you want the checking tool to include in the DNS query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hosted-zone-id=!: The ID of the hosted zone that you want Amazon Route 53 to simulate a query for.
+        --record-name=!: The name of the resource record set that you want Amazon Route 53 to simulate a query for.
+        --record-type=!: The type of the resource record set.
+        --resolver-ip=: If you want to simulate a request from a specific DNS resolver, specify the IP address for that resolver.
+      completion:
+        flag:
+            record-type:
+                - SOA
+                - A
+                - TXT
+                - NS
+                - CNAME
+                - MX
+                - NAPTR
+                - PTR
+                - SRV
+                - SPF
+                - AAAA
+                - CAA
+                - DS
+                - TLSA
+                - SSHFP
+                - SVCB
+                - HTTPS
+    - name: update-health-check
+      description: Updates an existing health check.
+      flags:
+        --alarm-identifier=: A complex type that identifies the CloudWatch alarm that you want Amazon Route 53 health checkers to use to determine whether the specified health check is healthy.
+        --child-health-checks=: A complex type that contains one `ChildHealthCheck` element for each health check that you want to associate with a `CALCULATED` health check.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disabled: Stops Route 53 from performing health checks.
+        --enable-sni: Specify whether you want Amazon Route 53 to send the value of `FullyQualifiedDomainName` to the endpoint in the `client_hello` message during `TLS` negotiation.
+        --failure-threshold=: The number of consecutive health checks that an endpoint must pass or fail for Amazon Route 53 to change the current status of the endpoint from unhealthy to healthy or vice versa.
+        --fully-qualified-domain-name=: Amazon Route 53 behavior depends on whether you specify a value for `IPAddress`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-id=!: The ID for the health check for which you want detailed information.
+        --health-check-version=: A sequential counter that Amazon Route 53 sets to `1` when you create a health check and increments by 1 each time you update settings for the health check.
+        --health-threshold=: The number of child health checks that are associated with a `CALCULATED` health that Amazon Route 53 must consider healthy for the `CALCULATED` health check to be considered healthy.
+        --insufficient-data-health-status=: 'When CloudWatch has insufficient data about the metric to determine the alarm state, the status that you want Amazon Route 53 to assign to the health check:'
+        --inverted: Specify whether you want Amazon Route 53 to invert the status of a health check, for example, to consider a health check unhealthy when it otherwise would be considered healthy.
+        --ip-address=: The IPv4 or IPv6 IP address for the endpoint that you want Amazon Route 53 to perform health checks on.
+        --no-disabled: Stops Route 53 from performing health checks.
+        --no-enable-sni: Specify whether you want Amazon Route 53 to send the value of `FullyQualifiedDomainName` to the endpoint in the `client_hello` message during `TLS` negotiation.
+        --no-inverted: Specify whether you want Amazon Route 53 to invert the status of a health check, for example, to consider a health check unhealthy when it otherwise would be considered healthy.
+        --port=: The port on the endpoint that you want Amazon Route 53 to perform health checks on.
+        --regions=: A complex type that contains one `Region` element for each region that you want Amazon Route 53 health checkers to check the specified endpoint from.
+        --reset-elements=: A complex type that contains one `ResettableElementName` element for each element that you want to reset to the default value.
+        --resource-path=: The path that you want Amazon Route 53 to request when performing health checks.
+        --search-string=: If the value of `Type` is `HTTP_STR_MATCH` or `HTTPS_STR_MATCH`, the string that you want Amazon Route 53 to search for in the response body from the specified resource.
+      completion:
+        flag:
+            insufficient-data-health-status:
+                - Healthy
+                - Unhealthy
+                - LastKnownStatus
+    - name: update-hosted-zone-comment
+      description: Updates the comment for a specified hosted zone.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: The new comment for the hosted zone.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID for the hosted zone that you want to update the comment for.
+    - name: update-traffic-policy-comment
+      description: Updates the comment for a specified traffic policy version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=!: The new comment for the specified traffic policy and version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The value of `Id` for the traffic policy that you want to update the comment for.
+        --traffic-policy-version=!: The value of `Version` for the traffic policy that you want to update the comment for.
+    - name: update-traffic-policy-instance
+      description: After you submit a `UpdateTrafficPolicyInstance` request, there's a brief delay while Route 53 creates the resource record sets that are specified in the traffic policy definition.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: If the value of `IsTruncated` in the previous response was `true`, you have more reusable delegation sets.
-        --max-items=: The number of reusable delegation sets that you want Amazon Route 53 to return in the response to this request.
-    - name: create-reusable-delegation-set
-      description: Creates a delegation set (a group of four name servers) that can be reused by multiple hosted zones that were created by the same Amazon Web Services account.
-      flags:
-        --caller-reference=!: A unique string that identifies the request, and that allows you to retry failed `CreateReusableDelegationSet` requests without the risk of executing the operation twice.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hosted-zone-id=: If you want to mark the delegation set for an existing hosted zone as reusable, the ID for that hosted zone.
+        --id=!: The ID of the traffic policy instance that you want to update.
+        --traffic-policy-id=!: The ID of the traffic policy that you want Amazon Route 53 to use to update resource record sets for the specified traffic policy instance.
+        --traffic-policy-version=!: The version of the traffic policy that you want Amazon Route 53 to use to update resource record sets for the specified traffic policy instance.
+        --ttl=!: The TTL that you want Amazon Route 53 to assign to all of the updated resource record sets.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

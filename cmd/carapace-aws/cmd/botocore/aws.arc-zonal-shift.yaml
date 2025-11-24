@@ -1,44 +1,20 @@
 name: arc-zonal-shift
 description: AWS ARC - Zonal Shift
 commands:
-    - name: list-autoshifts
-      description: Returns the autoshifts for an Amazon Web Services Region.
+    - name: cancel-practice-run
+      description: Cancel an in-progress practice run zonal shift in Amazon Application Recovery Controller.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The number of objects that you want to return with this call.
-        --next-token=: Specifies that you want to receive the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --status=: The status of the autoshift.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - COMPLETED
-    - name: update-zonal-shift
-      description: Update an active zonal shift in Amazon Application Recovery Controller in your Amazon Web Services account.
+        --zonal-shift-id=!: The identifier of a practice run zonal shift in Amazon Application Recovery Controller that you want to cancel.
+    - name: cancel-zonal-shift
+      description: Cancel a zonal shift in Amazon Application Recovery Controller.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=: A comment that you enter about the zonal shift.
-        --expires-in=: The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --zonal-shift-id=!: The identifier of a zonal shift.
-    - name: update-practice-run-configuration
-      description: 'Update a practice run configuration to change one or more of the following: add, change, or remove the blocking alarm; change the outcome alarm; or add, change, or remove blocking dates or time windows.'
-      flags:
-        --allowed-windows=: Add, change, or remove windows of days and times for when you can, optionally, allow ARC to start a practice run for a resource.
-        --blocked-dates=: Add, change, or remove blocked dates for a practice run in zonal autoshift.
-        --blocked-windows=: Add, change, or remove windows of days and times for when you can, optionally, block ARC from starting a practice run for a resource.
-        --blocking-alarms=: Add, change, or remove the Amazon CloudWatch alarms that you optionally specify as the blocking alarms for practice runs.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outcome-alarms=: Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.
-        --resource-identifier=!: The identifier for the resource that you want to update the practice run configuration for.
+        --zonal-shift-id=!: The internally-generated identifier of a zonal shift.
     - name: create-practice-run-configuration
       description: A practice run configuration for zonal autoshift is required when you enable zonal autoshift.
       flags:
@@ -58,6 +34,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-identifier=!: The identifier for the resource that you want to delete the practice run configuration for.
+    - name: get-autoshift-observer-notification-status
+      description: Returns the status of the autoshift observer notification.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-managed-resource
       description: Get information about a resource that's been registered for zonal shifts with Amazon Application Recovery Controller in this Amazon Web Services Region.
       flags:
@@ -65,6 +47,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-identifier=!: The identifier for the resource that Amazon Web Services shifts traffic for.
+    - name: list-autoshifts
+      description: Returns the autoshifts for an Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The number of objects that you want to return with this call.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status of the autoshift.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - COMPLETED
     - name: list-managed-resources
       description: Lists all the resources in your Amazon Web Services account in this Amazon Web Services Region that are managed for zonal shifts in Amazon Application Recovery Controller, and information about them.
       flags:
@@ -104,19 +103,16 @@ commands:
         --comment=!: The initial comment that you enter about the practice run.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-identifier=!: The identifier for the resource that you want to start a practice run zonal shift for.
-    - name: cancel-practice-run
-      description: Cancel an in-progress practice run zonal shift in Amazon Application Recovery Controller.
+    - name: start-zonal-shift
+      description: You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in an Amazon Web Services Region, to help your application recover immediately, for example, from a developer's bad code deployment or from an Amazon Web Services infrastructure failure in a single Availability Zone.
       flags:
+        --away-from=!: The Availability Zone (for example, `use1-az1`) that traffic is moved away from for a resource when you start a zonal shift.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=!: A comment that you enter about the zonal shift.
+        --expires-in=!: The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --zonal-shift-id=!: The identifier of a practice run zonal shift in Amazon Application Recovery Controller that you want to cancel.
-    - name: get-autoshift-observer-notification-status
-      description: Returns the status of the autoshift observer notification.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-identifier=!: The identifier for the resource that Amazon Web Services shifts traffic for.
     - name: update-autoshift-observer-notification-status
       description: Update the status of autoshift observer notification.
       flags:
@@ -129,6 +125,18 @@ commands:
             status:
                 - ENABLED
                 - DISABLED
+    - name: update-practice-run-configuration
+      description: 'Update a practice run configuration to change one or more of the following: add, change, or remove the blocking alarm; change the outcome alarm; or add, change, or remove blocking dates or time windows.'
+      flags:
+        --allowed-windows=: Add, change, or remove windows of days and times for when you can, optionally, allow ARC to start a practice run for a resource.
+        --blocked-dates=: Add, change, or remove blocked dates for a practice run in zonal autoshift.
+        --blocked-windows=: Add, change, or remove windows of days and times for when you can, optionally, block ARC from starting a practice run for a resource.
+        --blocking-alarms=: Add, change, or remove the Amazon CloudWatch alarms that you optionally specify as the blocking alarms for practice runs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outcome-alarms=: Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.
+        --resource-identifier=!: The identifier for the resource that you want to update the practice run configuration for.
     - name: update-zonal-autoshift-configuration
       description: The zonal autoshift configuration for a resource includes the practice run configuration and the status for running autoshifts, zonal autoshift status.
       flags:
@@ -142,20 +150,12 @@ commands:
             zonal-autoshift-status:
                 - ENABLED
                 - DISABLED
-    - name: cancel-zonal-shift
-      description: Cancel a zonal shift in Amazon Application Recovery Controller.
+    - name: update-zonal-shift
+      description: Update an active zonal shift in Amazon Application Recovery Controller in your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comment=: A comment that you enter about the zonal shift.
+        --expires-in=: The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --zonal-shift-id=!: The internally-generated identifier of a zonal shift.
-    - name: start-zonal-shift
-      description: You start a zonal shift to temporarily move load balancer traffic away from an Availability Zone in an Amazon Web Services Region, to help your application recover immediately, for example, from a developer's bad code deployment or from an Amazon Web Services infrastructure failure in a single Availability Zone.
-      flags:
-        --away-from=!: The Availability Zone (for example, `use1-az1`) that traffic is moved away from for a resource when you start a zonal shift.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --comment=!: A comment that you enter about the zonal shift.
-        --expires-in=!: The length of time that you want a zonal shift to be active, which ARC converts to an expiry time (expiration time).
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-identifier=!: The identifier for the resource that Amazon Web Services shifts traffic for.
+        --zonal-shift-id=!: The identifier of a zonal shift.

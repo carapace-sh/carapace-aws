@@ -9,136 +9,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The Batch job ID of the job to cancel.
         --reason=!: A message to attach to the job that explains the reason for canceling it.
-    - name: create-service-environment
-      description: Creates a service environment for running service jobs.
-      flags:
-        --capacity-limits=!: The capacity limits for the service environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-environment-name=!: The name for the service environment.
-        --service-environment-type=!: The type of service environment.
-        --state=: The state of the service environment.
-        --tags=: The tags that you apply to the service environment to help you categorize and organize your resources.
-      completion:
-        flag:
-            service-environment-type:
-                - SAGEMAKER_TRAINING
-            state:
-                - ENABLED
-                - DISABLED
-    - name: get-job-queue-snapshot
-      description: Provides a list of the first 100 `RUNNABLE` jobs associated to a single job queue.
+    - name: create-compute-environment
+      description: Creates an Batch compute environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-queue=!: The job queue’s name or full queue Amazon Resource Name (ARN).
-    - name: terminate-job
-      description: Terminates a job in a job queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The Batch job ID of the job to terminate.
-        --reason=!: A message to attach to the job that explains the reason for canceling it.
-    - name: delete-scheduling-policy
-      description: Deletes the specified scheduling policy.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the scheduling policy to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-job-queues
-      description: Describes one or more of your job queues.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-queues=: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned by `DescribeJobQueues` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `DescribeJobQueues` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: submit-service-job
-      description: Submits a service job to a specified job queue to run on SageMaker AI.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique identifier for the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=!: The name of the service job.
-        --job-queue=!: The job queue into which the service job is submitted.
-        --retry-strategy=: The retry strategy to use for failed service jobs that are submitted with this service job request.
-        --scheduling-priority=: The scheduling priority of the service job.
-        --service-job-type=!: The type of service job.
-        --service-request-payload=!: The request, in JSON, for the service that the SubmitServiceJob operation is queueing.
-        --share-identifier=: The share identifier for the service job.
-        --tags=: The tags that you apply to the service job request.
-        --timeout-config=: The timeout configuration for the service job.
-      completion:
-        flag:
-            service-job-type:
-                - SAGEMAKER_TRAINING
-    - name: untag-resource
-      description: Deletes specified tags from an Batch resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to delete tags.
-        --tag-keys=!: The keys of the tags to be removed.
-    - name: update-compute-environment
-      description: Updates an Batch compute environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-environment=!: The name or full Amazon Resource Name (ARN) of the compute environment to update.
-        --compute-resources=: Details of the compute resources managed by the compute environment.
+        --compute-environment-name=!: The name for your compute environment.
+        --compute-resources=: Details about the compute resources managed by the compute environment.
         --context=: Reserved.
+        --eks-configuration=: The details for the Amazon EKS cluster that supports the compute environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-role=: The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make calls to other Amazon Web Services services on your behalf.
         --state=: The state of the compute environment.
-        --unmanagedv-cpus=: The maximum number of vCPUs expected to be used for an unmanaged compute environment.
-        --update-policy=: Specifies the updated infrastructure update policy for the compute environment.
+        --tags=: The tags that you apply to the compute environment to help you categorize and organize your resources.
+        --type=!: 'The type of the compute environment: `MANAGED` or `UNMANAGED`.'
+        --unmanagedv-cpus=: The maximum number of vCPUs for an unmanaged compute environment.
       completion:
         flag:
             state:
                 - ENABLED
                 - DISABLED
-    - name: update-job-queue
-      description: Updates a job queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-environment-order=: Details the set of compute environments mapped to a job queue and their order relative to each other.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-queue=!: The name or the Amazon Resource Name (ARN) of the job queue.
-        --job-state-time-limit-actions=: The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times.
-        --priority=: The priority of the job queue.
-        --scheduling-policy-arn=: Amazon Resource Name (ARN) of the fair-share scheduling policy.
-        --service-environment-order=: The order of the service environment associated with the job queue.
-        --state=: Describes the queue's ability to accept new jobs.
-      completion:
-        flag:
-            state:
-                - ENABLED
-                - DISABLED
-    - name: update-service-environment
-      description: Updates a service environment.
-      flags:
-        --capacity-limits=: The capacity limits for the service environment.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-environment=!: The name or ARN of the service environment to update.
-        --state=: The state of the service environment.
-      completion:
-        flag:
-            state:
-                - ENABLED
-                - DISABLED
+            type:
+                - MANAGED
+                - UNMANAGED
     - name: create-consumable-resource
       description: Creates an Batch consumable resource.
       flags:
@@ -149,83 +42,6 @@ commands:
         --resource-type=: Indicates whether the resource is available to be re-used after a job completes.
         --tags=: The tags that you apply to the consumable resource to help you categorize and organize your resources.
         --total-quantity=: The total amount of the consumable resource that is available.
-    - name: deregister-job-definition
-      description: Deregisters an Batch job definition.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-definition=!: The name and revision (`name:revision`) or full Amazon Resource Name (ARN) of the job definition to deregister.
-    - name: describe-service-job
-      description: The details of a service job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-id=!: The job ID for the service job to describe.
-    - name: tag-resource
-      description: Associates the specified tags to a resource with the specified `resourceArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that tags are added to.
-        --tags=!: The tags that you apply to the resource to help you categorize and organize your resources.
-    - name: update-consumable-resource
-      description: Updates a consumable resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: If this parameter is specified and two update requests with identical payloads and `clientToken`s are received, these requests are considered the same request.
-        --consumable-resource=!: The name or ARN of the consumable resource to be updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operation=: Indicates how the quantity of the consumable resource will be updated.
-        --quantity=: The change in the total quantity of the consumable resource.
-    - name: update-scheduling-policy
-      description: Updates a scheduling policy.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the scheduling policy to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fairshare-policy=: The fair-share policy scheduling details.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-service-environment
-      description: Deletes a Service environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-environment=!: The name or ARN of the service environment to delete.
-    - name: describe-service-environments
-      description: Describes one or more of your service environments.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned by `DescribeServiceEnvironments` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `DescribeServiceEnvironments` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --service-environments=: An array of service environment names or ARN entries.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-scheduling-policies
-      description: Returns a list of Batch scheduling policies.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results that's returned by `ListSchedulingPolicies` in paginated output.
-        --next-token=: The `nextToken` value that's returned from a previous paginated `ListSchedulingPolicies` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Lists the tags for an Batch resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource that tags are listed for.
     - name: create-job-queue
       description: Creates an Batch job queue.
       flags:
@@ -260,6 +76,66 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the fair-share scheduling policy.
         --tags=: The tags that you apply to the scheduling policy to help you categorize and organize your resources.
+    - name: create-service-environment
+      description: Creates a service environment for running service jobs.
+      flags:
+        --capacity-limits=!: The capacity limits for the service environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-environment-name=!: The name for the service environment.
+        --service-environment-type=!: The type of service environment.
+        --state=: The state of the service environment.
+        --tags=: The tags that you apply to the service environment to help you categorize and organize your resources.
+      completion:
+        flag:
+            service-environment-type:
+                - SAGEMAKER_TRAINING
+            state:
+                - ENABLED
+                - DISABLED
+    - name: delete-compute-environment
+      description: Deletes an Batch compute environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-environment=!: The name or Amazon Resource Name (ARN) of the compute environment to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-consumable-resource
+      description: Deletes the specified consumable resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumable-resource=!: The name or ARN of the consumable resource that will be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-job-queue
+      description: Deletes the specified job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=!: The short name or full Amazon Resource Name (ARN) of the queue to delete.
+    - name: delete-scheduling-policy
+      description: Deletes the specified scheduling policy.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the scheduling policy to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-service-environment
+      description: Deletes a Service environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-environment=!: The name or ARN of the service environment to delete.
+    - name: deregister-job-definition
+      description: Deregisters an Batch job definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-definition=!: The name and revision (`name:revision`) or full Amazon Resource Name (ARN) of the job definition to deregister.
     - name: describe-compute-environments
       description: Describes one or more of your compute environments.
       flags:
@@ -272,6 +148,13 @@ commands:
         --next-token=: The `nextToken` value returned from a previous paginated `DescribeComputeEnvironments` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: describe-consumable-resource
+      description: Returns a description of the specified consumable resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consumable-resource=!: The name or ARN of the consumable resource whose description will be returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-job-definitions
       description: Describes a list of job definitions.
       flags:
@@ -286,6 +169,25 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --status=: The status used to filter job definitions.
+    - name: describe-job-queues
+      description: Describes one or more of your job queues.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queues=: A list of up to 100 queue names or full queue Amazon Resource Name (ARN) entries.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by `DescribeJobQueues` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `DescribeJobQueues` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-jobs
+      description: Describes a list of Batch jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --jobs=!: A list of up to 100 job IDs.
     - name: describe-scheduling-policies
       description: Describes one or more of your scheduling policies.
       flags:
@@ -293,6 +195,70 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-service-environments
+      description: Describes one or more of your service environments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by `DescribeServiceEnvironments` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `DescribeServiceEnvironments` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-environments=: An array of service environment names or ARN entries.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-service-job
+      description: The details of a service job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The job ID for the service job to describe.
+    - name: get-job-queue-snapshot
+      description: Provides a list of the first 100 `RUNNABLE` jobs associated to a single job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=!: The job queue’s name or full queue Amazon Resource Name (ARN).
+    - name: list-consumable-resources
+      description: Returns a list of Batch consumable resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filters to apply to the consumable resource list query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by `ListConsumableResources` in paginated output.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListConsumableResources` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-jobs
+      description: Returns a list of Batch jobs.
+      flags:
+        --array-job-id=: The job ID for an array job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filter to apply to the query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=: The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
+        --job-status=: The job status used to filter jobs in the specified queue.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by `ListJobs` in a paginated output.
+        --multi-node-job-id=: The job ID for a multi-node parallel job.
+        --next-token=: The `nextToken` value returned from a previous paginated `ListJobs` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            job-status:
+                - SUBMITTED
+                - PENDING
+                - RUNNABLE
+                - STARTING
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
     - name: list-jobs-by-consumable-resource
       description: Returns a list of Batch jobs that require a specific consumable resource.
       flags:
@@ -304,6 +270,17 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results returned by `ListJobsByConsumableResource` in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated `ListJobsByConsumableResource` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-scheduling-policies
+      description: Returns a list of Batch scheduling policies.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that's returned by `ListSchedulingPolicies` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `ListSchedulingPolicies` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-service-jobs
@@ -331,6 +308,13 @@ commands:
                 - RUNNING
                 - SUCCEEDED
                 - FAILED
+    - name: list-tags-for-resource
+      description: Lists the tags for an Batch resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource that tags are listed for.
     - name: register-job-definition
       description: Registers an Batch job definition.
       flags:
@@ -357,67 +341,6 @@ commands:
             type:
                 - container
                 - multinode
-    - name: delete-compute-environment
-      description: Deletes an Batch compute environment.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-environment=!: The name or Amazon Resource Name (ARN) of the compute environment to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-consumable-resource
-      description: Deletes the specified consumable resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumable-resource=!: The name or ARN of the consumable resource that will be deleted.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-job-queue
-      description: Deletes the specified job queue.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-queue=!: The short name or full Amazon Resource Name (ARN) of the queue to delete.
-    - name: describe-consumable-resource
-      description: Returns a description of the specified consumable resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --consumable-resource=!: The name or ARN of the consumable resource whose description will be returned.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-jobs
-      description: Describes a list of Batch jobs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --jobs=!: A list of up to 100 job IDs.
-    - name: list-jobs
-      description: Returns a list of Batch jobs.
-      flags:
-        --array-job-id=: The job ID for an array job.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filter to apply to the query.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-queue=: The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
-        --job-status=: The job status used to filter jobs in the specified queue.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned by `ListJobs` in a paginated output.
-        --multi-node-job-id=: The job ID for a multi-node parallel job.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListJobs` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            job-status:
-                - SUBMITTED
-                - PENDING
-                - RUNNABLE
-                - STARTING
-                - RUNNING
-                - SUCCEEDED
-                - FAILED
     - name: submit-job
       description: Submits an Batch job from a job definition.
       flags:
@@ -442,6 +365,42 @@ commands:
         --share-identifier=: The share identifier for the job.
         --tags=: The tags that you apply to the job request to help you categorize and organize your resources.
         --timeout=: The timeout configuration for this [SubmitJob]() operation.
+    - name: submit-service-job
+      description: Submits a service job to a specified job queue to run on SageMaker AI.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: The name of the service job.
+        --job-queue=!: The job queue into which the service job is submitted.
+        --retry-strategy=: The retry strategy to use for failed service jobs that are submitted with this service job request.
+        --scheduling-priority=: The scheduling priority of the service job.
+        --service-job-type=!: The type of service job.
+        --service-request-payload=!: The request, in JSON, for the service that the SubmitServiceJob operation is queueing.
+        --share-identifier=: The share identifier for the service job.
+        --tags=: The tags that you apply to the service job request.
+        --timeout-config=: The timeout configuration for the service job.
+      completion:
+        flag:
+            service-job-type:
+                - SAGEMAKER_TRAINING
+    - name: tag-resource
+      description: Associates the specified tags to a resource with the specified `resourceArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that tags are added to.
+        --tags=!: The tags that you apply to the resource to help you categorize and organize your resources.
+    - name: terminate-job
+      description: Terminates a job in a job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The Batch job ID of the job to terminate.
+        --reason=!: A message to attach to the job that explains the reason for canceling it.
     - name: terminate-service-job
       description: Terminates a service job in a job queue.
       flags:
@@ -450,38 +409,79 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The service job ID of the service job to terminate.
         --reason=!: A message to attach to the service job that explains the reason for canceling it.
-    - name: create-compute-environment
-      description: Creates an Batch compute environment.
+    - name: untag-resource
+      description: Deletes specified tags from an Batch resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-environment-name=!: The name for your compute environment.
-        --compute-resources=: Details about the compute resources managed by the compute environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to delete tags.
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: update-compute-environment
+      description: Updates an Batch compute environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-environment=!: The name or full Amazon Resource Name (ARN) of the compute environment to update.
+        --compute-resources=: Details of the compute resources managed by the compute environment.
         --context=: Reserved.
-        --eks-configuration=: The details for the Amazon EKS cluster that supports the compute environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-role=: The full Amazon Resource Name (ARN) of the IAM role that allows Batch to make calls to other Amazon Web Services services on your behalf.
         --state=: The state of the compute environment.
-        --tags=: The tags that you apply to the compute environment to help you categorize and organize your resources.
-        --type=!: 'The type of the compute environment: `MANAGED` or `UNMANAGED`.'
-        --unmanagedv-cpus=: The maximum number of vCPUs for an unmanaged compute environment.
+        --unmanagedv-cpus=: The maximum number of vCPUs expected to be used for an unmanaged compute environment.
+        --update-policy=: Specifies the updated infrastructure update policy for the compute environment.
       completion:
         flag:
             state:
                 - ENABLED
                 - DISABLED
-            type:
-                - MANAGED
-                - UNMANAGED
-    - name: list-consumable-resources
-      description: Returns a list of Batch consumable resources.
+    - name: update-consumable-resource
+      description: Updates a consumable resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters to apply to the consumable resource list query.
+        --client-token=: If this parameter is specified and two update requests with identical payloads and `clientToken`s are received, these requests are considered the same request.
+        --consumable-resource=!: The name or ARN of the consumable resource to be updated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results returned by `ListConsumableResources` in paginated output.
-        --next-token=: The `nextToken` value returned from a previous paginated `ListConsumableResources` request where `maxResults` was used and the results exceeded the value of that parameter.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --operation=: Indicates how the quantity of the consumable resource will be updated.
+        --quantity=: The change in the total quantity of the consumable resource.
+    - name: update-job-queue
+      description: Updates a job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-environment-order=: Details the set of compute environments mapped to a job queue and their order relative to each other.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=!: The name or the Amazon Resource Name (ARN) of the job queue.
+        --job-state-time-limit-actions=: The set of actions that Batch perform on jobs that remain at the head of the job queue in the specified state longer than specified times.
+        --priority=: The priority of the job queue.
+        --scheduling-policy-arn=: Amazon Resource Name (ARN) of the fair-share scheduling policy.
+        --service-environment-order=: The order of the service environment associated with the job queue.
+        --state=: Describes the queue's ability to accept new jobs.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
+    - name: update-scheduling-policy
+      description: Updates a scheduling policy.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the scheduling policy to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fairshare-policy=: The fair-share policy scheduling details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-service-environment
+      description: Updates a service environment.
+      flags:
+        --capacity-limits=: The capacity limits for the service environment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-environment=!: The name or ARN of the service environment to update.
+        --state=: The state of the service environment.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED

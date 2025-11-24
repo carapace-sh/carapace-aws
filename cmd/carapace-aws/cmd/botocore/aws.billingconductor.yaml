@@ -1,41 +1,6 @@
 name: billingconductor
 description: AWSBillingConductor
 commands:
-    - name: list-billing-groups
-      description: A paginated call to retrieve a list of billing groups for the given billing period.
-      flags:
-        --billing-period=: The preferred billing period to get billing groups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A `ListBillingGroupsFilter` that specifies the billing group and pricing plan to retrieve billing group information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of billing groups to retrieve.
-        --next-token=: The pagination token that's used on subsequent calls to get billing groups.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-resources-associated-to-custom-line-item
-      description: List the resources that are associated to a custom line item.
-      flags:
-        --arn=!: The ARN of the custom line item for which the resource associations will be listed.
-        --billing-period=: The billing period for which the resource associations will be listed.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: (Optional) A `ListResourcesAssociatedToCustomLineItemFilter` that can specify the types of resources that should be retrieved.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: (Optional) The maximum number of resource associations to be retrieved.
-        --next-token=: (Optional) The pagination token that's returned by a previous request.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Associates the specified tags to a resource with the specified `resourceArn`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to add tags.
-        --tags=!: The tags to add to the resource as a list of key-value pairs.
     - name: associate-accounts
       description: Connects an array of account IDs in a consolidated billing family to a predefined billing group.
       flags:
@@ -44,6 +9,76 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: associate-pricing-rules
+      description: Connects an array of `PricingRuleArns` to a defined `PricingPlan`.
+      flags:
+        --arn=!: The `PricingPlanArn` that the `PricingRuleArns` are associated with.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pricing-rule-arns=!: The `PricingRuleArns` that are associated with the Pricing Plan.
+    - name: batch-associate-resources-to-custom-line-item
+      description: Associates a batch of resources to a percentage custom line item.
+      flags:
+        --billing-period-range=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arns=!: A list containing the ARNs of the resources to be associated.
+        --target-arn=!: A percentage custom line item ARN to associate the resources to.
+    - name: batch-disassociate-resources-from-custom-line-item
+      description: Disassociates a batch of resources from a percentage custom line item.
+      flags:
+        --billing-period-range=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arns=!: A list containing the ARNs of resources to be disassociated.
+        --target-arn=!: A percentage custom line item ARN to disassociate the resources from.
+    - name: create-billing-group
+      description: Creates a billing group that resembles a consolidated billing family that Amazon Web Services charges, based off of the predefined pricing plan computation.
+      flags:
+        --account-grouping=!: The set of accounts that will be under the billing group.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
+        --computation-preference=!: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
+        --description=: The description of the billing group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The billing group name.
+        --primary-account-id=: The account ID that serves as the main account in a billing group.
+        --tags=: A map that contains tag keys and tag values that are attached to a billing group.
+    - name: create-custom-line-item
+      description: Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period.
+      flags:
+        --account-id=: The Amazon Web Services account in which this custom line item will be applied to.
+        --billing-group-arn=!: The Amazon Resource Name (ARN) that references the billing group where the custom line item applies to.
+        --billing-period-range=: A time range for which the custom line item is effective.
+        --charge-details=!: A `CustomLineItemChargeDetails` that describes the charge details for a custom line item.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
+        --computation-rule=: Specifies how the custom line item charges are computed.
+        --description=!: The description of the custom line item.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the custom line item.
+        --presentation-details=: Details controlling how the custom line item charges are presented in the bill.
+        --tags=: A map that contains tag keys and tag values that are attached to a custom line item.
+      completion:
+        flag:
+            computation-rule:
+                - CONSOLIDATED
+    - name: create-pricing-plan
+      description: Creates a pricing plan that is used for computing Amazon Web Services charges for billing groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
+        --description=: The description of the pricing plan.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the pricing plan.
+        --pricing-rule-arns=: A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.
+        --tags=: A map that contains tag keys and tag values that are attached to a pricing plan.
     - name: create-pricing-rule
       description: Creates a pricing rule can be associated to a pricing plan, or a set of pricing plans.
       flags:
@@ -73,115 +108,6 @@ commands:
                 - MARKUP
                 - DISCOUNT
                 - TIERING
-    - name: list-tags-for-resource
-      description: A list the tags for a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list the tags.
-    - name: update-billing-group
-      description: This updates an existing billing group.
-      flags:
-        --account-grouping=: Specifies if the billing group has automatic account association (`AutoAssociate`) enabled.
-        --arn=!: The Amazon Resource Name (ARN) of the billing group being updated.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --computation-preference=: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
-        --description=: A description of the billing group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the billing group.
-        --status=: The status of the billing group.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - PRIMARY_ACCOUNT_MISSING
-                - PENDING
-    - name: update-pricing-rule
-      description: Updates an existing pricing rule.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the pricing rule to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new description for the pricing rule.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --modifier-percentage=: The new modifier to show pricing plan rates as a percentage.
-        --name=: The new name of the pricing rule.
-        --tiering=: The set of tiering configurations for the pricing rule.
-        --type=: The new pricing rule type.
-      completion:
-        flag:
-            type:
-                - MARKUP
-                - DISCOUNT
-                - TIERING
-    - name: associate-pricing-rules
-      description: Connects an array of `PricingRuleArns` to a defined `PricingPlan`.
-      flags:
-        --arn=!: The `PricingPlanArn` that the `PricingRuleArns` are associated with.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --pricing-rule-arns=!: The `PricingRuleArns` that are associated with the Pricing Plan.
-    - name: delete-pricing-plan
-      description: Deletes a pricing plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the pricing plan that you're deleting.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-custom-line-items
-      description: A paginated call to get a list of all custom line items (FFLIs) for the given billing period.
-      flags:
-        --billing-period=: The preferred billing period to get custom line items (FFLIs).
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A `ListCustomLineItemsFilter` that specifies the custom line item names and/or billing group Amazon Resource Names (ARNs) to retrieve FFLI information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of billing groups to retrieve.
-        --next-token=: The pagination token that's used on subsequent calls to get custom line items (FFLIs).
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-pricing-plan
-      description: This updates an existing pricing plan.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the pricing plan that you're updating.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The description of the pricing plan.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The name of the pricing plan.
-    - name: batch-associate-resources-to-custom-line-item
-      description: Associates a batch of resources to a percentage custom line item.
-      flags:
-        --billing-period-range=: ""
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arns=!: A list containing the ARNs of the resources to be associated.
-        --target-arn=!: A percentage custom line item ARN to associate the resources to.
-    - name: create-custom-line-item
-      description: Creates a custom line item that can be used to create a one-time fixed charge that can be applied to a single billing group for the current or previous billing period.
-      flags:
-        --account-id=: The Amazon Web Services account in which this custom line item will be applied to.
-        --billing-group-arn=!: The Amazon Resource Name (ARN) that references the billing group where the custom line item applies to.
-        --billing-period-range=: A time range for which the custom line item is effective.
-        --charge-details=!: A `CustomLineItemChargeDetails` that describes the charge details for a custom line item.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
-        --computation-rule=: Specifies how the custom line item charges are computed.
-        --description=!: The description of the custom line item.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the custom line item.
-        --presentation-details=: Details controlling how the custom line item charges are presented in the bill.
-        --tags=: A map that contains tag keys and tag values that are attached to a custom line item.
-      completion:
-        flag:
-            computation-rule:
-                - CONSOLIDATED
     - name: delete-billing-group
       description: Deletes a billing group.
       flags:
@@ -189,58 +115,33 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-custom-line-item
-      description: Update an existing custom line item in the current or previous billing period.
+    - name: delete-custom-line-item
+      description: Deletes the custom line item identified by the given ARN in the current, or previous billing period.
       flags:
-        --arn=!: The ARN of the custom line item to be updated.
+        --arn=!: The ARN of the custom line item to be deleted.
         --billing-period-range=: ""
-        --charge-details=: A `ListCustomLineItemChargeDetails` containing the new charge details for the custom line item.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: The new line item description of the custom line item.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name for the custom line item.
-    - name: create-billing-group
-      description: Creates a billing group that resembles a consolidated billing family that Amazon Web Services charges, based off of the predefined pricing plan computation.
+    - name: delete-pricing-plan
+      description: Deletes a pricing plan.
       flags:
-        --account-grouping=!: The set of accounts that will be under the billing group.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
-        --computation-preference=!: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
-        --description=: The description of the billing group.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The billing group name.
-        --primary-account-id=: The account ID that serves as the main account in a billing group.
-        --tags=: A map that contains tag keys and tag values that are attached to a billing group.
-    - name: get-billing-group-cost-report
-      description: Retrieves the margin summary report, which includes the Amazon Web Services cost and charged amount (pro forma cost) by Amazon Web Services service for a specific billing group.
-      flags:
-        --arn=!: The Amazon Resource Number (ARN) that uniquely identifies the billing group.
-        --billing-period-range=: A time range for which the margin summary is effective.
+        --arn=!: The Amazon Resource Name (ARN) of the pricing plan that you're deleting.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-by=: A list of strings that specify the attributes that are used to break down costs in the margin summary reports for the billing group.
-        --max-results=: The maximum number of margin summary reports to retrieve.
-        --next-token=: The pagination token used on subsequent calls to get reports.
-    - name: list-pricing-plans
-      description: A paginated call to get pricing plans for the given billing period.
-      flags:
-        --billing-period=: The preferred billing period to get pricing plan.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A `ListPricingPlansFilter` that specifies the Amazon Resource Name (ARNs) of pricing plans to retrieve pricing plans information.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of pricing plans to retrieve.
-        --next-token=: The pagination token that's used on subsequent call to get pricing plans.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
     - name: delete-pricing-rule
       description: Deletes the pricing rule that's identified by the input Amazon Resource Name (ARN).
       flags:
         --arn=!: The Amazon Resource Name (ARN) of the pricing rule that you are deleting.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: disassociate-accounts
+      description: Removes the specified list of account IDs from the given billing group.
+      flags:
+        --account-ids=!: The array of account IDs to disassociate.
+        --arn=!: The Amazon Resource Name (ARN) of the billing group that the array of account IDs will disassociate from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -252,6 +153,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pricing-rule-arns=!: A list containing the Amazon Resource Name (ARN) of the pricing rules that will be disassociated.
+    - name: get-billing-group-cost-report
+      description: Retrieves the margin summary report, which includes the Amazon Web Services cost and charged amount (pro forma cost) by Amazon Web Services service for a specific billing group.
+      flags:
+        --arn=!: The Amazon Resource Number (ARN) that uniquely identifies the billing group.
+        --billing-period-range=: A time range for which the margin summary is effective.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=: A list of strings that specify the attributes that are used to break down costs in the margin summary reports for the billing group.
+        --max-results=: The maximum number of margin summary reports to retrieve.
+        --next-token=: The pagination token used on subsequent calls to get reports.
     - name: list-account-associations
       description: This is a paginated call to list linked accounts that are linked to the payer account for the specified time period.
       flags:
@@ -276,6 +188,19 @@ commands:
         --next-token=: The pagination token that's used on subsequent calls to get reports.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-billing-groups
+      description: A paginated call to retrieve a list of billing groups for the given billing period.
+      flags:
+        --billing-period=: The preferred billing period to get billing groups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A `ListBillingGroupsFilter` that specifies the billing group and pricing plan to retrieve billing group information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of billing groups to retrieve.
+        --next-token=: The pagination token that's used on subsequent calls to get billing groups.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-custom-line-item-versions
       description: A paginated call to get a list of all custom line item versions.
       flags:
@@ -287,6 +212,32 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of custom line item versions to retrieve.
         --next-token=: The pagination token that's used on subsequent calls to retrieve custom line item versions.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-custom-line-items
+      description: A paginated call to get a list of all custom line items (FFLIs) for the given billing period.
+      flags:
+        --billing-period=: The preferred billing period to get custom line items (FFLIs).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A `ListCustomLineItemsFilter` that specifies the custom line item names and/or billing group Amazon Resource Names (ARNs) to retrieve FFLI information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of billing groups to retrieve.
+        --next-token=: The pagination token that's used on subsequent calls to get custom line items (FFLIs).
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-pricing-plans
+      description: A paginated call to get pricing plans for the given billing period.
+      flags:
+        --billing-period=: The preferred billing period to get pricing plan.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: A `ListPricingPlansFilter` that specifies the Amazon Resource Name (ARNs) of pricing plans to retrieve pricing plans information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of pricing plans to retrieve.
+        --next-token=: The pagination token that's used on subsequent call to get pricing plans.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-pricing-plans-associated-with-pricing-rule
@@ -302,25 +253,6 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --pricing-rule-arn=!: The pricing rule Amazon Resource Name (ARN) for which associations will be listed.
         --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Deletes specified tags from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to delete tags.
-        --tag-keys=!: The tags to delete from the resource as a list of key-value pairs.
-    - name: create-pricing-plan
-      description: Creates a pricing plan that is used for computing Amazon Web Services charges for billing groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A unique, case-sensitive identifier that you specify to ensure idempotency of the request.
-        --description=: The description of the pricing plan.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the pricing plan.
-        --pricing-rule-arns=: A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.
-        --tags=: A map that contains tag keys and tag values that are attached to a pricing plan.
     - name: list-pricing-rules
       description: Describes a pricing rule that can be associated to a pricing plan, or set of pricing plans.
       flags:
@@ -347,28 +279,96 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --pricing-plan-arn=!: The Amazon Resource Name (ARN) of the pricing plan for which associations are to be listed.
         --starting-token=: A token to specify where to start paginating.
-    - name: batch-disassociate-resources-from-custom-line-item
-      description: Disassociates a batch of resources from a percentage custom line item.
+    - name: list-resources-associated-to-custom-line-item
+      description: List the resources that are associated to a custom line item.
       flags:
+        --arn=!: The ARN of the custom line item for which the resource associations will be listed.
+        --billing-period=: The billing period for which the resource associations will be listed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: (Optional) A `ListResourcesAssociatedToCustomLineItemFilter` that can specify the types of resources that should be retrieved.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: (Optional) The maximum number of resource associations to be retrieved.
+        --next-token=: (Optional) The pagination token that's returned by a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: A list the tags for a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource to list the tags.
+    - name: tag-resource
+      description: Associates the specified tags to a resource with the specified `resourceArn`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to add tags.
+        --tags=!: The tags to add to the resource as a list of key-value pairs.
+    - name: untag-resource
+      description: Deletes specified tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to delete tags.
+        --tag-keys=!: The tags to delete from the resource as a list of key-value pairs.
+    - name: update-billing-group
+      description: This updates an existing billing group.
+      flags:
+        --account-grouping=: Specifies if the billing group has automatic account association (`AutoAssociate`) enabled.
+        --arn=!: The Amazon Resource Name (ARN) of the billing group being updated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computation-preference=: The preferences and settings that will be used to compute the Amazon Web Services charges for a billing group.
+        --description=: A description of the billing group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the billing group.
+        --status=: The status of the billing group.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - PRIMARY_ACCOUNT_MISSING
+                - PENDING
+    - name: update-custom-line-item
+      description: Update an existing custom line item in the current or previous billing period.
+      flags:
+        --arn=!: The ARN of the custom line item to be updated.
         --billing-period-range=: ""
+        --charge-details=: A `ListCustomLineItemChargeDetails` containing the new charge details for the custom line item.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new line item description of the custom line item.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arns=!: A list containing the ARNs of resources to be disassociated.
-        --target-arn=!: A percentage custom line item ARN to disassociate the resources from.
-    - name: delete-custom-line-item
-      description: Deletes the custom line item identified by the given ARN in the current, or previous billing period.
+        --name=: The new name for the custom line item.
+    - name: update-pricing-plan
+      description: This updates an existing pricing plan.
       flags:
-        --arn=!: The ARN of the custom line item to be deleted.
-        --billing-period-range=: ""
+        --arn=!: The Amazon Resource Name (ARN) of the pricing plan that you're updating.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the pricing plan.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: disassociate-accounts
-      description: Removes the specified list of account IDs from the given billing group.
+        --name=: The name of the pricing plan.
+    - name: update-pricing-rule
+      description: Updates an existing pricing rule.
       flags:
-        --account-ids=!: The array of account IDs to disassociate.
-        --arn=!: The Amazon Resource Name (ARN) of the billing group that the array of account IDs will disassociate from.
+        --arn=!: The Amazon Resource Name (ARN) of the pricing rule to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description for the pricing rule.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --modifier-percentage=: The new modifier to show pricing plan rates as a percentage.
+        --name=: The new name of the pricing rule.
+        --tiering=: The set of tiering configurations for the pricing rule.
+        --type=: The new pricing rule type.
+      completion:
+        flag:
+            type:
+                - MARKUP
+                - DISCOUNT
+                - TIERING

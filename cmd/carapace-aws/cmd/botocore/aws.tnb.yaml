@@ -1,48 +1,6 @@
 name: tnb
 description: AWS Telco Network Builder
 commands:
-    - name: update-sol-function-package
-      description: Updates the operational state of function package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --operational-state=!: Operational state of the function package.
-        --vnf-pkg-id=!: ID of the function package.
-      completion:
-        flag:
-            operational-state:
-                - ENABLED
-                - DISABLED
-    - name: instantiate-sol-network-instance
-      description: Instantiates a network instance.
-      flags:
-        --additional-params-for-ns=: Provides values for the configurable properties.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
-        --ns-instance-id=!: ID of the network instance.
-        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
-    - name: list-sol-network-packages
-      description: Lists network packages.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to include in the response.
-        --next-token=: The token for the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: get-sol-network-package
-      description: Gets the details of a network package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nsd-info-id=!: ID of the network service descriptor in the network package.
     - name: cancel-sol-network-operation
       description: Cancels a network operation.
       flags:
@@ -50,6 +8,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ns-lcm-op-occ-id=!: The identifier of the network operation.
+    - name: create-sol-function-package
+      description: Creates a function package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
+    - name: create-sol-network-instance
+      description: Creates a network instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ns-description=: Network instance description.
+        --ns-name=!: Network instance name.
+        --nsd-info-id=!: ID for network service descriptor.
+        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
     - name: create-sol-network-package
       description: Creates a network package.
       flags:
@@ -57,13 +32,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: A tag is a label that you assign to an Amazon Web Services resource.
-    - name: get-sol-network-package-descriptor
-      description: Gets the content of the network service descriptor.
+    - name: delete-sol-function-package
+      description: Deletes a function package.
       flags:
-        --nsd-info-id=!: ID of the network service descriptor in the network package.
-      completion:
-        positional:
-            - - $files
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vnf-pkg-id=!: ID of the function package.
     - name: delete-sol-network-instance
       description: Deletes a network instance.
       flags:
@@ -71,32 +46,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ns-instance-id=!: Network instance ID.
-    - name: update-sol-network-package
-      description: Updates the operational state of a network package.
+    - name: delete-sol-network-package
+      description: Deletes network package.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --nsd-info-id=!: ID of the network service descriptor in the network package.
-        --nsd-operational-state=!: Operational state of the network service descriptor in the network package.
-      completion:
-        flag:
-            nsd-operational-state:
-                - ENABLED
-                - DISABLED
-    - name: validate-sol-network-package-content
-      description: Validates network package content.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: Network package content type.
-        --file=!: Network package file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nsd-info-id=!: Network service descriptor file.
-      completion:
-        flag:
-            content-type:
-                - application/zip
     - name: get-sol-function-instance
       description: Gets the details of a network function instance, including the instantiation state and metadata from the function package descriptor in the network function package.
       flags:
@@ -104,6 +60,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vnf-instance-id=!: ID of the network function.
+    - name: get-sol-function-package
+      description: Gets the details of an individual function package, such as the operational state and whether the package is in use.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vnf-pkg-id=!: ID of the function package.
     - name: get-sol-function-package-content
       description: Gets the contents of a function package.
       flags:
@@ -115,6 +78,67 @@ commands:
                 - application/zip
         positional:
             - - $files
+    - name: get-sol-function-package-descriptor
+      description: Gets a function package descriptor in a function package.
+      flags:
+        --accept=!: Indicates which content types, expressed as MIME types, the client is able to understand.
+        --vnf-pkg-id=!: ID of the function package.
+      completion:
+        flag:
+            accept:
+                - text/plain
+        positional:
+            - - $files
+    - name: get-sol-network-instance
+      description: Gets the details of the network instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ns-instance-id=!: ID of the network instance.
+    - name: get-sol-network-operation
+      description: Gets the details of a network operation, including the tasks involved in the network operation and the status of the tasks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ns-lcm-op-occ-id=!: The identifier of the network operation.
+    - name: get-sol-network-package
+      description: Gets the details of a network package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nsd-info-id=!: ID of the network service descriptor in the network package.
+    - name: get-sol-network-package-content
+      description: Gets the contents of a network package.
+      flags:
+        --accept=!: The format of the package you want to download from the network package.
+        --nsd-info-id=!: ID of the network service descriptor in the network package.
+      completion:
+        flag:
+            accept:
+                - application/zip
+        positional:
+            - - $files
+    - name: get-sol-network-package-descriptor
+      description: Gets the content of the network service descriptor.
+      flags:
+        --nsd-info-id=!: ID of the network service descriptor in the network package.
+      completion:
+        positional:
+            - - $files
+    - name: instantiate-sol-network-instance
+      description: Instantiates a network instance.
+      flags:
+        --additional-params-for-ns=: Provides values for the configurable properties.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+        --ns-instance-id=!: ID of the network instance.
+        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
     - name: list-sol-function-instances
       description: Lists network function instances.
       flags:
@@ -137,76 +161,6 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: validate-sol-function-package-content
-      description: Validates function package content.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-type=: Function package content type.
-        --file=!: Function package file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vnf-pkg-id=!: Function package ID.
-      completion:
-        flag:
-            content-type:
-                - application/zip
-    - name: list-tags-for-resource
-      description: Lists tags for AWS TNB resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Resource ARN.
-    - name: terminate-sol-network-instance
-      description: Terminates a network instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ns-instance-id=!: ID of the network instance.
-        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
-    - name: get-sol-network-operation
-      description: Gets the details of a network operation, including the tasks involved in the network operation and the status of the tasks.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ns-lcm-op-occ-id=!: The identifier of the network operation.
-    - name: create-sol-network-instance
-      description: Creates a network instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ns-description=: Network instance description.
-        --ns-name=!: Network instance name.
-        --nsd-info-id=!: ID for network service descriptor.
-        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
-    - name: delete-sol-network-package
-      description: Deletes network package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nsd-info-id=!: ID of the network service descriptor in the network package.
-    - name: get-sol-network-package-content
-      description: Gets the contents of a network package.
-      flags:
-        --accept=!: The format of the package you want to download from the network package.
-        --nsd-info-id=!: ID of the network service descriptor in the network package.
-      completion:
-        flag:
-            accept:
-                - application/zip
-        positional:
-            - - $files
-    - name: delete-sol-function-package
-      description: Deletes a function package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vnf-pkg-id=!: ID of the function package.
     - name: list-sol-network-instances
       description: Lists your network instances.
       flags:
@@ -230,6 +184,50 @@ commands:
         --ns-instance-id=: Network instance id filter, to retrieve network operations associated to a network instance.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-sol-network-packages
+      description: Lists network packages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists tags for AWS TNB resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Resource ARN.
+    - name: put-sol-function-package-content
+      description: Uploads the contents of a function package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: Function package content type.
+        --file=!: Function package file.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vnf-pkg-id=!: Function package ID.
+      completion:
+        flag:
+            content-type:
+                - application/zip
+    - name: put-sol-network-package-content
+      description: Uploads the contents of a network package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: Network package content type.
+        --file=!: Network package file.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nsd-info-id=!: Network service descriptor info ID.
+      completion:
+        flag:
+            content-type:
+                - application/zip
     - name: tag-resource
       description: Tags an AWS TNB resource.
       flags:
@@ -238,6 +236,35 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Resource ARN.
         --tags=!: A tag is a label that you assign to an Amazon Web Services resource.
+    - name: terminate-sol-network-instance
+      description: Terminates a network instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ns-instance-id=!: ID of the network instance.
+        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
+    - name: untag-resource
+      description: Untags an AWS TNB resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: Resource ARN.
+        --tag-keys=!: Tag keys.
+    - name: update-sol-function-package
+      description: Updates the operational state of function package.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operational-state=!: Operational state of the function package.
+        --vnf-pkg-id=!: ID of the function package.
+      completion:
+        flag:
+            operational-state:
+                - ENABLED
+                - DISABLED
     - name: update-sol-network-instance
       description: Update a network instance.
       flags:
@@ -254,33 +281,21 @@ commands:
             update-type:
                 - MODIFY_VNF_INFORMATION
                 - UPDATE_NS
-    - name: get-sol-function-package
-      description: Gets the details of an individual function package, such as the operational state and whether the package is in use.
+    - name: update-sol-network-package
+      description: Updates the operational state of a network package.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vnf-pkg-id=!: ID of the function package.
-    - name: get-sol-function-package-descriptor
-      description: Gets a function package descriptor in a function package.
-      flags:
-        --accept=!: Indicates which content types, expressed as MIME types, the client is able to understand.
-        --vnf-pkg-id=!: ID of the function package.
+        --nsd-info-id=!: ID of the network service descriptor in the network package.
+        --nsd-operational-state=!: Operational state of the network service descriptor in the network package.
       completion:
         flag:
-            accept:
-                - text/plain
-        positional:
-            - - $files
-    - name: get-sol-network-instance
-      description: Gets the details of the network instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ns-instance-id=!: ID of the network instance.
-    - name: put-sol-function-package-content
-      description: Uploads the contents of a function package.
+            nsd-operational-state:
+                - ENABLED
+                - DISABLED
+    - name: validate-sol-function-package-content
+      description: Validates function package content.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -292,30 +307,15 @@ commands:
         flag:
             content-type:
                 - application/zip
-    - name: untag-resource
-      description: Untags an AWS TNB resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: Resource ARN.
-        --tag-keys=!: Tag keys.
-    - name: create-sol-function-package
-      description: Creates a function package.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: A tag is a label that you assign to an Amazon Web Services resource.
-    - name: put-sol-network-package-content
-      description: Uploads the contents of a network package.
+    - name: validate-sol-network-package-content
+      description: Validates network package content.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-type=: Network package content type.
         --file=!: Network package file.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --nsd-info-id=!: Network service descriptor info ID.
+        --nsd-info-id=!: Network service descriptor file.
       completion:
         flag:
             content-type:

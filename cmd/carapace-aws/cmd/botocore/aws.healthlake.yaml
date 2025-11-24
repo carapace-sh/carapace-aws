@@ -1,65 +1,6 @@
 name: healthlake
 description: Amazon HealthLake
 commands:
-    - name: describe-fhir-datastore
-      description: Get properties for a FHIR-enabled data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-id=!: The data store identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-fhir-import-jobs
-      description: List all FHIR import jobs associated with an account and their statuses.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-id=!: Limits the response to the import job with the specified data store ID.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=: Limits the response to the import job with the specified job name.
-        --job-status=: Limits the response to the import job with the specified job status.
-        --max-results=: Limits the number of results returned for `ListFHIRImportJobs` to a maximum quantity specified by the user.
-        --next-token=: The pagination token used to identify the next page of results to return.
-        --submitted-after=: Limits the response to FHIR import jobs submitted after a user-specified date.
-        --submitted-before=: Limits the response to FHIR import jobs submitted before a user- specified date.
-      completion:
-        flag:
-            job-status:
-                - SUBMITTED
-                - QUEUED
-                - IN_PROGRESS
-                - COMPLETED_WITH_ERRORS
-                - COMPLETED
-                - FAILED
-                - CANCEL_SUBMITTED
-                - CANCEL_IN_PROGRESS
-                - CANCEL_COMPLETED
-                - CANCEL_FAILED
-    - name: list-tags-for-resource
-      description: Returns a list of all existing tags associated with a data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the data store to which tags are being added.
-    - name: start-fhir-export-job
-      description: Start a FHIR export job.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: An optional user provided token used for ensuring API idempotency.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) used during initiation of the export job.
-        --datastore-id=!: The data store identifier from which files are being exported.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-name=: The export job name.
-        --output-data-config=!: The output data configuration supplied when the export job was started.
-    - name: untag-resource
-      description: Remove a user-specifed key and value tag from a data store.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the data store from which tags are being removed.
-        --tag-keys=!: The keys for the tags to be removed from the data store.
     - name: create-fhir-datastore
       description: Create a FHIR-enabled data store.
       flags:
@@ -77,6 +18,20 @@ commands:
         flag:
             datastore-type-version:
                 - R4
+    - name: delete-fhir-datastore
+      description: Delete a FHIR-enabled data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-id=!: The AWS-generated identifier for the data store to be deleted.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-fhir-datastore
+      description: Get properties for a FHIR-enabled data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-id=!: The data store identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-fhir-export-job
       description: Get FHIR export job properties.
       flags:
@@ -128,6 +83,50 @@ commands:
                 - CANCEL_IN_PROGRESS
                 - CANCEL_COMPLETED
                 - CANCEL_FAILED
+    - name: list-fhir-import-jobs
+      description: List all FHIR import jobs associated with an account and their statuses.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --datastore-id=!: Limits the response to the import job with the specified data store ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=: Limits the response to the import job with the specified job name.
+        --job-status=: Limits the response to the import job with the specified job status.
+        --max-results=: Limits the number of results returned for `ListFHIRImportJobs` to a maximum quantity specified by the user.
+        --next-token=: The pagination token used to identify the next page of results to return.
+        --submitted-after=: Limits the response to FHIR import jobs submitted after a user-specified date.
+        --submitted-before=: Limits the response to FHIR import jobs submitted before a user- specified date.
+      completion:
+        flag:
+            job-status:
+                - SUBMITTED
+                - QUEUED
+                - IN_PROGRESS
+                - COMPLETED_WITH_ERRORS
+                - COMPLETED
+                - FAILED
+                - CANCEL_SUBMITTED
+                - CANCEL_IN_PROGRESS
+                - CANCEL_COMPLETED
+                - CANCEL_FAILED
+    - name: list-tags-for-resource
+      description: Returns a list of all existing tags associated with a data store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the data store to which tags are being added.
+    - name: start-fhir-export-job
+      description: Start a FHIR export job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An optional user provided token used for ensuring API idempotency.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) used during initiation of the export job.
+        --datastore-id=!: The data store identifier from which files are being exported.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=: The export job name.
+        --output-data-config=!: The output data configuration supplied when the export job was started.
     - name: start-fhir-import-job
       description: Start importing bulk FHIR data into an ACTIVE data store.
       flags:
@@ -155,16 +154,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) that grants access to the data store tags are being added to.
         --tags=!: The user-specified key and value pair tags being added to a data store.
-    - name: delete-fhir-datastore
-      description: Delete a FHIR-enabled data store.
+    - name: untag-resource
+      description: Remove a user-specifed key and value tag from a data store.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-id=!: The AWS-generated identifier for the data store to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the data store from which tags are being removed.
+        --tag-keys=!: The keys for the tags to be removed from the data store.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: fhir-datastore-active
+          description: Get properties for a FHIR-enabled data store.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --datastore-id=!: The data store identifier.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: fhir-datastore-deleted
+          description: Get properties for a FHIR-enabled data store.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --datastore-id=!: The data store identifier.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: fhir-export-job-completed
           description: Get FHIR export job properties.
           flags:
@@ -181,17 +195,3 @@ commands:
             --datastore-id=!: The data store identifier.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --job-id=!: The import job identifier.
-        - name: fhir-datastore-active
-          description: Get properties for a FHIR-enabled data store.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --datastore-id=!: The data store identifier.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: fhir-datastore-deleted
-          description: Get properties for a FHIR-enabled data store.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --datastore-id=!: The data store identifier.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

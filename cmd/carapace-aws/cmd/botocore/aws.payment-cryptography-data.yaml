@@ -1,6 +1,85 @@
 name: payment-cryptography-data
 description: Payment Cryptography Data Plane
 commands:
+    - name: decrypt-data
+      description: Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme.
+      flags:
+        --cipher-text=!: The ciphertext to decrypt.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --decryption-attributes=!: The encryption key type and attributes for ciphertext decryption.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `keyARN` of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.
+        --wrapped-key=: The WrappedKeyBlock containing the encryption key for ciphertext decryption.
+    - name: encrypt-data
+      description: Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-attributes=!: The encryption key type and attributes for plaintext encryption.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `keyARN` of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.
+        --plain-text=!: The plaintext to be encrypted.
+        --wrapped-key=: The WrappedKeyBlock containing the encryption key for plaintext encryption.
+    - name: generate-card-validation-data
+      description: Generates card-related validation data using algorithms such as Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generation-attributes=!: The algorithm for generating CVV or CSC values for the card within Amazon Web Services Payment Cryptography.
+        --key-identifier=!: The `keyARN` of the CVK encryption key that Amazon Web Services Payment Cryptography uses to generate card data.
+        --primary-account-number=!: The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.
+        --validation-data-length=: The length of the CVV or CSC to be generated.
+    - name: generate-mac
+      description: Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generation-attributes=!: The attributes and data values to use for MAC generation within Amazon Web Services Payment Cryptography.
+        --key-identifier=!: The `keyARN` of the MAC generation encryption key.
+        --mac-length=: The length of a MAC under generation.
+        --message-data=!: The data for which a MAC is under generation.
+    - name: generate-mac-emv-pin-change
+      description: Generates an issuer script mac for EMV payment cards that use offline PINs as the cardholder verification method (CVM).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --derivation-method-attributes=!: The attributes and data values to derive payment card specific confidentiality and integrity keys.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --message-data=!: The message data is the APDU command from the card reader or terminal.
+        --new-encrypted-pin-block=!: The incoming new encrypted PIN block data for offline pin change on an EMV card.
+        --new-pin-pek-identifier=!: The `keyARN` of the PEK protecting the incoming new encrypted PIN block.
+        --pin-block-format=!: The PIN encoding format of the incoming new encrypted PIN block as specified in ISO 9564.
+        --secure-messaging-confidentiality-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMC) used to protect the PIN block data in the issuer script response.
+        --secure-messaging-integrity-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMI) used to authenticate the issuer script response.
+      completion:
+        flag:
+            pin-block-format:
+                - ISO_FORMAT_0
+                - ISO_FORMAT_1
+                - ISO_FORMAT_3
+    - name: generate-pin-data
+      description: Generates pin-related data such as PIN, PIN Verification Value (PVV), PIN Block, and PIN Offset during new card issuance or reissuance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-key-identifier=!: The `keyARN` of the PEK that Amazon Web Services Payment Cryptography uses to encrypt the PIN Block.
+        --encryption-wrapped-key=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generation-attributes=!: The attributes and values to use for PIN, PVV, or PIN Offset generation.
+        --generation-key-identifier=!: The `keyARN` of the PEK that Amazon Web Services Payment Cryptography uses for pin data generation.
+        --pin-block-format=!: The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports `ISO_Format_0`, `ISO_Format_3` and `ISO_Format_4`.
+        --pin-data-length=: The length of PIN under generation.
+        --primary-account-number=: The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.
+      completion:
+        flag:
+            pin-block-format:
+                - ISO_FORMAT_0
+                - ISO_FORMAT_1
+                - ISO_FORMAT_3
+                - ISO_FORMAT_4
     - name: re-encrypt-data
       description: Re-encrypt ciphertext using DUKPT or Symmetric data encryption keys.
       flags:
@@ -62,36 +141,6 @@ commands:
             major-key-derivation-mode:
                 - EMV_OPTION_A
                 - EMV_OPTION_B
-    - name: generate-card-validation-data
-      description: Generates card-related validation data using algorithms such as Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generation-attributes=!: The algorithm for generating CVV or CSC values for the card within Amazon Web Services Payment Cryptography.
-        --key-identifier=!: The `keyARN` of the CVK encryption key that Amazon Web Services Payment Cryptography uses to generate card data.
-        --primary-account-number=!: The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.
-        --validation-data-length=: The length of the CVV or CSC to be generated.
-    - name: generate-pin-data
-      description: Generates pin-related data such as PIN, PIN Verification Value (PVV), PIN Block, and PIN Offset during new card issuance or reissuance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-key-identifier=!: The `keyARN` of the PEK that Amazon Web Services Payment Cryptography uses to encrypt the PIN Block.
-        --encryption-wrapped-key=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generation-attributes=!: The attributes and values to use for PIN, PVV, or PIN Offset generation.
-        --generation-key-identifier=!: The `keyARN` of the PEK that Amazon Web Services Payment Cryptography uses for pin data generation.
-        --pin-block-format=!: The PIN encoding format for pin data generation as specified in ISO 9564. Amazon Web Services Payment Cryptography supports `ISO_Format_0`, `ISO_Format_3` and `ISO_Format_4`.
-        --pin-data-length=: The length of PIN under generation.
-        --primary-account-number=: The Primary Account Number (PAN), a unique identifier for a payment credit or debit card that associates the card with a specific account holder.
-      completion:
-        flag:
-            pin-block-format:
-                - ISO_FORMAT_0
-                - ISO_FORMAT_1
-                - ISO_FORMAT_3
-                - ISO_FORMAT_4
     - name: verify-card-validation-data
       description: Verifies card-related validation data using algorithms such as Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2) and Card Security Codes (CSC).
       flags:
@@ -135,52 +184,3 @@ commands:
                 - ISO_FORMAT_1
                 - ISO_FORMAT_3
                 - ISO_FORMAT_4
-    - name: decrypt-data
-      description: Decrypts ciphertext data to plaintext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme.
-      flags:
-        --cipher-text=!: The ciphertext to decrypt.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --decryption-attributes=!: The encryption key type and attributes for ciphertext decryption.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `keyARN` of the encryption key that Amazon Web Services Payment Cryptography uses for ciphertext decryption.
-        --wrapped-key=: The WrappedKeyBlock containing the encryption key for ciphertext decryption.
-    - name: encrypt-data
-      description: Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric (RSA), or derived (DUKPT or EMV) encryption key scheme.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-attributes=!: The encryption key type and attributes for plaintext encryption.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `keyARN` of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.
-        --plain-text=!: The plaintext to be encrypted.
-        --wrapped-key=: The WrappedKeyBlock containing the encryption key for plaintext encryption.
-    - name: generate-mac
-      description: Generates a Message Authentication Code (MAC) cryptogram within Amazon Web Services Payment Cryptography.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --generation-attributes=!: The attributes and data values to use for MAC generation within Amazon Web Services Payment Cryptography.
-        --key-identifier=!: The `keyARN` of the MAC generation encryption key.
-        --mac-length=: The length of a MAC under generation.
-        --message-data=!: The data for which a MAC is under generation.
-    - name: generate-mac-emv-pin-change
-      description: Generates an issuer script mac for EMV payment cards that use offline PINs as the cardholder verification method (CVM).
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --derivation-method-attributes=!: The attributes and data values to derive payment card specific confidentiality and integrity keys.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-data=!: The message data is the APDU command from the card reader or terminal.
-        --new-encrypted-pin-block=!: The incoming new encrypted PIN block data for offline pin change on an EMV card.
-        --new-pin-pek-identifier=!: The `keyARN` of the PEK protecting the incoming new encrypted PIN block.
-        --pin-block-format=!: The PIN encoding format of the incoming new encrypted PIN block as specified in ISO 9564.
-        --secure-messaging-confidentiality-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMC) used to protect the PIN block data in the issuer script response.
-        --secure-messaging-integrity-key-identifier=!: The `keyARN` of the issuer master key (IMK-SMI) used to authenticate the issuer script response.
-      completion:
-        flag:
-            pin-block-format:
-                - ISO_FORMAT_0
-                - ISO_FORMAT_1
-                - ISO_FORMAT_3

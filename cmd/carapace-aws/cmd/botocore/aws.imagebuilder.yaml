@@ -1,190 +1,14 @@
 name: imagebuilder
 description: EC2 Image Builder
 commands:
-    - name: delete-image-recipe
-      description: Deletes an image recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe to delete.
-    - name: list-image-build-versions
-      description: Returns a list of image build versions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-version-arn=: The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-image-packages
-      description: List the Packages that are associated with an Image Build Version, as determined by Amazon Web Services Systems Manager Inventory at build time.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: Filter results for the ListImagePackages request by the Image Build Version ARN
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: create-infrastructure-configuration
-      description: Creates a new infrastructure configuration.
+    - name: cancel-image-creation
+      description: CancelImageCreation cancels the creation of Image.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: The description of the infrastructure configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-metadata-options=: The instance metadata options that you can set for the HTTP requests that pipeline builds use to launch EC2 build and test instances.
-        --instance-profile-name=!: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
-        --instance-types=: The instance types of the infrastructure configuration.
-        --key-pair=: The key pair of the infrastructure configuration.
-        --logging=: The logging configuration of the infrastructure configuration.
-        --name=!: The name of the infrastructure configuration.
-        --no-terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
-        --placement=: The instance placement settings that define where the instances that are launched from your image will run.
-        --resource-tags=: The metadata tags to assign to the Amazon EC2 instance that Image Builder launches during the build process.
-        --security-group-ids=: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
-        --sns-topic-arn=: The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.
-        --subnet-id=: The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.
-        --tags=: The metadata tags to assign to the infrastructure configuration resource that Image Builder creates as output.
-        --terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
-    - name: get-distribution-configuration
-      description: Gets a distribution configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: import-component
-      description: Imports a component and transforms its data into a component document.
-      flags:
-        --change-description=: The change description of the component.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --data=: The data of the component.
-        --description=: The description of the component.
-        --format=!: The format of the resource that you want to import as a component.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component.
-        --name=!: The name of the component.
-        --platform=!: The platform of the component.
-        --semantic-version=!: The semantic version of the component.
-        --tags=: The tags of the component.
-        --type=!: The type of the component denotes whether the component is used to build the image, or only to test it.
-        --uri=: The uri of the component.
-      completion:
-        flag:
-            format:
-                - SHELL
-            platform:
-                - Windows
-                - Linux
-                - macOS
-            type:
-                - BUILD
-                - TEST
-    - name: list-container-recipes
-      description: Returns a list of container recipes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --owner=: Returns container recipes belonging to the specified owner, that have been shared with you.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            owner:
-                - Self
-                - Shared
-                - Amazon
-                - ThirdParty
-                - AWSMarketplace
-    - name: untag-resource
-      description: Removes a tag from a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
-        --tag-keys=!: The tag keys to remove from the resource.
-    - name: delete-image-pipeline
-      description: Deletes an image pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline to delete.
-    - name: get-image-pipeline
-      description: Gets an image pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.
-    - name: list-distribution-configurations
-      description: Returns a list of distribution configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: You can filter on `name` to streamline results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-image-scan-finding-aggregations
-      description: Returns a list of image scan aggregations for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter=: ""
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --next-token=: A token to specify where to start paginating.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-tags-for-resource
-      description: Returns the list of tags for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
-    - name: update-lifecycle-policy
-      description: Update the specified lifecycle policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: Optional description for the lifecycle policy.
-        --execution-role=!: The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to update the lifecycle policy.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-policy-arn=!: The Amazon Resource Name (ARN) of the lifecycle policy resource.
-        --policy-details=!: The configuration details for a lifecycle policy resource.
-        --resource-selection=!: Selection criteria for resources that the lifecycle policy applies to.
-        --resource-type=!: The type of image resource that the lifecycle policy applies to.
-        --status=: Indicates whether the lifecycle policy resource is enabled.
-      completion:
-        flag:
-            resource-type:
-                - AMI_IMAGE
-                - CONTAINER_IMAGE
-            status:
-                - DISABLED
-                - ENABLED
+        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image that you want to cancel creation for.
     - name: cancel-lifecycle-execution
       description: Cancel a specific image lifecycle policy runtime instance.
       flags:
@@ -193,250 +17,6 @@ commands:
         --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lifecycle-execution-id=!: Identifies the specific runtime instance of the image lifecycle to cancel.
-    - name: get-container-recipe
-      description: Retrieves a container recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-image-recipe-policy
-      description: Gets an image recipe policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve.
-    - name: list-lifecycle-executions
-      description: Get the lifecycle runtime history for the specified resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to get a list of lifecycle runtime instances.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-image-recipes
-      description: Returns a list of image recipes.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --owner=: You can specify the recipe owner to filter results by that owner.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            owner:
-                - Self
-                - Shared
-                - Amazon
-                - ThirdParty
-                - AWSMarketplace
-    - name: delete-distribution-configuration
-      description: Deletes a distribution configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-component
-      description: Gets a component object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-build-version-arn=!: The Amazon Resource Name (ARN) of the component that you want to get.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-workflow-execution
-      description: Get the runtime information that was logged for a specific runtime instance of the workflow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-execution-id=!: Use the unique identifier for a runtime instance of the workflow to get runtime details.
-    - name: list-image-pipeline-images
-      description: Returns a list of images created by the specified pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline whose images you want to view.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-infrastructure-configurations
-      description: Returns a list of infrastructure configurations.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: You can filter on `name` to streamline results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: delete-component
-      description: Deletes a component build version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-build-version-arn=!: The Amazon Resource Name (ARN) of the component build version to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-container-recipe
-      description: Deletes a container recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-component-policy
-      description: Gets a component policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-arn=!: The Amazon Resource Name (ARN) of the component whose policy you want to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-marketplace-resource
-      description: Verify the subscription and perform resource dependency checks on the requested Amazon Web Services Marketplace resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies an Amazon Web Services Marketplace resource.
-        --resource-location=: The bucket path that you can specify to download the resource from Amazon S3.
-        --resource-type=!: Specifies which type of Amazon Web Services Marketplace resource Image Builder retrieves.
-      completion:
-        flag:
-            resource-type:
-                - COMPONENT_DATA
-                - COMPONENT_ARTIFACT
-    - name: list-workflow-executions
-      description: Returns a list of workflow runtime instance metadata objects for a specific image build version.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: List all workflow runtime instances for the specified image build version resource ARN.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-infrastructure-configuration
-      description: Updates a new infrastructure configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: The description of the infrastructure configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update.
-        --instance-metadata-options=: The instance metadata options that you can set for the HTTP requests that pipeline builds use to launch EC2 build and test instances.
-        --instance-profile-name=!: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
-        --instance-types=: The instance types of the infrastructure configuration.
-        --key-pair=: The key pair of the infrastructure configuration.
-        --logging=: The logging configuration of the infrastructure configuration.
-        --no-terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
-        --placement=: The instance placement settings that define where the instances that are launched from your image will run.
-        --resource-tags=: The tags attached to the resource created by Image Builder.
-        --security-group-ids=: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
-        --sns-topic-arn=: The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.
-        --subnet-id=: The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
-        --terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
-    - name: create-image-recipe
-      description: Creates a new image recipe.
-      flags:
-        --additional-instance-configuration=: Specify additional settings and launch scripts for your build instances.
-        --ami-tags=: Tags that are applied to the AMI that Image Builder creates during the Build phase prior to image distribution.
-        --block-device-mappings=: The block device mappings of the image recipe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --components=: The components included in the image recipe.
-        --description=: The description of the image recipe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the image recipe.
-        --parent-image=!: The base image for customizations specified in the image recipe.
-        --semantic-version=!: The semantic version of the image recipe.
-        --tags=: The tags of the image recipe.
-        --working-directory=: The working directory used during build and test workflows.
-    - name: get-image
-      description: Gets an image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image that you want to get.
-    - name: get-lifecycle-policy
-      description: Get details for the specified image lifecycle policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-policy-arn=!: Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.
-    - name: list-images
-      description: Returns the list of images that you have access to.
-      flags:
-        --by-name: Requests a list of images with a specific recipe name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-deprecated: Includes deprecated images in the response list.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --no-by-name: Requests a list of images with a specific recipe name.
-        --no-include-deprecated: Includes deprecated images in the response list.
-        --owner=: The owner defines which images you want to list.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            owner:
-                - Self
-                - Shared
-                - Amazon
-                - ThirdParty
-                - AWSMarketplace
-    - name: update-image-pipeline
-      description: Updates an image pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container pipeline to update.
-        --description=: The description of the image pipeline.
-        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that Image Builder uses to configure and distribute images that this image pipeline has updated.
-        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to update.
-        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline.
-        --image-scanning-configuration=: Contains settings for vulnerability scans.
-        --image-tests-configuration=: The image test configuration of the image pipeline.
-        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that Image Builder uses to build images that this image pipeline has updated.
-        --logging-configuration=: Update logging configuration for the output image that's created when the pipeline runs.
-        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --schedule=: The schedule of the image pipeline.
-        --status=: The status of the image pipeline.
-        --workflows=: Contains the workflows to run for the pipeline.
-      completion:
-        flag:
-            status:
-                - DISABLED
-                - ENABLED
     - name: create-component
       description: Creates a new component that can be used to build, validate, test, and assess your image.
       flags:
@@ -462,305 +42,6 @@ commands:
                 - Windows
                 - Linux
                 - macOS
-    - name: create-distribution-configuration
-      description: Creates a new distribution configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: The description of the distribution configuration.
-        --distributions=!: The distributions of the distribution configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the distribution configuration.
-        --tags=: The tags of the distribution configuration.
-    - name: create-image-pipeline
-      description: Creates a new image pipeline.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
-        --description=: The description of the image pipeline.
-        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.
-        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.
-        --image-scanning-configuration=: Contains settings for vulnerability scans.
-        --image-tests-configuration=: The image test configuration of the image pipeline.
-        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.
-        --logging-configuration=: Define logging configuration for the image build process.
-        --name=!: The name of the image pipeline.
-        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --schedule=: The schedule of the image pipeline.
-        --status=: The status of the image pipeline.
-        --tags=: The tags of the image pipeline.
-        --workflows=: Contains an array of workflow configuration objects.
-      completion:
-        flag:
-            status:
-                - DISABLED
-                - ENABLED
-    - name: get-lifecycle-execution
-      description: Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-execution-id=!: Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
-    - name: get-workflow-step-execution
-      description: Get the runtime information that was logged for a specific runtime instance of the workflow step.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --step-execution-id=!: Use the unique identifier for a specific runtime instance of the workflow step to get runtime details for that step.
-    - name: list-workflows
-      description: Lists workflow build versions based on filtering parameters.
-      flags:
-        --by-name: Specify all or part of the workflow name to streamline results.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Used to streamline search results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --no-by-name: Specify all or part of the workflow name to streamline results.
-        --owner=: Used to get a list of workflow build version filtered by the identity of the creator.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            owner:
-                - Self
-                - Shared
-                - Amazon
-                - ThirdParty
-                - AWSMarketplace
-    - name: put-component-policy
-      description: Applies a policy to a component.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --component-arn=!: The Amazon Resource Name (ARN) of the component that this policy should be applied to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy to apply.
-    - name: tag-resource
-      description: Adds a tag to a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
-        --tags=!: The tags to apply to the resource.
-    - name: get-workflow
-      description: Get a workflow resource object.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-build-version-arn=!: The Amazon Resource Name (ARN) of the workflow resource that you want to get.
-    - name: list-components
-      description: Returns the list of components that can be filtered by name, or by using the listed `filters` to streamline results.
-      flags:
-        --by-name: Returns the list of components for the specified name.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --no-by-name: Returns the list of components for the specified name.
-        --owner=: Filters results based on the type of owner for the component.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            owner:
-                - Self
-                - Shared
-                - Amazon
-                - ThirdParty
-                - AWSMarketplace
-    - name: list-lifecycle-policies
-      description: Get a list of lifecycle policies in your Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Streamline results based on one of the following values: `Name`, `Status`.'
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: retry-image
-      description: RetryImage retries an image distribution without rebuilding the image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: The source image Amazon Resource Name (ARN) to retry.
-    - name: start-resource-state-update
-      description: Begin asynchronous resource state update for lifecycle changes to the specified image resources.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --exclusion-rules=: Skip action on the image resource and associated resources if specified exclusion rules are met.
-        --execution-role=: The name or Amazon Resource Name (ARN) of the IAM role that’s used to update image state.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-resources=: A list of image resources to update state for.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
-        --state=!: Indicates the lifecycle action to take for this request.
-        --update-at=: The timestamp that indicates when resources are updated by a lifecycle action.
-    - name: cancel-image-creation
-      description: CancelImageCreation cancels the creation of Image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image that you want to cancel creation for.
-    - name: delete-image
-      description: Deletes an Image Builder image resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the Image Builder image resource to delete.
-    - name: get-image-policy
-      description: Gets an image policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-arn=!: The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.
-    - name: get-image-recipe
-      description: Gets an image recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
-    - name: list-lifecycle-execution-resources
-      description: List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-execution-id=!: Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --parent-resource-id=: You can leave this empty to get a list of Image Builder resources that were identified for lifecycle actions.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-distribution-configuration
-      description: Updates a new distribution configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: The description of the distribution configuration.
-        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration that you want to update.
-        --distributions=!: The distributions of the distribution configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: create-image
-      description: Creates a new image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
-        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.
-        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
-        --image-scanning-configuration=: Contains settings for vulnerability scans.
-        --image-tests-configuration=: The image tests configuration of the image.
-        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.
-        --logging-configuration=: Define logging configuration for the image build process.
-        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
-        --tags=: The tags of the image.
-        --workflows=: Contains an array of workflow configuration objects.
-    - name: create-lifecycle-policy
-      description: Create a lifecycle policy resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --description=: Optional description for the lifecycle policy.
-        --execution-role=!: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to run lifecycle actions.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the lifecycle policy to create.
-        --policy-details=!: Configuration details for the lifecycle policy rules.
-        --resource-selection=!: Selection criteria for the resources that the lifecycle policy applies to.
-        --resource-type=!: The type of Image Builder resource that the lifecycle policy applies to.
-        --status=: Indicates whether the lifecycle policy resource is enabled.
-        --tags=: Tags to apply to the lifecycle policy resource.
-      completion:
-        flag:
-            resource-type:
-                - AMI_IMAGE
-                - CONTAINER_IMAGE
-            status:
-                - DISABLED
-                - ENABLED
-    - name: delete-workflow
-      description: Deletes a specific workflow resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --workflow-build-version-arn=!: The Amazon Resource Name (ARN) of the workflow resource to delete.
-    - name: get-container-recipe-policy
-      description: Retrieves the policy for a container recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe for the policy being requested.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-workflow-step-executions
-      description: Returns runtime data for each step in a runtime instance of the workflow that you specify in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --workflow-execution-id=!: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
-    - name: put-container-recipe-policy
-      description: Applies a policy to a container image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=!: The policy to apply to the container recipe.
-    - name: put-image-policy
-      description: Applies a policy to an image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-arn=!: The Amazon Resource Name (ARN) of the image that this policy should be applied to.
-        --policy=!: The policy to apply.
-    - name: put-image-recipe-policy
-      description: Applies a policy to an image recipe.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to.
-        --policy=!: The policy to apply.
     - name: create-container-recipe
       description: Creates a new container recipe.
       flags:
@@ -791,6 +72,126 @@ commands:
                 - Windows
                 - Linux
                 - macOS
+    - name: create-distribution-configuration
+      description: Creates a new distribution configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: The description of the distribution configuration.
+        --distributions=!: The distributions of the distribution configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the distribution configuration.
+        --tags=: The tags of the distribution configuration.
+    - name: create-image
+      description: Creates a new image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container recipe that defines how images are configured and tested.
+        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that defines and configures the outputs of your pipeline.
+        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
+        --image-scanning-configuration=: Contains settings for vulnerability scans.
+        --image-tests-configuration=: The image tests configuration of the image.
+        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that defines the environment in which your image will be built and tested.
+        --logging-configuration=: Define logging configuration for the image build process.
+        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --tags=: The tags of the image.
+        --workflows=: Contains an array of workflow configuration objects.
+    - name: create-image-pipeline
+      description: Creates a new image pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container recipe that is used to configure images created by this container pipeline.
+        --description=: The description of the image pipeline.
+        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that will be used to configure and distribute images created by this image pipeline.
+        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images created by this image pipeline.
+        --image-scanning-configuration=: Contains settings for vulnerability scans.
+        --image-tests-configuration=: The image test configuration of the image pipeline.
+        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that will be used to build images created by this image pipeline.
+        --logging-configuration=: Define logging configuration for the image build process.
+        --name=!: The name of the image pipeline.
+        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --schedule=: The schedule of the image pipeline.
+        --status=: The status of the image pipeline.
+        --tags=: The tags of the image pipeline.
+        --workflows=: Contains an array of workflow configuration objects.
+      completion:
+        flag:
+            status:
+                - DISABLED
+                - ENABLED
+    - name: create-image-recipe
+      description: Creates a new image recipe.
+      flags:
+        --additional-instance-configuration=: Specify additional settings and launch scripts for your build instances.
+        --ami-tags=: Tags that are applied to the AMI that Image Builder creates during the Build phase prior to image distribution.
+        --block-device-mappings=: The block device mappings of the image recipe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --components=: The components included in the image recipe.
+        --description=: The description of the image recipe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the image recipe.
+        --parent-image=!: The base image for customizations specified in the image recipe.
+        --semantic-version=!: The semantic version of the image recipe.
+        --tags=: The tags of the image recipe.
+        --working-directory=: The working directory used during build and test workflows.
+    - name: create-infrastructure-configuration
+      description: Creates a new infrastructure configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: The description of the infrastructure configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-metadata-options=: The instance metadata options that you can set for the HTTP requests that pipeline builds use to launch EC2 build and test instances.
+        --instance-profile-name=!: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
+        --instance-types=: The instance types of the infrastructure configuration.
+        --key-pair=: The key pair of the infrastructure configuration.
+        --logging=: The logging configuration of the infrastructure configuration.
+        --name=!: The name of the infrastructure configuration.
+        --no-terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
+        --placement=: The instance placement settings that define where the instances that are launched from your image will run.
+        --resource-tags=: The metadata tags to assign to the Amazon EC2 instance that Image Builder launches during the build process.
+        --security-group-ids=: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
+        --sns-topic-arn=: The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.
+        --subnet-id=: The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.
+        --tags=: The metadata tags to assign to the infrastructure configuration resource that Image Builder creates as output.
+        --terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
+    - name: create-lifecycle-policy
+      description: Create a lifecycle policy resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: Optional description for the lifecycle policy.
+        --execution-role=!: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to run lifecycle actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the lifecycle policy to create.
+        --policy-details=!: Configuration details for the lifecycle policy rules.
+        --resource-selection=!: Selection criteria for the resources that the lifecycle policy applies to.
+        --resource-type=!: The type of Image Builder resource that the lifecycle policy applies to.
+        --status=: Indicates whether the lifecycle policy resource is enabled.
+        --tags=: Tags to apply to the lifecycle policy resource.
+      completion:
+        flag:
+            resource-type:
+                - AMI_IMAGE
+                - CONTAINER_IMAGE
+            status:
+                - DISABLED
+                - ENABLED
     - name: create-workflow
       description: Create a new workflow or a new version of an existing workflow.
       flags:
@@ -815,6 +216,151 @@ commands:
                 - BUILD
                 - TEST
                 - DISTRIBUTION
+    - name: delete-component
+      description: Deletes a component build version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-build-version-arn=!: The Amazon Resource Name (ARN) of the component build version to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-container-recipe
+      description: Deletes a container recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-distribution-configuration
+      description: Deletes a distribution configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-image
+      description: Deletes an Image Builder image resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the Image Builder image resource to delete.
+    - name: delete-image-pipeline
+      description: Deletes an image pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline to delete.
+    - name: delete-image-recipe
+      description: Deletes an image recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe to delete.
+    - name: delete-infrastructure-configuration
+      description: Deletes an infrastructure configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration to delete.
+    - name: delete-lifecycle-policy
+      description: Delete the specified lifecycle policy resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-policy-arn=!: The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.
+    - name: delete-workflow
+      description: Deletes a specific workflow resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-build-version-arn=!: The Amazon Resource Name (ARN) of the workflow resource to delete.
+    - name: distribute-image
+      description: DistributeImage distributes existing AMIs to additional regions and accounts without rebuilding the image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration to use.
+        --execution-role=!: The IAM role to use for the distribution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The logging configuration for the distribution.
+        --source-image=!: The source image Amazon Resource Name (ARN) to distribute.
+        --tags=: The tags to apply to the distributed image.
+    - name: get-component
+      description: Gets a component object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-build-version-arn=!: The Amazon Resource Name (ARN) of the component that you want to get.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-component-policy
+      description: Gets a component policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-arn=!: The Amazon Resource Name (ARN) of the component whose policy you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-container-recipe
+      description: Retrieves a container recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-container-recipe-policy
+      description: Retrieves the policy for a container recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe for the policy being requested.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-distribution-configuration
+      description: Gets a distribution configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration that you want to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-image
+      description: Gets an image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image that you want to get.
+    - name: get-image-pipeline
+      description: Gets an image pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to retrieve.
+    - name: get-image-policy
+      description: Gets an image policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-arn=!: The Amazon Resource Name (ARN) of the image whose policy you want to retrieve.
+    - name: get-image-recipe
+      description: Gets an image recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe that you want to retrieve.
+    - name: get-image-recipe-policy
+      description: Gets an image recipe policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe whose policy you want to retrieve.
     - name: get-infrastructure-configuration
       description: Gets an infrastructure configuration.
       flags:
@@ -822,6 +368,84 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to retrieve.
+    - name: get-lifecycle-execution
+      description: Get the runtime information that was logged for a specific runtime instance of the lifecycle policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-execution-id=!: Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
+    - name: get-lifecycle-policy
+      description: Get details for the specified image lifecycle policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-policy-arn=!: Specifies the Amazon Resource Name (ARN) of the image lifecycle policy resource to get.
+    - name: get-marketplace-resource
+      description: Verify the subscription and perform resource dependency checks on the requested Amazon Web Services Marketplace resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that uniquely identifies an Amazon Web Services Marketplace resource.
+        --resource-location=: The bucket path that you can specify to download the resource from Amazon S3.
+        --resource-type=!: Specifies which type of Amazon Web Services Marketplace resource Image Builder retrieves.
+      completion:
+        flag:
+            resource-type:
+                - COMPONENT_DATA
+                - COMPONENT_ARTIFACT
+    - name: get-workflow
+      description: Get a workflow resource object.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-build-version-arn=!: The Amazon Resource Name (ARN) of the workflow resource that you want to get.
+    - name: get-workflow-execution
+      description: Get the runtime information that was logged for a specific runtime instance of the workflow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-execution-id=!: Use the unique identifier for a runtime instance of the workflow to get runtime details.
+    - name: get-workflow-step-execution
+      description: Get the runtime information that was logged for a specific runtime instance of the workflow step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --step-execution-id=!: Use the unique identifier for a specific runtime instance of the workflow step to get runtime details for that step.
+    - name: import-component
+      description: Imports a component and transforms its data into a component document.
+      flags:
+        --change-description=: The change description of the component.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --data=: The data of the component.
+        --description=: The description of the component.
+        --format=!: The format of the resource that you want to import as a component.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Resource Name (ARN) that uniquely identifies the KMS key used to encrypt this component.
+        --name=!: The name of the component.
+        --platform=!: The platform of the component.
+        --semantic-version=!: The semantic version of the component.
+        --tags=: The tags of the component.
+        --type=!: The type of the component denotes whether the component is used to build the image, or only to test it.
+        --uri=: The uri of the component.
+      completion:
+        flag:
+            format:
+                - SHELL
+            platform:
+                - Windows
+                - Linux
+                - macOS
+            type:
+                - BUILD
+                - TEST
     - name: import-disk-image
       description: Import a Windows operating system image from a verified Microsoft ISO disk file.
       flags:
@@ -839,62 +463,6 @@ commands:
         --semantic-version=!: The semantic version to attach to the image that's created during the import process.
         --tags=: Tags that are attached to image resources created from the import.
         --uri=!: The `uri` of the ISO disk file that's stored in Amazon S3.
-    - name: list-image-scan-findings
-      description: Returns a list of image scan findings for your account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: An array of name value pairs that you can use to filter your results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Specify the maximum number of items to return in a request.
-        --next-token=: A token to specify where to start paginating.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: send-workflow-step-action
-      description: Pauses or resumes image creation when the associated workflow runs a `WaitForAction` step.
-      flags:
-        --action=!: The action for the image creation process to take while a workflow `WaitForAction` step waits for an asynchronous action to complete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image build version to send action for.
-        --reason=: The reason why this action is sent.
-        --step-execution-id=!: Uniquely identifies the workflow step that sent the step action.
-      completion:
-        flag:
-            action:
-                - RESUME
-                - STOP
-    - name: start-image-pipeline-execution
-      description: Manually triggers a pipeline to create an image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke.
-        --tags=: Specify tags for Image Builder to apply to the image resource that's created When it starts pipeline execution.
-    - name: delete-infrastructure-configuration
-      description: Deletes an infrastructure configuration.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration to delete.
-    - name: distribute-image
-      description: DistributeImage distributes existing AMIs to additional regions and accounts without rebuilding the image.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
-        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration to use.
-        --execution-role=!: The IAM role to use for the distribution.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --logging-configuration=: The logging configuration for the distribution.
-        --source-image=!: The source image Amazon Resource Name (ARN) to distribute.
-        --tags=: The tags to apply to the distributed image.
     - name: import-vm-image
       description: When you export your virtual machine (VM) from its virtualization environment, that process creates a set of one or more disk container files that act as snapshots of your VM’s environment, settings, and data.
       flags:
@@ -928,8 +496,207 @@ commands:
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-    - name: list-waiting-workflow-steps
-      description: Get a list of workflow steps that are waiting for action for workflows in your Amazon Web Services account.
+    - name: list-components
+      description: Returns the list of components that can be filtered by name, or by using the listed `filters` to streamline results.
+      flags:
+        --by-name: Returns the list of components for the specified name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --no-by-name: Returns the list of components for the specified name.
+        --owner=: Filters results based on the type of owner for the component.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            owner:
+                - Self
+                - Shared
+                - Amazon
+                - ThirdParty
+                - AWSMarketplace
+    - name: list-container-recipes
+      description: Returns a list of container recipes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --owner=: Returns container recipes belonging to the specified owner, that have been shared with you.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            owner:
+                - Self
+                - Shared
+                - Amazon
+                - ThirdParty
+                - AWSMarketplace
+    - name: list-distribution-configurations
+      description: Returns a list of distribution configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: You can filter on `name` to streamline results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-build-versions
+      description: Returns a list of image build versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-version-arn=: The Amazon Resource Name (ARN) of the image whose build versions you want to retrieve.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-packages
+      description: List the Packages that are associated with an Image Build Version, as determined by Amazon Web Services Systems Manager Inventory at build time.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: Filter results for the ListImagePackages request by the Image Build Version ARN
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-pipeline-images
+      description: Returns a list of images created by the specified pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline whose images you want to view.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-pipelines
+      description: Returns a list of image pipelines.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-recipes
+      description: Returns a list of image recipes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --owner=: You can specify the recipe owner to filter results by that owner.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            owner:
+                - Self
+                - Shared
+                - Amazon
+                - ThirdParty
+                - AWSMarketplace
+    - name: list-image-scan-finding-aggregations
+      description: Returns a list of image scan aggregations for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token to specify where to start paginating.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-image-scan-findings
+      description: Returns a list of image scan findings for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: An array of name value pairs that you can use to filter your results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-images
+      description: Returns the list of images that you have access to.
+      flags:
+        --by-name: Requests a list of images with a specific recipe name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Use the following filters to streamline results:'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-deprecated: Includes deprecated images in the response list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --no-by-name: Requests a list of images with a specific recipe name.
+        --no-include-deprecated: Includes deprecated images in the response list.
+        --owner=: The owner defines which images you want to list.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            owner:
+                - Self
+                - Shared
+                - Amazon
+                - ThirdParty
+                - AWSMarketplace
+    - name: list-infrastructure-configurations
+      description: Returns a list of infrastructure configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: You can filter on `name` to streamline results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-lifecycle-execution-resources
+      description: List resources that the runtime instance of the image lifecycle identified for lifecycle actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-execution-id=!: Use the unique identifier for a runtime instance of the lifecycle policy to get runtime details.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --parent-resource-id=: You can leave this empty to get a list of Image Builder resources that were identified for lifecycle actions.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-lifecycle-executions
+      description: Get the lifecycle runtime history for the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -938,20 +705,32 @@ commands:
         --max-results=: Specify the maximum number of items to return in a request.
         --next-token=: A token to specify where to start paginating.
         --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to get a list of lifecycle runtime instances.
         --starting-token=: A token to specify where to start paginating.
-    - name: delete-lifecycle-policy
-      description: Delete the specified lifecycle policy resource.
+    - name: list-lifecycle-policies
+      description: Get a list of lifecycle policies in your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: 'Streamline results based on one of the following values: `Name`, `Status`.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Returns the list of tags for the specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lifecycle-policy-arn=!: The Amazon Resource Name (ARN) of the lifecycle policy resource to delete.
-    - name: list-image-pipelines
-      description: Returns a list of image pipelines.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+    - name: list-waiting-workflow-steps
+      description: Get a list of workflow steps that are waiting for action for workflows in your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Use the following filters to streamline results:'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Specify the maximum number of items to return in a request.
@@ -970,3 +749,224 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --workflow-version-arn=: The Amazon Resource Name (ARN) of the workflow resource for which to get a list of build versions.
+    - name: list-workflow-executions
+      description: Returns a list of workflow runtime instance metadata objects for a specific image build version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: List all workflow runtime instances for the specified image build version resource ARN.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-workflow-step-executions
+      description: Returns runtime data for each step in a runtime instance of the workflow that you specify in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workflow-execution-id=!: The unique identifier that Image Builder assigned to keep track of runtime details when it ran the workflow.
+    - name: list-workflows
+      description: Lists workflow build versions based on filtering parameters.
+      flags:
+        --by-name: Specify all or part of the workflow name to streamline results.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Used to streamline search results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specify the maximum number of items to return in a request.
+        --next-token=: A token to specify where to start paginating.
+        --no-by-name: Specify all or part of the workflow name to streamline results.
+        --owner=: Used to get a list of workflow build version filtered by the identity of the creator.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            owner:
+                - Self
+                - Shared
+                - Amazon
+                - ThirdParty
+                - AWSMarketplace
+    - name: put-component-policy
+      description: Applies a policy to a component.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --component-arn=!: The Amazon Resource Name (ARN) of the component that this policy should be applied to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The policy to apply.
+    - name: put-container-recipe-policy
+      description: Applies a policy to a container image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --container-recipe-arn=!: The Amazon Resource Name (ARN) of the container recipe that this policy should be applied to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The policy to apply to the container recipe.
+    - name: put-image-policy
+      description: Applies a policy to an image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-arn=!: The Amazon Resource Name (ARN) of the image that this policy should be applied to.
+        --policy=!: The policy to apply.
+    - name: put-image-recipe-policy
+      description: Applies a policy to an image recipe.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-recipe-arn=!: The Amazon Resource Name (ARN) of the image recipe that this policy should be applied to.
+        --policy=!: The policy to apply.
+    - name: retry-image
+      description: RetryImage retries an image distribution without rebuilding the image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: The source image Amazon Resource Name (ARN) to retry.
+    - name: send-workflow-step-action
+      description: Pauses or resumes image creation when the associated workflow runs a `WaitForAction` step.
+      flags:
+        --action=!: The action for the image creation process to take while a workflow `WaitForAction` step waits for an asynchronous action to complete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-build-version-arn=!: The Amazon Resource Name (ARN) of the image build version to send action for.
+        --reason=: The reason why this action is sent.
+        --step-execution-id=!: Uniquely identifies the workflow step that sent the step action.
+      completion:
+        flag:
+            action:
+                - RESUME
+                - STOP
+    - name: start-image-pipeline-execution
+      description: Manually triggers a pipeline to create an image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to manually invoke.
+        --tags=: Specify tags for Image Builder to apply to the image resource that's created When it starts pipeline execution.
+    - name: start-resource-state-update
+      description: Begin asynchronous resource state update for lifecycle changes to the specified image resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --exclusion-rules=: Skip action on the image resource and associated resources if specified exclusion rules are met.
+        --execution-role=: The name or Amazon Resource Name (ARN) of the IAM role that’s used to update image state.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-resources=: A list of image resources to update state for.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the Image Builder resource that is updated.
+        --state=!: Indicates the lifecycle action to take for this request.
+        --update-at=: The timestamp that indicates when resources are updated by a lifecycle action.
+    - name: tag-resource
+      description: Adds a tag to a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to tag.
+        --tags=!: The tags to apply to the resource.
+    - name: untag-resource
+      description: Removes a tag from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
+        --tag-keys=!: The tag keys to remove from the resource.
+    - name: update-distribution-configuration
+      description: Updates a new distribution configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: The description of the distribution configuration.
+        --distribution-configuration-arn=!: The Amazon Resource Name (ARN) of the distribution configuration that you want to update.
+        --distributions=!: The distributions of the distribution configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-image-pipeline
+      description: Updates an image pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --container-recipe-arn=: The Amazon Resource Name (ARN) of the container pipeline to update.
+        --description=: The description of the image pipeline.
+        --distribution-configuration-arn=: The Amazon Resource Name (ARN) of the distribution configuration that Image Builder uses to configure and distribute images that this image pipeline has updated.
+        --enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --execution-role=: The name or Amazon Resource Name (ARN) for the IAM role you create that grants Image Builder access to perform workflow actions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-pipeline-arn=!: The Amazon Resource Name (ARN) of the image pipeline that you want to update.
+        --image-recipe-arn=: The Amazon Resource Name (ARN) of the image recipe that will be used to configure images updated by this image pipeline.
+        --image-scanning-configuration=: Contains settings for vulnerability scans.
+        --image-tests-configuration=: The image test configuration of the image pipeline.
+        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that Image Builder uses to build images that this image pipeline has updated.
+        --logging-configuration=: Update logging configuration for the output image that's created when the pipeline runs.
+        --no-enhanced-image-metadata-enabled: Collects additional information about the image being created, including the operating system (OS) version and package list.
+        --schedule=: The schedule of the image pipeline.
+        --status=: The status of the image pipeline.
+        --workflows=: Contains the workflows to run for the pipeline.
+      completion:
+        flag:
+            status:
+                - DISABLED
+                - ENABLED
+    - name: update-infrastructure-configuration
+      description: Updates a new infrastructure configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: The description of the infrastructure configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --infrastructure-configuration-arn=!: The Amazon Resource Name (ARN) of the infrastructure configuration that you want to update.
+        --instance-metadata-options=: The instance metadata options that you can set for the HTTP requests that pipeline builds use to launch EC2 build and test instances.
+        --instance-profile-name=!: The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
+        --instance-types=: The instance types of the infrastructure configuration.
+        --key-pair=: The key pair of the infrastructure configuration.
+        --logging=: The logging configuration of the infrastructure configuration.
+        --no-terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
+        --placement=: The instance placement settings that define where the instances that are launched from your image will run.
+        --resource-tags=: The tags attached to the resource created by Image Builder.
+        --security-group-ids=: The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
+        --sns-topic-arn=: The Amazon Resource Name (ARN) for the SNS topic to which we send image build event notifications.
+        --subnet-id=: The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
+        --terminate-instance-on-failure: The terminate instance on failure setting of the infrastructure configuration.
+    - name: update-lifecycle-policy
+      description: Update the specified lifecycle policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Unique, case-sensitive identifier you provide to ensure idempotency of the request.
+        --description=: Optional description for the lifecycle policy.
+        --execution-role=!: The name or Amazon Resource Name (ARN) of the IAM role that Image Builder uses to update the lifecycle policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lifecycle-policy-arn=!: The Amazon Resource Name (ARN) of the lifecycle policy resource.
+        --policy-details=!: The configuration details for a lifecycle policy resource.
+        --resource-selection=!: Selection criteria for resources that the lifecycle policy applies to.
+        --resource-type=!: The type of image resource that the lifecycle policy applies to.
+        --status=: Indicates whether the lifecycle policy resource is enabled.
+      completion:
+        flag:
+            resource-type:
+                - AMI_IMAGE
+                - CONTAINER_IMAGE
+            status:
+                - DISABLED
+                - ENABLED

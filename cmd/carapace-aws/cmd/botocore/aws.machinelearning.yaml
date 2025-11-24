@@ -1,56 +1,45 @@
 name: machinelearning
 description: Amazon Machine Learning
 commands:
-    - name: describe-data-sources
-      description: Returns a list of `DataSource` that match the search criteria in the request.
+    - name: add-tags
+      description: Adds one or more tags to an object, up to a limit of 10. Each tag consists of a key and an optional value.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --eq=: The equal to operator.
-        --filter-variable=: 'Use one of the following variables to filter a list of `DataSource`:'
-        --ge=: The greater than or equal to operator.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --gt=: The greater than operator.
-        --le=: The less than or equal to operator.
-        --limit=: The maximum number of `DataSource` to include in the result.
-        --lt=: The less than operator.
-        --max-items=: The  total number of items to return in the command's output.
-        --ne=: The not equal to operator.
-        --next-token=: The ID of the page in the paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
-        --sort-order=: A two-value parameter that determines the sequence of the resulting list of `DataSource`.
-        --starting-token=: A token to specify where to start paginating.
+        --resource-id=!: The ID of the ML object to tag.
+        --resource-type=!: The type of the ML object to tag.
+        --tags=!: The key-value pairs to use to create tags.
       completion:
         flag:
-            filter-variable:
-                - CreatedAt
-                - LastUpdatedAt
-                - Status
-                - Name
-                - DataLocationS3
-                - IAMUser
-            sort-order:
-                - asc
-                - dsc
-    - name: get-data-source
-      description: Returns a `DataSource` that includes metadata and data file information, as well as the current status of the `DataSource`.
+            resource-type:
+                - BatchPrediction
+                - DataSource
+                - Evaluation
+                - MLModel
+    - name: create-batch-prediction
+      description: Generates predictions for a group of observations.
       flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=!: The ID assigned to the `DataSource` at creation.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-verbose: Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.
-        --verbose: Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.
-    - name: get-ml-model
-      description: Returns an `MLModel` that includes detailed metadata, data source information, and the current status of the `MLModel`.
-      flags:
+        --batch-prediction-data-source-id=!: The ID of the `DataSource` that points to the group of observations to predict.
+        --batch-prediction-id=!: A user-supplied ID that uniquely identifies the `BatchPrediction`.
+        --batch-prediction-name=: A user-supplied name or description of the `BatchPrediction`.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ml-model-id=!: The ID assigned to the `MLModel` at creation.
-        --no-verbose: Specifies whether the `GetMLModel` operation should return `Recipe`.
-        --verbose: Specifies whether the `GetMLModel` operation should return `Recipe`.
+        --ml-model-id=!: The ID of the `MLModel` that will generate predictions for the group of observations.
+        --output-uri=!: The location of an Amazon Simple Storage Service (Amazon S3) bucket or directory to store the batch prediction results.
+    - name: create-data-source-from-rds
+      description: Creates a `DataSource` object from an [Amazon Relational Database Service](http://aws.amazon.com/rds/) (Amazon RDS).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-statistics: The compute statistics for a `DataSource`.
+        --data-source-id=!: A user-supplied ID that uniquely identifies the `DataSource`.
+        --data-source-name=: A user-supplied name or description of the `DataSource`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-compute-statistics: The compute statistics for a `DataSource`.
+        --rds-data=!: 'The data specification of an Amazon RDS `DataSource`:'
+        --role-arn=!: The role that Amazon ML assumes on behalf of the user to create and activate a data pipeline in the user's account and copy data using the `SelectSqlQuery` query from Amazon RDS to Amazon S3.
     - name: create-data-source-from-redshift
       description: Creates a `DataSource` from a database hosted on an Amazon Redshift cluster.
       flags:
@@ -74,88 +63,6 @@ commands:
         --data-spec=!: 'The data specification of a `DataSource`:'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-compute-statistics: The compute statistics for a `DataSource`.
-    - name: delete-batch-prediction
-      description: Assigns the DELETED status to a `BatchPrediction`, rendering it unusable.
-      flags:
-        --batch-prediction-id=!: A user-supplied ID that uniquely identifies the `BatchPrediction`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-ml-models
-      description: Returns a list of `MLModel` that match the search criteria in the request.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --eq=: The equal to operator.
-        --filter-variable=: 'Use one of the following variables to filter a list of `MLModel`:'
-        --ge=: The greater than or equal to operator.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --gt=: The greater than operator.
-        --le=: The less than or equal to operator.
-        --limit=: The number of pages of information to include in the result.
-        --lt=: The less than operator.
-        --max-items=: The  total number of items to return in the command's output.
-        --ne=: The not equal to operator.
-        --next-token=: The ID of the page in the paginated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
-        --sort-order=: A two-value parameter that determines the sequence of the resulting list of `MLModel`.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            filter-variable:
-                - CreatedAt
-                - LastUpdatedAt
-                - Status
-                - Name
-                - IAMUser
-                - TrainingDataSourceId
-                - RealtimeEndpointStatus
-                - MLModelType
-                - Algorithm
-                - TrainingDataURI
-            sort-order:
-                - asc
-                - dsc
-    - name: get-evaluation
-      description: Returns an `Evaluation` that includes metadata as well as the current status of the `Evaluation`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --evaluation-id=!: The ID of the `Evaluation` to retrieve.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-batch-prediction
-      description: Updates the `BatchPredictionName` of a `BatchPrediction`.
-      flags:
-        --batch-prediction-id=!: The ID assigned to the `BatchPrediction` during creation.
-        --batch-prediction-name=!: A new user-supplied name or description of the `BatchPrediction`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-evaluation
-      description: Updates the `EvaluationName` of an `Evaluation`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --evaluation-id=!: The ID assigned to the `Evaluation` during creation.
-        --evaluation-name=!: A new user-supplied name or description of the `Evaluation` that will replace the current content.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: add-tags
-      description: Adds one or more tags to an object, up to a limit of 10. Each tag consists of a key and an optional value.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The ID of the ML object to tag.
-        --resource-type=!: The type of the ML object to tag.
-        --tags=!: The key-value pairs to use to create tags.
-      completion:
-        flag:
-            resource-type:
-                - BatchPrediction
-                - DataSource
-                - Evaluation
-                - MLModel
     - name: create-evaluation
       description: Creates a new `Evaluation` of an `MLModel`.
       flags:
@@ -185,12 +92,33 @@ commands:
                 - REGRESSION
                 - BINARY
                 - MULTICLASS
+    - name: create-realtime-endpoint
+      description: Creates a real-time endpoint for the `MLModel`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ml-model-id=!: The ID assigned to the `MLModel` during creation.
+    - name: delete-batch-prediction
+      description: Assigns the DELETED status to a `BatchPrediction`, rendering it unusable.
+      flags:
+        --batch-prediction-id=!: A user-supplied ID that uniquely identifies the `BatchPrediction`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-data-source
       description: Assigns the DELETED status to a `DataSource`, rendering it unusable.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-source-id=!: A user-supplied ID that uniquely identifies the `DataSource`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-evaluation
+      description: Assigns the `DELETED` status to an `Evaluation`, rendering it unusable.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluation-id=!: A user-supplied ID that uniquely identifies the `Evaluation` to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-ml-model
       description: Assigns the `DELETED` status to an `MLModel`, rendering it unusable.
@@ -199,6 +127,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ml-model-id=!: A user-supplied ID that uniquely identifies the `MLModel`.
+    - name: delete-realtime-endpoint
+      description: Deletes a real time endpoint of an `MLModel`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ml-model-id=!: The ID assigned to the `MLModel` during creation.
     - name: delete-tags
       description: Deletes the specified tags associated with an ML object.
       flags:
@@ -249,6 +184,38 @@ commands:
             sort-order:
                 - asc
                 - dsc
+    - name: describe-data-sources
+      description: Returns a list of `DataSource` that match the search criteria in the request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --eq=: The equal to operator.
+        --filter-variable=: 'Use one of the following variables to filter a list of `DataSource`:'
+        --ge=: The greater than or equal to operator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --gt=: The greater than operator.
+        --le=: The less than or equal to operator.
+        --limit=: The maximum number of `DataSource` to include in the result.
+        --lt=: The less than operator.
+        --max-items=: The  total number of items to return in the command's output.
+        --ne=: The not equal to operator.
+        --next-token=: The ID of the page in the paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
+        --sort-order=: A two-value parameter that determines the sequence of the resulting list of `DataSource`.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter-variable:
+                - CreatedAt
+                - LastUpdatedAt
+                - Status
+                - Name
+                - DataLocationS3
+                - IAMUser
+            sort-order:
+                - asc
+                - dsc
     - name: describe-evaluations
       description: Returns a list of `DescribeEvaluations` that match the search criteria in the request.
       flags:
@@ -283,32 +250,42 @@ commands:
             sort-order:
                 - asc
                 - dsc
-    - name: create-data-source-from-rds
-      description: Creates a `DataSource` object from an [Amazon Relational Database Service](http://aws.amazon.com/rds/) (Amazon RDS).
+    - name: describe-ml-models
+      description: Returns a list of `MLModel` that match the search criteria in the request.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --compute-statistics: The compute statistics for a `DataSource`.
-        --data-source-id=!: A user-supplied ID that uniquely identifies the `DataSource`.
-        --data-source-name=: A user-supplied name or description of the `DataSource`.
+        --eq=: The equal to operator.
+        --filter-variable=: 'Use one of the following variables to filter a list of `MLModel`:'
+        --ge=: The greater than or equal to operator.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-compute-statistics: The compute statistics for a `DataSource`.
-        --rds-data=!: 'The data specification of an Amazon RDS `DataSource`:'
-        --role-arn=!: The role that Amazon ML assumes on behalf of the user to create and activate a data pipeline in the user's account and copy data using the `SelectSqlQuery` query from Amazon RDS to Amazon S3.
-    - name: create-realtime-endpoint
-      description: Creates a real-time endpoint for the `MLModel`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ml-model-id=!: The ID assigned to the `MLModel` during creation.
-    - name: delete-realtime-endpoint
-      description: Deletes a real time endpoint of an `MLModel`.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ml-model-id=!: The ID assigned to the `MLModel` during creation.
+        --gt=: The greater than operator.
+        --le=: The less than or equal to operator.
+        --limit=: The number of pages of information to include in the result.
+        --lt=: The less than operator.
+        --max-items=: The  total number of items to return in the command's output.
+        --ne=: The not equal to operator.
+        --next-token=: The ID of the page in the paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
+        --sort-order=: A two-value parameter that determines the sequence of the resulting list of `MLModel`.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter-variable:
+                - CreatedAt
+                - LastUpdatedAt
+                - Status
+                - Name
+                - IAMUser
+                - TrainingDataSourceId
+                - RealtimeEndpointStatus
+                - MLModelType
+                - Algorithm
+                - TrainingDataURI
+            sort-order:
+                - asc
+                - dsc
     - name: describe-tags
       description: Describes one or more of the tags for your Amazon ML object.
       flags:
@@ -331,6 +308,31 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-data-source
+      description: Returns a `DataSource` that includes metadata and data file information, as well as the current status of the `DataSource`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The ID assigned to the `DataSource` at creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-verbose: Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.
+        --verbose: Specifies whether the `GetDataSource` operation should return `DataSourceSchema`.
+    - name: get-evaluation
+      description: Returns an `Evaluation` that includes metadata as well as the current status of the `Evaluation`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluation-id=!: The ID of the `Evaluation` to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-ml-model
+      description: Returns an `MLModel` that includes detailed metadata, data source information, and the current status of the `MLModel`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ml-model-id=!: The ID assigned to the `MLModel` at creation.
+        --no-verbose: Specifies whether the `GetMLModel` operation should return `Recipe`.
+        --verbose: Specifies whether the `GetMLModel` operation should return `Recipe`.
     - name: predict
       description: Generates a prediction for the observation using the specified `ML Model`.
       flags:
@@ -340,6 +342,14 @@ commands:
         --ml-model-id=!: A unique identifier of the `MLModel`.
         --predict-endpoint=!: ""
         --record=!: ""
+    - name: update-batch-prediction
+      description: Updates the `BatchPredictionName` of a `BatchPrediction`.
+      flags:
+        --batch-prediction-id=!: The ID assigned to the `BatchPrediction` during creation.
+        --batch-prediction-name=!: A new user-supplied name or description of the `BatchPrediction`.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-data-source
       description: Updates the `DataSourceName` of a `DataSource`.
       flags:
@@ -347,6 +357,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-source-id=!: The ID assigned to the `DataSource` during creation.
         --data-source-name=!: A new user-supplied name or description of the `DataSource` that will replace the current description.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-evaluation
+      description: Updates the `EvaluationName` of an `Evaluation`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluation-id=!: The ID assigned to the `Evaluation` during creation.
+        --evaluation-name=!: A new user-supplied name or description of the `Evaluation` that will replace the current content.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-ml-model
       description: Updates the `MLModelName` and the `ScoreThreshold` of an `MLModel`.
@@ -357,24 +375,6 @@ commands:
         --ml-model-id=!: The ID assigned to the `MLModel` during creation.
         --ml-model-name=: A user-supplied name or description of the `MLModel`.
         --score-threshold=: The `ScoreThreshold` used in binary classification `MLModel` that marks the boundary between a positive prediction and a negative prediction.
-    - name: create-batch-prediction
-      description: Generates predictions for a group of observations.
-      flags:
-        --batch-prediction-data-source-id=!: The ID of the `DataSource` that points to the group of observations to predict.
-        --batch-prediction-id=!: A user-supplied ID that uniquely identifies the `BatchPrediction`.
-        --batch-prediction-name=: A user-supplied name or description of the `BatchPrediction`.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ml-model-id=!: The ID of the `MLModel` that will generate predictions for the group of observations.
-        --output-uri=!: The location of an Amazon Simple Storage Service (Amazon S3) bucket or directory to store the batch prediction results.
-    - name: delete-evaluation
-      description: Assigns the `DELETED` status to an `Evaluation`, rendering it unusable.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --evaluation-id=!: A user-supplied ID that uniquely identifies the `Evaluation` to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
@@ -444,6 +444,40 @@ commands:
                 sort-order:
                     - asc
                     - dsc
+        - name: evaluation-available
+          description: Returns a list of `DescribeEvaluations` that match the search criteria in the request.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --eq=: The equal to operator.
+            --filter-variable=: 'Use one of the following variable to filter a list of `Evaluation` objects:'
+            --ge=: The greater than or equal to operator.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --gt=: The greater than operator.
+            --le=: The less than or equal to operator.
+            --limit=: The maximum number of `Evaluation` to include in the result.
+            --lt=: The less than operator.
+            --max-items=: The  total number of items to return in the command's output.
+            --ne=: The not equal to operator.
+            --next-token=: The ID of the page in the paginated results.
+            --page-size=: The size of each page to get in the AWS service call.
+            --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
+            --sort-order=: A two-value parameter that determines the sequence of the resulting list of `Evaluation`.
+            --starting-token=: A token to specify where to start paginating.
+          completion:
+            flag:
+                filter-variable:
+                    - CreatedAt
+                    - LastUpdatedAt
+                    - Status
+                    - Name
+                    - IAMUser
+                    - MLModelId
+                    - DataSourceId
+                    - DataURI
+                sort-order:
+                    - asc
+                    - dsc
         - name: ml-model-available
           description: Returns a list of `MLModel` that match the search criteria in the request.
           flags:
@@ -477,40 +511,6 @@ commands:
                     - MLModelType
                     - Algorithm
                     - TrainingDataURI
-                sort-order:
-                    - asc
-                    - dsc
-        - name: evaluation-available
-          description: Returns a list of `DescribeEvaluations` that match the search criteria in the request.
-          flags:
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --eq=: The equal to operator.
-            --filter-variable=: 'Use one of the following variable to filter a list of `Evaluation` objects:'
-            --ge=: The greater than or equal to operator.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --gt=: The greater than operator.
-            --le=: The less than or equal to operator.
-            --limit=: The maximum number of `Evaluation` to include in the result.
-            --lt=: The less than operator.
-            --max-items=: The  total number of items to return in the command's output.
-            --ne=: The not equal to operator.
-            --next-token=: The ID of the page in the paginated results.
-            --page-size=: The size of each page to get in the AWS service call.
-            --prefix=: A string that is found at the beginning of a variable, such as `Name` or `Id`.
-            --sort-order=: A two-value parameter that determines the sequence of the resulting list of `Evaluation`.
-            --starting-token=: A token to specify where to start paginating.
-          completion:
-            flag:
-                filter-variable:
-                    - CreatedAt
-                    - LastUpdatedAt
-                    - Status
-                    - Name
-                    - IAMUser
-                    - MLModelId
-                    - DataSourceId
-                    - DataURI
                 sort-order:
                     - asc
                     - dsc

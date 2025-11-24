@@ -1,59 +1,6 @@
 name: cloudhsmv2
 description: AWS CloudHSM V2
 commands:
-    - name: untag-resource
-      description: Removes the specified tag or tags from the specified CloudHSM cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-id=!: The cluster identifier (ID) for the cluster whose tags you are removing.
-        --tag-key-list=!: A list of one or more tag keys for the tags that you are removing.
-    - name: create-hsm
-      description: Creates a new hardware security module (HSM) in the specified CloudHSM cluster.
-      flags:
-        --availability-zone=!: The Availability Zone where you are creating the HSM.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The identifier (ID) of the HSM's cluster.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ip-address=: The HSM's IP address.
-    - name: list-tags
-      description: Gets a list of tags for the specified CloudHSM cluster.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of tags to return in the response.
-        --next-token=: The `NextToken` value that you received in the previous response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-id=!: The cluster identifier (ID) for the cluster whose tags you are getting.
-        --starting-token=: A token to specify where to start paginating.
-    - name: modify-backup-attributes
-      description: Modifies attributes for CloudHSM backup.
-      flags:
-        --backup-id=!: The identifier (ID) of the backup to modify.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --never-expires!: Specifies whether the service should exempt a backup from the retention policy for the cluster.
-        --no-never-expires!: Specifies whether the service should exempt a backup from the retention policy for the cluster.
-    - name: put-resource-policy
-      description: Creates or updates an CloudHSM resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --policy=: The policy you want to associate with a resource.
-        --resource-arn=: Amazon Resource Name (ARN) of the resource to which you want to attach a policy.
-    - name: restore-backup
-      description: Restores a specified CloudHSM backup that is in the `PENDING_DELETION` state.
-      flags:
-        --backup-id=!: The ID of the backup to be restored.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: copy-backup-to-region
       description: Copy an CloudHSM cluster backup to a different region.
       flags:
@@ -84,6 +31,15 @@ commands:
             network-type:
                 - IPV4
                 - DUALSTACK
+    - name: create-hsm
+      description: Creates a new hardware security module (HSM) in the specified CloudHSM cluster.
+      flags:
+        --availability-zone=!: The Availability Zone where you are creating the HSM.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The identifier (ID) of the HSM's cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address=: The HSM's IP address.
     - name: delete-backup
       description: Deletes a specified CloudHSM backup.
       flags:
@@ -91,43 +47,6 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-resource-policy
-      description: Deletes an CloudHSM resource policy.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=: Amazon Resource Name (ARN) of the resource from which the policy will be removed.
-    - name: describe-clusters
-      description: Gets information about CloudHSM clusters.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters to limit the items returned in the response.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of clusters to return in the response.
-        --next-token=: The `NextToken` value that you received in the previous response.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: initialize-cluster
-      description: Claims an CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA's root certificate.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The identifier (ID) of the cluster that you are claiming.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signed-cert=!: The cluster certificate issued (signed) by your issuing certificate authority (CA).
-        --trust-anchor=!: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate.
-    - name: modify-cluster
-      description: Modifies CloudHSM cluster.
-      flags:
-        --backup-retention-policy=: A policy that defines how the service retains backups.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --cluster-id=!: The identifier (ID) of the cluster that you want to modify.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hsm-type=: The desired HSM type of the cluster.
     - name: delete-cluster
       description: Deletes the specified CloudHSM cluster.
       flags:
@@ -145,6 +64,13 @@ commands:
         --eni-ip=: The IP address of the elastic network interface (ENI) of the HSM that you are deleting.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hsm-id=: The identifier (ID) of the HSM that you are deleting.
+    - name: delete-resource-policy
+      description: Deletes an CloudHSM resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=: Amazon Resource Name (ARN) of the resource from which the policy will be removed.
     - name: describe-backups
       description: Gets information about backups of CloudHSM clusters.
       flags:
@@ -161,6 +87,18 @@ commands:
         --shared: Describe backups that are shared with you.
         --sort-ascending: Designates whether or not to sort the return backups by ascending chronological order of generation.
         --starting-token=: A token to specify where to start paginating.
+    - name: describe-clusters
+      description: Gets information about CloudHSM clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: One or more filters to limit the items returned in the response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of clusters to return in the response.
+        --next-token=: The `NextToken` value that you received in the previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-resource-policy
       description: Retrieves the resource policy document attached to a given resource.
       flags:
@@ -168,6 +106,60 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=: Amazon Resource Name (ARN) of the resource to which a policy is attached.
+    - name: initialize-cluster
+      description: Claims an CloudHSM cluster by submitting the cluster certificate issued by your issuing certificate authority (CA) and the CA's root certificate.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The identifier (ID) of the cluster that you are claiming.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --signed-cert=!: The cluster certificate issued (signed) by your issuing certificate authority (CA).
+        --trust-anchor=!: The issuing certificate of the issuing certificate authority (CA) that issued (signed) the cluster certificate.
+    - name: list-tags
+      description: Gets a list of tags for the specified CloudHSM cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tags to return in the response.
+        --next-token=: The `NextToken` value that you received in the previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=!: The cluster identifier (ID) for the cluster whose tags you are getting.
+        --starting-token=: A token to specify where to start paginating.
+    - name: modify-backup-attributes
+      description: Modifies attributes for CloudHSM backup.
+      flags:
+        --backup-id=!: The identifier (ID) of the backup to modify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --never-expires!: Specifies whether the service should exempt a backup from the retention policy for the cluster.
+        --no-never-expires!: Specifies whether the service should exempt a backup from the retention policy for the cluster.
+    - name: modify-cluster
+      description: Modifies CloudHSM cluster.
+      flags:
+        --backup-retention-policy=: A policy that defines how the service retains backups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-id=!: The identifier (ID) of the cluster that you want to modify.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hsm-type=: The desired HSM type of the cluster.
+    - name: put-resource-policy
+      description: Creates or updates an CloudHSM resource policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=: The policy you want to associate with a resource.
+        --resource-arn=: Amazon Resource Name (ARN) of the resource to which you want to attach a policy.
+    - name: restore-backup
+      description: Restores a specified CloudHSM backup that is in the `PENDING_DELETION` state.
+      flags:
+        --backup-id=!: The ID of the backup to be restored.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Adds or overwrites one or more tags for the specified CloudHSM cluster.
       flags:
@@ -176,3 +168,11 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The cluster identifier (ID) for the cluster that you are tagging.
         --tag-list=!: A list of one or more tags.
+    - name: untag-resource
+      description: Removes the specified tag or tags from the specified CloudHSM cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The cluster identifier (ID) for the cluster whose tags you are removing.
+        --tag-key-list=!: A list of one or more tag keys for the tags that you are removing.

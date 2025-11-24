@@ -1,121 +1,49 @@
 name: kendra
 description: AWSKendraFrontendService
 commands:
-    - name: list-thesauri
-      description: Lists the thesauri for an index.
+    - name: associate-entities-to-experience
+      description: Grants users or groups in your IAM Identity Center identity source access to your Amazon Kendra experience.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-list=!: Lists users or groups in your IAM Identity Center identity source.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index with one or more thesauri.
-        --max-results=: The maximum number of thesauri to return.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: submit-feedback
-      description: Enables you to provide feedback to Amazon Kendra to improve the performance of your index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --click-feedback-items=: Tells Amazon Kendra that a particular search result link was chosen by the user.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index that was queried.
-        --query-id=!: The identifier of the specific query for which you are submitting feedback.
-        --relevance-feedback-items=: Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.
-    - name: describe-data-source
-      description: Gets information about an Amazon Kendra data source connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the data source connector.
-        --index-id=!: The identifier of the index used with the data source connector.
-    - name: describe-query-suggestions-block-list
-      description: Gets information about a block list used for query suggestions for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the block list you want to get information on.
-        --index-id=!: The identifier of the index for the block list.
-    - name: describe-query-suggestions-config
-      description: Gets information on the settings of query suggestions for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index with query suggestions that you want to get information on.
-    - name: update-query-suggestions-config
-      description: Updates the settings of query suggestions for an index.
-      flags:
-        --attribute-suggestions-config=: Configuration information for the document fields/attributes that you want to base query suggestions on.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --include-queries-without-user-information: '`TRUE` to include queries without user information (i.e. all queries, irrespective of the user), otherwise `FALSE` to only include queries with user information.'
-        --index-id=!: The identifier of the index with query suggestions you want to update.
-        --minimum-number-of-querying-users=: The minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.
-        --minimum-query-count=: The the minimum number of times a query must be searched in order to be eligible to suggest to your users.
-        --mode=: Set the mode to `ENABLED` or `LEARN_ONLY`.
-        --no-include-queries-without-user-information: '`TRUE` to include queries without user information (i.e. all queries, irrespective of the user), otherwise `FALSE` to only include queries with user information.'
-        --query-log-look-back-window-in-days=: How recent your queries are in your query log time window.
-      completion:
-        flag:
-            mode:
-                - ENABLED
-                - LEARN_ONLY
-    - name: clear-query-suggestions
-      description: Clears existing query suggestions from an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index you want to clear query suggestions from.
-    - name: create-experience
-      description: Creates an Amazon Kendra experience such as a search application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create your Amazon Kendra experience.
-        --configuration=: Configuration information for your Amazon Kendra experience.
-        --description=: A description for your Amazon Kendra experience.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience.
         --index-id=!: The identifier of the index for your Amazon Kendra experience.
-        --name=!: A name for your Amazon Kendra experience.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access `Query` API, `GetQuerySuggestions` API, and other required APIs.
-    - name: delete-thesaurus
-      description: Deletes an Amazon Kendra thesaurus.
+    - name: associate-personas-to-entities
+      description: Defines the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the thesaurus you want to delete.
-        --index-id=!: The identifier of the index for the thesaurus.
-    - name: query
-      description: Searches an index given an input query.
+        --id=!: The identifier of your Amazon Kendra experience.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+        --personas=!: The personas that define the specific permissions of users or groups in your IAM Identity Center identity source.
+    - name: batch-delete-document
+      description: Removes one or more documents from an index.
       flags:
-        --attribute-filter=: Filters search results by document fields/attributes.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --collapse-configuration=: Provides configuration to determine how to group results by document attribute value, and how to display them (collapsed or expanded) under a designated primary document for each group.
-        --document-relevance-override-configurations=: Overrides relevance tuning configurations of fields/attributes set at the index level.
-        --facets=: An array of documents fields/attributes for faceted search.
+        --data-source-sync-job-metric-target=: ""
+        --document-id-list=!: One or more identifiers for documents to delete from the index.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for the search.
-        --page-number=: Query results are returned in pages the size of the `PageSize` parameter.
-        --page-size=: Sets the number of results that are returned in each page of results.
-        --query-result-type-filter=: Sets the type of query result or response.
-        --query-text=: The input query text for the search.
-        --requested-document-attributes=: An array of document fields/attributes to include in the response.
-        --sorting-configuration=: Provides information that determines how the results of the query are sorted.
-        --sorting-configurations=: Provides configuration information to determine how the results of a query are sorted.
-        --spell-correction-configuration=: Enables suggested spell corrections for queries.
-        --user-context=: The user context token or user and group information.
-        --visitor-id=: Provides an identifier for a specific user.
-      completion:
-        flag:
-            query-result-type-filter:
-                - DOCUMENT
-                - QUESTION_ANSWER
-                - ANSWER
+        --index-id=!: The identifier of the index that contains the documents to delete.
+    - name: batch-delete-featured-results-set
+      description: Removes one or more sets of featured results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --featured-results-set-ids=!: The identifiers of the featured results sets that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used for featuring results.
+    - name: batch-get-document-status
+      description: Returns the indexing status for one or more documents submitted with the [BatchPutDocument](https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html) API.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --document-info-list=!: A list of `DocumentInfo` objects that identify the documents for which to get the status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index to add documents to.
     - name: batch-put-document
       description: Adds one or more documents to an index.
       flags:
@@ -126,332 +54,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --index-id=!: The identifier of the index to add the documents to.
         --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket.
-    - name: stop-data-source-sync-job
-      description: Stops a synchronization job that is currently running.
+    - name: clear-query-suggestions
+      description: Clears existing query suggestions from an index.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the data source connector for which to stop the synchronization jobs.
-        --index-id=!: The identifier of the index used with the data source connector.
-    - name: update-featured-results-set
-      description: Updates a set of featured results.
+        --index-id=!: The identifier of the index you want to clear query suggestions from.
+    - name: create-access-control-configuration
+      description: Creates an access configuration for your documents.
       flags:
+        --access-control-list=: Information on principals (users and/or groups) and which documents they should have access to.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the set of featured results.
-        --featured-documents=: A list of document IDs for the documents you want to feature at the top of the search results page.
-        --featured-results-set-id=!: The identifier of the set of featured results that you want to update.
-        --featured-results-set-name=: A new name for the set of featured results.
+        --client-token=: A token that you provide to identify the request to create an access control configuration.
+        --description=: A description for the access control configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used for featuring results.
-        --query-texts=: A list of queries for featuring results.
-        --status=: You can set the status to `ACTIVE` or `INACTIVE`.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - INACTIVE
-    - name: delete-data-source
-      description: Deletes an Amazon Kendra data source connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the data source connector you want to delete.
-        --index-id=!: The identifier of the index used with the data source connector.
-    - name: get-query-suggestions
-      description: Fetches the queries that are suggested to your users.
-      flags:
-        --attribute-suggestions-config=: Configuration information for the document fields/attributes that you want to base query suggestions on.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index you want to get query suggestions from.
-        --max-suggestions-count=: The maximum number of query suggestions you want to show to your users.
-        --query-text=!: The text of a user's query to generate query suggestions.
-        --suggestion-types=: The suggestions type to base query suggestions on.
-    - name: create-faq
-      description: Creates a set of frequently ask questions (FAQs) using a specified FAQ file stored in an Amazon S3 bucket.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create a FAQ.
-        --description=: A description for the FAQ.
-        --file-format=: The format of the FAQ input file.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for the FAQ.
-        --language-code=: The code for a language.
-        --name=!: A name for the FAQ.
-        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the FAQ file.
-        --s3-path=!: The path to the FAQ file in S3.
-        --tags=: A list of key-value pairs that identify the FAQ.
-      completion:
-        flag:
-            file-format:
-                - CSV
-                - CSV_WITH_HEADER
-                - JSON
-    - name: describe-access-control-configuration
-      description: Gets information about an access control configuration that you created for your documents in an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the access control configuration you want to get information on.
-        --index-id=!: The identifier of the index for an access control configuration.
-    - name: list-data-source-sync-jobs
-      description: Gets statistics about synchronizing a data source connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the data source connector.
-        --index-id=!: The identifier of the index used with the data source connector.
-        --max-results=: The maximum number of synchronization jobs to return in the response.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-        --start-time-filter=: When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates.
-        --status-filter=: Only returns synchronization jobs with the `Status` field equal to the specified status.
-      completion:
-        flag:
-            status-filter:
-                - FAILED
-                - SUCCEEDED
-                - SYNCING
-                - INCOMPLETE
-                - STOPPING
-                - ABORTED
-                - SYNCING_INDEXING
-    - name: list-groups-older-than-ordering-id
-      description: Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.
-        --max-results=: The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-        --ordering-id=!: The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.
-    - name: list-query-suggestions-block-lists
-      description: Lists the block lists used for query suggestions for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for a list of all block lists that exist for that index.
-        --max-results=: The maximum number of block lists to return.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: delete-faq
-      description: Removes a FAQ from an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the FAQ you want to remove.
-        --index-id=!: The identifier of the index for the FAQ.
-    - name: delete-index
-      description: Deletes an Amazon Kendra index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the index you want to delete.
-    - name: describe-featured-results-set
-      description: Gets information about a set of featured results.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --featured-results-set-id=!: The identifier of the set of featured results that you want to get information on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used for featuring results.
-    - name: list-experience-entities
-      description: Lists users or groups in your IAM Identity Center identity source that are granted access to your Amazon Kendra experience.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: list-experiences
-      description: Lists one or more Amazon Kendra experiences.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-        --max-results=: The maximum number of returned Amazon Kendra experiences.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: list-featured-results-sets
-      description: Lists all your sets of featured results for a given index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index used for featuring results.
-        --max-results=: The maximum number of featured results sets to return.
-        --next-token=: If the response is truncated, Amazon Kendra returns a pagination token in the response.
-    - name: associate-entities-to-experience
-      description: Grants users or groups in your IAM Identity Center identity source access to your Amazon Kendra experience.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-list=!: Lists users or groups in your IAM Identity Center identity source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-    - name: create-query-suggestions-block-list
-      description: Creates a block list to exlcude certain queries from suggestions.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create a query suggestions block list.
-        --description=: A description for the block list.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index you want to create a query suggestions block list for.
-        --name=!: A name for the block list.
-        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the block list text file.
-        --source-s3-path=!: The S3 path to your block list text file in your S3 bucket.
-        --tags=: A list of key-value pairs that identify or categorize the block list.
-    - name: create-thesaurus
-      description: Creates a thesaurus for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create a thesaurus.
-        --description=: A description for the thesaurus.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for the thesaurus.
-        --name=!: A name for the thesaurus.
-        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the thesaurus file.
-        --source-s3-path=!: The path to the thesaurus file in S3.
-        --tags=: A list of key-value pairs that identify or categorize the thesaurus.
-    - name: put-principal-mapping
-      description: Maps users to their groups so that you only need to provide the user ID when you issue the query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source you want to map users to their groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-id=!: The identifier of the group you want to map its users to.
-        --group-members=!: The list that contains your users that belong the same group.
-        --index-id=!: The identifier of the index you want to map users to their groups.
-        --ordering-id=: The timestamp identifier you specify to ensure Amazon Kendra doesn't override the latest `PUT` action with previous actions.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains your list of users that belong to a group.
-    - name: update-data-source
-      description: Updates an Amazon Kendra data source connector.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: Configuration information you want to update for the data source connector.
-        --custom-document-enrichment-configuration=: Configuration information you want to update for altering document metadata and content during the document ingestion process.
-        --description=: A new description for the data source connector.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the data source connector you want to update.
-        --index-id=!: The identifier of the index used with the data source connector.
-        --language-code=: The code for a language you want to update for the data source connector.
-        --name=: A new name for the data source connector.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
-        --schedule=: The sync schedule you want to update for the data source connector.
-        --vpc-configuration=: Configuration information for an Amazon Virtual Private Cloud to connect to your data source.
-    - name: update-experience
-      description: Updates your Amazon Kendra experience such as a search application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: Configuration information you want to update for your Amazon Kendra experience.
-        --description=: A new description for your Amazon Kendra experience.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience you want to update.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-        --name=: A new name for your Amazon Kendra experience.
-        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM Identity Center that stores your users and groups information.
-    - name: update-thesaurus
-      description: Updates a thesaurus for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the thesaurus.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the thesaurus you want to update.
-        --index-id=!: The identifier of the index for the thesaurus.
-        --name=: A new name for the thesaurus.
-        --role-arn=: An IAM role that gives Amazon Kendra permissions to access thesaurus file specified in `SourceS3Path`.
-        --source-s3-path=: ""
-    - name: associate-personas-to-entities
-      description: Defines the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-        --personas=!: The personas that define the specific permissions of users or groups in your IAM Identity Center identity source.
-    - name: create-featured-results-set
-      description: Creates a set of featured results to display at the top of the search results page.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create a set of featured results.
-        --description=: A description for the set of featured results.
-        --featured-documents=: A list of document IDs for the documents you want to feature at the top of the search results page.
-        --featured-results-set-name=!: A name for the set of featured results.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index that you want to use for featuring results.
-        --query-texts=: A list of queries for featuring results.
-        --status=: The current status of the set of featured results.
-        --tags=: A list of key-value pairs that identify or categorize the featured results set.
-      completion:
-        flag:
-            status:
-                - ACTIVE
-                - INACTIVE
-    - name: delete-experience
-      description: Deletes your Amazon Kendra experience such as a search application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience you want to delete.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-    - name: list-faqs
-      description: Gets a list of FAQs associated with an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The index for the FAQs.
-        --max-results=: The maximum number of FAQs to return in the response.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: tag-resource
-      description: Adds the specified tag to the specified index, FAQ, data source, or other resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag.
-        --tags=!: A list of tag keys to add to the index, FAQ, data source, or other resource.
-    - name: update-index
-      description: Updates an Amazon Kendra index.
-      flags:
-        --capacity-units=: Sets the number of additional document storage and query capacity units that should be used by the index.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A new description for the index.
-        --document-metadata-configuration-updates=: The document metadata configuration you want to update for the index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the index you want to update.
-        --name=: A new name for the index.
-        --role-arn=: An Identity and Access Management (IAM) role that gives Amazon Kendra permission to access Amazon CloudWatch logs and metrics.
-        --user-context-policy=: The user context policy.
-        --user-group-resolution-configuration=: Gets users and groups from IAM Identity Center identity source.
-        --user-token-configurations=: The user token configuration.
-      completion:
-        flag:
-            user-context-policy:
-                - ATTRIBUTE_FILTER
-                - USER_TOKEN
+        --hierarchical-access-control-list=: The list of [principal](https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that define the hierarchy for which documents users should have access to.
+        --index-id=!: The identifier of the index to create an access control configuration for your documents.
+        --name=!: A name for the access control configuration.
     - name: create-data-source
       description: Creates a data source connector that you want to use with an Amazon Kendra index.
       flags:
@@ -492,6 +113,282 @@ commands:
                 - GITHUB
                 - ALFRESCO
                 - TEMPLATE
+    - name: create-experience
+      description: Creates an Amazon Kendra experience such as a search application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create your Amazon Kendra experience.
+        --configuration=: Configuration information for your Amazon Kendra experience.
+        --description=: A description for your Amazon Kendra experience.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+        --name=!: A name for your Amazon Kendra experience.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access `Query` API, `GetQuerySuggestions` API, and other required APIs.
+    - name: create-faq
+      description: Creates a set of frequently ask questions (FAQs) using a specified FAQ file stored in an Amazon S3 bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create a FAQ.
+        --description=: A description for the FAQ.
+        --file-format=: The format of the FAQ input file.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for the FAQ.
+        --language-code=: The code for a language.
+        --name=!: A name for the FAQ.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access the S3 bucket that contains the FAQ file.
+        --s3-path=!: The path to the FAQ file in S3.
+        --tags=: A list of key-value pairs that identify the FAQ.
+      completion:
+        flag:
+            file-format:
+                - CSV
+                - CSV_WITH_HEADER
+                - JSON
+    - name: create-featured-results-set
+      description: Creates a set of featured results to display at the top of the search results page.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create a set of featured results.
+        --description=: A description for the set of featured results.
+        --featured-documents=: A list of document IDs for the documents you want to feature at the top of the search results page.
+        --featured-results-set-name=!: A name for the set of featured results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index that you want to use for featuring results.
+        --query-texts=: A list of queries for featuring results.
+        --status=: The current status of the set of featured results.
+        --tags=: A list of key-value pairs that identify or categorize the featured results set.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: create-index
+      description: Creates an Amazon Kendra index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create an index.
+        --description=: A description for the index.
+        --edition=: The Amazon Kendra edition to use for the index.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the index.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your Amazon CloudWatch logs and metrics.
+        --server-side-encryption-configuration=: The identifier of the KMS customer managed key (CMK) that's used to encrypt data indexed by Amazon Kendra.
+        --tags=: A list of key-value pairs that identify or categorize the index.
+        --user-context-policy=: The user context policy.
+        --user-group-resolution-configuration=: Gets users and groups from IAM Identity Center identity source.
+        --user-token-configurations=: The user token configuration.
+      completion:
+        flag:
+            edition:
+                - DEVELOPER_EDITION
+                - ENTERPRISE_EDITION
+                - GEN_AI_ENTERPRISE_EDITION
+            user-context-policy:
+                - ATTRIBUTE_FILTER
+                - USER_TOKEN
+    - name: create-query-suggestions-block-list
+      description: Creates a block list to exlcude certain queries from suggestions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create a query suggestions block list.
+        --description=: A description for the block list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index you want to create a query suggestions block list for.
+        --name=!: A name for the block list.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the block list text file.
+        --source-s3-path=!: The S3 path to your block list text file in your S3 bucket.
+        --tags=: A list of key-value pairs that identify or categorize the block list.
+    - name: create-thesaurus
+      description: Creates a thesaurus for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A token that you provide to identify the request to create a thesaurus.
+        --description=: A description for the thesaurus.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for the thesaurus.
+        --name=!: A name for the thesaurus.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your S3 bucket that contains the thesaurus file.
+        --source-s3-path=!: The path to the thesaurus file in S3.
+        --tags=: A list of key-value pairs that identify or categorize the thesaurus.
+    - name: delete-access-control-configuration
+      description: Deletes an access control configuration that you created for your documents in an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the access control configuration you want to delete.
+        --index-id=!: The identifier of the index for an access control configuration.
+    - name: delete-data-source
+      description: Deletes an Amazon Kendra data source connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the data source connector you want to delete.
+        --index-id=!: The identifier of the index used with the data source connector.
+    - name: delete-experience
+      description: Deletes your Amazon Kendra experience such as a search application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience you want to delete.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+    - name: delete-faq
+      description: Removes a FAQ from an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the FAQ you want to remove.
+        --index-id=!: The identifier of the index for the FAQ.
+    - name: delete-index
+      description: Deletes an Amazon Kendra index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the index you want to delete.
+    - name: delete-principal-mapping
+      description: Deletes a group so that all users that belong to the group can no longer access documents only available to that group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source you want to delete a group from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group you want to delete.
+        --index-id=!: The identifier of the index you want to delete a group from.
+        --ordering-id=: The timestamp identifier you specify to ensure Amazon Kendra does not override the latest `DELETE` action with previous actions.
+    - name: delete-query-suggestions-block-list
+      description: Deletes a block list used for query suggestions for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the block list you want to delete.
+        --index-id=!: The identifier of the index for the block list.
+    - name: delete-thesaurus
+      description: Deletes an Amazon Kendra thesaurus.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the thesaurus you want to delete.
+        --index-id=!: The identifier of the index for the thesaurus.
+    - name: describe-access-control-configuration
+      description: Gets information about an access control configuration that you created for your documents in an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the access control configuration you want to get information on.
+        --index-id=!: The identifier of the index for an access control configuration.
+    - name: describe-data-source
+      description: Gets information about an Amazon Kendra data source connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the data source connector.
+        --index-id=!: The identifier of the index used with the data source connector.
+    - name: describe-experience
+      description: Gets information about your Amazon Kendra experience such as a search application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience you want to get information on.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+    - name: describe-faq
+      description: Gets information about a FAQ.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the FAQ you want to get information on.
+        --index-id=!: The identifier of the index for the FAQ.
+    - name: describe-featured-results-set
+      description: Gets information about a set of featured results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --featured-results-set-id=!: The identifier of the set of featured results that you want to get information on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used for featuring results.
+    - name: describe-index
+      description: Gets information about an Amazon Kendra index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the index you want to get information on.
+    - name: describe-principal-mapping
+      description: Describes the processing of `PUT` and `DELETE` actions for mapping users to their groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group required to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
+        --index-id=!: The identifier of the index required to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
+    - name: describe-query-suggestions-block-list
+      description: Gets information about a block list used for query suggestions for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the block list you want to get information on.
+        --index-id=!: The identifier of the index for the block list.
+    - name: describe-query-suggestions-config
+      description: Gets information on the settings of query suggestions for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index with query suggestions that you want to get information on.
+    - name: describe-thesaurus
+      description: Gets information about an Amazon Kendra thesaurus.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the thesaurus you want to get information on.
+        --index-id=!: The identifier of the index for the thesaurus.
+    - name: disassociate-entities-from-experience
+      description: Prevents users or groups in your IAM Identity Center identity source from accessing your Amazon Kendra experience.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-list=!: Lists users or groups in your IAM Identity Center identity source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+    - name: disassociate-personas-from-entities
+      description: Removes the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-ids=!: The identifiers of users or groups in your IAM Identity Center identity source.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+    - name: get-query-suggestions
+      description: Fetches the queries that are suggested to your users.
+      flags:
+        --attribute-suggestions-config=: Configuration information for the document fields/attributes that you want to base query suggestions on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index you want to get query suggestions from.
+        --max-suggestions-count=: The maximum number of query suggestions you want to show to your users.
+        --query-text=!: The text of a user's query to generate query suggestions.
+        --suggestion-types=: The suggestions type to base query suggestions on.
     - name: get-snapshots
       description: Retrieves search metrics data.
       flags:
@@ -519,6 +416,37 @@ commands:
                 - DOCS_BY_CLICK_COUNT
                 - AGG_QUERY_DOC_METRICS
                 - TREND_QUERY_DOC_METRICS
+    - name: list-access-control-configurations
+      description: Lists one or more access control configurations for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for the access control configuration.
+        --max-results=: The maximum number of access control configurations to return.
+        --next-token=: If the previous response was incomplete (because there's more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-data-source-sync-jobs
+      description: Gets statistics about synchronizing a data source connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the data source connector.
+        --index-id=!: The identifier of the index used with the data source connector.
+        --max-results=: The maximum number of synchronization jobs to return in the response.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+        --start-time-filter=: When specified, the synchronization jobs returned in the list are limited to jobs between the specified dates.
+        --status-filter=: Only returns synchronization jobs with the `Status` field equal to the specified status.
+      completion:
+        flag:
+            status-filter:
+                - FAILED
+                - SUCCEEDED
+                - SYNCING
+                - INCOMPLETE
+                - STOPPING
+                - ABORTED
+                - SYNCING_INDEXING
     - name: list-data-sources
       description: Lists the data source connectors that you have created.
       flags:
@@ -528,15 +456,6 @@ commands:
         --index-id=!: The identifier of the index used with one or more data source connectors.
         --max-results=: The maximum number of data source connectors to return.
         --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: disassociate-personas-from-entities
-      description: Removes the specific permissions of users or groups in your IAM Identity Center identity source with access to your Amazon Kendra experience.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-ids=!: The identifiers of users or groups in your IAM Identity Center identity source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
     - name: list-entity-personas
       description: Lists specific permissions of users and groups with access to your Amazon Kendra experience.
       flags:
@@ -547,6 +466,125 @@ commands:
         --index-id=!: The identifier of the index for your Amazon Kendra experience.
         --max-results=: The maximum number of returned users or groups.
         --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-experience-entities
+      description: Lists users or groups in your IAM Identity Center identity source that are granted access to your Amazon Kendra experience.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-experiences
+      description: Lists one or more Amazon Kendra experiences.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+        --max-results=: The maximum number of returned Amazon Kendra experiences.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-faqs
+      description: Gets a list of FAQs associated with an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The index for the FAQs.
+        --max-results=: The maximum number of FAQs to return in the response.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-featured-results-sets
+      description: Lists all your sets of featured results for a given index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index used for featuring results.
+        --max-results=: The maximum number of featured results sets to return.
+        --next-token=: If the response is truncated, Amazon Kendra returns a pagination token in the response.
+    - name: list-groups-older-than-ordering-id
+      description: Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.
+        --max-results=: The maximum number of returned groups that are mapped to users before a given ordering or timestamp identifier.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+        --ordering-id=!: The timestamp identifier used for the latest `PUT` or `DELETE` action for mapping users to their groups.
+    - name: list-indices
+      description: Lists the Amazon Kendra indexes that you created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of indices to return.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-query-suggestions-block-lists
+      description: Lists the block lists used for query suggestions for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for a list of all block lists that exist for that index.
+        --max-results=: The maximum number of block lists to return.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: list-tags-for-resource
+      description: Gets a list of tags associated with a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to get a list of tags for.
+    - name: list-thesauri
+      description: Lists the thesauri for an index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index with one or more thesauri.
+        --max-results=: The maximum number of thesauri to return.
+        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+    - name: put-principal-mapping
+      description: Maps users to their groups so that you only need to provide the user ID when you issue the query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=: The identifier of the data source you want to map users to their groups.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The identifier of the group you want to map its users to.
+        --group-members=!: The list that contains your users that belong the same group.
+        --index-id=!: The identifier of the index you want to map users to their groups.
+        --ordering-id=: The timestamp identifier you specify to ensure Amazon Kendra doesn't override the latest `PUT` action with previous actions.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role that has access to the S3 file that contains your list of users that belong to a group.
+    - name: query
+      description: Searches an index given an input query.
+      flags:
+        --attribute-filter=: Filters search results by document fields/attributes.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collapse-configuration=: Provides configuration to determine how to group results by document attribute value, and how to display them (collapsed or expanded) under a designated primary document for each group.
+        --document-relevance-override-configurations=: Overrides relevance tuning configurations of fields/attributes set at the index level.
+        --facets=: An array of documents fields/attributes for faceted search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index for the search.
+        --page-number=: Query results are returned in pages the size of the `PageSize` parameter.
+        --page-size=: Sets the number of results that are returned in each page of results.
+        --query-result-type-filter=: Sets the type of query result or response.
+        --query-text=: The input query text for the search.
+        --requested-document-attributes=: An array of document fields/attributes to include in the response.
+        --sorting-configuration=: Provides information that determines how the results of the query are sorted.
+        --sorting-configurations=: Provides configuration information to determine how the results of a query are sorted.
+        --spell-correction-configuration=: Enables suggested spell corrections for queries.
+        --user-context=: The user context token or user and group information.
+        --visitor-id=: Provides an identifier for a specific user.
+      completion:
+        flag:
+            query-result-type-filter:
+                - DOCUMENT
+                - QUESTION_ANSWER
+                - ANSWER
     - name: retrieve
       description: Retrieves relevant passages or text excerpts given an input query.
       flags:
@@ -561,55 +599,6 @@ commands:
         --query-text=!: The input query text to retrieve relevant passages for the search.
         --requested-document-attributes=: A list of document fields/attributes to include in the response.
         --user-context=: The user context token or user and group information.
-    - name: describe-index
-      description: Gets information about an Amazon Kendra index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the index you want to get information on.
-    - name: describe-principal-mapping
-      description: Describes the processing of `PUT` and `DELETE` actions for mapping users to their groups.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-id=!: The identifier of the group required to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
-        --index-id=!: The identifier of the index required to check the processing of `PUT` and `DELETE` actions for mapping users to their groups.
-    - name: untag-resource
-      description: Removes a tag from an index, FAQ, data source, or other resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to remove a tag.
-        --tag-keys=!: A list of tag keys to remove from the index, FAQ, data source, or other resource.
-    - name: list-access-control-configurations
-      description: Lists one or more access control configurations for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index for the access control configuration.
-        --max-results=: The maximum number of access control configurations to return.
-        --next-token=: If the previous response was incomplete (because there's more data to retrieve), Amazon Kendra returns a pagination token in the response.
-    - name: delete-access-control-configuration
-      description: Deletes an access control configuration that you created for your documents in an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the access control configuration you want to delete.
-        --index-id=!: The identifier of the index for an access control configuration.
-    - name: describe-experience
-      description: Gets information about your Amazon Kendra experience such as a search application.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience you want to get information on.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
     - name: start-data-source-sync-job
       description: Starts a synchronization job for a data source connector.
       flags:
@@ -618,58 +607,40 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The identifier of the data source connector to synchronize.
         --index-id=!: The identifier of the index used with the data source connector.
-    - name: create-index
-      description: Creates an Amazon Kendra index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create an index.
-        --description=: A description for the index.
-        --edition=: The Amazon Kendra edition to use for the index.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for the index.
-        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role with permission to access your Amazon CloudWatch logs and metrics.
-        --server-side-encryption-configuration=: The identifier of the KMS customer managed key (CMK) that's used to encrypt data indexed by Amazon Kendra.
-        --tags=: A list of key-value pairs that identify or categorize the index.
-        --user-context-policy=: The user context policy.
-        --user-group-resolution-configuration=: Gets users and groups from IAM Identity Center identity source.
-        --user-token-configurations=: The user token configuration.
-      completion:
-        flag:
-            edition:
-                - DEVELOPER_EDITION
-                - ENTERPRISE_EDITION
-                - GEN_AI_ENTERPRISE_EDITION
-            user-context-policy:
-                - ATTRIBUTE_FILTER
-                - USER_TOKEN
-    - name: delete-principal-mapping
-      description: Deletes a group so that all users that belong to the group can no longer access documents only available to that group.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-id=: The identifier of the data source you want to delete a group from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-id=!: The identifier of the group you want to delete.
-        --index-id=!: The identifier of the index you want to delete a group from.
-        --ordering-id=: The timestamp identifier you specify to ensure Amazon Kendra does not override the latest `DELETE` action with previous actions.
-    - name: disassociate-entities-from-experience
-      description: Prevents users or groups in your IAM Identity Center identity source from accessing your Amazon Kendra experience.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entity-list=!: Lists users or groups in your IAM Identity Center identity source.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of your Amazon Kendra experience.
-        --index-id=!: The identifier of the index for your Amazon Kendra experience.
-    - name: list-indices
-      description: Lists the Amazon Kendra indexes that you created.
+    - name: stop-data-source-sync-job
+      description: Stops a synchronization job that is currently running.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of indices to return.
-        --next-token=: If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response.
+        --id=!: The identifier of the data source connector for which to stop the synchronization jobs.
+        --index-id=!: The identifier of the index used with the data source connector.
+    - name: submit-feedback
+      description: Enables you to provide feedback to Amazon Kendra to improve the performance of your index.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --click-feedback-items=: Tells Amazon Kendra that a particular search result link was chosen by the user.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-id=!: The identifier of the index that was queried.
+        --query-id=!: The identifier of the specific query for which you are submitting feedback.
+        --relevance-feedback-items=: Provides Amazon Kendra with relevant or not relevant feedback for whether a particular item was relevant to the search.
+    - name: tag-resource
+      description: Adds the specified tag to the specified index, FAQ, data source, or other resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to add a tag.
+        --tags=!: A list of tag keys to add to the index, FAQ, data source, or other resource.
+    - name: untag-resource
+      description: Removes a tag from an index, FAQ, data source, or other resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to remove a tag.
+        --tag-keys=!: A list of tag keys to remove from the index, FAQ, data source, or other resource.
     - name: update-access-control-configuration
       description: Updates an access control configuration for your documents in an index.
       flags:
@@ -682,53 +653,72 @@ commands:
         --id=!: The identifier of the access control configuration you want to update.
         --index-id=!: The identifier of the index for an access control configuration.
         --name=: A new name for the access control configuration.
-    - name: batch-delete-featured-results-set
-      description: Removes one or more sets of featured results.
+    - name: update-data-source
+      description: Updates an Amazon Kendra data source connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --featured-results-set-ids=!: The identifiers of the featured results sets that you want to delete.
+        --configuration=: Configuration information you want to update for the data source connector.
+        --custom-document-enrichment-configuration=: Configuration information you want to update for altering document metadata and content during the document ingestion process.
+        --description=: A new description for the data source connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the data source connector you want to update.
+        --index-id=!: The identifier of the index used with the data source connector.
+        --language-code=: The code for a language you want to update for the data source connector.
+        --name=: A new name for the data source connector.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the data source and required resources.
+        --schedule=: The sync schedule you want to update for the data source connector.
+        --vpc-configuration=: Configuration information for an Amazon Virtual Private Cloud to connect to your data source.
+    - name: update-experience
+      description: Updates your Amazon Kendra experience such as a search application.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: Configuration information you want to update for your Amazon Kendra experience.
+        --description=: A new description for your Amazon Kendra experience.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of your Amazon Kendra experience you want to update.
+        --index-id=!: The identifier of the index for your Amazon Kendra experience.
+        --name=: A new name for your Amazon Kendra experience.
+        --role-arn=: The Amazon Resource Name (ARN) of an IAM role with permission to access the `Query` API, `QuerySuggestions` API, `SubmitFeedback` API, and IAM Identity Center that stores your users and groups information.
+    - name: update-featured-results-set
+      description: Updates a set of featured results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the set of featured results.
+        --featured-documents=: A list of document IDs for the documents you want to feature at the top of the search results page.
+        --featured-results-set-id=!: The identifier of the set of featured results that you want to update.
+        --featured-results-set-name=: A new name for the set of featured results.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --index-id=!: The identifier of the index used for featuring results.
-    - name: batch-get-document-status
-      description: Returns the indexing status for one or more documents submitted with the [BatchPutDocument](https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html) API.
+        --query-texts=: A list of queries for featuring results.
+        --status=: You can set the status to `ACTIVE` or `INACTIVE`.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: update-index
+      description: Updates an Amazon Kendra index.
       flags:
+        --capacity-units=: Sets the number of additional document storage and query capacity units that should be used by the index.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-info-list=!: A list of `DocumentInfo` objects that identify the documents for which to get the status.
+        --description=: A new description for the index.
+        --document-metadata-configuration-updates=: The document metadata configuration you want to update for the index.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index to add documents to.
-    - name: delete-query-suggestions-block-list
-      description: Deletes a block list used for query suggestions for an index.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the block list you want to delete.
-        --index-id=!: The identifier of the index for the block list.
-    - name: describe-faq
-      description: Gets information about a FAQ.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the FAQ you want to get information on.
-        --index-id=!: The identifier of the index for the FAQ.
-    - name: describe-thesaurus
-      description: Gets information about an Amazon Kendra thesaurus.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --id=!: The identifier of the thesaurus you want to get information on.
-        --index-id=!: The identifier of the index for the thesaurus.
-    - name: list-tags-for-resource
-      description: Gets a list of tags associated with a resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the index, FAQ, data source, or other resource to get a list of tags for.
+        --id=!: The identifier of the index you want to update.
+        --name=: A new name for the index.
+        --role-arn=: An Identity and Access Management (IAM) role that gives Amazon Kendra permission to access Amazon CloudWatch logs and metrics.
+        --user-context-policy=: The user context policy.
+        --user-group-resolution-configuration=: Gets users and groups from IAM Identity Center identity source.
+        --user-token-configurations=: The user token configuration.
+      completion:
+        flag:
+            user-context-policy:
+                - ATTRIBUTE_FILTER
+                - USER_TOKEN
     - name: update-query-suggestions-block-list
       description: Updates a block list used for query suggestions for an index.
       flags:
@@ -741,24 +731,34 @@ commands:
         --name=: A new name for the block list.
         --role-arn=: The IAM (Identity and Access Management) role used to access the block list text file in S3.
         --source-s3-path=: The S3 path where your block list text file sits in S3.
-    - name: batch-delete-document
-      description: Removes one or more documents from an index.
+    - name: update-query-suggestions-config
+      description: Updates the settings of query suggestions for an index.
+      flags:
+        --attribute-suggestions-config=: Configuration information for the document fields/attributes that you want to base query suggestions on.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-queries-without-user-information: '`TRUE` to include queries without user information (i.e. all queries, irrespective of the user), otherwise `FALSE` to only include queries with user information.'
+        --index-id=!: The identifier of the index with query suggestions you want to update.
+        --minimum-number-of-querying-users=: The minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.
+        --minimum-query-count=: The the minimum number of times a query must be searched in order to be eligible to suggest to your users.
+        --mode=: Set the mode to `ENABLED` or `LEARN_ONLY`.
+        --no-include-queries-without-user-information: '`TRUE` to include queries without user information (i.e. all queries, irrespective of the user), otherwise `FALSE` to only include queries with user information.'
+        --query-log-look-back-window-in-days=: How recent your queries are in your query log time window.
+      completion:
+        flag:
+            mode:
+                - ENABLED
+                - LEARN_ONLY
+    - name: update-thesaurus
+      description: Updates a thesaurus for an index.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-source-sync-job-metric-target=: ""
-        --document-id-list=!: One or more identifiers for documents to delete from the index.
+        --description=: A new description for the thesaurus.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --index-id=!: The identifier of the index that contains the documents to delete.
-    - name: create-access-control-configuration
-      description: Creates an access configuration for your documents.
-      flags:
-        --access-control-list=: Information on principals (users and/or groups) and which documents they should have access to.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: A token that you provide to identify the request to create an access control configuration.
-        --description=: A description for the access control configuration.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --hierarchical-access-control-list=: The list of [principal](https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html) lists that define the hierarchy for which documents users should have access to.
-        --index-id=!: The identifier of the index to create an access control configuration for your documents.
-        --name=!: A name for the access control configuration.
+        --id=!: The identifier of the thesaurus you want to update.
+        --index-id=!: The identifier of the index for the thesaurus.
+        --name=: A new name for the thesaurus.
+        --role-arn=: An IAM role that gives Amazon Kendra permissions to access thesaurus file specified in `SourceS3Path`.
+        --source-s3-path=: ""

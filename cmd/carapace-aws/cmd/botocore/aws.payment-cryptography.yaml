@@ -1,199 +1,14 @@
 name: payment-cryptography
 description: Payment Cryptography Control Plane
 commands:
-    - name: get-public-key-certificate
-      description: Gets the public key certificate of the asymmetric key pair that exists within Amazon Web Services Payment Cryptography.
+    - name: add-key-replication-regions
+      description: Adds replication Amazon Web Services Regions to an existing Amazon Web Services Payment Cryptography key, enabling the key to be used for cryptographic operations in additional Amazon Web Services Regions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `KeyARN` of the asymmetric key pair.
-    - name: list-keys
-      description: Lists the keys in the caller's Amazon Web Services account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-state=: The key state of the keys you want to list.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter to specify the maximum number of items to return.
-        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-      completion:
-        flag:
-            key-state:
-                - CREATE_IN_PROGRESS
-                - CREATE_COMPLETE
-                - DELETE_PENDING
-                - DELETE_COMPLETE
-    - name: delete-alias
-      description: Deletes the alias, but doesn't affect the underlying key.
-      flags:
-        --alias-name=!: A friendly name that you can use to refer Amazon Web Services Payment Cryptography key.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-key
-      description: Gets the key metadata for an Amazon Web Services Payment Cryptography key, including the immutable and mutable attributes specified when the key was created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `KeyARN` of the Amazon Web Services Payment Cryptography key.
-    - name: import-key
-      description: Imports symmetric keys and public key certificates in PEM format (base64 encoded) into Amazon Web Services Payment Cryptography.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled: Specifies whether import key is enabled.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-check-value-algorithm=: The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV).
-        --key-material=!: The key or public key certificate type to use during key material import, for example TR-34 or RootCertificatePublicKey.
-        --no-enabled: Specifies whether import key is enabled.
-        --replication-regions=: ""
-        --tags=: Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
-      completion:
-        flag:
-            key-check-value-algorithm:
-                - CMAC
-                - ANSI_X9_24
-                - HMAC
-                - SHA_1
-    - name: list-aliases
-      description: Lists the aliases for all keys in the caller's Amazon Web Services account and Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-arn=: The `keyARN` for which you want to list all aliases.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter to specify the maximum number of items to return.
-        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: start-key-usage
-      description: Enables an Amazon Web Services Payment Cryptography key, which makes it active for cryptographic operations within Amazon Web Services Payment Cryptography
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `KeyArn` of the key.
-    - name: stop-key-usage
-      description: Disables an Amazon Web Services Payment Cryptography key, which makes it inactive within Amazon Web Services Payment Cryptography.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `KeyArn` of the key.
-    - name: tag-resource
-      description: Adds or edits tags on an Amazon Web Services Payment Cryptography key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The `KeyARN` of the key whose tags are being updated.
-        --tags=!: One or more tags.
-    - name: untag-resource
-      description: Deletes a tag from an Amazon Web Services Payment Cryptography key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The `KeyARN` of the key whose tags are being removed.
-        --tag-keys=!: One or more tag keys.
-    - name: delete-key
-      description: Deletes the key material and metadata associated with Amazon Web Services Payment Cryptography key.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --delete-key-in-days=: The waiting period for key deletion.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The `KeyARN` of the key that is scheduled for deletion.
-    - name: enable-default-key-replication-regions
-      description: Enables [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html) settings for your Amazon Web Services account, causing new keys to be automatically replicated to the specified Amazon Web Services Regions when created.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-regions=!: The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).
-    - name: export-key
-      description: Exports a key from Amazon Web Services Payment Cryptography.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-attributes=: The attributes for IPEK generation during export.
-        --export-key-identifier=!: The `KeyARN` of the key under export from Amazon Web Services Payment Cryptography.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-material=!: The key block format type, for example, TR-34 or TR-31, to use during key material export.
-    - name: get-certificate-signing-request
-      description: Creates a certificate signing request (CSR) from a key pair.
-      flags:
-        --certificate-subject=!: The metadata used to create the CSR.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: Asymmetric key used for generating the certificate signing request
-        --signing-algorithm=!: The cryptographic algorithm used to sign your CSR.
-      completion:
-        flag:
-            signing-algorithm:
-                - SHA224
-                - SHA256
-                - SHA384
-                - SHA512
-    - name: get-parameters-for-import
-      description: Gets the import token and the wrapping key certificate in PEM format (base64 encoded) to initiate a TR-34 WrappedKeyBlock or a RSA WrappedKeyCryptogram import into Amazon Web Services Payment Cryptography.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-material-type=!: The method to use for key material import.
-        --wrapping-key-algorithm=!: The wrapping key algorithm to generate a wrapping key certificate.
-      completion:
-        flag:
-            key-material-type:
-                - TR34_KEY_BLOCK
-                - TR31_KEY_BLOCK
-                - ROOT_PUBLIC_KEY_CERTIFICATE
-                - TRUSTED_PUBLIC_KEY_CERTIFICATE
-                - KEY_CRYPTOGRAM
-            wrapping-key-algorithm:
-                - TDES_2KEY
-                - TDES_3KEY
-                - AES_128
-                - AES_192
-                - AES_256
-                - HMAC_SHA256
-                - HMAC_SHA384
-                - HMAC_SHA512
-                - HMAC_SHA224
-                - RSA_2048
-                - RSA_3072
-                - RSA_4096
-                - ECC_NIST_P256
-                - ECC_NIST_P384
-                - ECC_NIST_P521
-    - name: list-tags-for-resource
-      description: Lists the tags for an Amazon Web Services resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: Use this parameter to specify the maximum number of items to return.
-        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --resource-arn=!: The `KeyARN` of the key whose tags you are getting.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-alias
-      description: Associates an existing Amazon Web Services Payment Cryptography alias with a different key.
-      flags:
-        --alias-name=!: The alias whose associated key is changing.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-arn=: The `KeyARN` for the key that you are updating or removing from the alias.
+        --key-identifier=!: The key identifier (ARN or alias) of the key for which to add replication regions.
+        --replication-regions=!: The list of Amazon Web Services Regions to add to the key's replication configuration.
     - name: create-alias
       description: Creates an *alias*, or a friendly name, for an Amazon Web Services Payment Cryptography key.
       flags:
@@ -244,6 +59,21 @@ commands:
                 - ANSI_X9_24
                 - HMAC
                 - SHA_1
+    - name: delete-alias
+      description: Deletes the alias, but doesn't affect the underlying key.
+      flags:
+        --alias-name=!: A friendly name that you can use to refer Amazon Web Services Payment Cryptography key.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-key
+      description: Deletes the key material and metadata associated with Amazon Web Services Payment Cryptography key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-key-in-days=: The waiting period for key deletion.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `KeyARN` of the key that is scheduled for deletion.
     - name: disable-default-key-replication-regions
       description: Disables [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html) settings for the specified Amazon Web Services Regions in your Amazon Web Services account, preventing new keys from being automatically replicated to those regions.
       flags:
@@ -251,6 +81,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-regions=!: The list of Amazon Web Services Regions to remove from the account's default replication regions.
+    - name: enable-default-key-replication-regions
+      description: Enables [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html) settings for your Amazon Web Services account, causing new keys to be automatically replicated to the specified Amazon Web Services Regions when created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --replication-regions=!: The list of Amazon Web Services Regions to enable as default replication regions for the Amazon Web Services account for [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html).
+    - name: export-key
+      description: Exports a key from Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-attributes=: The attributes for IPEK generation during export.
+        --export-key-identifier=!: The `KeyARN` of the key under export from Amazon Web Services Payment Cryptography.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-material=!: The key block format type, for example, TR-34 or TR-31, to use during key material export.
     - name: get-alias
       description: Gets the Amazon Web Services Payment Cryptography key associated with the alias.
       flags:
@@ -258,12 +104,35 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-certificate-signing-request
+      description: Creates a certificate signing request (CSR) from a key pair.
+      flags:
+        --certificate-subject=!: The metadata used to create the CSR.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: Asymmetric key used for generating the certificate signing request
+        --signing-algorithm=!: The cryptographic algorithm used to sign your CSR.
+      completion:
+        flag:
+            signing-algorithm:
+                - SHA224
+                - SHA256
+                - SHA384
+                - SHA512
     - name: get-default-key-replication-regions
       description: Retrieves the list of Amazon Web Services Regions where [Multi-Region key replication](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-multi-region-replication.html) is currently enabled for your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-key
+      description: Gets the key metadata for an Amazon Web Services Payment Cryptography key, including the immutable and mutable attributes specified when the key was created.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `KeyARN` of the Amazon Web Services Payment Cryptography key.
     - name: get-parameters-for-export
       description: Gets the export token and the signing key certificate to initiate a TR-34 key export from Amazon Web Services Payment Cryptography.
       flags:
@@ -296,6 +165,107 @@ commands:
                 - ECC_NIST_P256
                 - ECC_NIST_P384
                 - ECC_NIST_P521
+    - name: get-parameters-for-import
+      description: Gets the import token and the wrapping key certificate in PEM format (base64 encoded) to initiate a TR-34 WrappedKeyBlock or a RSA WrappedKeyCryptogram import into Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-material-type=!: The method to use for key material import.
+        --wrapping-key-algorithm=!: The wrapping key algorithm to generate a wrapping key certificate.
+      completion:
+        flag:
+            key-material-type:
+                - TR34_KEY_BLOCK
+                - TR31_KEY_BLOCK
+                - ROOT_PUBLIC_KEY_CERTIFICATE
+                - TRUSTED_PUBLIC_KEY_CERTIFICATE
+                - KEY_CRYPTOGRAM
+            wrapping-key-algorithm:
+                - TDES_2KEY
+                - TDES_3KEY
+                - AES_128
+                - AES_192
+                - AES_256
+                - HMAC_SHA256
+                - HMAC_SHA384
+                - HMAC_SHA512
+                - HMAC_SHA224
+                - RSA_2048
+                - RSA_3072
+                - RSA_4096
+                - ECC_NIST_P256
+                - ECC_NIST_P384
+                - ECC_NIST_P521
+    - name: get-public-key-certificate
+      description: Gets the public key certificate of the asymmetric key pair that exists within Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `KeyARN` of the asymmetric key pair.
+    - name: import-key
+      description: Imports symmetric keys and public key certificates in PEM format (base64 encoded) into Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enabled: Specifies whether import key is enabled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-check-value-algorithm=: The algorithm that Amazon Web Services Payment Cryptography uses to calculate the key check value (KCV).
+        --key-material=!: The key or public key certificate type to use during key material import, for example TR-34 or RootCertificatePublicKey.
+        --no-enabled: Specifies whether import key is enabled.
+        --replication-regions=: ""
+        --tags=: Assigns one or more tags to the Amazon Web Services Payment Cryptography key.
+      completion:
+        flag:
+            key-check-value-algorithm:
+                - CMAC
+                - ANSI_X9_24
+                - HMAC
+                - SHA_1
+    - name: list-aliases
+      description: Lists the aliases for all keys in the caller's Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-arn=: The `keyARN` for which you want to list all aliases.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter to specify the maximum number of items to return.
+        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-keys
+      description: Lists the keys in the caller's Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-state=: The key state of the keys you want to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter to specify the maximum number of items to return.
+        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            key-state:
+                - CREATE_IN_PROGRESS
+                - CREATE_COMPLETE
+                - DELETE_PENDING
+                - DELETE_COMPLETE
+    - name: list-tags-for-resource
+      description: Lists the tags for an Amazon Web Services resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Use this parameter to specify the maximum number of items to return.
+        --next-token=: Use this parameter in a subsequent request after you receive a response with truncated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The `KeyARN` of the key whose tags you are getting.
+        --starting-token=: A token to specify where to start paginating.
     - name: remove-key-replication-regions
       description: Removes Replication Regions from an existing Amazon Web Services Payment Cryptography key, disabling the key's availability for cryptographic operations in the specified Amazon Web Services Regions.
       flags:
@@ -311,11 +281,41 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-identifier=!: The `KeyARN` of the key to be restored within Amazon Web Services Payment Cryptography.
-    - name: add-key-replication-regions
-      description: Adds replication Amazon Web Services Regions to an existing Amazon Web Services Payment Cryptography key, enabling the key to be used for cryptographic operations in additional Amazon Web Services Regions.
+    - name: start-key-usage
+      description: Enables an Amazon Web Services Payment Cryptography key, which makes it active for cryptographic operations within Amazon Web Services Payment Cryptography
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --key-identifier=!: The key identifier (ARN or alias) of the key for which to add replication regions.
-        --replication-regions=!: The list of Amazon Web Services Regions to add to the key's replication configuration.
+        --key-identifier=!: The `KeyArn` of the key.
+    - name: stop-key-usage
+      description: Disables an Amazon Web Services Payment Cryptography key, which makes it inactive within Amazon Web Services Payment Cryptography.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `KeyArn` of the key.
+    - name: tag-resource
+      description: Adds or edits tags on an Amazon Web Services Payment Cryptography key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The `KeyARN` of the key whose tags are being updated.
+        --tags=!: One or more tags.
+    - name: untag-resource
+      description: Deletes a tag from an Amazon Web Services Payment Cryptography key.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The `KeyARN` of the key whose tags are being removed.
+        --tag-keys=!: One or more tag keys.
+    - name: update-alias
+      description: Associates an existing Amazon Web Services Payment Cryptography alias with a different key.
+      flags:
+        --alias-name=!: The alias whose associated key is changing.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-arn=: The `KeyARN` for the key that you are updating or removing from the alias.

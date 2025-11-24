@@ -1,6 +1,29 @@
 name: timestream-query
 description: Amazon Timestream Query
 commands:
+    - name: cancel-query
+      description: Cancels a query that has been issued.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The ID of the query that needs to be cancelled.
+    - name: create-scheduled-query
+      description: Create a scheduled query that will be run on your behalf at the configured schedule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result.
+        --error-report-configuration=!: Configuration for error reporting.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon KMS key used to encrypt the scheduled query resource, at-rest.
+        --name=!: Name of the scheduled query.
+        --notification-configuration=!: Notification configuration for the scheduled query.
+        --query-string=!: The query string to run.
+        --schedule-configuration=!: The schedule configuration for the query.
+        --scheduled-query-execution-role-arn=!: The ARN for the IAM role that Timestream will assume when running the scheduled query.
+        --tags=: A list of key-value pairs to label the scheduled query.
+        --target-configuration=: Configuration used for writing the result of a query.
     - name: delete-scheduled-query
       description: Deletes a given scheduled query.
       flags:
@@ -20,13 +43,34 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: cancel-query
-      description: Cancels a query that has been issued.
+    - name: describe-scheduled-query
+      description: Provides detailed information about a scheduled query.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --query-id=!: The ID of the query that needs to be cancelled.
+        --scheduled-query-arn=!: The ARN of the scheduled query.
+    - name: execute-scheduled-query
+      description: You can use this API to run a scheduled query manually.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Not used.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --invocation-time=!: The timestamp in UTC.
+        --query-insights=: Encapsulates settings for enabling `QueryInsights`.
+        --scheduled-query-arn=!: ARN of the scheduled query.
+    - name: list-scheduled-queries
+      description: Gets a list of all scheduled queries in the caller's Amazon account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the output.
+        --next-token=: A pagination token to resume pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: List all tags on a Timestream query resource.
       flags:
@@ -48,72 +92,6 @@ commands:
         --no-validate-only: By setting this value to `true`, Timestream will only validate that the query string is a valid Timestream query, and not store the prepared query for later use.
         --query-string=!: The Timestream query string that you want to use as a prepared statement.
         --validate-only: By setting this value to `true`, Timestream will only validate that the query string is a valid Timestream query, and not store the prepared query for later use.
-    - name: create-scheduled-query
-      description: Create a scheduled query that will be run on your behalf at the configured schedule.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Using a ClientToken makes the call to CreateScheduledQuery idempotent, in other words, making the same request repeatedly will produce the same result.
-        --error-report-configuration=!: Configuration for error reporting.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The Amazon KMS key used to encrypt the scheduled query resource, at-rest.
-        --name=!: Name of the scheduled query.
-        --notification-configuration=!: Notification configuration for the scheduled query.
-        --query-string=!: The query string to run.
-        --schedule-configuration=!: The schedule configuration for the query.
-        --scheduled-query-execution-role-arn=!: The ARN for the IAM role that Timestream will assume when running the scheduled query.
-        --tags=: A list of key-value pairs to label the scheduled query.
-        --target-configuration=: Configuration used for writing the result of a query.
-    - name: list-scheduled-queries
-      description: Gets a list of all scheduled queries in the caller's Amazon account and Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of items to return in the output.
-        --next-token=: A pagination token to resume pagination.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: untag-resource
-      description: Removes the association of tags from a Timestream query resource.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Timestream resource that the tags will be removed from.
-        --tag-keys=!: A list of tags keys.
-    - name: update-account-settings
-      description: Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-query-tcu=: The maximum number of compute units the service will use at any point in time to serve your queries.
-        --query-compute=: Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.
-        --query-pricing-model=: The pricing model for queries in an account.
-      completion:
-        flag:
-            query-pricing-model:
-                - BYTES_SCANNED
-                - COMPUTE_UNITS
-    - name: describe-scheduled-query
-      description: Provides detailed information about a scheduled query.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --scheduled-query-arn=!: The ARN of the scheduled query.
-    - name: execute-scheduled-query
-      description: You can use this API to run a scheduled query manually.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=: Not used.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invocation-time=!: The timestamp in UTC.
-        --query-insights=: Encapsulates settings for enabling `QueryInsights`.
-        --scheduled-query-arn=!: ARN of the scheduled query.
     - name: query
       description: '`Query` is a synchronous operation that enables you to run a query against your Amazon Timestream data.'
       flags:
@@ -136,6 +114,28 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Identifies the Timestream resource to which tags should be added.
         --tags=!: The tags to be assigned to the Timestream resource.
+    - name: untag-resource
+      description: Removes the association of tags from a Timestream query resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Timestream resource that the tags will be removed from.
+        --tag-keys=!: A list of tags keys.
+    - name: update-account-settings
+      description: Transitions your account to use TCUs for query pricing and modifies the maximum query compute units that you've configured.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-query-tcu=: The maximum number of compute units the service will use at any point in time to serve your queries.
+        --query-compute=: Modifies the query compute settings configured in your account, including the query pricing model and provisioned Timestream Compute Units (TCUs) in your account.
+        --query-pricing-model=: The pricing model for queries in an account.
+      completion:
+        flag:
+            query-pricing-model:
+                - BYTES_SCANNED
+                - COMPUTE_UNITS
     - name: update-scheduled-query
       description: Update a scheduled query.
       flags:

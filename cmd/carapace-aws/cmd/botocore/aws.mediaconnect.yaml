@@ -1,6 +1,122 @@
 name: mediaconnect
 description: AWS MediaConnect
 commands:
+    - name: add-bridge-outputs
+      description: Adds outputs to an existing bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outputs=!: The outputs that you want to add to this bridge.
+    - name: add-bridge-sources
+      description: Adds sources to an existing bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sources=!: The sources that you want to add to this bridge.
+    - name: add-flow-media-streams
+      description: Adds media streams to an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-streams=!: The media streams that you want to add to the flow.
+    - name: add-flow-outputs
+      description: Adds outputs to an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to add outputs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --outputs=!: A list of outputs that you want to add to the flow.
+    - name: add-flow-sources
+      description: Adds sources to a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --sources=!: A list of sources that you want to add to the flow.
+    - name: add-flow-vpc-interfaces
+      description: Adds VPC interfaces to a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-interfaces=!: A list of VPC interfaces that you want to add to the flow.
+    - name: batch-get-router-input
+      description: Retrieves information about multiple router inputs in AWS Elemental MediaConnect.
+      flags:
+        --arns=!: The Amazon Resource Names (ARNs) of the router inputs you want to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-router-network-interface
+      description: Retrieves information about multiple router network interfaces in AWS Elemental MediaConnect.
+      flags:
+        --arns=!: The Amazon Resource Names (ARNs) of the router network interfaces you want to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-router-output
+      description: Retrieves information about multiple router outputs in AWS Elemental MediaConnect.
+      flags:
+        --arns=!: The Amazon Resource Names (ARNs) of the router outputs you want to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-bridge
+      description: Creates a new bridge.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --egress-gateway-bridge=: An egress bridge is a cloud-to-ground bridge.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingress-gateway-bridge=: An ingress bridge is a ground-to-cloud bridge.
+        --name=!: The name of the bridge.
+        --outputs=: The outputs that you want to add to this bridge.
+        --placement-arn=!: The bridge placement Amazon Resource Number (ARN).
+        --source-failover-config=: The settings for source failover.
+        --sources=!: The sources that you want to add to this bridge.
+    - name: create-flow
+      description: Creates a new flow.
+      flags:
+        --availability-zone=: The Availability Zone that you want to create the flow in.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entitlements=: The entitlements that you want to grant on a flow.
+        --flow-size=: Determines the processing capacity and feature set of the flow.
+        --flow-tags=: The key-value pairs that can be used to tag and organize the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maintenance=: The maintenance settings you want to use for the flow.
+        --media-streams=: The media streams that you want to add to the flow.
+        --name=!: The name of the flow.
+        --ndi-config=: Specifies the configuration settings for NDI outputs.
+        --outputs=: The outputs that you want to add to this flow.
+        --source-failover-config=: The settings for source failover.
+        --source-monitoring-config=: The settings for source monitoring.
+        --source=: The settings for the source that you want to use for the new flow.
+        --sources=: The sources that are assigned to the flow.
+        --vpc-interfaces=: The VPC interfaces you want on the flow.
+      completion:
+        flag:
+            flow-size:
+                - MEDIUM
+                - LARGE
+    - name: create-gateway
+      description: Creates a new gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --egress-cidr-blocks=!: The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the gateway.
+        --networks=!: The list of networks that you want to add to the gateway.
     - name: create-router-input
       description: Creates a new router input in AWS Elemental MediaConnect.
       flags:
@@ -27,173 +143,6 @@ commands:
                 - INPUT_100
                 - INPUT_50
                 - INPUT_20
-    - name: start-router-output
-      description: Starts a router output in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to start.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-flow
-      description: Stops a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to stop.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: stop-router-input
-      description: Stops a router input in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: take-router-input
-      description: Associates a router input with a router output in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --router-input-arn=: The Amazon Resource Name (ARN) of the router input that you want to associate with a router output.
-        --router-output-arn=!: The Amazon Resource Name (ARN) of the router output that you want to associate with a router input.
-    - name: grant-flow-entitlements
-      description: Grants entitlements to an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entitlements=!: The list of entitlements that you want to grant.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to grant entitlements on.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-flows
-      description: Displays a list of flows that are associated with this account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-bridge-output
-      description: Removes an output from a bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --output-name=!: The name of the bridge output that you want to remove.
-    - name: add-flow-sources
-      description: Adds sources to a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sources=!: A list of sources that you want to add to the flow.
-    - name: create-gateway
-      description: Creates a new gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --egress-cidr-blocks=!: The range of IP addresses that are allowed to contribute content or initiate output requests for flows communicating with this gateway.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the gateway.
-        --networks=!: The list of networks that you want to add to the gateway.
-    - name: start-flow
-      description: Starts a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to start.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: tag-global-resource
-      description: Adds tags to a global resource in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource to tag.
-        --tags=!: A map of tag keys and values to add to the global resource.
-    - name: untag-global-resource
-      description: Removes tags from a global resource in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource to remove tags from.
-        --tag-keys=!: The keys of the tags to remove from the global resource.
-    - name: update-bridge-source
-      description: Updates an existing bridge source.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-source=: The name of the flow that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-source=: The network for the bridge source.
-        --source-name=!: The name of the source that you want to update.
-    - name: add-flow-media-streams
-      description: Adds media streams to an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-streams=!: The media streams that you want to add to the flow.
-    - name: batch-get-router-input
-      description: Retrieves information about multiple router inputs in AWS Elemental MediaConnect.
-      flags:
-        --arns=!: The Amazon Resource Names (ARNs) of the router inputs you want to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: batch-get-router-network-interface
-      description: Retrieves information about multiple router network interfaces in AWS Elemental MediaConnect.
-      flags:
-        --arns=!: The Amazon Resource Names (ARNs) of the router network interfaces you want to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-gateway
-      description: Deletes a gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-arn=!: The Amazon Resource Name (ARN) of the gateway that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-router-network-interface
-      description: Deletes a router network interface from AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: remove-flow-output
-      description: Removes an output from an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove an output from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --output-arn=!: The ARN of the output that you want to remove.
-    - name: update-flow-entitlement
-      description: Updates an entitlement.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: A description of the entitlement.
-        --encryption=: The type of encryption that will be used on the output associated with this entitlement.
-        --entitlement-arn=!: The Amazon Resource Name (ARN) of the entitlement that you want to update.
-        --entitlement-status=: An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily.
-        --flow-arn=!: The ARN of the flow that is associated with the entitlement that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subscribers=: The Amazon Web Services account IDs that you want to share your content with.
-      completion:
-        flag:
-            entitlement-status:
-                - ENABLED
-                - DISABLED
     - name: create-router-network-interface
       description: Creates a new router network interface in AWS Elemental MediaConnect.
       flags:
@@ -205,357 +154,6 @@ commands:
         --name=!: The name of the router network interface.
         --region-name=: The AWS Region for the router network interface.
         --tags=: Key-value pairs that can be used to tag and organize this router network interface.
-    - name: add-flow-outputs
-      description: Adds outputs to an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to add outputs to.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outputs=!: A list of outputs that you want to add to the flow.
-    - name: create-bridge
-      description: Creates a new bridge.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --egress-gateway-bridge=: An egress bridge is a cloud-to-ground bridge.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingress-gateway-bridge=: An ingress bridge is a ground-to-cloud bridge.
-        --name=!: The name of the bridge.
-        --outputs=: The outputs that you want to add to this bridge.
-        --placement-arn=!: The bridge placement Amazon Resource Number (ARN).
-        --source-failover-config=: The settings for source failover.
-        --sources=!: The sources that you want to add to this bridge.
-    - name: get-router-input
-      description: Retrieves information about a specific router input in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-reservations
-      description: Displays a list of all reservations that have been purchased by this account in the current Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-flow-source
-      description: Removes a source from an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove a source from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-arn=!: The ARN of the source that you want to remove.
-    - name: remove-flow-vpc-interface
-      description: Removes a VPC Interface from an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove a VPC interface from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-interface-name=!: The name of the VPC interface that you want to remove.
-    - name: list-gateways
-      description: Displays a list of gateways that are associated with this account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: tag-resource
-      description: Associates the specified tags to a resource with the specified `resourceArn` in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the MediaConnect resource to which to add tags.
-        --tags=!: A map from tag keys to values.
-    - name: update-bridge-output
-      description: Updates an existing bridge output.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --network-output=: The network of the bridge output.
-        --output-name=!: Tname of the output that you want to update.
-    - name: add-bridge-outputs
-      description: Adds outputs to an existing bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outputs=!: The outputs that you want to add to this bridge.
-    - name: describe-bridge
-      description: Displays the details of a bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to describe.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: restart-router-input
-      description: Restarts a router input.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to restart.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: restart-router-output
-      description: Restarts a router output.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to restart.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: untag-resource
-      description: Deletes specified tags from a resource in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
-        --tag-keys=!: The keys of the tags to be removed.
-    - name: update-gateway-instance
-      description: Updates an existing gateway instance.
-      flags:
-        --bridge-placement=: The state of the instance.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-instance-arn=!: The Amazon Resource Name (ARN) of the gateway instance that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-      completion:
-        flag:
-            bridge-placement:
-                - AVAILABLE
-                - LOCKED
-    - name: describe-flow
-      description: Displays the details of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The ARN of the flow that you want to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-gateway
-      description: Displays the details of a gateway.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --gateway-arn=!: The ARN of the gateway that you want to describe.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-gateway-instances
-      description: Displays a list of instances associated with the Amazon Web Services account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-arn=: Filter the list results to display only the instances associated with the selected Gateway ARN.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: list-router-network-interfaces
-      description: Retrieves a list of router network interfaces in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters to apply when retrieving the list of router network interfaces.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of router network interfaces to return in the response.
-        --next-token=: A token used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: remove-flow-media-stream
-      description: Removes a media stream from a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-stream-name=!: The name of the media stream that you want to remove.
-    - name: stop-router-output
-      description: Stops a router output in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to stop.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-flow-source
-      description: Updates the source of a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --decryption=: The type of encryption that is used on the content ingested from the source.
-        --description=: A description of the source.
-        --entitlement-arn=: The Amazon Resource Name (ARN) of the entitlement that allows you to subscribe to the flow.
-        --flow-arn=!: The ARN of the flow that you want to update.
-        --gateway-bridge-source=: The source configuration for cloud flows receiving a stream from a bridge.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingest-port=: The port that the flow listens on for incoming content.
-        --max-bitrate=: The maximum bitrate for RIST, RTP, and RTP-FEC streams.
-        --max-latency=: The maximum latency in milliseconds.
-        --max-sync-buffer=: The size of the buffer (in milliseconds) to use to sync incoming source data.
-        --media-stream-source-configurations=: The media stream that is associated with the source, and the parameters for that association.
-        --min-latency=: The minimum latency in milliseconds for SRT-based streams.
-        --protocol=: The protocol that the source uses to deliver the content to MediaConnect.
-        --router-integration-state=: Indicates whether to enable or disable router integration for this flow source.
-        --router-integration-transit-decryption=: The encryption configuration for the flow source when router integration is enabled.
-        --sender-control-port=: The port that the flow uses to send outbound requests to initiate connection with the sender.
-        --sender-ip-address=: The IP address that the flow communicates with to initiate connection with the sender.
-        --source-arn=!: The ARN of the source that you want to update.
-        --source-listener-address=: The source IP or domain name for SRT-caller protocol.
-        --source-listener-port=: Source port for SRT-caller protocol.
-        --stream-id=: The stream ID that you want to use for this transport.
-        --vpc-interface-name=: The name of the VPC interface that you want to send your output to.
-        --whitelist-cidr=: The range of IP addresses that are allowed to contribute content to your source.
-      completion:
-        flag:
-            protocol:
-                - zixi-push
-                - rtp-fec
-                - rtp
-                - zixi-pull
-                - rist
-                - st2110-jpegxs
-                - cdi
-                - srt-listener
-                - srt-caller
-                - fujitsu-qos
-                - udp
-                - ndi-speed-hq
-            router-integration-state:
-                - ENABLED
-                - DISABLED
-    - name: batch-get-router-output
-      description: Retrieves information about multiple router outputs in AWS Elemental MediaConnect.
-      flags:
-        --arns=!: The Amazon Resource Names (ARNs) of the router outputs you want to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-bridge
-      description: Deletes a bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-router-output
-      description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-offerings
-      description: Displays a list of all offerings that are available to this account in the current Amazon Web Services Region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: purchase-offering
-      description: Submits a request to purchase an offering.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --offering-arn=!: The Amazon Resource Name (ARN) of the offering.
-        --reservation-name=!: The name that you want to use for the reservation.
-        --start=!: The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC).
-    - name: remove-bridge-source
-      description: Removes a source from a bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --source-name=!: The name of the bridge source that you want to remove.
-    - name: revoke-flow-entitlement
-      description: Revokes an entitlement from a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entitlement-arn=!: The Amazon Resource Name (ARN) of the entitlement that you want to revoke.
-        --flow-arn=!: The flow that you want to revoke an entitlement from.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: add-flow-vpc-interfaces
-      description: Adds VPC interfaces to a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-interfaces=!: A list of VPC interfaces that you want to add to the flow.
-    - name: describe-reservation
-      description: Displays the details of a reservation.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --reservation-arn=!: The Amazon Resource Name (ARN) of the offering.
-    - name: list-tags-for-global-resource
-      description: Lists the tags associated with a global resource in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource whose tags you want to list.
-    - name: update-flow
-      description: Updates an existing flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
-        --flow-size=: Determines the processing capacity and feature set of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maintenance=: The maintenance setting of the flow.
-        --ndi-config=: Specifies the configuration settings for NDI outputs.
-        --source-failover-config=: The settings for source failover.
-        --source-monitoring-config=: The settings for source monitoring.
-      completion:
-        flag:
-            flow-size:
-                - MEDIUM
-                - LARGE
-    - name: update-router-input
-      description: Updates the configuration of an existing router input in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: The updated configuration settings for the router input.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maintenance-configuration=: The updated maintenance configuration settings for the router input, including any changes to preferred maintenance windows and schedules.
-        --maximum-bitrate=: The updated maximum bitrate for the router input.
-        --name=: The updated name for the router input.
-        --routing-scope=: Specifies whether the router input can be assigned to outputs in different Regions.
-        --tier=: The updated tier level for the router input.
-        --transit-encryption=: The updated transit encryption settings for the router input.
-      completion:
-        flag:
-            routing-scope:
-                - REGIONAL
-                - GLOBAL
-            tier:
-                - INPUT_100
-                - INPUT_50
-                - INPUT_20
     - name: create-router-output
       description: Creates a new router output in AWS Elemental MediaConnect.
       flags:
@@ -581,6 +179,92 @@ commands:
                 - OUTPUT_100
                 - OUTPUT_50
                 - OUTPUT_20
+    - name: delete-bridge
+      description: Deletes a bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-flow
+      description: Deletes a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-gateway
+      description: Deletes a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-arn=!: The Amazon Resource Name (ARN) of the gateway that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-router-input
+      description: Deletes a router input from AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-router-network-interface
+      description: Deletes a router network interface from AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-router-output
+      description: Deletes a router output from AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deregister-gateway-instance
+      description: Deregisters an instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --force: Force the deregistration of an instance.
+        --gateway-instance-arn=!: The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force: Force the deregistration of an instance.
+    - name: describe-bridge
+      description: Displays the details of a bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-flow
+      description: Displays the details of a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The ARN of the flow that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-flow-source-metadata
+      description: The `DescribeFlowSourceMetadata` API is used to view information about the flow's source transport stream and programs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-flow-source-thumbnail
+      description: Describes the thumbnail for the flow source.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-gateway
+      description: Displays the details of a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-arn=!: The ARN of the gateway that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-gateway-instance
       description: Displays the details of an instance.
       flags:
@@ -588,37 +272,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-instance-arn=!: The Amazon Resource Name (ARN) of the gateway instance that you want to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-router-outputs
-      description: Retrieves a list of router outputs in AWS Elemental MediaConnect.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters to apply when retrieving the list of router outputs.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of router outputs to return in the response.
-        --next-token=: A token used to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-    - name: update-flow-media-stream
-      description: Updates an existing media stream.
-      flags:
-        --attributes=: The attributes that you want to assign to the media stream.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --clock-rate=: The sample rate for the stream.
-        --description=: A description that can help you quickly identify what your media stream is used for.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that is associated with the media stream that you updated.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --media-stream-name=!: The media stream that you updated.
-        --media-stream-type=: The type of media stream.
-        --video-format=: The resolution of the video.
-      completion:
-        flag:
-            media-stream-type:
-                - video
-                - audio
-                - ancillary-data
     - name: describe-offering
       description: Displays the details of an offering.
       flags:
@@ -626,8 +279,126 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --offering-arn=!: The ARN of the offering.
+    - name: describe-reservation
+      description: Displays the details of a reservation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reservation-arn=!: The Amazon Resource Name (ARN) of the offering.
+    - name: get-router-input
+      description: Retrieves information about a specific router input in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-router-input-source-metadata
+      description: Retrieves detailed metadata information about a specific router input source, including stream details and connection state.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve metadata for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-router-input-thumbnail
+      description: Retrieves the thumbnail for a router input in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to see a thumbnail of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-router-network-interface
+      description: Retrieves information about a specific router network interface in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-router-output
+      description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: grant-flow-entitlements
+      description: Grants entitlements to an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entitlements=!: The list of entitlements that you want to grant.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to grant entitlements on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-bridges
+      description: Displays a list of bridges that are associated with this account and an optionally specified Amazon Resource Name (ARN).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-arn=: Filter the list results to display only the bridges associated with the selected ARN.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-entitlements
       description: Displays a list of all entitlements that have been granted to this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-flows
+      description: Displays a list of flows that are associated with this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-gateway-instances
+      description: Displays a list of instances associated with the Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-arn=: Filter the list results to display only the instances associated with the selected Gateway ARN.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-gateways
+      description: Displays a list of gateways that are associated with this account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-offerings
+      description: Displays a list of all offerings that are available to this account in the current Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-reservations
+      description: Displays a list of all reservations that have been purchased by this account in the current Amazon Web Services Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -649,6 +420,130 @@ commands:
         --next-token=: A token used to retrieve the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-router-network-interfaces
+      description: Retrieves a list of router network interfaces in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filters to apply when retrieving the list of router network interfaces.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of router network interfaces to return in the response.
+        --next-token=: A token used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-router-outputs
+      description: Retrieves a list of router outputs in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: The filters to apply when retrieving the list of router outputs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of router outputs to return in the response.
+        --next-token=: A token used to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-global-resource
+      description: Lists the tags associated with a global resource in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource whose tags you want to list.
+    - name: list-tags-for-resource
+      description: List all tags on a MediaConnect resource in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.
+    - name: purchase-offering
+      description: Submits a request to purchase an offering.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --offering-arn=!: The Amazon Resource Name (ARN) of the offering.
+        --reservation-name=!: The name that you want to use for the reservation.
+        --start=!: The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC).
+    - name: remove-bridge-output
+      description: Removes an output from a bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-name=!: The name of the bridge output that you want to remove.
+    - name: remove-bridge-source
+      description: Removes a source from a bridge.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-name=!: The name of the bridge source that you want to remove.
+    - name: remove-flow-media-stream
+      description: Removes a media stream from a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-stream-name=!: The name of the media stream that you want to remove.
+    - name: remove-flow-output
+      description: Removes an output from an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove an output from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-arn=!: The ARN of the output that you want to remove.
+    - name: remove-flow-source
+      description: Removes a source from an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove a source from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --source-arn=!: The ARN of the source that you want to remove.
+    - name: remove-flow-vpc-interface
+      description: Removes a VPC Interface from an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to remove a VPC interface from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --vpc-interface-name=!: The name of the VPC interface that you want to remove.
+    - name: restart-router-input
+      description: Restarts a router input.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to restart.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: restart-router-output
+      description: Restarts a router output.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to restart.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: revoke-flow-entitlement
+      description: Revokes an entitlement from a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entitlement-arn=!: The Amazon Resource Name (ARN) of the entitlement that you want to revoke.
+        --flow-arn=!: The flow that you want to revoke an entitlement from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-flow
+      description: Starts a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to start.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-router-input
       description: Starts a router input in AWS Elemental MediaConnect.
       flags:
@@ -656,6 +551,103 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: start-router-output
+      description: Starts a router output in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to start.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-flow
+      description: Stops a flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to stop.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-router-input
+      description: Stops a router input in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-router-output
+      description: Stops a router output in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: tag-global-resource
+      description: Adds tags to a global resource in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource to tag.
+        --tags=!: A map of tag keys and values to add to the global resource.
+    - name: tag-resource
+      description: Associates the specified tags to a resource with the specified `resourceArn` in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the MediaConnect resource to which to add tags.
+        --tags=!: A map from tag keys to values.
+    - name: take-router-input
+      description: Associates a router input with a router output in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --router-input-arn=: The Amazon Resource Name (ARN) of the router input that you want to associate with a router output.
+        --router-output-arn=!: The Amazon Resource Name (ARN) of the router output that you want to associate with a router input.
+    - name: untag-global-resource
+      description: Removes tags from a global resource in AWS Elemental MediaConnect.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the global resource to remove tags from.
+        --tag-keys=!: The keys of the tags to remove from the global resource.
+    - name: untag-resource
+      description: Deletes specified tags from a resource in the current region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource that you want to untag.
+        --tag-keys=!: The keys of the tags to be removed.
+    - name: update-bridge
+      description: Updates the bridge.
+      flags:
+        --bridge-arn=!: TheAmazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --egress-gateway-bridge=: A cloud-to-ground bridge.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingress-gateway-bridge=: A ground-to-cloud bridge.
+        --source-failover-config=: The settings for source failover.
+    - name: update-bridge-output
+      description: Updates an existing bridge output.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-output=: The network of the bridge output.
+        --output-name=!: Tname of the output that you want to update.
+    - name: update-bridge-source
+      description: Updates an existing bridge source.
+      flags:
+        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-source=: The name of the flow that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-source=: The network for the bridge source.
+        --source-name=!: The name of the source that you want to update.
     - name: update-bridge-state
       description: Updates the bridge state.
       flags:
@@ -670,6 +662,59 @@ commands:
                 - ACTIVE
                 - STANDBY
                 - DELETED
+    - name: update-flow
+      description: Updates an existing flow.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to update.
+        --flow-size=: Determines the processing capacity and feature set of the flow.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maintenance=: The maintenance setting of the flow.
+        --ndi-config=: Specifies the configuration settings for NDI outputs.
+        --source-failover-config=: The settings for source failover.
+        --source-monitoring-config=: The settings for source monitoring.
+      completion:
+        flag:
+            flow-size:
+                - MEDIUM
+                - LARGE
+    - name: update-flow-entitlement
+      description: Updates an entitlement.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the entitlement.
+        --encryption=: The type of encryption that will be used on the output associated with this entitlement.
+        --entitlement-arn=!: The Amazon Resource Name (ARN) of the entitlement that you want to update.
+        --entitlement-status=: An indication of whether you want to enable the entitlement to allow access, or disable it to stop streaming content to the subscriber’s flow temporarily.
+        --flow-arn=!: The ARN of the flow that is associated with the entitlement that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscribers=: The Amazon Web Services account IDs that you want to share your content with.
+      completion:
+        flag:
+            entitlement-status:
+                - ENABLED
+                - DISABLED
+    - name: update-flow-media-stream
+      description: Updates an existing media stream.
+      flags:
+        --attributes=: The attributes that you want to assign to the media stream.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --clock-rate=: The sample rate for the stream.
+        --description=: A description that can help you quickly identify what your media stream is used for.
+        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that is associated with the media stream that you updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --media-stream-name=!: The media stream that you updated.
+        --media-stream-type=: The type of media stream.
+        --video-format=: The resolution of the video.
+      completion:
+        flag:
+            media-stream-type:
+                - video
+                - audio
+                - ancillary-data
     - name: update-flow-output
       description: Updates an existing flow output.
       flags:
@@ -719,40 +764,97 @@ commands:
             router-integration-state:
                 - ENABLED
                 - DISABLED
-    - name: add-bridge-sources
-      description: Adds sources to an existing bridge.
-      flags:
-        --bridge-arn=!: The Amazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --sources=!: The sources that you want to add to this bridge.
-    - name: get-router-input-source-metadata
-      description: Retrieves detailed metadata information about a specific router input source, including stream details and connection state.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve metadata for.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-router-input-thumbnail
-      description: Retrieves the thumbnail for a router input in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to see a thumbnail of.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-bridges
-      description: Displays a list of bridges that are associated with this account and an optionally specified Amazon Resource Name (ARN).
+    - name: update-flow-source
+      description: Updates the source of a flow.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filter-arn=: Filter the list results to display only the bridges associated with the selected ARN.
+        --decryption=: The type of encryption that is used on the content ingested from the source.
+        --description=: A description of the source.
+        --entitlement-arn=: The Amazon Resource Name (ARN) of the entitlement that allows you to subscribe to the flow.
+        --flow-arn=!: The ARN of the flow that you want to update.
+        --gateway-bridge-source=: The source configuration for cloud flows receiving a stream from a bridge.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return per API request.
-        --next-token=: The token that identifies the batch of results that you want to see.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
+        --ingest-port=: The port that the flow listens on for incoming content.
+        --max-bitrate=: The maximum bitrate for RIST, RTP, and RTP-FEC streams.
+        --max-latency=: The maximum latency in milliseconds.
+        --max-sync-buffer=: The size of the buffer (in milliseconds) to use to sync incoming source data.
+        --media-stream-source-configurations=: The media stream that is associated with the source, and the parameters for that association.
+        --min-latency=: The minimum latency in milliseconds for SRT-based streams.
+        --protocol=: The protocol that the source uses to deliver the content to MediaConnect.
+        --router-integration-state=: Indicates whether to enable or disable router integration for this flow source.
+        --router-integration-transit-decryption=: The encryption configuration for the flow source when router integration is enabled.
+        --sender-control-port=: The port that the flow uses to send outbound requests to initiate connection with the sender.
+        --sender-ip-address=: The IP address that the flow communicates with to initiate connection with the sender.
+        --source-arn=!: The ARN of the source that you want to update.
+        --source-listener-address=: The source IP or domain name for SRT-caller protocol.
+        --source-listener-port=: Source port for SRT-caller protocol.
+        --stream-id=: The stream ID that you want to use for this transport.
+        --vpc-interface-name=: The name of the VPC interface that you want to send your output to.
+        --whitelist-cidr=: The range of IP addresses that are allowed to contribute content to your source.
+      completion:
+        flag:
+            protocol:
+                - zixi-push
+                - rtp-fec
+                - rtp
+                - zixi-pull
+                - rist
+                - st2110-jpegxs
+                - cdi
+                - srt-listener
+                - srt-caller
+                - fujitsu-qos
+                - udp
+                - ndi-speed-hq
+            router-integration-state:
+                - ENABLED
+                - DISABLED
+    - name: update-gateway-instance
+      description: Updates an existing gateway instance.
+      flags:
+        --bridge-placement=: The state of the instance.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-instance-arn=!: The Amazon Resource Name (ARN) of the gateway instance that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            bridge-placement:
+                - AVAILABLE
+                - LOCKED
+    - name: update-router-input
+      description: Updates the configuration of an existing router input in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: The updated configuration settings for the router input.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --maintenance-configuration=: The updated maintenance configuration settings for the router input, including any changes to preferred maintenance windows and schedules.
+        --maximum-bitrate=: The updated maximum bitrate for the router input.
+        --name=: The updated name for the router input.
+        --routing-scope=: Specifies whether the router input can be assigned to outputs in different Regions.
+        --tier=: The updated tier level for the router input.
+        --transit-encryption=: The updated transit encryption settings for the router input.
+      completion:
+        flag:
+            routing-scope:
+                - REGIONAL
+                - GLOBAL
+            tier:
+                - INPUT_100
+                - INPUT_50
+                - INPUT_20
+    - name: update-router-network-interface
+      description: Updates the configuration of an existing router network interface in AWS Elemental MediaConnect.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: The updated configuration settings for the router network interface.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name for the router network interface.
     - name: update-router-output
       description: Updates the configuration of an existing router output in AWS Elemental MediaConnect.
       flags:
@@ -775,125 +877,9 @@ commands:
                 - OUTPUT_100
                 - OUTPUT_50
                 - OUTPUT_20
-    - name: create-flow
-      description: Creates a new flow.
-      flags:
-        --availability-zone=: The Availability Zone that you want to create the flow in.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entitlements=: The entitlements that you want to grant on a flow.
-        --flow-size=: Determines the processing capacity and feature set of the flow.
-        --flow-tags=: The key-value pairs that can be used to tag and organize the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maintenance=: The maintenance settings you want to use for the flow.
-        --media-streams=: The media streams that you want to add to the flow.
-        --name=!: The name of the flow.
-        --ndi-config=: Specifies the configuration settings for NDI outputs.
-        --outputs=: The outputs that you want to add to this flow.
-        --source-failover-config=: The settings for source failover.
-        --source-monitoring-config=: The settings for source monitoring.
-        --source=: The settings for the source that you want to use for the new flow.
-        --sources=: The sources that are assigned to the flow.
-        --vpc-interfaces=: The VPC interfaces you want on the flow.
-      completion:
-        flag:
-            flow-size:
-                - MEDIUM
-                - LARGE
-    - name: delete-router-input
-      description: Deletes a router input from AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router input that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-flow-source-metadata
-      description: The `DescribeFlowSourceMetadata` API is used to view information about the flow's source transport stream and programs.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: describe-flow-source-thumbnail
-      description: Describes the thumbnail for the flow source.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-tags-for-resource
-      description: List all tags on a MediaConnect resource in the current region.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the MediaConnect resource for which to list the tags.
-    - name: update-bridge
-      description: Updates the bridge.
-      flags:
-        --bridge-arn=!: TheAmazon Resource Name (ARN) of the bridge that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --egress-gateway-bridge=: A cloud-to-ground bridge.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ingress-gateway-bridge=: A ground-to-cloud bridge.
-        --source-failover-config=: The settings for source failover.
-    - name: delete-flow
-      description: Deletes a flow.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --flow-arn=!: The Amazon Resource Name (ARN) of the flow that you want to delete.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-router-output
-      description: Deletes a router output from AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router output that you want to delete.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-router-network-interface
-      description: Updates the configuration of an existing router network interface in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to update.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --configuration=: The updated configuration settings for the router network interface.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The updated name for the router network interface.
-    - name: deregister-gateway-instance
-      description: Deregisters an instance.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --force: Force the deregistration of an instance.
-        --gateway-instance-arn=!: The Amazon Resource Name (ARN) of the gateway that contains the instance that you want to deregister.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-force: Force the deregistration of an instance.
-    - name: get-router-network-interface
-      description: Retrieves information about a specific router network interface in AWS Elemental MediaConnect.
-      flags:
-        --arn=!: The Amazon Resource Name (ARN) of the router network interface that you want to retrieve information about.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
-        - name: output-routed
-          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
-          flags:
-            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: output-standby
-          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
-          flags:
-            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: flow-active
           description: Displays the details of a flow.
           flags:
@@ -907,20 +893,6 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --flow-arn=!: The ARN of the flow that you want to describe.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: input-deleted
-          description: Retrieves information about a specific router input in AWS Elemental MediaConnect.
-          flags:
-            --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve information about.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
-            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        - name: output-deleted
-          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
-          flags:
-            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
-            --cli-input-json=: Read arguments from the JSON string provided.
-            --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: flow-standby
           description: Displays the details of a flow.
@@ -936,6 +908,13 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: input-deleted
+          description: Retrieves information about a specific router input in AWS Elemental MediaConnect.
+          flags:
+            --arn=!: The Amazon Resource Name (ARN) of the router input to retrieve information about.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: input-standby
           description: Retrieves information about a specific router input in AWS Elemental MediaConnect.
           flags:
@@ -944,6 +923,27 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: output-active
+          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
+          flags:
+            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: output-deleted
+          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
+          flags:
+            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: output-routed
+          description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
+          flags:
+            --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: output-standby
           description: Retrieves information about a specific router output in AWS Elemental MediaConnect.
           flags:
             --arn=!: The Amazon Resource Name (ARN) of the router output that you want to retrieve information about.

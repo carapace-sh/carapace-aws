@@ -1,15 +1,47 @@
 name: chime
 description: Amazon Chime
 commands:
-    - name: update-user-settings
-      description: Updates the settings for the specified user, such as phone number settings.
+    - name: associate-phone-number-with-user
+      description: Associates a phone number with the specified Amazon Chime user.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-number=!: The phone number, in E.164 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The user ID.
+    - name: associate-signin-delegate-groups-with-account
+      description: Associates the specified sign-in delegate groups with the specified Amazon Chime account.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user ID.
-        --user-settings=!: The user settings to update.
+        --signin-delegate-groups=!: The sign-in delegate groups.
+    - name: batch-create-room-membership
+      description: Adds up to 50 members to a chat room in an Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-item-list=!: The list of membership items.
+        --room-id=!: The room ID.
+    - name: batch-delete-phone-number
+      description: Moves phone numbers into the **Deletion queue**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-ids=!: List of phone number IDs.
+    - name: batch-suspend-user
+      description: Suspends up to 50 users from a `Team` or `EnterpriseLWA` Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id-list=!: The request containing the user IDs to suspend.
     - name: batch-unsuspend-user
       description: Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime `EnterpriseLWA` account.
       flags:
@@ -18,22 +50,138 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-id-list=!: The request containing the user IDs to unsuspend.
-    - name: get-bot
-      description: Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.
+    - name: batch-update-phone-number
+      description: Updates phone number product types or calling names.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-phone-number-request-items=!: The request containing the phone number IDs and product types or calling names to update.
+    - name: batch-update-user
+      description: Updates user details within the [UpdateUserRequestItem]() object for up to 20 users for the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-user-request-items=!: The request containing the user IDs and details to update.
+    - name: create-account
+      description: Creates an Amazon Chime account under the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Amazon Chime account.
+    - name: create-bot
+      description: Creates a bot for an Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=!: The bot display name.
+        --domain=: The domain of the Amazon Chime Enterprise account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-meeting-dial-out
+      description: Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --from-phone-number=!: Phone number used as the caller ID when the remote party receives a call.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --join-token=!: Token used by the Amazon Chime SDK attendee.
+        --meeting-id=!: The Amazon Chime SDK meeting ID.
+        --to-phone-number=!: Phone number called when inviting someone to a meeting.
+    - name: create-phone-number-order
+      description: Creates an order for phone numbers to be provisioned.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-type=!: The phone number product type.
+      completion:
+        flag:
+            product-type:
+                - BusinessCalling
+                - VoiceConnector
+                - SipMediaApplicationDialIn
+    - name: create-room
+      description: Creates a chat room for the specified Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: The idempotency token for the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The room name.
+    - name: create-room-membership
+      description: Adds a member to a chat room in an Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-id=!: The Amazon Chime member ID (user ID or bot ID).
+        --role=: The role of the member.
+        --room-id=!: The room ID.
+      completion:
+        flag:
+            role:
+                - Administrator
+                - Member
+    - name: create-user
+      description: Creates a user under the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email=: The user's email address.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-type=: The user type.
+        --username=: The user name.
+      completion:
+        flag:
+            user-type:
+                - PrivateUser
+                - SharedDevice
+    - name: delete-account
+      description: Deletes the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-events-configuration
+      description: Deletes the events configuration that allows a bot to receive outgoing events.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --bot-id=!: The bot ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: redact-room-message
-      description: Redacts the specified message from the specified Amazon Chime channel.
+    - name: delete-phone-number
+      description: Moves the specified phone number into the **Deletion queue**.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-id=!: The phone number ID.
+    - name: delete-room
+      description: Deletes a chat room in an Amazon Chime Enterprise account.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --message-id=!: The message ID.
+        --room-id=!: The chat room ID.
+    - name: delete-room-membership
+      description: Removes a member from a chat room in an Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-id=!: The member ID (user ID or bot ID).
         --room-id=!: The room ID.
     - name: disassociate-phone-number-from-user
       description: Disassociates the primary provisioned phone number from the specified Amazon Chime user.
@@ -43,6 +191,145 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-id=!: The user ID.
+    - name: disassociate-signin-delegate-groups-from-account
+      description: Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-names=!: The sign-in delegate group names.
+    - name: get-account
+      description: Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-account-settings
+      description: Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-bot
+      description: Retrieves details for the specified bot, such as bot email address, bot type, status, and display name.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --bot-id=!: The bot ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-events-configuration
+      description: Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --bot-id=!: The bot ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-global-settings
+      description: Retrieves global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-phone-number
+      description: Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-id=!: The phone number ID.
+    - name: get-phone-number-order
+      description: Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-order-id=!: The ID for the phone number order.
+    - name: get-phone-number-settings
+      description: Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-retention-settings
+      description: Gets the retention settings for the specified Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-room
+      description: Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --room-id=!: The room ID.
+    - name: get-user
+      description: Retrieves details for the specified user ID, such as primary email address, license type,and personal meeting PIN.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The user ID.
+    - name: get-user-settings
+      description: Retrieves settings for the specified user ID, such as any associated phone number settings.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=!: The user ID.
+    - name: invite-users
+      description: Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime `Team` account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-email-list=!: The user email addresses to which to send the email invitation.
+        --user-type=: The user type.
+      completion:
+        flag:
+            user-type:
+                - PrivateUser
+                - SharedDevice
+    - name: list-accounts
+      description: Lists the Amazon Chime accounts under the administrator's AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --name=: Amazon Chime account name prefix with which to filter results.
+        --next-token=: The token to use to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-email=: User email address with which to filter results.
+    - name: list-bots
+      description: Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token to use to retrieve the next page of results.
+    - name: list-phone-number-orders
+      description: Lists the phone number orders for the administrator's Amazon Chime account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token to use to retrieve the next page of results.
     - name: list-phone-numbers
       description: Lists the phone numbers for the specified Amazon Chime account, Amazon Chime user, Amazon Chime Voice Connector, or Amazon Chime Voice Connector group.
       flags:
@@ -76,123 +363,6 @@ commands:
                 - DeleteInProgress
                 - ReleaseFailed
                 - DeleteFailed
-    - name: create-account
-      description: Creates an Amazon Chime account under the administrator's AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the Amazon Chime account.
-    - name: get-account-settings
-      description: Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-global-settings
-      description: Updates global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
-      flags:
-        --business-calling=: The Amazon Chime Business Calling settings.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector=: The Amazon Chime Voice Connector settings.
-    - name: associate-phone-number-with-user
-      description: Associates a phone number with the specified Amazon Chime user.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-number=!: The phone number, in E.164 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user ID.
-    - name: get-phone-number
-      description: Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number ID.
-    - name: get-phone-number-order
-      description: Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-order-id=!: The ID for the phone number order.
-    - name: list-accounts
-      description: Lists the Amazon Chime accounts under the administrator's AWS account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --name=: Amazon Chime account name prefix with which to filter results.
-        --next-token=: The token to use to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-email=: User email address with which to filter results.
-    - name: batch-delete-phone-number
-      description: Moves phone numbers into the **Deletion queue**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-ids=!: List of phone number IDs.
-    - name: delete-phone-number
-      description: Moves the specified phone number into the **Deletion queue**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number ID.
-    - name: get-room
-      description: Retrieves room details, such as the room name, for a room in an Amazon Chime Enterprise account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --room-id=!: The room ID.
-    - name: get-user-settings
-      description: Retrieves settings for the specified user ID, such as any associated phone number settings.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user ID.
-    - name: update-room-membership
-      description: Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The member ID.
-        --role=: The role of the member.
-        --room-id=!: The room ID.
-      completion:
-        flag:
-            role:
-                - Administrator
-                - Member
-    - name: create-phone-number-order
-      description: Creates an order for phone numbers to be provisioned.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --e164-phone-numbers=!: List of phone numbers, in E.164 format.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --product-type=!: The phone number product type.
-      completion:
-        flag:
-            product-type:
-                - BusinessCalling
-                - VoiceConnector
-                - SipMediaApplicationDialIn
     - name: list-room-memberships
       description: Lists the membership details for the specified room in an Amazon Chime Enterprise account, such as the members' IDs, email addresses, and names.
       flags:
@@ -203,108 +373,6 @@ commands:
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token to use to retrieve the next page of results.
         --room-id=!: The room ID.
-    - name: list-users
-      description: Lists the users that belong to the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token to use to retrieve the next page of results.
-        --page-size=: The size of each page to get in the AWS service call.
-        --starting-token=: A token to specify where to start paginating.
-        --user-email=: Optional.
-        --user-type=: The user type.
-      completion:
-        flag:
-            user-type:
-                - PrivateUser
-                - SharedDevice
-    - name: update-account
-      description: Updates account details for the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-license=: The default license applied when you add users to an Amazon Chime account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name for the specified Amazon Chime account.
-      completion:
-        flag:
-            default-license:
-                - Basic
-                - Plus
-                - Pro
-                - ProTrial
-    - name: batch-suspend-user
-      description: Suspends up to 50 users from a `Team` or `EnterpriseLWA` Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id-list=!: The request containing the user IDs to suspend.
-    - name: batch-update-user
-      description: Updates user details within the [UpdateUserRequestItem]() object for up to 20 users for the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --update-user-request-items=!: The request containing the user IDs and details to update.
-    - name: create-bot
-      description: Creates a bot for an Amazon Chime Enterprise account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --display-name=!: The bot display name.
-        --domain=: The domain of the Amazon Chime Enterprise account.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-phone-number-settings
-      description: Retrieves the phone number settings for the administrator's AWS account, such as the default outbound calling name.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: logout-user
-      description: Logs out the specified user from all of the devices they are currently logged into.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-id=!: The user ID.
-    - name: update-user
-      description: Updates user details for a specified user ID.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --alexa-for-business-metadata=: The Alexa for Business metadata.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --license-type=: The user license type to update.
-        --user-id=!: The user ID.
-        --user-type=: The user type.
-      completion:
-        flag:
-            license-type:
-                - Basic
-                - Plus
-                - Pro
-                - ProTrial
-            user-type:
-                - PrivateUser
-                - SharedDevice
-    - name: batch-update-phone-number
-      description: Updates phone number product types or calling names.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --update-phone-number-request-items=!: The request containing the phone number IDs and product types or calling names to update.
     - name: list-rooms
       description: Lists the room details for the specified Amazon Chime Enterprise account.
       flags:
@@ -328,29 +396,43 @@ commands:
                 - BusinessCalling
                 - VoiceConnector
                 - SipMediaApplicationDialIn
-    - name: reset-personal-pin
-      description: Resets the personal meeting PIN for the specified user on an Amazon Chime account.
+    - name: list-users
+      description: Lists the users that belong to the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token to use to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --user-email=: Optional.
+        --user-type=: The user type.
+      completion:
+        flag:
+            user-type:
+                - PrivateUser
+                - SharedDevice
+    - name: logout-user
+      description: Logs out the specified user from all of the devices they are currently logged into.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-id=!: The user ID.
-    - name: update-phone-number
-      description: Updates phone number details, such as product type or calling name, for the specified phone number ID.
+    - name: put-events-configuration
+      description: Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime.
       flags:
-        --calling-name=: The outbound calling name associated with the phone number.
+        --account-id=!: The Amazon Chime account ID.
+        --bot-id=!: The bot ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number ID.
-        --product-type=: The product type.
-      completion:
-        flag:
-            product-type:
-                - BusinessCalling
-                - VoiceConnector
-                - SipMediaApplicationDialIn
+        --lambda-function-arn=: Lambda function ARN that allows the bot to receive outgoing events.
+        --outbound-events-https-endpoint=: HTTPS endpoint that allows the bot to receive outgoing events.
     - name: put-retention-settings
       description: Puts retention settings for the specified Amazon Chime Enterprise account.
       flags:
@@ -368,48 +450,15 @@ commands:
         --conversation-id=!: The conversation ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --message-id=!: The message ID.
-    - name: restore-phone-number
-      description: Moves a phone number from the **Deletion queue** back into the phone number **Inventory**.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --phone-number-id=!: The phone number.
-    - name: create-meeting-dial-out
-      description: Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --from-phone-number=!: Phone number used as the caller ID when the remote party receives a call.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --join-token=!: Token used by the Amazon Chime SDK attendee.
-        --meeting-id=!: The Amazon Chime SDK meeting ID.
-        --to-phone-number=!: Phone number called when inviting someone to a meeting.
-    - name: delete-events-configuration
-      description: Deletes the events configuration that allows a bot to receive outgoing events.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --bot-id=!: The bot ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-retention-settings
-      description: Gets the retention settings for the specified Amazon Chime Enterprise account.
+    - name: redact-room-message
+      description: Redacts the specified message from the specified Amazon Chime channel.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: put-events-configuration
-      description: Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --bot-id=!: The bot ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --lambda-function-arn=: Lambda function ARN that allows the bot to receive outgoing events.
-        --outbound-events-https-endpoint=: HTTPS endpoint that allows the bot to receive outgoing events.
+        --message-id=!: The message ID.
+        --room-id=!: The room ID.
     - name: regenerate-security-token
       description: Regenerates the security token for a bot.
       flags:
@@ -418,47 +467,21 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-global-settings
-      description: Retrieves global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: delete-room-membership
-      description: Removes a member from a chat room in an Amazon Chime Enterprise account.
+    - name: reset-personal-pin
+      description: Resets the personal meeting PIN for the specified user on an Amazon Chime account.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The member ID (user ID or bot ID).
-        --room-id=!: The room ID.
-    - name: get-events-configuration
-      description: Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN.
+        --user-id=!: The user ID.
+    - name: restore-phone-number
+      description: Moves a phone number from the **Deletion queue** back into the phone number **Inventory**.
       flags:
-        --account-id=!: The Amazon Chime account ID.
-        --bot-id=!: The bot ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: list-bots
-      description: Lists the bots associated with the administrator's Amazon Chime Enterprise account ID.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token to use to retrieve the next page of results.
-    - name: batch-create-room-membership
-      description: Adds up to 50 members to a chat room in an Amazon Chime Enterprise account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --membership-item-list=!: The list of membership items.
-        --room-id=!: The room ID.
+        --phone-number-id=!: The phone number.
     - name: search-available-phone-numbers
       description: Searches for phone numbers that can be ordered.
       flags:
@@ -478,6 +501,30 @@ commands:
             phone-number-type:
                 - Local
                 - TollFree
+    - name: update-account
+      description: Updates account details for the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-license=: The default license applied when you add users to an Amazon Chime account.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new name for the specified Amazon Chime account.
+      completion:
+        flag:
+            default-license:
+                - Basic
+                - Plus
+                - Pro
+                - ProTrial
+    - name: update-account-settings
+      description: Updates the settings for the specified Amazon Chime account.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --account-settings=!: The Amazon Chime account settings to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-bot
       description: Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.
       flags:
@@ -488,42 +535,33 @@ commands:
         --disabled: When true, stops the specified bot from running in your account.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-disabled: When true, stops the specified bot from running in your account.
-    - name: create-room-membership
-      description: Adds a member to a chat room in an Amazon Chime Enterprise account.
+    - name: update-global-settings
+      description: Updates global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
       flags:
-        --account-id=!: The Amazon Chime account ID.
+        --business-calling=: The Amazon Chime Business Calling settings.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --member-id=!: The Amazon Chime member ID (user ID or bot ID).
-        --role=: The role of the member.
-        --room-id=!: The room ID.
+        --voice-connector=: The Amazon Chime Voice Connector settings.
+    - name: update-phone-number
+      description: Updates phone number details, such as product type or calling name, for the specified phone number ID.
+      flags:
+        --calling-name=: The outbound calling name associated with the phone number.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --phone-number-id=!: The phone number ID.
+        --product-type=: The product type.
       completion:
         flag:
-            role:
-                - Administrator
-                - Member
-    - name: delete-room
-      description: Deletes a chat room in an Amazon Chime Enterprise account.
+            product-type:
+                - BusinessCalling
+                - VoiceConnector
+                - SipMediaApplicationDialIn
+    - name: update-phone-number-settings
+      description: Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name.
       flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --room-id=!: The chat room ID.
-    - name: disassociate-signin-delegate-groups-from-account
-      description: Disassociates the specified sign-in delegate groups from the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --group-names=!: The sign-in delegate group names.
-    - name: update-account-settings
-      description: Updates the settings for the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --account-settings=!: The Amazon Chime account settings to update.
+        --calling-name=!: The default outbound calling name for the account.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -536,86 +574,48 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The room name.
         --room-id=!: The room ID.
-    - name: associate-signin-delegate-groups-with-account
-      description: Associates the specified sign-in delegate groups with the specified Amazon Chime account.
+    - name: update-room-membership
+      description: Updates room membership details, such as the member role, for a room in an Amazon Chime Enterprise account.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --signin-delegate-groups=!: The sign-in delegate groups.
-    - name: create-room
-      description: Creates a chat room for the specified Amazon Chime Enterprise account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-request-token=: The idempotency token for the request.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The room name.
-    - name: create-user
-      description: Creates a user under the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --email=: The user's email address.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-type=: The user type.
-        --username=: The user name.
+        --member-id=!: The member ID.
+        --role=: The role of the member.
+        --room-id=!: The room ID.
       completion:
         flag:
+            role:
+                - Administrator
+                - Member
+    - name: update-user
+      description: Updates user details for a specified user ID.
+      flags:
+        --account-id=!: The Amazon Chime account ID.
+        --alexa-for-business-metadata=: The Alexa for Business metadata.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-type=: The user license type to update.
+        --user-id=!: The user ID.
+        --user-type=: The user type.
+      completion:
+        flag:
+            license-type:
+                - Basic
+                - Plus
+                - Pro
+                - ProTrial
             user-type:
                 - PrivateUser
                 - SharedDevice
-    - name: delete-account
-      description: Deletes the specified Amazon Chime account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: get-user
-      description: Retrieves details for the specified user ID, such as primary email address, license type,and personal meeting PIN.
+    - name: update-user-settings
+      description: Updates the settings for the specified user, such as phone number settings.
       flags:
         --account-id=!: The Amazon Chime account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --user-id=!: The user ID.
-    - name: get-account
-      description: Retrieves details for the specified Amazon Chime account, such as account type and supported licenses.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: invite-users
-      description: Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime `Team` account.
-      flags:
-        --account-id=!: The Amazon Chime account ID.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --user-email-list=!: The user email addresses to which to send the email invitation.
-        --user-type=: The user type.
-      completion:
-        flag:
-            user-type:
-                - PrivateUser
-                - SharedDevice
-    - name: list-phone-number-orders
-      description: Lists the phone number orders for the administrator's Amazon Chime account.
-      flags:
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --max-results=: The maximum number of results to return in a single call.
-        --next-token=: The token to use to retrieve the next page of results.
-    - name: update-phone-number-settings
-      description: Updates the phone number settings for the administrator's AWS account, such as the default outbound calling name.
-      flags:
-        --calling-name=!: The default outbound calling name for the account.
-        --cli-input-json=: Read arguments from the JSON string provided.
-        --cli-input-yaml=: Read arguments from the YAML string provided.
-        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-settings=!: The user settings to update.
