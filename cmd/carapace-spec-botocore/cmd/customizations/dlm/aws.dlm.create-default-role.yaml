@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: create-default-role
+description: Creates the default IAM role which will be used by Lifecycle service.
+flags:
+  --iam-endpoint=: The IAM endpoint to call for creating the roles.
+  --resource-type=: The resource type for which the role needs to be created.
+completion:
+  flag:
+    resource-type: [snapshot, image]
+documentation:
+  command: |
+    Creates the default IAM role which will be used by Lifecycle service.
+    If the role does not exist, create-default-role will automatically create it and set its policy.
+    If the role has been already created, create-default-role will not update its policy.
+  flag:
+    iam-endpoint: |
+      The IAM endpoint to call for creating the roles.
+      This is optional and should only be specified when a custom endpoint should be called for IAM operations.
+    resource-type: |
+      The resource type for which the role needs to be created.
+      The available options are ‘snapshot’ and ‘image’.
+      This parameter defaults to ‘snapshot’.
