@@ -4,9 +4,9 @@ go 1.23.1
 
 require (
 	github.com/JohannesKaufmann/html-to-markdown/v2 v2.4.0
-	github.com/carapace-sh/carapace v1.10.3-0.20251121151734-35d09b66ce03
+	github.com/carapace-sh/carapace v1.10.3
 	github.com/carapace-sh/carapace-bridge v1.4.9
-	github.com/carapace-sh/carapace-spec v1.3.5
+	github.com/carapace-sh/carapace-spec v1.4.0
 	github.com/neurosnap/sentences v1.1.2
 	github.com/spf13/cobra v1.10.1
 	github.com/spf13/pflag v1.0.10
@@ -21,3 +21,5 @@ require (
 	github.com/stretchr/testify v1.11.1 // indirect
 	golang.org/x/net v0.43.0 // indirect
 )
+
+replace github.com/spf13/pflag => github.com/carapace-sh/carapace-pflag v1.1.0
