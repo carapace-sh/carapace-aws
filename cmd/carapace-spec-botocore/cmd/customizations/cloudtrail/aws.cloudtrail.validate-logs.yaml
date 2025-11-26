@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: validate-logs
+description: Validates CloudTrail logs for a given period of time.
+flags:
+  --trail-arn=!: Specifies the ARN of the trail to be validated
+  --start-time=!: Specifies that log files delivered on or after the specified UTC timestamp value will be validated.
+  --end-time=: Optionally specifies that log files delivered on or before the specified UTC timestamp value will be validated.
+  --s3-bucket=: Optionally specifies the S3 bucket where the digest files are stored.
+  --s3-prefix=: Optionally specifies the optional S3 prefix where the digest files are stored.
+  --account-id=: Optionally specifies the account for validating logs.
+  --verbose: Display verbose log validation information
+documentation:
+  command: |
+    Validates CloudTrail logs for a given period of time.
+    
+    This command uses the digest files delivered to your S3 bucket to perform the validation.
+    
+    The AWS CLI allows you to detect the following types of changes:
+    
+    - Modification or deletion of CloudTrail log files.
+    - Modification or deletion of CloudTrail digest files.
+
+    To validate log files with the AWS CLI, the following preconditions must be met:
+
+    - You must have online connectivity to AWS.
+    - You must have read access to the S3 bucket that contains the digest and log files.
+    - The digest and log files must not have been moved from the original S3 location where CloudTrail delivered them.
+    - For organization trails you must have access to describe-organization to validate digest files
+
+    When you disable Log File Validation, the chain of digest files is broken after one hour.
+    CloudTrail will not digest log files that were delivered during a period in which the Log File Validation feature was disabled.
+    For example, if you enable Log File Validation on January 1, disable it on January 2, and re-enable it on January 10, digest files will not be created for the log files delivered from January 3 to January 9.
+    The same applies whenever you stop CloudTrail logging or delete a trail.
