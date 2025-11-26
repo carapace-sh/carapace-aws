@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
 name: cloudfront
 description: Amazon CloudFront
 commands:
@@ -1085,6 +1086,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-document=!: The JSON-formatted resource policy to create.
         --resource-arn=!: The Amazon Resource Name (ARN) of the CloudFront resource for which the policy is being created.
+    - name: sign
+      description: Sign a given url.
+      flags:
+        --date-less-than=!: The expiration date and time for the URL.
+        --ip-address=: An optional IP address or IP address range to allow client making the GET request from.
+        --key-pair-id=!: The active CloudFront key pair Id for the key pair that you're using to generate the signature.
+        --private-key=!: file://path/to/your/private-key.pem
+        --url=!: The URL to be signed
+      completion:
+        flag:
+            private-key:
+                - $files ||| $prefix(file://)
     - name: tag-resource
       description: Add tags to a CloudFront resource.
       flags:

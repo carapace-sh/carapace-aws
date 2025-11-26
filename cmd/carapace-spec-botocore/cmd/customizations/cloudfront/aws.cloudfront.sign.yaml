@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: sign
+description: Sign a given url.
+flags:
+  --url!=: The URL to be signed
+  --key-pair-id!=: The active CloudFront key pair Id for the key pair that you're using to generate the signature.
+  --private-key!=: file://path/to/your/private-key.pem
+  --date-less-than!=: The expiration date and time for the URL.
+  --ip-address=: An optional IP address or IP address range to allow client making the GET request from.
+completion:
+  flag:
+    private-key: ["$files ||| $prefix(file://)"] # TODO only complete `file://` first
+documentation:
+  command: Sign a given url.
+  flag:
+    url: The URL to be signed.
+    key-pair-id: The active CloudFront key pair Id for the key pair that you're using to generate the signature.
+    private-key: file://path/to/your/private-key.pem
+    date-less-than: |
+      The expiration date and time for the URL.
+      Supported formats include:
+        - `YYYY-MM-DD` (which means 0AM UTC of that day)
+        - `YYYY-MM-DDThh:mm:ss` (with default timezone as UTC)
+        - `YYYY-MM-DDThh:mm:ss+hh:mm`
+        - `YYYY-MM-DDThh:mm:ss-hh:mm` (with offset)
+        -  EpochTime (which always means UTC)
+       Do NOT use YYYYMMDD, because it will be treated as EpochTime.
+    ip-address: |
+      An optional IP address or IP address range to allow client making the GET request from.
+      Format: x.x.x.x/x or x.x.x.x

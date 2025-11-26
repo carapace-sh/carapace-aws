@@ -38,6 +38,7 @@ var rootCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
+			fmt.Println("# yaml-language-server: $schema=https://carapace.sh/schemas/command.json")
 			fmt.Println(string(m))
 			return nil
 		}
@@ -52,6 +53,7 @@ var rootCmd = &cobra.Command{
 			if err != nil {
 				return err
 			}
+			m = append([]byte("# yaml-language-server: $schema=https://carapace.sh/schemas/command.json\n"), m...)
 			path := path.Join(dir, fmt.Sprintf("aws.%s.yaml", subCommand.Name))
 			println(path)
 			if err := os.WriteFile(path, m, os.ModePerm); err != nil {
@@ -274,8 +276,11 @@ func parseService(name, folder string) command.Command {
 	cmd.Description = service.Metadata.ServiceFullName
 	cmd.Documentation.Command, _ = htmltomarkdown.ConvertString(service.Documentation)
 
-	if cmd.Name == "cloudformation" { // TODO generic handling
+	switch cmd.Name {
+	case "cloudformation": // TODO generic handling
 		customizations.AddCloudformationSubcommands(&cmd)
+	case "cloudfront": // TODO generic handling
+		customizations.AddCloudfrontSubcommands(&cmd)
 	}
 
 	for name, operation := range service.Operations {
@@ -323,16 +328,16 @@ func parseService(name, folder string) command.Command {
 					}
 
 					subCmd.AddFlag(command.Flag{
-						Longhand: "--" + flagName,
-						Usage:    memberdoc,
-						Value:    !boolFlag,
-						Required: required,
+						Longhand:    flagName,
+						Description: memberdoc,
+						Value:       !boolFlag,
+						Required:    required,
 					})
 					if boolFlag {
 						subCmd.AddFlag(command.Flag{
-							Longhand: "--no-" + flagName,
-							Usage:    memberdoc,
-							Required: required,
+							Longhand:    "no-" + flagName,
+							Description: memberdoc,
+							Required:    required,
 						})
 					}
 
@@ -399,9 +404,9 @@ func isStreaming(service Service, operation Operation) bool {
 }
 
 func addCustomFlags(subCmd *command.Command, paginators map[string]Paginator, name string) {
-	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-json", Usage: "Read arguments from the JSON string provided.", Value: true})
-	subCmd.AddFlag(command.Flag{Longhand: "--cli-input-yaml", Usage: "Read arguments from the YAML string provided.", Value: true})
-	subCmd.AddFlag(command.Flag{Longhand: "--generate-cli-skeleton", Usage: "Prints a JSON skeleton to standard output without sending an API request."})
+	subCmd.AddFlag(command.Flag{Longhand: "cli-input-json", Description: "Read arguments from the JSON string provided.", Value: true})
+	subCmd.AddFlag(command.Flag{Longhand: "cli-input-yaml", Description: "Read arguments from the YAML string provided.", Value: true})
+	subCmd.AddFlag(command.Flag{Longhand: "generate-cli-skeleton", Description: "Prints a JSON skeleton to standard output without sending an API request."})
 
 	subCmd.Documentation.Flag["cli-input-json"] = `Reads arguments from the JSON string provided.
 The JSON string follows the  format  provided  by --generate-cli-skeleton.
@@ -417,8 +422,8 @@ This may  not  be  specified  along with --cli-input-yaml.`
 This may  not  be  specified  along with --cli-input-yaml.`
 
 	if paginator, ok := paginators[name]; ok {
-		subCmd.AddFlag(command.Flag{Longhand: "--max-items", Usage: "The  total number of items to return in the command's output.", Value: true})
-		subCmd.AddFlag(command.Flag{Longhand: "--starting-token", Usage: "A token to specify where to start paginating.", Value: true})
+		subCmd.AddFlag(command.Flag{Longhand: "max-items", Description: "The  total number of items to return in the command's output.", Value: true})
+		subCmd.AddFlag(command.Flag{Longhand: "starting-token", Description: "A token to specify where to start paginating.", Value: true})
 
 		subCmd.Documentation.Flag["max-items"] = `The total number of items to return in the command's output.
 If the total number of items available is more than the value specified, a NextToken is provided in the command's output.
@@ -432,7 +437,7 @@ This is the NextToken from a previously truncated response.
 For usage examples, see Pagination in the AWS Command Line Interface User Guide.`
 
 		if paginator.LimitKey != nil {
-			subCmd.AddFlag(command.Flag{Longhand: "--page-size", Usage: "The size of each page to get in the AWS service call.", Value: true})
+			subCmd.AddFlag(command.Flag{Longhand: "page-size", Description: "The size of each page to get in the AWS service call.", Value: true})
 
 			subCmd.Documentation.Flag["page-size"] = `The size of each page to get in the AWS service call.
 This does not affect the number of items returned in the command's output.
