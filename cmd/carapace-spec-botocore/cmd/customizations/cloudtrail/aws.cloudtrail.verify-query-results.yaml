@@ -1,0 +1,33 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: verify-query-results
+description: Validates CloudTrail Lake query’s export files.
+flags:
+  --local-export-path=: Specifies the local directory of export and sign file.
+  --s3-bucket=: Specifies the S3 bucket name that store the query result and sign file.
+  --s3-prefix=: Specifies the S3 path of the S3 folder that containexport and sign file.
+documentation:
+  command: |
+    Validates CloudTrail Lake query’s export files.
+    
+    This command uses the query export and sign file delivered to you to perform the validation.
+    
+    The AWS CLI allows you to detect the following types of changes:
+    
+    - Modification or deletion of CloudTrail Lake query’s export files.
+
+    To validate export files with the AWS CLI, the following preconditions must be met:
+    
+    - You must have online connectivity to AWS.
+    - You must put the sign file and export file in the specified path prefix
+    - You must not rename the delivered export file and sign file
+    - For validate export files from S3: (1) You must have read access to the S3 bucket that contains the sign and export file. (2) The digest and log files must not have been moved from the original S3 location where CloudTrail delivered them.
+  flag:
+    local-export-path: |
+      Specifies the local directory of export and sign file, e.g. /local/path/to/export/file/
+    s3-bucket: |
+      Specifies the S3 bucket name that store the query result and sign file.
+      This parameter can not coexist with local-export-path.
+    s3-prefix: |
+      Specifies the S3 path of the S3 folder that containexport and sign file, e.g. bucket_name/s3/path/ .
+      This parameter can not coexist with local-export-path.
+      If the files located in s3 bucket root directory, then no need to provide this parameter.
