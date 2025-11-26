@@ -276,12 +276,7 @@ func parseService(name, folder string) command.Command {
 	cmd.Description = service.Metadata.ServiceFullName
 	cmd.Documentation.Command, _ = htmltomarkdown.ConvertString(service.Documentation)
 
-	switch cmd.Name {
-	case "cloudformation": // TODO generic handling
-		customizations.AddCloudformationSubcommands(&cmd)
-	case "cloudfront": // TODO generic handling
-		customizations.AddCloudfrontSubcommands(&cmd)
-	}
+	customizations.CustomizeCommand(cmd.Name, &cmd)
 
 	for name, operation := range service.Operations {
 		if customizations.Removal(cmd.Name, CamelCaseToDash(name)) {
@@ -353,6 +348,7 @@ func parseService(name, folder string) command.Command {
 				// TODO others
 			}
 		}
+		customizations.CustomizeCommand(fmt.Sprintf("%s.%s", cmd.Name, subCmd.Name), &subCmd)
 		cmd.Commands = append(cmd.Commands, subCmd)
 	}
 
