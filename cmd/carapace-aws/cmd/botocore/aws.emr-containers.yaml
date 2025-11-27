@@ -36,6 +36,23 @@ commands:
         --tags=: The tags of the managed endpoint.
         --type=!: The type of the managed endpoint.
         --virtual-cluster-id=!: The ID of the virtual cluster for which a managed endpoint is created.
+    - name: create-role-associations
+      description: Creates role associations of given IAM role with EMR service accounts.
+      flags:
+        --cluster-name=!: Specify the name of the Amazon EKS cluster with which the IAM Role would be associated.
+        --namespace=!: Specify the job/application namespace from the Amazon EKS cluster with which the IAM Role would be associated.
+        --operator-namespace=: Specify the namespace that you want to associate the operator service account with the IAM role.
+        --role-name=!: Specify the IAM Role name that you want to associate with Amazon EMR on EKS.
+        --service-account-name=: Specify the service account name that you want to associate with the IAM role.
+        --type=: Specify the Amazon EMR on EKS submission model and choose service accounts that you want to associate with Amazon EMR on EKS.
+      completion:
+        flag:
+            type:
+                - start_job_run
+                - interactive_endpoint
+                - spark_operator
+                - flink_operator
+                - livy
     - name: create-security-configuration
       description: Creates a security configuration.
       flags:
@@ -73,6 +90,23 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the managed endpoint.
         --virtual-cluster-id=!: The ID of the endpoint's virtual cluster.
+    - name: delete-role-associations
+      description: Deletes role associations of given IAM role with EMR service accounts.
+      flags:
+        --cluster-name=!: Specify the name of the Amazon EKS cluster with which the IAM Role would be dissociated.
+        --namespace=!: Specify the job/application namespace from the Amazon EKS cluster with which the IAM Role would be dissociated.
+        --operator-namespace=: Specify the namespace under which you want to dissociate the operator service account from the IAM role.
+        --role-name=!: Specify the IAM Role name that you want to dissociate with Amazon EMR on EKS.
+        --service-account-name=: Specify the service account name that you want to dissociate with the IAM role.
+        --type=: Specify the Amazon EMR on EKS submission model and choose service accounts that you want to dissociate from Amazon EMR on EKS.
+      completion:
+        flag:
+            type:
+                - start_job_run
+                - interactive_endpoint
+                - spark_operator
+                - flink_operator
+                - livy
     - name: delete-virtual-cluster
       description: Deletes a virtual cluster.
       flags:
@@ -250,3 +284,11 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of resources.
         --tag-keys=!: The tag keys of the resources.
+    - name: update-role-trust-policy
+      description: Updates the trust policy of given IAM role.
+      flags:
+        --cluster-name=!: Specify the name of the Amazon EKS cluster with which the IAM Role would be used.
+        --dry-run: Print the merged trust policy document tostdout instead of updating the role trustpolicy directly.
+        --iam-endpoint=: The IAM endpoint to call for updating the role trust policy.
+        --namespace=!: Specify the namespace from the Amazon EKS cluster with which the IAM Role would be used.
+        --role-name=!: Specify the IAM Role name that you want to usewith Amazon EMR on EKS.
