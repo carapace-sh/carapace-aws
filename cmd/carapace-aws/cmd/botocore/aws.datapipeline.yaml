@@ -8,6 +8,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parameter-values-uri=: The JSON parameter values.
         --parameter-values=: A list of parameter values to pass to the pipeline at activation.
         --pipeline-id=!: The ID of the pipeline.
         --start-timestamp=: The date and time to resume the pipeline.
@@ -19,6 +20,8 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-id=!: The ID of the pipeline.
         --tags=!: The tags to add, as key/value pairs.
+    - name: create-default-roles
+      description: Creates the default IAM role “DataPipelineDefaultRole” and “DataPipelineDefaultResourceRole” which are used while creating an EMR cluster.
     - name: create-pipeline
       description: Creates a new, empty pipeline.
       flags:
@@ -91,6 +94,24 @@ commands:
         --marker=: The starting point for the results to be returned.
         --max-items=: The  total number of items to return in the command's output.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-runs
+      description: Lists the times the specified pipeline has run.
+      flags:
+        --pipeline-id=!: The identifier of the pipeline.
+        --schedule-interval=: Filters the list to include only runs that are scheduled to start within the specified interval.
+        --start-interval=: Filters the list to include only runs that started within the specified interval.
+        --status=: Filters the list to include only runs in the specified statuses.
+      completion:
+        flag:
+            status:
+                - waiting
+                - pending
+                - cancelled
+                - running
+                - finished
+                - failed
+                - waiting_for_runner
+                - waiting_on_dependencies
     - name: poll-for-task
       description: Task runners call `PollForTask` to receive a task to perform from AWS Data Pipeline.
       flags:
@@ -107,9 +128,10 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --parameter-objects=: The parameter objects used with the pipeline.
+        --parameter-values-uri=: The JSON parameter values.
         --parameter-values=: The parameter values used with the pipeline.
+        --pipeline-definition=!: The JSON pipeline definition.
         --pipeline-id=!: The ID of the pipeline.
-        --pipeline-objects=!: The objects that define the pipeline.
     - name: query-objects
       description: Queries the specified pipeline for the names of objects that match the specified set of conditions.
       flags:
