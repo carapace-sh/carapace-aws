@@ -1,0 +1,42 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: delete-role-associations
+description: Deletes role associations of given IAM role with EMR service accounts.
+flags:
+  --cluster-name=!: Specify the name of the Amazon EKS cluster with which the IAM Role would be dissociated.
+  --namespace=!: Specify the job/application namespace from the Amazon EKS cluster with which the IAM Role would be dissociated.
+  --role-name=!: Specify the IAM Role name that you want to dissociate with Amazon EMR on EKS.
+  --type=: Specify the Amazon EMR on EKS submission model and choose service accounts that you want to dissociate from Amazon EMR on EKS.
+  --operator-namespace=: Specify the namespace under which you want to dissociate the operator service account from the IAM role.
+  --service-account-name=: Specify the service account name that you want to dissociate with the IAM role.
+completion:
+  flag:
+    type:
+      - start_job_run
+      - interactive_endpoint
+      - spark_operator
+      - flink_operator
+      - livy
+documentation:
+  command: |
+    Deletes role associations of given IAM role with EMR service accounts such that
+    it will be removed from Amazon EMR on EKS with the given namespace from the given EKS cluster.
+
+    Note: The command would dissociate EMR service accounts with provided IAM role from EKS pod identity:
+
+    - “emr-containers-sa-%(FRAMEWORK)s-%(COMPONENT)s-%(AWS_ACCOUNT_ID)s-%(BASE36_ENCODED_ROLE_NAME)s”
+  flag:
+    cluster-name: Specify the name of the Amazon EKS cluster with which the IAM Role would be dissociated.
+    namespace: Specify the job/application namespace from the Amazon EKS cluster with which the IAM Role would be dissociated.
+    role-name: Specify the IAM Role name that you want to dissociate with Amazon EMR on EKS.
+    type: |
+      Specify the Amazon EMR on EKS submission model and choose service accounts that you want to dissociate from Amazon EMR on EKS.
+      The default is start_job_run.
+      Supported types: start_job_run, interactive_endpoint, spark_operator, flink_operator, livy.
+    operator-namespace: |
+      Specify the namespace under which you want to dissociate the operator service account from the IAM role.
+      Default to the job/application namespace specified.
+      Note: If jobs are running in a different namespace than the operator installation namespace,
+      this parameter needs to be set as the namespace that the operator is running on.
+    service-account-name: |
+      Specify the service account name that you want to dissociate with the IAM role.
+      By default, Amazon EMR on EKS service accounts will be used for association.

@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: update-role-trust-policy
+description: Updates the trust policy of given IAM role.
+flags:
+  --cluster-name=!: Specify the name of the Amazon EKS cluster with which the IAM Role would be used.
+  --namespace=!: Specify the namespace from the Amazon EKS cluster with which the IAM Role would be used.
+  --role-name=!: Specify the IAM Role name that you want to usewith Amazon EMR on EKS.
+  --iam-endpoint=: The IAM endpoint to call for updating the role trust policy.
+  --dry-run: Print the merged trust policy document tostdout instead of updating the role trustpolicy directly.
+documentation:
+  command: |
+    Updates the trust policy of given IAM role such that it can be used with Amazon EMR
+    on EKS with the given namespace from the given EKS cluster.
+
+    > Note:
+    >
+    > To use the IAM Role with Amazon EMR on EKS, OIDC identity provider also needs to be created for the EKS cluster.
+    > This can be done using `eksctl utils associate-iam-oidc-provider --cluster <cluster_name> --approve` command.
+    > For information about installing or upgrading eksctl, see Installing or upgrading eksctl in the Amazon EKS User Guide.
+  flag:
+    cluster-name: Specify the name of the Amazon EKS cluster with which the IAM Role would be used.
+    namespace: Specify the namespace from the Amazon EKS cluster with which the IAM Role would be used.
+    role-name: Specify the IAM Role name that you want to usewith Amazon EMR on EKS.
+    iam-endpoint: |
+      The IAM endpoint to call for updating the role trust policy.
+      This is optional and should only bespecified when a custom endpoint should be calledfor IAM operations.
+    dry-run: Print the merged trust policy document tostdout instead of updating the role trustpolicy directly.
