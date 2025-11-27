@@ -13,7 +13,7 @@ var lambda_wizard []byte
 func init() {
 	customizations["lambda"] = func(cmd *command.Command) error {
 		var specCommand command.Command
-		if err := yaml.Unmarshal(events_wizard, &specCommand); err != nil {
+		if err := yaml.Unmarshal(lambda_wizard, &specCommand); err != nil {
 			return err
 		}
 		cmd.Commands = append(cmd.Commands, specCommand)
