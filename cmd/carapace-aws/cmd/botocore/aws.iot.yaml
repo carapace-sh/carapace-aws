@@ -201,12 +201,17 @@ commands:
     - name: create-certificate-from-csr
       description: Creates an X.509 certificate using the specified certificate signing request.
       flags:
+        --certificate-pem-outfile=: Saves the command output contents of certificatePem to the given filename
         --certificate-signing-request=!: The certificate signing request (CSR).
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-set-as-active: Specifies whether the certificate is active.
         --set-as-active: Specifies whether the certificate is active.
+      completion:
+        flag:
+            certificate-pem-outfile:
+                - $files
     - name: create-certificate-provider
       description: Creates an Amazon Web Services IoT Core certificate provider.
       flags:
@@ -413,11 +418,22 @@ commands:
     - name: create-keys-and-certificate
       description: Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key.
       flags:
+        --certificate-pem-outfile=: Saves the command output contents of certificatePem to the given filename
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-set-as-active: Specifies whether the certificate is active.
+        --private-key-outfile=: Saves the command output contents of keyPair.PrivateKey to the given filename
+        --public-key-outfile=: Saves the command output contents of keyPair.PublicKey to the given filename
         --set-as-active: Specifies whether the certificate is active.
+      completion:
+        flag:
+            certificate-pem-outfile:
+                - $files
+            private-key-outfile:
+                - $files
+            public-key-outfile:
+                - $files
     - name: create-mitigation-action
       description: Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask.
       flags:
