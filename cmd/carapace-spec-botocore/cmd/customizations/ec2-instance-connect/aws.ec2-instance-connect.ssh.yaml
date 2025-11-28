@@ -1,0 +1,18 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: ssh
+description: Connect to your EC2 instance using your OpenSSH client.
+flags:
+  --instance-id=!: Specify the ID of the EC2 instance to connect to
+  --instance-ip=: Specify the IP address of the instance to connect to
+  --private-key-file=: Specify the path to the private key file for login
+  --os-user=: Specify the OS SSH user
+  --ssh-port=: Specify the SSH port
+  --local-forwarding=: Specify the local forwarding specification as defined by your OpenSSH client
+  --connection-type=: Specify how to SSH into the instance
+  --eice-options=: Specify the options for your EC2 Instance Connect Endpoint.maxTunnelDuration
+completion:
+  flag:
+    connection-type:
+      - "direct\tSSH directly to the instance"
+      - "eice\tSSH using EC2 Instance Connect Endpoint"
+      - "auto\tThe CLI automatically determines the connection type"

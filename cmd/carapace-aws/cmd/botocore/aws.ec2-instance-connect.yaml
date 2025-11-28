@@ -2,6 +2,17 @@
 name: ec2-instance-connect
 description: AWS EC2 Instance Connect
 commands:
+    - name: open-tunnel
+      description: Opens a websocket tunnel to the specified EC2 Instance or private ip.
+      flags:
+        --instance-connect-endpoint-dns-name=: Specify the EC2 Instance Connect Endpoint DNS Name that should be used to open the tunnel
+        --instance-connect-endpoint-id=: Specify the EC2 Instance Connect Endpoint Id that should be used to open the tunnel
+        --instance-id=: Specify the id of the EC2 instance that a tunnel should be opened for
+        --local-port=: Specify the local port to listen on
+        --max-tunnel-duration=: Specify the maximum time, in seconds, to keep a websocket tunnel alive for
+        --max-websocket-connections=: Specify the maximum amount of websocket connections allowed when local-port is specified
+        --private-ip-address=: Specify the private ip address to open a tunnel for
+        --remote-port=: Specify the remote port to connect to on the instance
     - name: send-serial-console-ssh-public-key
       description: Pushes an SSH public key to the specified EC2 instance.
       flags:
@@ -21,3 +32,20 @@ commands:
         --instance-id=!: The ID of the EC2 instance.
         --instance-os-user=!: The OS user on the EC2 instance for whom the key can be used to authenticate.
         --ssh-public-key=!: The public key material.
+    - name: ssh
+      description: Connect to your EC2 instance using your OpenSSH client.
+      flags:
+        --connection-type=: Specify how to SSH into the instance
+        --eice-options=: Specify the options for your EC2 Instance Connect Endpoint.maxTunnelDuration
+        --instance-id=!: Specify the ID of the EC2 instance to connect to
+        --instance-ip=: Specify the IP address of the instance to connect to
+        --local-forwarding=: Specify the local forwarding specification as defined by your OpenSSH client
+        --os-user=: Specify the OS SSH user
+        --private-key-file=: Specify the path to the private key file for login
+        --ssh-port=: Specify the SSH port
+      completion:
+        flag:
+            connection-type:
+                - "direct\tSSH directly to the instance"
+                - "eice\tSSH using EC2 Instance Connect Endpoint"
+                - "auto\tThe CLI automatically determines the connection type"
