@@ -98,6 +98,7 @@ func CamelCaseToDash(s string) string {
 	quickfix := map[string]string{
 		"application-i-ds":                          "application-ids",
 		"asset-sh-a256":                             "asset-sha256",
+		"associated-license-asset-ruleset-ar-ns ":   "associated-license-asset-ruleset-arns",
 		"autonomous-data-storage-size-in-t-bs":      "autonomous-data-storage-size-in-tbs",
 		"callback-ur-ls":                            "callback-urls",
 		"create-cachedi-scsi-volume":                "describe-stored-iscsi-volumes",
@@ -145,6 +146,7 @@ func CamelCaseToDash(s string) string {
 		"source-server-i-d":                         "source-server-ids",
 		"start-ic-d10-cm-inference-job":             "start-icd10-cm-inference-job",
 		"stop-ic-d10-cm-inference-job":              "stop-icd10-cm-inference-job",
+		"swap-environment-cnam-es":                  "swap-environment-cnames",
 		"tape-ar-ns":                                "tape-arns",
 		"target-group-ar-ns":                        "target-group-arns",
 		"volume-ar-ns":                              "volume-arns",
