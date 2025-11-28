@@ -28,6 +28,7 @@ var rootCmd = &cobra.Command{
 		if err != nil {
 			return err
 		}
+		customizations.CustomizeCommand("", command)
 
 		if cmd.Flag("no-doc").Changed {
 			stripDoc(command)
