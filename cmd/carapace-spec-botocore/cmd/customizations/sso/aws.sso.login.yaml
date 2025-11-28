@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: login
+description: Retrieves and caches an AWS IAM Identity Center access token
+flags:
+  --no-browser=: Disables automatically opening the verification URL in the default browser
+  --use-device-code=: Uses the Device Code authorization grant and login flow instead of the Authorization Code flow
+  --sso-session=: An explicit SSO session to use to login
+documentation:
+  command: |
+    Retrieves and caches an AWS IAM Identity Center access token to exchange for AWS credentials.
+    To login, the requested profile must have first been setup using aws configure sso.
+    Each time the login command is called, a new SSO access token will be retrieved.
+    Please note that only one login session can be active for a given SSO Session
+    and creating multiple profiles does not allow for multiple users to be authenticated against the same SSO Session.
+  flag:
+    no-browser: Disables automatically opening the verification URL in the default browser.
+    use-device-code: Uses the Device Code authorization grant and login flow instead of the Authorization Code flow.
+    sso-session: |
+      An explicit SSO session to use to login.
+      By default, this command will login using the SSO session configured as part of the requested profile and generally does not require this argument to be set.
