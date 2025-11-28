@@ -527,6 +527,44 @@ commands:
         --parameters=: A map of all self-service action parameters and their values.
         --provisioned-product-id=!: The identifier of the provisioned product.
         --service-action-id=!: The self-service action identifier.
+    - name: generate
+      description: Generate a Service Catalog product or provisioning artifact.
+      commands:
+        - name: product
+          description: Create a new product using a CloudFormation template specified as a local file path
+          flags:
+            --bucket-name=!: Name of the S3 bucket name where the CloudFormation template will be uploaded to
+            --file-path=!: A local file path that references the CloudFormation template
+            --product-description=: The text description of the product
+            --product-distributor=: The distributor of the product
+            --product-name=!: The name of the product
+            --product-owner=!: The owner of the product
+            --product-type=!: The type of the product to create
+            --provisioning-artifact-description=!: The text description of the provisioning artifact
+            --provisioning-artifact-name=!: The name assigned to the provisioning artifact
+            --provisioning-artifact-type=!: The type of the provisioning artifact
+            --support-description=: Support information about the product
+            --support-email=: Contact email for product support
+            --tags=:
+                description: Tags to associate with the new product
+                nargs: -1
+          completion:
+            flag:
+                file-path:
+                    - $files
+        - name: provisioning-artifact
+          description: Create a new provisioning artifact for the specified product
+          flags:
+            --bucket-name=!: Name of the S3 bucket name where the CloudFormation template will be uploaded to
+            --file-path=!: A local file path that references the CloudFormation template
+            --product-id=!: The product identifier
+            --provisioning-artifact-description=!: The text description of the provisioning artifact
+            --provisioning-artifact-name=!: The name assigned to the provisioning artifact
+            --provisioning-artifact-type=!: The type of the provisioning artifact
+          completion:
+            flag:
+                file-path:
+                    - $files
     - name: get-aws-organizations-access-status
       description: Get the Access Status for Organizations portfolio share feature.
       flags:

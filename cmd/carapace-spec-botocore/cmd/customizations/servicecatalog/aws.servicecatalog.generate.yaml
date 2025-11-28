@@ -1,0 +1,40 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: generate
+description: Generate a Service Catalog product or provisioning artifact.
+documentation:
+  command: Generate a Service Catalog product or provisioning artifact using a CloudFormation template specified as a local file path
+commands:
+  - name: product
+    description: Create a new product using a CloudFormation template specified as a local file path
+    flags:
+      --product-name=!: The name of the product
+      --product-owner=!: The owner of the product
+      --product-type=!: The type of the product to create
+      --product-description=: The text description of the product
+      --product-distributor=: The distributor of the product
+      --tags=: {description: Tags to associate with the new product, nargs: -1}
+      --file-path=!: A local file path that references the CloudFormation template
+      --bucket-name=!: Name of the S3 bucket name where the CloudFormation template will be uploaded to
+      --support-description=: Support information about the product
+      --support-email=: Contact email for product support
+      --provisioning-artifact-name=!: The name assigned to the provisioning artifact
+      --provisioning-artifact-description=!: The text description of the provisioning artifact
+      --provisioning-artifact-type=!: The type of the provisioning artifact
+    completion:
+      flag:
+        file-path: ["$files"]
+
+  - name: provisioning-artifact
+    description: Create a new provisioning artifact for the specified product
+    flags:
+      --file-path=!: A local file path that references the CloudFormation template
+      --bucket-name=!: Name of the S3 bucket name where the CloudFormation template will be uploaded to
+      --provisioning-artifact-name=!: The name assigned to the provisioning artifact
+      --provisioning-artifact-description=!: The text description of the provisioning artifact
+      --provisioning-artifact-type=!: The type of the provisioning artifact
+      --product-id=!: The product identifier
+    completion:
+      flag:
+        file-path: ["$files"]
+    documentation:
+      command: Create a new provisioning artifact for the specified product using a CloudFormation template specified as a local file path
