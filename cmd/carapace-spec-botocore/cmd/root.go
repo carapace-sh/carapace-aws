@@ -301,8 +301,6 @@ func parseService(name, folder string) command.Command {
 	cmd.Description = service.Metadata.ServiceFullName
 	cmd.Documentation.Command, _ = htmltomarkdown.ConvertString(service.Documentation)
 
-	customizations.CustomizeCommand(cmd.Name, &cmd)
-
 	for name, operation := range service.Operations {
 		if customizations.Removal(cmd.Name, CamelCaseToDash(name)) {
 			continue
@@ -401,6 +399,9 @@ func parseService(name, folder string) command.Command {
 		}
 		cmd.Commands = append(cmd.Commands, waitCmd)
 	}
+
+	customizations.CustomizeCommand(cmd.Name, &cmd)
+
 	// TODO sort in carapace-spec
 	slices.SortFunc(cmd.Commands, func(a, b command.Command) int { return strings.Compare(a.Name, b.Name) })
 	return cmd
