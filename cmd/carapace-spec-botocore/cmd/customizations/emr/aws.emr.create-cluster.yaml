@@ -1,0 +1,50 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: create-cluster
+description: Creates an Amazon EMR cluster with the specified configurations
+flags:
+  --release-label=: Specifies the Amazon EMR release version
+  --os-release-label=: Specifies a particular Amazon Linux release for all nodes in a cluster launch request
+  --ami-version=: Specifies the version of Amazon Linux Amazon Machine Image (AMI) to use
+  --instance-groups=: {description: "Specifies the number and type of Amazon EC2 instances to create", nargs: -1}
+  --instance-type=: Shortcut parameter as an alternative to --instance-groups
+  --instance-count=: Shortcut parameter as an alternative to --instance-groups when used together with --instance-type
+  --auto-terminate: Specifies whether the cluster should terminate after completing all the steps
+  --no-auto-terminate: Specifies whether the cluster should terminate after completing all the steps
+  --instance-fleets=: {description: "Specifies the number and type of Amazon EC2 instances to create", nargs: -1}
+  --name=: The name of the cluster
+  --log-uri=: Specifies the location in Amazon S3 to which log files are periodically written
+  --log-encryption-kms-key-id=: Specifies the KMS Id utilized for log encryption
+  --service-role=: Specifies an IAM service role, which Amazon EMR requires to call other AWS services
+  --auto-scaling-role=: Specify --auto-scaling-role EMR_AutoScaling_DefaultRole if an automatic scaling policy is specified
+  --use-default-roles: Specifies that the cluster should use the default service role
+  --configurations=: Specifies a JSON file that contains configuration classifications
+  --ec2-attributes=: Configures cluster and Amazon EC2 instance configurations
+  --termination-protected: Specifies whether to lock the cluster to prevent the Amazon EC2 instances from being terminated by API call
+  --no-termination-protected: Specifies whether to lock the cluster to prevent the Amazon EC2 instances from being terminated by API call
+  --unhealthy-node-replacement: Unhealthy node replacement for an Amazon EMR cluster
+  --no-unhealthy-node-replacement: Unhealthy node replacement for an Amazon EMR cluster
+  --scale-down-behavior=: Specifies the way that individual Amazon EC2 instances terminate
+  --visible-to-all-users: Specifies whether the cluster is visible to all IAM users
+  --no-visible-to-all-users: Specifies whether the cluster is visible to all IAM users
+  --enable-debugging: Specifies that the debugging tool is enabled for the cluster
+  --no-enable-debugging: Specifies that the debugging tool is enabled for the cluster
+  --tags=: {description: "A list of tags to associate with a cluster", nargs: -1}
+  --bootstrap-actions=: {description: "Specifies a list of bootstrap actions to run on each EC2 instance", nargs: -1}
+  --application=: {description: "Specifies the applications to install on the cluster", nargs: -1}
+  --emrfs=: Specifies EMRFS configuration options
+  --steps=: {description: "Specifies a list of steps to be executed by the cluster", nargs: -1}
+  --additional-info=: Specifies additional information during cluster creation
+  --restore-from-hbase-backup=: Launches a new HBase cluster and populates it with data from a previous backup
+  --security-configuration=: Specifies the name of a security configuration to use for the cluster
+  --custom-ami-id=: Specifies the AMI ID of a custom AMI to use when Amazon EMR provisions EC2 instances
+  --ebs-root-volume-size=: Specifies the size, in GiB, of the EBS root device volume of the Amazon Linux AMI that is used
+  --ebs-root-volume-iops=: Specifies the IOPS, of the EBS root device volume of the Amazon Linux AMI that is used
+  --ebs-root-volume-throughput=: Specifies the throughput, in MiB/s, of the EBS root device volume of the Amazon Linux AMI that is used
+  --repo-upgrade-on-boot=: Amazon Linux AMIs connect to package repositories to install security updates
+  --kerberos-attributes=: Specifies required cluster attributes for Kerberos when Kerberos authentication is enabled
+  --step-concurrency-level=: This command specifies the step concurrency level of the cluster
+  --managed-scaling-policy=: Managed scaling policy for an Amazon EMR cluster
+  --placement-group-configs=: {description: "Placement group configuration for an Amazon EMR cluster", nargs: -1}
+  --auto-termination-policy=: Auto termination policy for an Amazon EMR cluster
+  --extended-support: Reserved
+  --no-extended-support: Reserved
