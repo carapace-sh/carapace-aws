@@ -54,7 +54,7 @@ func init() {
 		return nil
 	}
 
-	customizations["ec2.bundle-instances"] = func(cmd *command.Command) error {
+	customizations["ec2.bundle-instance"] = func(cmd *command.Command) error {
 		cmd.AddFlag(command.Flag{
 			Longhand:    "prefix",
 			Description: "The prefix for the image component names being stored in Amazon S3",
