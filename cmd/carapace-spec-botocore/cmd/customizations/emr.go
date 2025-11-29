@@ -34,7 +34,7 @@ var emr_modifyClusterAttributes []byte
 //go:embed emr/aws.emr.put.yaml
 var emr_put []byte
 
-//go:embed emr/aws.emr.restore-hbase-backup.yaml
+//go:embed emr/aws.emr.restore-from-hbase-backup.yaml
 var emr_restoreHbaseBackup []byte
 
 //go:embed emr/aws.emr.schedule-hbase-backup.yaml
