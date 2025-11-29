@@ -62,7 +62,7 @@ func init() {
 		})
 		cmd.AddFlag(command.Flag{
 			Longhand:    "owner-sak",
-			Description: "The AWS secret access key for the owner of the Amazon S3 bucket ",
+			Description: "The AWS secret access key for the owner of the Amazon S3 bucket",
 			Value:       true,
 		})
 		cmd.AddFlag(command.Flag{
