@@ -352,8 +352,11 @@ func parseService(name, folder string) command.Command {
 						Required:    required,
 					})
 					if boolFlag {
+						negatedFlagName := "no-" + flagName
+						negatedFlagName = renameFlag(cmd.Name, subCmd.Name, negatedFlagName)
+
 						subCmd.AddFlag(command.Flag{
-							Longhand:    "no-" + flagName,
+							Longhand:    negatedFlagName,
 							Description: memberdoc,
 							Required:    required,
 						})
