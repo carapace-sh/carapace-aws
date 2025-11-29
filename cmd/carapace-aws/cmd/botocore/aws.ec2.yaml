@@ -8502,6 +8502,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The ID of the Windows instance.
         --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --priv-launch-key=: The file that contains the private key used to launch the instance
     - name: get-reserved-instances-exchange-quote
       description: Returns a quote and exchange information for exchanging one or more specified Convertible Reserved Instances for a new Convertible Reserved Instance.
       flags:
@@ -9159,6 +9160,7 @@ commands:
     - name: modify-instance-attribute
       description: Modifies the specified attribute of the specified instance.
       flags:
+        '----enable-api-termination': Enable or disable termination protection for the instance.
         --attribute=: The name of the attribute to modify.
         --block-device-mappings=: Modifies the `DeleteOnTermination` attribute for volumes that are currently attached.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -9168,7 +9170,6 @@ commands:
         --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
         --ebs-optimized: Specifies whether the instance is optimized for Amazon EBS I/O.
         --ena-support: Set to `true` to enable enhanced networking with ENA for the instance.
-        --enable-api-termination: Enable or disable termination protection for the instance.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --groups=: Replaces the security groups of the instance with the specified security groups.
         --instance-id=!: The ID of the instance.
@@ -10913,16 +10914,21 @@ commands:
       description: Removes the specified outbound (egress) rules from the specified security group.
       flags:
         --cidr-ip=: Not supported.
+        --cidr=: The IPv4 address range, in CIDR format
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --from-port=: Not supported.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-id=!: The ID of the security group.
+        --group-owner=: The AWS account ID that owns the source security group
         --ip-permissions=: The sets of IP permissions.
         --ip-protocol=: Not supported.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --port=: The range of ports to allow or ICMP code
+        --protocol=: The IP protoco
         --security-group-rule-ids=: The IDs of the security group rules.
+        --source-group=: The name or ID of the source security group
         --source-security-group-name=: Not supported.
         --source-security-group-owner-id=: Not supported.
         --to-port=: Not supported.
@@ -10930,6 +10936,7 @@ commands:
       description: Removes the specified inbound (ingress) rules from a security group.
       flags:
         --cidr-ip=: The CIDR IP address range.
+        --cidr=: The IPv4 address range, in CIDR format
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
@@ -10937,10 +10944,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-id=: The ID of the security group.
         --group-name=: \[Default VPC] The name of the security group.
+        --group-owner=: The AWS account ID that owns the source security group
         --ip-permissions=: The sets of IP permissions.
         --ip-protocol=: The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). Use `-1` to specify all.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --port=: The range of ports to allow or ICMP code
+        --protocol=: The IP protoco
         --security-group-rule-ids=: The IDs of the security group rules.
+        --source-group=: The name or ID of the source security group
         --source-security-group-name=: \[Default VPC] The name of the source security group.
         --source-security-group-owner-id=: Not supported.
         --to-port=: If the protocol is TCP or UDP, this is the end of the port range.
@@ -10948,11 +10959,13 @@ commands:
       description: Launches the specified number of instances using an AMI for which you have permissions.
       flags:
         --additional-info=: Reserved.
+        --associate-public-ip-address: If specified a public IP address will be assigned to the new instance in a VPC
         --block-device-mappings=: The block device mapping, which defines the EBS volumes and instance store volumes to attach to the instance at launch.
         --capacity-reservation-specification=: Information about the Capacity Reservation targeting option.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+        --count=: Number of instances to launch
         --cpu-options=: The CPU options for the instance.
         --credit-specification=: The credit option for CPU usage of the burstable performance instance.
         --disable-api-stop: Indicates whether an instance is enabled for stop protection.
@@ -10978,12 +10991,11 @@ commands:
         --launch-template=: The launch template.
         --license-specifications=: The license configurations.
         --maintenance-options=: The maintenance and recovery options for the instance.
-        --max-count=!: The maximum number of instances to launch.
         --metadata-options=: The metadata options for the instance.
-        --min-count=!: The minimum number of instances to launch.
         --monitoring=: Specifies whether detailed monitoring is enabled for the instance.
         --network-interfaces=: The network interfaces to associate with the instance.
         --network-performance-options=: Contains settings for the network performance options for the instance.
+        --no-associate-public-ip-address: If specified a public IP address will be assigned to the new instance in a VPC
         --no-disable-api-stop: Indicates whether an instance is enabled for stop protection.
         --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
         --no-ebs-optimized: Indicates whether the instance is optimized for Amazon EBS I/O.
@@ -10993,6 +11005,8 @@ commands:
         --private-dns-name-options=: The options for the instance hostname.
         --private-ip-address=: The primary IPv4 address.
         --ramdisk-id=: The ID of the RAM disk to select.
+        --secondary-private-ip-address-count=: The number of secondary IP addresses to assign to the network interface or instance
+        --secondary-private-ip-addresses=: A secondary private IP address for the network interface or instance
         --security-group-ids=: The IDs of the security groups.
         --security-groups=: \[Default VPC] The names of the security groups.
         --subnet-id=: The ID of the subnet to launch the instance into.
@@ -12621,6 +12635,7 @@ commands:
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --instance-id=!: The ID of the Windows instance.
             --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+            --priv-launch-key=: The file that contains the private key used to launch the instance
         - name: security-group-exists
           description: Describes the specified security groups or all of your security groups.
           flags:
