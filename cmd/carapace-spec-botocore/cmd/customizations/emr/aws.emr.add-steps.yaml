@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: add-steps
+description: Add a list of steps to a cluster
+flags:
+  --cluster-id=!: A unique string that identifies a cluster
+  --steps=: {description: "Specifies a list of steps to be executed by the cluster", nargs: -1}
+  --execution-role-arn=: You must grant the execution role the permissions needed to access the same IAM resources that the step can access
+documentation:
+  flag:
+    cluster-id: |
+      A unique string that identifies a cluster.
+      The `create-cluster` command returns this identifier.
+      You can use the `list-clusters` command to get cluster IDs.
+    steps: |
+      Specifies a list of steps to be executed by the cluster.
+      Steps run only on the master node after applications are installed and are used to submit work to a cluster.
+      A step can be specified using the shorthand syntax, by referencing a JSON file or by specifying an inline JSON structure.
+      `Args` supplied with steps should be a comma-separated list of values (`Args=arg1,arg2,arg3`)
+      or a bracket-enclosed list of values and key-value pairs (`Args=[arg1,arg2=value,arg4`).
