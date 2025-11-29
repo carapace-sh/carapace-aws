@@ -107,13 +107,23 @@ commands:
         --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tape-arn=!: The Amazon Resource Name (ARN) of the virtual tape you want to cancel retrieval for.
-    - name: create-cached-iscsi-volume
-      description: Returns the description of the gateway volumes specified in the request.
+    - name: create-cached-iscsi-volumes
+      description: Creates a cached volume on a specified cached volume gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique identifier that you use to retry a request.
+        --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-arns=!: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume.
+        --kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
+        --kms-key=: The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption.
+        --network-interface-id=!: The network interface of the gateway on which to expose the iSCSI target.
+        --no-kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
+        --snapshot-id=: The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume.
+        --source-volume-arn=: The ARN for an existing volume.
+        --tags=: A list of up to 50 tags that you can assign to a cached volume.
+        --target-name=!: The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN.
+        --volume-size-in-bytes=!: The size of the volume in bytes.
     - name: create-nfs-file-share
       description: Creates a Network File System (NFS) file share on an existing S3 File Gateway.
       flags:
@@ -490,23 +500,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --volume-arn=!: The Amazon Resource Name (ARN) of the volume.
-    - name: describe-stored-iscsi-volumes
-      description: Creates a cached volume on a specified cached volume gateway.
+    - name: describe-stored-iscsi-volume
+      description: Returns the description of the gateway volumes specified in the request.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: A unique identifier that you use to retry a request.
-        --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
-        --kms-key=: The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used for Amazon S3 server-side encryption.
-        --network-interface-id=!: The network interface of the gateway on which to expose the iSCSI target.
-        --no-kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
-        --snapshot-id=: The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume.
-        --source-volume-arn=: The ARN for an existing volume.
-        --tags=: A list of up to 50 tags that you can assign to a cached volume.
-        --target-name=!: The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN.
-        --volume-size-in-bytes=!: The size of the volume in bytes.
+        --volume-arns=!: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume.
     - name: describe-tape-archives
       description: Returns a description of specified virtual tapes in the virtual tape shelf (VTS).
       flags:

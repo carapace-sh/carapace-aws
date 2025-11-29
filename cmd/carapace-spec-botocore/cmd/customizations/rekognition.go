@@ -8,15 +8,16 @@ import (
 
 func init() {
 	for _, operation := range []string{
-		"rekognition.search-users-by-image",
-		"rekognition.detect-text",
-		"rekognition.detect-protective-equipment",
-		"rekognition.detect-moderation-labels",
+		"rekognition.detect-custom-labels",
 		"rekognition.detect-faces",
 		"rekognition.detect-labels",
-		"rekognition.detect-custom-labels",
-		"rekognition.search-faces-by-image",
+		"rekognition.detect-moderation-labels",
+		"rekognition.detect-protective-equipment",
+		"rekognition.detect-text",
 		"rekognition.index-faces",
+		"rekognition.recoknize-celebrities",
+		"rekognition.search-faces-by-image",
+		"rekognition.search-users-by-image",
 	} {
 		customizations[operation] = func(cmd *command.Command) error {
 			cmd.AddFlag(command.Flag{
