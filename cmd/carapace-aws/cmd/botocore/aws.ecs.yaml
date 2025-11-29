@@ -38,6 +38,7 @@ commands:
         --health-check-path=: The path on the container that the Application Load Balancer uses for health checks.
         --infrastructure-role-arn=!: The Amazon Resource Name (ARN) of the infrastructure role that grants Amazon ECS permission to create and manage Amazon Web Services resources on your behalf for the Express service.
         --memory=: The amount of memory (in MiB) used by the task.
+        --monitor-resources=: ' Enable live monitoring of service resource status'
         --network-configuration=: The network configuration for the Express service tasks.
         --primary-container=!: The primary container configuration for the Express service.
         --scaling-target=: The auto-scaling configuration for the Express service.
@@ -171,6 +172,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monitor-resources=: ' Enable live monitoring of service resource status'
         --service-arn=!: The Amazon Resource Name (ARN) of the Express service to delete.
     - name: delete-service
       description: Deletes a specified service within a cluster.
@@ -200,6 +202,15 @@ commands:
         --no-force: If `true`, you can delete a task set even if it hasn't been scaled down to zero.
         --service=!: The short name or full Amazon Resource Name (ARN) of the service that hosts the task set to delete.
         --task-set=!: The task set ID or full Amazon Resource Name (ARN) of the task set to delete.
+    - name: deploy
+      description: Deploys a new task definition to the specified ECS service
+      flags:
+        --cluster=!: The short name or full Amazon Resource Name (ARN) of the cluster that your service is running within
+        --codedeploy-application=: The name of the AWS CodeDeploy application to use for the deployment
+        --codedeploy-appspec=!: The file path where your AWS CodeDeploy appspec file is located
+        --codedeploy-deployment-group=: The name of the AWS CodeDeploy deployment group to use for the deployment
+        --service=!: The short name or full Amazon Resource Name (ARN) of the service to update
+        --task-definition=!: The file path where your task definition file is located
     - name: deregister-container-instance
       description: Deregisters an Amazon ECS container instance from the specified cluster.
       flags:
@@ -542,6 +553,12 @@ commands:
                 - FARGATE
                 - EXTERNAL
                 - MANAGED_INSTANCES
+    - name: monitor-express-gateway-service
+      description: Monitors the progress of resource creation for an ECS Express Gateway Service
+      flags:
+        --resource-view=: Specifies which resources to display during monitoring
+        --service-arn=!: The short name or full Amazon Resource Name (ARN) of the service to monitor
+        --timeout=: Maximum time in minutes to monitor the service. Default is 30 minutes
     - name: put-account-setting
       description: Modifies an account setting.
       flags:
@@ -860,6 +877,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-path=: The path on the container for Application Load Balancer health checks.
         --memory=: The amount of memory (in MiB) used by the task.
+        --monitor-resources=: ' Enable live monitoring of service resource status'
         --network-configuration=: The network configuration for the Express service tasks.
         --primary-container=: The primary container configuration for the Express service.
         --scaling-target=: The auto-scaling configuration for the Express service.
