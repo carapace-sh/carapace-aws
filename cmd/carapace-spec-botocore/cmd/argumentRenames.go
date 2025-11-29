@@ -4,6 +4,7 @@ import (
 	"fmt"
 )
 
+// https://github.com/aws/aws-cli/blob/develop/awscli/customizations/argrename.py
 var argumentRenames = map[string]string{
 	"ec2.create-image.no-no-reboot":                      "reboot",
 	"ec2.*.no-egress":                                    "ingress",
