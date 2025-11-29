@@ -23,7 +23,6 @@ func init() {
 
 	for _, operation := range []string{
 		"mgn.create-replication-configuration-template",
-		"mgn.describe-replication-configuration-templates",
 		"mgn.update-replication-configuration",
 		"mgn.update-replication-configuration-template",
 	} {
@@ -39,4 +38,13 @@ func init() {
 		}
 	}
 
+	customizations["mgn.describe-replication-configuration-templates"] = func(cmd *command.Command) error {
+		cmd.AddFlag(command.Flag{
+			Longhand:    "replication-configuration-template-i-ds",
+			Description: "Request to describe Replication Configuration template by template IDs",
+			Value:       true,
+			Nargs:       -1,
+		})
+		return nil
+	}
 }
