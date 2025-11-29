@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: monitor-express-gateway-service
+description: Monitors the progress of resource creation for an ECS Express Gateway Service
+flags:
+  --service-arn=!: The short name or full Amazon Resource Name (ARN) of the service to monitor
+  --resource-view=: Specifies which resources to display during monitoring
+  --timeout=: Maximum time in minutes to monitor the service. Default is 30 minutes  
+documentation:
+  command: |
+    Monitors the progress of resource creation for an ECS Express Gateway Service.
+    This command provides real-time monitoring of service deployments with interactive progress display,
+    showing the status of load balancers, security groups, auto-scaling configurations,
+    and other AWS resources as they are created or updated.
+    Use `--resource-view RESOURCE` to view all service resources,
+    or `--resource-view DEPLOYMENT` to track only resources that have changed in the most recent deployment.
+    The command requires a terminal (TTY) to run and the monitoring session continues
+    until manually stopped by the user or the specified timeout is reached. Use keyboard shortcuts to navigate:
+    up/down to scroll through resources, ‘q’ to quit monitoring.
+  flag:
+    service-arn: The short name or full Amazon Resource Name (ARN) of the service to monitor.
+    resource-view: |
+      Specifies which resources to display during monitoring.
+      RESOURCE (default) - Combines resources from all active configurations of the service
+      and displays the live status of load balancers, security groups, target groups, etc.
+      DEPLOYMENT - Determines the resources that are being added or removed as part of the latest service deployment,
+      and displays their live statuses.
+    timeout: Maximum time in minutes to monitor the service. Default is 30 minutes.
+
