@@ -500,15 +500,20 @@ commands:
       description: Adds the specified outbound (egress) rules to a security group.
       flags:
         --cidr-ip=: Not supported.
+        --cidr=: The IPv4 address range, in CIDR format
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --from-port=: Not supported.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-id=!: The ID of the security group.
+        --group-owner=: The AWS account ID that owns the source security group
         --ip-permissions=: The permissions for the security group rules.
         --ip-protocol=: Not supported.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --port=: The range of ports to allow or ICMP code
+        --protocol=: The IP protoco
+        --source-group=: The name or ID of the source security group
         --source-security-group-name=: Not supported.
         --source-security-group-owner-id=: Not supported.
         --tag-specifications=: The tags applied to the security group rule.
@@ -517,6 +522,7 @@ commands:
       description: Adds the specified inbound (ingress) rules to a security group.
       flags:
         --cidr-ip=: The IPv4 address range, in CIDR format.
+        --cidr=: The IPv4 address range, in CIDR format
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
@@ -524,9 +530,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-id=: The ID of the security group.
         --group-name=: \[Default VPC] The name of the security group.
+        --group-owner=: The AWS account ID that owns the source security group
         --ip-permissions=: The permissions for the security group rules.
         --ip-protocol=: The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol Numbers](http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)). To specify all protocols, use `-1`.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --port=: The range of ports to allow or ICMP code
+        --protocol=: The IP protoco
+        --source-group=: The name or ID of the source security group
         --source-security-group-name=: \[Default VPC] The name of the source security group.
         --source-security-group-owner-id=: The Amazon Web Services account ID for the source security group, if the source security group is in a different account.
         --tag-specifications=: The tags applied to the security group rule.
@@ -9160,7 +9170,7 @@ commands:
     - name: modify-instance-attribute
       description: Modifies the specified attribute of the specified instance.
       flags:
-        '----enable-api-termination': Enable or disable termination protection for the instance.
+        '----no-disable-api-termination': Enable or disable termination protection for the instance.
         --attribute=: The name of the attribute to modify.
         --block-device-mappings=: Modifies the `DeleteOnTermination` attribute for volumes that are currently attached.
         --cli-input-json=: Read arguments from the JSON string provided.
