@@ -39,6 +39,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subnet-mappings=!: The IDs of the subnets that you want to associate with the firewall.
         --update-token=: An optional token that you can use for optimistic locking.
+    - name: attach-rule-groups-to-proxy-configuration
+      description: Attaches [ProxyRuleGroup]() resources to a [ProxyConfiguration]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+        --rule-groups=!: The proxy rule group(s) to attach to the proxy configuration
+        --update-token=!: A token used for optimistic locking.
     - name: create-firewall
       description: Creates an Network Firewall [Firewall]() and accompanying [FirewallStatus]() for a VPC.
       flags:
@@ -76,6 +86,50 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
         --tags=: The key:value pairs to associate with the resource.
+    - name: create-proxy
+      description: Creates an Network Firewall [Proxy]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-properties=: Listener properties for HTTP and HTTPS traffic.
+        --nat-gateway-id=!: A unique identifier for the NAT gateway to use with proxy resources.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+        --proxy-name=!: The descriptive name of the proxy.
+        --tags=: The key:value pairs to associate with the resource.
+        --tls-intercept-properties=!: TLS decryption on traffic to filter on attributes in the HTTP header.
+    - name: create-proxy-configuration
+      description: Creates an Network Firewall [ProxyConfiguration]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-rule-phase-actions=!: Evaluation points in the traffic flow where rules are applied.
+        --description=: A description of the proxy configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-name=!: The descriptive name of the proxy configuration.
+        --rule-group-arns=: The proxy rule group arn(s) to attach to the proxy configuration.
+        --rule-group-names=: The proxy rule group name(s) to attach to the proxy configuration.
+        --tags=: The key:value pairs to associate with the resource.
+    - name: create-proxy-rule-group
+      description: Creates an Network Firewall [ProxyRuleGroup]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the proxy rule group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-name=!: The descriptive name of the proxy rule group.
+        --rules=: Individual rules that define match conditions and actions for application-layer traffic.
+        --tags=: The key:value pairs to associate with the resource.
+    - name: create-proxy-rules
+      description: Creates Network Firewall [ProxyRule]() resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+        --rules=!: Individual rules that define match conditions and actions for application-layer traffic.
     - name: create-rule-group
       description: Creates the specified stateless or stateful rule group, which includes the rules for network traffic inspection, a capacity setting, and tags.
       flags:
@@ -146,6 +200,40 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --transit-gateway-attachment-id=!: Required.
+    - name: delete-proxy
+      description: Deletes the specified [Proxy]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nat-gateway-id=!: The NAT Gateway the proxy is attached to.
+        --proxy-arn=: The Amazon Resource Name (ARN) of a proxy.
+        --proxy-name=: The descriptive name of the proxy.
+    - name: delete-proxy-configuration
+      description: Deletes the specified [ProxyConfiguration]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+    - name: delete-proxy-rule-group
+      description: Deletes the specified [ProxyRuleGroup]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+    - name: delete-proxy-rules
+      description: Deletes the specified [ProxyRule]()(s).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+        --rules=!: The proxy rule(s) to remove from the existing proxy rule group.
     - name: delete-resource-policy
       description: Deletes a resource policy that you created in a [PutResourcePolicy]() request.
       flags:
@@ -224,6 +312,39 @@ commands:
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
         --firewall-name=: The descriptive name of the firewall.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-proxy
+      description: Returns the data objects for the specified proxy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-arn=: The Amazon Resource Name (ARN) of a proxy.
+        --proxy-name=: The descriptive name of the proxy.
+    - name: describe-proxy-configuration
+      description: Returns the data objects for the specified proxy configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+    - name: describe-proxy-rule
+      description: Returns the data objects for the specified proxy configuration for the specified proxy rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+        --proxy-rule-name=!: The descriptive name of the proxy rule.
+    - name: describe-proxy-rule-group
+      description: Returns the data objects for the specified proxy rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
     - name: describe-resource-policy
       description: Retrieves a resource policy that you created in a [PutResourcePolicy]() request.
       flags:
@@ -290,6 +411,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vpc-endpoint-association-arn=!: The Amazon Resource Name (ARN) of a VPC endpoint association.
+    - name: detach-rule-groups-from-proxy-configuration
+      description: Detaches [ProxyRuleGroup]() resources from a [ProxyConfiguration]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+        --rule-group-arns=: The proxy rule group arns to detach from the proxy configuration
+        --rule-group-names=: The proxy rule group names to detach from the proxy configuration
+        --update-token=!: A token used for optimistic locking.
     - name: disassociate-availability-zones
       description: Removes the specified Availability Zone associations from a transit gateway-attached firewall.
       flags:
@@ -397,6 +529,39 @@ commands:
             flow-operation-type:
                 - FLOW_FLUSH
                 - FLOW_CAPTURE
+    - name: list-proxies
+      description: Retrieves the metadata for the proxies that you have defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Network Firewall to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-proxy-configurations
+      description: Retrieves the metadata for the proxy configuration that you have defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Network Firewall to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-proxy-rule-groups
+      description: Retrieves the metadata for the proxy rule groups that you have defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Network Firewall to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-rule-groups
       description: Retrieves the metadata for the rule groups that you have defined.
       flags:
@@ -620,6 +785,76 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-configuration=: Defines how Network Firewall performs logging for a firewall.
         --no-enable-monitoring-dashboard: A boolean that lets you enable or disable the detailed firewall monitoring dashboard on the firewall.
+    - name: update-proxy
+      description: Updates the properties of the specified proxy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-properties-to-add=: Listener properties for HTTP and HTTPS traffic to add.
+        --listener-properties-to-remove=: Listener properties for HTTP and HTTPS traffic to remove.
+        --nat-gateway-id=!: The NAT Gateway the proxy is attached to.
+        --proxy-arn=: The Amazon Resource Name (ARN) of a proxy.
+        --proxy-name=: The descriptive name of the proxy.
+        --tls-intercept-properties=: TLS decryption on traffic to filter on attributes in the HTTP header.
+        --update-token=!: A token used for optimistic locking.
+    - name: update-proxy-configuration
+      description: Updates the properties of the specified proxy configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-rule-phase-actions=!: Evaluation points in the traffic flow where rules are applied.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+        --update-token=!: A token used for optimistic locking.
+    - name: update-proxy-rule
+      description: Updates the properties of the specified proxy rule.
+      flags:
+        --action=: Depending on the match action, the proxy either stops the evaluation (if the action is terminal - allow or deny), or continues it (if the action is alert) until it matches a rule with a terminal action.
+        --add-conditions=: Proxy rule conditions to add.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the proxy rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+        --proxy-rule-name=!: The descriptive name of the proxy rule.
+        --remove-conditions=: Proxy rule conditions to remove.
+        --update-token=!: A token used for optimistic locking.
+      completion:
+        flag:
+            action:
+                - ALLOW
+                - DENY
+                - ALERT
+    - name: update-proxy-rule-group-priorities
+      description: Updates proxy rule group priorities within a proxy configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
+        --proxy-configuration-name=: The descriptive name of the proxy configuration.
+        --rule-groups=!: proxy rule group resources to update to new positions.
+        --update-token=!: A token used for optimistic locking.
+    - name: update-proxy-rule-priorities
+      description: Updates proxy rule priorities within a proxy rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
+        --proxy-rule-group-name=: The descriptive name of the proxy rule group.
+        --rule-group-request-phase=!: Evaluation points in the traffic flow where rules are applied.
+        --rules=!: proxy rule resources to update to new positions.
+        --update-token=!: A token used for optimistic locking.
+      completion:
+        flag:
+            rule-group-request-phase:
+                - PRE_DNS
+                - PRE_REQ
+                - POST_RES
     - name: update-rule-group
       description: Updates the rule settings for the specified rule group.
       flags:
