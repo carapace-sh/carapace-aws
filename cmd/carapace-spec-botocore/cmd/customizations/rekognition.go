@@ -15,7 +15,7 @@ func init() {
 		"rekognition.detect-protective-equipment",
 		"rekognition.detect-text",
 		"rekognition.index-faces",
-		"rekognition.recoknize-celebrities",
+		"rekognition.recognize-celebrities",
 		"rekognition.search-faces-by-image",
 		"rekognition.search-users-by-image",
 	} {
