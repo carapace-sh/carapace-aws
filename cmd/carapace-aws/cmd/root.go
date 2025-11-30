@@ -89,21 +89,15 @@ func init() {
 	}
 
 	for _, extension := range []string{
-		"apptest",
 		"cli-dev",
 		"configservice",
 		"configure",
 		"ddb",
 		"deploy",
 		"history",
-		"iotfleethub",
-		"lookoutmetrics",
-		"lookoutvision",
-		"qldb",
-		"qldb-session",
-		"robomaker",
+		"login",
+		"logout",
 		"s3api",
-		"sms",
 	} {
 		subCmd := &cobra.Command{
 			Use:                extension,
