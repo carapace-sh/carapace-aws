@@ -333,6 +333,7 @@ func init() {
 		"route53resolver":                     "Amazon Route 53 Resolver",
 		"rtbfabric":                           "RTBFabric",
 		"rum":                                 "CloudWatch RUM",
+		"s3":                                  "",
 		"s3api":                               "Amazon Simple Storage Service",
 		"s3control":                           "AWS S3 Control",
 		"s3outposts":                          "Amazon S3 on Outposts",

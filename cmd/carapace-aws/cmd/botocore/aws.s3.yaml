@@ -1,0 +1,196 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: s3
+commands:
+    - name: cp
+      description: Copies a local file or S3 object to another location locally or in S3
+      flags:
+        --acl=: Sets the ACL for the object when the command is performed
+        --cache-control=: Specifies caching behavior along the request/reply chain
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object
+        --checksum-mode=: To retrieve the checksum, this mode must be enabled
+        --content-disposition=: Specifies presentational information for the object
+        --content-encoding=: Specifies what content encodings have been applied to the object
+        --content-language=: The language the content is in
+        --content-type=: Specify an explicit content type for this operation
+        --copy-props=: Determines which properties are copied from the source S3 object
+        --dryrun: Displays the operations that would be performed using the specified command without actually running them
+        --exclude=: Exclude all files or objects from the command that matches the specified pattern
+        --expected-size=: This argument specifies the expected size of a stream in terms of bytes
+        --expires=: The date and time at which the object is no longer cacheable
+        --follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --force-glacier-transfer: Forces a transfer request on all Glacier objects in a sync or recursive copy
+        --grants=: Grant specific permissions to individual users or groups
+        --ignore-glacier-warnings: Turns off glacier warnings
+        --include=: Don’t exclude files or objects in the command that match the specified pattern
+        --metadata-directive=: Sets the x-amz-metadata-directive header for CopyObject operations
+        --metadata=: A map of metadata to store with the objects in S3
+        --no-follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --no-guess-mime-type: Do not try to guess the mime type for uploaded files
+        --no-progress: File transfer progress is not displayed
+        --only-show-errors: Only errors and warnings are displayed
+        --page-size=: The number of results to return in each response to a list operation
+        --progress-frequency=: Number of seconds to wait before updating file transfer progress
+        --progress-multiline: Show progress on multiple lines.
+        --quiet: Does not display the operations performed from the specified command
+        --recursive: Command is performed on all files or objects under the specified directory or prefix
+        --request-payer=: Confirms that the requester knows that they will be charged for the request
+        --source-region=: The region of the source bucket
+        --sse-c-copy-source-key=: The customer-provided encryption key for Amazon S3 to use to decrypt the source object
+        --sse-c-copy-source=: The algorithm to use when decrypting the source object
+        --sse-c-key=: The customer-provided encryption key to use to server-side encrypt the object in S3
+        --sse-c=: Specifies server-side encryption using customer provided keys of the the object in S3
+        --sse-kms-key-id=: The customer-managed AWS Key Management Service (KMS) key ID
+        --sse=: Specifies server-side encryption of the object in S3
+        --storage-class=: The type of storage to use for the object
+        --website-redirect=: If the bucket is configured as a website, redirects requests for this object to another object in the same bucket or to an external URL
+      completion:
+        flag:
+            storage-class:
+                - STANDARD
+                - REDUCED_REDUNDANCY
+                - STANDARD_IA
+                - ONEZONE_IA
+                - INTELLIGENT_TIERING
+                - GLACIER
+                - DEEP_ARCHIVE
+                - GLACIER_IR
+    - name: ls
+      description: List S3 objects and common prefixes under a prefix or all S3 buckets
+      flags:
+        --bucket-name-prefix=: Limits the response to bucket names that begin with the specified bucket name prefix
+        --bucket-region=: Limits the response to buckets that are located in the specified Amazon Web Services Region
+        --human-readable: Displays file sizes in human readable format
+        --page-size=: The number of results to return in each response to a list operation
+        --recursive: Command is performed on all files or objects under the specified directory or prefix
+        --request-payer=: Confirms that the requester knows that they will be charged for the request
+        --summarize: Displays summary information
+    - name: mb
+      description: Creates an S3 bucket
+    - name: mv
+      description: Moves a local file or S3 object to another location locally or in S3.
+      flags:
+        --acl=: Sets the ACL for the object when the command is performed
+        --cache-control=: Specifies caching behavior along the request/reply chain
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object
+        --checksum-mode=: To retrieve the checksum, this mode must be enabled
+        --content-disposition=: Specifies presentational information for the object
+        --content-encoding=: Specifies what content encodings have been applied to the object
+        --content-language=: The language the content is in
+        --content-type=: Specify an explicit content type for this operation
+        --copy-props=: Determines which properties are copied from the source S3 object
+        --dryrun: Displays the operations that would be performed using the specified command without actually running them
+        --exclude=: Exclude all files or objects from the command that matches the specified pattern
+        --expires=: The date and time at which the object is no longer cacheable
+        --follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --force-glacier-transfer: Forces a transfer request on all Glacier objects in a sync or recursive copy
+        --grants=: Grant specific permissions to individual users or groups
+        --ignore-glacier-warnings: Turns off glacier warnings
+        --include=: Don’t exclude files or objects in the command that match the specified pattern
+        --metadata-directive=: Sets the x-amz-metadata-directive header for CopyObject operations
+        --metadata=: A map of metadata to store with the objects in S3
+        --no-follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --no-guess-mime-type: Do not try to guess the mime type for uploaded files
+        --no-progress: File transfer progress is not displayed
+        --only-show-errors: Only errors and warnings are displayed
+        --page-size=: The number of results to return in each response to a list operation
+        --progress-frequency=: Number of seconds to wait before updating file transfer progress
+        --progress-multiline: Show progress on multiple lines
+        --quiet: Does not display the operations performed from the specified command
+        --recursive: Command is performed on all files or objects under the specified directory or prefix
+        --request-payer=: Confirms that the requester knows that they will be charged for the request
+        --source-region=: This specifies the region of the source bucket
+        --sse-c-copy-source-key=: The encryption key provided must be one that was used when the source object was created.
+        --sse-c-copy-source=: The algorithm to use when decrypting the source object
+        --sse-c-key=: The customer-provided encryption key to use to server-side encrypt the object in S3
+        --sse-c=: Specifies server-side encryption using customer provided keys of the the object in S3
+        --sse-kms-key-id=: The customer-managed AWS Key Management Service (KMS) key ID
+        --sse=: Specifies server-side encryption of the object in S3
+        --storage-class=: The type of storage to use for the object
+        --validate-same-s3-paths: Resolves the source and destination S3 URIs to their underlying buckets
+        --website-redirect=: Redirects requests for this object to another object in the same bucket or to an external URL
+      completion:
+        flag:
+            storage-class:
+                - STANDARD
+                - REDUCED_REDUNDANCY
+                - STANDARD_IA
+                - ONEZONE_IA
+                - INTELLIGENT_TIERING
+                - GLACIER
+                - DEEP_ARCHIVE
+                - GLACIER_IR
+    - name: presign
+      description: Generate a pre-signed URL for an Amazon S3 object
+      flags:
+        --expires-in=: Number of seconds until the pre-signed URL expires
+    - name: rb
+      description: Deletes an empty S3 bucket
+      flags:
+        --force: Deletes all objects in the bucket including the bucket itself.
+    - name: rm
+      description: Deletes an S3 object.
+      flags:
+        --dryrun: Displays the operations that would be performed using the specified command without actually running them
+        --exclude=: Exclude all files or objects from the command that matches the specified pattern
+        --include=: Don’t exclude files or objects in the command that match the specified pattern
+        --only-show-errors: Only errors and warnings are displayed
+        --page-size=: The number of results to return in each response to a list operation
+        --quiet: Does not display the operations performed from the specified command
+        --recursive: Command is performed on all files or objects under the specified directory or prefix
+        --request-payer=: Confirms that the requester knows that they will be charged for the request
+    - name: sync
+      description: Syncs directories and S3 prefixe
+      flags:
+        --acl=: Sets the ACL for the object when the command is performed
+        --cache-control=: Specifies caching behavior along the request/reply chain
+        --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object
+        --checksum-mode=: To retrieve the checksum, this mode must be enabled
+        --content-disposition=: Specifies presentational information for the object
+        --content-encoding=: Specifies what content encodings have been applied to the object
+        --content-language=: The language the content is in
+        --content-type=: Specify an explicit content type for this operation. This value overrides any guessed mime types
+        --copy-props=: Determines which properties are copied from the source S3 object
+        --dryrun: Displays the operations that would be performed using the specified command without actually running them
+        --exclude=: Exclude all files or objects from the command that matches the specified pattern
+        --expires=: The date and time at which the object is no longer cacheable
+        --follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --force-glacier-transfer: Forces a transfer request on all Glacier objects in a sync or recursive copy
+        --grants=: Grant specific permissions to individual users or groups
+        --ignore-glacier-warnings: Turns off glacier warnings
+        --include=: Don’t exclude files or objects in the command that match the specified pattern
+        --metadata-directive=: Sets the x-amz-metadata-directive header for CopyObject operations
+        --metadata=: A map of metadata to store with the objects in S3
+        --no-follow-symlinks: Symbolic links are followed only when uploading to S3 from the local filesystem
+        --no-guess-mime-type: Do not try to guess the mime type for uploaded files
+        --no-progress: File transfer progress is not displayed
+        --only-show-errors: Only errors and warnings are displayed
+        --page-size=: The number of results to return in each response to a list operation
+        --progress-frequency=: Number of seconds to wait before updating file transfer progress
+        --progress-multiline: Show progress on multiple lines
+        --quiet: Does not display the operations performed from the specified command
+        --request-payer=: Confirms that the requester knows that they will be charged for the request
+        --source-region=: Specifies the region of the source bucket
+        --sse-c-copy-source-key=: Specifies the customer-provided encryption key for Amazon S3
+        --sse-c-copy-source=: The algorithm to use when decrypting the source object
+        --sse-c-key=: The customer-provided encryption key to use to server-side encrypt the object in S3
+        --sse-c=: Specifies server-side encryption using customer provided keys of the the object in S3
+        --sse-kms-key-id=: The customer-managed AWS Key Management Service (KMS) key ID
+        --sse=: Specifies server-side encryption of the object in S3
+        --storage-class=: The type of storage to use for the object
+        --website-redirect=: Redirects requests for this object to another object in the same bucket or to an external URL
+      completion:
+        flag:
+            storage-class:
+                - STANDARD
+                - REDUCED_REDUNDANCY
+                - STANDARD_IA
+                - ONEZONE_IA
+                - INTELLIGENT_TIERING
+                - GLACIER
+                - DEEP_ARCHIVE
+                - GLACIER_IR. Defaults to ‘STANDARD’
+    - name: website
+      description: Set the website configuration for a bucket
+      flags:
+        --error-document=: The object key name to use when a 4XX class error occurs
+        --index-document=: A suffix that is appended to a request that is for a directory on the website endpoint
