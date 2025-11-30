@@ -36,6 +36,7 @@ var s3_website []byte
 
 func init() {
 	customizations["s3"] = func(cmd *command.Command) error {
+		cmd.Name = "s3api"
 		cmd.Commands = make([]command.Command, 0)
 		for _, spec := range [][]byte{
 			s3_cp,
