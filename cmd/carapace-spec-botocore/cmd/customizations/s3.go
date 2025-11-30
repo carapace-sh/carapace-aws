@@ -15,6 +15,12 @@ func init() {
 		cmd.Name = "s3api"
 		return nil
 	}
+	customizations["s3.select-object-content"] = func(cmd *command.Command) error {
+		delete(cmd.Flags, "--generate-cli-skeleton")
+		delete(cmd.Flags, "--cli-input-json=")
+		delete(cmd.Flags, "--cli-input-yaml=")
+		return nil
+	}
 
 	customizations[""] = func(cmd *command.Command) error {
 		var specCommand command.Command
