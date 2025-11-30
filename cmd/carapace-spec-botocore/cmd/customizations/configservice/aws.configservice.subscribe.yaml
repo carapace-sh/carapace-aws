@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: subscribe
+description: Subscribes user to AWS Config
+flags:
+  --s3-bucket=!: The S3 bucket that the AWS Config delivery channel will use
+  --sns-topic=!: The SNS topic that the AWS Config delivery channel will use
+  --iam-role=!: The IAM role that the AWS Config configuration recorder will use
+documentation:
+  command: |
+    Subscribes user to AWS Config by creating an AWS Config delivery channel
+    and configuration recorder to track AWS resource configurations.
+    The names of the default channel and configuration recorder will be default.
+  flag:
+    s3-bucket: |
+      The S3 bucket that the AWS Config delivery channel will use.
+      If the bucket does not exist, it will be automatically created.
+      The value for this argument should follow the form bucket/prefix.
+      Note that the prefix is optional.
+    sns-topic: |
+      The SNS topic that the AWS Config delivery channel will use.
+      If the SNS topic does not exist, it will be automatically created.
+      Value for this should be a valid SNS topic name or the ARN of an existing SNS topic.
+    iam-role: |
+      The IAM role that the AWS Config configuration recorder will use to record current resource configurations.
+      Value for this should be the ARN of the desired IAM role.
