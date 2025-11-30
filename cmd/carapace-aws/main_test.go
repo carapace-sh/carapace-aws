@@ -27,6 +27,27 @@ func TestService(t *testing.T) {
 	defer os.Remove(testFile.Name())
 
 	serviceToTest := os.Getenv("SERVICE")
+
+	if serviceToTest == "" || serviceToTest == "_" {
+		fmt.Printf("\033[2m# %v\033[0m\n", "_")
+
+		patch := carapace.DiffPatch(
+			bridge.ActionAws("aws"),
+			bridge.ActionCarapace("carapace-aws").Chdir(testDir),
+			carapace.NewContext(""),
+		)
+		for _, line := range patch {
+			switch {
+			case strings.HasPrefix(line, "-"):
+				fmt.Printf("\033[0;31m%v\033[0m\n", line)
+				t.Fail()
+			case strings.HasPrefix(line, "+"):
+				fmt.Printf("\033[0;32m%v\033[0m\n", line)
+				t.Fail()
+			}
+		}
+	}
+
 	for service := range botocore.Services() {
 		t.Run(service, func(t *testing.T) {
 			if serviceToTest != "" && service != serviceToTest { // TODO env var to only test a specific service
