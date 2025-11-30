@@ -44,9 +44,12 @@ var rootCmd = &cobra.Command{
 			return nil
 		}
 
-		dir, err := os.MkdirTemp("", "carapace-spec-botocore-*")
-		if err != nil {
-			return err
+		dir := cmd.Flag("target").Value.String()
+		if dir == "" {
+			dir, err = os.MkdirTemp("", "carapace-spec-botocore-*")
+			if err != nil {
+				return err
+			}
 		}
 
 		for _, subCommand := range command.Commands {
@@ -84,6 +87,8 @@ func init() {
 	carapace.Gen(rootCmd).Standalone()
 	rootCmd.Flags().Bool("no-doc", false, "strip documentation")
 	rootCmd.Flags().Bool("stdout", false, "print to stdout")
+	rootCmd.Flags().String("target", "", "target directory")
+	rootCmd.MarkFlagsMutuallyExclusive("stdout", "target")
 }
 
 func CamelCaseToDash(s string) string {
