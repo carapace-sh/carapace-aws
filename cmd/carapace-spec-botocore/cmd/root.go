@@ -111,7 +111,7 @@ func CamelCaseToDash(s string) string {
 		"checksum-cr-c32-c":                                  "checksum-crc32-c",
 		"checksum-cr-c32":                                    "checksum-crc32",
 		"checksum-cr-c64-nvme":                               "checksum-crc64-nvme",
-		"checksum-sh-a1":                                     "checksum-sh-a1",
+		"checksum-sh-a1":                                     "checksum-sha1",
 		"checksum-sh-a256":                                   "checksum-sha256",
 		"content-m-d5":                                       "content-md5",
 		"copy-source-sse-customer-key-m-d5":                  "copy-source-sse-customer-key-md5",
