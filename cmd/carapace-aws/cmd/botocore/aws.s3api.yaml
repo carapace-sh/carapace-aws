@@ -22,11 +22,11 @@ commands:
       description: Completes a multipart upload by assembling previously uploaded parts.
       flags:
         --bucket=!: Name of the bucket to which the multipart upload was initiated.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-type=: This header specifies the checksum type of the object, which determines how part-level checksums are combined to create an object-level checksum for multipart objects.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -39,7 +39,7 @@ commands:
         --multipart-upload=: The container for the multipart upload request information.
         --request-payer=: ""
         --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key-md5=: The MD5 server-side encryption (SSE) customer managed key.
         --sse-customer-key=: The server-side encryption (SSE) customer managed key.
         --upload-id=!: ID for the initiated multipart upload.
       completion:
@@ -68,7 +68,7 @@ commands:
         --copy-source-if-none-match=: Copies the object if its entity tag (ETag) is different than the specified ETag.
         --copy-source-if-unmodified-since=: Copies the object if it hasn't been modified since the specified time.
         --copy-source-sse-customer-algorithm=: Specifies the algorithm to use when decrypting the source object (for example, `AES256`).
-        --copy-source-sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --copy-source-sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --copy-source-sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object.
         --copy-source=!: Specifies the source object for the copy operation.
         --expected-bucket-owner=: The account ID of the expected destination bucket owner.
@@ -91,7 +91,7 @@ commands:
         --request-payer=: ""
         --server-side-encryption=: The server-side encryption algorithm used when storing this object in Amazon S3.
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, `AES256`).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for the destination object encryption.
         --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
@@ -182,7 +182,7 @@ commands:
         --checksum-algorithm=: The checksum algorithm to use with your metadata configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the metadata configuration.
+        --content-md5=: The `Content-MD5` header for the metadata configuration.
         --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata-configuration=!: The contents of your metadata configuration.
@@ -201,7 +201,7 @@ commands:
         --checksum-algorithm=: The checksum algorithm to use with your metadata table configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the metadata table configuration.
+        --content-md5=: The `Content-MD5` header for the metadata table configuration.
         --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to your metadata table configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata-table-configuration=!: The contents of your metadata table configuration.
@@ -244,7 +244,7 @@ commands:
         --request-payer=: ""
         --server-side-encryption=: The server-side encryption algorithm used when you store this object in Amazon S3 or Amazon FSx.
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context to use for object encryption.
         --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
@@ -736,7 +736,7 @@ commands:
         --response-content-type=: Sets the `Content-Type` header of the response.
         --response-expires=: Sets the `Expires` header of the response.
         --sse-customer-algorithm=: Specifies the algorithm to use when decrypting the object (for example, `AES256`).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the customer-provided encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key that you originally provided for Amazon S3 to encrypt the data before storing it.
         --version-id=: Version ID used to reference a specific version of the object.
       completion:
@@ -776,7 +776,7 @@ commands:
         --part-number-marker=: Specifies the part after which listing should begin.
         --request-payer=: ""
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --version-id=: The version ID used to reference a specific version of the object.
       completion:
@@ -889,7 +889,7 @@ commands:
         --response-content-type=: Sets the `Content-Type` header of the response.
         --response-expires=: Sets the `Expires` header of the response.
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --version-id=: Version ID used to reference a specific version of the object.
       completion:
@@ -1073,7 +1073,7 @@ commands:
         --part-number-marker=: Specifies the part after which listing should begin.
         --request-payer=: ""
         --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key-md5=: The MD5 server-side encryption (SSE) customer managed key.
         --sse-customer-key=: The server-side encryption (SSE) customer managed key.
         --starting-token=: A token to specify where to start paginating.
         --upload-id=!: Upload ID identifying the multipart upload whose parts are being listed.
@@ -1089,7 +1089,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm that you want Amazon S3 to use to create the checksum.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutBucketAbac` request body.
+        --content-md5=: The MD5 hash of the `PutBucketAbac` request body.
         --expected-bucket-owner=: The Amazon Web Services account ID of the general purpose bucket's owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
@@ -1127,7 +1127,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -1165,7 +1165,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --cors-configuration=!: Describes the cross-origin access configuration for objects in an Amazon S3 bucket.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1184,7 +1184,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the server-side encryption configuration.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the server-side encryption configuration.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --server-side-encryption-configuration=!: ""
@@ -1223,7 +1223,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
+        --content-md5=: For requests made using the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is calculated automatically.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lifecycle-configuration=: ""
@@ -1265,7 +1265,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutBucketLogging` request body.
+        --content-md5=: The MD5 hash of the `PutBucketLogging` request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
       completion:
@@ -1293,7 +1293,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutPublicAccessBlock` request body.
+        --content-md5=: The MD5 hash of the `PutPublicAccessBlock` request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --notification-configuration=!: The container for the configuration.
@@ -1323,7 +1323,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `OwnershipControls` request body.
+        --content-md5=: The MD5 hash of the `OwnershipControls` request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ownership-controls=!: The `OwnershipControls` (BucketOwnerEnforced, BucketOwnerPreferred, or ObjectWriter) that you want to apply to this Amazon S3 bucket.
@@ -1343,7 +1343,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
-        --content-m-d5=: The MD5 hash of the request body.
+        --content-md5=: The MD5 hash of the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-confirm-remove-self-bucket-access: Set this parameter to true to confirm that you want to remove your permissions to change this bucket policy in the future.
@@ -1363,7 +1363,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --replication-configuration=!: ""
@@ -1383,7 +1383,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --request-payment-configuration=!: Container for Payer.
@@ -1402,7 +1402,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tagging=!: Container for the `TagSet` and `Tag` elements.
@@ -1421,7 +1421,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: '&gt;The Base64 encoded 128-bit `MD5` digest of the data.'
+        --content-md5=: '&gt;The Base64 encoded 128-bit `MD5` digest of the data.'
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mfa=: The concatenation of the authentication device's serial number, a space, and the value that is displayed on your authentication device.
@@ -1441,7 +1441,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the request when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --website-configuration=!: Container for the request.
@@ -1462,18 +1462,18 @@ commands:
         --bucket=!: The bucket name to which the PUT action was initiated.
         --cache-control=: Can be used to specify caching behavior along the request/reply chain.
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-disposition=: Specifies presentational information for the object.
         --content-encoding=: Specifies what content encodings have been applied to the object and thus what decoding mechanisms must be applied to obtain the media-type referenced by the Content-Type header field.
         --content-language=: The language the content is in.
         --content-length=: Size of the body in bytes.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the message (without the headers) according to RFC 1864. This header can be used as a message integrity check to verify that the data is the same data that was originally sent.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the message (without the headers) according to RFC 1864. This header can be used as a message integrity check to verify that the data is the same data that was originally sent.
         --content-type=: A standard MIME type describing the format of the contents.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --expires=: The date and time at which the object is no longer cacheable.
@@ -1493,7 +1493,7 @@ commands:
         --request-payer=: ""
         --server-side-encryption=: The server-side encryption algorithm that was used when you store this object in Amazon S3 or Amazon FSx.
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, `AES256`).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --ssekms-encryption-context=: Specifies the Amazon Web Services KMS Encryption Context as an additional encryption context to use for object encryption.
         --ssekms-key-id=: Specifies the KMS key ID (Key ID, Key ARN, or Key Alias) to use for object encryption.
@@ -1552,7 +1552,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The Base64 encoded 128-bit `MD5` digest of the data.
+        --content-md5=: The Base64 encoded 128-bit `MD5` digest of the data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-full-control=: Allows grantee the read, write, read ACP, and write ACP permissions on the bucket.
@@ -1588,7 +1588,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
+        --content-md5=: The MD5 hash for the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key=!: The key name for the object that you want to place a legal hold on.
@@ -1612,7 +1612,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
+        --content-md5=: The MD5 hash for the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --object-lock-configuration=: The Object Lock configuration that you want to apply to the specified bucket.
@@ -1636,7 +1636,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
+        --content-md5=: The MD5 hash for the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key=!: The key name for the object that you want to apply this Object Retention configuration to.
@@ -1661,7 +1661,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash for the request body.
+        --content-md5=: The MD5 hash for the request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key=!: Name of the object key.
@@ -1685,7 +1685,7 @@ commands:
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The MD5 hash of the `PutPublicAccessBlock` request body.
+        --content-md5=: The MD5 hash of the `PutPublicAccessBlock` request body.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --public-access-block-configuration=!: The `PublicAccessBlock` configuration that you want to apply to this Amazon S3 bucket.
@@ -1754,7 +1754,7 @@ commands:
         --request-progress=: Specifies if periodic request progress information should be enabled.
         --scan-range=: Specifies the byte range of the object to get the records from.
         --sse-customer-algorithm=: The server-side encryption (SSE) algorithm used to encrypt the object.
-        --sse-customer-key-m-d5=: The MD5 server-side encryption (SSE) customer managed key.
+        --sse-customer-key-md5=: The MD5 server-side encryption (SSE) customer managed key.
         --sse-customer-key=: The server-side encryption (SSE) customer managed key.
       completion:
         flag:
@@ -1767,7 +1767,7 @@ commands:
         --checksum-algorithm=: The checksum algorithm to use with your inventory table configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the inventory table configuration.
+        --content-md5=: The `Content-MD5` header for the inventory table configuration.
         --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable an inventory table for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --inventory-table-configuration=!: The contents of your inventory table configuration.
@@ -1786,7 +1786,7 @@ commands:
         --checksum-algorithm=: The checksum algorithm to use with your journal table configuration.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --content-m-d5=: The `Content-MD5` header for the journal table configuration.
+        --content-md5=: The `Content-MD5` header for the journal table configuration.
         --expected-bucket-owner=: The expected owner of the general purpose bucket that corresponds to the metadata table configuration that you want to enable or disable journal table record expiration for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --journal-table-configuration=!: The contents of your journal table configuration.
@@ -1804,22 +1804,22 @@ commands:
         --body=: Object data.
         --bucket=!: The name of the bucket to which the multipart upload was initiated.
         --checksum-algorithm=: Indicates the algorithm used to create the checksum for the object when you use the SDK.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-length=: Size of the body in bytes.
-        --content-m-d5=: The Base64 encoded 128-bit MD5 digest of the part data.
+        --content-md5=: The Base64 encoded 128-bit MD5 digest of the part data.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key=!: Object key for which the multipart upload was initiated.
         --part-number=!: Part number of part being uploaded.
         --request-payer=: ""
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --upload-id=!: Upload ID identifying the multipart upload whose part is being uploaded.
       completion:
@@ -1844,7 +1844,7 @@ commands:
         --copy-source-if-unmodified-since=: Copies the object if it hasn't been modified since the specified time.
         --copy-source-range=: The range of bytes to copy from the source object.
         --copy-source-sse-customer-algorithm=: Specifies the algorithm to use when decrypting the source object (for example, `AES256`).
-        --copy-source-sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --copy-source-sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --copy-source-sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use to decrypt the source object.
         --copy-source=!: Specifies the source object for the copy operation.
         --expected-bucket-owner=: The account ID of the expected destination bucket owner.
@@ -1854,7 +1854,7 @@ commands:
         --part-number=!: Part number of part being copied.
         --request-payer=: ""
         --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-        --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+        --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
         --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
         --upload-id=!: Upload ID identifying the multipart upload whose part is being copied.
       completion:
@@ -1904,7 +1904,7 @@ commands:
             --response-content-type=: Sets the `Content-Type` header of the response.
             --response-expires=: Sets the `Expires` header of the response.
             --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-            --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+            --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
             --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
             --version-id=: Version ID used to reference a specific version of the object.
           completion:
@@ -1937,7 +1937,7 @@ commands:
             --response-content-type=: Sets the `Content-Type` header of the response.
             --response-expires=: Sets the `Expires` header of the response.
             --sse-customer-algorithm=: Specifies the algorithm to use when encrypting the object (for example, AES256).
-            --sse-customer-key-m-d5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
+            --sse-customer-key-md5=: Specifies the 128-bit MD5 digest of the encryption key according to RFC 1321. Amazon S3 uses this header for a message integrity check to ensure that the encryption key was transmitted without error.
             --sse-customer-key=: Specifies the customer-provided encryption key for Amazon S3 to use in encrypting data.
             --version-id=: Version ID used to reference a specific version of the object.
           completion:
@@ -1953,11 +1953,11 @@ commands:
         --body=: The object data.
         --bucket-key-enabled: Indicates whether the object stored in Amazon S3 uses an S3 bucket key for server-side encryption with Amazon Web Services KMS (SSE-KMS).
         --cache-control=: Specifies caching behavior along the request/reply chain.
-        --checksum-cr-c32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-cr-c64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sh-a1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
-        --checksum-sh-a256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-disposition=: Specifies presentational information for the object.
@@ -1989,7 +1989,7 @@ commands:
         --restore=: Provides information about object restoration operation and expiration time of the restored object copy.
         --server-side-encryption=: The server-side encryption algorithm used when storing requested object in Amazon S3 or Amazon FSx.
         --sse-customer-algorithm=: Encryption algorithm used if server-side encryption with a customer-provided encryption key was specified for object stored in Amazon S3.
-        --sse-customer-key-m-d5=: 128-bit MD5 digest of customer-provided encryption key used in Amazon S3 to encrypt data stored in S3.
+        --sse-customer-key-md5=: 128-bit MD5 digest of customer-provided encryption key used in Amazon S3 to encrypt data stored in S3.
         --ssekms-key-id=: If present, specifies the ID (Key ID, Key ARN, or Key Alias) of the Amazon Web Services Key Management Service (Amazon Web Services KMS) symmetric encryption customer managed key that was used for stored in Amazon S3 object.
         --status-code=: The integer status code for an HTTP response of a corresponding `GetObject` request.
         --storage-class=: Provides storage class information of the object.
