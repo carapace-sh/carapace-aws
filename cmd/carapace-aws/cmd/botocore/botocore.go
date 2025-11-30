@@ -10,7 +10,6 @@ import (
 //go:embed *.yaml
 var f embed.FS
 
-//go:generate sh -c "go run ./generate > botocore_generated.go && go fmt botocore_generated.go"
 var services map[string]string
 
 func Services() map[string]string {
