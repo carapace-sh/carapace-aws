@@ -9,7 +9,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --player-ids=!: A unique identifier for a player delivering the response.
+        --player-ids=!:
+            description: A unique identifier for a player delivering the response.
+            nargs: -1
         --ticket-id=!: A unique identifier for a matchmaking ticket.
       completion:
         flag:
@@ -35,7 +37,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A descriptive label that is associated with an alias.
         --routing-strategy=!: The routing configuration, including routing type and fleet target, for the alias.
-        --tags=: A list of labels to assign to the new alias resource.
+        --tags=:
+            description: A list of labels to assign to the new alias resource.
+            nargs: -1
     - name: create-build
       description: '**This API works with the following fleet types:** EC2, Anywhere'
       flags:
@@ -47,7 +51,9 @@ commands:
         --operating-system=: The operating system that your game server binaries run on.
         --server-sdk-version=: A server SDK version you used when integrating your game server build with Amazon GameLift Servers.
         --storage-location=: Information indicating where your game build files are stored.
-        --tags=: A list of labels to assign to the new build resource.
+        --tags=:
+            description: A list of labels to assign to the new build resource.
+            nargs: -1
       completion:
         flag:
             operating-system:
@@ -70,14 +76,22 @@ commands:
         --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-connection-port-range=: The set of port numbers to open on each fleet instance.
-        --instance-inbound-permissions=: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
+        --instance-inbound-permissions=:
+            description: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
+            nargs: -1
         --instance-type=: The Amazon EC2 instance type to use for all instances in the fleet.
-        --locations=: A set of locations to deploy container fleet instances to.
+        --locations=:
+            description: A set of locations to deploy container fleet instances to.
+            nargs: -1
         --log-configuration=: A method for collecting container logs for the fleet.
-        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+        --metric-groups=:
+            description: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+            nargs: -1
         --new-game-session-protection-policy=: Determines whether Amazon GameLift Servers can shut down game sessions on the fleet that are actively running and hosting players.
         --per-instance-container-group-definition-name=: The name of a container group definition resource that describes a set of axillary software.
-        --tags=: A list of labels to assign to the new fleet resource.
+        --tags=:
+            description: A list of labels to assign to the new fleet resource.
+            nargs: -1
       completion:
         flag:
             billing-type:
@@ -96,8 +110,12 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A descriptive identifier for the container group definition.
         --operating-system=!: The platform that all containers in the group use.
-        --support-container-definitions=: One or more definition for support containers in this group.
-        --tags=: A list of labels to assign to the container group definition resource.
+        --support-container-definitions=:
+            description: One or more definition for support containers in this group.
+            nargs: -1
+        --tags=:
+            description: A list of labels to assign to the container group definition resource.
+            nargs: -1
         --total-memory-limit-mebibytes=!: The maximum amount of memory (in MiB) to allocate to the container group.
         --total-vcpu-limit=!: The maximum amount of vCPU units to allocate to the container group (1 vCPU is equal to 1024 CPU units).
         --version-description=: A description for the initial version of this container group definition.
@@ -118,15 +136,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compute-type=: The type of compute resource used to host your game servers.
         --description=: A description for the fleet.
-        --ec2-inbound-permissions=: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
+        --ec2-inbound-permissions=:
+            description: The IP address ranges and port settings that allow inbound traffic to access game server processes and other processes on this fleet.
+            nargs: -1
         --ec2-instance-type=: The Amazon GameLift Servers-supported Amazon EC2 instance type to use with managed EC2 fleets.
         --fleet-type=: Indicates whether to use On-Demand or Spot instances for this fleet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-role-arn=: A unique identifier for an IAM role that manages access to your Amazon Web Services services.
         --instance-role-credentials-provider=: Prompts Amazon GameLift Servers to generate a shared credentials file for the IAM role that's defined in `InstanceRoleArn`.
-        --locations=: A set of remote locations to deploy additional instances to and manage as a multi-location fleet.
-        --log-paths=: '**This parameter is no longer used.** To specify where Amazon GameLift Servers should store log files once a server process shuts down, use the Amazon GameLift Servers server API `ProcessReady()` and specify one or more directory paths in `logParameters`.'
-        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+        --locations=:
+            description: A set of remote locations to deploy additional instances to and manage as a multi-location fleet.
+            nargs: -1
+        --log-paths=:
+            description: '**This parameter is no longer used.** To specify where Amazon GameLift Servers should store log files once a server process shuts down, use the Amazon GameLift Servers server API `ProcessReady()` and specify one or more directory paths in `logParameters`.'
+            nargs: -1
+        --metric-groups=:
+            description: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+            nargs: -1
         --name=!: A descriptive label that is associated with a fleet.
         --new-game-session-protection-policy=: The status of termination protection for active game sessions on the fleet.
         --peer-vpc-aws-account-id=: Used when peering your Amazon GameLift Servers fleet with a VPC, the unique identifier for the Amazon Web Services account that owns the VPC.
@@ -136,7 +162,9 @@ commands:
         --script-id=: The unique identifier for a Realtime configuration script to be deployed to a fleet with compute type `EC2`.
         --server-launch-parameters=: '**This parameter is no longer used.** Specify server launch parameters using the `RuntimeConfiguration` parameter.'
         --server-launch-path=: '**This parameter is no longer used.** Specify a server launch path using the `RuntimeConfiguration` parameter.'
-        --tags=: A list of labels to assign to the new fleet resource.
+        --tags=:
+            description: A list of labels to assign to the new fleet resource.
+            nargs: -1
       completion:
         flag:
             compute-type:
@@ -663,7 +691,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the fleet to add locations to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locations=!: A list of locations to deploy additional instances to and manage as part of the fleet.
+        --locations=!:
+            description: A list of locations to deploy additional instances to and manage as part of the fleet.
+            nargs: -1
     - name: create-game-server-group
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
@@ -674,13 +704,19 @@ commands:
         --game-server-group-name=!: An identifier for the new game server group.
         --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-definitions=!: The Amazon EC2 instance types and sizes to use in the Auto Scaling group.
+        --instance-definitions=!:
+            description: The Amazon EC2 instance types and sizes to use in the Auto Scaling group.
+            nargs: -1
         --launch-template=!: The Amazon EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.
         --max-size=!: The maximum number of instances allowed in the Amazon EC2 Auto Scaling group.
         --min-size=!: The minimum number of instances allowed in the Amazon EC2 Auto Scaling group.
         --role-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
-        --tags=: A list of labels to assign to the new game server group resource.
-        --vpc-subnets=: A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+        --tags=:
+            description: A list of labels to assign to the new game server group resource.
+            nargs: -1
+        --vpc-subnets=:
+            description: A list of virtual private cloud (VPC) subnets to use with instances in the game server group.
+            nargs: -1
       completion:
         flag:
             balancing-strategy:
@@ -698,7 +734,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --creator-id=: A unique identifier for a player or entity creating the game session.
         --fleet-id=: A unique identifier for the fleet to create a game session in.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-properties=:
+            description: A set of key-value pairs that can store custom data in a game session.
+            nargs: -1
         --game-session-data=: A set of custom game session properties, formatted as a single string value.
         --game-session-id=: '*This parameter is deprecated.'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -712,14 +750,20 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-event-data=: Information to be added to all events that are related to this game session queue.
-        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+        --destinations=:
+            description: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+            nargs: -1
         --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A descriptive label that is associated with game session queue.
         --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
-        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+        --player-latency-policies=:
+            description: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+            nargs: -1
         --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
-        --tags=: A list of labels to assign to the new game session queue resource.
+        --tags=:
+            description: A list of labels to assign to the new game session queue resource.
+            nargs: -1
         --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
     - name: create-location
       description: '**This API works with the following fleet types:** Anywhere'
@@ -728,7 +772,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --location-name=!: A descriptive name for the custom location.
-        --tags=: A list of labels to assign to the new resource.
+        --tags=:
+            description: A list of labels to assign to the new resource.
+            nargs: -1
     - name: create-matchmaking-configuration
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -741,16 +787,22 @@ commands:
         --custom-event-data=: Information to be added to all events related to this matchmaking configuration.
         --description=: A human-readable description of the matchmaking configuration.
         --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-properties=:
+            description: A set of key-value pairs that can store custom data in a game session.
+            nargs: -1
         --game-session-data=: A set of custom game session properties, formatted as a single string value.
-        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+        --game-session-queue-arns=:
+            description: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A unique identifier for the matchmaking configuration.
         --no-acceptance-required!: A flag that determines whether a match that was created with this configuration must be accepted by the matched players.
         --notification-target=: An SNS topic ARN that is set up to receive matchmaking notifications.
         --request-timeout-seconds=!: The maximum duration, in seconds, that a matchmaking ticket can remain in process before timing out.
         --rule-set-name=!: A unique identifier for the matchmaking rule set to use with this configuration.
-        --tags=: A list of labels to assign to the new matchmaking configuration resource.
+        --tags=:
+            description: A list of labels to assign to the new matchmaking configuration resource.
+            nargs: -1
       completion:
         flag:
             backfill-mode:
@@ -767,7 +819,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A unique identifier for the matchmaking rule set.
         --rule-set-body=!: A collection of matchmaking rules, formatted as a JSON string.
-        --tags=: A list of labels to assign to the new matchmaking rule set resource.
+        --tags=:
+            description: A list of labels to assign to the new matchmaking rule set resource.
+            nargs: -1
     - name: create-player-session
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -785,7 +839,9 @@ commands:
         --game-session-id=!: A unique identifier for the game session to add players to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --player-data-map=: Map of string pairs, each specifying a player ID and a set of developer-defined information related to the player.
-        --player-ids=!: List of unique identifiers for the players to be added.
+        --player-ids=!:
+            description: List of unique identifiers for the players to be added.
+            nargs: -1
     - name: create-script
       description: '**This API works with the following fleet types:** EC2, Anywhere'
       flags:
@@ -795,7 +851,9 @@ commands:
         --name=: A descriptive label that is associated with a script.
         --script-version=: Version information that is associated with a build or script.
         --storage-location=: The location of the Amazon S3 bucket where a zipped file containing your Realtime scripts is stored.
-        --tags=: A list of labels to assign to the new script resource.
+        --tags=:
+            description: A list of labels to assign to the new script resource.
+            nargs: -1
         --zip-file=: A data object containing your Realtime scripts and dependencies as a zip file.
     - name: create-vpc-peering-authorization
       description: '**This API works with the following fleet types:** EC2'
@@ -858,7 +916,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the fleet to delete locations for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --locations=!: The list of fleet locations to delete.
+        --locations=!:
+            description: The list of fleet locations to delete.
+            nargs: -1
     - name: delete-game-server-group
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
@@ -1506,7 +1566,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A list of unique fleet identifiers to retrieve attributes for.
+        --fleet-ids=:
+            description: A list of unique fleet identifiers to retrieve attributes for.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
@@ -1518,7 +1580,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A unique identifier for the fleet to retrieve capacity information for.
+        --fleet-ids=:
+            description: A unique identifier for the fleet to retrieve capacity information for.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
@@ -1555,7 +1619,9 @@ commands:
         --fleet-id=!: A unique identifier for the fleet to retrieve remote locations for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
-        --locations=: A list of fleet locations to retrieve information for.
+        --locations=:
+            description: A list of fleet locations to retrieve information for.
+            nargs: -1
         --next-token=: A token that indicates the start of the next sequential page of results.
     - name: describe-fleet-location-capacity
       description: '**This API works with the following fleet types:** EC2, Container'
@@ -1586,7 +1652,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --fleet-ids=: A unique identifier for the fleet to retrieve utilization data for.
+        --fleet-ids=:
+            description: A unique identifier for the fleet to retrieve utilization data for.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
@@ -1615,7 +1683,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The Amazon EC2 instance IDs that you want to retrieve status on.
+        --instance-ids=:
+            description: The Amazon EC2 instance IDs that you want to retrieve status on.
+            nargs: -1
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
         --next-token=: A token that indicates the start of the next sequential page of results.
@@ -1652,7 +1722,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
-        --names=: A list of queue names to retrieve information for.
+        --names=:
+            description: A list of queue names to retrieve information for.
+            nargs: -1
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -1692,7 +1764,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ticket-ids=!: A unique identifier for a matchmaking ticket.
+        --ticket-ids=!:
+            description: A unique identifier for a matchmaking ticket.
+            nargs: -1
     - name: describe-matchmaking-configurations
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -1701,7 +1775,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
-        --names=: A unique identifier for the matchmaking configuration(s) to retrieve.
+        --names=:
+            description: A unique identifier for the matchmaking configuration(s) to retrieve.
+            nargs: -1
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --rule-set-name=: A unique identifier for the matchmaking rule set.
@@ -1714,7 +1790,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
-        --names=: A list of one or more matchmaking rule set names to retrieve details for.
+        --names=:
+            description: A list of one or more matchmaking rule set names to retrieve details for.
+            nargs: -1
         --next-token=: A token that indicates the start of the next sequential page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -1980,7 +2058,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters the list for `AWS` or `CUSTOM` locations.
+        --filters=:
+            description: Filters the list for `AWS` or `CUSTOM` locations.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --limit=: The maximum number of results to return.
         --max-items=: The  total number of items to return in the command's output.
@@ -2092,7 +2172,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resume-actions=!: The activity to resume for this game server group.
+        --resume-actions=!:
+            description: The activity to resume for this game server group.
+            nargs: -1
     - name: search-game-sessions
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -2112,7 +2194,9 @@ commands:
     - name: start-fleet-actions
       description: '**This API works with the following fleet types:** EC2, Container'
       flags:
-        --actions=!: List of actions to restart on the fleet.
+        --actions=!:
+            description: List of actions to restart on the fleet.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the fleet to restart actions on.
@@ -2123,15 +2207,21 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --desired-player-sessions=: Set of information on each player to create a player session for.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --desired-player-sessions=:
+            description: Set of information on each player to create a player session for.
+            nargs: -1
+        --game-properties=:
+            description: A set of key-value pairs that can store custom data in a game session.
+            nargs: -1
         --game-session-data=: A set of custom game session properties, formatted as a single string value.
         --game-session-name=: A descriptive label that is associated with a game session.
         --game-session-queue-name=!: Name of the queue to use to place the new game session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --maximum-player-session-count=!: The maximum number of players that can be connected simultaneously to the game session.
         --placement-id=!: A unique identifier to assign to the new game session placement.
-        --player-latencies=: A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions.
+        --player-latencies=:
+            description: A set of values, expressed in milliseconds, that indicates the amount of latency that a player experiences when connected to Amazon Web Services Regions.
+            nargs: -1
         --priority-configuration-override=: A prioritized list of locations to use for the game session placement and instructions on how to use it.
     - name: start-match-backfill
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
@@ -2141,7 +2231,9 @@ commands:
         --configuration-name=!: Name of the matchmaker to use for this request.
         --game-session-arn=: A unique identifier for the game session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --players=!: Match information on all players that are currently assigned to the game session.
+        --players=!:
+            description: Match information on all players that are currently assigned to the game session.
+            nargs: -1
         --ticket-id=: A unique identifier for a matchmaking ticket.
     - name: start-matchmaking
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
@@ -2150,12 +2242,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-name=!: Name of the matchmaking configuration to use for this request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --players=!: Information on each player to be matched.
+        --players=!:
+            description: Information on each player to be matched.
+            nargs: -1
         --ticket-id=: A unique identifier for a matchmaking ticket.
     - name: stop-fleet-actions
       description: '**This API works with the following fleet types:** EC2, Container'
       flags:
-        --actions=!: List of actions to suspend on the fleet.
+        --actions=!:
+            description: List of actions to suspend on the fleet.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the fleet to stop actions on.
@@ -2182,7 +2278,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --game-server-group-name=!: A unique identifier for the game server group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --suspend-actions=!: The activity to suspend for this game server group.
+        --suspend-actions=!:
+            description: The activity to suspend for this game server group.
+            nargs: -1
     - name: tag-resource
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -2190,7 +2288,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to assign tags to.
-        --tags=!: A list of one or more tags to assign to the specified Amazon GameLift Servers resource.
+        --tags=!:
+            description: A list of one or more tags to assign to the specified Amazon GameLift Servers resource.
+            nargs: -1
     - name: terminate-game-session
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -2211,7 +2311,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that uniquely identifies the Amazon GameLift Servers resource that you want to remove tags from.
-        --tag-keys=!: A list of one or more tag keys to remove from the specified Amazon GameLift Servers resource.
+        --tag-keys=!:
+            description: A list of one or more tag keys to remove from the specified Amazon GameLift Servers resource.
+            nargs: -1
     - name: update-alias
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
@@ -2244,13 +2346,21 @@ commands:
         --game-session-creation-limit-policy=: A policy that limits the number of game sessions that each individual player can create on instances in this fleet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-connection-port-range=: A revised set of port numbers to open on each fleet instance.
-        --instance-inbound-permission-authorizations=: A set of ports to add to the container fleet's inbound permissions.
-        --instance-inbound-permission-revocations=: A set of ports to remove from the container fleet's inbound permissions.
+        --instance-inbound-permission-authorizations=:
+            description: A set of ports to add to the container fleet's inbound permissions.
+            nargs: -1
+        --instance-inbound-permission-revocations=:
+            description: A set of ports to remove from the container fleet's inbound permissions.
+            nargs: -1
         --log-configuration=: The method for collecting container logs for the fleet.
-        --metric-groups=: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+        --metric-groups=:
+            description: The name of an Amazon Web Services CloudWatch metric group to add this fleet to.
+            nargs: -1
         --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions that are started in this fleet.
         --per-instance-container-group-definition-name=: The name or ARN value of a new per-instance container group definition to deploy on the fleet.
-        --remove-attributes=: If set, this update removes a fleet's per-instance container group definition.
+        --remove-attributes=:
+            description: If set, this update removes a fleet's per-instance container group definition.
+            nargs: -1
       completion:
         flag:
             new-game-session-protection-policy:
@@ -2266,7 +2376,9 @@ commands:
         --name=!: A descriptive identifier for the container group definition.
         --operating-system=: The platform that all containers in the group use.
         --source-version-number=: The container group definition version to update.
-        --support-container-definitions=: One or more definitions for support containers in this group.
+        --support-container-definitions=:
+            description: One or more definitions for support containers in this group.
+            nargs: -1
         --total-memory-limit-mebibytes=: The maximum amount of memory (in MiB) to allocate to the container group.
         --total-vcpu-limit=: The maximum amount of vCPU units to allocate to the container group (1 vCPU is equal to 1024 CPU units).
         --version-description=: A description for this update to the container group definition.
@@ -2283,7 +2395,9 @@ commands:
         --description=: A human-readable description of a fleet.
         --fleet-id=!: A unique identifier for the fleet to update attribute metadata for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metric-groups=: The name of a metric group to add this fleet to.
+        --metric-groups=:
+            description: The name of a metric group to add this fleet to.
+            nargs: -1
         --name=: A descriptive label that is associated with a fleet.
         --new-game-session-protection-policy=: The game session protection policy to apply to all new game sessions created in this fleet.
         --resource-creation-limit-policy=: Policy settings that limit the number of game sessions an individual player can create over a span of time.
@@ -2310,8 +2424,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fleet-id=!: A unique identifier for the fleet to update port settings for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inbound-permission-authorizations=: A collection of port settings to be added to the fleet resource.
-        --inbound-permission-revocations=: A collection of port settings to be removed from the fleet resource.
+        --inbound-permission-authorizations=:
+            description: A collection of port settings to be added to the fleet resource.
+            nargs: -1
+        --inbound-permission-revocations=:
+            description: A collection of port settings to be removed from the fleet resource.
+            nargs: -1
     - name: update-game-server
       description: '**This API works with the following fleet types:** EC2 (FleetIQ)'
       flags:
@@ -2339,7 +2457,9 @@ commands:
         --game-server-group-name=!: A unique identifier for the game server group.
         --game-server-protection-policy=: A flag that indicates whether instances in the game server group are protected from early termination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-definitions=: An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
+        --instance-definitions=:
+            description: An updated list of Amazon EC2 instance types to use in the Auto Scaling group.
+            nargs: -1
         --role-arn=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) for an IAM role that allows Amazon GameLift Servers to access your Amazon EC2 Auto Scaling groups.
       completion:
         flag:
@@ -2355,7 +2475,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-properties=:
+            description: A set of key-value pairs that can store custom data in a game session.
+            nargs: -1
         --game-session-id=!: A unique identifier for the game session to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --maximum-player-session-count=: The maximum number of players that can be connected simultaneously to the game session.
@@ -2376,12 +2498,16 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-event-data=: Information to be added to all events that are related to this game session queue.
-        --destinations=: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+        --destinations=:
+            description: A list of fleets and/or fleet aliases that can be used to fulfill game session placement requests in the queue.
+            nargs: -1
         --filter-configuration=: A list of locations where a queue is allowed to place new game sessions.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A descriptive label that is associated with game session queue.
         --notification-target=: An SNS topic ARN that is set up to receive game session placement notifications.
-        --player-latency-policies=: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+        --player-latency-policies=:
+            description: A set of policies that enforce a sliding cap on player latency when processing game sessions placement requests.
+            nargs: -1
         --priority-configuration=: Custom settings to use when prioritizing destinations and locations for game session placements.
         --timeout-in-seconds=: The maximum time, in seconds, that a new game session placement request remains in the queue.
     - name: update-matchmaking-configuration
@@ -2396,9 +2522,13 @@ commands:
         --custom-event-data=: Information to add to all events related to the matchmaking configuration.
         --description=: A description for the matchmaking configuration.
         --flex-match-mode=: Indicates whether this matchmaking configuration is being used with Amazon GameLift Servers hosting or as a standalone matchmaking solution.
-        --game-properties=: A set of key-value pairs that can store custom data in a game session.
+        --game-properties=:
+            description: A set of key-value pairs that can store custom data in a game session.
+            nargs: -1
         --game-session-data=: A set of custom game session properties, formatted as a single string value.
-        --game-session-queue-arns=: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+        --game-session-queue-arns=:
+            description: The Amazon Resource Name ([ARN](https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is assigned to a Amazon GameLift Servers game session queue resource and uniquely identifies it.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A unique identifier for the matchmaking configuration to update.
         --no-acceptance-required: A flag that indicates whether a match that was created with this configuration must be accepted by the matched players.

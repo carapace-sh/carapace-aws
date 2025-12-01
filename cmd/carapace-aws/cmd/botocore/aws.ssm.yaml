@@ -10,7 +10,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The resource ID you want to tag.
         --resource-type=!: Specifies the type of resource you are tagging.
-        --tags=!: One or more tags.
+        --tags=!:
+            description: One or more tags.
+            nargs: -1
       completion:
         flag:
             resource-type:
@@ -40,7 +42,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --command-id=!: The ID of the command you want to cancel.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: (Optional) A list of managed node IDs on which you want to cancel the command.
+        --instance-ids=:
+            description: (Optional) A list of managed node IDs on which you want to cancel the command.
+            nargs: -1
     - name: cancel-maintenance-window-execution
       description: Stops a maintenance window execution that is already in progress and cancels any tasks in the window that haven't already starting running.
       flags:
@@ -59,8 +63,12 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --iam-role=!: The name of the Identity and Access Management (IAM) role that you want to assign to the managed node.
         --registration-limit=: Specify the maximum number of managed nodes you want to register.
-        --registration-metadata=: Reserved for internal use.
-        --tags=: Optional metadata that you assign to a resource.
+        --registration-metadata=:
+            description: Reserved for internal use.
+            nargs: -1
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
     - name: create-association
       description: A State Manager association defines the state that you want to maintain on your managed nodes.
       flags:
@@ -68,7 +76,9 @@ commands:
         --apply-only-at-cron-interval: By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified and when target changes are detected.
         --association-name=: Specify a descriptive name for the association.
         --automation-target-parameter-name=: Choose the parameter that will define how your automation will branch out.
-        --calendar-names=: The names of Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under.
+        --calendar-names=:
+            description: The names of Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compliance-severity=: The severity level to assign to the association.
@@ -85,10 +95,18 @@ commands:
         --schedule-expression=: A cron expression when the association will be applied to the targets.
         --schedule-offset=: Number of days to wait after the scheduled day to run an association.
         --sync-compliance=: The mode for generating association compliance.
-        --tags=: Adds or overwrites one or more tags for a State Manager association.
-        --target-locations=: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
-        --target-maps=: A key-value mapping of document parameters to target resources.
-        --targets=: The targets for the association.
+        --tags=:
+            description: Adds or overwrites one or more tags for a State Manager association.
+            nargs: -1
+        --target-locations=:
+            description: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
+            nargs: -1
+        --target-maps=:
+            description: A key-value mapping of document parameters to target resources.
+            nargs: -1
+        --targets=:
+            description: The targets for the association.
+            nargs: -1
       completion:
         flag:
             compliance-severity:
@@ -105,12 +123,16 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --entries=!: One or more associations.
+        --entries=!:
+            description: One or more associations.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-document
       description: Creates a Amazon Web Services Systems Manager (SSM document).
       flags:
-        --attachments=: A list of key-value pairs that describe attachments to a version of a document.
+        --attachments=:
+            description: A list of key-value pairs that describe attachments to a version of a document.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content=!: The content for the new SSM document in JSON or YAML format.
@@ -119,8 +141,12 @@ commands:
         --document-type=: The type of document to create.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name for the SSM document.
-        --requires=: A list of SSM documents required by a document.
-        --tags=: Optional metadata that you assign to a resource.
+        --requires=:
+            description: A list of SSM documents required by a document.
+            nargs: -1
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
         --target-type=: Specify a target type to define the kinds of resources the document can run on.
         --version-name=: An optional field specifying the version of the artifact you are creating with the document.
       completion:
@@ -165,7 +191,9 @@ commands:
         --schedule-timezone=: The time zone that the scheduled maintenance window executions are based on, in Internet Assigned Numbers Authority (IANA) format.
         --schedule=!: The schedule of the maintenance window in the form of a cron or rate expression.
         --start-date=: The date and time, in ISO-8601 Extended format, for when you want the maintenance window to become active.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
     - name: create-ops-item
       description: Creates a new OpsItem.
       flags:
@@ -177,16 +205,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=!: User-defined text that contains information about the OpsItem, in Markdown format.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notifications=: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+        --notifications=:
+            description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+            nargs: -1
         --operational-data=: Operational data is custom data that provides useful reference details about the OpsItem.
         --ops-item-type=: The type of OpsItem to create.
         --planned-end-time=: The time specified in a change request for a runbook workflow to end.
         --planned-start-time=: The time specified in a change request for a runbook workflow to start.
         --priority=: The importance of this OpsItem in relation to other OpsItems in the system.
-        --related-ops-items=: One or more OpsItems that share something in common with the current OpsItems.
+        --related-ops-items=:
+            description: One or more OpsItems that share something in common with the current OpsItems.
+            nargs: -1
         --severity=: Specify a severity to assign to an OpsItem.
         --source=!: The origin of the OpsItem, such as Amazon EC2 or Systems Manager.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
         --title=!: A short heading that describes the nature of the OpsItem and the impacted resource.
     - name: create-ops-metadata
       description: If you create a new application in Application Manager, Amazon Web Services Systems Manager calls this API operation to specify information about the new application, including the application type.
@@ -196,14 +230,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata=: Metadata for a new Application Manager application.
         --resource-id=!: A resource ID for a new Application Manager application.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
     - name: create-patch-baseline
       description: Creates a patch baseline.
       flags:
         --approval-rules=: A set of rules used to include patches in the baseline.
         --approved-patches-compliance-level=: Defines the compliance level for approved patches.
         --approved-patches-enable-non-security: Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes.
-        --approved-patches=: A list of explicitly approved patches for the baseline.
+        --approved-patches=:
+            description: A list of explicitly approved patches for the baseline.
+            nargs: -1
         --available-security-updates-compliance-status=: Indicates the status you want to assign to security patches that are available but not approved because they don't meet the installation criteria specified in the patch baseline.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -215,9 +253,15 @@ commands:
         --no-approved-patches-enable-non-security: Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes.
         --operating-system=: Defines the operating system the patch baseline applies to.
         --rejected-patches-action=: The action for Patch Manager to take on patches included in the `RejectedPackages` list.
-        --rejected-patches=: A list of explicitly rejected patches for the baseline.
-        --sources=: Information about the patches to use to update the managed nodes, including target operating systems and source repositories.
-        --tags=: Optional metadata that you assign to a resource.
+        --rejected-patches=:
+            description: A list of explicitly rejected patches for the baseline.
+            nargs: -1
+        --sources=:
+            description: Information about the patches to use to update the managed nodes, including target operating systems and source repositories.
+            nargs: -1
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
       completion:
         flag:
             approved-patches-compliance-level:
@@ -336,7 +380,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --names=!: The names of the parameters to delete.
+        --names=!:
+            description: The names of the parameters to delete.
+            nargs: -1
     - name: delete-patch-baseline
       description: Deletes a patch baseline.
       flags:
@@ -399,7 +445,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter to view information about your activations.
+        --filters=:
+            description: A filter to view information about your activations.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -423,7 +471,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --execution-id=!: The execution ID for which you want to view details.
-        --filters=: Filters for the request.
+        --filters=:
+            description: Filters for the request.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -436,7 +486,9 @@ commands:
         --association-id=!: The association ID for which you want to view execution history details.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters for the request.
+        --filters=:
+            description: Filters for the request.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -448,7 +500,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters used to limit the scope of executions that are requested.
+        --filters=:
+            description: Filters used to limit the scope of executions that are requested.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -461,7 +515,9 @@ commands:
         --automation-execution-id=!: The Automation execution ID for which you want step execution descriptions.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters to limit the number of step executions returned by the request.
+        --filters=:
+            description: One or more filters to limit the number of step executions returned by the request.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -475,7 +531,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Each element in the array is a structure containing a key-value pair.
+        --filters=:
+            description: Each element in the array is a structure containing a key-value pair.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of patches to return (per page).
@@ -546,9 +604,13 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-information-filter-list=: This is a legacy method.
+        --instance-information-filter-list=:
+            description: This is a legacy method.
+            nargs: -1
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: The token for the next set of items to return.
@@ -560,7 +622,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=!: The ID of the managed node for which patch state information should be retrieved.
+        --instance-ids=!:
+            description: The ID of the managed node for which patch state information should be retrieved.
+            nargs: -1
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of managed nodes to return (per page).
         --next-token=: The token for the next set of items to return.
@@ -571,7 +635,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Each entry in the array is a structure containing:'
+        --filters=:
+            description: 'Each entry in the array is a structure containing:'
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of patches to return (per page).
@@ -584,7 +650,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Each element in the array is a structure containing a key-value pair.
+        --filters=:
+            description: Each element in the array is a structure containing a key-value pair.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The ID of the managed node whose patch state information should be retrieved.
         --max-items=: The  total number of items to return in the command's output.
@@ -597,9 +665,13 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters-with-operator=: The request filters to use with the operator.
+        --filters-with-operator=:
+            description: The request filters to use with the operator.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-property-filter-list=: An array of instance property filters.
+        --instance-property-filter-list=:
+            description: An array of instance property filters.
+            nargs: -1
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for the call.
         --next-token=: The token provided by a previous request to use to return the next set of properties.
@@ -622,7 +694,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters used to scope down the returned task invocations.
+        --filters=:
+            description: Optional filters used to scope down the returned task invocations.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -636,7 +710,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters used to scope down the returned tasks.
+        --filters=:
+            description: Optional filters used to scope down the returned tasks.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -649,7 +725,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: 'Each entry in the array is a structure containing:'
+        --filters=:
+            description: 'Each entry in the array is a structure containing:'
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -662,7 +740,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Filters used to limit the range of results.
+        --filters=:
+            description: Filters used to limit the range of results.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -670,7 +750,9 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-type=: The type of resource you want to retrieve information about.
         --starting-token=: A token to specify where to start paginating.
-        --targets=: The managed node ID or key-value pair to retrieve information about.
+        --targets=:
+            description: The managed node ID or key-value pair to retrieve information about.
+            nargs: -1
         --window-id=: The ID of the maintenance window to retrieve information about.
       completion:
         flag:
@@ -682,7 +764,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters that can be used to narrow down the scope of the returned window targets.
+        --filters=:
+            description: Optional filters that can be used to narrow down the scope of the returned window targets.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -695,7 +779,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters used to narrow down the scope of the returned tasks.
+        --filters=:
+            description: Optional filters used to narrow down the scope of the returned tasks.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -708,7 +794,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters used to narrow down the scope of the returned maintenance windows.
+        --filters=:
+            description: Optional filters used to narrow down the scope of the returned maintenance windows.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -727,7 +815,9 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-type=!: The type of resource you want to retrieve information about.
         --starting-token=: A token to specify where to start paginating.
-        --targets=!: The managed node ID or key-value pair to retrieve information about.
+        --targets=!:
+            description: The managed node ID or key-value pair to retrieve information about.
+            nargs: -1
       completion:
         flag:
             resource-type:
@@ -742,7 +832,9 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: A token to start the list.
-        --ops-item-filters=: One or more filters to limit the response.
+        --ops-item-filters=:
+            description: One or more filters to limit the response.
+            nargs: -1
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-parameters
@@ -750,14 +842,18 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This data type is deprecated.
+        --filters=:
+            description: This data type is deprecated.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: The token for the next set of items to return.
         --no-shared: Lists parameters that are shared with you.
         --page-size=: The size of each page to get in the AWS service call.
-        --parameter-filters=: Filters to limit the request results.
+        --parameter-filters=:
+            description: Filters to limit the request results.
+            nargs: -1
         --shared: Lists parameters that are shared with you.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-patch-baselines
@@ -765,7 +861,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Each element in the array is a structure containing a key-value pair.
+        --filters=:
+            description: Each element in the array is a structure containing a key-value pair.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of patch baselines to return (per page).
@@ -784,7 +882,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Each element in the array is a structure containing a key-value pair.
+        --filters=:
+            description: Each element in the array is a structure containing a key-value pair.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of patch groups to return (per page).
@@ -838,7 +938,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters to limit the type of sessions returned by the request.
+        --filters=:
+            description: One or more filters to limit the type of sessions returned by the request.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -877,7 +979,9 @@ commands:
       description: Gets the state of a Amazon Web Services Systems Manager change calendar at the current time or a specified time.
       flags:
         --at-time=: (Optional) The specific time for which you want to get calendar state information, in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format.
-        --calendar-names=!: The names of Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that represent the calendar entries for which you want to get the state.
+        --calendar-names=!:
+            description: The names of Amazon Resource Names (ARNs) of the Systems Manager documents (SSM documents) that represent the calendar entries for which you want to get the state.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -959,16 +1063,22 @@ commands:
     - name: get-inventory
       description: Query inventory information.
       flags:
-        --aggregators=: Returns counts of inventory types based on one or more expressions.
+        --aggregators=:
+            description: Returns counts of inventory types based on one or more expressions.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
-        --result-attributes=: The list of inventory item types to return.
+        --result-attributes=:
+            description: The list of inventory item types to return.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
     - name: get-inventory-schema
       description: Return a list of inventory type names for the account, or return a list of attribute names for a specific Inventory item type.
@@ -1045,16 +1155,22 @@ commands:
     - name: get-ops-summary
       description: View a summary of operations metadata (OpsData) based on specified filters and aggregators.
       flags:
-        --aggregators=: Optional aggregators that return counts of OpsData based on one or more expressions.
+        --aggregators=:
+            description: Optional aggregators that return counts of OpsData based on one or more expressions.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Optional filters used to scope down the returned OpsData.
+        --filters=:
+            description: Optional filters used to scope down the returned OpsData.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: A token to start the list.
         --page-size=: The size of each page to get in the AWS service call.
-        --result-attributes=: The OpsData data type to return.
+        --result-attributes=:
+            description: The OpsData data type to return.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
         --sync-name=: Specify the name of a resource data sync to get.
     - name: get-parameter
@@ -1086,7 +1202,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --names=!: The names or Amazon Resource Names (ARNs) of the parameters that you want to query.
+        --names=!:
+            description: The names or Amazon Resource Names (ARNs) of the parameters that you want to query.
+            nargs: -1
         --no-with-decryption: Return decrypted secure string value.
         --with-decryption: Return decrypted secure string value.
     - name: get-parameters-by-path
@@ -1101,7 +1219,9 @@ commands:
         --no-recursive: Retrieve all parameters within a hierarchy.
         --no-with-decryption: Retrieve all parameters in a hierarchy with their value decrypted.
         --page-size=: The size of each page to get in the AWS service call.
-        --parameter-filters=: Filters to limit the request results.
+        --parameter-filters=:
+            description: Filters to limit the request results.
+            nargs: -1
         --path=!: The hierarchy for the parameter.
         --recursive: Retrieve all parameters within a hierarchy.
         --starting-token=: A token to specify where to start paginating.
@@ -1164,7 +1284,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --labels=!: One or more labels to attach to the specified parameter version.
+        --labels=!:
+            description: One or more labels to attach to the specified parameter version.
+            nargs: -1
         --name=!: The parameter name on which you want to attach one or more labels.
         --parameter-version=: The specific version of the parameter on which you want to attach one or more labels.
     - name: list-association-versions
@@ -1182,7 +1304,9 @@ commands:
     - name: list-associations
       description: Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region.
       flags:
-        --association-filter-list=: One or more filters.
+        --association-filter-list=:
+            description: One or more filters.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1198,7 +1322,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --command-id=: (Optional) The invocations for a specific command ID.
         --details: (Optional) If set this returns the response of the command executions and any command output.
-        --filters=: (Optional) One or more filters.
+        --filters=:
+            description: (Optional) One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=: (Optional) The command execution details for a specific managed node ID.
         --max-items=: The  total number of items to return in the command's output.
@@ -1213,7 +1339,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --command-id=: (Optional) If provided, lists only the specified command.
-        --filters=: (Optional) One or more filters.
+        --filters=:
+            description: (Optional) One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=: (Optional) Lists commands issued against this managed node ID.
         --max-items=: The  total number of items to return in the command's output.
@@ -1226,21 +1354,29 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more compliance filters.
+        --filters=:
+            description: One or more compliance filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
         --next-token=: A token to start the list.
         --page-size=: The size of each page to get in the AWS service call.
-        --resource-ids=: The ID for the resources from which to get compliance information.
-        --resource-types=: The type of resource from which to get compliance information.
+        --resource-ids=:
+            description: The ID for the resources from which to get compliance information.
+            nargs: -1
+        --resource-types=:
+            description: The type of resource from which to get compliance information.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
     - name: list-compliance-summaries
       description: Returns a summary count of compliant and non-compliant resources for a compliance type.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more compliance or inventory filters.
+        --filters=:
+            description: One or more compliance or inventory filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1279,8 +1415,12 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --document-filter-list=: This data type is deprecated.
-        --filters=: One or more `DocumentKeyValuesFilter` objects.
+        --document-filter-list=:
+            description: This data type is deprecated.
+            nargs: -1
+        --filters=:
+            description: One or more `DocumentKeyValuesFilter` objects.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1292,7 +1432,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The managed node ID for which you want inventory information.
         --max-results=: The maximum number of items to return for this call.
@@ -1303,7 +1445,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1314,10 +1458,14 @@ commands:
     - name: list-nodes-summary
       description: Generates a summary of managed instance/node metadata based on the filters and aggregators you specify.
       flags:
-        --aggregators=!: Specify one or more aggregators to return a count of managed nodes that match that expression.
+        --aggregators=!:
+            description: Specify one or more aggregators to return a count of managed nodes that match that expression.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1330,7 +1478,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more OpsItem filters.
+        --filters=:
+            description: One or more OpsItem filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1342,7 +1492,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more OpsItem filters.
+        --filters=:
+            description: One or more OpsItem filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1355,7 +1507,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters to limit the number of OpsMetadata objects returned by the call.
+        --filters=:
+            description: One or more filters to limit the number of OpsMetadata objects returned by the call.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1367,7 +1521,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: One or more filters.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of items to return for this call.
@@ -1409,8 +1565,12 @@ commands:
     - name: modify-document-permission
       description: Shares a Amazon Web Services Systems Manager document (SSM document)publicly or privately.
       flags:
-        --account-ids-to-add=: The Amazon Web Services users that should have access to the document.
-        --account-ids-to-remove=: The Amazon Web Services users that should no longer have access to the document.
+        --account-ids-to-add=:
+            description: The Amazon Web Services users that should have access to the document.
+            nargs: -1
+        --account-ids-to-remove=:
+            description: The Amazon Web Services users that should no longer have access to the document.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1430,7 +1590,9 @@ commands:
         --execution-summary=!: 'A summary of the call execution that includes an execution ID, the type of execution (for example, `Command`), and the date/time of the execution using a datetime object that is saved in the following format: `yyyy-MM-dd''T''HH:mm:ss''Z''`'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --item-content-hash=: MD5 or SHA-256 content hash.
-        --items=!: Information about the compliance as defined by the resource type.
+        --items=!:
+            description: Information about the compliance as defined by the resource type.
+            nargs: -1
         --resource-id=!: Specify an ID for this resource.
         --resource-type=!: Specify the type of resource.
         --upload-type=: The mode for uploading compliance items.
@@ -1446,7 +1608,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: An managed node ID where you want to add or update inventory items.
-        --items=!: The inventory items that you want to add or update on managed nodes.
+        --items=!:
+            description: The inventory items that you want to add or update on managed nodes.
+            nargs: -1
     - name: put-parameter
       description: Create or update a parameter in Parameter Store.
       flags:
@@ -1461,7 +1625,9 @@ commands:
         --no-overwrite: Overwrite an existing parameter.
         --overwrite: Overwrite an existing parameter.
         --policies=: One or more policies to apply to a parameter.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
         --tier=: The parameter tier to assign to a parameter.
         --type=: The type of parameter that you want to create.
         --value=!: The parameter value that you want to add to the system.
@@ -1511,7 +1677,9 @@ commands:
         --name=: An optional name for the target.
         --owner-information=: User-provided value that will be included in any Amazon CloudWatch Events events raised while running tasks for these targets in this maintenance window.
         --resource-type=!: The type of target being registered with the maintenance window.
-        --targets=!: The targets to register with the maintenance window.
+        --targets=!:
+            description: The targets to register with the maintenance window.
+            nargs: -1
         --window-id=!: The ID of the maintenance window the target should be registered with.
       completion:
         flag:
@@ -1534,7 +1702,9 @@ commands:
         --name=: An optional name for the task.
         --priority=: The priority of the task in the maintenance window, the lower the number the higher the priority.
         --service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task.
-        --targets=: The targets (either managed nodes or maintenance window targets).
+        --targets=:
+            description: The targets (either managed nodes or maintenance window targets).
+            nargs: -1
         --task-arn=!: The ARN of the task to run.
         --task-invocation-parameters=: The parameters that the task should use during execution.
         --task-parameters=: The parameters that should be passed to the task when it is run.
@@ -1558,7 +1728,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-id=!: The ID of the resource from which you want to remove tags.
         --resource-type=!: The type of resource from which you want to remove a tag.
-        --tag-keys=!: Tag keys that you want to remove from the specified resource.
+        --tag-keys=!:
+            description: Tag keys that you want to remove from the specified resource.
+            nargs: -1
       completion:
         flag:
             resource-type:
@@ -1616,7 +1788,9 @@ commands:
         --document-name=!: The name of the Amazon Web Services Systems Manager document (SSM document) to run.
         --document-version=: The SSM document version to use in the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --instance-ids=: The IDs of the managed nodes where the command should run.
+        --instance-ids=:
+            description: The IDs of the managed nodes where the command should run.
+            nargs: -1
         --max-concurrency=: (Optional) The maximum number of managed nodes that are allowed to run the command at the same time.
         --max-errors=: The maximum number of errors allowed without the command failing.
         --notification-config=: Configurations for sending notifications.
@@ -1625,7 +1799,9 @@ commands:
         --output-s3-region=: (Deprecated) You can no longer specify this parameter.
         --parameters=: The required and optional parameters specified in the document being run.
         --service-role-arn=: The ARN of the Identity and Access Management (IAM) service role to use to publish Amazon Simple Notification Service (Amazon SNS) notifications for Run Command commands.
-        --targets=: An array of search criteria that targets managed nodes using a `Key,Value` combination that you specify.
+        --targets=:
+            description: An array of search criteria that targets managed nodes using a `Key,Value` combination that you specify.
+            nargs: -1
         --timeout-seconds=: If this time is reached and the command hasn't already started running, it won't run.
       completion:
         flag:
@@ -1639,12 +1815,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --reason=!: A brief description explaining why you are requesting access to the node.
-        --tags=: Key-value pairs of metadata you want to assign to the access request.
-        --targets=!: The node you are requesting access to.
+        --tags=:
+            description: Key-value pairs of metadata you want to assign to the access request.
+            nargs: -1
+        --targets=!:
+            description: The node you are requesting access to.
+            nargs: -1
     - name: start-associations-once
       description: Runs an association immediately and only one time.
       flags:
-        --association-ids=!: The association IDs that you want to run immediately and only one time.
+        --association-ids=!:
+            description: The association IDs that you want to run immediately and only one time.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1662,12 +1844,20 @@ commands:
         --max-errors=: The number of errors that are allowed before the system stops running the automation on additional targets.
         --mode=: The execution mode of the automation.
         --parameters=: A key-value map of execution parameters, which match the declared parameters in the Automation runbook.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
         --target-locations-url=: Specify a publicly accessible URL for a file that contains the `TargetLocations` body.
-        --target-locations=: A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the automation.
-        --target-maps=: A key-value mapping of document parameters to target resources.
+        --target-locations=:
+            description: A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the automation.
+            nargs: -1
+        --target-maps=:
+            description: A key-value mapping of document parameters to target resources.
+            nargs: -1
         --target-parameter-name=: The name of the parameter used as the target resource for the rate-controlled execution.
-        --targets=: A key-value mapping to target resources.
+        --targets=:
+            description: A key-value mapping to target resources.
+            nargs: -1
       completion:
         flag:
             mode:
@@ -1687,10 +1877,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-auto-approve: Indicates whether the change request can be approved automatically without the need for manual approvals.
         --parameters=: A key-value map of parameters that match the declared parameters in the change template document.
-        --runbooks=!: Information about the Automation runbooks that are run during the runbook workflow.
+        --runbooks=!:
+            description: Information about the Automation runbooks that are run during the runbook workflow.
+            nargs: -1
         --scheduled-end-time=: The time that the requester expects the runbook workflow related to the change request to complete.
         --scheduled-time=: The date and time specified in the change request to run the Automation runbooks.
-        --tags=: Optional metadata that you assign to a resource.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
     - name: start-execution-preview
       description: Initiates the process of creating a preview showing the effects that running a specified Automation runbook would have on the targeted resources.
       flags:
@@ -1736,7 +1930,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --labels=!: One or more labels to delete from the specified parameter version.
+        --labels=!:
+            description: One or more labels to delete from the specified parameter version.
+            nargs: -1
         --name=!: The name of the parameter from which you want to delete one or more labels.
         --parameter-version=!: The specific version of the parameter which you want to delete one or more labels from.
     - name: update-association
@@ -1748,7 +1944,9 @@ commands:
         --association-name=: The name of the association that you want to update.
         --association-version=: This parameter is provided for concurrency control purposes.
         --automation-target-parameter-name=: Choose the parameter that will define how your automation will branch out.
-        --calendar-names=: The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under.
+        --calendar-names=:
+            description: The names or Amazon Resource Names (ARNs) of the Change Calendar type documents you want to gate your associations under.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compliance-severity=: The severity level to assign to the association.
@@ -1764,9 +1962,15 @@ commands:
         --schedule-expression=: The cron expression used to schedule the association that you want to update.
         --schedule-offset=: Number of days to wait after the scheduled day to run an association.
         --sync-compliance=: The mode for generating association compliance.
-        --target-locations=: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
-        --target-maps=: A key-value mapping of document parameters to target resources.
-        --targets=: The targets of the association.
+        --target-locations=:
+            description: A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
+            nargs: -1
+        --target-maps=:
+            description: A key-value mapping of document parameters to target resources.
+            nargs: -1
+        --targets=:
+            description: The targets of the association.
+            nargs: -1
       completion:
         flag:
             compliance-severity:
@@ -1790,7 +1994,9 @@ commands:
     - name: update-document
       description: Updates one or more values for an SSM document.
       flags:
-        --attachments=: A list of key-value pairs that describe attachments to a version of a document.
+        --attachments=:
+            description: A list of key-value pairs that describe attachments to a version of a document.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content=!: A valid JSON or YAML string.
@@ -1857,7 +2063,9 @@ commands:
         --no-replace: If `True`, then all fields that are required by the [RegisterTargetWithMaintenanceWindow]() operation are also required for this API request.
         --owner-information=: User-provided value that will be included in any Amazon CloudWatch Events events raised while running tasks for these targets in this maintenance window.
         --replace: If `True`, then all fields that are required by the [RegisterTargetWithMaintenanceWindow]() operation are also required for this API request.
-        --targets=: The targets to add or replace.
+        --targets=:
+            description: The targets to add or replace.
+            nargs: -1
         --window-id=!: The maintenance window ID with which to modify the target.
         --window-target-id=!: The target ID to modify.
     - name: update-maintenance-window-task
@@ -1877,7 +2085,9 @@ commands:
         --priority=: The new task priority to specify.
         --replace: If True, then all fields that are required by the [RegisterTaskWithMaintenanceWindow]() operation are also required for this API request.
         --service-role-arn=: The Amazon Resource Name (ARN) of the IAM service role for Amazon Web Services Systems Manager to assume when running a maintenance window task.
-        --targets=: The targets (either managed nodes or tags) to modify.
+        --targets=:
+            description: The targets (either managed nodes or tags) to modify.
+            nargs: -1
         --task-arn=: The task ARN to modify.
         --task-invocation-parameters=: The parameters that the task should use during execution.
         --task-parameters=: The parameters to modify.
@@ -1906,15 +2116,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: User-defined text that contains information about the OpsItem, in Markdown format.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notifications=: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
-        --operational-data-to-delete=: Keys that you want to remove from the OperationalData map.
+        --notifications=:
+            description: The Amazon Resource Name (ARN) of an SNS topic where notifications are sent when this OpsItem is edited or changed.
+            nargs: -1
+        --operational-data-to-delete=:
+            description: Keys that you want to remove from the OperationalData map.
+            nargs: -1
         --operational-data=: Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem object.
         --ops-item-arn=: The OpsItem Amazon Resource Name (ARN).
         --ops-item-id=!: The ID of the OpsItem.
         --planned-end-time=: The time specified in a change request for a runbook workflow to end.
         --planned-start-time=: The time specified in a change request for a runbook workflow to start.
         --priority=: The importance of this OpsItem in relation to other OpsItems in the system.
-        --related-ops-items=: One or more OpsItems that share something in common with the current OpsItems.
+        --related-ops-items=:
+            description: One or more OpsItems that share something in common with the current OpsItems.
+            nargs: -1
         --severity=: Specify a new severity for an OpsItem.
         --status=: The OpsItem status.
         --title=: A short heading that describes the nature of the OpsItem and the impacted resource.
@@ -1947,7 +2163,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --keys-to-delete=: The metadata keys to delete from the OpsMetadata object.
+        --keys-to-delete=:
+            description: The metadata keys to delete from the OpsMetadata object.
+            nargs: -1
         --metadata-to-update=: Metadata to add to an OpsMetadata object.
         --ops-metadata-arn=!: The Amazon Resource Name (ARN) of the OpsMetadata Object to update.
     - name: update-patch-baseline
@@ -1956,7 +2174,9 @@ commands:
         --approval-rules=: A set of rules used to include patches in the baseline.
         --approved-patches-compliance-level=: Assigns a new compliance severity level to an existing patch baseline.
         --approved-patches-enable-non-security: Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes.
-        --approved-patches=: A list of explicitly approved patches for the baseline.
+        --approved-patches=:
+            description: A list of explicitly approved patches for the baseline.
+            nargs: -1
         --available-security-updates-compliance-status=: Indicates the status to be assigned to security patches that are available but not approved because they don't meet the installation criteria specified in the patch baseline.
         --baseline-id=!: The ID of the patch baseline to update.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -1968,9 +2188,13 @@ commands:
         --no-approved-patches-enable-non-security: Indicates whether the list of approved patches includes non-security updates that should be applied to the managed nodes.
         --no-replace: If True, then all fields that are required by the [CreatePatchBaseline]() operation are also required for this API request.
         --rejected-patches-action=: The action for Patch Manager to take on patches included in the `RejectedPackages` list.
-        --rejected-patches=: A list of explicitly rejected patches for the baseline.
+        --rejected-patches=:
+            description: A list of explicitly rejected patches for the baseline.
+            nargs: -1
         --replace: If True, then all fields that are required by the [CreatePatchBaseline]() operation are also required for this API request.
-        --sources=: Information about the patches to use to update the managed nodes, including target operating systems and source repositories.
+        --sources=:
+            description: Information about the patches to use to update the managed nodes, including target operating systems and source repositories.
+            nargs: -1
       completion:
         flag:
             approved-patches-compliance-level:

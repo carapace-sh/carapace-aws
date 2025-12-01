@@ -358,11 +358,22 @@ func parseService(name, folder string) command.Command {
 						}
 					}
 
+					// lists consume multiple arguments
+					nargs := 0
+					if !boolFlag {
+						if member.Shape == "list" {
+							nargs = -1
+						} else if shape, ok := service.Shapes[member.Shape]; ok && shape.Type == "list" {
+							nargs = -1
+						}
+					}
+
 					subCmd.AddFlag(command.Flag{
 						Longhand:    flagName,
 						Description: memberdoc,
 						Value:       !boolFlag,
 						Required:    required,
+						Nargs:       nargs,
 					})
 					if boolFlag {
 						negatedFlagName := "no-" + flagName

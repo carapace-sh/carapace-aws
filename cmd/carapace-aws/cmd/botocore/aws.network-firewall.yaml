@@ -12,7 +12,9 @@ commands:
     - name: associate-availability-zones
       description: Associates the specified Availability Zones with a transit gateway-attached firewall.
       flags:
-        --availability-zone-mappings=!: Required.
+        --availability-zone-mappings=!:
+            description: Required.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
@@ -37,7 +39,9 @@ commands:
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
         --firewall-name=: The descriptive name of the firewall.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-mappings=!: The IDs of the subnets that you want to associate with the firewall.
+        --subnet-mappings=!:
+            description: The IDs of the subnets that you want to associate with the firewall.
+            nargs: -1
         --update-token=: An optional token that you can use for optimistic locking.
     - name: attach-rule-groups-to-proxy-configuration
       description: Attaches [ProxyRuleGroup]() resources to a [ProxyConfiguration]()
@@ -47,18 +51,24 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
         --proxy-configuration-name=: The descriptive name of the proxy configuration.
-        --rule-groups=!: The proxy rule group(s) to attach to the proxy configuration
+        --rule-groups=!:
+            description: The proxy rule group(s) to attach to the proxy configuration
+            nargs: -1
         --update-token=!: A token used for optimistic locking.
     - name: create-firewall
       description: Creates an Network Firewall [Firewall]() and accompanying [FirewallStatus]() for a VPC.
       flags:
         --availability-zone-change-protection: Optional.
-        --availability-zone-mappings=: Required.
+        --availability-zone-mappings=:
+            description: Required.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --delete-protection: A flag indicating whether it is possible to delete the firewall.
         --description=: A description of the firewall.
-        --enabled-analysis-types=: An optional setting indicating the specific traffic analysis types to enable on the firewall.
+        --enabled-analysis-types=:
+            description: An optional setting indicating the specific traffic analysis types to enable on the firewall.
+            nargs: -1
         --encryption-configuration=: A complex type that contains settings for encryption of your firewall resources.
         --firewall-name=!: The descriptive name of the firewall.
         --firewall-policy-arn=!: The Amazon Resource Name (ARN) of the [FirewallPolicy]() that you want to use for the firewall.
@@ -69,8 +79,12 @@ commands:
         --no-firewall-policy-change-protection: A setting indicating whether the firewall is protected against a change to the firewall policy association.
         --no-subnet-change-protection: A setting indicating whether the firewall is protected against changes to the subnet associations.
         --subnet-change-protection: A setting indicating whether the firewall is protected against changes to the subnet associations.
-        --subnet-mappings=: The public subnets to use for your Network Firewall firewalls.
-        --tags=: The key:value pairs to associate with the resource.
+        --subnet-mappings=:
+            description: The public subnets to use for your Network Firewall firewalls.
+            nargs: -1
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
         --transit-gateway-id=: Required when creating a transit gateway-attached firewall.
         --vpc-id=: The unique identifier of the VPC where Network Firewall should create the firewall.
     - name: create-firewall-policy
@@ -85,19 +99,25 @@ commands:
         --firewall-policy=!: The rule groups and policy actions to use in the firewall policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
     - name: create-proxy
       description: Creates an Network Firewall [Proxy]()
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-properties=: Listener properties for HTTP and HTTPS traffic.
+        --listener-properties=:
+            description: Listener properties for HTTP and HTTPS traffic.
+            nargs: -1
         --nat-gateway-id=!: A unique identifier for the NAT gateway to use with proxy resources.
         --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
         --proxy-configuration-name=: The descriptive name of the proxy configuration.
         --proxy-name=!: The descriptive name of the proxy.
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
         --tls-intercept-properties=!: TLS decryption on traffic to filter on attributes in the HTTP header.
     - name: create-proxy-configuration
       description: Creates an Network Firewall [ProxyConfiguration]()
@@ -108,9 +128,15 @@ commands:
         --description=: A description of the proxy configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-configuration-name=!: The descriptive name of the proxy configuration.
-        --rule-group-arns=: The proxy rule group arn(s) to attach to the proxy configuration.
-        --rule-group-names=: The proxy rule group name(s) to attach to the proxy configuration.
-        --tags=: The key:value pairs to associate with the resource.
+        --rule-group-arns=:
+            description: The proxy rule group arn(s) to attach to the proxy configuration.
+            nargs: -1
+        --rule-group-names=:
+            description: The proxy rule group name(s) to attach to the proxy configuration.
+            nargs: -1
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
     - name: create-proxy-rule-group
       description: Creates an Network Firewall [ProxyRuleGroup]()
       flags:
@@ -120,7 +146,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-rule-group-name=!: The descriptive name of the proxy rule group.
         --rules=: Individual rules that define match conditions and actions for application-layer traffic.
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
     - name: create-proxy-rules
       description: Creates Network Firewall [ProxyRule]() resources.
       flags:
@@ -148,7 +176,9 @@ commands:
         --rules=: A string containing stateful rule group rules specifications in Suricata flat format, with one rule per line.
         --source-metadata=: A complex type that contains metadata about the rule group that your own rule group is copied from.
         --summary-configuration=: An object that contains a `RuleOptions` array of strings.
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
         --type=!: Indicates whether the rule group is stateless or stateful.
       completion:
         flag:
@@ -163,7 +193,9 @@ commands:
         --description=: A description of the TLS inspection configuration.
         --encryption-configuration=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
         --tls-inspection-configuration-name=!: The descriptive name of the TLS inspection configuration.
         --tls-inspection-configuration=!: The object that defines a TLS inspection configuration.
     - name: create-vpc-endpoint-association
@@ -175,7 +207,9 @@ commands:
         --firewall-arn=!: The Amazon Resource Name (ARN) of the firewall.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subnet-mapping=!: ""
-        --tags=: The key:value pairs to associate with the resource.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
         --vpc-id=!: The unique identifier of the VPC where you want to create a firewall endpoint.
     - name: delete-firewall
       description: Deletes the specified [Firewall]() and its [FirewallStatus]().
@@ -233,7 +267,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
         --proxy-rule-group-name=: The descriptive name of the proxy rule group.
-        --rules=!: The proxy rule(s) to remove from the existing proxy rule group.
+        --rules=!:
+            description: The proxy rule(s) to remove from the existing proxy rule group.
+            nargs: -1
     - name: delete-resource-policy
       description: Deletes a resource policy that you created in a [PutResourcePolicy]() request.
       flags:
@@ -419,13 +455,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
         --proxy-configuration-name=: The descriptive name of the proxy configuration.
-        --rule-group-arns=: The proxy rule group arns to detach from the proxy configuration
-        --rule-group-names=: The proxy rule group names to detach from the proxy configuration
+        --rule-group-arns=:
+            description: The proxy rule group arns to detach from the proxy configuration
+            nargs: -1
+        --rule-group-names=:
+            description: The proxy rule group names to detach from the proxy configuration
+            nargs: -1
         --update-token=!: A token used for optimistic locking.
     - name: disassociate-availability-zones
       description: Removes the specified Availability Zone associations from a transit gateway-attached firewall.
       flags:
-        --availability-zone-mappings=!: Required.
+        --availability-zone-mappings=!:
+            description: Required.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
@@ -440,7 +482,9 @@ commands:
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
         --firewall-name=: The descriptive name of the firewall.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: The unique identifiers for the subnets that you want to disassociate.
+        --subnet-ids=!:
+            description: The unique identifiers for the subnets that you want to disassociate.
+            nargs: -1
         --update-token=: An optional token that you can use for optimistic locking.
     - name: get-analysis-report-results
       description: The results of a `COMPLETED` analysis report generated with [StartAnalysisReport]().
@@ -491,7 +535,9 @@ commands:
         --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a `NextToken` value in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --vpc-ids=: The unique identifiers of the VPCs that you want Network Firewall to retrieve the firewalls for.
+        --vpc-ids=:
+            description: The unique identifiers of the VPCs that you want Network Firewall to retrieve the firewalls for.
+            nargs: -1
     - name: list-flow-operation-results
       description: Returns the results of a specific flow operation.
       flags:
@@ -664,7 +710,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-arn=!: The Amazon Resource Name (ARN) of the firewall.
-        --flow-filters=!: Defines the scope a flow operation.
+        --flow-filters=!:
+            description: Defines the scope a flow operation.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --minimum-flow-age-in-seconds=: The reqested `FlowOperation` ignores flows with an age (in seconds) lower than `MinimumFlowAgeInSeconds`.
         --vpc-endpoint-association-arn=: The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -676,7 +724,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-arn=!: The Amazon Resource Name (ARN) of the firewall.
-        --flow-filters=!: Defines the scope a flow operation.
+        --flow-filters=!:
+            description: Defines the scope a flow operation.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --minimum-flow-age-in-seconds=: The reqested `FlowOperation` ignores flows with an age (in seconds) lower than `MinimumFlowAgeInSeconds`.
         --vpc-endpoint-association-arn=: The Amazon Resource Name (ARN) of a VPC endpoint association.
@@ -688,7 +738,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tags=!: ""
+        --tags=!:
+            nargs: -1
     - name: untag-resource
       description: Removes the tags with the specified keys from the specified resource.
       flags:
@@ -696,7 +747,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
-        --tag-keys=!: ""
+        --tag-keys=!:
+            nargs: -1
     - name: update-availability-zone-change-protection
       description: Modifies the `AvailabilityZoneChangeProtection` setting for a transit gateway-attached firewall.
       flags:
@@ -713,7 +765,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --enabled-analysis-types=: An optional setting indicating the specific traffic analysis types to enable on the firewall.
+        --enabled-analysis-types=:
+            description: An optional setting indicating the specific traffic analysis types to enable on the firewall.
+            nargs: -1
         --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
         --firewall-name=: The descriptive name of the firewall.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -791,8 +845,12 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --listener-properties-to-add=: Listener properties for HTTP and HTTPS traffic to add.
-        --listener-properties-to-remove=: Listener properties for HTTP and HTTPS traffic to remove.
+        --listener-properties-to-add=:
+            description: Listener properties for HTTP and HTTPS traffic to add.
+            nargs: -1
+        --listener-properties-to-remove=:
+            description: Listener properties for HTTP and HTTPS traffic to remove.
+            nargs: -1
         --nat-gateway-id=!: The NAT Gateway the proxy is attached to.
         --proxy-arn=: The Amazon Resource Name (ARN) of a proxy.
         --proxy-name=: The descriptive name of the proxy.
@@ -812,7 +870,9 @@ commands:
       description: Updates the properties of the specified proxy rule.
       flags:
         --action=: Depending on the match action, the proxy either stops the evaluation (if the action is terminal - allow or deny), or continues it (if the action is alert) until it matches a rule with a terminal action.
-        --add-conditions=: Proxy rule conditions to add.
+        --add-conditions=:
+            description: Proxy rule conditions to add.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the proxy rule.
@@ -820,7 +880,9 @@ commands:
         --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
         --proxy-rule-group-name=: The descriptive name of the proxy rule group.
         --proxy-rule-name=!: The descriptive name of the proxy rule.
-        --remove-conditions=: Proxy rule conditions to remove.
+        --remove-conditions=:
+            description: Proxy rule conditions to remove.
+            nargs: -1
         --update-token=!: A token used for optimistic locking.
       completion:
         flag:
@@ -836,7 +898,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --proxy-configuration-arn=: The Amazon Resource Name (ARN) of a proxy configuration.
         --proxy-configuration-name=: The descriptive name of the proxy configuration.
-        --rule-groups=!: proxy rule group resources to update to new positions.
+        --rule-groups=!:
+            description: proxy rule group resources to update to new positions.
+            nargs: -1
         --update-token=!: A token used for optimistic locking.
     - name: update-proxy-rule-priorities
       description: Updates proxy rule priorities within a proxy rule group.
@@ -847,7 +911,9 @@ commands:
         --proxy-rule-group-arn=: The Amazon Resource Name (ARN) of a proxy rule group.
         --proxy-rule-group-name=: The descriptive name of the proxy rule group.
         --rule-group-request-phase=!: Evaluation points in the traffic flow where rules are applied.
-        --rules=!: proxy rule resources to update to new positions.
+        --rules=!:
+            description: proxy rule resources to update to new positions.
+            nargs: -1
         --update-token=!: A token used for optimistic locking.
       completion:
         flag:

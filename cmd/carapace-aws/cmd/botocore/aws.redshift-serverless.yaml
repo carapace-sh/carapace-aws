@@ -11,7 +11,9 @@ commands:
         --recovery-point-id=!: The unique identifier of the recovery point.
         --retention-period=: How long to retain the snapshot.
         --snapshot-name=!: The name of the snapshot.
-        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the created snapshot.
+        --tags=:
+            description: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the created snapshot.
+            nargs: -1
     - name: create-custom-domain-association
       description: Creates a custom domain association for Amazon Redshift Serverless.
       flags:
@@ -29,8 +31,12 @@ commands:
         --endpoint-name=!: The name of the VPC endpoint.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --owner-account=: The owner Amazon Web Services account for the Amazon Redshift Serverless workgroup.
-        --subnet-ids=!: The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.
-        --vpc-security-group-ids=: The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+        --subnet-ids=!:
+            description: The unique identifers of subnets from which Amazon Redshift Serverless chooses one to deploy a VPC endpoint.
+            nargs: -1
+        --vpc-security-group-ids=:
+            description: The unique identifiers of the security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+            nargs: -1
         --workgroup-name=!: The name of the workgroup to associate with the VPC endpoint.
     - name: create-namespace
       description: Creates a namespace in Amazon Redshift Serverless.
@@ -43,14 +49,20 @@ commands:
         --db-name=: The name of the first database created in the namespace.
         --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-roles=: A list of IAM roles to associate with the namespace.
+        --iam-roles=:
+            description: A list of IAM roles to associate with the namespace.
+            nargs: -1
         --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
-        --log-exports=: The types of logs the namespace can export.
+        --log-exports=:
+            description: The types of logs the namespace can export.
+            nargs: -1
         --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
         --namespace-name=!: The name of the namespace.
         --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
         --redshift-idc-application-arn=: The ARN for the Redshift application that integrates with IAM Identity Center.
-        --tags=: A list of tag instances.
+        --tags=:
+            description: A list of tag instances.
+            nargs: -1
     - name: create-reservation
       description: Creates an Amazon Redshift Serverless reservation, which gives you the option to commit to a specified number of Redshift Processing Units (RPUs) for a year at a discount from Serverless on-demand (OD) rates.
       flags:
@@ -85,7 +97,9 @@ commands:
         --namespace-name=!: The namespace to create a snapshot for.
         --retention-period=: How long to retain the created snapshot.
         --snapshot-name=!: The name of the snapshot.
-        --tags=: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the snapshot.
+        --tags=:
+            description: An array of [Tag objects](https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html) to associate with the snapshot.
+            nargs: -1
     - name: create-snapshot-copy-configuration
       description: Creates a snapshot copy configuration that lets you copy snapshots to another Amazon Web Services Region.
       flags:
@@ -126,7 +140,9 @@ commands:
         --base-capacity=: The base data warehouse capacity of the workgroup in Redshift Processing Units (RPUs).
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-parameters=: An array of parameters to set for advanced control over a database.
+        --config-parameters=:
+            description: An array of parameters to set for advanced control over a database.
+            nargs: -1
         --enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC instead of over the internet.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address type that the workgroup supports.
@@ -137,9 +153,15 @@ commands:
         --port=: The custom port to use when connecting to a workgroup.
         --price-performance-target=: An object that represents the price performance target settings for the workgroup.
         --publicly-accessible: A value that specifies whether the workgroup can be accessed from a public network.
-        --security-group-ids=: An array of security group IDs to associate with the workgroup.
-        --subnet-ids=: An array of VPC subnet IDs to associate with the workgroup.
-        --tags=: A array of tag instances.
+        --security-group-ids=:
+            description: An array of security group IDs to associate with the workgroup.
+            nargs: -1
+        --subnet-ids=:
+            description: An array of VPC subnet IDs to associate with the workgroup.
+            nargs: -1
+        --tags=:
+            description: A array of tag instances.
+            nargs: -1
         --track-name=: An optional parameter for the name of the track for the workgroup.
         --workgroup-name=!: The name of the created workgroup.
     - name: delete-custom-domain-association
@@ -572,7 +594,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
-        --tags=!: The map of the key-value pairs used to tag the resource.
+        --tags=!:
+            description: The map of the key-value pairs used to tag the resource.
+            nargs: -1
     - name: untag-resource
       description: Removes a tag or set of tags from a resource.
       flags:
@@ -580,7 +604,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
-        --tag-keys=!: The tag or set of tags to remove from the resource.
+        --tag-keys=!:
+            description: The tag or set of tags to remove from the resource.
+            nargs: -1
     - name: update-custom-domain-association
       description: Updates an Amazon Redshift Serverless certificate associated with a custom domain.
       flags:
@@ -597,7 +623,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --endpoint-name=!: The name of the VPC endpoint to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vpc-security-group-ids=: The list of VPC security groups associated with the endpoint after the endpoint is modified.
+        --vpc-security-group-ids=:
+            description: The list of VPC security groups associated with the endpoint after the endpoint is modified.
+            nargs: -1
     - name: update-lakehouse-configuration
       description: Modifies the lakehouse configuration for a namespace.
       flags:
@@ -629,9 +657,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --default-iam-role-arn=: The Amazon Resource Name (ARN) of the IAM role to set as a default in the namespace.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --iam-roles=: A list of IAM roles to associate with the namespace.
+        --iam-roles=:
+            description: A list of IAM roles to associate with the namespace.
+            nargs: -1
         --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
-        --log-exports=: The types of logs the namespace can export.
+        --log-exports=:
+            description: The types of logs the namespace can export.
+            nargs: -1
         --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
         --namespace-name=!: The name of the namespace to update.
         --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
@@ -687,7 +719,9 @@ commands:
         --base-capacity=: The new base data warehouse capacity in Redshift Processing Units (RPUs).
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --config-parameters=: An array of parameters to set for advanced control over a database.
+        --config-parameters=:
+            description: An array of parameters to set for advanced control over a database.
+            nargs: -1
         --enhanced-vpc-routing: The value that specifies whether to turn on enhanced virtual private cloud (VPC) routing, which forces Amazon Redshift Serverless to route traffic through your VPC.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address type that the workgroup supports.
@@ -697,7 +731,11 @@ commands:
         --port=: The custom port to use when connecting to a workgroup.
         --price-performance-target=: An object that represents the price performance target settings for the workgroup.
         --publicly-accessible: A value that specifies whether the workgroup can be accessible from a public network.
-        --security-group-ids=: An array of security group IDs to associate with the workgroup.
-        --subnet-ids=: An array of VPC subnet IDs to associate with the workgroup.
+        --security-group-ids=:
+            description: An array of security group IDs to associate with the workgroup.
+            nargs: -1
+        --subnet-ids=:
+            description: An array of VPC subnet IDs to associate with the workgroup.
+            nargs: -1
         --track-name=: An optional parameter for the name of the track for the workgroup.
         --workgroup-name=!: The name of the workgroup to update.
