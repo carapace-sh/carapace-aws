@@ -362,7 +362,9 @@ commands:
       description: Use the `GetUtterancesView` operation to get information about the utterances that your users have made to your bot.
       flags:
         --bot-name=!: The name of the bot for which utterance information should be returned.
-        --bot-versions=!: An array of bot versions for which utterance information should be returned.
+        --bot-versions=!:
+            description: An array of bot versions for which utterance information should be returned.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -394,7 +396,9 @@ commands:
         --enable-model-improvements: Set to `true` to enable access to natural language understanding improvements.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --idle-session-ttl-in-seconds=: The maximum time in seconds that Amazon Lex retains the data gathered in a conversation.
-        --intents=: An array of `Intent` objects.
+        --intents=:
+            description: An array of `Intent` objects.
+            nargs: -1
         --locale=!: Specifies the target locale for the bot.
         --name=!: The name of the bot.
         --nlu-intent-confidence-threshold=: Determines the threshold where Amazon Lex will insert the `AMAZON.FallbackIntent`, `AMAZON.KendraSearchIntent`, or both when returning alternative intents in a [PostContent](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html) or [PostText](https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html) response.
@@ -403,7 +407,9 @@ commands:
         --no-detect-sentiment: When set to `true` user utterances are sent to Amazon Comprehend for sentiment analysis.
         --no-enable-model-improvements: Set to `true` to enable access to natural language understanding improvements.
         --process-behavior=: If you set the `processBehavior` element to `BUILD`, Amazon Lex builds the bot so that it can be run.
-        --tags=: A list of tags to add to the bot.
+        --tags=:
+            description: A list of tags to add to the bot.
+            nargs: -1
         --voice-id=: The Amazon Polly voice ID that you want Amazon Lex to use for voice interactions with the user.
       completion:
         flag:
@@ -436,7 +442,9 @@ commands:
         --description=: A description of the alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
-        --tags=: A list of tags to add to the bot alias.
+        --tags=:
+            description: A list of tags to add to the bot alias.
+            nargs: -1
     - name: put-intent
       description: Creates an intent or replaces an existing intent.
       flags:
@@ -451,15 +459,23 @@ commands:
         --follow-up-prompt=: Amazon Lex uses this prompt to solicit additional activity after fulfilling an intent.
         --fulfillment-activity=: Required.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --input-contexts=: An array of `InputContext` objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+        --input-contexts=:
+            description: An array of `InputContext` objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+            nargs: -1
         --kendra-configuration=: Configuration information required to use the `AMAZON.KendraSearchIntent` intent to connect to an Amazon Kendra index.
         --name=!: The name of the intent.
         --no-create-version: When set to `true` a new numbered version of the intent is created.
-        --output-contexts=: An array of `OutputContext` objects that lists the contexts that the intent activates when the intent is fulfilled.
+        --output-contexts=:
+            description: An array of `OutputContext` objects that lists the contexts that the intent activates when the intent is fulfilled.
+            nargs: -1
         --parent-intent-signature=: A unique identifier for the built-in intent to base this intent on.
         --rejection-statement=: When the user answers "no" to the question defined in `confirmationPrompt`, Amazon Lex responds with this statement to acknowledge that the intent was canceled.
-        --sample-utterances=: An array of utterances (strings) that a user might say to signal the intent.
-        --slots=: An array of intent slots.
+        --sample-utterances=:
+            description: An array of utterances (strings) that a user might say to signal the intent.
+            nargs: -1
+        --slots=:
+            description: An array of intent slots.
+            nargs: -1
     - name: put-slot-type
       description: Creates a custom slot type or replaces an existing custom slot type.
       flags:
@@ -468,12 +484,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --create-version: When set to `true` a new numbered version of the slot type is created.
         --description=: A description of the slot type.
-        --enumeration-values=: A list of `EnumerationValue` objects that defines the values that the slot type can take.
+        --enumeration-values=:
+            description: A list of `EnumerationValue` objects that defines the values that the slot type can take.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the slot type.
         --no-create-version: When set to `true` a new numbered version of the slot type is created.
         --parent-slot-type-signature=: The built-in slot type used as the parent of the slot type.
-        --slot-type-configurations=: Configuration information that extends the parent built-in slot type.
+        --slot-type-configurations=:
+            description: Configuration information that extends the parent built-in slot type.
+            nargs: -1
         --value-selection-strategy=: Determines the slot resolution strategy that Amazon Lex uses to return slot type values.
       completion:
         flag:
@@ -489,7 +509,9 @@ commands:
         --merge-strategy=!: Specifies the action that the `StartImport` operation should take when there is an existing resource with the same name.
         --payload=!: A zip archive in binary format.
         --resource-type=!: Specifies the type of resource to export.
-        --tags=: A list of tags to add to the imported bot.
+        --tags=:
+            description: A list of tags to add to the imported bot.
+            nargs: -1
       completion:
         flag:
             merge-strategy:
@@ -522,7 +544,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the bot, bot alias, or bot channel to tag.
-        --tags=!: A list of tag keys to add to the resource.
+        --tags=!:
+            description: A list of tag keys to add to the resource.
+            nargs: -1
     - name: untag-resource
       description: Removes tags from a bot, bot alias or bot channel.
       flags:
@@ -530,4 +554,6 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove the tags from.
-        --tag-keys=!: A list of tag keys to remove from the resource.
+        --tag-keys=!:
+            description: A list of tag keys to remove from the resource.
+            nargs: -1

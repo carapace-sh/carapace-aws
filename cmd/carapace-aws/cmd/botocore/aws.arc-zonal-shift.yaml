@@ -19,14 +19,24 @@ commands:
     - name: create-practice-run-configuration
       description: A practice run configuration for zonal autoshift is required when you enable zonal autoshift.
       flags:
-        --allowed-windows=: Optionally, you can allow ARC to start practice runs for specific windows of days and times.
-        --blocked-dates=: Optionally, you can block ARC from starting practice runs for a resource on specific calendar dates.
-        --blocked-windows=: Optionally, you can block ARC from starting practice runs for specific windows of days and times.
-        --blocking-alarms=: '*Blocking alarms* for practice runs are optional alarms that you can specify that block practice runs when one or more of the alarms is in an `ALARM` state.'
+        --allowed-windows=:
+            description: Optionally, you can allow ARC to start practice runs for specific windows of days and times.
+            nargs: -1
+        --blocked-dates=:
+            description: Optionally, you can block ARC from starting practice runs for a resource on specific calendar dates.
+            nargs: -1
+        --blocked-windows=:
+            description: Optionally, you can block ARC from starting practice runs for specific windows of days and times.
+            nargs: -1
+        --blocking-alarms=:
+            description: '*Blocking alarms* for practice runs are optional alarms that you can specify that block practice runs when one or more of the alarms is in an `ALARM` state.'
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outcome-alarms=!: '*Outcome alarms* for practice runs are alarms that you specify that end a practice run when one or more of the alarms is in an `ALARM` state.'
+        --outcome-alarms=!:
+            description: '*Outcome alarms* for practice runs are alarms that you specify that end a practice run when one or more of the alarms is in an `ALARM` state.'
+            nargs: -1
         --resource-identifier=!: The identifier of the resource that Amazon Web Services shifts traffic for with a practice run zonal shift.
     - name: delete-practice-run-configuration
       description: Deletes the practice run configuration for a resource.
@@ -129,14 +139,24 @@ commands:
     - name: update-practice-run-configuration
       description: 'Update a practice run configuration to change one or more of the following: add, change, or remove the blocking alarm; change the outcome alarm; or add, change, or remove blocking dates or time windows.'
       flags:
-        --allowed-windows=: Add, change, or remove windows of days and times for when you can, optionally, allow ARC to start a practice run for a resource.
-        --blocked-dates=: Add, change, or remove blocked dates for a practice run in zonal autoshift.
-        --blocked-windows=: Add, change, or remove windows of days and times for when you can, optionally, block ARC from starting a practice run for a resource.
-        --blocking-alarms=: Add, change, or remove the Amazon CloudWatch alarms that you optionally specify as the blocking alarms for practice runs.
+        --allowed-windows=:
+            description: Add, change, or remove windows of days and times for when you can, optionally, allow ARC to start a practice run for a resource.
+            nargs: -1
+        --blocked-dates=:
+            description: Add, change, or remove blocked dates for a practice run in zonal autoshift.
+            nargs: -1
+        --blocked-windows=:
+            description: Add, change, or remove windows of days and times for when you can, optionally, block ARC from starting a practice run for a resource.
+            nargs: -1
+        --blocking-alarms=:
+            description: Add, change, or remove the Amazon CloudWatch alarms that you optionally specify as the blocking alarms for practice runs.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --outcome-alarms=: Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.
+        --outcome-alarms=:
+            description: Specify one or more Amazon CloudWatch alarms as the outcome alarms for practice runs.
+            nargs: -1
         --resource-identifier=!: The identifier for the resource that you want to update the practice run configuration for.
     - name: update-zonal-autoshift-configuration
       description: The zonal autoshift configuration for a resource includes the practice run configuration and the status for running autoshifts, zonal autoshift status.

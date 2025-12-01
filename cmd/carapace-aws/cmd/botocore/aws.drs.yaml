@@ -64,9 +64,13 @@ commands:
         --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         --no-create-public-ip!: Whether to create a Public IP for the Recovery Instance by default.
         --no-use-dedicated-replication-server!: Whether to use a dedicated Replication Server in the replication staging area.
-        --pit-policy=!: The Point in time (PIT) policy to manage snapshots taken during replication.
+        --pit-policy=!:
+            description: The Point in time (PIT) policy to manage snapshots taken during replication.
+            nargs: -1
         --replication-server-instance-type=!: The instance type to be used for the replication server.
-        --replication-servers-security-groups-ids=!: The security group IDs that will be used by the replication server.
+        --replication-servers-security-groups-ids=!:
+            description: The security group IDs that will be used by the replication server.
+            nargs: -1
         --staging-area-subnet-id=!: The subnet to be used by the replication staging area.
         --staging-area-tags=!: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
         --tags=: A set of tags to be associated with the Replication Configuration Template resource.
@@ -175,7 +179,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --launch-configuration-template-ids=: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+        --launch-configuration-template-ids=:
+            description: Request to filter Launch Configuration Templates list by Launch Configuration Template ID.
+            nargs: -1
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum results to be returned in DescribeLaunchConfigurationTemplates.
         --next-token=: The token of the next Launch Configuration Template to retrieve.
@@ -222,7 +228,9 @@ commands:
         --max-results=: Maximum number of Replication Configuration Templates to retrieve.
         --next-token=: The token of the next Replication Configuration Template to retrieve.
         --page-size=: The size of each page to get in the AWS service call.
-        --replication-configuration-template-ids=: The IDs of the Replication Configuration Templates to retrieve.
+        --replication-configuration-template-ids=:
+            description: The IDs of the Replication Configuration Templates to retrieve.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
     - name: describe-source-networks
       description: Lists all Source Networks or multiple Source Networks filtered by ID.
@@ -386,7 +394,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instance whose failback launch we want to request.
+        --recovery-instance-ids=!:
+            description: The IDs of the Recovery Instance whose failback launch we want to request.
+            nargs: -1
         --tags=: The tags to be associated with the failback launch Job.
     - name: start-recovery
       description: Launches Recovery Instances for the specified Source Servers.
@@ -396,7 +406,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --is-drill: Whether this Source Server Recovery operation is a drill or not.
         --no-is-drill: Whether this Source Server Recovery operation is a drill or not.
-        --source-servers=!: The Source Servers that we want to start a Recovery Job for.
+        --source-servers=!:
+            description: The Source Servers that we want to start a Recovery Job for.
+            nargs: -1
         --tags=: The tags to be associated with the Recovery Job.
     - name: start-replication
       description: Starts replication for a stopped Source Server.
@@ -413,7 +425,9 @@ commands:
         --deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-deploy-as-new: Don't update existing CloudFormation Stack, recover the network using a new stack.
-        --source-networks=!: The Source Networks that we want to start a Recovery Job for.
+        --source-networks=!:
+            description: The Source Networks that we want to start a Recovery Job for.
+            nargs: -1
         --tags=: The tags to be associated with the Source Network recovery Job.
     - name: start-source-network-replication
       description: Starts replication for a Source Network.
@@ -457,7 +471,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --recovery-instance-ids=!: The IDs of the Recovery Instances that should be terminated.
+        --recovery-instance-ids=!:
+            description: The IDs of the Recovery Instances that should be terminated.
+            nargs: -1
     - name: untag-resource
       description: Deletes the specified set of tags from the specified set of Elastic Disaster Recovery resources.
       flags:
@@ -465,7 +481,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: ARN of the resource for which tags are to be removed.
-        --tag-keys=!: Array of tags to be removed.
+        --tag-keys=!:
+            description: Array of tags to be removed.
+            nargs: -1
     - name: update-failback-replication-configuration
       description: Allows you to update the failback replication configuration of a Recovery Instance by ID.
       flags:
@@ -551,10 +569,16 @@ commands:
         --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         --no-create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
         --no-use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-        --pit-policy=: The Point in time (PIT) policy to manage snapshots taken during replication.
-        --replicated-disks=: The configuration of the disks of the Source Server to be replicated.
+        --pit-policy=:
+            description: The Point in time (PIT) policy to manage snapshots taken during replication.
+            nargs: -1
+        --replicated-disks=:
+            description: The configuration of the disks of the Source Server to be replicated.
+            nargs: -1
         --replication-server-instance-type=: The instance type to be used for the replication server.
-        --replication-servers-security-groups-ids=: The security group IDs that will be used by the replication server.
+        --replication-servers-security-groups-ids=:
+            description: The security group IDs that will be used by the replication server.
+            nargs: -1
         --source-server-id=!: The ID of the Source Server for this Replication Configuration.
         --staging-area-subnet-id=: The subnet to be used by the replication staging area.
         --staging-area-tags=: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
@@ -592,10 +616,14 @@ commands:
         --no-auto-replicate-new-disks: Whether to allow the AWS replication agent to automatically replicate newly added disks.
         --no-create-public-ip: Whether to create a Public IP for the Recovery Instance by default.
         --no-use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.
-        --pit-policy=: The Point in time (PIT) policy to manage snapshots taken during replication.
+        --pit-policy=:
+            description: The Point in time (PIT) policy to manage snapshots taken during replication.
+            nargs: -1
         --replication-configuration-template-id=!: The Replication Configuration Template ID.
         --replication-server-instance-type=: The instance type to be used for the replication server.
-        --replication-servers-security-groups-ids=: The security group IDs that will be used by the replication server.
+        --replication-servers-security-groups-ids=:
+            description: The security group IDs that will be used by the replication server.
+            nargs: -1
         --staging-area-subnet-id=: The subnet to be used by the replication staging area.
         --staging-area-tags=: 'A set of tags to be associated with all resources created in the replication staging area: EC2 replication server, EBS volumes, EBS snapshots, etc.'
         --use-dedicated-replication-server: Whether to use a dedicated Replication Server in the replication staging area.

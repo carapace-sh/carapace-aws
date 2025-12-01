@@ -14,14 +14,18 @@ commands:
         --gateway-type=: A value that defines the type of gateway to activate.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --medium-changer-type=: The value that indicates the type of medium changer to use for tape gateway.
-        --tags=: A list of up to 50 tags that you can assign to the gateway.
+        --tags=:
+            description: A list of up to 50 tags that you can assign to the gateway.
+            nargs: -1
         --tape-drive-type=: The value that indicates the type of tape drive to use for tape gateway.
     - name: add-cache
       description: Configures one or more gateway local disks as cache for a gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disk-ids=!: An array of strings that identify disks that are to be configured as working storage.
+        --disk-ids=!:
+            description: An array of strings that identify disks that are to be configured as working storage.
+            nargs: -1
         --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: add-tags-to-resource
@@ -31,13 +35,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to add tags to.
-        --tags=!: The key-value pair that represents the tag you want to add to the resource.
+        --tags=!:
+            description: The key-value pair that represents the tag you want to add to the resource.
+            nargs: -1
     - name: add-upload-buffer
       description: Configures one or more gateway local disks as upload buffer for a specified gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disk-ids=!: An array of strings that identify disks that are to be configured as working storage.
+        --disk-ids=!:
+            description: An array of strings that identify disks that are to be configured as working storage.
+            nargs: -1
         --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: add-working-storage
@@ -45,7 +53,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --disk-ids=!: An array of strings that identify disks that are to be configured as working storage.
+        --disk-ids=!:
+            description: An array of strings that identify disks that are to be configured as working storage.
+            nargs: -1
         --gateway-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: assign-tape-pool
@@ -71,7 +81,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --location-arn=!: The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the FSx File Gateway.
         --password=!: The password of the user credential.
-        --tags=: A list of up to 50 tags that can be assigned to the file system association.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to the file system association.
+            nargs: -1
         --user-name=!: The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system.
     - name: attach-volume
       description: Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway.
@@ -121,7 +133,9 @@ commands:
         --no-kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
         --snapshot-id=: The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new cached volume.
         --source-volume-arn=: The ARN for an existing volume.
-        --tags=: A list of up to 50 tags that you can assign to a cached volume.
+        --tags=:
+            description: A list of up to 50 tags that you can assign to a cached volume.
+            nargs: -1
         --target-name=!: The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN.
         --volume-size-in-bytes=!: The size of the volume in bytes.
     - name: create-nfs-file-share
@@ -132,7 +146,9 @@ commands:
         --cache-attributes=: Specifies refresh cache information for the file share.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-list=: The list of clients that are allowed to access the S3 File Gateway.
+        --client-list=:
+            description: The list of clients that are allowed to access the S3 File Gateway.
+            nargs: -1
         --client-token=!: A unique string value that you supply that is used by S3 File Gateway to ensure idempotent file share creation.
         --default-storage-class=: The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.
         --encryption-type=: A value that specifies the type of server-side encryption that the file share will use for the data that it stores in Amazon S3.
@@ -154,7 +170,9 @@ commands:
         --requester-pays: A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket.
         --role=!: The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it accesses the underlying storage.
         --squash=: A value that maps a user to anonymous user.
-        --tags=: A list of up to 50 tags that can be assigned to the NFS file share.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to the NFS file share.
+            nargs: -1
         --vpc-endpoint-dns-name=: Specifies the DNS name for the VPC endpoint that the NFS file share uses to connect to Amazon S3.
       completion:
         flag:
@@ -174,7 +192,9 @@ commands:
       description: Creates a Server Message Block (SMB) file share on an existing S3 File Gateway.
       flags:
         --access-based-enumeration: The files and folders on this share will only be visible to users with read access.
-        --admin-user-list=: A list of users or groups in the Active Directory that will be granted administrator privileges on the file share.
+        --admin-user-list=:
+            description: A list of users or groups in the Active Directory that will be granted administrator privileges on the file share.
+            nargs: -1
         --audit-destination-arn=: The Amazon Resource Name (ARN) of the storage used for audit logs.
         --authentication=: The authentication method that users use to access the file share.
         --bucket-region=: Specifies the Region of the S3 bucket where the SMB file share stores files.
@@ -189,7 +209,9 @@ commands:
         --gateway-arn=!: The ARN of the S3 File Gateway on which you want to create a file share.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --guess-mime-type-enabled: A value that enables guessing of the MIME type for uploaded objects based on file extensions.
-        --invalid-user-list=: A list of users or groups in the Active Directory that are not allowed to access the file share.
+        --invalid-user-list=:
+            description: A list of users or groups in the Active Directory that are not allowed to access the file share.
+            nargs: -1
         --kms-encrypted: Optional.
         --kms-key=: Optional.
         --location-arn=!: A custom ARN for the backend storage used for storing data for file shares.
@@ -207,8 +229,12 @@ commands:
         --requester-pays: A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket.
         --role=!: The ARN of the Identity and Access Management (IAM) role that an S3 File Gateway assumes when it accesses the underlying storage.
         --smbacl-enabled: Set this value to `true` to enable access control list (ACL) on the SMB file share.
-        --tags=: A list of up to 50 tags that can be assigned to the NFS file share.
-        --valid-user-list=: A list of users or groups in the Active Directory that are allowed to access the file [share.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to the NFS file share.
+            nargs: -1
+        --valid-user-list=:
+            description: A list of users or groups in the Active Directory that are allowed to access the file [share.
+            nargs: -1
         --vpc-endpoint-dns-name=: Specifies the DNS name for the VPC endpoint that the SMB file share uses to connect to Amazon S3.
       completion:
         flag:
@@ -234,7 +260,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --snapshot-description=!: Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the **Description** field, and in the Storage Gateway snapshot **Details** pane, **Description** field.
-        --tags=: A list of up to 50 tags that can be assigned to a snapshot.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a snapshot.
+            nargs: -1
         --volume-arn=!: The Amazon Resource Name (ARN) of the volume.
     - name: create-snapshot-from-volume-recovery-point
       description: Initiates a snapshot of a gateway from a volume recovery point.
@@ -243,7 +271,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --snapshot-description=!: Textual description of the snapshot that appears in the Amazon EC2 console, Elastic Block Store snapshots panel in the **Description** field, and in the Storage Gateway snapshot **Details** pane, **Description** field.
-        --tags=: A list of up to 50 tags that can be assigned to a snapshot.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a snapshot.
+            nargs: -1
         --volume-arn=!: The Amazon Resource Name (ARN) of the iSCSI volume target.
     - name: create-stored-iscsi-volume
       description: Creates a volume on a specified gateway.
@@ -260,7 +290,9 @@ commands:
         --no-preserve-existing-data!: Set to `true` if you want to preserve the data on the local disk.
         --preserve-existing-data!: Set to `true` if you want to preserve the data on the local disk.
         --snapshot-id=: The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the new stored volume.
-        --tags=: A list of up to 50 tags that can be assigned to a stored volume.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a stored volume.
+            nargs: -1
         --target-name=!: The name of the iSCSI target used by an initiator to connect to a volume and used as a suffix for the target ARN.
     - name: create-tape-pool
       description: Creates a new custom tape pool.
@@ -272,7 +304,9 @@ commands:
         --retention-lock-time-in-days=: Tape retention lock time is set in days.
         --retention-lock-type=: Tape retention lock can be configured in two modes.
         --storage-class=!: The storage class that is associated with the new custom pool.
-        --tags=: A list of up to 50 tags that can be assigned to tape pool.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to tape pool.
+            nargs: -1
       completion:
         flag:
             retention-lock-type:
@@ -294,7 +328,9 @@ commands:
         --no-kms-encrypted: Set to `true` to use Amazon S3 server-side encryption with your own KMS key, or `false` to use a key managed by Amazon S3.
         --no-worm: Set to `TRUE` if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
         --pool-id=: The ID of the pool that you want to add your tape to for archiving.
-        --tags=: A list of up to 50 tags that can be assigned to a virtual tape that has a barcode.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a virtual tape that has a barcode.
+            nargs: -1
         --tape-barcode=!: The barcode that you want to assign to the tape.
         --tape-size-in-bytes=!: The size, in bytes, of the virtual tape that you want to create.
         --worm: Set to `TRUE` if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
@@ -312,7 +348,9 @@ commands:
         --no-worm: Set to `TRUE` if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
         --num-tapes-to-create=!: The number of virtual tapes that you want to create.
         --pool-id=: The ID of the pool that you want to add your tape to for archiving.
-        --tags=: A list of up to 50 tags that can be assigned to a virtual tape.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a virtual tape.
+            nargs: -1
         --tape-barcode-prefix=!: A prefix that you append to the barcode of the virtual tape you are creating.
         --tape-size-in-bytes=!: The size, in bytes, of the virtual tapes that you want to create.
         --worm: Set to `TRUE` if the tape you are creating is to be configured as a write-once-read-many (WORM) tape.
@@ -443,7 +481,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-arns=!: An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume.
+        --volume-arns=!:
+            description: An array of strings where each string represents the Amazon Resource Name (ARN) of a cached volume.
+            nargs: -1
     - name: describe-chap-credentials
       description: Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair.
       flags:
@@ -456,7 +496,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-system-association-arn-list=!: An array containing the Amazon Resource Name (ARN) of each file system association to be described.
+        --file-system-association-arn-list=!:
+            description: An array containing the Amazon Resource Name (ARN) of each file system association to be described.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-gateway-information
       description: Returns metadata about a gateway such as its name, network interfaces, time zone, status, and software version.
@@ -477,14 +519,18 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-share-arn-list=!: An array containing the Amazon Resource Name (ARN) of each file share to be described.
+        --file-share-arn-list=!:
+            description: An array containing the Amazon Resource Name (ARN) of each file share to be described.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-smb-file-shares
       description: Gets a description for one or more Server Message Block (SMB) file shares from a S3 File Gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-share-arn-list=!: An array containing the Amazon Resource Name (ARN) of each file share to be described.
+        --file-share-arn-list=!:
+            description: An array containing the Amazon Resource Name (ARN) of each file share to be described.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-smb-settings
       description: Gets a description of a Server Message Block (SMB) file share settings from a file gateway.
@@ -506,7 +552,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --volume-arns=!: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume.
+        --volume-arns=!:
+            description: An array of strings where each string represents the Amazon Resource Name (ARN) of a stored volume.
+            nargs: -1
     - name: describe-tape-archives
       description: Returns a description of specified virtual tapes in the virtual tape shelf (VTS).
       flags:
@@ -518,7 +566,9 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --tape-arns=: Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
+        --tape-arns=:
+            description: Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
+            nargs: -1
     - name: describe-tape-recovery-points
       description: Returns a list of virtual tape recovery points that are available for the specified tape gateway.
       flags:
@@ -543,7 +593,9 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --tape-arns=: Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
+        --tape-arns=:
+            description: Specifies one or more unique Amazon Resource Names (ARNs) that represent the virtual tapes you want to describe.
+            nargs: -1
     - name: describe-upload-buffer
       description: Returns information about the upload buffer of a gateway.
       flags:
@@ -563,7 +615,9 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --vtl-device-arns=: An array of strings, where each string represents the Amazon Resource Name (ARN) of a VTL device.
+        --vtl-device-arns=:
+            description: An array of strings, where each string represents the Amazon Resource Name (ARN) of a VTL device.
+            nargs: -1
     - name: describe-working-storage
       description: Returns information about the working storage of a gateway.
       flags:
@@ -610,7 +664,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-controllers=: List of IP addresses, NetBIOS names, or host names of your domain server.
+        --domain-controllers=:
+            description: List of IP addresses, NetBIOS names, or host names of your domain server.
+            nargs: -1
         --domain-name=!: The name of the domain that you want the gateway to join.
         --gateway-arn=!: The Amazon Resource Name (ARN) of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -698,7 +754,9 @@ commands:
         --marker=: A string that indicates the position at which to begin the returned list of tape pools.
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
-        --pool-arns=: The Amazon Resource Name (ARN) of each of the custom tape pools you want to list.
+        --pool-arns=:
+            description: The Amazon Resource Name (ARN) of each of the custom tape pools you want to list.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
     - name: list-tapes
       description: Lists virtual tapes in your virtual tape library (VTL) and your virtual tape shelf (VTS).
@@ -711,7 +769,8 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --tape-arns=: ""
+        --tape-arns=:
+            nargs: -1
     - name: list-volume-initiators
       description: Lists iSCSI initiators that are connected to a volume.
       flags:
@@ -751,7 +810,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --file-share-arn=!: The Amazon Resource Name (ARN) of the file share you want to refresh.
-        --folder-list=: A comma-separated list of the paths of folders to refresh in the cache.
+        --folder-list=:
+            description: A comma-separated list of the paths of folders to refresh in the cache.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-recursive: A value that specifies whether to recursively refresh folders in the cache.
         --recursive: A value that specifies whether to recursively refresh folders in the cache.
@@ -762,7 +823,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to remove the tags from.
-        --tag-keys=!: The keys of the tags you want to remove from the specified resource.
+        --tag-keys=!:
+            description: The keys of the tags you want to remove from the specified resource.
+            nargs: -1
     - name: reset-cache
       description: Resets all cache disks that have encountered an error and makes the disks available for reconfiguration as cache storage.
       flags:
@@ -823,13 +886,19 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: A unique identifier that you use to ensure idempotent report generation if you need to retry an unsuccessful `StartCacheReport` request.
-        --exclusion-filters=: The list of filters and parameters that determine which files are excluded from the report.
+        --exclusion-filters=:
+            description: The list of filters and parameters that determine which files are excluded from the report.
+            nargs: -1
         --file-share-arn=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --inclusion-filters=: The list of filters and parameters that determine which files are included in the report.
+        --inclusion-filters=:
+            description: The list of filters and parameters that determine which files are included in the report.
+            nargs: -1
         --location-arn=!: The ARN of the Amazon S3 bucket where you want to save the cache report.
         --role=!: The ARN of the IAM role used when saving the cache report to Amazon S3.
-        --tags=: A list of up to 50 key/value tags that you can assign to the cache report.
+        --tags=:
+            description: A list of up to 50 key/value tags that you can assign to the cache report.
+            nargs: -1
         --vpc-endpoint-dns-name=: The DNS name of the VPC endpoint associated with the Amazon S3 where you want to save the cache report.
     - name: start-gateway
       description: Starts a gateway that you previously shut down (see [ShutdownGateway]()).
@@ -841,7 +910,9 @@ commands:
     - name: update-automatic-tape-creation-policy
       description: Updates the automatic tape creation policy of a gateway.
       flags:
-        --automatic-tape-creation-rules=!: An automatic tape creation policy consists of a list of automatic tape creation rules.
+        --automatic-tape-creation-rules=!:
+            description: An automatic tape creation policy consists of a list of automatic tape creation rules.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-arn=!: ""
@@ -858,7 +929,9 @@ commands:
     - name: update-bandwidth-rate-limit-schedule
       description: Updates the bandwidth rate limit schedule for a specified gateway.
       flags:
-        --bandwidth-rate-limit-intervals=!: An array containing bandwidth rate limit schedule intervals for a gateway.
+        --bandwidth-rate-limit-intervals=!:
+            description: An array containing bandwidth rate limit schedule intervals for a gateway.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-arn=!: ""
@@ -927,7 +1000,9 @@ commands:
         --cache-attributes=: Specifies refresh cache information for the file share.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-list=: The list of clients that are allowed to access the S3 File Gateway.
+        --client-list=:
+            description: The list of clients that are allowed to access the S3 File Gateway.
+            nargs: -1
         --default-storage-class=: The default storage class for objects put into an Amazon S3 bucket by the S3 File Gateway.
         --encryption-type=: A value that specifies the type of server-side encryption that the file share will use for the data that it stores in Amazon S3.
         --file-share-arn=!: The Amazon Resource Name (ARN) of the file share to be updated.
@@ -964,7 +1039,9 @@ commands:
       description: Updates a Server Message Block (SMB) file share.
       flags:
         --access-based-enumeration: The files and folders on this share will only be visible to users with read access.
-        --admin-user-list=: A list of users or groups in the Active Directory that have administrator rights to the file share.
+        --admin-user-list=:
+            description: A list of users or groups in the Active Directory that have administrator rights to the file share.
+            nargs: -1
         --audit-destination-arn=: The Amazon Resource Name (ARN) of the storage used for audit logs.
         --cache-attributes=: Specifies refresh cache information for the file share.
         --case-sensitivity=: The case of an object name in an Amazon S3 bucket.
@@ -976,7 +1053,9 @@ commands:
         --file-share-name=: The name of the file share.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --guess-mime-type-enabled: A value that enables guessing of the MIME type for uploaded objects based on file extensions.
-        --invalid-user-list=: A list of users or groups in the Active Directory that are not allowed to access the file share.
+        --invalid-user-list=:
+            description: A list of users or groups in the Active Directory that are not allowed to access the file share.
+            nargs: -1
         --kms-encrypted: Optional.
         --kms-key=: Optional.
         --no-access-based-enumeration: The files and folders on this share will only be visible to users with read access.
@@ -992,7 +1071,9 @@ commands:
         --read-only: A value that sets the write status of a file share.
         --requester-pays: A value that sets who pays the cost of the request and the cost associated with data download from the S3 bucket.
         --smbacl-enabled: Set this value to `true` to enable access control list (ACL) on the SMB file share.
-        --valid-user-list=: A list of users or groups in the Active Directory that are allowed to access the file share.
+        --valid-user-list=:
+            description: A list of users or groups in the Active Directory that are allowed to access the file share.
+            nargs: -1
       completion:
         flag:
             case-sensitivity:
@@ -1051,7 +1132,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recurrence-in-hours=!: Frequency of snapshots.
         --start-at=!: The hour of the day at which the snapshot schedule begins represented as *hh*, where *hh* is the hour (0 to 23).
-        --tags=: A list of up to 50 tags that can be assigned to a snapshot.
+        --tags=:
+            description: A list of up to 50 tags that can be assigned to a snapshot.
+            nargs: -1
         --volume-arn=!: The Amazon Resource Name (ARN) of the volume.
     - name: update-vtl-device-type
       description: Updates the type of medium changer in a tape gateway.

@@ -5,7 +5,9 @@ commands:
     - name: associate-file-system-aliases
       description: Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system.
       flags:
-        --aliases=!: An array of one or more DNS alias names to associate with the file system.
+        --aliases=!:
+            description: An array of one or more DNS alias names to associate with the file system.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
@@ -30,7 +32,8 @@ commands:
         --no-copy-tags: A Boolean flag indicating whether tags from the source backup should be copied to the backup copy.
         --source-backup-id=!: The ID of the source backup.
         --source-region=: The source Amazon Web Services Region of the backup.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: copy-snapshot-and-update-volume
       description: Updates an existing volume by using a snapshot from another Amazon FSx for OpenZFS file system.
       flags:
@@ -39,7 +42,9 @@ commands:
         --client-request-token=: ""
         --copy-strategy=: Specifies the strategy to use when copying data from a snapshot to the volume.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: Confirms that you want to delete data on the destination volume that wasn’t there during the previous snapshot replication.
+        --options=:
+            description: Confirms that you want to delete data on the destination volume that wasn’t there during the previous snapshot replication.
+            nargs: -1
         --source-snapshot-arn=!: ""
         --volume-id=!: Specifies the ID of the volume that you are copying the snapshot to.
       completion:
@@ -71,7 +76,9 @@ commands:
         --client-request-token=: (Optional) A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent creation.
         --file-system-id=: The ID of the file system to back up.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: (Optional) The tags to apply to the backup at backup creation.
+        --tags=:
+            description: (Optional) The tags to apply to the backup at backup creation.
+            nargs: -1
         --volume-id=: (Optional) The ID of the FSx for ONTAP volume to back up.
     - name: create-data-repository-association
       description: Creates an Amazon FSx for Lustre data repository association (DRA).
@@ -87,7 +94,8 @@ commands:
         --imported-file-chunk-size=: For files imported from a data repository, this value determines the stripe count and maximum amount of data per file (in MiB) stored on a single physical disk.
         --no-batch-import-meta-data-on-create: Set to `true` to run an import data repository task to import metadata from the data repository to the file system after the data repository association is created.
         --s3=: The configuration for an Amazon S3 data repository linked to an Amazon FSx Lustre file system with a data repository association.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: create-data-repository-task
       description: Creates an Amazon FSx for Lustre data repository task.
       flags:
@@ -97,10 +105,13 @@ commands:
         --client-request-token=: ""
         --file-system-id=!: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --paths=: A list of paths for the data repository task to use when the task is processed.
+        --paths=:
+            description: A list of paths for the data repository task to use when the task is processed.
+            nargs: -1
         --release-configuration=: The configuration that specifies the last accessed time criteria for files that will be released from an Amazon FSx for Lustre file system.
         --report=!: Defines whether or not Amazon FSx provides a CompletionReport once the task has completed.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --type=!: Specifies the type of data repository task to create.
       completion:
         flag:
@@ -116,17 +127,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: An idempotency token for resource creation, in a string of up to 63 ASCII characters.
         --copy-tags-to-data-repository-associations: A boolean flag indicating whether tags for the cache should be copied to data repository associations.
-        --data-repository-associations=: A list of up to 8 configurations for data repository associations (DRAs) to be created during the cache creation.
+        --data-repository-associations=:
+            description: A list of up to 8 configurations for data repository associations (DRAs) to be created during the cache creation.
+            nargs: -1
         --file-cache-type-version=!: Sets the Lustre version for the cache that you're creating, which must be `2.12`.
         --file-cache-type=!: The type of cache that you're creating, which must be `LUSTRE`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: Specifies the ID of the Key Management Service (KMS) key to use for encrypting data on an Amazon File Cache.
         --lustre-configuration=: The configuration for the Amazon File Cache resource being created.
         --no-copy-tags-to-data-repository-associations: A boolean flag indicating whether tags for the cache should be copied to data repository associations.
-        --security-group-ids=: A list of IDs specifying the security groups to apply to all network interfaces created for Amazon File Cache access.
+        --security-group-ids=:
+            description: A list of IDs specifying the security groups to apply to all network interfaces created for Amazon File Cache access.
+            nargs: -1
         --storage-capacity=!: The storage capacity of the cache in gibibytes (GiB).
-        --subnet-ids=!: ""
-        --tags=: ""
+        --subnet-ids=!:
+            nargs: -1
+        --tags=:
+            nargs: -1
       completion:
         flag:
             file-cache-type:
@@ -145,11 +162,17 @@ commands:
         --network-type=: The network type of the Amazon FSx file system that you are creating.
         --ontap-configuration=: ""
         --open-zfs-configuration=: The OpenZFS configuration for the file system that's being created.
-        --security-group-ids=: A list of IDs specifying the security groups to apply to all network interfaces created for file system access.
+        --security-group-ids=:
+            description: A list of IDs specifying the security groups to apply to all network interfaces created for file system access.
+            nargs: -1
         --storage-capacity=: Sets the storage capacity of the file system that you're creating, in gibibytes (GiB).
         --storage-type=: Sets the storage class for the file system that you're creating.
-        --subnet-ids=!: Specifies the IDs of the subnets that the file system will be accessible from.
-        --tags=: The tags to apply to the file system that's being created.
+        --subnet-ids=!:
+            description: Specifies the IDs of the subnets that the file system will be accessible from.
+            nargs: -1
+        --tags=:
+            description: The tags to apply to the file system that's being created.
+            nargs: -1
         --windows-configuration=: The Microsoft Windows configuration for the file system that's being created.
       completion:
         flag:
@@ -178,11 +201,17 @@ commands:
         --lustre-configuration=: ""
         --network-type=: Sets the network type for the Amazon FSx for OpenZFS file system that you're creating from a backup.
         --open-zfs-configuration=: The OpenZFS configuration for the file system that's being created.
-        --security-group-ids=: A list of IDs for the security groups that apply to the specified network interfaces created for file system access.
+        --security-group-ids=:
+            description: A list of IDs for the security groups that apply to the specified network interfaces created for file system access.
+            nargs: -1
         --storage-capacity=: Sets the storage capacity of the OpenZFS file system that you're creating from a backup, in gibibytes (GiB).
         --storage-type=: Sets the storage type for the Windows, OpenZFS, or Lustre file system that you're creating from a backup.
-        --subnet-ids=!: Specifies the IDs of the subnets that the file system will be accessible from.
-        --tags=: The tags to be applied to the file system at file system creation.
+        --subnet-ids=!:
+            description: Specifies the IDs of the subnets that the file system will be accessible from.
+            nargs: -1
+        --tags=:
+            description: The tags to be applied to the file system at file system creation.
+            nargs: -1
         --windows-configuration=: The configuration for this Microsoft Windows file system.
       completion:
         flag:
@@ -201,7 +230,8 @@ commands:
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the snapshot.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --volume-id=!: The ID of the volume that you are taking a snapshot of.
     - name: create-storage-virtual-machine
       description: Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file system.
@@ -215,7 +245,8 @@ commands:
         --name=!: The name of the SVM.
         --root-volume-security-style=: The security style of the root volume of the SVM.
         --svm-admin-password=: The password to use when managing the SVM using the NetApp ONTAP CLI or REST API.
-        --tags=: ""
+        --tags=:
+            nargs: -1
       completion:
         flag:
             root-volume-security-style:
@@ -232,7 +263,8 @@ commands:
         --name=!: Specifies the name of the volume that you're creating.
         --ontap-configuration=: Specifies the configuration to use when creating the ONTAP volume.
         --open-zfs-configuration=: Specifies the configuration to use when creating the OpenZFS volume.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --volume-type=!: Specifies the type of volume to create; `ONTAP` and `OPENZFS` are the only valid volume types.
       completion:
         flag:
@@ -249,7 +281,8 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the new volume you're creating.
         --ontap-configuration=: Specifies the configuration of the ONTAP volume that you are creating.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: delete-backup
       description: Deletes an Amazon FSx backup.
       flags:
@@ -316,10 +349,14 @@ commands:
     - name: describe-backups
       description: Returns the description of a specific Amazon FSx backup, if a `BackupIds` value is provided for that backup.
       flags:
-        --backup-ids=: The IDs of the backups that you want to retrieve.
+        --backup-ids=:
+            description: The IDs of the backups that you want to retrieve.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters structure.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of backups to return in the response.
@@ -329,10 +366,13 @@ commands:
     - name: describe-data-repository-associations
       description: Returns the description of specific Amazon FSx for Lustre or Amazon File Cache data repository associations, if one or more `AssociationIds` values are provided in the request, or if filters are used in the request.
       flags:
-        --association-ids=: IDs of the data repository associations whose descriptions you want to retrieve (String).
+        --association-ids=:
+            description: IDs of the data repository associations whose descriptions you want to retrieve (String).
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: ""
+        --filters=:
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of resources to return in the response.
         --next-token=: ""
@@ -341,17 +381,23 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: (Optional) You can use filters to narrow the `DescribeDataRepositoryTasks` response to include just tasks for specific file systems, or tasks in a specific lifecycle state.
+        --filters=:
+            description: (Optional) You can use filters to narrow the `DescribeDataRepositoryTasks` response to include just tasks for specific file systems, or tasks in a specific lifecycle state.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: ""
         --next-token=: ""
-        --task-ids=: (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
+        --task-ids=:
+            description: (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
+            nargs: -1
     - name: describe-file-caches
       description: Returns the description of a specific Amazon File Cache resource, if a `FileCacheIds` value is provided for that cache.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-cache-ids=: IDs of the caches whose descriptions you want to retrieve (String).
+        --file-cache-ids=:
+            description: IDs of the caches whose descriptions you want to retrieve (String).
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: ""
         --next-token=: ""
@@ -370,7 +416,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-system-ids=: IDs of the file systems whose descriptions you want to retrieve (String).
+        --file-system-ids=:
+            description: IDs of the file systems whose descriptions you want to retrieve (String).
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of file systems to return in the response (integer).
@@ -382,11 +430,15 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Enter a filter Name and Values pair to view a select set of S3 access point attachments.
+        --filters=:
+            description: Enter a filter Name and Values pair to view a select set of S3 access point attachments.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
-        --names=: The names of the S3 access point attachments whose descriptions you want to retrieve.
+        --names=:
+            description: The names of the S3 access point attachments whose descriptions you want to retrieve.
+            nargs: -1
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -401,7 +453,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: The filters structure.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-shared: Set to `false` (default) if you want to only see the snapshots owned by your Amazon Web Services account.
         --max-items=: The  total number of items to return in the command's output.
@@ -409,34 +463,44 @@ commands:
         --next-token=: ""
         --no-include-shared: Set to `false` (default) if you want to only see the snapshots owned by your Amazon Web Services account.
         --page-size=: The size of each page to get in the AWS service call.
-        --snapshot-ids=: The IDs of the snapshots that you want to retrieve.
+        --snapshot-ids=:
+            description: The IDs of the snapshots that you want to retrieve.
+            nargs: -1
         --starting-token=: A token to specify where to start paginating.
     - name: describe-storage-virtual-machines
       description: Describes one or more Amazon FSx for NetApp ONTAP storage virtual machines (SVMs).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Enter a filter name:value pair to view a select set of SVMs.
+        --filters=:
+            description: Enter a filter name:value pair to view a select set of SVMs.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --storage-virtual-machine-ids=: Enter the ID of one or more SVMs that you want to view.
+        --storage-virtual-machine-ids=:
+            description: Enter the ID of one or more SVMs that you want to view.
+            nargs: -1
     - name: describe-volumes
       description: Describes one or more Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volumes.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: Enter a filter `Name` and `Values` pair to view a select set of volumes.
+        --filters=:
+            description: Enter a filter `Name` and `Values` pair to view a select set of volumes.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --volume-ids=: The IDs of the volumes whose descriptions you want to retrieve.
+        --volume-ids=:
+            description: The IDs of the volumes whose descriptions you want to retrieve.
+            nargs: -1
     - name: detach-and-delete-s3-access-point
       description: Detaches an S3 access point from an Amazon FSx volume and deletes the S3 access point.
       flags:
@@ -448,7 +512,9 @@ commands:
     - name: disassociate-file-system-aliases
       description: Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system.
       flags:
-        --aliases=!: An array of one or more DNS alias names to disassociate, or remove, from the file system.
+        --aliases=!:
+            description: An array of one or more DNS alias names to disassociate, or remove, from the file system.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
@@ -481,7 +547,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --options=: The settings used when restoring the specified volume from snapshot.
+        --options=:
+            description: The settings used when restoring the specified volume from snapshot.
+            nargs: -1
         --snapshot-id=!: The ID of the source snapshot.
         --volume-id=!: The ID of the volume that you are restoring.
     - name: start-misconfigured-state-recovery
@@ -499,7 +567,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the Amazon FSx resource that you want to tag.
-        --tags=!: A list of tags for the resource.
+        --tags=!:
+            description: A list of tags for the resource.
+            nargs: -1
     - name: untag-resource
       description: This action removes a tag from an Amazon FSx resource.
       flags:
@@ -507,7 +577,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the Amazon FSx resource to untag.
-        --tag-keys=!: A list of keys of tags on the resource to untag.
+        --tag-keys=!:
+            description: A list of keys of tags on the resource to untag.
+            nargs: -1
     - name: update-data-repository-association
       description: Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system.
       flags:

@@ -5,7 +5,9 @@ commands:
     - name: batch-get-member-account-details
       description: Provides information on whether the supplied account IDs are associated with a membership.
       flags:
-        --account-ids=!: Optional element to query the membership relationship status to a provided list of account IDs.
+        --account-ids=!:
+            description: Optional element to query the membership relationship status to a provided list of account IDs.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -33,15 +35,25 @@ commands:
         --description=!: Required element used in combination with CreateCase
         --engagement-type=!: Required element used in combination with CreateCase to provide an engagement type for the new cases.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --impacted-accounts=!: Required element used in combination with CreateCase to provide a list of impacted accounts.
-        --impacted-aws-regions=: An optional element used in combination with CreateCase to provide a list of impacted regions.
-        --impacted-services=: An optional element used in combination with CreateCase to provide a list of services impacted.
+        --impacted-accounts=!:
+            description: Required element used in combination with CreateCase to provide a list of impacted accounts.
+            nargs: -1
+        --impacted-aws-regions=:
+            description: An optional element used in combination with CreateCase to provide a list of impacted regions.
+            nargs: -1
+        --impacted-services=:
+            description: An optional element used in combination with CreateCase to provide a list of services impacted.
+            nargs: -1
         --reported-incident-start-date=!: Required element used in combination with CreateCase to provide an initial start date for the unauthorized activity.
         --resolver-type=!: Required element used in combination with CreateCase to identify the resolver type.
         --tags=: An optional element used in combination with CreateCase to add customer specified tags to a case.
-        --threat-actor-ip-addresses=: An optional element used in combination with CreateCase to provide a list of suspicious internet protocol addresses associated with unauthorized activity.
+        --threat-actor-ip-addresses=:
+            description: An optional element used in combination with CreateCase to provide a list of suspicious internet protocol addresses associated with unauthorized activity.
+            nargs: -1
         --title=!: Required element used in combination with CreateCase to provide a title for the new case.
-        --watchers=!: Required element used in combination with CreateCase to provide a list of entities to receive notifications for case updates.
+        --watchers=!:
+            description: Required element used in combination with CreateCase to provide a list of entities to receive notifications for case updates.
+            nargs: -1
       completion:
         flag:
             engagement-type:
@@ -67,10 +79,14 @@ commands:
         --client-token=: The `clientToken` field is an idempotency key used to ensure that repeated attempts for a single action will be ignored by the server during retries.
         --cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-response-team=!: Required element used in combination with CreateMembership to add customer incident response team members and trusted partners to the membership.
+        --incident-response-team=!:
+            description: Required element used in combination with CreateMembership to add customer incident response team members and trusted partners to the membership.
+            nargs: -1
         --membership-name=!: Required element used in combination with CreateMembership to create a name for the membership.
         --no-cover-entire-organization: The `coverEntireOrganization` parameter is a boolean flag that determines whether the membership should be applied to the entire Amazon Web Services Organization.
-        --opt-in-features=: Optional element to enable the monitoring and investigation opt-in features for the service.
+        --opt-in-features=:
+            description: Optional element to enable the monitoring and investigation opt-in features for the service.
+            nargs: -1
         --tags=: Optional element for customer configured tags.
     - name: get-case
       description: Returns the attributes of a case.
@@ -199,30 +215,54 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: Required element for UnTagResource to identify the ARN for the resource to remove a tag from.
-        --tag-keys=!: Required element for UnTagResource to identify tag to remove.
+        --tag-keys=!:
+            description: Required element for UnTagResource to identify tag to remove.
+            nargs: -1
     - name: update-case
       description: Updates an existing case.
       flags:
         --actual-incident-start-date=: Optional element for UpdateCase to provide content for the incident start date field.
         --case-id=!: Required element for UpdateCase to identify the case ID for updates.
-        --case-metadata=: Update the case request with case metadata
+        --case-metadata=:
+            description: Update the case request with case metadata
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Optional element for UpdateCase to provide content for the description field.
         --engagement-type=: Optional element for UpdateCase to provide content for the engagement type field.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --impacted-accounts-to-add=: Optional element for UpdateCase to provide content to add accounts impacted.
-        --impacted-accounts-to-delete=: Optional element for UpdateCase to provide content to add accounts impacted.
-        --impacted-aws-regions-to-add=: Optional element for UpdateCase to provide content to add regions impacted.
-        --impacted-aws-regions-to-delete=: Optional element for UpdateCase to provide content to remove regions impacted.
-        --impacted-services-to-add=: Optional element for UpdateCase to provide content to add services impacted.
-        --impacted-services-to-delete=: Optional element for UpdateCase to provide content to remove services impacted.
+        --impacted-accounts-to-add=:
+            description: Optional element for UpdateCase to provide content to add accounts impacted.
+            nargs: -1
+        --impacted-accounts-to-delete=:
+            description: Optional element for UpdateCase to provide content to add accounts impacted.
+            nargs: -1
+        --impacted-aws-regions-to-add=:
+            description: Optional element for UpdateCase to provide content to add regions impacted.
+            nargs: -1
+        --impacted-aws-regions-to-delete=:
+            description: Optional element for UpdateCase to provide content to remove regions impacted.
+            nargs: -1
+        --impacted-services-to-add=:
+            description: Optional element for UpdateCase to provide content to add services impacted.
+            nargs: -1
+        --impacted-services-to-delete=:
+            description: Optional element for UpdateCase to provide content to remove services impacted.
+            nargs: -1
         --reported-incident-start-date=: Optional element for UpdateCase to provide content for the customer reported incident start date field.
-        --threat-actor-ip-addresses-to-add=: Optional element for UpdateCase to provide content to add additional suspicious IP addresses related to a case.
-        --threat-actor-ip-addresses-to-delete=: Optional element for UpdateCase to provide content to remove suspicious IP addresses from a case.
+        --threat-actor-ip-addresses-to-add=:
+            description: Optional element for UpdateCase to provide content to add additional suspicious IP addresses related to a case.
+            nargs: -1
+        --threat-actor-ip-addresses-to-delete=:
+            description: Optional element for UpdateCase to provide content to remove suspicious IP addresses from a case.
+            nargs: -1
         --title=: Optional element for UpdateCase to provide content for the title field.
-        --watchers-to-add=: Optional element for UpdateCase to provide content to add additional watchers to a case.
-        --watchers-to-delete=: Optional element for UpdateCase to provide content to remove existing watchers from a case.
+        --watchers-to-add=:
+            description: Optional element for UpdateCase to provide content to add additional watchers to a case.
+            nargs: -1
+        --watchers-to-delete=:
+            description: Optional element for UpdateCase to provide content to remove existing watchers from a case.
+            nargs: -1
       completion:
         flag:
             engagement-type:
@@ -258,12 +298,16 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --incident-response-team=: Optional element for UpdateMembership to update the membership name.
+        --incident-response-team=:
+            description: Optional element for UpdateMembership to update the membership name.
+            nargs: -1
         --membership-accounts-configurations-update=: The `membershipAccountsConfigurationsUpdate` field in the `UpdateMembershipRequest` structure allows you to update the configuration settings for accounts within a membership.
         --membership-id=!: Required element for UpdateMembership to identify the membership to update.
         --membership-name=: Optional element for UpdateMembership to update the membership name.
         --no-undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
-        --opt-in-features=: Optional element for UpdateMembership to enable or disable opt-in features for the service.
+        --opt-in-features=:
+            description: Optional element for UpdateMembership to enable or disable opt-in features for the service.
+            nargs: -1
         --undo-membership-cancellation: The `undoMembershipCancellation` parameter is a boolean flag that indicates whether to reverse a previously requested membership cancellation.
     - name: update-resolver-type
       description: Updates the resolver type for a case.

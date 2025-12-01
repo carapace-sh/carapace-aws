@@ -16,14 +16,18 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vehicles=!: A list of information about each vehicle to create.
+        --vehicles=!:
+            description: A list of information about each vehicle to create.
+            nargs: -1
     - name: batch-update-vehicle
       description: Updates a group, or batch, of vehicles.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --vehicles=!: A list of information about the vehicles to update.
+        --vehicles=!:
+            description: A list of information about the vehicles to update.
+            nargs: -1
     - name: create-campaign
       description: Creates an orchestration of data collection rules.
       flags:
@@ -31,9 +35,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --collection-scheme=!: The data collection scheme associated with the campaign.
         --compression=: Determines whether to compress signals before transmitting data to Amazon Web Services IoT FleetWise.
-        --data-destination-configs=: The destination where the campaign sends data.
-        --data-extra-dimensions=: A list of vehicle attributes to associate with a campaign.
-        --data-partitions=: The data partitions associated with the signals collected from the vehicle.
+        --data-destination-configs=:
+            description: The destination where the campaign sends data.
+            nargs: -1
+        --data-extra-dimensions=:
+            description: A list of vehicle attributes to associate with a campaign.
+            nargs: -1
+        --data-partitions=:
+            description: The data partitions associated with the signals collected from the vehicle.
+            nargs: -1
         --description=: An optional description of the campaign to help identify its purpose.
         --diagnostics-mode=: Option for a vehicle to send diagnostic trouble codes to Amazon Web Services IoT FleetWise.
         --expiry-time=: The time the campaign expires, in seconds since epoch (January 1, 1970 at midnight UTC time).
@@ -42,11 +52,17 @@ commands:
         --post-trigger-collection-duration=: How long (in milliseconds) to collect raw data after a triggering event initiates the collection.
         --priority=: A number indicating the priority of one campaign over another campaign for a certain vehicle or fleet.
         --signal-catalog-arn=!: The Amazon Resource Name (ARN) of the signal catalog to associate with the campaign.
-        --signals-to-collect=: A list of information about signals to collect.
-        --signals-to-fetch=: A list of information about signals to fetch.
+        --signals-to-collect=:
+            description: A list of information about signals to collect.
+            nargs: -1
+        --signals-to-fetch=:
+            description: A list of information about signals to fetch.
+            nargs: -1
         --spooling-mode=: Determines whether to store collected data after a vehicle lost a connection with the cloud.
         --start-time=: The time, in milliseconds, to deliver a campaign after it was approved.
-        --tags=: Metadata that can be used to manage the campaign.
+        --tags=:
+            description: Metadata that can be used to manage the campaign.
+            nargs: -1
         --target-arn=!: The ARN of the vehicle or fleet to deploy a campaign to.
       completion:
         flag:
@@ -69,9 +85,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-manifest-arn=!: The Amazon Resource Name (ARN) of the vehicle model (model manifest).
         --name=!: The unique name of the decoder manifest to create.
-        --network-interfaces=: A list of information about available network interfaces.
-        --signal-decoders=: A list of information about signal decoders.
-        --tags=: Metadata that can be used to manage the decoder manifest.
+        --network-interfaces=:
+            description: A list of information about available network interfaces.
+            nargs: -1
+        --signal-decoders=:
+            description: A list of information about signal decoders.
+            nargs: -1
+        --tags=:
+            description: Metadata that can be used to manage the decoder manifest.
+            nargs: -1
       completion:
         flag:
             default-for-unmapped-signals:
@@ -85,7 +107,9 @@ commands:
         --fleet-id=!: The unique ID of the fleet to create.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --signal-catalog-arn=!: The Amazon Resource Name (ARN) of a signal catalog.
-        --tags=: Metadata that can be used to manage the fleet.
+        --tags=:
+            description: Metadata that can be used to manage the fleet.
+            nargs: -1
     - name: create-model-manifest
       description: Creates a vehicle model (model manifest) that specifies signals (attributes, branches, sensors, and actuators).
       flags:
@@ -94,9 +118,13 @@ commands:
         --description=: A brief description of the vehicle model.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the vehicle model to create.
-        --nodes=!: A list of nodes, which are a general abstraction of signals.
+        --nodes=!:
+            description: A list of nodes, which are a general abstraction of signals.
+            nargs: -1
         --signal-catalog-arn=!: The Amazon Resource Name (ARN) of a signal catalog.
-        --tags=: Metadata that can be used to manage the vehicle model.
+        --tags=:
+            description: Metadata that can be used to manage the vehicle model.
+            nargs: -1
     - name: create-signal-catalog
       description: Creates a collection of standardized signals that can be reused to create vehicle models.
       flags:
@@ -105,21 +133,33 @@ commands:
         --description=: A brief description of the signal catalog.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the signal catalog to create.
-        --nodes=: A list of information about nodes, which are a general abstraction of signals.
-        --tags=: Metadata that can be used to manage the signal catalog.
+        --nodes=:
+            description: A list of information about nodes, which are a general abstraction of signals.
+            nargs: -1
+        --tags=:
+            description: Metadata that can be used to manage the signal catalog.
+            nargs: -1
     - name: create-state-template
       description: Creates a state template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+        --data-extra-dimensions=:
+            description: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+            nargs: -1
         --description=: A brief description of the state template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
+        --metadata-extra-dimensions=:
+            description: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
+            nargs: -1
         --name=!: The name of the state template.
         --signal-catalog-arn=!: The ARN of the signal catalog associated with the state template.
-        --state-template-properties=!: A list of signals from which data is collected.
-        --tags=: Metadata that can be used to manage the state template.
+        --state-template-properties=!:
+            description: A list of signals from which data is collected.
+            nargs: -1
+        --tags=:
+            description: Metadata that can be used to manage the state template.
+            nargs: -1
     - name: create-vehicle
       description: Creates a vehicle, which is an instance of a vehicle model (model manifest).
       flags:
@@ -130,8 +170,12 @@ commands:
         --decoder-manifest-arn=!: The ARN of a decoder manifest.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-manifest-arn=!: The Amazon Resource Name ARN of a vehicle model.
-        --state-templates=: Associate state templates with the vehicle.
-        --tags=: Metadata that can be used to manage the vehicle.
+        --state-templates=:
+            description: Associate state templates with the vehicle.
+            nargs: -1
+        --tags=:
+            description: Metadata that can be used to manage the vehicle.
+            nargs: -1
         --vehicle-name=!: The unique ID of the vehicle to create.
       completion:
         flag:
@@ -281,7 +325,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the decoder manifest to import.
-        --network-file-definitions=!: The file to load into an Amazon Web Services account.
+        --network-file-definitions=!:
+            description: The file to load into an Amazon Web Services account.
+            nargs: -1
     - name: import-signal-catalog
       description: Creates a signal catalog using your existing VSS formatted content from your local device.
       flags:
@@ -290,7 +336,9 @@ commands:
         --description=: A brief description of the signal catalog.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the signal catalog to import.
-        --tags=: Metadata that can be used to manage the signal catalog.
+        --tags=:
+            description: Metadata that can be used to manage the signal catalog.
+            nargs: -1
         --vss=: The contents of the Vehicle Signal Specification (VSS) configuration.
     - name: list-campaigns
       description: Lists information about created campaigns.
@@ -466,8 +514,12 @@ commands:
     - name: list-vehicles
       description: Retrieves a list of summaries of created vehicles.
       flags:
-        --attribute-names=: The fully qualified names of the attributes.
-        --attribute-values=: Static information about a vehicle attribute value in string format.
+        --attribute-names=:
+            description: The fully qualified names of the attributes.
+            nargs: -1
+        --attribute-values=:
+            description: Static information about a vehicle attribute value in string format.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -529,7 +581,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
-        --tags=!: The new or modified tags for the resource.
+        --tags=!:
+            description: The new or modified tags for the resource.
+            nargs: -1
     - name: untag-resource
       description: Removes the given tags (metadata) from the resource.
       flags:
@@ -537,14 +591,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource.
-        --tag-keys=!: A list of the keys of the tags to be removed from the resource.
+        --tag-keys=!:
+            description: A list of the keys of the tags to be removed from the resource.
+            nargs: -1
     - name: update-campaign
       description: Updates a campaign.
       flags:
         --action=!: Specifies how to update a campaign.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-extra-dimensions=: A list of vehicle attributes to associate with a signal.
+        --data-extra-dimensions=:
+            description: A list of vehicle attributes to associate with a signal.
+            nargs: -1
         --description=: The description of the campaign.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the campaign to update.
@@ -564,12 +622,24 @@ commands:
         --description=: A brief description of the decoder manifest to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the decoder manifest to update.
-        --network-interfaces-to-add=: A list of information about the network interfaces to add to the decoder manifest.
-        --network-interfaces-to-remove=: A list of network interfaces to remove from the decoder manifest.
-        --network-interfaces-to-update=: A list of information about the network interfaces to update in the decoder manifest.
-        --signal-decoders-to-add=: A list of information about decoding additional signals to add to the decoder manifest.
-        --signal-decoders-to-remove=: A list of signal decoders to remove from the decoder manifest.
-        --signal-decoders-to-update=: A list of updated information about decoding signals to update in the decoder manifest.
+        --network-interfaces-to-add=:
+            description: A list of information about the network interfaces to add to the decoder manifest.
+            nargs: -1
+        --network-interfaces-to-remove=:
+            description: A list of network interfaces to remove from the decoder manifest.
+            nargs: -1
+        --network-interfaces-to-update=:
+            description: A list of information about the network interfaces to update in the decoder manifest.
+            nargs: -1
+        --signal-decoders-to-add=:
+            description: A list of information about decoding additional signals to add to the decoder manifest.
+            nargs: -1
+        --signal-decoders-to-remove=:
+            description: A list of signal decoders to remove from the decoder manifest.
+            nargs: -1
+        --signal-decoders-to-update=:
+            description: A list of updated information about decoding signals to update in the decoder manifest.
+            nargs: -1
         --status=: The state of the decoder manifest.
       completion:
         flag:
@@ -596,8 +666,12 @@ commands:
         --description=: A brief description of the vehicle model.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the vehicle model to update.
-        --nodes-to-add=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.
-        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.
+        --nodes-to-add=:
+            description: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to add to the vehicle model.
+            nargs: -1
+        --nodes-to-remove=:
+            description: A list of `fullyQualifiedName` of nodes, which are a general abstraction of signals, to remove from the vehicle model.
+            nargs: -1
         --status=: The state of the vehicle model.
       completion:
         flag:
@@ -614,21 +688,35 @@ commands:
         --description=: A brief description of the signal catalog to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the signal catalog to update.
-        --nodes-to-add=: A list of information about nodes to add to the signal catalog.
-        --nodes-to-remove=: A list of `fullyQualifiedName` of nodes to remove from the signal catalog.
-        --nodes-to-update=: A list of information about nodes to update in the signal catalog.
+        --nodes-to-add=:
+            description: A list of information about nodes to add to the signal catalog.
+            nargs: -1
+        --nodes-to-remove=:
+            description: A list of `fullyQualifiedName` of nodes to remove from the signal catalog.
+            nargs: -1
+        --nodes-to-update=:
+            description: A list of information about nodes to update in the signal catalog.
+            nargs: -1
     - name: update-state-template
       description: Updates a state template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --data-extra-dimensions=: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+        --data-extra-dimensions=:
+            description: A list of vehicle attributes to associate with the payload published on the state template's MQTT topic.
+            nargs: -1
         --description=: A brief description of the state template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique ID of the state template.
-        --metadata-extra-dimensions=: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
-        --state-template-properties-to-add=: Add signals from which data is collected as part of the state template.
-        --state-template-properties-to-remove=: Remove signals from which data is collected as part of the state template.
+        --metadata-extra-dimensions=:
+            description: A list of vehicle attributes to associate with user properties of the messages published on the state template's MQTT topic.
+            nargs: -1
+        --state-template-properties-to-add=:
+            description: Add signals from which data is collected as part of the state template.
+            nargs: -1
+        --state-template-properties-to-remove=:
+            description: Remove signals from which data is collected as part of the state template.
+            nargs: -1
     - name: update-vehicle
       description: Updates a vehicle.
       flags:
@@ -639,9 +727,15 @@ commands:
         --decoder-manifest-arn=: The ARN of the decoder manifest associated with this vehicle.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-manifest-arn=: The ARN of a vehicle model (model manifest) associated with the vehicle.
-        --state-templates-to-add=: Associate state templates with the vehicle.
-        --state-templates-to-remove=: Remove state templates from the vehicle.
-        --state-templates-to-update=: Change the `stateTemplateUpdateStrategy` of state templates already associated with the vehicle.
+        --state-templates-to-add=:
+            description: Associate state templates with the vehicle.
+            nargs: -1
+        --state-templates-to-remove=:
+            description: Remove state templates from the vehicle.
+            nargs: -1
+        --state-templates-to-update=:
+            description: Change the `stateTemplateUpdateStrategy` of state templates already associated with the vehicle.
+            nargs: -1
         --vehicle-name=!: The unique ID of the vehicle to update.
       completion:
         flag:

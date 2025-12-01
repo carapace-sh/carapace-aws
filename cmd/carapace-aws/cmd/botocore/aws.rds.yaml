@@ -47,7 +47,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The Amazon RDS resource that the tags are added to.
-        --tags=!: The tags to be assigned to the Amazon RDS resource.
+        --tags=!:
+            description: The tags to be assigned to the Amazon RDS resource.
+            nargs: -1
     - name: apply-pending-maintenance-action
       description: Applies a pending maintenance action to a resource (for example, to a DB instance).
       flags:
@@ -94,7 +96,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-db-cluster-parameter-group-identifier=!: The identifier or Amazon Resource Name (ARN) for the source DB cluster parameter group.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-db-cluster-parameter-group-description=!: A description for the copied DB cluster parameter group.
         --target-db-cluster-parameter-group-identifier=!: The identifier for the copied DB cluster parameter group.
     - name: copy-db-cluster-snapshot
@@ -109,7 +112,8 @@ commands:
         --pre-signed-url=: When you are copying a DB cluster snapshot from one Amazon Web Services GovCloud (US) Region to another, the URL that contains a Signature Version 4 signed request for the `CopyDBClusterSnapshot` API operation in the Amazon Web Services Region that contains the source DB cluster snapshot to copy.
         --source-db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot to copy.
         --source-region=: The ID of the region that contains the snapshot to be copied
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-db-cluster-snapshot-identifier=!: The identifier of the new DB cluster snapshot to create from the source DB cluster snapshot.
     - name: copy-db-parameter-group
       description: Copies the specified DB parameter group.
@@ -118,7 +122,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-db-parameter-group-identifier=!: The identifier or ARN for the source DB parameter group.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-db-parameter-group-description=!: A description for the copied DB parameter group.
         --target-db-parameter-group-identifier=!: The identifier for the copied DB parameter group.
     - name: copy-db-snapshot
@@ -138,7 +143,8 @@ commands:
         --snapshot-target=: Configures the location where RDS will store copied snapshots.
         --source-db-snapshot-identifier=!: The identifier for the source DB snapshot.
         --source-region=: The ID of the region that contains the snapshot to be copied
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-custom-availability-zone=: The external custom Availability Zone (CAZ) identifier for the target CAZ.
         --target-db-snapshot-identifier=!: The identifier for the copy of the snapshot.
     - name: copy-option-group
@@ -148,7 +154,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-option-group-identifier=!: The identifier for the source option group.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-option-group-description=!: The description for the copied option group.
         --target-option-group-identifier=!: The identifier for the copied option group.
     - name: create-blue-green-deployment
@@ -160,7 +167,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-upgrade-target-storage-config: Whether to upgrade the storage file system configuration on the green database.
         --source=!: The Amazon Resource Name (ARN) of the source production database.
-        --tags=: Tags to assign to the blue/green deployment.
+        --tags=:
+            description: Tags to assign to the blue/green deployment.
+            nargs: -1
         --target-allocated-storage=: The amount of storage in gibibytes (GiB) to allocate for the green DB instance.
         --target-db-cluster-parameter-group-name=: The DB cluster parameter group associated with the Aurora DB cluster in the green environment.
         --target-db-instance-class=: Specify the DB instance class for the databases in the green environment.
@@ -186,14 +195,17 @@ commands:
         --manifest=: The CEV manifest, which is a JSON document that describes the installation .zip files stored in Amazon S3.
         --no-use-aws-provided-latest-image: Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for the CEV.
         --source-custom-db-engine-version-identifier=: The ARN of a CEV to use as a source for creating a new CEV.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --use-aws-provided-latest-image: Specifies whether to use the latest service-provided Amazon Machine Image (AMI) for the CEV.
     - name: create-db-cluster
       description: Creates a new Amazon Aurora DB cluster or Multi-AZ DB cluster.
       flags:
         --allocated-storage=: The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.
         --auto-minor-version-upgrade: Specifies whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window.
-        --availability-zones=: A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.
+        --availability-zones=:
+            description: A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.
+            nargs: -1
         --backtrack-window=: The target backtrack window, in seconds.
         --backup-retention-period=: The number of days for which automated backups are retained.
         --ca-certificate-identifier=: The CA certificate identifier to use for the DB cluster's server certificate.
@@ -212,7 +224,9 @@ commands:
         --deletion-protection: Specifies whether the DB cluster has deletion protection enabled.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain=: The Active Directory directory ID to create the DB cluster in.
-        --enable-cloudwatch-logs-exports=: The list of log types that need to be enabled for exporting to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of log types that need to be enabled for exporting to CloudWatch Logs.
+            nargs: -1
         --enable-global-write-forwarding: Specifies whether to enable this DB cluster to forward write operations to the primary cluster of a global cluster (Aurora global database).
         --enable-http-endpoint: Specifies whether to enable the HTTP endpoint for the DB cluster.
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
@@ -262,8 +276,12 @@ commands:
         --source-region=: The ID of the region that contains the source for the db cluster
         --storage-encrypted: Specifies whether the DB cluster is encrypted.
         --storage-type=: The storage type to associate with the DB cluster.
-        --tags=: Tags to assign to the DB cluster.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB cluster.
+        --tags=:
+            description: Tags to assign to the DB cluster.
+            nargs: -1
+        --vpc-security-group-ids=:
+            description: A list of EC2 VPC security groups to associate with this DB cluster.
+            nargs: -1
       completion:
         flag:
             cluster-scalability-type:
@@ -283,10 +301,16 @@ commands:
         --db-cluster-endpoint-identifier=!: The identifier to use for the new endpoint.
         --db-cluster-identifier=!: The DB cluster identifier of the DB cluster associated with the endpoint.
         --endpoint-type=!: 'The type of the endpoint, one of: `READER`, `WRITER`, `ANY`.'
-        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
+        --excluded-members=:
+            description: List of DB instance identifiers that aren't part of the custom endpoint group.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
-        --tags=: The tags to be assigned to the Amazon RDS resource.
+        --static-members=:
+            description: List of DB instance identifiers that are part of the custom endpoint group.
+            nargs: -1
+        --tags=:
+            description: The tags to be assigned to the Amazon RDS resource.
+            nargs: -1
     - name: create-db-cluster-parameter-group
       description: Creates a new DB cluster parameter group.
       flags:
@@ -296,7 +320,9 @@ commands:
         --db-parameter-group-family=!: The DB cluster parameter group family name.
         --description=!: The description for the DB cluster parameter group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Tags to assign to the DB cluster parameter group.
+        --tags=:
+            description: Tags to assign to the DB cluster parameter group.
+            nargs: -1
     - name: create-db-cluster-snapshot
       description: Creates a snapshot of a DB cluster.
       flags:
@@ -305,7 +331,9 @@ commands:
         --db-cluster-identifier=!: The identifier of the DB cluster to create a snapshot for.
         --db-cluster-snapshot-identifier=!: The identifier of the DB cluster snapshot.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: The tags to be assigned to the DB cluster snapshot.
+        --tags=:
+            description: The tags to be assigned to the DB cluster snapshot.
+            nargs: -1
     - name: create-db-instance
       description: Creates a new DB instance.
       flags:
@@ -326,18 +354,24 @@ commands:
         --db-instance-identifier=!: The identifier for this DB instance.
         --db-name=: The meaning of this parameter differs according to the database engine you use.
         --db-parameter-group-name=: The name of the DB parameter group to associate with this DB instance.
-        --db-security-groups=: A list of DB security groups to associate with this DB instance.
+        --db-security-groups=:
+            description: A list of DB security groups to associate with this DB instance.
+            nargs: -1
         --db-subnet-group-name=: A DB subnet group to associate with this DB instance.
         --db-system-id=: The Oracle system identifier (SID), which is the name of the Oracle database instance that manages your database files.
         --dedicated-log-volume: Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
         --deletion-protection: Specifies whether the DB instance has deletion protection enabled.
         --domain-auth-secret-arn=: The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
-        --domain-dns-ips=: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+        --domain-dns-ips=:
+            description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+            nargs: -1
         --domain-fqdn=: The fully qualified domain name (FQDN) of an Active Directory domain.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain-ou=: The Active Directory organizational unit for your DB instance to join.
         --domain=: The Active Directory directory ID to create the DB instance in.
-        --enable-cloudwatch-logs-exports=: The list of log types to enable for exporting to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of log types to enable for exporting to CloudWatch Logs.
+            nargs: -1
         --enable-customer-owned-ip: Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --enable-performance-insights: Specifies whether to enable Performance Insights for the DB instance.
@@ -378,17 +412,23 @@ commands:
         --port=: The port number on which the database accepts connections.
         --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled, using the `BackupRetentionPeriod` parameter.
         --preferred-maintenance-window=: The time range each week during which system maintenance can occur.
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --promotion-tier=: The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --storage-encrypted: Specifes whether the DB instance is encrypted.
         --storage-throughput=: The storage throughput value, in mebibyte per second (MiBps), for the DB instance.
         --storage-type=: The storage type to associate with the DB instance.
-        --tags=: Tags to assign to the DB instance.
+        --tags=:
+            description: Tags to assign to the DB instance.
+            nargs: -1
         --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
         --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
         --timezone=: The time zone of the DB instance.
-        --vpc-security-group-ids=: A list of Amazon EC2 VPC security groups to associate with this DB instance.
+        --vpc-security-group-ids=:
+            description: A list of Amazon EC2 VPC security groups to associate with this DB instance.
+            nargs: -1
       completion:
         flag:
             database-insights-mode:
@@ -417,12 +457,16 @@ commands:
         --dedicated-log-volume: Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
         --deletion-protection: Specifies whether to enable deletion protection for the DB instance.
         --domain-auth-secret-arn=: The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
-        --domain-dns-ips=: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+        --domain-dns-ips=:
+            description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+            nargs: -1
         --domain-fqdn=: The fully qualified domain name (FQDN) of an Active Directory domain.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain-ou=: The Active Directory organizational unit for your DB instance to join.
         --domain=: The Active Directory directory ID to create the DB instance in.
-        --enable-cloudwatch-logs-exports=: The list of logs that the new DB instance is to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the new DB instance is to export to CloudWatch Logs.
+            nargs: -1
         --enable-customer-owned-ip: Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts read replica.
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --enable-performance-insights: Specifies whether to enable Performance Insights for the read replica.
@@ -450,7 +494,9 @@ commands:
         --performance-insights-retention-period=: The number of days to retain Performance Insights data.
         --port=: The port number that the DB instance uses for connections.
         --pre-signed-url=: When you are creating a read replica from one Amazon Web Services GovCloud (US) Region to another or from one China Amazon Web Services Region to another, the URL that contains a Signature Version 4 signed request for the `CreateDBInstanceReadReplica` API operation in the source Amazon Web Services Region that contains the source DB instance.
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --replica-mode=: The open mode of the replica database.
         --source-db-cluster-identifier=: The identifier of the Multi-AZ DB cluster that will act as the source for the read replica.
@@ -458,10 +504,13 @@ commands:
         --source-region=: The ID of the region that contains the source for the read replica
         --storage-throughput=: Specifies the storage throughput value for the read replica.
         --storage-type=: The storage type to associate with the read replica.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --upgrade-storage-config: Whether to upgrade the storage file system configuration on the read replica.
         --use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
-        --vpc-security-group-ids=: A list of Amazon EC2 VPC security groups to associate with the read replica.
+        --vpc-security-group-ids=:
+            description: A list of Amazon EC2 VPC security groups to associate with the read replica.
+            nargs: -1
       completion:
         flag:
             database-insights-mode:
@@ -479,11 +528,15 @@ commands:
         --db-parameter-group-name=!: The name of the DB parameter group.
         --description=!: The description for the DB parameter group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Tags to assign to the DB parameter group.
+        --tags=:
+            description: Tags to assign to the DB parameter group.
+            nargs: -1
     - name: create-db-proxy
       description: Creates a new DB proxy.
       flags:
-        --auth=: The authorization mechanism that the proxy uses.
+        --auth=:
+            description: The authorization mechanism that the proxy uses.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-name=!: The identifier for the proxy.
@@ -497,10 +550,16 @@ commands:
         --no-require-tls: Specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
         --require-tls: Specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
         --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in Amazon Web Services Secrets Manager.
-        --tags=: An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.
+        --tags=:
+            description: An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.
+            nargs: -1
         --target-connection-network-type=: The network type that the proxy uses to connect to the target database.
-        --vpc-security-group-ids=: One or more VPC security group IDs to associate with the new proxy.
-        --vpc-subnet-ids=!: One or more VPC subnet IDs to associate with the new proxy.
+        --vpc-security-group-ids=:
+            description: One or more VPC security group IDs to associate with the new proxy.
+            nargs: -1
+        --vpc-subnet-ids=!:
+            description: One or more VPC subnet IDs to associate with the new proxy.
+            nargs: -1
       completion:
         flag:
             default-auth-scheme:
@@ -526,10 +585,15 @@ commands:
         --db-proxy-name=!: The name of the DB proxy associated with the DB proxy endpoint that you create.
         --endpoint-network-type=: The network type of the DB proxy endpoint.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-role=: The role of the DB proxy endpoint.
-        --vpc-security-group-ids=: The VPC security group IDs for the DB proxy endpoint that you create.
-        --vpc-subnet-ids=!: The VPC subnet IDs for the DB proxy endpoint that you create.
+        --vpc-security-group-ids=:
+            description: The VPC security group IDs for the DB proxy endpoint that you create.
+            nargs: -1
+        --vpc-subnet-ids=!:
+            description: The VPC subnet IDs for the DB proxy endpoint that you create.
+            nargs: -1
       completion:
         flag:
             endpoint-network-type:
@@ -547,7 +611,9 @@ commands:
         --db-security-group-description=!: The description for the DB security group.
         --db-security-group-name=!: The name for the DB security group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: Tags to assign to the DB security group.
+        --tags=:
+            description: Tags to assign to the DB security group.
+            nargs: -1
     - name: create-db-shard-group
       description: Creates a new DB shard group for Aurora Limitless Database.
       flags:
@@ -561,7 +627,8 @@ commands:
         --min-acu=: The minimum capacity of the DB shard group in Aurora capacity units (ACUs).
         --no-publicly-accessible: Specifies whether the DB shard group is publicly accessible.
         --publicly-accessible: Specifies whether the DB shard group is publicly accessible.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: create-db-snapshot
       description: Creates a snapshot of a DB instance.
       flags:
@@ -570,7 +637,8 @@ commands:
         --db-instance-identifier=!: The identifier of the DB instance that you want to create the snapshot of.
         --db-snapshot-identifier=!: The identifier for the DB snapshot.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: create-db-subnet-group
       description: Creates a new DB subnet group.
       flags:
@@ -579,22 +647,31 @@ commands:
         --db-subnet-group-description=!: The description for the DB subnet group.
         --db-subnet-group-name=!: The name for the DB subnet group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: The EC2 Subnet IDs for the DB subnet group.
-        --tags=: Tags to assign to the DB subnet group.
+        --subnet-ids=!:
+            description: The EC2 Subnet IDs for the DB subnet group.
+            nargs: -1
+        --tags=:
+            description: Tags to assign to the DB subnet group.
+            nargs: -1
     - name: create-event-subscription
       description: Creates an RDS event notification subscription.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --enabled: Specifies whether to activate the subscription.
-        --event-categories=: A list of event categories for a particular source type (`SourceType`) that you want to subscribe to.
+        --event-categories=:
+            description: A list of event categories for a particular source type (`SourceType`) that you want to subscribe to.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-enabled: Specifies whether to activate the subscription.
         --sns-topic-arn=!: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
-        --source-ids=: The list of identifiers of the event sources for which events are returned.
+        --source-ids=:
+            description: The list of identifiers of the event sources for which events are returned.
+            nargs: -1
         --source-type=: The type of source that is generating the events.
         --subscription-name=!: The name of the subscription.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: create-global-cluster
       description: Creates an Aurora global database spread across multiple Amazon Web Services Regions.
       flags:
@@ -611,7 +688,9 @@ commands:
         --no-storage-encrypted: Specifies whether to enable storage encryption for the new global database cluster.
         --source-db-cluster-identifier=: The Amazon Resource Name (ARN) to use as the primary cluster of the global database.
         --storage-encrypted: Specifies whether to enable storage encryption for the new global database cluster.
-        --tags=: Tags to assign to the global cluster.
+        --tags=:
+            description: Tags to assign to the global cluster.
+            nargs: -1
     - name: create-integration
       description: Creates a zero-ETL integration with Amazon Redshift.
       flags:
@@ -624,7 +703,8 @@ commands:
         --integration-name=!: The name of the integration.
         --kms-key-id=: The Amazon Web Services Key Management System (Amazon Web Services KMS) key identifier for the key to use to encrypt the integration.
         --source-arn=!: The Amazon Resource Name (ARN) of the database to use as the source for replication.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-arn=!: The ARN of the Redshift data warehouse to use as the target for replication.
     - name: create-option-group
       description: Creates a new option group.
@@ -636,7 +716,9 @@ commands:
         --major-engine-version=!: Specifies the major version of the engine that this option group should be associated with.
         --option-group-description=!: The description of the option group.
         --option-group-name=!: Specifies the name of the option group to be created.
-        --tags=: Tags to assign to the option group.
+        --tags=:
+            description: Tags to assign to the option group.
+            nargs: -1
     - name: create-tenant-database
       description: Creates a tenant database in a DB instance that uses the multi-tenant configuration.
       flags:
@@ -651,7 +733,8 @@ commands:
         --master-username=!: The name for the master user account in your tenant database.
         --nchar-character-set-name=: The `NCHAR` value for the tenant database.
         --no-manage-master-user-password: Specifies whether to manage the master user password with Amazon Web Services Secrets Manager.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --tenant-db-name=!: The user-supplied name of the tenant database that you want to create in your DB instance.
     - name: delete-blue-green-deployment
       description: Deletes a blue/green deployment.
@@ -823,8 +906,12 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifiers=: One or more DB cluster identifiers.
-        --db-instance-identifiers=: One or more DB instance identifiers.
+        --db-cluster-identifiers=:
+            description: One or more DB cluster identifiers.
+            nargs: -1
+        --db-instance-identifiers=:
+            description: One or more DB instance identifiers.
+            nargs: -1
         --db-proxy-name=!: The identifier of the `DBProxy` that is associated with the `DBProxyTargetGroup`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-group-name=: The identifier of the `DBProxyTargetGroup`.
@@ -840,7 +927,9 @@ commands:
         --blue-green-deployment-identifier=: The blue/green deployment identifier.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more blue/green deployments to describe.
+        --filters=:
+            description: A filter that specifies one or more blue/green deployments to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeBlueGreenDeployments` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -853,7 +942,9 @@ commands:
         --certificate-identifier=: The user-supplied certificate identifier.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeCertificates` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -867,7 +958,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=: (Optional) The user-supplied DB cluster identifier.
         --db-cluster-resource-id=: The resource ID of the DB cluster that is the source of the automated backup.
-        --filters=: A filter that specifies which resources to return based on status.
+        --filters=:
+            description: A filter that specifies which resources to return based on status.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: The pagination token provided in the previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -881,7 +974,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=!: The DB cluster identifier of the DB cluster to be described.
-        --filters=: A filter that specifies one or more DB clusters to describe.
+        --filters=:
+            description: A filter that specifies one or more DB clusters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBClusterBacktracks` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -895,7 +990,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-endpoint-identifier=: The identifier of the endpoint to describe.
         --db-cluster-identifier=: The DB cluster identifier of the DB cluster associated with the endpoint.
-        --filters=: A set of name-value pairs that define which endpoints to include in the output.
+        --filters=:
+            description: A set of name-value pairs that define which endpoints to include in the output.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBClusterEndpoints` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -908,7 +1005,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-parameter-group-name=: The name of a specific DB cluster parameter group to return details for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameterGroups` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -921,7 +1020,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-parameter-group-name=!: The name of a specific DB cluster parameter group to return parameter details for.
-        --filters=: A filter that specifies one or more DB cluster parameters to describe.
+        --filters=:
+            description: A filter that specifies one or more DB cluster parameters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBClusterParameters` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -944,7 +1045,9 @@ commands:
         --db-cluster-identifier=: The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
         --db-cluster-resource-id=: A specific DB cluster resource ID to describe.
         --db-cluster-snapshot-identifier=: A specific DB cluster snapshot identifier to describe.
-        --filters=: A filter that specifies one or more DB cluster snapshots to describe.
+        --filters=:
+            description: A filter that specifies one or more DB cluster snapshots to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
         --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -962,7 +1065,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-identifier=: The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the DB cluster.
-        --filters=: A filter that specifies one or more DB clusters to describe.
+        --filters=:
+            description: A filter that specifies one or more DB clusters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-shared: Specifies whether the output includes information about clusters shared from other Amazon Web Services accounts.
         --marker=: An optional pagination token provided by a previous `DescribeDBClusters` request.
@@ -980,7 +1085,9 @@ commands:
         --default-only: Specifies whether to return only the default version of the specified engine or the engine and major version combination.
         --engine-version=: A specific database engine version to return details for.
         --engine=: The database engine to return version details for.
-        --filters=: A filter that specifies one or more DB engine versions to describe.
+        --filters=:
+            description: A filter that specifies one or more DB engine versions to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-all: Specifies whether to also list the engine versions that aren't available.
         --list-supported-character-sets: Specifies whether to list the supported character sets for each engine version.
@@ -1002,7 +1109,9 @@ commands:
         --db-instance-automated-backups-arn=: The Amazon Resource Name (ARN) of the replicated automated backups, for example, `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
         --db-instance-identifier=: (Optional) The user-supplied instance identifier.
         --dbi-resource-id=: The resource ID of the DB instance that is the source of the automated backup.
-        --filters=: A filter that specifies which resources to return based on status.
+        --filters=:
+            description: A filter that specifies which resources to return based on status.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: The pagination token provided in the previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1015,7 +1124,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-instance-identifier=: The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance.
-        --filters=: A filter that specifies one or more DB instances to describe.
+        --filters=:
+            description: A filter that specifies one or more DB instances to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1031,7 +1142,9 @@ commands:
         --file-last-written=: Filters the available log files for files written since the specified date, in POSIX timestamp format with milliseconds.
         --file-size=: Filters the available log files for files larger than the specified size.
         --filename-contains=: Filters the available log files for log file names that contain the specified string.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: The pagination token provided in the previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1057,7 +1170,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-parameter-group-name=: The name of a specific DB parameter group to return details for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBParameterGroups` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1070,7 +1185,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-parameter-group-name=!: The name of a specific DB parameter group to return details for.
-        --filters=: A filter that specifies one or more DB parameters to describe.
+        --filters=:
+            description: A filter that specifies one or more DB parameters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBParameters` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1084,7 +1201,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-name=: The name of the DB proxy.
-        --filters=: This parameter is not currently supported.
+        --filters=:
+            description: This parameter is not currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1098,7 +1217,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-endpoint-name=: The name of a DB proxy endpoint to describe.
         --db-proxy-name=: The name of the DB proxy whose endpoints you want to describe.
-        --filters=: This parameter is not currently supported.
+        --filters=:
+            description: This parameter is not currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1111,7 +1232,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-name=!: The identifier of the `DBProxy` associated with the target group.
-        --filters=: This parameter is not currently supported.
+        --filters=:
+            description: This parameter is not currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1125,7 +1248,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-name=!: The identifier of the `DBProxyTarget` to describe.
-        --filters=: This parameter is not currently supported.
+        --filters=:
+            description: This parameter is not currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1138,7 +1263,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more recommendations to describe.
+        --filters=:
+            description: A filter that specifies one or more recommendations to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --last-updated-after=: A filter to include only the recommendations that were updated after this specified time.
         --last-updated-before=: A filter to include only the recommendations that were updated before this specified time.
@@ -1154,7 +1281,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-security-group-name=: The name of the DB security group to return details for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBSecurityGroups` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1167,7 +1296,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-shard-group-identifier=: The user-supplied DB shard group identifier.
-        --filters=: A filter that specifies one or more DB shard groups to describe.
+        --filters=:
+            description: A filter that specifies one or more DB shard groups to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBShardGroups` request.
         --max-records=: The maximum number of records to include in the response.
@@ -1186,7 +1317,9 @@ commands:
         --db-instance-identifier=: The ID of the DB instance used to create the DB snapshots.
         --db-snapshot-identifier=: The ID of a DB snapshot that contains the tenant databases to describe.
         --dbi-resource-id=: A specific DB resource identifier to describe.
-        --filters=: A filter that specifies one or more tenant databases to describe.
+        --filters=:
+            description: A filter that specifies one or more tenant databases to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeDBSnapshotTenantDatabases` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1202,7 +1335,9 @@ commands:
         --db-instance-identifier=: The ID of the DB instance to retrieve the list of DB snapshots for.
         --db-snapshot-identifier=: A specific DB snapshot identifier to describe.
         --dbi-resource-id=: A specific DB resource ID to describe.
-        --filters=: A filter that specifies one or more DB snapshots to describe.
+        --filters=:
+            description: A filter that specifies one or more DB snapshots to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
         --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -1220,7 +1355,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-subnet-group-name=: The name of the DB subnet group to return details for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous DescribeDBSubnetGroups request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1233,7 +1370,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-parameter-group-family=!: The name of the DB cluster parameter group family to return engine parameter information for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultClusterParameters` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1246,7 +1385,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-parameter-group-family=!: The name of the DB parameter group family.
-        --filters=: A filter that specifies one or more parameters to describe.
+        --filters=:
+            description: A filter that specifies one or more parameters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeEngineDefaultParameters` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1258,7 +1399,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-type=: The type of source that is generating the events.
     - name: describe-event-subscriptions
@@ -1266,7 +1409,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1281,8 +1426,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --duration=: The number of minutes to retrieve events for.
         --end-time=: The end of the time interval for which to retrieve events, specified in ISO 8601 format.
-        --event-categories=: A list of event categories that trigger notifications for a event notification subscription.
-        --filters=: This parameter isn't currently supported.
+        --event-categories=:
+            description: A list of event categories that trigger notifications for a event notification subscription.
+            nargs: -1
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous DescribeEvents request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1312,7 +1461,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --export-task-identifier=: The identifier of the snapshot or cluster export task to be described.
-        --filters=: Filters specify one or more snapshot or cluster exports to describe.
+        --filters=:
+            description: Filters specify one or more snapshot or cluster exports to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeExportTasks` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1331,7 +1482,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more global database clusters to describe.
+        --filters=:
+            description: A filter that specifies one or more global database clusters to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-cluster-identifier=: The user-supplied DB cluster identifier.
         --marker=: An optional pagination token provided by a previous `DescribeGlobalClusters` request.
@@ -1344,7 +1497,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more resources to return.
+        --filters=:
+            description: A filter that specifies one or more resources to return.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --integration-identifier=: The unique identifier of the integration.
         --marker=: An optional pagination token provided by a previous `DescribeIntegrations` request.
@@ -1358,7 +1513,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --engine-name=!: The name of the engine to describe options for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --major-engine-version=: If specified, filters the results to include only options for the specified major engine version.
         --marker=: An optional pagination token provided by a previous request.
@@ -1372,7 +1529,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --engine-name=: A filter to only include option groups associated with this database engine.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --major-engine-version=: Filters the list of option groups to only include groups associated with a specific database engine version.
         --marker=: An optional pagination token provided by a previous DescribeOptionGroups request.
@@ -1390,7 +1549,9 @@ commands:
         --db-instance-class=: A filter to include only the available options for the specified DB instance class.
         --engine-version=: A filter to include only the available options for the specified engine version.
         --engine=!: The name of the database engine to describe DB instance options for.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --license-model=: A filter to include only the available options for the specified license model.
         --marker=: An optional pagination token provided by a previous DescribeOrderableDBInstanceOptions request.
@@ -1405,7 +1566,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: A filter that specifies one or more resources to return pending maintenance actions for.
+        --filters=:
+            description: A filter that specifies one or more resources to return pending maintenance actions for.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribePendingMaintenanceActions` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1420,7 +1583,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-instance-class=: The DB instance class filter value.
         --duration=: The duration filter value, specified in years or seconds.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lease-id=: The lease identifier filter value.
         --marker=: An optional pagination token provided by a previous request.
@@ -1441,7 +1606,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-instance-class=: The DB instance class filter value.
         --duration=: Duration filter value, specified in years or seconds.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1458,7 +1625,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeSourceRegions` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1472,7 +1641,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-instance-identifier=: The user-supplied DB instance identifier, which must match the identifier of an existing instance owned by the Amazon Web Services account.
-        --filters=: A filter that specifies one or more database tenants to describe.
+        --filters=:
+            description: A filter that specifies one or more database tenants to describe.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: An optional pagination token provided by a previous `DescribeTenantDatabases` request.
         --max-items=: The  total number of items to return in the command's output.
@@ -1545,7 +1716,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --filters=: This parameter isn't currently supported.
+        --filters=:
+            description: This parameter isn't currently supported.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The Amazon RDS resource with tags to be listed.
     - name: modify-activity-stream
@@ -1662,7 +1835,9 @@ commands:
         --scaling-configuration=: The scaling properties of the DB cluster.
         --serverless-v2-scaling-configuration=: ""
         --storage-type=: The storage type to associate with the DB cluster.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB cluster.
+        --vpc-security-group-ids=:
+            description: A list of EC2 VPC security groups to associate with this DB cluster.
+            nargs: -1
       completion:
         flag:
             database-insights-mode:
@@ -1678,9 +1853,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-endpoint-identifier=!: The identifier of the endpoint to modify.
         --endpoint-type=: The type of the endpoint.
-        --excluded-members=: List of DB instance identifiers that aren't part of the custom endpoint group.
+        --excluded-members=:
+            description: List of DB instance identifiers that aren't part of the custom endpoint group.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --static-members=: List of DB instance identifiers that are part of the custom endpoint group.
+        --static-members=:
+            description: List of DB instance identifiers that are part of the custom endpoint group.
+            nargs: -1
     - name: modify-db-cluster-parameter-group
       description: Modifies the parameters of a DB cluster parameter group.
       flags:
@@ -1688,7 +1867,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to modify.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=!: A list of parameters in the DB cluster parameter group to modify.
+        --parameters=!:
+            description: A list of parameters in the DB cluster parameter group to modify.
+            nargs: -1
     - name: modify-db-cluster-snapshot-attribute
       description: Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.
       flags:
@@ -1697,8 +1878,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-snapshot-identifier=!: The identifier for the DB cluster snapshot to modify the attributes for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --values-to-add=: A list of DB cluster snapshot attributes to add to the attribute specified by `AttributeName`.
-        --values-to-remove=: A list of DB cluster snapshot attributes to remove from the attribute specified by `AttributeName`.
+        --values-to-add=:
+            description: A list of DB cluster snapshot attributes to add to the attribute specified by `AttributeName`.
+            nargs: -1
+        --values-to-remove=:
+            description: A list of DB cluster snapshot attributes to remove from the attribute specified by `AttributeName`.
+            nargs: -1
     - name: modify-db-instance
       description: Modifies settings for a DB instance.
       flags:
@@ -1720,13 +1905,17 @@ commands:
         --db-instance-identifier=!: The identifier of DB instance to modify.
         --db-parameter-group-name=: The name of the DB parameter group to apply to the DB instance.
         --db-port-number=: The port number on which the database accepts connections.
-        --db-security-groups=: A list of DB security groups to authorize on this DB instance.
+        --db-security-groups=:
+            description: A list of DB security groups to authorize on this DB instance.
+            nargs: -1
         --db-subnet-group-name=: The new DB subnet group for the DB instance.
         --dedicated-log-volume: Indicates whether the DB instance has a dedicated log volume (DLV) enabled.
         --deletion-protection: Specifies whether the DB instance has deletion protection enabled.
         --disable-domain: Specifies whether to remove the DB instance from the Active Directory domain.
         --domain-auth-secret-arn=: The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
-        --domain-dns-ips=: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+        --domain-dns-ips=:
+            description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+            nargs: -1
         --domain-fqdn=: The fully qualified domain name (FQDN) of an Active Directory domain.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain-ou=: The Active Directory organizational unit for your DB instance to join.
@@ -1772,7 +1961,9 @@ commands:
         --performance-insights-retention-period=: The number of days to retain Performance Insights data.
         --preferred-backup-window=: The daily time range during which automated backups are created if automated backups are enabled, as determined by the `BackupRetentionPeriod` parameter.
         --preferred-maintenance-window=: The weekly time range during which system maintenance can occur, which might result in an outage.
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --promotion-tier=: The order of priority in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --replica-mode=: The open mode of a replica database.
@@ -1783,7 +1974,9 @@ commands:
         --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
         --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
         --use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
-        --vpc-security-group-ids=: A list of Amazon EC2 VPC security groups to associate with this DB instance.
+        --vpc-security-group-ids=:
+            description: A list of Amazon EC2 VPC security groups to associate with this DB instance.
+            nargs: -1
       completion:
         flag:
             automation-mode:
@@ -1805,11 +1998,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-parameter-group-name=!: The name of the DB parameter group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --parameters=!: An array of parameter names, values, and the application methods for the parameter update.
+        --parameters=!:
+            description: An array of parameter names, values, and the application methods for the parameter update.
+            nargs: -1
     - name: modify-db-proxy
       description: Changes the settings for an existing DB proxy.
       flags:
-        --auth=: The new authentication settings for the `DBProxy`.
+        --auth=:
+            description: The new authentication settings for the `DBProxy`.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-proxy-name=!: The identifier for the `DBProxy` to modify.
@@ -1822,7 +2019,9 @@ commands:
         --no-require-tls: Whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
         --require-tls: Whether Transport Layer Security (TLS) encryption is required for connections to the proxy.
         --role-arn=: The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in Amazon Web Services Secrets Manager.
-        --security-groups=: The new list of security groups for the `DBProxy`.
+        --security-groups=:
+            description: The new list of security groups for the `DBProxy`.
+            nargs: -1
       completion:
         flag:
             default-auth-scheme:
@@ -1836,7 +2035,9 @@ commands:
         --db-proxy-endpoint-name=!: The name of the DB proxy sociated with the DB proxy endpoint that you want to modify.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --new-db-proxy-endpoint-name=: The new identifier for the `DBProxyEndpoint`.
-        --vpc-security-group-ids=: The VPC security group IDs for the DB proxy endpoint.
+        --vpc-security-group-ids=:
+            description: The VPC security group IDs for the DB proxy endpoint.
+            nargs: -1
     - name: modify-db-proxy-target-group
       description: Modifies the properties of a `DBProxyTargetGroup`.
       flags:
@@ -1855,7 +2056,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --locale=: The language of the modified recommendation.
         --recommendation-id=!: The identifier of the recommendation to update.
-        --recommended-action-updates=: The list of recommended action status to update.
+        --recommended-action-updates=:
+            description: The list of recommended action status to update.
+            nargs: -1
         --status=: The recommendation status to update.
     - name: modify-db-shard-group
       description: Modifies the settings of an Aurora Limitless Database DB shard group.
@@ -1884,8 +2087,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-snapshot-identifier=!: The identifier for the DB snapshot to modify the attributes for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --values-to-add=: A list of DB snapshot attributes to add to the attribute specified by `AttributeName`.
-        --values-to-remove=: A list of DB snapshot attributes to remove from the attribute specified by `AttributeName`.
+        --values-to-add=:
+            description: A list of DB snapshot attributes to add to the attribute specified by `AttributeName`.
+            nargs: -1
+        --values-to-remove=:
+            description: A list of DB snapshot attributes to remove from the attribute specified by `AttributeName`.
+            nargs: -1
     - name: modify-db-subnet-group
       description: Modifies an existing DB subnet group.
       flags:
@@ -1894,14 +2101,18 @@ commands:
         --db-subnet-group-description=: The description for the DB subnet group.
         --db-subnet-group-name=!: The name for the DB subnet group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --subnet-ids=!: The EC2 subnet IDs for the DB subnet group.
+        --subnet-ids=!:
+            description: The EC2 subnet IDs for the DB subnet group.
+            nargs: -1
     - name: modify-event-subscription
       description: Modifies an existing RDS event notification subscription.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --enabled: Specifies whether to activate the subscription.
-        --event-categories=: A list of event categories for a source type (`SourceType`) that you want to subscribe to.
+        --event-categories=:
+            description: A list of event categories for a source type (`SourceType`) that you want to subscribe to.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-enabled: Specifies whether to activate the subscription.
         --sns-topic-arn=: The Amazon Resource Name (ARN) of the SNS topic created for event notification.
@@ -1970,7 +2181,8 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --reserved-db-instance-id=: Customer-specified identifier to track this reservation.
         --reserved-db-instances-offering-id=!: The ID of the Reserved DB instance offering to purchase.
-        --tags=: ""
+        --tags=:
+            nargs: -1
     - name: reboot-db-cluster
       description: You might need to reboot your DB cluster, usually for maintenance reasons.
       flags:
@@ -1999,8 +2211,12 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --db-cluster-identifiers=: One or more DB cluster identifiers.
-        --db-instance-identifiers=: One or more DB instance identifiers.
+        --db-cluster-identifiers=:
+            description: One or more DB cluster identifiers.
+            nargs: -1
+        --db-instance-identifiers=:
+            description: One or more DB instance identifiers.
+            nargs: -1
         --db-proxy-name=!: The identifier of the `DBProxy` that is associated with the `DBProxyTargetGroup`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-group-name=: The identifier of the `DBProxyTargetGroup`.
@@ -2057,7 +2273,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-name=!: The Amazon RDS resource that the tags are removed from.
-        --tag-keys=!: The tag key (name) of the tag to be removed.
+        --tag-keys=!:
+            description: The tag key (name) of the tag to be removed.
+            nargs: -1
     - name: reset-db-cluster-parameter-group
       description: Modifies the parameters of a DB cluster parameter group to the default value.
       flags:
@@ -2066,7 +2284,9 @@ commands:
         --db-cluster-parameter-group-name=!: The name of the DB cluster parameter group to reset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-reset-all-parameters: Specifies whether to reset all parameters in the DB cluster parameter group to their default values.
-        --parameters=: A list of parameter names in the DB cluster parameter group to reset to the default values.
+        --parameters=:
+            description: A list of parameter names in the DB cluster parameter group to reset to the default values.
+            nargs: -1
         --reset-all-parameters: Specifies whether to reset all parameters in the DB cluster parameter group to their default values.
     - name: reset-db-parameter-group
       description: Modifies the parameters of a DB parameter group to the engine/system default value.
@@ -2076,12 +2296,16 @@ commands:
         --db-parameter-group-name=!: The name of the DB parameter group.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-reset-all-parameters: Specifies whether to reset all parameters in the DB parameter group to default values.
-        --parameters=: To reset the entire DB parameter group, specify the `DBParameterGroup` name and `ResetAllParameters` parameters.
+        --parameters=:
+            description: To reset the entire DB parameter group, specify the `DBParameterGroup` name and `ResetAllParameters` parameters.
+            nargs: -1
         --reset-all-parameters: Specifies whether to reset all parameters in the DB parameter group to default values.
     - name: restore-db-cluster-from-s3
       description: Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3 bucket.
       flags:
-        --availability-zones=: A list of Availability Zones (AZs) where instances in the restored DB cluster can be created.
+        --availability-zones=:
+            description: A list of Availability Zones (AZs) where instances in the restored DB cluster can be created.
+            nargs: -1
         --backtrack-window=: The target backtrack window, in seconds.
         --backup-retention-period=: The number of days for which automated backups of the restored DB cluster are retained.
         --character-set-name=: A value that indicates that the restored DB cluster should be associated with the specified CharacterSet.
@@ -2095,7 +2319,9 @@ commands:
         --deletion-protection: Specifies whether to enable deletion protection for the DB cluster.
         --domain-iam-role-name=: Specify the name of the IAM role to be used when making API calls to the Directory Service.
         --domain=: Specify the Active Directory directory ID to restore the DB cluster in.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+            nargs: -1
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --engine-lifecycle-support=: The life cycle type for this DB cluster.
         --engine-version=: The version number of the database engine to use.
@@ -2124,12 +2350,17 @@ commands:
         --source-engine=!: The identifier for the database engine that was backed up to create the files stored in the Amazon S3 bucket.
         --storage-encrypted: Specifies whether the restored DB cluster is encrypted.
         --storage-type=: Specifies the storage type to be associated with the DB cluster.
-        --tags=: ""
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with the restored DB cluster.
+        --tags=:
+            nargs: -1
+        --vpc-security-group-ids=:
+            description: A list of EC2 VPC security groups to associate with the restored DB cluster.
+            nargs: -1
     - name: restore-db-cluster-from-snapshot
       description: Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
       flags:
-        --availability-zones=: Provides the list of Availability Zones (AZs) where instances in the restored DB cluster can be created.
+        --availability-zones=:
+            description: Provides the list of Availability Zones (AZs) where instances in the restored DB cluster can be created.
+            nargs: -1
         --backtrack-window=: The target backtrack window, in seconds.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -2142,7 +2373,9 @@ commands:
         --deletion-protection: Specifies whether to enable deletion protection for the DB cluster.
         --domain-iam-role-name=: The name of the IAM role to be used when making API calls to the Directory Service.
         --domain=: The Active Directory directory ID to restore the DB cluster in.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the restored DB cluster is to export to Amazon CloudWatch Logs.
+            nargs: -1
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --enable-performance-insights: Specifies whether to turn on Performance Insights for the DB cluster.
         --engine-lifecycle-support=: The life cycle type for this DB cluster.
@@ -2170,8 +2403,12 @@ commands:
         --serverless-v2-scaling-configuration=: ""
         --snapshot-identifier=!: The identifier for the DB snapshot or DB cluster snapshot to restore from.
         --storage-type=: Specifies the storage type to be associated with the DB cluster.
-        --tags=: The tags to be assigned to the restored DB cluster.
-        --vpc-security-group-ids=: A list of VPC security groups that the new DB cluster will belong to.
+        --tags=:
+            description: The tags to be assigned to the restored DB cluster.
+            nargs: -1
+        --vpc-security-group-ids=:
+            description: A list of VPC security groups that the new DB cluster will belong to.
+            nargs: -1
     - name: restore-db-cluster-to-point-in-time
       description: Restores a DB cluster to an arbitrary point in time.
       flags:
@@ -2186,7 +2423,9 @@ commands:
         --deletion-protection: Specifies whether to enable deletion protection for the DB cluster.
         --domain-iam-role-name=: The name of the IAM role to be used when making API calls to the Directory Service.
         --domain=: The Active Directory directory ID to restore the DB cluster in.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the restored DB cluster is to export to CloudWatch Logs.
+            nargs: -1
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --enable-performance-insights: Specifies whether to turn on Performance Insights for the DB cluster.
         --engine-lifecycle-support=: The life cycle type for this DB cluster.
@@ -2216,9 +2455,12 @@ commands:
         --source-db-cluster-identifier=: The identifier of the source DB cluster from which to restore.
         --source-db-cluster-resource-id=: The resource ID of the source DB cluster from which to restore.
         --storage-type=: Specifies the storage type to be associated with the DB cluster.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --use-latest-restorable-time: Specifies whether to restore the DB cluster to the latest restorable backup time.
-        --vpc-security-group-ids=: A list of VPC security groups that the new DB cluster belongs to.
+        --vpc-security-group-ids=:
+            description: A list of VPC security groups that the new DB cluster belongs to.
+            nargs: -1
     - name: restore-db-instance-from-db-snapshot
       description: Creates a new DB instance from a DB snapshot.
       flags:
@@ -2241,12 +2483,16 @@ commands:
         --dedicated-log-volume: Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
         --deletion-protection: Specifies whether to enable deletion protection for the DB instance.
         --domain-auth-secret-arn=: The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
-        --domain-dns-ips=: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+        --domain-dns-ips=:
+            description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+            nargs: -1
         --domain-fqdn=: The fully qualified domain name (FQDN) of an Active Directory domain.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain-ou=: The Active Directory organizational unit for your DB instance to join.
         --domain=: The Active Directory directory ID to restore the DB instance in.
-        --enable-cloudwatch-logs-exports=: The list of logs for the restored DB instance to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs for the restored DB instance to export to CloudWatch Logs.
+            nargs: -1
         --enable-customer-owned-ip: Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --engine-lifecycle-support=: The life cycle type for this DB instance.
@@ -2270,15 +2516,20 @@ commands:
         --no-use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
         --option-group-name=: The name of the option group to be used for the restored DB instance.
         --port=: The port number on which the database accepts connections.
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --storage-throughput=: Specifies the storage throughput value for the DB instance.
         --storage-type=: Specifies the storage type to be associated with the DB instance.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
         --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
         --use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB instance.
+        --vpc-security-group-ids=:
+            description: A list of EC2 VPC security groups to associate with this DB instance.
+            nargs: -1
     - name: restore-db-instance-from-s3
       description: Amazon Relational Database Service (Amazon RDS) supports importing MySQL databases by using backup files.
       flags:
@@ -2295,11 +2546,15 @@ commands:
         --db-instance-identifier=!: The DB instance identifier.
         --db-name=: The name of the database to create when the DB instance is created.
         --db-parameter-group-name=: The name of the DB parameter group to associate with this DB instance.
-        --db-security-groups=: A list of DB security groups to associate with this DB instance.
+        --db-security-groups=:
+            description: A list of DB security groups to associate with this DB instance.
+            nargs: -1
         --db-subnet-group-name=: A DB subnet group to associate with this DB instance.
         --dedicated-log-volume: Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
         --deletion-protection: Specifies whether to enable deletion protection for the DB instance.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+            nargs: -1
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --enable-performance-insights: Specifies whether to enable Performance Insights for the DB instance.
         --engine-lifecycle-support=: The life cycle type for this DB instance.
@@ -2335,7 +2590,9 @@ commands:
         --port=: The port number on which the database accepts connections.
         --preferred-backup-window=: The time range each day during which automated backups are created if automated backups are enabled.
         --preferred-maintenance-window=: The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --s3-bucket-name=!: The name of your Amazon S3 bucket that contains your database backup file.
         --s3-ingestion-role-arn=!: An Amazon Web Services Identity and Access Management (IAM) role with a trust policy and a permissions policy that allows Amazon RDS to access your Amazon S3 bucket.
@@ -2345,9 +2602,13 @@ commands:
         --storage-encrypted: Specifies whether the new DB instance is encrypted or not.
         --storage-throughput=: Specifies the storage throughput value for the DB instance.
         --storage-type=: Specifies the storage type to be associated with the DB instance.
-        --tags=: A list of tags to associate with this DB instance.
+        --tags=:
+            description: A list of tags to associate with this DB instance.
+            nargs: -1
         --use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
-        --vpc-security-group-ids=: A list of VPC security groups to associate with this DB instance.
+        --vpc-security-group-ids=:
+            description: A list of VPC security groups to associate with this DB instance.
+            nargs: -1
       completion:
         flag:
             database-insights-mode:
@@ -2372,12 +2633,16 @@ commands:
         --dedicated-log-volume: Specifies whether to enable a dedicated log volume (DLV) for the DB instance.
         --deletion-protection: Specifies whether the DB instance has deletion protection enabled.
         --domain-auth-secret-arn=: The ARN for the Secrets Manager secret with the credentials for the user joining the domain.
-        --domain-dns-ips=: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+        --domain-dns-ips=:
+            description: The IPv4 DNS IP addresses of your primary and secondary Active Directory domain controllers.
+            nargs: -1
         --domain-fqdn=: The fully qualified domain name (FQDN) of an Active Directory domain.
         --domain-iam-role-name=: The name of the IAM role to use when making API calls to the Directory Service.
         --domain-ou=: The Active Directory organizational unit for your DB instance to join.
         --domain=: The Active Directory directory ID to restore the DB instance in.
-        --enable-cloudwatch-logs-exports=: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+        --enable-cloudwatch-logs-exports=:
+            description: The list of logs that the restored DB instance is to export to CloudWatch Logs.
+            nargs: -1
         --enable-customer-owned-ip: Specifies whether to enable a customer-owned IP address (CoIP) for an RDS on Outposts DB instance.
         --enable-iam-database-authentication: Specifies whether to enable mapping of Amazon Web Services Identity and Access Management (IAM) accounts to database accounts.
         --engine-lifecycle-support=: The life cycle type for this DB instance.
@@ -2403,7 +2668,9 @@ commands:
         --no-use-latest-restorable-time: Specifies whether the DB instance is restored from the latest backup time.
         --option-group-name=: The name of the option group to use for the restored DB instance.
         --port=: The port number on which the database accepts connections.
-        --processor-features=: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+        --processor-features=:
+            description: The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.
+            nargs: -1
         --publicly-accessible: Specifies whether the DB instance is publicly accessible.
         --restore-time=: The date and time to restore from.
         --source-db-instance-automated-backups-arn=: The Amazon Resource Name (ARN) of the replicated automated backups from which to restore, for example, `arn:aws:rds:us-east-1:123456789012:auto-backup:ab-L2IJCEXJP7XQ7HOJ4SIEXAMPLE`.
@@ -2411,13 +2678,16 @@ commands:
         --source-dbi-resource-id=: The resource ID of the source DB instance from which to restore.
         --storage-throughput=: The storage throughput value for the DB instance.
         --storage-type=: The storage type to associate with the DB instance.
-        --tags=: ""
+        --tags=:
+            nargs: -1
         --target-db-instance-identifier=!: The name of the new DB instance to create.
         --tde-credential-arn=: The ARN from the key store with which to associate the instance for TDE encryption.
         --tde-credential-password=: The password for the given ARN from the key store in order to access the device.
         --use-default-processor-features: Specifies whether the DB instance class of the DB instance uses its default processor features.
         --use-latest-restorable-time: Specifies whether the DB instance is restored from the latest backup time.
-        --vpc-security-group-ids=: A list of EC2 VPC security groups to associate with this DB instance.
+        --vpc-security-group-ids=:
+            description: A list of EC2 VPC security groups to associate with this DB instance.
+            nargs: -1
     - name: revoke-db-security-group-ingress
       description: Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or EC2 or VPC security groups.
       flags:
@@ -2477,7 +2747,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --export-only=: The data to be exported from the snapshot or cluster.
+        --export-only=:
+            description: The data to be exported from the snapshot or cluster.
+            nargs: -1
         --export-task-identifier=!: A unique identifier for the export task.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --iam-role-arn=!: The name of the IAM role to use for writing to the Amazon S3 bucket when exporting a snapshot or cluster.
@@ -2548,7 +2820,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-cluster-identifier=: The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the DB cluster.
-            --filters=: A filter that specifies one or more DB clusters to describe.
+            --filters=:
+                description: A filter that specifies one or more DB clusters to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-shared: Specifies whether the output includes information about clusters shared from other Amazon Web Services accounts.
             --marker=: An optional pagination token provided by a previous `DescribeDBClusters` request.
@@ -2563,7 +2837,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-cluster-identifier=: The user-supplied DB cluster identifier or the Amazon Resource Name (ARN) of the DB cluster.
-            --filters=: A filter that specifies one or more DB clusters to describe.
+            --filters=:
+                description: A filter that specifies one or more DB clusters to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-shared: Specifies whether the output includes information about clusters shared from other Amazon Web Services accounts.
             --marker=: An optional pagination token provided by a previous `DescribeDBClusters` request.
@@ -2580,7 +2856,9 @@ commands:
             --db-cluster-identifier=: The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
             --db-cluster-resource-id=: A specific DB cluster resource ID to describe.
             --db-cluster-snapshot-identifier=: A specific DB cluster snapshot identifier to describe.
-            --filters=: A filter that specifies one or more DB cluster snapshots to describe.
+            --filters=:
+                description: A filter that specifies one or more DB cluster snapshots to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
             --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -2600,7 +2878,9 @@ commands:
             --db-cluster-identifier=: The ID of the DB cluster to retrieve the list of DB cluster snapshots for.
             --db-cluster-resource-id=: A specific DB cluster resource ID to describe.
             --db-cluster-snapshot-identifier=: A specific DB cluster snapshot identifier to describe.
-            --filters=: A filter that specifies one or more DB cluster snapshots to describe.
+            --filters=:
+                description: A filter that specifies one or more DB cluster snapshots to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
             --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -2618,7 +2898,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-instance-identifier=: The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance.
-            --filters=: A filter that specifies one or more DB instances to describe.
+            --filters=:
+                description: A filter that specifies one or more DB instances to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
             --max-items=: The  total number of items to return in the command's output.
@@ -2631,7 +2913,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-instance-identifier=: The user-supplied instance identifier or the Amazon Resource Name (ARN) of the DB instance.
-            --filters=: A filter that specifies one or more DB instances to describe.
+            --filters=:
+                description: A filter that specifies one or more DB instances to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous `DescribeDBInstances` request.
             --max-items=: The  total number of items to return in the command's output.
@@ -2646,7 +2930,9 @@ commands:
             --db-instance-identifier=: The ID of the DB instance to retrieve the list of DB snapshots for.
             --db-snapshot-identifier=: A specific DB snapshot identifier to describe.
             --dbi-resource-id=: A specific DB resource ID to describe.
-            --filters=: A filter that specifies one or more DB snapshots to describe.
+            --filters=:
+                description: A filter that specifies one or more DB snapshots to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
             --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -2666,7 +2952,9 @@ commands:
             --db-instance-identifier=: The ID of the DB instance to retrieve the list of DB snapshots for.
             --db-snapshot-identifier=: A specific DB snapshot identifier to describe.
             --dbi-resource-id=: A specific DB resource ID to describe.
-            --filters=: A filter that specifies one or more DB snapshots to describe.
+            --filters=:
+                description: A filter that specifies one or more DB snapshots to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
             --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -2686,7 +2974,9 @@ commands:
             --db-instance-identifier=: The ID of the DB instance to retrieve the list of DB snapshots for.
             --db-snapshot-identifier=: A specific DB snapshot identifier to describe.
             --dbi-resource-id=: A specific DB resource ID to describe.
-            --filters=: A filter that specifies one or more DB snapshots to describe.
+            --filters=:
+                description: A filter that specifies one or more DB snapshots to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --include-public: Specifies whether to include manual DB cluster snapshots that are public and can be copied or restored by any Amazon Web Services account.
             --include-shared: Specifies whether to include shared manual DB cluster snapshots from other Amazon Web Services accounts that this Amazon Web Services account has been given permission to copy or restore.
@@ -2704,7 +2994,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-instance-identifier=: The user-supplied DB instance identifier, which must match the identifier of an existing instance owned by the Amazon Web Services account.
-            --filters=: A filter that specifies one or more database tenants to describe.
+            --filters=:
+                description: A filter that specifies one or more database tenants to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous `DescribeTenantDatabases` request.
             --max-items=: The  total number of items to return in the command's output.
@@ -2718,7 +3010,9 @@ commands:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --db-instance-identifier=: The user-supplied DB instance identifier, which must match the identifier of an existing instance owned by the Amazon Web Services account.
-            --filters=: A filter that specifies one or more database tenants to describe.
+            --filters=:
+                description: A filter that specifies one or more database tenants to describe.
+                nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: An optional pagination token provided by a previous `DescribeTenantDatabases` request.
             --max-items=: The  total number of items to return in the command's output.
