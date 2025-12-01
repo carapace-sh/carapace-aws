@@ -25,8 +25,8 @@ commands:
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --function-url-auth-type=: The type of authentication that your function URL uses.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
-        --no-invoked-via-function-url: Restricts the `lambda:InvokeFunction` action to function URL calls.
+        --invoked-via-function-url: Indicates whether the permission applies when the function is invoked through a function URL.
+        --no-invoked-via-function-url: Indicates whether the permission applies when the function is invoked through a function URL.
         --principal-org-id=: The identifier for your organization in Organizations.
         --principal=!: The Amazon Web Services service, Amazon Web Services account, IAM user, or IAM role that invokes the function.
         --qualifier=: Specify a version or alias to add permissions to a published version of the function.
@@ -50,6 +50,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
+    - name: create-capacity-provider
+      description: Creates a capacity provider that manages compute resources for Lambda functions
+      flags:
+        --capacity-provider-name=!: The name of the capacity provider.
+        --capacity-provider-scaling-config=: The scaling configuration that defines how the capacity provider scales compute instances, including maximum vCPU count and scaling policies.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-requirements=: The instance requirements that specify the compute instance characteristics, including architectures and allowed or excluded instance types.
+        --kms-key-arn=: The ARN of the KMS key used to encrypt data associated with the capacity provider.
+        --permissions-config=!: The permissions configuration that specifies the IAM role ARN used by the capacity provider to manage compute resources.
+        --tags=: A list of tags to associate with the capacity provider.
+        --vpc-config=!: The VPC configuration for the capacity provider, including subnet IDs and security group IDs where compute instances will be launched.
     - name: create-code-signing-config
       description: Creates a code signing configuration.
       flags:
@@ -115,6 +128,7 @@ commands:
         --architectures=:
             description: The instruction set architecture that the function supports.
             nargs: -1
+        --capacity-provider-config=: Configuration for the capacity provider that manages compute resources for Lambda functions.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=: To enable code signing for this function, specify the ARN of a code-signing configuration.
@@ -139,6 +153,7 @@ commands:
         --no-publish: Set to true to publish the first version of the function during creation.
         --package-type=: The type of deployment package.
         --publish: Set to true to publish the first version of the function during creation.
+        --publish-to=: Specifies where to publish the function version or configuration.
         --role=!: The Amazon Resource Name (ARN) of the function's execution role.
         --runtime=: The identifier of the function's [runtime](https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html). Runtime is required if the deployment package is a .zip file archive.
         --snap-start=: The function's [SnapStart](https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html) setting.
@@ -153,6 +168,8 @@ commands:
             package-type:
                 - Zip
                 - Image
+            publish-to:
+                - LATEST_PUBLISHED
             runtime:
                 - nodejs
                 - nodejs4.3
@@ -225,6 +242,13 @@ commands:
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
+    - name: delete-capacity-provider
+      description: Deletes a capacity provider.
+      flags:
+        --capacity-provider-name=!: The name of the capacity provider to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-code-signing-config
       description: Deletes the code signing configuration.
       flags:
@@ -307,6 +331,13 @@ commands:
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
+    - name: get-capacity-provider
+      description: Retrieves information about a specific capacity provider, including its configuration, state, and associated resources.
+      flags:
+        --capacity-provider-name=!: The name of the capacity provider to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-code-signing-config
       description: Returns information about the specified code signing configuration.
       flags:
@@ -364,8 +395,16 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --function-name=!: ""
+        --function-name=!: The name of the function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-function-scaling-config
+      description: Retrieves the scaling configuration for a Lambda Managed Instances function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=!: Specify a version or alias to get the scaling configuration for a published version of the function.
     - name: get-function-url-config
       description: Returns details about a Lambda function URL.
       flags:
@@ -462,6 +501,24 @@ commands:
         --max-items=: Limit the number of aliases returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-capacity-providers
+      description: Returns a list of capacity providers in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: The maximum number of capacity providers to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Filter capacity providers by their current state.
+      completion:
+        flag:
+            state:
+                - Pending
+                - Active
+                - Failed
+                - Deleting
     - name: list-code-signing-configs
       description: Returns a list of [code signing configurations](https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html). A request returns up to 10,000 configurations per call.
       flags:
@@ -504,6 +561,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
         --max-items=: The maximum number of function URLs to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-function-versions-by-capacity-provider
+      description: Returns a list of function versions that are configured to use a specific capacity provider.
+      flags:
+        --capacity-provider-name=!: The name of the capacity provider to list function versions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Specify the pagination token that's returned by a previous request to retrieve the next page of results.
+        --max-items=: The maximum number of function versions to return in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-functions
@@ -713,7 +781,12 @@ commands:
         --description=: A description for the version to override the description in the function configuration.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --publish-to=: Specifies where to publish the function version or configuration.
         --revision-id=: Only update the function if the revision ID matches the ID that's specified.
+      completion:
+        flag:
+            publish-to:
+                - LATEST_PUBLISHED
     - name: put-function-code-signing-config
       description: Update the code signing configuration for the function.
       flags:
@@ -754,6 +827,15 @@ commands:
             recursive-loop:
                 - Allow
                 - Terminate
+    - name: put-function-scaling-config
+      description: Sets the scaling configuration for a Lambda Managed Instances function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name or ARN of the Lambda function.
+        --function-scaling-config=: The scaling configuration to apply to the function, including minimum and maximum execution environment limits.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --qualifier=!: Specify a version or alias to set the scaling configuration for a published version of the function.
     - name: put-provisioned-concurrency-config
       description: Adds a provisioned concurrency configuration to a function's alias or version.
       flags:
@@ -829,6 +911,14 @@ commands:
         --name=!: The name of the alias.
         --revision-id=: Only update the alias if the revision ID matches the ID that's specified.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
+    - name: update-capacity-provider
+      description: Updates the configuration of an existing capacity provider.
+      flags:
+        --capacity-provider-name=!: The name of the capacity provider to update.
+        --capacity-provider-scaling-config=: The updated scaling configuration for the capacity provider.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-code-signing-config
       description: Update the code signing configuration.
       flags:
@@ -887,15 +977,21 @@ commands:
         --no-dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
         --no-publish: Set to true to publish a new version of the function after updating the code.
         --publish: Set to true to publish a new version of the function after updating the code.
+        --publish-to=: Specifies where to publish the function version or configuration.
         --revision-id=: Update the function only if the revision ID matches the ID that's specified.
         --s3-bucket=: An Amazon S3 bucket in the same Amazon Web Services Region as your function.
         --s3-key=: The Amazon S3 key of the deployment package.
         --s3-object-version=: For versioned objects, the version of the deployment package object to use.
         --source-kms-key-arn=: The ARN of the Key Management Service (KMS) customer managed key that's used to encrypt your function's .zip deployment package.
         --zip-file=: The base64-encoded contents of the deployment package.
+      completion:
+        flag:
+            publish-to:
+                - LATEST_PUBLISHED
     - name: update-function-configuration
       description: Modify the version-specific settings of a Lambda function.
       flags:
+        --capacity-provider-config=: Configuration for the capacity provider that manages compute resources for Lambda functions.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dead-letter-config=: A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.

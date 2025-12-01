@@ -34,6 +34,9 @@ commands:
                 - EMAIL_RESPONSE
                 - EMAIL_OVERVIEW
                 - EMAIL_GENERATIVE_ANSWER
+                - ORCHESTRATION
+                - NOTE_TAKING
+                - CASE_SUMMARIZATION
             visibility-status:
                 - SAVED
                 - PUBLISHED
@@ -91,6 +94,7 @@ commands:
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: The description of the AI Prompt.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-configuration=: The inference configuration for the AI Prompt being created.
         --model-id=!: The identifier of the model used for this AI Prompt.
         --name=!: The name of the AI Prompt.
         --tags=: The tags used to organize, track, or control access for this resource.
@@ -117,6 +121,9 @@ commands:
                 - EMAIL_OVERVIEW
                 - EMAIL_GENERATIVE_ANSWER
                 - EMAIL_QUERY_REFORMULATION
+                - ORCHESTRATION
+                - NOTE_TAKING
+                - CASE_SUMMARIZATION
             visibility-status:
                 - SAVED
                 - PUBLISHED
@@ -161,6 +168,7 @@ commands:
         flag:
             association-type:
                 - KNOWLEDGE_BASE
+                - EXTERNAL_BEDROCK_KNOWLEDGE_BASE
     - name: create-content
       description: Creates Amazon Q in Connect content.
       flags:
@@ -296,6 +304,11 @@ commands:
         --description=: The description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the session.
+        --no-remove-orchestrator-configuration-list: The list of orchestrator configurations to remove from the session.
+        --orchestrator-configuration-list=:
+            description: The list of orchestrator configurations for the session being created.
+            nargs: -1
+        --remove-orchestrator-configuration-list: The list of orchestrator configurations to remove from the session.
         --tag-filter=: An object that can be used to specify Tag conditions.
         --tags=: The tags used to organize, track, or control access for this resource.
     - name: deactivate-message-template
@@ -543,8 +556,28 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return per page.
         --next-chunk-token=: The token for the next set of chunks.
+        --recommendation-type=: The type of recommendation being requested.
         --session-id=!: The identifier of the session.
         --wait-time-seconds=: The duration (in seconds) for which the call waits for a recommendation to be made available before returning.
+      completion:
+        flag:
+            recommendation-type:
+                - KNOWLEDGE_CONTENT
+                - GENERATIVE_RESPONSE
+                - GENERATIVE_ANSWER
+                - DETECTED_INTENT
+                - GENERATIVE_ANSWER_CHUNK
+                - BLOCKED_GENERATIVE_ANSWER_CHUNK
+                - INTENT_ANSWER_CHUNK
+                - BLOCKED_INTENT_ANSWER_CHUNK
+                - EMAIL_RESPONSE_CHUNK
+                - EMAIL_OVERVIEW_CHUNK
+                - EMAIL_GENERATIVE_ANSWER_CHUNK
+                - CASE_SUMMARIZATION_CHUNK
+                - BLOCKED_CASE_SUMMARIZATION_CHUNK
+                - SUGGESTED_MESSAGE
+                - NOTES_CHUNK
+                - BLOCKED_NOTES_CHUNK
     - name: get-session
       description: Retrieves information for a specified session.
       flags:
@@ -754,6 +787,7 @@ commands:
         --assistant-id=!: The identifier of the Amazon Q in Connect assistant.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The filter criteria for listing messages.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per page.
@@ -761,6 +795,11 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --session-id=!: The identifier of the Amazon Q in Connect session.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter:
+                - ALL
+                - TEXT_ONLY
     - name: list-quick-responses
       description: Lists information about quick response.
       flags:
@@ -772,6 +811,19 @@ commands:
         --max-results=: The maximum number of results to return per page.
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-spans
+      description: Retrieves AI agent execution traces for a session, providing granular visibility into agent orchestration flows, LLM interactions, and tool invocations.
+      flags:
+        --assistant-id=!: UUID or ARN of the Connect AI Assistant resource
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of spans to return per page
+        --next-token=: Pagination token for retrieving the next page of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --session-id=!: UUID or ARN of the Connect AI Session resource
         --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Lists the tags for the specified resource.
@@ -838,6 +890,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --orchestrator-use-case=: The orchestrator use case for the AI Agent being removed.
       completion:
         flag:
             ai-agent-type:
@@ -847,6 +900,9 @@ commands:
                 - EMAIL_RESPONSE
                 - EMAIL_OVERVIEW
                 - EMAIL_GENERATIVE_ANSWER
+                - ORCHESTRATION
+                - NOTE_TAKING
+                - CASE_SUMMARIZATION
     - name: remove-knowledge-base-template-uri
       description: Removes a URI template from a knowledge base.
       flags:
@@ -863,6 +919,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The identifier of the knowledge base.
         --message-template-id=!: The identifier of the message template.
+    - name: retrieve
+      description: Retrieves content from knowledge sources based on a query.
+      flags:
+        --assistant-id=!: The identifier of the Amazon Q in Connect assistant for content retrieval.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retrieval-configuration=!: The configuration for the content retrieval operation.
+        --retrieval-query=!: The query for content retrieval.
     - name: search-content
       description: Searches for content in a specified knowledge base.
       flags:
@@ -919,6 +984,7 @@ commands:
     - name: send-message
       description: Submits a message to the Amazon Q in Connect session.
       flags:
+        --ai-agent-id=: The identifier of the AI Agent to use for processing the message.
         --assistant-id=!: The identifier of the Amazon Q in Connect assistant.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -927,6 +993,8 @@ commands:
         --conversation-context=: The conversation context before the Amazon Q in Connect session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --message=!: The message data to submit to the Amazon Q in Connect session.
+        --metadata=: Additional metadata for the message.
+        --orchestrator-use-case=: The orchestrator use case for message processing.
         --session-id=!: The identifier of the Amazon Q in Connect session.
         --type=!: The message type.
       completion:
@@ -1026,6 +1094,7 @@ commands:
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: The description of the Amazon Q in Connect AI Prompt.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-configuration=: The updated inference configuration for the AI Prompt.
         --model-id=: The identifier of the model used for this AI Prompt.
         --template-configuration=: The configuration of the prompt template for this AI Prompt.
         --visibility-status=!: The visibility status of the Amazon Q in Connect AI prompt.
@@ -1043,6 +1112,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration=!: The configuration of the AI Agent being updated for use by default on the Amazon Q in Connect Assistant.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --orchestrator-configuration-list=:
+            description: The updated list of orchestrator configurations for the assistant AI Agent.
+            nargs: -1
       completion:
         flag:
             ai-agent-type:
@@ -1052,6 +1124,9 @@ commands:
                 - EMAIL_RESPONSE
                 - EMAIL_OVERVIEW
                 - EMAIL_GENERATIVE_ANSWER
+                - ORCHESTRATION
+                - NOTE_TAKING
+                - CASE_SUMMARIZATION
     - name: update-content
       description: Updates information about the content.
       flags:
@@ -1133,6 +1208,11 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-remove-orchestrator-configuration-list: The list of orchestrator configurations to remove from the session.
+        --orchestrator-configuration-list=:
+            description: The updated list of orchestrator configurations for the session.
+            nargs: -1
+        --remove-orchestrator-configuration-list: The list of orchestrator configurations to remove from the session.
         --session-id=!: The identifier of the session.
         --tag-filter=: An object that can be used to specify Tag conditions.
     - name: update-session-data

@@ -208,6 +208,23 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --key=!: A valid security key in PEM format as a String.
+    - name: associate-security-profiles
+      description: Associate security profiles with an Entity in an Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-arn=!: Arn of a Q in Connect AI Agent.
+        --entity-type=!: Only supported type is AI\_AGENT.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --security-profiles=!:
+            description: List of Security Profile Object.
+            nargs: -1
+      completion:
+        flag:
+            entity-type:
+                - USER
+                - AI_AGENT
     - name: associate-traffic-distribution-group-user
       description: Associates an agent with a traffic distribution group.
       flags:
@@ -228,6 +245,17 @@ commands:
         --user-proficiencies=!:
             description: The proficiencies to associate with the user.
             nargs: -1
+    - name: associate-workspace
+      description: Associates a workspace with one or more users or routing profiles, allowing them to access the workspace's configured views and pages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --resource-arns=!:
+            description: The Amazon Resource Names (ARNs) of the resources to associate with the workspace.
+            nargs: -1
+        --workspace-id=!: The identifier of the workspace.
     - name: batch-associate-analytics-data-set
       description: Associates a list of analytics datasets for a given Amazon Connect instance to a target account.
       flags:
@@ -239,6 +267,39 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --target-account-id=: The identifier of the target account.
+    - name: batch-create-data-table-value
+      description: Creates values for attributes in a data table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --values=!:
+            description: A list of values to create.
+            nargs: -1
+    - name: batch-delete-data-table-value
+      description: Deletes multiple values from a data table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --values=!:
+            description: A list of value identifiers to delete, each specifying primary values, attribute name, and lock version information.
+            nargs: -1
+    - name: batch-describe-data-table-value
+      description: Retrieves multiple values from a data table without evaluating expressions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --values=!:
+            description: A list of value identifiers to retrieve, each specifying primary values and attribute names.
+            nargs: -1
     - name: batch-disassociate-analytics-data-set
       description: Removes a list of analytics datasets associated with a given Amazon Connect instance.
       flags:
@@ -291,6 +352,17 @@ commands:
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
+    - name: batch-update-data-table-value
+      description: Updates multiple data table values using all properties from BatchCreateDataTableValue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --values=!:
+            description: A list of values to update, each including the current lock version to ensure optimistic locking.
+            nargs: -1
     - name: claim-phone-number
       description: Claims an available phone number to your Amazon Connect instance or traffic distribution group.
       flags:
@@ -449,6 +521,51 @@ commands:
         --instance-id=!: The identifier of the Amazon Connect instance.
         --last-modified-region=: The Amazon Web Services Region where this resource was last modified.
         --last-modified-time=: The Amazon Web Services Region where this resource was last modified.
+    - name: create-data-table
+      description: Creates a new data table with the specified properties.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional description for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance where the data table will be created.
+        --name=!: The name for the data table.
+        --status=!: The status of the data table.
+        --tags=: Key value pairs for attribute based access control (TBAC or ABAC).
+        --time-zone=!: The IANA timezone identifier to use when resolving time based dynamic values.
+        --value-lock-level=!: The data level that concurrent value edits are locked on.
+      completion:
+        flag:
+            status:
+                - PUBLISHED
+            value-lock-level:
+                - NONE
+                - DATA_TABLE
+                - PRIMARY_VALUE
+                - ATTRIBUTE
+                - VALUE
+    - name: create-data-table-attribute
+      description: Adds an attribute to an existing data table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --description=: An optional description for the attribute.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --name=!: The name for the attribute.
+        --no-primary: Optional boolean that defaults to false.
+        --primary: Optional boolean that defaults to false.
+        --validation=: Optional validation rules for the attribute.
+        --value-type=!: The type of value allowed or the resultant type after the value's expression is evaluated.
+      completion:
+        flag:
+            value-type:
+                - TEXT
+                - NUMBER
+                - BOOLEAN
+                - TEXT_LIST
+                - NUMBER_LIST
     - name: create-email-address
       description: Create new email address in the specified Amazon Connect instance.
       flags:
@@ -464,6 +581,7 @@ commands:
     - name: create-evaluation-form
       description: Creates an evaluation form in the specified Amazon Connect instance.
       flags:
+        --as-draft: A boolean flag indicating whether to create evaluation form in draft state.
         --auto-evaluation-configuration=: Configuration information about automated evaluations.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -474,8 +592,11 @@ commands:
         --items=!:
             description: Items that are part of the evaluation form.
             nargs: -1
+        --language-configuration=: Configuration for language settings of the evaluation form.
+        --no-as-draft: A boolean flag indicating whether to create evaluation form in draft state.
         --scoring-strategy=: A scoring strategy of the evaluation form.
         --tags=: The tags used to organize, track, or control access for this resource.
+        --target-configuration=: Configuration that specifies the target for the evaluation form.
         --title=!: A title of the evaluation form.
     - name: create-hours-of-operation
       description: Creates hours of operation.
@@ -557,6 +678,7 @@ commands:
                 - ANALYTICS_CONNECTOR
                 - CALL_TRANSFER_CONNECTOR
                 - COGNITO_USER_POOL
+                - MESSAGE_PROCESSOR
             source-type:
                 - SALESFORCE
                 - ZENDESK
@@ -708,13 +830,17 @@ commands:
       flags:
         --allowed-access-control-hierarchy-group-id=: The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
         --allowed-access-control-tags=: The list of tags that a security profile uses to restrict access to resources in Amazon Connect.
+        --allowed-flow-modules=:
+            description: A list of Flow Modules an AI Agent can invoke as a tool.
+            nargs: -1
         --applications=:
-            description: A list of third-party applications that the security profile will give access to.
+            description: A list of third-party applications or MCP Servers that the security profile will give access to.
             nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the security profile.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granular-access-control-configuration=: The granular access control configuration for the security profile, including data table permissions.
         --hierarchy-restricted-resources=:
             description: The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.
             nargs: -1
@@ -880,6 +1006,30 @@ commands:
                 - pl-PL
                 - sv-SE
                 - tl-PH
+    - name: create-workspace
+      description: Creates a workspace that defines the user experience by mapping views to pages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --name=!: The name of the workspace.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --theme=: The theme configuration for the workspace, including colors and styling.
+        --title=: The title displayed for the workspace.
+    - name: create-workspace-page
+      description: Associates a view with a page in a workspace, defining what users see when they navigate to that page.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data=: A JSON string containing input parameters for the view, validated against the view's input schema.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --page=!: The page identifier.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the view to associate with the page.
+        --slug=: The URL-friendly identifier for the page.
+        --workspace-id=!: The identifier of the workspace.
     - name: deactivate-evaluation-form
       description: Deactivates an evaluation form in the specified Amazon Connect instance.
       flags:
@@ -949,6 +1099,23 @@ commands:
         --contact-flow-version=!: The identifier of the flow version.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
+    - name: delete-data-table
+      description: Deletes a data table and all associated attributes, versions, audits, and values.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+    - name: delete-data-table-attribute
+      description: Deletes an attribute and all its values from a data table.
+      flags:
+        --attribute-name=!: The name of the attribute to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
     - name: delete-email-address
       description: Deletes email address from the specified Amazon Connect instance.
       flags:
@@ -1129,6 +1296,39 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --vocabulary-id=!: The identifier of the custom vocabulary.
+    - name: delete-workspace
+      description: Deletes a workspace and removes all associated view and resource assignments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --workspace-id=!: The identifier of the workspace.
+    - name: delete-workspace-media
+      description: Deletes a media asset (such as a logo) from a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --media-type=!: The type of media to delete.
+        --workspace-id=!: The identifier of the workspace.
+      completion:
+        flag:
+            media-type:
+                - IMAGE_LOGO_LIGHT_FAVICON
+                - IMAGE_LOGO_DARK_FAVICON
+                - IMAGE_LOGO_LIGHT_HORIZONTAL
+                - IMAGE_LOGO_DARK_HORIZONTAL
+    - name: delete-workspace-page
+      description: Removes the association between a view and a page in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --page=!: The page identifier.
+        --workspace-id=!: The identifier of the workspace.
     - name: describe-agent-status
       description: Describes an agent status.
       flags:
@@ -1186,6 +1386,23 @@ commands:
         --contact-flow-module-id=!: The identifier of the flow module.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
+    - name: describe-data-table
+      description: Returns all properties for a data table except for attributes and values.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+    - name: describe-data-table-attribute
+      description: Returns detailed information for a specific data table attribute including its configuration, validation rules, and metadata.
+      flags:
+        --attribute-name=!: The name of the attribute to retrieve detailed information for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
     - name: describe-email-address
       description: Describe email address form the specified Amazon Connect instance.
       flags:
@@ -1250,6 +1467,7 @@ commands:
                 - ENHANCED_CONTACT_MONITORING
                 - ENHANCED_CHAT_MONITORING
                 - MULTI_PARTY_CHAT_CONFERENCE
+                - MESSAGE_STREAMING
     - name: describe-instance-storage-config
       description: This API is in preview release for Amazon Connect and is subject to change.
       flags:
@@ -1384,6 +1602,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --vocabulary-id=!: The identifier of the custom vocabulary.
+    - name: describe-workspace
+      description: Retrieves details about a workspace, including its configuration and metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --workspace-id=!: The identifier of the workspace.
     - name: disassociate-analytics-data-set
       description: Removes the dataset ID associated with a given Amazon Connect instance.
       flags:
@@ -1526,6 +1752,23 @@ commands:
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
+    - name: disassociate-security-profiles
+      description: Disassociates a security profile attached to a Q in Connect AI Agent Entity in an Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-arn=!: ARN of a Q in Connect AI Agent.
+        --entity-type=!: Only supported type is AI\_AGENT.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --security-profiles=!:
+            description: List of Security Profile Object.
+            nargs: -1
+      completion:
+        flag:
+            entity-type:
+                - USER
+                - AI_AGENT
     - name: disassociate-traffic-distribution-group-user
       description: Disassociates an agent from a traffic distribution group.
       flags:
@@ -1546,6 +1789,17 @@ commands:
         --user-proficiencies=!:
             description: The proficiencies to disassociate from the user.
             nargs: -1
+    - name: disassociate-workspace
+      description: Removes the association between a workspace and one or more users or routing profiles.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --resource-arns=!:
+            description: The Amazon Resource Names (ARNs) of the resources to disassociate from the workspace.
+            nargs: -1
+        --workspace-id=!: The identifier of the workspace.
     - name: dismiss-user-contact
       description: Dismisses contacts from an agent’s CCP and returns the agent to an available state, which allows the agent to receive a new routed contact.
       flags:
@@ -1555,6 +1809,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --user-id=!: The identifier of the user account.
+    - name: evaluate-data-table-values
+      description: Evaluates values at the time of the request and returns them.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --max-results=: The maximum number of data table values to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --time-zone=: Optional IANA timezone identifier to use when resolving time based dynamic values.
+        --values=!:
+            description: A list of value evaluation sets specifying which primary values and attributes to evaluate.
+            nargs: -1
     - name: get-attached-file
       description: Provides a pre-signed URL for download of an approved attached file.
       flags:
@@ -1724,6 +1992,23 @@ commands:
         --phone-number-description=: The description of the phone number.
         --source-phone-number-arn=!: The claimed phone number ARN being imported from the external service, such as Amazon Web Services End User Messaging.
         --tags=: The tags used to organize, track, or control access for this resource.
+    - name: import-workspace-media
+      description: Imports a media asset (such as a logo) for use in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --media-source=!: The media source.
+        --media-type=!: The type of media.
+        --workspace-id=!: The identifier of the workspace.
+      completion:
+        flag:
+            media-type:
+                - IMAGE_LOGO_LIGHT_FAVICON
+                - IMAGE_LOGO_DARK_FAVICON
+                - IMAGE_LOGO_LIGHT_HORIZONTAL
+                - IMAGE_LOGO_DARK_HORIZONTAL
     - name: list-agent-statuses
       description: Lists agent statuses.
       flags:
@@ -1907,6 +2192,72 @@ commands:
             description: The type of reference.
             nargs: -1
         --starting-token=: A token to specify where to start paginating.
+    - name: list-data-table-attributes
+      description: Returns all attributes for a specified data table.
+      flags:
+        --attribute-ids=:
+            description: Optional list of specific attribute IDs to retrieve.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table whose attributes should be listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data table attributes to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-table-primary-values
+      description: Lists all primary value combinations for a given data table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table whose primary values should be listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data table primary values to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --primary-attribute-values=:
+            description: Optional filter to retrieve primary values matching specific criteria.
+            nargs: -1
+        --record-ids=:
+            description: Optional list of specific record IDs to retrieve.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-table-values
+      description: Lists values stored in a data table with optional filtering by record IDs or primary attribute values.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table whose values should be listed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data table values to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --primary-attribute-values=:
+            description: Optional filter to retrieve values for records matching specific primary attribute criteria.
+            nargs: -1
+        --record-ids=:
+            description: Optional list of specific record IDs to retrieve values for.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-tables
+      description: Lists all data tables for the specified Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance whose data tables should be listed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data tables to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-default-vocabularies
       description: Lists the default vocabularies for the specified Amazon Connect instance.
       flags:
@@ -1956,6 +2307,22 @@ commands:
                 - pl-PL
                 - sv-SE
                 - tl-PH
+    - name: list-entity-security-profiles
+      description: Lists all security profiles attached to a Q in Connect AIAgent Entity in an Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-arn=!: ARN of a Q in Connect AI Agent.
+        --entity-type=!: Only supported type is AI\_AGENT.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+      completion:
+        flag:
+            entity-type:
+                - USER
+                - AI_AGENT
     - name: list-evaluation-form-versions
       description: Lists versions of an evaluation form in the specified Amazon Connect instance.
       flags:
@@ -2110,6 +2477,7 @@ commands:
                 - ANALYTICS_CONNECTOR
                 - CALL_TRANSFER_CONNECTOR
                 - COGNITO_USER_POOL
+                - MESSAGE_PROCESSOR
     - name: list-lambda-functions
       description: This API is in preview release for Amazon Connect and is subject to change.
       flags:
@@ -2341,7 +2709,7 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-security-profile-applications
-      description: Returns a list of third-party applications in a specific security profile.
+      description: Returns a list of third-party applications or MCP Servers in a specific security profile.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -2353,6 +2721,16 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --security-profile-id=!: The identifier for the security profle.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-security-profile-flow-modules
+      description: A list of Flow Modules an AI Agent can invoke as a tool
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --security-profile-id=!: The identifier for the security profile.
     - name: list-security-profile-permissions
       description: Lists the permissions granted to a security profile.
       flags:
@@ -2509,6 +2887,39 @@ commands:
             type:
                 - CUSTOMER_MANAGED
                 - AWS_MANAGED
+    - name: list-workspace-media
+      description: Lists media assets (such as logos) associated with a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --workspace-id=!: The identifier of the workspace.
+    - name: list-workspace-pages
+      description: Lists the page configurations in a workspace, including the views assigned to each page.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-id=!: The identifier of the workspace.
+    - name: list-workspaces
+      description: Lists the workspaces in an Amazon Connect instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: monitor-contact
       description: Initiates silent monitoring of a contact.
       flags:
@@ -2915,6 +3326,20 @@ commands:
         --sort=: Specifies a field to sort by and a sort order.
         --starting-token=: A token to specify where to start paginating.
         --time-range=!: Time range that you want to search results.
+    - name: search-data-tables
+      description: Searches for data tables based on the table's ID, name, and description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance to search within.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of data tables to return in one page of results.
+        --next-token=: Specify the pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=: Search criteria including string conditions for matching table names, descriptions, or resource IDs.
+        --search-filter=: Optional filters to apply to the search results, such as tag-based filtering for attribute-based access control.
+        --starting-token=: A token to specify where to start paginating.
     - name: search-email-addresses
       description: Searches email address in an instance, with optional filtering.
       flags:
@@ -3092,6 +3517,20 @@ commands:
         --search-criteria=: ""
         --search-filter=: Filters to be applied to search results.
         --starting-token=: A token to specify where to start paginating.
+    - name: search-views
+      description: Searches views based on name, description, or tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=: The search criteria, including field names and comparison types.
+        --search-filter=: Filters to apply to the search, such as tag-based filters.
+        --starting-token=: A token to specify where to start paginating.
     - name: search-vocabularies
       description: Searches for vocabularies within a specific Amazon Connect instance using `State`, `NameStartsWith`, and `LanguageCode`.
       flags:
@@ -3148,6 +3587,34 @@ commands:
                 - ACTIVE
                 - CREATION_FAILED
                 - DELETE_IN_PROGRESS
+    - name: search-workspace-associations
+      description: Searches for workspace associations with users or routing profiles based on various criteria.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=: The search criteria, including workspace ID, resource ID, or resource type.
+        --search-filter=: Filters to apply to the search, such as tag-based filters.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-workspaces
+      description: Searches workspaces based on name, description, visibility, or tags.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=: The search criteria, including field names and comparison types.
+        --search-filter=: Filters to apply to the search, such as tag-based filters.
+        --starting-token=: A token to specify where to start paginating.
     - name: send-chat-integration-event
       description: Processes chat integration events from Amazon Web Services or external integrations to Amazon Connect.
       flags:
@@ -3211,6 +3678,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --initial-message=: The initial message to be sent to the newly created chat.
         --instance-id=!: The identifier of the Amazon Connect instance.
+        --participant-configuration=: The configuration of the participant.
         --participant-details=!: Information identifying the participant.
         --persistent-chat=: Enable persistent chats.
         --related-contact-id=: The unique identifier for an Amazon Connect contact.
@@ -3230,6 +3698,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --tags=: The tags used to organize, track, or control access for this resource.
+    - name: start-contact-media-processing
+      description: Enables in-flight message processing for an ongoing chat session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contact-id=: The identifier of the contact.
+        --failure-mode=: The desired behavior for failed message processing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=: The identifier of the Amazon Connect instance.
+        --processor-arn=: The Amazon Resource Name (ARN) of the Lambda processor.
+      completion:
+        flag:
+            failure-mode:
+                - DELIVER_UNPROCESSED_MESSAGE
+                - DO_NOT_DELIVER_UNPROCESSED_MESSAGE
     - name: start-contact-recording
       description: 'Starts recording the contact:'
       flags:
@@ -3384,6 +3867,14 @@ commands:
         --disconnect-reason=: The reason a contact can be disconnected.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
+    - name: stop-contact-media-processing
+      description: Stops in-flight message processing for an ongoing chat session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contact-id=: The identifier of the contact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=: The identifier of the Amazon Connect instance.
     - name: stop-contact-recording
       description: Stops recording a call when a contact is being recorded.
       flags:
@@ -3654,6 +4145,64 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --scheduled-time=!: The timestamp, in Unix Epoch seconds format, at which to start running the inbound flow.
+    - name: update-data-table-attribute
+      description: Updates all properties for an attribute using all properties from CreateDataTableAttribute.
+      flags:
+        --attribute-name=!: The current name of the attribute to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --description=: The updated description for the attribute.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --name=!: The new name for the attribute.
+        --no-primary: Whether the attribute should be treated as a primary key.
+        --primary: Whether the attribute should be treated as a primary key.
+        --validation=: The updated validation rules for the attribute.
+        --value-type=!: The updated value type for the attribute.
+      completion:
+        flag:
+            value-type:
+                - TEXT
+                - NUMBER
+                - BOOLEAN
+                - TEXT_LIST
+                - NUMBER_LIST
+    - name: update-data-table-metadata
+      description: Updates the metadata properties of a data table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --description=: The updated description for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --name=!: The updated name for the data table.
+        --time-zone=!: The updated IANA timezone identifier to use when resolving time based dynamic values.
+        --value-lock-level=!: The updated value lock level for the data table.
+      completion:
+        flag:
+            value-lock-level:
+                - NONE
+                - DATA_TABLE
+                - PRIMARY_VALUE
+                - ATTRIBUTE
+                - VALUE
+    - name: update-data-table-primary-values
+      description: Updates the primary values for a record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-table-id=!: The unique identifier for the data table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The unique identifier for the Amazon Connect instance.
+        --lock-version=!: The lock version information required for optimistic locking to prevent concurrent modifications.
+        --new-primary-values=!:
+            description: The new primary values for the record.
+            nargs: -1
+        --primary-values=!:
+            description: The current primary values for the record.
+            nargs: -1
     - name: update-email-address-metadata
       description: Updates an email address metadata.
       flags:
@@ -3668,6 +4217,7 @@ commands:
     - name: update-evaluation-form
       description: Updates details about a specific evaluation form version in the specified Amazon Connect instance.
       flags:
+        --as-draft: A boolean flag indicating whether to update evaluation form to draft state.
         --auto-evaluation-configuration=: Whether automated evaluations are enabled.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -3681,8 +4231,11 @@ commands:
         --items=!:
             description: Items that are part of the evaluation form.
             nargs: -1
+        --language-configuration=: Configuration for language settings of the evaluation form.
+        --no-as-draft: A boolean flag indicating whether to update evaluation form to draft state.
         --no-create-new-version: A flag indicating whether the operation must create a new version.
         --scoring-strategy=: A scoring strategy of the evaluation form.
+        --target-configuration=: Configuration that specifies the target for the evaluation form.
         --title=!: A title of the evaluation form.
     - name: update-hours-of-operation
       description: Updates the hours of operation.
@@ -3739,6 +4292,7 @@ commands:
                 - ENHANCED_CONTACT_MONITORING
                 - ENHANCED_CHAT_MONITORING
                 - MULTI_PARTY_CHAT_CONFERENCE
+                - MESSAGE_STREAMING
     - name: update-instance-storage-config
       description: This API is in preview release for Amazon Connect and is subject to change.
       flags:
@@ -3987,6 +4541,9 @@ commands:
       flags:
         --allowed-access-control-hierarchy-group-id=: The identifier of the hierarchy group that a security profile uses to restrict access to resources in Amazon Connect.
         --allowed-access-control-tags=: The list of tags that a security profile uses to restrict access to resources in Amazon Connect.
+        --allowed-flow-modules=:
+            description: A list of Flow Modules an AI Agent can invoke as a tool
+            nargs: -1
         --applications=:
             description: A list of the third-party application's metadata.
             nargs: -1
@@ -3994,6 +4551,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The description of the security profile.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granular-access-control-configuration=: The granular access control configuration for the security profile, including data table permissions.
         --hierarchy-restricted-resources=:
             description: The list of resources that a security profile applies hierarchy restrictions to in Amazon Connect.
             nargs: -1
@@ -4138,3 +4696,51 @@ commands:
         --instance-id=!: The identifier of the Amazon Connect instance.
         --name=: The name of the view.
         --view-id=!: The identifier of the view.
+    - name: update-workspace-metadata
+      description: Updates the metadata of a workspace, such as its name and description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --name=: The name of the workspace.
+        --title=: The title displayed for the workspace.
+        --workspace-id=!: The identifier of the workspace.
+    - name: update-workspace-page
+      description: Updates the configuration of a page in a workspace, including the associated view and input data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data=: A JSON string containing input parameters for the view.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --new-page=: The new page identifier, if changing the page name.
+        --page=!: The current page identifier.
+        --resource-arn=: The Amazon Resource Name (ARN) of the view to associate with the page.
+        --slug=: The URL-friendly identifier for the page.
+        --workspace-id=!: The identifier of the workspace.
+    - name: update-workspace-theme
+      description: Updates the theme configuration for a workspace, including colors and styling.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --theme=: The theme configuration, including color schemes and visual styles.
+        --workspace-id=!: The identifier of the workspace.
+    - name: update-workspace-visibility
+      description: Updates the visibility setting of a workspace, controlling whether it is available to all users, assigned users only, or none.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --visibility=!: The visibility setting for the workspace.
+        --workspace-id=!: The identifier of the workspace.
+      completion:
+        flag:
+            visibility:
+                - ALL
+                - ASSIGNED
+                - NONE
