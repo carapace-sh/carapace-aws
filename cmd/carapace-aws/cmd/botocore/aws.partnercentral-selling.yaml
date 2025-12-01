@@ -35,6 +35,7 @@ commands:
                 - Solutions
                 - AwsProducts
                 - AwsMarketplaceOffers
+                - AwsMarketplaceOfferSets
     - name: create-engagement
       description: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers.
       flags:
@@ -48,6 +49,22 @@ commands:
         --description=!: Provides a description of the `Engagement`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --title=!: Specifies the title of the `Engagement`.
+    - name: create-engagement-context
+      description: Creates a new context within an existing engagement.
+      flags:
+        --catalog=!: Specifies the catalog associated with the engagement context request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier provided by the client to ensure that the request is handled exactly once.
+        --engagement-identifier=!: The unique identifier of the `Engagement` for which the context is being created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payload=!: ""
+        --type=!: Specifies the type of context being created for the engagement.
+      completion:
+        flag:
+            type:
+                - CustomerProject
+                - Lead
     - name: create-engagement-invitation
       description: This action creates an invitation from a sender to a single receiver to join an engagement.
       flags:
@@ -155,6 +172,7 @@ commands:
                 - Solutions
                 - AwsProducts
                 - AwsMarketplaceOffers
+                - AwsMarketplaceOfferSets
     - name: get-aws-opportunity-summary
       description: Retrieves a summary of an AWS Opportunity.
       flags:
@@ -338,11 +356,17 @@ commands:
         --catalog=!: Specifies the catalog related to the request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-types=:
+            description: Filters engagements to include only those containing the specified context types, such as "CustomerProject" or "Lead".
+            nargs: -1
         --created-by=:
             description: A list of AWS account IDs.
             nargs: -1
         --engagement-identifier=:
             description: An array of strings representing engagement identifiers to retrieve.
+            nargs: -1
+        --exclude-context-types=:
+            description: Filters engagements to exclude those containing the specified context types.
             nargs: -1
         --exclude-created-by=:
             description: An array of strings representing AWS Account IDs.
@@ -380,6 +404,34 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --sort=: An object that specifies how the response is sorted.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-opportunity-from-engagement-tasks
+      description: Lists all in-progress, completed, or failed opportunity creation tasks from engagements that were initiated by the caller's account.
+      flags:
+        --catalog=!: Specifies the catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-identifier=:
+            description: Filters tasks by the identifiers of the engagement contexts associated with the opportunity creation.
+            nargs: -1
+        --engagement-identifier=:
+            description: Filters tasks by the identifiers of the engagements from which opportunities are being created.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single page of the response.
+        --next-token=: The token for requesting the next page of results.
+        --opportunity-identifier=:
+            description: Filters tasks by the identifiers of the opportunities they created or are associated with.
+            nargs: -1
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: ""
+        --starting-token=: A token to specify where to start paginating.
+        --task-identifier=:
+            description: Filters tasks by their unique identifiers.
+            nargs: -1
+        --task-status=:
+            description: Filters the tasks based on their current status.
+            nargs: -1
     - name: list-resource-snapshot-jobs
       description: Lists resource snapshot jobs owned by the customer.
       flags:
@@ -492,6 +544,19 @@ commands:
         --tags=:
             description: A map of the key-value pairs of the tag or tags to assign.
             nargs: -1
+    - name: start-opportunity-from-engagement-task
+      description: This action creates an opportunity from an existing engagement context.
+      flags:
+        --catalog=!: Specifies the catalog in which the opportunity creation task is executed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique token provided by the client to help ensure the idempotency of the request.
+        --context-identifier=!: The unique identifier of the engagement context from which to create the opportunity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the engagement from which the opportunity creation task is to be initiated.
+        --tags=:
+            description: A map of the key-value pairs of the tag or tags to assign.
+            nargs: -1
     - name: start-resource-snapshot-job
       description: Starts a resource snapshot job that has been previously created.
       flags:
@@ -546,6 +611,23 @@ commands:
         --tag-keys=!:
             description: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
             nargs: -1
+    - name: update-engagement-context
+      description: Updates the context information for an existing engagement with new or modified data.
+      flags:
+        --catalog=!: Specifies the catalog associated with the engagement context update request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-identifier=!: The unique identifier of the specific engagement context to be updated.
+        --engagement-identifier=!: The unique identifier of the `Engagement` containing the context to be updated.
+        --engagement-last-modified-at=!: The timestamp when the engagement was last modified, used for optimistic concurrency control.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payload=!: Contains the updated contextual information for the engagement.
+        --type=!: Specifies the type of context being updated within the engagement.
+      completion:
+        flag:
+            type:
+                - CustomerProject
+                - Lead
     - name: update-opportunity
       description: Updates the `Opportunity` record identified by a given `Identifier`.
       flags:

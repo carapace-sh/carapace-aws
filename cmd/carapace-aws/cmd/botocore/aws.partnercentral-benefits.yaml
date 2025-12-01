@@ -1,0 +1,239 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: partnercentral-benefits
+description: Partner Central Benefits API
+commands:
+    - name: amend-benefit-application
+      description: Modifies an existing benefit application by applying amendments to specific fields while maintaining revision control.
+      flags:
+        --amendment-reason=!: A descriptive reason explaining why the benefit application is being amended.
+        --amendments=!:
+            description: A list of specific field amendments to apply to the benefit application.
+            nargs: -1
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure idempotent processing of the amendment request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to be amended.
+        --revision=!: The current revision number of the benefit application to ensure optimistic concurrency control.
+    - name: associate-benefit-application-resource
+      description: Links an AWS resource to an existing benefit application for tracking and management purposes.
+      flags:
+        --benefit-application-identifier=!: The unique identifier of the benefit application to associate the resource with.
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS resource to associate with the benefit application.
+    - name: cancel-benefit-application
+      description: Cancels a benefit application that is currently in progress, preventing further processing.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure idempotent processing of the cancellation request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to cancel.
+        --reason=: A descriptive reason explaining why the benefit application is being cancelled.
+    - name: create-benefit-application
+      description: Creates a new benefit application for a partner to request access to AWS benefits and programs.
+      flags:
+        --associated-resources=:
+            description: AWS resources that are associated with this benefit application.
+            nargs: -1
+        --benefit-application-details=: Detailed information and requirements specific to the benefit being requested.
+        --benefit-identifier=!: The unique identifier of the benefit being requested in this application.
+        --catalog=!: The catalog identifier that specifies which benefit catalog to create the application in.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure idempotent processing of the creation request.
+        --description=: A detailed description of the benefit application and its intended use.
+        --file-details=:
+            description: Supporting documents and files attached to the benefit application.
+            nargs: -1
+        --fulfillment-types=:
+            description: The types of fulfillment requested for this benefit application (e.g., credits, access, disbursement).
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A human-readable name for the benefit application.
+        --partner-contacts=:
+            description: Contact information for partner representatives responsible for this benefit application.
+            nargs: -1
+        --tags=:
+            description: Key-value pairs to categorize and organize the benefit application.
+            nargs: -1
+    - name: disassociate-benefit-application-resource
+      description: Removes the association between an AWS resource and a benefit application.
+      flags:
+        --benefit-application-identifier=!: The unique identifier of the benefit application to disassociate the resource from.
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the AWS resource to disassociate from the benefit application.
+    - name: get-benefit
+      description: Retrieves detailed information about a specific benefit available in the partner catalog.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog to query.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit to retrieve.
+    - name: get-benefit-allocation
+      description: Retrieves detailed information about a specific benefit allocation that has been granted to a partner.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog to query.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit allocation to retrieve.
+    - name: get-benefit-application
+      description: Retrieves detailed information about a specific benefit application.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog to query.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to retrieve.
+    - name: list-benefit-allocations
+      description: Retrieves a paginated list of benefit allocations based on specified filter criteria.
+      flags:
+        --benefit-application-identifiers=:
+            description: Filter benefit allocations by specific benefit application identifiers.
+            nargs: -1
+        --benefit-identifiers=:
+            description: Filter benefit allocations by specific benefit identifiers.
+            nargs: -1
+        --catalog=!: The catalog identifier to filter benefit allocations by catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fulfillment-types=:
+            description: Filter benefit allocations by specific fulfillment types.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of benefit allocations to return in a single response.
+        --next-token=: A pagination token to retrieve the next set of results from a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: Filter benefit allocations by their current status.
+            nargs: -1
+    - name: list-benefit-applications
+      description: Retrieves a paginated list of benefit applications based on specified filter criteria.
+      flags:
+        --associated-resource-arns=:
+            description: Filter benefit applications by specific AWS resource ARNs.
+            nargs: -1
+        --associated-resources=:
+            description: Filter benefit applications by associated AWS resources.
+            nargs: -1
+        --benefit-identifiers=:
+            description: Filter benefit applications by specific benefit identifiers.
+            nargs: -1
+        --catalog=!: The catalog identifier to filter benefit applications by catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fulfillment-types=:
+            description: Filter benefit applications by specific fulfillment types.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of benefit applications to return in a single response.
+        --next-token=: A pagination token to retrieve the next set of results from a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --programs=:
+            description: Filter benefit applications by specific AWS partner programs.
+            nargs: -1
+        --stages=:
+            description: Filter benefit applications by their current processing stage.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: Filter benefit applications by their current processing status.
+            nargs: -1
+    - name: list-benefits
+      description: Retrieves a paginated list of available benefits based on specified filter criteria.
+      flags:
+        --catalog=!: The catalog identifier to filter benefits by catalog.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --fulfillment-types=:
+            description: Filter benefits by specific fulfillment types.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of benefits to return in a single response.
+        --next-token=: A pagination token to retrieve the next set of results from a previous request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --programs=:
+            description: Filter benefits by specific AWS partner programs.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: Filter benefits by their current status.
+            nargs: -1
+    - name: list-tags-for-resource
+      description: Retrieves all tags associated with a specific resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
+    - name: recall-benefit-application
+      description: Recalls a submitted benefit application, returning it to draft status for further modifications.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotent processing of the recall request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to recall.
+        --reason=!: A descriptive reason explaining why the benefit application is being recalled.
+    - name: submit-benefit-application
+      description: Submits a benefit application for review and processing by AWS.
+      flags:
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to submit.
+    - name: tag-resource
+      description: Adds or updates tags for a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
+        --tags=!:
+            description: A list of key-value pairs to add as tags to the resource.
+            nargs: -1
+    - name: untag-resource
+      description: Removes specified tags from a resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
+        --tag-keys=!:
+            description: A list of tag keys to remove from the resource.
+            nargs: -1
+    - name: update-benefit-application
+      description: Updates an existing benefit application with new information while maintaining revision control.
+      flags:
+        --benefit-application-details=: Updated detailed information and requirements specific to the benefit being requested.
+        --catalog=!: The catalog identifier that specifies which benefit catalog the application belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure idempotent processing of the update request.
+        --description=: The updated detailed description of the benefit application.
+        --file-details=:
+            description: Updated supporting documents and files attached to the benefit application.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the benefit application to update.
+        --name=: The updated human-readable name for the benefit application.
+        --partner-contacts=:
+            description: Updated contact information for partner representatives responsible for this benefit application.
+            nargs: -1
+        --revision=!: The current revision number of the benefit application to ensure optimistic concurrency control.
