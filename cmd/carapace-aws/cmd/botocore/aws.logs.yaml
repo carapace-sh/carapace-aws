@@ -11,6 +11,14 @@ commands:
         --kms-key-id=!: The Amazon Resource Name (ARN) of the KMS key to use when encrypting log data.
         --log-group-name=: The name of the log group.
         --resource-identifier=: Specifies the target for this operation.
+    - name: associate-source-to-s3-table-integration
+      description: Associates a data source with an S3 Table Integration for query access in the 'logs' namespace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=!: The data source to associate with the S3 Table Integration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-arn=!: The Amazon Resource Name (ARN) of the S3 Table Integration to associate the data source with.
     - name: cancel-export-task
       description: Cancels the specified export task.
       flags:
@@ -96,27 +104,27 @@ commands:
         --log-group-name=!: The name of the log group.
         --log-stream-name=!: The name of the log stream.
     - name: create-scheduled-query
-      description: Creates a new Scheduled Query that runs CloudWatch Logs Insights queries on a schedule and delivers results to specified destinations.
+      description: Creates a scheduled query that runs CloudWatch Logs Insights queries at regular intervals.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: An optional description for the scheduled query to help identify its purpose.
-        --destination-configuration=: Configuration for destinations where the query results will be delivered after successful execution.
-        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that CloudWatch Logs will assume to execute the scheduled query and deliver results to the specified destinations.
+        --description=: An optional description for the scheduled query to help identify its purpose and functionality.
+        --destination-configuration=: Configuration for where to deliver query results.
+        --execution-role-arn=!: The ARN of the IAM role that grants permissions to execute the query and deliver results to the specified destination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-identifiers=:
-            description: The log group identifiers to query.
+            description: An array of log group names or ARNs to query.
             nargs: -1
-        --name=!: A unique name for the scheduled query within the region for an AWS account.
+        --name=!: The name of the scheduled query.
         --query-language=!: The query language to use for the scheduled query.
-        --query-string=!: The CloudWatch Logs Insights query string to execute.
-        --schedule-end-time=: The end time for the query schedule in Unix epoch time (seconds since January 1, 1970, 00:00:00 UTC).
+        --query-string=!: The query string to execute.
+        --schedule-end-time=: The end time for the scheduled query in Unix epoch format.
         --schedule-expression=!: A cron expression that defines when the scheduled query runs.
-        --schedule-start-time=: The start time for the query schedule in Unix epoch time (seconds since January 1, 1970, 00:00:00 UTC).
-        --start-time-offset=: Time offset in seconds from the execution time for the start of the query time range.
+        --schedule-start-time=: The start time for the scheduled query in Unix epoch format.
+        --start-time-offset=: The time offset in seconds that defines the lookback period for the query.
         --state=: The initial state of the scheduled query.
-        --tags=: An optional list of key-value pairs to associate with the resource.
-        --timezone=: The timezone in which the schedule expression is evaluated.
+        --tags=: Key-value pairs to associate with the scheduled query for resource management and cost allocation.
+        --timezone=: The timezone for evaluating the schedule expression.
       completion:
         flag:
             query-language:
@@ -254,12 +262,12 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=!: The name of the log group.
     - name: delete-scheduled-query
-      description: Deletes an existing scheduled query and all its associated configurations.
+      description: Deletes a scheduled query and stops all future executions.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The name or ARN of the scheduled query to delete.
+        --identifier=!: The ARN or name of the scheduled query to delete.
     - name: delete-subscription-filter
       description: Deletes the specified subscription filter.
       flags:
@@ -404,7 +412,7 @@ commands:
             nargs: -1
         --next-token=: ""
     - name: describe-log-groups
-      description: Returns information about log groups.
+      description: Returns information about log groups, including data sources that ingest into each log group.
       flags:
         --account-identifiers=:
             description: When `includeLinkedAccounts` is set to `true`, use this parameter to specify the list of accounts to search.
@@ -551,6 +559,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=: The name of the log group.
         --resource-identifier=: Specifies the target for this operation.
+    - name: disassociate-source-from-s3-table-integration
+      description: Disassociates a data source from an S3 Table Integration, removing query access and deleting all associated data from the integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the association to remove between the data source and S3 Table Integration.
     - name: filter-log-events
       description: Lists log events from the specified log group.
       flags:
@@ -641,6 +656,14 @@ commands:
         --start-from-head: If the value is true, the earliest log events are returned first.
         --start-time=: The start of the time range, expressed as the number of milliseconds after `Jan 1, 1970 00:00:00 UTC`.
         --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+    - name: get-log-fields
+      description: Discovers available fields for a specific data source and type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-name=!: The name of the data source to retrieve log fields for.
+        --data-source-type=!: The type of the data source to retrieve log fields for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-log-group-fields
       description: Returns a list of the fields that are included in log events in the specified log group.
       flags:
@@ -667,28 +690,28 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --query-id=!: The ID number of the query.
     - name: get-scheduled-query
-      description: Returns detailed information about a specified scheduled query, including its configuration, current state, and execution history.
+      description: Retrieves details about a specific scheduled query, including its configuration, execution status, and metadata.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The name or ARN of the scheduled query to retrieve.
+        --identifier=!: The ARN or name of the scheduled query to retrieve.
     - name: get-scheduled-query-history
-      description: Retrieves the execution history of a scheduled query within a specified time range, including execution status and destination processing metadata.
+      description: Retrieves the execution history of a scheduled query within a specified time range, including query results and destination processing status.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --end-time=!: The end time for the history retrieval window in Unix epoch time.
+        --end-time=!: The end time for the history query in Unix epoch format.
         --execution-statuses=:
-            description: Filter results by execution status (Running, Complete, Failed, Timeout, or InvalidQuery).
+            description: An array of execution statuses to filter the history results.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The name or ARN of the scheduled query to retrieve history for.
+        --identifier=!: The ARN or name of the scheduled query to retrieve history for.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of history records to return in a single call.
+        --max-results=: The maximum number of history records to return.
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
-        --start-time=!: The start time for the history retrieval window in Unix epoch time.
+        --start-time=!: The start time for the history query in Unix epoch format.
         --starting-token=: A token to specify where to start paginating.
     - name: get-transformer
       description: Returns the information about the log transformer associated with this log group.
@@ -697,6 +720,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-identifier=!: Specify either the name or ARN of the log group to return transformer information for.
+    - name: list-aggregate-log-group-summaries
+      description: Returns an aggregate summary of all log groups in the Region grouped by specified data source characteristics.
+      flags:
+        --account-identifiers=:
+            description: When `includeLinkedAccounts` is set to `true`, use this parameter to specify the list of accounts to search.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-sources=:
+            description: Filters the results by data source characteristics to include only log groups associated with the specified data sources.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=!: Specifies how to group the log groups in the summary.
+        --include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
+        --limit=: The maximum number of aggregated summaries to return.
+        --log-group-class=: Filters the results by log group class to include only log groups of the specified class.
+        --log-group-name-pattern=: Use this parameter to limit the returned log groups to only those with names that match the pattern that you specify.
+        --next-token=: ""
+        --no-include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
+      completion:
+        flag:
+            group-by:
+                - DATA_SOURCE_NAME_TYPE_AND_FORMAT
+                - DATA_SOURCE_NAME_AND_TYPE
+            log-group-class:
+                - STANDARD
+                - INFREQUENT_ACCESS
+                - DELIVERY
     - name: list-anomalies
       description: Returns a list of anomalies that log anomaly detectors have found.
       flags:
@@ -752,6 +803,12 @@ commands:
             nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-sources=:
+            description: An array of data source filters to filter log groups by their associated data sources.
+            nargs: -1
+        --field-index-names=:
+            description: An array of field index names to filter log groups that have specific field indexes.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --include-linked-accounts: If you are using a monitoring account, set this to `true` to have the operation return log groups in the accounts listed in `accountIdentifiers`.
         --limit=: The maximum number of log groups to return.
@@ -778,22 +835,34 @@ commands:
         --query-id=!: The ID of the query to use.
         --starting-token=: A token to specify where to start paginating.
     - name: list-scheduled-queries
-      description: Lists all scheduled queries in the current AWS account and region with optional filtering by state.
+      description: Lists all scheduled queries in your account and region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: The maximum number of scheduled queries to return in a single call.
+        --max-results=: The maximum number of scheduled queries to return.
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
-        --state=: Filter results by the state of scheduled queries (ENABLED or DISABLED).
+        --state=: Filter scheduled queries by state.
       completion:
         flag:
             state:
                 - ENABLED
                 - DISABLED
+    - name: list-sources-for-s3-table-integration
+      description: Returns a list of data source associations for a specified S3 Table Integration, showing which data sources are currently associated for query access.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-arn=!: The Amazon Resource Name (ARN) of the S3 Table Integration to list associations for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of associations to return in a single call.
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Displays the tags associated with a CloudWatch Logs resource.
       flags:
@@ -1051,7 +1120,7 @@ commands:
                 - "interative\tStarts a Live Tail session in interactive mode"
                 - "print-only\tStarts a Live Tail session in print-only mode"
     - name: start-query
-      description: Starts a query of one or more log groups using CloudWatch Logs Insights.
+      description: Starts a query of one or more log groups or data sources using CloudWatch Logs Insights.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -1206,26 +1275,26 @@ commands:
                 - THIRTY_MIN
                 - ONE_HOUR
     - name: update-scheduled-query
-      description: Updates the configuration of an existing scheduled query.
+      description: Updates an existing scheduled query with new configuration.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=: Updated description for the scheduled query.
-        --destination-configuration=: Updated configuration for destinations where the query results will be delivered.
-        --execution-role-arn=!: Updated ARN of the IAM role that CloudWatch Logs will assume to execute the scheduled query.
+        --description=: An updated description for the scheduled query.
+        --destination-configuration=: The updated configuration for where to deliver query results.
+        --execution-role-arn=!: The updated ARN of the IAM role that grants permissions to execute the query and deliver results.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The name or ARN of the scheduled query to update.
+        --identifier=!: The ARN or name of the scheduled query to update.
         --log-group-identifiers=:
-            description: Updated log group identifiers to query.
+            description: The updated array of log group names or ARNs to query.
             nargs: -1
-        --query-language=!: Updated query language to use (LogsQL, PPL, or SQL).
-        --query-string=!: Updated CloudWatch Logs Insights query string to execute.
-        --schedule-end-time=: Updated end time for the query schedule in Unix epoch time.
-        --schedule-expression=!: Updated cron expression that defines when the scheduled query runs.
-        --schedule-start-time=: Updated start time for the query schedule in Unix epoch time.
-        --start-time-offset=: Updated time offset in seconds from the execution time for the start of the query time range.
-        --state=: Updated state of the scheduled query (ENABLED or DISABLED).
-        --timezone=: Updated timezone in which the schedule expression is evaluated.
+        --query-language=!: The updated query language for the scheduled query.
+        --query-string=!: The updated query string to execute.
+        --schedule-end-time=: The updated end time for the scheduled query in Unix epoch format.
+        --schedule-expression=!: The updated cron expression that defines when the scheduled query runs.
+        --schedule-start-time=: The updated start time for the scheduled query in Unix epoch format.
+        --start-time-offset=: The updated time offset in seconds that defines the lookback period for the query.
+        --state=: The updated state of the scheduled query.
+        --timezone=: The updated timezone for evaluating the schedule expression.
       completion:
         flag:
             query-language:

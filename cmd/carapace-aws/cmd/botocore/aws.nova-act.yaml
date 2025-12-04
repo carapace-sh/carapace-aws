@@ -1,0 +1,211 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: nova-act
+description: Nova Act Service
+commands:
+    - name: create-act
+      description: Creates a new AI task (act) within a session that can interact with tools and perform specific actions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique identifier of the session to create the act in.
+        --task=!: The task description that defines what the act should accomplish.
+        --tool-specs=:
+            description: A list of tool specifications that the act can invoke to complete its task.
+            nargs: -1
+        --workflow-definition-name=!: The name of the workflow definition containing the session.
+        --workflow-run-id=!: The unique identifier of the workflow run containing the session.
+    - name: create-session
+      description: Creates a new session context within a workflow run to manage conversation state and acts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-definition-name=!: The name of the workflow definition containing the workflow run.
+        --workflow-run-id=!: The unique identifier of the workflow run to create the session in.
+    - name: create-workflow-definition
+      description: Creates a new workflow definition template that can be used to execute multiple workflow runs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: An optional description of the workflow definition's purpose and functionality.
+        --export-config=: Configuration for exporting workflow execution data to Amazon Simple Storage Service.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the workflow definition.
+    - name: create-workflow-run
+      description: Creates a new execution instance of a workflow definition with specified parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-info=!: Information about the client making the request, including compatibility version and SDK version.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-group-name=: The CloudWatch log group name for storing workflow execution logs.
+        --model-id=!: The ID of the AI model to use for workflow execution.
+        --workflow-definition-name=!: The name of the workflow definition to execute.
+    - name: delete-workflow-definition
+      description: Deletes a workflow definition and all associated resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-definition-name=!: The name of the workflow definition to delete.
+    - name: delete-workflow-run
+      description: Terminates and cleans up a workflow run, stopping all associated acts and sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-definition-name=!: The name of the workflow definition containing the workflow run.
+        --workflow-run-id=!: The unique identifier of the workflow run to delete.
+    - name: get-workflow-definition
+      description: Retrieves the details and configuration of a specific workflow definition.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-definition-name=!: The name of the workflow definition to retrieve.
+    - name: get-workflow-run
+      description: Retrieves the current state, configuration, and execution details of a workflow run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workflow-definition-name=!: The name of the workflow definition containing the workflow run.
+        --workflow-run-id=!: The unique identifier of the workflow run to retrieve.
+    - name: invoke-act-step
+      description: Executes the next step of an act, processing tool call results and returning new tool calls if needed.
+      flags:
+        --act-id=!: The unique identifier of the act to invoke the next step for.
+        --call-results=!:
+            description: The results from previous tool calls that the act requested.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --previous-step-id=: The identifier of the previous step, used for tracking execution flow.
+        --session-id=!: The unique identifier of the session containing the act.
+        --workflow-definition-name=!: The name of the workflow definition containing the act.
+        --workflow-run-id=!: The unique identifier of the workflow run containing the act.
+    - name: list-acts
+      description: Lists all acts within a specific session with their current status and execution details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of acts to return in a single response.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --session-id=: The unique identifier of the session to list acts for.
+        --sort-order=: The sort order for the returned acts (ascending or descending).
+        --starting-token=: A token to specify where to start paginating.
+        --workflow-definition-name=!: The name of the workflow definition containing the session.
+        --workflow-run-id=: The unique identifier of the workflow run containing the session.
+      completion:
+        flag:
+            sort-order:
+                - Ascending
+                - Descending
+    - name: list-models
+      description: Lists all available AI models that can be used for workflow execution, including their status and compatibility information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-compatibility-version=!: The client compatibility version to filter models by compatibility.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-sessions
+      description: Lists all sessions within a specific workflow run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of sessions to return in a single response.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: The sort order for the returned sessions (ascending or descending).
+        --starting-token=: A token to specify where to start paginating.
+        --workflow-definition-name=!: The name of the workflow definition containing the workflow run.
+        --workflow-run-id=!: The unique identifier of the workflow run to list sessions for.
+      completion:
+        flag:
+            sort-order:
+                - Ascending
+                - Descending
+    - name: list-workflow-definitions
+      description: Lists all workflow definitions in your account with optional filtering and pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of workflow definitions to return in a single response.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: The sort order for the returned workflow definitions (ascending or descending).
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-order:
+                - Ascending
+                - Descending
+    - name: list-workflow-runs
+      description: Lists all workflow runs for a specific workflow definition with optional filtering and pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of workflow runs to return in a single response.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-order=: The sort order for the returned workflow runs (ascending or descending).
+        --starting-token=: A token to specify where to start paginating.
+        --workflow-definition-name=!: The name of the workflow definition to list workflow runs for.
+      completion:
+        flag:
+            sort-order:
+                - Ascending
+                - Descending
+    - name: update-act
+      description: Updates an existing act's configuration, status, or error information.
+      flags:
+        --act-id=!: The unique identifier of the act to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --error=: Error information to associate with the act, if applicable.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique identifier of the session containing the act.
+        --status=!: The new status to set for the act.
+        --workflow-definition-name=!: The name of the workflow definition containing the act.
+        --workflow-run-id=!: The unique identifier of the workflow run containing the act.
+      completion:
+        flag:
+            status:
+                - RUNNING
+                - PENDING_CLIENT_ACTION
+                - PENDING_HUMAN_ACTION
+                - SUCCEEDED
+                - FAILED
+                - TIMED_OUT
+    - name: update-workflow-run
+      description: Updates the configuration or state of an active workflow run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --status=!: The new status to set for the workflow run.
+        --workflow-definition-name=!: The name of the workflow definition containing the workflow run.
+        --workflow-run-id=!: The unique identifier of the workflow run to update.
+      completion:
+        flag:
+            status:
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+                - TIMED_OUT
+                - DELETING

@@ -277,6 +277,7 @@ func init() {
 		"networkmonitor":                      "Amazon CloudWatch Network Monitor",
 		"notifications":                       "AWS User Notifications",
 		"notificationscontacts":               "AWS User Notifications Contacts",
+		"nova-act":                            "Nova Act Service",
 		"oam":                                 "CloudWatch Observability Access Manager",
 		"observabilityadmin":                  "CloudWatch Observability Admin Service",
 		"odb":                                 "odb",
