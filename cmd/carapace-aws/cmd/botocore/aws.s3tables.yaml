@@ -23,6 +23,7 @@ commands:
         --metadata=: The metadata for the table.
         --name=!: The name for the table.
         --namespace=!: The namespace to associated with the table.
+        --storage-class-configuration=: The storage class configuration for the table.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket to create the table in.
         --tags=: A map of user-defined tags that you would like to apply to the table that you are creating.
       completion:
@@ -37,6 +38,7 @@ commands:
         --encryption-configuration=: The encryption configuration to use for the table bucket.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name for the table bucket.
+        --storage-class-configuration=: The default storage class configuration for the table bucket.
         --tags=: A map of user-defined tags that you would like to apply to the table bucket that you are creating.
     - name: delete-namespace
       description: Deletes a namespace.
@@ -84,6 +86,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+    - name: delete-table-bucket-replication
+      description: Deletes the replication configuration for a table bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+        --version-token=: A version token from a previous GetTableBucketReplication call.
     - name: delete-table-policy
       description: Deletes a table policy.
       flags:
@@ -93,6 +103,14 @@ commands:
         --name=!: The table name.
         --namespace=!: The namespace associated with the table.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket that contains the table.
+    - name: delete-table-replication
+      description: Deletes the replication configuration for a specific table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+        --version-token=!: A version token from a previous GetTableReplication call.
     - name: get-namespace
       description: Gets details about a namespace.
       flags:
@@ -146,6 +164,20 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+    - name: get-table-bucket-replication
+      description: Retrieves the replication configuration for a table bucket.This operation returns the IAM role, `versionToken`, and replication rules that define how tables in this bucket are replicated to other buckets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+    - name: get-table-bucket-storage-class
+      description: Retrieves the storage class configuration for a specific table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
     - name: get-table-encryption
       description: Gets the encryption configuration for a table.
       flags:
@@ -184,6 +216,43 @@ commands:
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
     - name: get-table-policy
       description: Gets details about a table policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the table.
+        --namespace=!: The namespace associated with the table.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket that contains the table.
+    - name: get-table-record-expiration-configuration
+      description: Retrieves the expiration configuration settings for records in a table, and the status of the configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+    - name: get-table-record-expiration-job-status
+      description: Retrieves the status, metrics, and details of the latest record expiration job for a table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+    - name: get-table-replication
+      description: Retrieves the replication configuration for a specific table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+    - name: get-table-replication-status
+      description: Retrieves the replication status for a table, including the status of replication to each destination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+    - name: get-table-storage-class
+      description: Retrieves the storage class configuration for a specific table.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -279,6 +348,23 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-policy=!: The `JSON` that defines the policy.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+    - name: put-table-bucket-replication
+      description: Creates or updates the replication configuration for a table bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: The replication configuration to apply, including the IAM role and replication rules.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the source table bucket.
+        --version-token=: A version token from a previous GetTableBucketReplication call.
+    - name: put-table-bucket-storage-class
+      description: Sets or updates the storage class configuration for a table bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --storage-class-configuration=!: The storage class configuration to apply to the table bucket.
+        --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
     - name: put-table-maintenance-configuration
       description: Creates a new maintenance configuration or replaces an existing maintenance configuration for a table.
       flags:
@@ -305,6 +391,23 @@ commands:
         --namespace=!: The namespace associated with the table.
         --resource-policy=!: The `JSON` that defines the policy.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket that contains the table.
+    - name: put-table-record-expiration-configuration
+      description: Creates or updates the expiration configuration settings for records in a table, including the status of the configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the table.
+        --value=!: The record expiration configuration to apply to the table, including the status (`enabled` or `disabled`) and retention period in days.
+    - name: put-table-replication
+      description: Creates or updates the replication configuration for a specific table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: The replication configuration to apply to the table, including the IAM role and replication rules.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the source table.
+        --version-token=: A version token from a previous GetTableReplication call.
     - name: rename-table
       description: Renames a table or a namespace.
       flags:

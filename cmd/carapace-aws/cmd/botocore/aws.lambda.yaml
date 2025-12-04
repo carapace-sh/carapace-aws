@@ -39,6 +39,18 @@ commands:
             function-url-auth-type:
                 - NONE
                 - AWS_IAM
+    - name: checkpoint-durable-execution
+      description: Saves the progress of a [durable function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution during runtime.
+      flags:
+        --checkpoint-token=!: A unique token that identifies the current checkpoint state.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An optional idempotency token to ensure that duplicate checkpoint requests are handled correctly.
+        --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --updates=:
+            description: An array of state updates to apply during this checkpoint.
+            nargs: -1
     - name: create-alias
       description: Creates an [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function version.
       flags:
@@ -135,6 +147,7 @@ commands:
         --code=!: The code for the function.
         --dead-letter-config=: A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.
         --description=: A description of the function.
+        --durable-config=: Configuration settings for durable functions.
         --environment=: Environment variables that are accessible from function code during execution.
         --ephemeral-storage=: The size of the function's `/tmp` directory in MB.
         --file-system-configs=:
@@ -345,6 +358,40 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-durable-execution
+      description: Retrieves detailed information about a specific [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including its current status, input payload, result or error information, and execution metadata such as start time and usage statistics.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-durable-execution-history
+      description: Retrieves the execution history for a [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), showing all the steps, callbacks, and events that occurred during the execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-execution-data: Specifies whether to include execution data such as step results and callback payloads in the history events.
+        --marker=: If `NextMarker` was returned from a previous request, use this value to retrieve the next page of results.
+        --max-items=: The maximum number of history events to return per call.
+        --no-include-execution-data: Specifies whether to include execution data such as step results and callback payloads in the history events.
+        --no-reverse-order: When set to `true`, returns the history events in reverse chronological order (newest first).
+        --page-size=: The size of each page to get in the AWS service call.
+        --reverse-order: When set to `true`, returns the history events in reverse chronological order (newest first).
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-durable-execution-state
+      description: Retrieves the current execution state required for the replay process during [durable function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution.
+      flags:
+        --checkpoint-token=!: A checkpoint token that identifies the current state of the execution.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: If `NextMarker` was returned from a previous request, use this value to retrieve the next page of operations.
+        --max-items=: The maximum number of operations to return per call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-event-source-mapping
       description: Returns details about an event source mapping.
       flags:
@@ -464,6 +511,7 @@ commands:
       description: Invokes a Lambda function.
       flags:
         --client-context=: Up to 3,583 bytes of base64-encoded data about the invoking client to pass to the function in the context object.
+        --durable-execution-name=: Optional unique name for the durable execution.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --invocation-type=: Choose from the following options.
         --log-type=: Set to `Tail` to include the execution log in the response.
@@ -529,6 +577,26 @@ commands:
         --max-items=: Maximum number of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-durable-executions-by-function
+      description: Returns a list of [durable executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) for a specified Lambda function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --durable-execution-name=: Filter executions by name.
+        --function-name=!: The name or ARN of the Lambda function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marker=: Pagination token from a previous request to continue retrieving results.
+        --max-items=: Maximum number of executions to return (1-1000).
+        --no-reverse-order: Set to true to return results in reverse chronological order (newest first).
+        --page-size=: The size of each page to get in the AWS service call.
+        --qualifier=: The function version or alias.
+        --reverse-order: Set to true to return results in reverse chronological order (newest first).
+        --started-after=: Filter executions that started after this timestamp (ISO 8601 format).
+        --started-before=: Filter executions that started before this timestamp (ISO 8601 format).
+        --starting-token=: A token to specify where to start paginating.
+        --statuses=:
+            description: Filter executions by status.
+            nargs: -1
     - name: list-event-source-mappings
       description: Lists event source mappings.
       flags:
@@ -881,6 +949,37 @@ commands:
         --qualifier=: Specify a version or alias to remove permissions from a published version of the function.
         --revision-id=: Update the policy only if the revision ID matches the ID that's specified.
         --statement-id=!: Statement ID of the permission to remove.
+    - name: send-durable-execution-callback-failure
+      description: Sends a failure response for a callback operation in a durable execution.
+      flags:
+        --callback-id=!: The unique identifier for the callback operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --error=: Error details describing why the callback operation failed.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: send-durable-execution-callback-heartbeat
+      description: Sends a heartbeat signal for a long-running callback operation to prevent timeout.
+      flags:
+        --callback-id=!: The unique identifier for the callback operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: send-durable-execution-callback-success
+      description: Sends a successful completion response for a callback operation in a durable execution.
+      flags:
+        --callback-id=!: The unique identifier for the callback operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --result=: The result data from the successful callback operation.
+    - name: stop-durable-execution
+      description: Stops a running [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
+        --error=: Optional error details explaining why the execution is being stopped.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: tag-resource
       description: Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a function, event source mapping, or code signing configuration.
       flags:
@@ -996,6 +1095,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dead-letter-config=: A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.
         --description=: A description of the function.
+        --durable-config=: Configuration settings for durable functions.
         --environment=: Environment variables that are accessible from function code during execution.
         --ephemeral-storage=: The size of the function's `/tmp` directory in MB.
         --file-system-configs=:

@@ -67,6 +67,23 @@ commands:
         --name=!: The name of the code interpreter.
         --network-configuration=!: The network configuration for the code interpreter.
         --tags=: A map of tag keys and values to assign to the code interpreter.
+    - name: create-evaluator
+      description: Creates a custom evaluator for agent quality assessment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: The description of the evaluator that explains its purpose and evaluation criteria.
+        --evaluator-config=!: The configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration.
+        --evaluator-name=!: The name of the evaluator.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --level=!: The evaluation level that determines the scope of evaluation.
+      completion:
+        flag:
+            level:
+                - TOOL_CALL
+                - TRACE
+                - SESSION
     - name: create-gateway
       description: Creates a gateway for Amazon Bedrock Agent.
       flags:
@@ -83,6 +100,7 @@ commands:
             nargs: -1
         --kms-key-arn=: The Amazon Resource Name (ARN) of the KMS key used to encrypt data associated with the gateway.
         --name=!: The name of the gateway.
+        --policy-engine-configuration=: The policy engine configuration for the gateway.
         --protocol-configuration=: The configuration settings for the protocol specified in the `protocolType` parameter.
         --protocol-type=!: The protocol type for the gateway.
         --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the gateway to access Amazon Web Services services.
@@ -165,6 +183,49 @@ commands:
                 - FusionAuthOauth2
                 - Auth0Oauth2
                 - CognitoOauth2
+    - name: create-online-evaluation-config
+      description: Creates an online evaluation configuration for continuous monitoring of agent performance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --data-source-config=!: The data source configuration that specifies CloudWatch log groups and service names to monitor for agent traces.
+        --description=: The description of the online evaluation configuration that explains its monitoring purpose and scope.
+        --enable-on-create!: Whether to enable the online evaluation configuration immediately upon creation.
+        --evaluation-execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that grants permissions to read from CloudWatch logs, write evaluation results, and invoke Amazon Bedrock models for evaluation.
+        --evaluators=!:
+            description: The list of evaluators to apply during online evaluation.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enable-on-create!: Whether to enable the online evaluation configuration immediately upon creation.
+        --online-evaluation-config-name=!: The name of the online evaluation configuration.
+        --rule=!: The evaluation rule that defines sampling configuration, filters, and session detection settings for the online evaluation.
+    - name: create-policy
+      description: Creates a policy within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure the idempotency of the request.
+        --definition=!: The Cedar policy statement that defines the access control rules.
+        --description=: A human-readable description of the policy's purpose and functionality (1-4,096 characters).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The customer-assigned immutable name for the policy.
+        --policy-engine-id=!: The identifier of the policy engine which contains this policy.
+        --validation-mode=: The validation mode for the policy creation.
+      completion:
+        flag:
+            validation-mode:
+                - FAIL_ON_ANY_FINDINGS
+                - IGNORE_ALL_FINDINGS
+    - name: create-policy-engine
+      description: Creates a new policy engine within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: A human-readable description of the policy engine's purpose and scope (1-4,096 characters).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The customer-assigned immutable name for the policy engine.
     - name: create-workload-identity
       description: Creates a new workload identity.
       flags:
@@ -216,6 +277,13 @@ commands:
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --code-interpreter-id=!: The unique identifier of the code interpreter to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-evaluator
+      description: Deletes a custom evaluator.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluator-id=!: The unique identifier of the evaluator to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-gateway
       description: Deletes a gateway.
       flags:
@@ -246,6 +314,35 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the OAuth2 credential provider to delete.
+    - name: delete-online-evaluation-config
+      description: Deletes an online evaluation configuration and stops any ongoing evaluation processes associated with it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --online-evaluation-config-id=!: The unique identifier of the online evaluation configuration to delete.
+    - name: delete-policy
+      description: Deletes an existing policy from the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The identifier of the policy engine that manages the policy to be deleted.
+        --policy-id=!: The unique identifier of the policy to be deleted.
+    - name: delete-policy-engine
+      description: Deletes an existing policy engine from the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The unique identifier of the policy engine to be deleted.
+    - name: delete-resource-policy
+      description: Deletes the resource-based policy for a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to delete the resource policy.
     - name: delete-workload-identity
       description: Deletes a workload identity.
       flags:
@@ -290,6 +387,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-interpreter-id=!: The unique identifier of the code interpreter to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-evaluator
+      description: Retrieves detailed information about an evaluator, including its configuration, status, and metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --evaluator-id=!: The unique identifier of the evaluator to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-gateway
       description: Retrieves information about a specific Gateway.
       flags:
@@ -319,6 +423,43 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the OAuth2 credential provider to retrieve.
+    - name: get-online-evaluation-config
+      description: Retrieves detailed information about an online evaluation configuration, including its rules, data sources, evaluators, and execution status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --online-evaluation-config-id=!: The unique identifier of the online evaluation configuration to retrieve.
+    - name: get-policy
+      description: Retrieves detailed information about a specific policy within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The identifier of the policy engine that manages the policy to be retrieved.
+        --policy-id=!: The unique identifier of the policy to be retrieved.
+    - name: get-policy-engine
+      description: Retrieves detailed information about a specific policy engine within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The unique identifier of the policy engine to be retrieved.
+    - name: get-policy-generation
+      description: Retrieves information about a policy generation request within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The identifier of the policy engine associated with the policy generation request.
+        --policy-generation-id=!: The unique identifier of the policy generation request to be retrieved.
+    - name: get-resource-policy
+      description: Retrieves the resource-based policy for a specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to retrieve the resource policy.
     - name: get-token-vault
       description: Retrieves information about a token vault.
       flags:
@@ -413,6 +554,17 @@ commands:
             type:
                 - SYSTEM
                 - CUSTOM
+    - name: list-evaluators
+      description: Lists all available evaluators, including both builtin evaluators provided by the service and custom evaluators created by the user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of evaluators to return in a single response.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-gateway-targets
       description: Lists all targets for a specific gateway.
       flags:
@@ -458,6 +610,66 @@ commands:
         --next-token=: Pagination token.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-online-evaluation-configs
+      description: Lists all online evaluation configurations in the account, providing summary information about each configuration's status and settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of online evaluation configurations to return in a single response.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-policies
+      description: Retrieves a list of policies within the AgentCore Policy engine.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of policies to return in a single response.
+        --next-token=: A pagination token returned from a previous [ListPolicies](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicies.html) call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-engine-id=!: The identifier of the policy engine whose policies to retrieve.
+        --starting-token=: A token to specify where to start paginating.
+        --target-resource-scope=: Optional filter to list policies that apply to a specific resource scope or resource type.
+    - name: list-policy-engines
+      description: Retrieves a list of policy engines within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of policy engines to return in a single response.
+        --next-token=: A pagination token returned from a previous [ListPolicyEngines](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyEngines.html) call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-policy-generation-assets
+      description: Retrieves a list of generated policy assets from a policy generation request within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of policy generation assets to return in a single response.
+        --next-token=: A pagination token returned from a previous [ListPolicyGenerationAssets](https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/API_ListPolicyGenerationAssets.html) call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-engine-id=!: The unique identifier of the policy engine associated with the policy generation request.
+        --policy-generation-id=!: The unique identifier of the policy generation request whose assets are to be retrieved.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-policy-generations
+      description: Retrieves a list of policy generation requests within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of policy generations to return in a single response.
+        --next-token=: A pagination token for retrieving additional policy generations when results are paginated.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-engine-id=!: The identifier of the policy engine whose policy generations to retrieve.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Lists the tags associated with the specified resource.
       flags:
@@ -476,6 +688,14 @@ commands:
         --next-token=: Pagination token.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Creates or updates a resource-based policy for a resource with the specified resourceArn.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The resource policy to create or update.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to create or update the resource policy.
     - name: set-token-vault-cmk
       description: Sets the customer master key (CMK) for a token vault.
       flags:
@@ -484,6 +704,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-configuration=!: The KMS configuration for the token vault, including the key type and KMS key ARN.
         --token-vault-id=: The unique identifier of the token vault to update.
+    - name: start-policy-generation
+      description: Initiates the AI-powered generation of Cedar policies from natural language descriptions within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure the idempotency of the request.
+        --content=!: The natural language description of the desired policy behavior.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A customer-assigned name for the policy generation request.
+        --policy-engine-id=!: The identifier of the policy engine that provides the context for policy generation.
+        --resource=!: The resource information that provides context for policy generation.
     - name: synchronize-gateway-targets
       description: The gateway targets.
       flags:
@@ -548,6 +779,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the API key credential provider to update.
+    - name: update-evaluator
+      description: Updates a custom evaluator's configuration, description, or evaluation level.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: The updated description of the evaluator.
+        --evaluator-config=: The updated configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration.
+        --evaluator-id=!: The unique identifier of the evaluator to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --level=: The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines the scope of evaluation.
+      completion:
+        flag:
+            level:
+                - TOOL_CALL
+                - TRACE
+                - SESSION
     - name: update-gateway
       description: Updates an existing gateway.
       flags:
@@ -564,6 +812,7 @@ commands:
             nargs: -1
         --kms-key-arn=: The updated ARN of the KMS key used to encrypt the gateway.
         --name=!: The name of the gateway.
+        --policy-engine-configuration=: The updated policy engine configuration for the gateway.
         --protocol-configuration=: ""
         --protocol-type=!: The updated protocol type for the gateway.
         --role-arn=!: The updated IAM role ARN that provides permissions for the gateway.
@@ -640,6 +889,51 @@ commands:
                 - FusionAuthOauth2
                 - Auth0Oauth2
                 - CognitoOauth2
+    - name: update-online-evaluation-config
+      description: Updates an online evaluation configuration's settings, including rules, data sources, evaluators, and execution status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --data-source-config=: The updated data source configuration specifying CloudWatch log groups and service names to monitor.
+        --description=: The updated description of the online evaluation configuration.
+        --evaluation-execution-role-arn=: The updated Amazon Resource Name (ARN) of the IAM role used for evaluation execution.
+        --evaluators=:
+            description: The updated list of evaluators to apply during online evaluation.
+            nargs: -1
+        --execution-status=: The updated execution status to enable or disable the online evaluation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --online-evaluation-config-id=!: The unique identifier of the online evaluation configuration to update.
+        --rule=: The updated evaluation rule containing sampling configuration, filters, and session settings.
+      completion:
+        flag:
+            execution-status:
+                - ENABLED
+                - DISABLED
+    - name: update-policy
+      description: Updates an existing policy within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=!: The new Cedar policy statement that defines the access control rules.
+        --description=: The new human-readable description for the policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The identifier of the policy engine that manages the policy to be updated.
+        --policy-id=!: The unique identifier of the policy to be updated.
+        --validation-mode=: The validation mode for the policy update.
+      completion:
+        flag:
+            validation-mode:
+                - FAIL_ON_ANY_FINDINGS
+                - IGNORE_ALL_FINDINGS
+    - name: update-policy-engine
+      description: Updates an existing policy engine within the AgentCore Policy system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description for the policy engine.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-engine-id=!: The unique identifier of the policy engine to be updated.
     - name: update-workload-identity
       description: Updates an existing workload identity.
       flags:
@@ -660,3 +954,41 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --memory-id=!: The unique identifier of the memory to retrieve.
+        - name: policy-active
+          description: Retrieves detailed information about a specific policy within the AgentCore Policy system.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --policy-engine-id=!: The identifier of the policy engine that manages the policy to be retrieved.
+            --policy-id=!: The unique identifier of the policy to be retrieved.
+        - name: policy-deleted
+          description: Retrieves detailed information about a specific policy within the AgentCore Policy system.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --policy-engine-id=!: The identifier of the policy engine that manages the policy to be retrieved.
+            --policy-id=!: The unique identifier of the policy to be retrieved.
+        - name: policy-engine-active
+          description: Retrieves detailed information about a specific policy engine within the AgentCore Policy system.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --policy-engine-id=!: The unique identifier of the policy engine to be retrieved.
+        - name: policy-engine-deleted
+          description: Retrieves detailed information about a specific policy engine within the AgentCore Policy system.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --policy-engine-id=!: The unique identifier of the policy engine to be retrieved.
+        - name: policy-generation-completed
+          description: Retrieves information about a policy generation request within the AgentCore Policy system.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --policy-engine-id=!: The identifier of the policy engine associated with the policy generation request.
+            --policy-generation-id=!: The unique identifier of the policy generation request to be retrieved.
