@@ -8,7 +8,7 @@ require (
 	github.com/carapace-sh/carapace-bridge v1.4.9
 	github.com/carapace-sh/carapace-spec v1.4.0
 	github.com/neurosnap/sentences v1.1.2
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
 	gopkg.in/ini.v1 v1.67.0
 	gopkg.in/yaml.v3 v3.0.1
