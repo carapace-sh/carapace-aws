@@ -36,7 +36,7 @@ jobs:
           cmd/carapace-aws/carapace-aws.test
         retention-days: 1
 
-  _: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: _, version: "${{ needs.build.aws.outputs.version }}"}} # root
+  _: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: _, version: "${{ needs.build.outputs.version }}"}} # root
 
   accessanalyzer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: accessanalyzer, version: "${{ needs.build.outputs.version }}"}}
   account: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: account, version: "${{ needs.build.outputs.version }}"}}
