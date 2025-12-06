@@ -10,9 +10,14 @@ jobs:
   build:
     runs-on: ubuntu-latest
     container: ghcr.io/carapace-sh/go:1.23.1
+    outputs:
+      version: ${{ steps.aws.outputs.version }}
     steps:
     - name: shallow clone
       uses: actions/checkout@v6
+
+    - id: aws
+      run: grep --only-matching 'github.com/aws/aws-cli#\([^"]\+\)' package.json | sed 's/.*#/version=/' >> "$GITHUB_OUTPUT"
 
     - name: fix git safe.directory
       run:  git config --global --add safe.directory '*'
@@ -31,423 +36,423 @@ jobs:
           cmd/carapace-aws/carapace-aws.test
         retention-days: 1
 
-  _: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: _}} # root
+  _: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: _, version: "${{ needs.build.aws.outputs.version }}"}} # root
 
-  accessanalyzer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: accessanalyzer}}
-  account: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: account}}
-  acm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: acm}}
-  acm-pca: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: acm-pca}}
-  aiops: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: aiops}}
-  amp: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amp}}
-  amplify: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplify}}
-  amplifybackend: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplifybackend}}
-  amplifyuibuilder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplifyuibuilder}}
-  apigateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigateway}}
-  apigatewaymanagementapi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigatewaymanagementapi}}
-  apigatewayv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigatewayv2}}
-  appconfig: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appconfig}}
-  appconfigdata: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appconfigdata}}
-  appfabric: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appfabric}}
-  appflow: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appflow}}
-  appintegrations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appintegrations}}
-  application-autoscaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-autoscaling}}
-  application-insights: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-insights}}
-  application-signals: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-signals}}
-  applicationcostprofiler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: applicationcostprofiler}}
-  appmesh: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appmesh}}
-  apprunner: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apprunner}}
-  appstream: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appstream}}
-  appsync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appsync}}
-  arc-region-switch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: arc-region-switch}}
-  arc-zonal-shift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: arc-zonal-shift}}
-  artifact: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: artifact}}
-  athena: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: athena}}
-  auditmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: auditmanager}}
-  autoscaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: autoscaling}}
-  autoscaling-plans: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: autoscaling-plans}}
-  b2bi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: b2bi}}
-  backup: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backup}}
-  backup-gateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backup-gateway}}
-  backupsearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backupsearch}}
-  batch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: batch}}
-  bcm-dashboards: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-dashboards}}
-  bcm-data-exports: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-data-exports}}
-  bcm-pricing-calculator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-pricing-calculator}}
-  bcm-recommended-actions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-recommended-actions}}
-  bedrock: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock}}
-  bedrock-agent: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agent}}
-  bedrock-agent-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agent-runtime}}
-  bedrock-agentcore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agentcore}}
-  bedrock-agentcore-control: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agentcore-control}}
-  bedrock-data-automation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-data-automation}}
-  bedrock-data-automation-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-data-automation-runtime}}
-  bedrock-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-runtime}}
-  billing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: billing}}
-  billingconductor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: billingconductor}}
-  braket: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: braket}}
-  budgets: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: budgets}}
-  ce: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ce}}
-  chatbot: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chatbot}}
-  chime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime}}
-  chime-sdk-identity: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-identity}}
-  chime-sdk-media-pipelines: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-media-pipelines}}
-  chime-sdk-meetings: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-meetings}}
-  chime-sdk-messaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-messaging}}
-  chime-sdk-voice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-voice}}
-  cleanrooms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cleanrooms}}
-  cleanroomsml: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cleanroomsml}}
-  cli-dev: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cli-dev}}
-  cloud9: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloud9}}
-  cloudcontrol: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudcontrol}}
-  clouddirectory: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: clouddirectory}}
-  cloudformation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudformation}}
-  cloudfront: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudfront}}
-  cloudfront-keyvaluestore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudfront-keyvaluestore}}
-  cloudhsm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudhsm}}
-  cloudhsmv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudhsmv2}}
-  cloudsearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudsearch}}
-  cloudsearchdomain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudsearchdomain}}
-  cloudtrail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudtrail}}
-  cloudtrail-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudtrail-data}}
-  cloudwatch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudwatch}}
-  codeartifact: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeartifact}}
-  codebuild: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codebuild}}
-  codecatalyst: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codecatalyst}}
-  codecommit: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codecommit}}
-  codeconnections: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeconnections}}
-  codeguru-reviewer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguru-reviewer}}
-  codeguru-security: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguru-security}}
-  codeguruprofiler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguruprofiler}}
-  codepipeline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codepipeline}}
-  codestar-connections: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codestar-connections}}
-  codestar-notifications: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codestar-notifications}}
-  cognito-identity: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-identity}}
-  cognito-idp: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-idp}}
-  cognito-sync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-sync}}
-  comprehend: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: comprehend}}
-  comprehendmedical: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: comprehendmedical}}
-  compute-optimizer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: compute-optimizer}}
-  compute-optimizer-automation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: compute-optimizer-automation}}
-  configservice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: configservice}}
-  configure: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: configure}}
-  connect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connect}}
-  connect-contact-lens: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connect-contact-lens}}
-  connectcampaigns: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcampaigns}}
-  connectcampaignsv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcampaignsv2}}
-  connectcases: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcases}}
-  connectparticipant: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectparticipant}}
-  controlcatalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: controlcatalog}}
-  controltower: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: controltower}}
-  cost-optimization-hub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cost-optimization-hub}}
-  cur: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cur}}
-  customer-profiles: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: customer-profiles}}
-  databrew: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: databrew}}
-  dataexchange: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dataexchange}}
-  datapipeline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datapipeline}}
-  datasync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datasync}}
-  datazone: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datazone}}
-  dax: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dax}}
-  ddb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ddb}}
-  deadline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: deadline}}
-  deploy: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: deploy}}
-  detective: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: detective}}
-  devicefarm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: devicefarm}}
-  devops-guru: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: devops-guru}}
-  directconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: directconnect}}
-  discovery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: discovery}}
-  dlm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dlm}}
-  dms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dms}}
-  docdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: docdb}}
-  docdb-elastic: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: docdb-elastic}}
-  drs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: drs}}
-  ds: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ds}}
-  ds-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ds-data}}
-  dsql: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dsql}}
-  dynamodb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dynamodb}}
-  dynamodbstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dynamodbstreams}}
-  ebs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ebs}}
-  ec2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ec2}}
-  ec2-instance-connect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ec2-instance-connect}}
-  ecr: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecr}}
-  ecr-public: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecr-public}}
-  ecs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecs}}
-  efs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: efs}}
-  eks: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: eks}}
-  eks-auth: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: eks-auth}}
-  elasticache: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elasticache}}
-  elasticbeanstalk: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elasticbeanstalk}}
-  elastictranscoder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elastictranscoder}}
-  elb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elb}}
-  elbv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elbv2}}
-  emr: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr}}
-  emr-containers: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr-containers}}
-  emr-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr-serverless}}
-  entityresolution: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: entityresolution}}
-  es: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: es}}
-  events: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: events}}
-  evidently: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: evidently}}
-  evs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: evs}}
-  finspace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: finspace}}
-  finspace-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: finspace-data}}
-  firehose: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: firehose}}
-  fis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fis}}
-  fms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fms}}
-  forecast: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: forecast}}
-  forecastquery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: forecastquery}}
-  frauddetector: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: frauddetector}}
-  freetier: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: freetier}}
-  fsx: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fsx}}
-  gamelift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: gamelift}}
-  gameliftstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: gameliftstreams}}
-  geo-maps: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-maps}}
-  geo-places: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-places}}
-  geo-routes: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-routes}}
-  glacier: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: glacier}}
-  globalaccelerator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: globalaccelerator}}
-  glue: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: glue}}
-  grafana: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: grafana}}
-  greengrass: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: greengrass}}
-  greengrassv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: greengrassv2}}
-  groundstation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: groundstation}}
-  guardduty: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: guardduty}}
-  health: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: health}}
-  healthlake: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: healthlake}}
-  history: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: history}}
-  iam: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iam}}
-  identitystore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: identitystore}}
-  imagebuilder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: imagebuilder}}
-  importexport: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: importexport}}
-  inspector: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector}}
-  inspector-scan: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector-scan}}
-  inspector2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector2}}
-  internetmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: internetmonitor}}
-  invoicing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: invoicing}}
-  iot: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot}}
-  iot-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-data}}
-  iot-jobs-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-jobs-data}}
-  iot-managed-integrations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-managed-integrations}}
-  iotanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotanalytics}}
-  iotdeviceadvisor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotdeviceadvisor}}
-  iotevents: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotevents}}
-  iotevents-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotevents-data}}
-  iotfleetwise: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotfleetwise}}
-  iotsecuretunneling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotsecuretunneling}}
-  iotsitewise: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotsitewise}}
-  iotthingsgraph: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotthingsgraph}}
-  iottwinmaker: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iottwinmaker}}
-  iotwireless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotwireless}}
-  ivs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivs}}
-  ivs-realtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivs-realtime}}
-  ivschat: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivschat}}
-  kafka: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kafka}}
-  kafkaconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kafkaconnect}}
-  kendra: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kendra}}
-  kendra-ranking: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kendra-ranking}}
-  keyspaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: keyspaces}}
-  keyspacesstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: keyspacesstreams}}
-  kinesis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis}}
-  kinesis-video-archived-media: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-archived-media}}
-  kinesis-video-media: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-media}}
-  kinesis-video-signaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-signaling}}
-  kinesis-video-webrtc-storage: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-webrtc-storage}}
-  kinesisanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisanalytics}}
-  kinesisanalyticsv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisanalyticsv2}}
-  kinesisvideo: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisvideo}}
-  kms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kms}}
-  lakeformation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lakeformation}}
-  lambda: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lambda}}
-  launch-wizard: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: launch-wizard}}
-  lex-models: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lex-models}}
-  lex-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lex-runtime}}
-  lexv2-models: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lexv2-models}}
-  lexv2-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lexv2-runtime}}
-  license-manager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager}}
-  license-manager-linux-subscriptions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager-linux-subscriptions}}
-  license-manager-user-subscriptions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager-user-subscriptions}}
-  lightsail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lightsail}}
-  location: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: location}}
-  login: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: login}}
-  logout: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: logout}}
-  logs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: logs}}
-  lookoutequipment: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lookoutequipment}}
-  m2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: m2}}
-  machinelearning: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: machinelearning}}
-  macie2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: macie2}}
-  mailmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mailmanager}}
-  managedblockchain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: managedblockchain}}
-  managedblockchain-query: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: managedblockchain-query}}
-  marketplace-agreement: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-agreement}}
-  marketplace-catalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-catalog}}
-  marketplace-deployment: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-deployment}}
-  marketplace-entitlement: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-entitlement}}
-  marketplace-reporting: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-reporting}}
-  marketplacecommerceanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplacecommerceanalytics}}
-  mediaconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediaconnect}}
-  mediaconvert: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediaconvert}}
-  medialive: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: medialive}}
-  mediapackage: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackage}}
-  mediapackage-vod: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackage-vod}}
-  mediapackagev2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackagev2}}
-  mediastore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediastore}}
-  mediastore-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediastore-data}}
-  mediatailor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediatailor}}
-  medical-imaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: medical-imaging}}
-  memorydb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: memorydb}}
-  meteringmarketplace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: meteringmarketplace}}
-  mgh: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mgh}}
-  mgn: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mgn}}
-  migration-hub-refactor-spaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migration-hub-refactor-spaces}}
-  migrationhub-config: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhub-config}}
-  migrationhuborchestrator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhuborchestrator}}
-  migrationhubstrategy: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhubstrategy}}
-  mpa: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mpa}}
-  mq: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mq}}
-  mturk: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mturk}}
-  mwaa: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mwaa}}
-  mwaa-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mwaa-serverless}}
-  neptune: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptune}}
-  neptune-graph: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptune-graph}}
-  neptunedata: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptunedata}}
-  network-firewall: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: network-firewall}}
-  networkflowmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkflowmonitor}}
-  networkmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkmanager}}
-  networkmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkmonitor}}
-  notifications: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: notifications}}
-  notificationscontacts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: notificationscontacts}}
-  nova-act: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: nova-act}}
-  oam: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: oam}}
-  observabilityadmin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: observabilityadmin}}
-  odb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: odb}}
-  omics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: omics}}
-  opensearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: opensearch}}
-  opensearchserverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: opensearchserverless}}
-  organizations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: organizations}}
-  osis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: osis}}
-  outposts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: outposts}}
-  panorama: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: panorama}}
-  partnercentral-channel: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: partnercentral-channel}}
-  partnercentral-selling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: partnercentral-selling}}
-  payment-cryptography: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: payment-cryptography}}
-  payment-cryptography-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: payment-cryptography-data}}
-  pca-connector-ad: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pca-connector-ad}}
-  pca-connector-scep: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pca-connector-scep}}
-  pcs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pcs}}
-  personalize: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize}}
-  personalize-events: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize-events}}
-  personalize-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize-runtime}}
-  pi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pi}}
-  pinpoint: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint}}
-  pinpoint-email: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-email}}
-  pinpoint-sms-voice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-sms-voice}}
-  pinpoint-sms-voice-v2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-sms-voice-v2}}
-  pipes: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pipes}}
-  polly: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: polly}}
-  pricing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pricing}}
-  proton: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: proton}}
-  qapps: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qapps}}
-  qbusiness: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qbusiness}}
-  qconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qconnect}}
-  quicksight: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: quicksight}}
-  ram: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ram}}
-  rbin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rbin}}
-  rds: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rds}}
-  rds-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rds-data}}
-  redshift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift}}
-  redshift-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift-data}}
-  redshift-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift-serverless}}
-  rekognition: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rekognition}}
-  repostspace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: repostspace}}
-  resiliencehub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resiliencehub}}
-  resource-explorer-2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resource-explorer-2}}
-  resource-groups: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resource-groups}}
-  resourcegroupstaggingapi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resourcegroupstaggingapi}}
-  rolesanywhere: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rolesanywhere}}
-  route53: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53}}
-  route53-recovery-cluster: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-cluster}}
-  route53-recovery-control-config: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-control-config}}
-  route53-recovery-readiness: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-readiness}}
-  route53domains: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53domains}}
-  route53profiles: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53profiles}}
-  route53resolver: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53resolver}}
-  rtbfabric: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rtbfabric}}
-  rum: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rum}}
-  s3: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3}}
-  s3api: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3api}}
-  s3control: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3control}}
-  s3outposts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3outposts}}
-  s3tables: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3tables}}
-  s3vectors: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3vectors}}
-  sagemaker: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker}}
-  sagemaker-a2i-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-a2i-runtime}}
-  sagemaker-edge: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-edge}}
-  sagemaker-featurestore-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-featurestore-runtime}}
-  sagemaker-geospatial: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-geospatial}}
-  sagemaker-metrics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-metrics}}
-  sagemaker-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-runtime}}
-  savingsplans: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: savingsplans}}
-  scheduler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: scheduler}}
-  schemas: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: schemas}}
-  sdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sdb}}
-  secretsmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: secretsmanager}}
-  security-ir: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: security-ir}}
-  securityhub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: securityhub}}
-  securitylake: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: securitylake}}
-  serverlessrepo: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: serverlessrepo}}
-  service-quotas: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: service-quotas}}
-  servicecatalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicecatalog}}
-  servicecatalog-appregistry: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicecatalog-appregistry}}
-  servicediscovery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicediscovery}}
-  ses: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ses}}
-  sesv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sesv2}}
-  shield: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: shield}}
-  signer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: signer}}
-  signin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: signin}}
-  simspaceweaver: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: simspaceweaver}}
-  snow-device-management: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: snow-device-management}}
-  snowball: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: snowball}}
-  sns: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sns}}
-  socialmessaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: socialmessaging}}
-  sqs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sqs}}
-  ssm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm}}
-  ssm-contacts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-contacts}}
-  ssm-guiconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-guiconnect}}
-  ssm-incidents: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-incidents}}
-  ssm-quicksetup: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-quicksetup}}
-  ssm-sap: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-sap}}
-  sso: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso}}
-  sso-admin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso-admin}}
-  sso-oidc: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso-oidc}}
-  stepfunctions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: stepfunctions}}
-  storagegateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: storagegateway}}
-  sts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sts}}
-  supplychain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: supplychain}}
-  support: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: support}}
-  support-app: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: support-app}}
-  swf: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: swf}}
-  synthetics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: synthetics}}
-  taxsettings: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: taxsettings}}
-  textract: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: textract}}
-  timestream-influxdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-influxdb}}
-  timestream-query: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-query}}
-  timestream-write: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-write}}
-  tnb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: tnb}}
-  transcribe: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: transcribe}}
-  transfer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: transfer}}
-  translate: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: translate}}
-  trustedadvisor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: trustedadvisor}}
-  verifiedpermissions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: verifiedpermissions}}
-  voice-id: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: voice-id}}
-  vpc-lattice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: vpc-lattice}}
-  waf: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: waf}}
-  waf-regional: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: waf-regional}}
-  wafv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wafv2}}
-  wellarchitected: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wellarchitected}}
-  wisdom: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wisdom}}
-  workdocs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workdocs}}
-  workmail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workmail}}
-  workmailmessageflow: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workmailmessageflow}}
-  workspaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces}}
-  workspaces-instances: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-instances}}
-  workspaces-thin-client: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-thin-client}}
-  workspaces-web: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-web}}
-  xray: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: xray}}
+  accessanalyzer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: accessanalyzer, version: "${{ needs.build.outputs.version }}"}}
+  account: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: account, version: "${{ needs.build.outputs.version }}"}}
+  acm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: acm, version: "${{ needs.build.outputs.version }}"}}
+  acm-pca: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: acm-pca, version: "${{ needs.build.outputs.version }}"}}
+  aiops: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: aiops, version: "${{ needs.build.outputs.version }}"}}
+  amp: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amp, version: "${{ needs.build.outputs.version }}"}}
+  amplify: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplify, version: "${{ needs.build.outputs.version }}"}}
+  amplifybackend: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplifybackend, version: "${{ needs.build.outputs.version }}"}}
+  amplifyuibuilder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: amplifyuibuilder, version: "${{ needs.build.outputs.version }}"}}
+  apigateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigateway, version: "${{ needs.build.outputs.version }}"}}
+  apigatewaymanagementapi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigatewaymanagementapi, version: "${{ needs.build.outputs.version }}"}}
+  apigatewayv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apigatewayv2, version: "${{ needs.build.outputs.version }}"}}
+  appconfig: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appconfig, version: "${{ needs.build.outputs.version }}"}}
+  appconfigdata: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appconfigdata, version: "${{ needs.build.outputs.version }}"}}
+  appfabric: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appfabric, version: "${{ needs.build.outputs.version }}"}}
+  appflow: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appflow, version: "${{ needs.build.outputs.version }}"}}
+  appintegrations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appintegrations, version: "${{ needs.build.outputs.version }}"}}
+  application-autoscaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-autoscaling, version: "${{ needs.build.outputs.version }}"}}
+  application-insights: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-insights, version: "${{ needs.build.outputs.version }}"}}
+  application-signals: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: application-signals, version: "${{ needs.build.outputs.version }}"}}
+  applicationcostprofiler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: applicationcostprofiler, version: "${{ needs.build.outputs.version }}"}}
+  appmesh: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appmesh, version: "${{ needs.build.outputs.version }}"}}
+  apprunner: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: apprunner, version: "${{ needs.build.outputs.version }}"}}
+  appstream: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appstream, version: "${{ needs.build.outputs.version }}"}}
+  appsync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: appsync, version: "${{ needs.build.outputs.version }}"}}
+  arc-region-switch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: arc-region-switch, version: "${{ needs.build.outputs.version }}"}}
+  arc-zonal-shift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: arc-zonal-shift, version: "${{ needs.build.outputs.version }}"}}
+  artifact: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: artifact, version: "${{ needs.build.outputs.version }}"}}
+  athena: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: athena, version: "${{ needs.build.outputs.version }}"}}
+  auditmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: auditmanager, version: "${{ needs.build.outputs.version }}"}}
+  autoscaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: autoscaling, version: "${{ needs.build.outputs.version }}"}}
+  autoscaling-plans: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: autoscaling-plans, version: "${{ needs.build.outputs.version }}"}}
+  b2bi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: b2bi, version: "${{ needs.build.outputs.version }}"}}
+  backup: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backup, version: "${{ needs.build.outputs.version }}"}}
+  backup-gateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backup-gateway, version: "${{ needs.build.outputs.version }}"}}
+  backupsearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: backupsearch, version: "${{ needs.build.outputs.version }}"}}
+  batch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: batch, version: "${{ needs.build.outputs.version }}"}}
+  bcm-dashboards: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-dashboards, version: "${{ needs.build.outputs.version }}"}}
+  bcm-data-exports: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-data-exports, version: "${{ needs.build.outputs.version }}"}}
+  bcm-pricing-calculator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-pricing-calculator, version: "${{ needs.build.outputs.version }}"}}
+  bcm-recommended-actions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bcm-recommended-actions, version: "${{ needs.build.outputs.version }}"}}
+  bedrock: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-agent: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agent, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-agent-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agent-runtime, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-agentcore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agentcore, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-agentcore-control: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-agentcore-control, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-data-automation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-data-automation, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-data-automation-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-data-automation-runtime, version: "${{ needs.build.outputs.version }}"}}
+  bedrock-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: bedrock-runtime, version: "${{ needs.build.outputs.version }}"}}
+  billing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: billing, version: "${{ needs.build.outputs.version }}"}}
+  billingconductor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: billingconductor, version: "${{ needs.build.outputs.version }}"}}
+  braket: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: braket, version: "${{ needs.build.outputs.version }}"}}
+  budgets: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: budgets, version: "${{ needs.build.outputs.version }}"}}
+  ce: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ce, version: "${{ needs.build.outputs.version }}"}}
+  chatbot: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chatbot, version: "${{ needs.build.outputs.version }}"}}
+  chime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime, version: "${{ needs.build.outputs.version }}"}}
+  chime-sdk-identity: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-identity, version: "${{ needs.build.outputs.version }}"}}
+  chime-sdk-media-pipelines: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-media-pipelines, version: "${{ needs.build.outputs.version }}"}}
+  chime-sdk-meetings: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-meetings, version: "${{ needs.build.outputs.version }}"}}
+  chime-sdk-messaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-messaging, version: "${{ needs.build.outputs.version }}"}}
+  chime-sdk-voice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: chime-sdk-voice, version: "${{ needs.build.outputs.version }}"}}
+  cleanrooms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cleanrooms, version: "${{ needs.build.outputs.version }}"}}
+  cleanroomsml: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cleanroomsml, version: "${{ needs.build.outputs.version }}"}}
+  cli-dev: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cli-dev, version: "${{ needs.build.outputs.version }}"}}
+  cloud9: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloud9, version: "${{ needs.build.outputs.version }}"}}
+  cloudcontrol: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudcontrol, version: "${{ needs.build.outputs.version }}"}}
+  clouddirectory: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: clouddirectory, version: "${{ needs.build.outputs.version }}"}}
+  cloudformation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudformation, version: "${{ needs.build.outputs.version }}"}}
+  cloudfront: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudfront, version: "${{ needs.build.outputs.version }}"}}
+  cloudfront-keyvaluestore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudfront-keyvaluestore, version: "${{ needs.build.outputs.version }}"}}
+  cloudhsm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudhsm, version: "${{ needs.build.outputs.version }}"}}
+  cloudhsmv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudhsmv2, version: "${{ needs.build.outputs.version }}"}}
+  cloudsearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudsearch, version: "${{ needs.build.outputs.version }}"}}
+  cloudsearchdomain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudsearchdomain, version: "${{ needs.build.outputs.version }}"}}
+  cloudtrail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudtrail, version: "${{ needs.build.outputs.version }}"}}
+  cloudtrail-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudtrail-data, version: "${{ needs.build.outputs.version }}"}}
+  cloudwatch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cloudwatch, version: "${{ needs.build.outputs.version }}"}}
+  codeartifact: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeartifact, version: "${{ needs.build.outputs.version }}"}}
+  codebuild: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codebuild, version: "${{ needs.build.outputs.version }}"}}
+  codecatalyst: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codecatalyst, version: "${{ needs.build.outputs.version }}"}}
+  codecommit: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codecommit, version: "${{ needs.build.outputs.version }}"}}
+  codeconnections: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeconnections, version: "${{ needs.build.outputs.version }}"}}
+  codeguru-reviewer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguru-reviewer, version: "${{ needs.build.outputs.version }}"}}
+  codeguru-security: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguru-security, version: "${{ needs.build.outputs.version }}"}}
+  codeguruprofiler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codeguruprofiler, version: "${{ needs.build.outputs.version }}"}}
+  codepipeline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codepipeline, version: "${{ needs.build.outputs.version }}"}}
+  codestar-connections: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codestar-connections, version: "${{ needs.build.outputs.version }}"}}
+  codestar-notifications: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: codestar-notifications, version: "${{ needs.build.outputs.version }}"}}
+  cognito-identity: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-identity, version: "${{ needs.build.outputs.version }}"}}
+  cognito-idp: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-idp, version: "${{ needs.build.outputs.version }}"}}
+  cognito-sync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cognito-sync, version: "${{ needs.build.outputs.version }}"}}
+  comprehend: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: comprehend, version: "${{ needs.build.outputs.version }}"}}
+  comprehendmedical: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: comprehendmedical, version: "${{ needs.build.outputs.version }}"}}
+  compute-optimizer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: compute-optimizer, version: "${{ needs.build.outputs.version }}"}}
+  compute-optimizer-automation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: compute-optimizer-automation, version: "${{ needs.build.outputs.version }}"}}
+  configservice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: configservice, version: "${{ needs.build.outputs.version }}"}}
+  configure: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: configure, version: "${{ needs.build.outputs.version }}"}}
+  connect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connect, version: "${{ needs.build.outputs.version }}"}}
+  connect-contact-lens: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connect-contact-lens, version: "${{ needs.build.outputs.version }}"}}
+  connectcampaigns: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcampaigns, version: "${{ needs.build.outputs.version }}"}}
+  connectcampaignsv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcampaignsv2, version: "${{ needs.build.outputs.version }}"}}
+  connectcases: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectcases, version: "${{ needs.build.outputs.version }}"}}
+  connectparticipant: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: connectparticipant, version: "${{ needs.build.outputs.version }}"}}
+  controlcatalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: controlcatalog, version: "${{ needs.build.outputs.version }}"}}
+  controltower: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: controltower, version: "${{ needs.build.outputs.version }}"}}
+  cost-optimization-hub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cost-optimization-hub, version: "${{ needs.build.outputs.version }}"}}
+  cur: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: cur, version: "${{ needs.build.outputs.version }}"}}
+  customer-profiles: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: customer-profiles, version: "${{ needs.build.outputs.version }}"}}
+  databrew: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: databrew, version: "${{ needs.build.outputs.version }}"}}
+  dataexchange: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dataexchange, version: "${{ needs.build.outputs.version }}"}}
+  datapipeline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datapipeline, version: "${{ needs.build.outputs.version }}"}}
+  datasync: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datasync, version: "${{ needs.build.outputs.version }}"}}
+  datazone: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: datazone, version: "${{ needs.build.outputs.version }}"}}
+  dax: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dax, version: "${{ needs.build.outputs.version }}"}}
+  ddb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ddb, version: "${{ needs.build.outputs.version }}"}}
+  deadline: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: deadline, version: "${{ needs.build.outputs.version }}"}}
+  deploy: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: deploy, version: "${{ needs.build.outputs.version }}"}}
+  detective: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: detective, version: "${{ needs.build.outputs.version }}"}}
+  devicefarm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: devicefarm, version: "${{ needs.build.outputs.version }}"}}
+  devops-guru: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: devops-guru, version: "${{ needs.build.outputs.version }}"}}
+  directconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: directconnect, version: "${{ needs.build.outputs.version }}"}}
+  discovery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: discovery, version: "${{ needs.build.outputs.version }}"}}
+  dlm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dlm, version: "${{ needs.build.outputs.version }}"}}
+  dms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dms, version: "${{ needs.build.outputs.version }}"}}
+  docdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: docdb, version: "${{ needs.build.outputs.version }}"}}
+  docdb-elastic: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: docdb-elastic, version: "${{ needs.build.outputs.version }}"}}
+  drs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: drs, version: "${{ needs.build.outputs.version }}"}}
+  ds: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ds, version: "${{ needs.build.outputs.version }}"}}
+  ds-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ds-data, version: "${{ needs.build.outputs.version }}"}}
+  dsql: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dsql, version: "${{ needs.build.outputs.version }}"}}
+  dynamodb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dynamodb, version: "${{ needs.build.outputs.version }}"}}
+  dynamodbstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: dynamodbstreams, version: "${{ needs.build.outputs.version }}"}}
+  ebs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ebs, version: "${{ needs.build.outputs.version }}"}}
+  ec2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ec2, version: "${{ needs.build.outputs.version }}"}}
+  ec2-instance-connect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ec2-instance-connect, version: "${{ needs.build.outputs.version }}"}}
+  ecr: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecr, version: "${{ needs.build.outputs.version }}"}}
+  ecr-public: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecr-public, version: "${{ needs.build.outputs.version }}"}}
+  ecs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ecs, version: "${{ needs.build.outputs.version }}"}}
+  efs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: efs, version: "${{ needs.build.outputs.version }}"}}
+  eks: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: eks, version: "${{ needs.build.outputs.version }}"}}
+  eks-auth: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: eks-auth, version: "${{ needs.build.outputs.version }}"}}
+  elasticache: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elasticache, version: "${{ needs.build.outputs.version }}"}}
+  elasticbeanstalk: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elasticbeanstalk, version: "${{ needs.build.outputs.version }}"}}
+  elastictranscoder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elastictranscoder, version: "${{ needs.build.outputs.version }}"}}
+  elb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elb, version: "${{ needs.build.outputs.version }}"}}
+  elbv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: elbv2, version: "${{ needs.build.outputs.version }}"}}
+  emr: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr, version: "${{ needs.build.outputs.version }}"}}
+  emr-containers: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr-containers, version: "${{ needs.build.outputs.version }}"}}
+  emr-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: emr-serverless, version: "${{ needs.build.outputs.version }}"}}
+  entityresolution: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: entityresolution, version: "${{ needs.build.outputs.version }}"}}
+  es: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: es, version: "${{ needs.build.outputs.version }}"}}
+  events: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: events, version: "${{ needs.build.outputs.version }}"}}
+  evidently: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: evidently, version: "${{ needs.build.outputs.version }}"}}
+  evs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: evs, version: "${{ needs.build.outputs.version }}"}}
+  finspace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: finspace, version: "${{ needs.build.outputs.version }}"}}
+  finspace-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: finspace-data, version: "${{ needs.build.outputs.version }}"}}
+  firehose: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: firehose, version: "${{ needs.build.outputs.version }}"}}
+  fis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fis, version: "${{ needs.build.outputs.version }}"}}
+  fms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fms, version: "${{ needs.build.outputs.version }}"}}
+  forecast: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: forecast, version: "${{ needs.build.outputs.version }}"}}
+  forecastquery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: forecastquery, version: "${{ needs.build.outputs.version }}"}}
+  frauddetector: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: frauddetector, version: "${{ needs.build.outputs.version }}"}}
+  freetier: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: freetier, version: "${{ needs.build.outputs.version }}"}}
+  fsx: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: fsx, version: "${{ needs.build.outputs.version }}"}}
+  gamelift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: gamelift, version: "${{ needs.build.outputs.version }}"}}
+  gameliftstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: gameliftstreams, version: "${{ needs.build.outputs.version }}"}}
+  geo-maps: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-maps, version: "${{ needs.build.outputs.version }}"}}
+  geo-places: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-places, version: "${{ needs.build.outputs.version }}"}}
+  geo-routes: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: geo-routes, version: "${{ needs.build.outputs.version }}"}}
+  glacier: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: glacier, version: "${{ needs.build.outputs.version }}"}}
+  globalaccelerator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: globalaccelerator, version: "${{ needs.build.outputs.version }}"}}
+  glue: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: glue, version: "${{ needs.build.outputs.version }}"}}
+  grafana: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: grafana, version: "${{ needs.build.outputs.version }}"}}
+  greengrass: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: greengrass, version: "${{ needs.build.outputs.version }}"}}
+  greengrassv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: greengrassv2, version: "${{ needs.build.outputs.version }}"}}
+  groundstation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: groundstation, version: "${{ needs.build.outputs.version }}"}}
+  guardduty: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: guardduty, version: "${{ needs.build.outputs.version }}"}}
+  health: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: health, version: "${{ needs.build.outputs.version }}"}}
+  healthlake: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: healthlake, version: "${{ needs.build.outputs.version }}"}}
+  history: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: history, version: "${{ needs.build.outputs.version }}"}}
+  iam: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iam, version: "${{ needs.build.outputs.version }}"}}
+  identitystore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: identitystore, version: "${{ needs.build.outputs.version }}"}}
+  imagebuilder: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: imagebuilder, version: "${{ needs.build.outputs.version }}"}}
+  importexport: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: importexport, version: "${{ needs.build.outputs.version }}"}}
+  inspector: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector, version: "${{ needs.build.outputs.version }}"}}
+  inspector-scan: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector-scan, version: "${{ needs.build.outputs.version }}"}}
+  inspector2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: inspector2, version: "${{ needs.build.outputs.version }}"}}
+  internetmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: internetmonitor, version: "${{ needs.build.outputs.version }}"}}
+  invoicing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: invoicing, version: "${{ needs.build.outputs.version }}"}}
+  iot: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot, version: "${{ needs.build.outputs.version }}"}}
+  iot-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-data, version: "${{ needs.build.outputs.version }}"}}
+  iot-jobs-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-jobs-data, version: "${{ needs.build.outputs.version }}"}}
+  iot-managed-integrations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iot-managed-integrations, version: "${{ needs.build.outputs.version }}"}}
+  iotanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotanalytics, version: "${{ needs.build.outputs.version }}"}}
+  iotdeviceadvisor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotdeviceadvisor, version: "${{ needs.build.outputs.version }}"}}
+  iotevents: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotevents, version: "${{ needs.build.outputs.version }}"}}
+  iotevents-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotevents-data, version: "${{ needs.build.outputs.version }}"}}
+  iotfleetwise: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotfleetwise, version: "${{ needs.build.outputs.version }}"}}
+  iotsecuretunneling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotsecuretunneling, version: "${{ needs.build.outputs.version }}"}}
+  iotsitewise: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotsitewise, version: "${{ needs.build.outputs.version }}"}}
+  iotthingsgraph: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotthingsgraph, version: "${{ needs.build.outputs.version }}"}}
+  iottwinmaker: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iottwinmaker, version: "${{ needs.build.outputs.version }}"}}
+  iotwireless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: iotwireless, version: "${{ needs.build.outputs.version }}"}}
+  ivs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivs, version: "${{ needs.build.outputs.version }}"}}
+  ivs-realtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivs-realtime, version: "${{ needs.build.outputs.version }}"}}
+  ivschat: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ivschat, version: "${{ needs.build.outputs.version }}"}}
+  kafka: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kafka, version: "${{ needs.build.outputs.version }}"}}
+  kafkaconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kafkaconnect, version: "${{ needs.build.outputs.version }}"}}
+  kendra: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kendra, version: "${{ needs.build.outputs.version }}"}}
+  kendra-ranking: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kendra-ranking, version: "${{ needs.build.outputs.version }}"}}
+  keyspaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: keyspaces, version: "${{ needs.build.outputs.version }}"}}
+  keyspacesstreams: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: keyspacesstreams, version: "${{ needs.build.outputs.version }}"}}
+  kinesis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis, version: "${{ needs.build.outputs.version }}"}}
+  kinesis-video-archived-media: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-archived-media, version: "${{ needs.build.outputs.version }}"}}
+  kinesis-video-media: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-media, version: "${{ needs.build.outputs.version }}"}}
+  kinesis-video-signaling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-signaling, version: "${{ needs.build.outputs.version }}"}}
+  kinesis-video-webrtc-storage: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesis-video-webrtc-storage, version: "${{ needs.build.outputs.version }}"}}
+  kinesisanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisanalytics, version: "${{ needs.build.outputs.version }}"}}
+  kinesisanalyticsv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisanalyticsv2, version: "${{ needs.build.outputs.version }}"}}
+  kinesisvideo: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kinesisvideo, version: "${{ needs.build.outputs.version }}"}}
+  kms: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: kms, version: "${{ needs.build.outputs.version }}"}}
+  lakeformation: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lakeformation, version: "${{ needs.build.outputs.version }}"}}
+  lambda: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lambda, version: "${{ needs.build.outputs.version }}"}}
+  launch-wizard: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: launch-wizard, version: "${{ needs.build.outputs.version }}"}}
+  lex-models: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lex-models, version: "${{ needs.build.outputs.version }}"}}
+  lex-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lex-runtime, version: "${{ needs.build.outputs.version }}"}}
+  lexv2-models: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lexv2-models, version: "${{ needs.build.outputs.version }}"}}
+  lexv2-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lexv2-runtime, version: "${{ needs.build.outputs.version }}"}}
+  license-manager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager, version: "${{ needs.build.outputs.version }}"}}
+  license-manager-linux-subscriptions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager-linux-subscriptions, version: "${{ needs.build.outputs.version }}"}}
+  license-manager-user-subscriptions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: license-manager-user-subscriptions, version: "${{ needs.build.outputs.version }}"}}
+  lightsail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lightsail, version: "${{ needs.build.outputs.version }}"}}
+  location: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: location, version: "${{ needs.build.outputs.version }}"}}
+  login: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: login, version: "${{ needs.build.outputs.version }}"}}
+  logout: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: logout, version: "${{ needs.build.outputs.version }}"}}
+  logs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: logs, version: "${{ needs.build.outputs.version }}"}}
+  lookoutequipment: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: lookoutequipment, version: "${{ needs.build.outputs.version }}"}}
+  m2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: m2, version: "${{ needs.build.outputs.version }}"}}
+  machinelearning: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: machinelearning, version: "${{ needs.build.outputs.version }}"}}
+  macie2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: macie2, version: "${{ needs.build.outputs.version }}"}}
+  mailmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mailmanager, version: "${{ needs.build.outputs.version }}"}}
+  managedblockchain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: managedblockchain, version: "${{ needs.build.outputs.version }}"}}
+  managedblockchain-query: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: managedblockchain-query, version: "${{ needs.build.outputs.version }}"}}
+  marketplace-agreement: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-agreement, version: "${{ needs.build.outputs.version }}"}}
+  marketplace-catalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-catalog, version: "${{ needs.build.outputs.version }}"}}
+  marketplace-deployment: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-deployment, version: "${{ needs.build.outputs.version }}"}}
+  marketplace-entitlement: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-entitlement, version: "${{ needs.build.outputs.version }}"}}
+  marketplace-reporting: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplace-reporting, version: "${{ needs.build.outputs.version }}"}}
+  marketplacecommerceanalytics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: marketplacecommerceanalytics, version: "${{ needs.build.outputs.version }}"}}
+  mediaconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediaconnect, version: "${{ needs.build.outputs.version }}"}}
+  mediaconvert: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediaconvert, version: "${{ needs.build.outputs.version }}"}}
+  medialive: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: medialive, version: "${{ needs.build.outputs.version }}"}}
+  mediapackage: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackage, version: "${{ needs.build.outputs.version }}"}}
+  mediapackage-vod: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackage-vod, version: "${{ needs.build.outputs.version }}"}}
+  mediapackagev2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediapackagev2, version: "${{ needs.build.outputs.version }}"}}
+  mediastore: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediastore, version: "${{ needs.build.outputs.version }}"}}
+  mediastore-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediastore-data, version: "${{ needs.build.outputs.version }}"}}
+  mediatailor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mediatailor, version: "${{ needs.build.outputs.version }}"}}
+  medical-imaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: medical-imaging, version: "${{ needs.build.outputs.version }}"}}
+  memorydb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: memorydb, version: "${{ needs.build.outputs.version }}"}}
+  meteringmarketplace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: meteringmarketplace, version: "${{ needs.build.outputs.version }}"}}
+  mgh: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mgh, version: "${{ needs.build.outputs.version }}"}}
+  mgn: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mgn, version: "${{ needs.build.outputs.version }}"}}
+  migration-hub-refactor-spaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migration-hub-refactor-spaces, version: "${{ needs.build.outputs.version }}"}}
+  migrationhub-config: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhub-config, version: "${{ needs.build.outputs.version }}"}}
+  migrationhuborchestrator: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhuborchestrator, version: "${{ needs.build.outputs.version }}"}}
+  migrationhubstrategy: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: migrationhubstrategy, version: "${{ needs.build.outputs.version }}"}}
+  mpa: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mpa, version: "${{ needs.build.outputs.version }}"}}
+  mq: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mq, version: "${{ needs.build.outputs.version }}"}}
+  mturk: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mturk, version: "${{ needs.build.outputs.version }}"}}
+  mwaa: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mwaa, version: "${{ needs.build.outputs.version }}"}}
+  mwaa-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: mwaa-serverless, version: "${{ needs.build.outputs.version }}"}}
+  neptune: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptune, version: "${{ needs.build.outputs.version }}"}}
+  neptune-graph: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptune-graph, version: "${{ needs.build.outputs.version }}"}}
+  neptunedata: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: neptunedata, version: "${{ needs.build.outputs.version }}"}}
+  network-firewall: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: network-firewall, version: "${{ needs.build.outputs.version }}"}}
+  networkflowmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkflowmonitor, version: "${{ needs.build.outputs.version }}"}}
+  networkmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkmanager, version: "${{ needs.build.outputs.version }}"}}
+  networkmonitor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: networkmonitor, version: "${{ needs.build.outputs.version }}"}}
+  notifications: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: notifications, version: "${{ needs.build.outputs.version }}"}}
+  notificationscontacts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: notificationscontacts, version: "${{ needs.build.outputs.version }}"}}
+  nova-act: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: nova-act, version: "${{ needs.build.outputs.version }}"}}
+  oam: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: oam, version: "${{ needs.build.outputs.version }}"}}
+  observabilityadmin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: observabilityadmin, version: "${{ needs.build.outputs.version }}"}}
+  odb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: odb, version: "${{ needs.build.outputs.version }}"}}
+  omics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: omics, version: "${{ needs.build.outputs.version }}"}}
+  opensearch: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: opensearch, version: "${{ needs.build.outputs.version }}"}}
+  opensearchserverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: opensearchserverless, version: "${{ needs.build.outputs.version }}"}}
+  organizations: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: organizations, version: "${{ needs.build.outputs.version }}"}}
+  osis: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: osis, version: "${{ needs.build.outputs.version }}"}}
+  outposts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: outposts, version: "${{ needs.build.outputs.version }}"}}
+  panorama: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: panorama, version: "${{ needs.build.outputs.version }}"}}
+  partnercentral-channel: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: partnercentral-channel, version: "${{ needs.build.outputs.version }}"}}
+  partnercentral-selling: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: partnercentral-selling, version: "${{ needs.build.outputs.version }}"}}
+  payment-cryptography: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: payment-cryptography, version: "${{ needs.build.outputs.version }}"}}
+  payment-cryptography-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: payment-cryptography-data, version: "${{ needs.build.outputs.version }}"}}
+  pca-connector-ad: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pca-connector-ad, version: "${{ needs.build.outputs.version }}"}}
+  pca-connector-scep: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pca-connector-scep, version: "${{ needs.build.outputs.version }}"}}
+  pcs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pcs, version: "${{ needs.build.outputs.version }}"}}
+  personalize: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize, version: "${{ needs.build.outputs.version }}"}}
+  personalize-events: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize-events, version: "${{ needs.build.outputs.version }}"}}
+  personalize-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: personalize-runtime, version: "${{ needs.build.outputs.version }}"}}
+  pi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pi, version: "${{ needs.build.outputs.version }}"}}
+  pinpoint: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint, version: "${{ needs.build.outputs.version }}"}}
+  pinpoint-email: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-email, version: "${{ needs.build.outputs.version }}"}}
+  pinpoint-sms-voice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-sms-voice, version: "${{ needs.build.outputs.version }}"}}
+  pinpoint-sms-voice-v2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pinpoint-sms-voice-v2, version: "${{ needs.build.outputs.version }}"}}
+  pipes: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pipes, version: "${{ needs.build.outputs.version }}"}}
+  polly: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: polly, version: "${{ needs.build.outputs.version }}"}}
+  pricing: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: pricing, version: "${{ needs.build.outputs.version }}"}}
+  proton: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: proton, version: "${{ needs.build.outputs.version }}"}}
+  qapps: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qapps, version: "${{ needs.build.outputs.version }}"}}
+  qbusiness: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qbusiness, version: "${{ needs.build.outputs.version }}"}}
+  qconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: qconnect, version: "${{ needs.build.outputs.version }}"}}
+  quicksight: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: quicksight, version: "${{ needs.build.outputs.version }}"}}
+  ram: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ram, version: "${{ needs.build.outputs.version }}"}}
+  rbin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rbin, version: "${{ needs.build.outputs.version }}"}}
+  rds: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rds, version: "${{ needs.build.outputs.version }}"}}
+  rds-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rds-data, version: "${{ needs.build.outputs.version }}"}}
+  redshift: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift, version: "${{ needs.build.outputs.version }}"}}
+  redshift-data: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift-data, version: "${{ needs.build.outputs.version }}"}}
+  redshift-serverless: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: redshift-serverless, version: "${{ needs.build.outputs.version }}"}}
+  rekognition: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rekognition, version: "${{ needs.build.outputs.version }}"}}
+  repostspace: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: repostspace, version: "${{ needs.build.outputs.version }}"}}
+  resiliencehub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resiliencehub, version: "${{ needs.build.outputs.version }}"}}
+  resource-explorer-2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resource-explorer-2, version: "${{ needs.build.outputs.version }}"}}
+  resource-groups: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resource-groups, version: "${{ needs.build.outputs.version }}"}}
+  resourcegroupstaggingapi: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: resourcegroupstaggingapi, version: "${{ needs.build.outputs.version }}"}}
+  rolesanywhere: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rolesanywhere, version: "${{ needs.build.outputs.version }}"}}
+  route53: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53, version: "${{ needs.build.outputs.version }}"}}
+  route53-recovery-cluster: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-cluster, version: "${{ needs.build.outputs.version }}"}}
+  route53-recovery-control-config: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-control-config, version: "${{ needs.build.outputs.version }}"}}
+  route53-recovery-readiness: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53-recovery-readiness, version: "${{ needs.build.outputs.version }}"}}
+  route53domains: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53domains, version: "${{ needs.build.outputs.version }}"}}
+  route53profiles: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53profiles, version: "${{ needs.build.outputs.version }}"}}
+  route53resolver: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: route53resolver, version: "${{ needs.build.outputs.version }}"}}
+  rtbfabric: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rtbfabric, version: "${{ needs.build.outputs.version }}"}}
+  rum: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: rum, version: "${{ needs.build.outputs.version }}"}}
+  s3: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3, version: "${{ needs.build.outputs.version }}"}}
+  s3api: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3api, version: "${{ needs.build.outputs.version }}"}}
+  s3control: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3control, version: "${{ needs.build.outputs.version }}"}}
+  s3outposts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3outposts, version: "${{ needs.build.outputs.version }}"}}
+  s3tables: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3tables, version: "${{ needs.build.outputs.version }}"}}
+  s3vectors: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: s3vectors, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-a2i-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-a2i-runtime, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-edge: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-edge, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-featurestore-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-featurestore-runtime, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-geospatial: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-geospatial, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-metrics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-metrics, version: "${{ needs.build.outputs.version }}"}}
+  sagemaker-runtime: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sagemaker-runtime, version: "${{ needs.build.outputs.version }}"}}
+  savingsplans: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: savingsplans, version: "${{ needs.build.outputs.version }}"}}
+  scheduler: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: scheduler, version: "${{ needs.build.outputs.version }}"}}
+  schemas: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: schemas, version: "${{ needs.build.outputs.version }}"}}
+  sdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sdb, version: "${{ needs.build.outputs.version }}"}}
+  secretsmanager: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: secretsmanager, version: "${{ needs.build.outputs.version }}"}}
+  security-ir: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: security-ir, version: "${{ needs.build.outputs.version }}"}}
+  securityhub: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: securityhub, version: "${{ needs.build.outputs.version }}"}}
+  securitylake: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: securitylake, version: "${{ needs.build.outputs.version }}"}}
+  serverlessrepo: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: serverlessrepo, version: "${{ needs.build.outputs.version }}"}}
+  service-quotas: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: service-quotas, version: "${{ needs.build.outputs.version }}"}}
+  servicecatalog: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicecatalog, version: "${{ needs.build.outputs.version }}"}}
+  servicecatalog-appregistry: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicecatalog-appregistry, version: "${{ needs.build.outputs.version }}"}}
+  servicediscovery: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: servicediscovery, version: "${{ needs.build.outputs.version }}"}}
+  ses: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ses, version: "${{ needs.build.outputs.version }}"}}
+  sesv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sesv2, version: "${{ needs.build.outputs.version }}"}}
+  shield: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: shield, version: "${{ needs.build.outputs.version }}"}}
+  signer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: signer, version: "${{ needs.build.outputs.version }}"}}
+  signin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: signin, version: "${{ needs.build.outputs.version }}"}}
+  simspaceweaver: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: simspaceweaver, version: "${{ needs.build.outputs.version }}"}}
+  snow-device-management: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: snow-device-management, version: "${{ needs.build.outputs.version }}"}}
+  snowball: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: snowball, version: "${{ needs.build.outputs.version }}"}}
+  sns: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sns, version: "${{ needs.build.outputs.version }}"}}
+  socialmessaging: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: socialmessaging, version: "${{ needs.build.outputs.version }}"}}
+  sqs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sqs, version: "${{ needs.build.outputs.version }}"}}
+  ssm: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm, version: "${{ needs.build.outputs.version }}"}}
+  ssm-contacts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-contacts, version: "${{ needs.build.outputs.version }}"}}
+  ssm-guiconnect: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-guiconnect, version: "${{ needs.build.outputs.version }}"}}
+  ssm-incidents: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-incidents, version: "${{ needs.build.outputs.version }}"}}
+  ssm-quicksetup: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-quicksetup, version: "${{ needs.build.outputs.version }}"}}
+  ssm-sap: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: ssm-sap, version: "${{ needs.build.outputs.version }}"}}
+  sso: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso, version: "${{ needs.build.outputs.version }}"}}
+  sso-admin: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso-admin, version: "${{ needs.build.outputs.version }}"}}
+  sso-oidc: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sso-oidc, version: "${{ needs.build.outputs.version }}"}}
+  stepfunctions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: stepfunctions, version: "${{ needs.build.outputs.version }}"}}
+  storagegateway: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: storagegateway, version: "${{ needs.build.outputs.version }}"}}
+  sts: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: sts, version: "${{ needs.build.outputs.version }}"}}
+  supplychain: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: supplychain, version: "${{ needs.build.outputs.version }}"}}
+  support: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: support, version: "${{ needs.build.outputs.version }}"}}
+  support-app: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: support-app, version: "${{ needs.build.outputs.version }}"}}
+  swf: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: swf, version: "${{ needs.build.outputs.version }}"}}
+  synthetics: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: synthetics, version: "${{ needs.build.outputs.version }}"}}
+  taxsettings: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: taxsettings, version: "${{ needs.build.outputs.version }}"}}
+  textract: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: textract, version: "${{ needs.build.outputs.version }}"}}
+  timestream-influxdb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-influxdb, version: "${{ needs.build.outputs.version }}"}}
+  timestream-query: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-query, version: "${{ needs.build.outputs.version }}"}}
+  timestream-write: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: timestream-write, version: "${{ needs.build.outputs.version }}"}}
+  tnb: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: tnb, version: "${{ needs.build.outputs.version }}"}}
+  transcribe: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: transcribe, version: "${{ needs.build.outputs.version }}"}}
+  transfer: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: transfer, version: "${{ needs.build.outputs.version }}"}}
+  translate: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: translate, version: "${{ needs.build.outputs.version }}"}}
+  trustedadvisor: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: trustedadvisor, version: "${{ needs.build.outputs.version }}"}}
+  verifiedpermissions: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: verifiedpermissions, version: "${{ needs.build.outputs.version }}"}}
+  voice-id: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: voice-id, version: "${{ needs.build.outputs.version }}"}}
+  vpc-lattice: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: vpc-lattice, version: "${{ needs.build.outputs.version }}"}}
+  waf: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: waf, version: "${{ needs.build.outputs.version }}"}}
+  waf-regional: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: waf-regional, version: "${{ needs.build.outputs.version }}"}}
+  wafv2: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wafv2, version: "${{ needs.build.outputs.version }}"}}
+  wellarchitected: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wellarchitected, version: "${{ needs.build.outputs.version }}"}}
+  wisdom: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: wisdom, version: "${{ needs.build.outputs.version }}"}}
+  workdocs: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workdocs, version: "${{ needs.build.outputs.version }}"}}
+  workmail: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workmail, version: "${{ needs.build.outputs.version }}"}}
+  workmailmessageflow: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workmailmessageflow, version: "${{ needs.build.outputs.version }}"}}
+  workspaces: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces, version: "${{ needs.build.outputs.version }}"}}
+  workspaces-instances: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-instances, version: "${{ needs.build.outputs.version }}"}}
+  workspaces-thin-client: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-thin-client, version: "${{ needs.build.outputs.version }}"}}
+  workspaces-web: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: workspaces-web, version: "${{ needs.build.outputs.version }}"}}
+  xray: {needs: build, uses: ./.github/workflows/aws-template.yml, with: {service: xray, version: "${{ needs.build.outputs.version }}"}}
