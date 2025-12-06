@@ -6,11 +6,14 @@ on:
       service:
         required: true
         type: string
+      version:
+        required: true
+        type: string
 
 jobs:
   compare:
     runs-on: ubuntu-latest
-    container: amazon/aws-cli:latest
+    container: amazon/aws-cli:${{ inputs.version }}
 
     steps:
     - uses: actions/download-artifact@v6
