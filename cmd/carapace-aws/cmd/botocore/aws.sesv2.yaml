@@ -81,6 +81,9 @@ commands:
         --from-email-address=!: The email address that the custom verification email is sent from.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --success-redirection-url=!: The URL that the recipient of the verification email is sent to if his or her address is successfully verified.
+        --tags=:
+            description: An array of objects that define the tags (keys and values) to associate with the custom verification email template.
+            nargs: -1
         --template-content=!: The content of the custom verification email.
         --template-name=!: The name of the custom verification email template.
         --template-subject=!: The subject line of the custom verification email.
@@ -139,6 +142,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=:
+            description: An array of objects that define the tags (keys and values) to associate with the email template.
+            nargs: -1
         --template-content=!: The content of the email template, composed of a subject line, an HTML part, and a text-only part.
         --template-name=!: The name of the template.
     - name: create-export-job
@@ -384,6 +390,13 @@ commands:
         --end-date=!: The last day (in Unix time) that you want to obtain domain deliverability metrics for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --start-date=!: The first day (in Unix time) that you want to obtain domain deliverability metrics for.
+    - name: get-email-address-insights
+      description: Provides validation insights about a specific email address, including syntax validation, DNS record checks, mailbox existence, and other deliverability factors.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --email-address=!: The email address to analyze for validation insights.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-email-identity
       description: Provides information about a specific identity, including the identity's verification status, sending authorization policies, its DKIM authentication status, and its custom Mail-From settings.
       flags:
@@ -702,6 +715,7 @@ commands:
         --suppressed-reasons=:
             description: A list that contains the reasons that email addresses will be automatically added to the suppression list for your account.
             nargs: -1
+        --validation-attributes=: An object that contains additional suppression attributes for your account.
     - name: put-account-vdm-attributes
       description: Update your Amazon SES account VDM attributes.
       flags:
@@ -760,6 +774,7 @@ commands:
         --suppressed-reasons=:
             description: A list that contains the reasons that email addresses are automatically added to the suppression list for your account.
             nargs: -1
+        --validation-options=: An object that contains information about the email address suppression preferences for the configuration set in the current Amazon Web Services Region.
     - name: put-configuration-set-tracking-options
       description: Specify a custom domain to use for open and click tracking elements in email that you send.
       flags:

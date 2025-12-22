@@ -22,6 +22,20 @@ commands:
         --key-identifier=!: The `keyARN` of the encryption key that Amazon Web Services Payment Cryptography uses for plaintext encryption.
         --plain-text=!: The plaintext to be encrypted.
         --wrapped-key=: The WrappedKeyBlock containing the encryption key for plaintext encryption.
+    - name: generate-as2805-kek-validation
+      description: Establishes node-to-node initialization between payment processing nodes such as an acquirer, issuer or payment network using Australian Standard 2805 (AS2805).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kek-validation-type=!: Parameter information for generating a random key for KEK validation to perform node-to-node initialization.
+        --key-identifier=!: The `keyARN` of sending KEK that Amazon Web Services Payment Cryptography uses for node-to-node initialization
+        --random-key-send-variant-mask=!: The key variant to use for generating a random key for KEK validation during node-to-node initialization.
+      completion:
+        flag:
+            random-key-send-variant-mask:
+                - VARIANT_MASK_82C0
+                - VARIANT_MASK_82
     - name: generate-card-validation-data
       description: Generates card-related validation data using algorithms such as Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).
       flags:
@@ -95,13 +109,13 @@ commands:
         --outgoing-key-identifier=!: The `keyARN` of the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.
         --outgoing-wrapped-key=: The WrappedKeyBlock containing the encryption key of outgoing ciphertext data after encryption by Amazon Web Services Payment Cryptography.
     - name: translate-key-material
-      description: Translates an encryption key between different wrapping keys without importing the key into Amazon Web Services Payment Cryptography.
+      description: Translates an cryptographic key between different wrapping keys without importing the key into Amazon Web Services Payment Cryptography.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --incoming-key-material=!: Parameter information of the TR31WrappedKeyBlock containing the transaction key.
-        --key-check-value-algorithm=: The key check value (KCV) algorithm used for calculating the KCV.
+        --key-check-value-algorithm=: The key check value (KCV) algorithm used for calculating the KCV of the derived key.
         --outgoing-key-material=!: Parameter information of the wrapping key used to wrap the transaction key in the outgoing TR31WrappedKeyBlock.
       completion:
         flag:
@@ -117,6 +131,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --encrypted-pin-block=!: The encrypted PIN block data that Amazon Web Services Payment Cryptography translates.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --incoming-as2805-attributes=: The attributes and values to use for incoming AS2805 encryption key for PIN block translation.
         --incoming-dukpt-attributes=: The attributes and values to use for incoming DUKPT encryption key for PIN block translation.
         --incoming-key-identifier=!: The `keyARN` of the encryption key under which incoming PIN block data is encrypted.
         --incoming-translation-attributes=!: The format of the incoming PIN block data for translation within Amazon Web Services Payment Cryptography.

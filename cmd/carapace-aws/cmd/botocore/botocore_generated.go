@@ -408,6 +408,7 @@ func init() {
 		"waf":                                 "AWS WAF",
 		"wafv2":                               "AWS WAFV2",
 		"wellarchitected":                     "AWS Well-Architected Tool",
+		"wickr":                               "AWS Wickr Admin API",
 		"wisdom":                              "Amazon Connect Wisdom Service",
 		"workdocs":                            "Amazon WorkDocs",
 		"workmail":                            "Amazon WorkMail",
