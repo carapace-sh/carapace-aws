@@ -1,0 +1,504 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: wickr
+description: AWS Wickr Admin API
+commands:
+    - name: batch-create-user
+      description: Creates multiple users in a specified Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where users will be created.
+        --users=!:
+            description: A list of user objects containing the details for each user to be created, including username, name, security groups, and optional invite codes.
+            nargs: -1
+    - name: batch-delete-user
+      description: Deletes multiple users from a specified Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network from which users will be deleted.
+        --user-ids=!:
+            description: A list of user IDs identifying the users to be deleted from the network.
+            nargs: -1
+    - name: batch-lookup-user-uname
+      description: Looks up multiple user usernames from their unique username hashes (unames).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where the users will be looked up.
+        --unames=!:
+            description: A list of username hashes (unames) to look up.
+            nargs: -1
+    - name: batch-reinvite-user
+      description: Resends invitation codes to multiple users who have pending invitations in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where users will be reinvited.
+        --user-ids=!:
+            description: A list of user IDs identifying the users to be reinvited to the network.
+            nargs: -1
+    - name: batch-reset-devices-for-user
+      description: Resets multiple devices for a specific user in a Wickr network.
+      flags:
+        --app-ids=!:
+            description: A list of application IDs identifying the specific devices to be reset for the user.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the user whose devices will be reset.
+        --user-id=!: The ID of the user whose devices will be reset.
+    - name: batch-toggle-user-suspend-status
+      description: Suspends or unsuspends multiple users in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where users will be suspended or unsuspended.
+        --no-suspend!: A boolean value indicating whether to suspend (true) or unsuspend (false) the specified users.
+        --suspend!: A boolean value indicating whether to suspend (true) or unsuspend (false) the specified users.
+        --user-ids=!:
+            description: A list of user IDs identifying the users whose suspend status will be toggled.
+            nargs: -1
+    - name: create-bot
+      description: Creates a new bot in a specified Wickr network.
+      flags:
+        --challenge=!: The password for the bot account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: The display name for the bot that will be visible to users in the network.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The ID of the security group to which the bot will be assigned.
+        --network-id=!: The ID of the Wickr network where the bot will be created.
+        --username=!: The username for the bot.
+    - name: create-data-retention-bot
+      description: Creates a data retention bot in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where the data retention bot will be created.
+    - name: create-data-retention-bot-challenge
+      description: Creates a new challenge password for the data retention bot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the data retention bot.
+    - name: create-network
+      description: Creates a new Wickr network with specified access level and configuration.
+      flags:
+        --access-level=!: The access level for the network.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --enable-premium-free-trial: Specifies whether to enable a premium free trial for the network.
+        --encryption-key-arn=: The ARN of the Amazon Web Services KMS customer managed key to use for encrypting sensitive data in the network.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-name=!: The name for the new network.
+        --no-enable-premium-free-trial: Specifies whether to enable a premium free trial for the network.
+      completion:
+        flag:
+            access-level:
+                - STANDARD
+                - PREMIUM
+    - name: create-security-group
+      description: Creates a new security group in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the new security group.
+        --network-id=!: The ID of the Wickr network where the security group will be created.
+        --security-group-settings=!: The configuration settings for the security group, including permissions, federation settings, and feature controls.
+    - name: delete-bot
+      description: Deletes a bot from a specified Wickr network.
+      flags:
+        --bot-id=!: The unique identifier of the bot to be deleted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network from which the bot will be deleted.
+    - name: delete-data-retention-bot
+      description: Deletes the data retention bot from a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network from which the data retention bot will be deleted.
+    - name: delete-network
+      description: Deletes a Wickr network and all its associated resources, including users, bots, security groups, and settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network to delete.
+    - name: delete-security-group
+      description: Deletes a security group from a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The unique identifier of the security group to delete.
+        --network-id=!: The ID of the Wickr network from which the security group will be deleted.
+    - name: get-bot
+      description: Retrieves detailed information about a specific bot in a Wickr network, including its status, group membership, and authentication details.
+      flags:
+        --bot-id=!: The unique identifier of the bot to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the bot.
+    - name: get-bots-count
+      description: Retrieves the count of bots in a Wickr network, categorized by their status (pending, active, and total).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network for which to retrieve bot counts.
+    - name: get-data-retention-bot
+      description: Retrieves information about the data retention bot in a Wickr network, including its status and whether the data retention service is enabled.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the data retention bot.
+    - name: get-guest-user-history-count
+      description: Retrieves historical guest user count data for a Wickr network, showing the number of guest users per billing period over the past 90 days.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network for which to retrieve guest user history.
+    - name: get-network
+      description: Retrieves detailed information about a specific Wickr network, including its configuration, access level, and status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network to retrieve.
+    - name: get-network-settings
+      description: Retrieves all network-level settings for a Wickr network, including client metrics, data retention, and other configuration options.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network whose settings will be retrieved.
+    - name: get-oidc-info
+      description: Retrieves the OpenID Connect (OIDC) configuration for a Wickr network, including SSO settings and optional token information if access token parameters are provided.
+      flags:
+        --certificate=: The CA certificate for secure communication with the OIDC provider (optional).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The OAuth client ID for retrieving access tokens (optional).
+        --client-secret=: The OAuth client secret for retrieving access tokens (optional).
+        --code-verifier=: The PKCE code verifier for enhanced security in the OAuth flow (optional).
+        --code=: The authorization code for retrieving access tokens (optional).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-type=: The OAuth grant type for retrieving access tokens (optional).
+        --network-id=!: The ID of the Wickr network whose OIDC configuration will be retrieved.
+        --redirect-uri=: The redirect URI for the OAuth flow (optional).
+        --url=: The URL for the OIDC provider (optional).
+    - name: get-security-group
+      description: Retrieves detailed information about a specific security group in a Wickr network, including its settings, member counts, and configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The unique identifier of the security group to retrieve.
+        --network-id=!: The ID of the Wickr network containing the security group.
+    - name: get-user
+      description: Retrieves detailed information about a specific user in a Wickr network, including their profile, status, and activity history.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end time for filtering the user's last activity.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the user.
+        --start-time=: The start time for filtering the user's last activity.
+        --user-id=!: The unique identifier of the user to retrieve.
+    - name: get-users-count
+      description: Retrieves the count of users in a Wickr network, categorized by their status (pending, active, rejected) and showing how many users can still be added.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network for which to retrieve user counts.
+    - name: list-blocked-guest-users
+      description: Retrieves a paginated list of guest users who have been blocked from a Wickr network.
+      flags:
+        --admin=: Filter results to only include blocked guest users that were blocked by this administrator.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of blocked guest users to return in a single page.
+        --network-id=!: The ID of the Wickr network from which to list blocked guest users.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The field to sort blocked guest users by.
+        --starting-token=: A token to specify where to start paginating.
+        --username=: Filter results to only include blocked guest users with usernames matching this value.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-bots
+      description: Retrieves a paginated list of bots in a specified Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: Filter results to only include bots with display names matching this value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=: Filter results to only include bots belonging to this security group.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of bots to return in a single page.
+        --network-id=!: The ID of the Wickr network from which to list bots.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The fields to sort bots by.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter results to only include bots with this status (1 for pending, 2 for active).
+        --username=: Filter results to only include bots with usernames matching this value.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-devices-for-user
+      description: Retrieves a paginated list of devices associated with a specific user in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of devices to return in a single page.
+        --network-id=!: The ID of the Wickr network containing the user.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The fields to sort devices by.
+        --starting-token=: A token to specify where to start paginating.
+        --user-id=!: The unique identifier of the user whose devices will be listed.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-guest-users
+      description: Retrieves a paginated list of guest users who have communicated with your Wickr network.
+      flags:
+        --billing-period=: Filter results to only include guest users from this billing period (e.g., '2024-01').
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of guest users to return in a single page.
+        --network-id=!: The ID of the Wickr network from which to list guest users.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The field to sort guest users by.
+        --starting-token=: A token to specify where to start paginating.
+        --username=: Filter results to only include guest users with usernames matching this value.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-networks
+      description: Retrieves a paginated list of all Wickr networks associated with your Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of networks to return in a single page.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The field to sort networks by.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-security-group-users
+      description: Retrieves a paginated list of users who belong to a specific security group in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The unique identifier of the security group whose users will be listed.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of users to return in a single page.
+        --network-id=!: The ID of the Wickr network containing the security group.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The field to sort users by.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-security-groups
+      description: Retrieves a paginated list of security groups in a specified Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of security groups to return in a single page.
+        --network-id=!: The ID of the Wickr network from which to list security groups.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The field to sort security groups by.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: list-users
+      description: Retrieves a paginated list of users in a specified Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --first-name=: Filter results to only include users with first names matching this value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=: Filter results to only include users belonging to this security group.
+        --last-name=: Filter results to only include users with last names matching this value.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of users to return in a single page.
+        --network-id=!: The ID of the Wickr network from which to list users.
+        --next-token=: The token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-direction=: The direction to sort results.
+        --sort-fields=: The fields to sort users by.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter results to only include users with this status (1 for pending, 2 for active).
+        --username=: Filter results to only include users with usernames matching this value.
+      completion:
+        flag:
+            sort-direction:
+                - ASC
+                - DESC
+    - name: register-oidc-config
+      description: Registers and saves an OpenID Connect (OIDC) configuration for a Wickr network, enabling Single Sign-On (SSO) authentication through an identity provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --company-id=!: Custom identifier your end users will use to sign in with SSO.
+        --custom-username=: A custom field mapping to extract the username from the OIDC token (optional).
+        --extra-auth-params=: Additional authentication parameters to include in the OIDC flow (optional).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issuer=!: The issuer URL of the OIDC provider (e.g., 'https://login.example.com').
+        --network-id=!: The ID of the Wickr network for which OIDC will be configured.
+        --scopes=!: The OAuth scopes to request from the OIDC provider (e.g., 'openid profile email').
+        --secret=: The client secret for authenticating with the OIDC provider (optional).
+        --sso-token-buffer-minutes=: The buffer time in minutes before the SSO token expires to refresh it (optional).
+        --user-id=: Unique identifier provided by your identity provider to authenticate the access request.
+    - name: register-oidc-config-test
+      description: Tests an OpenID Connect (OIDC) configuration for a Wickr network by validating the connection to the identity provider and retrieving its supported capabilities.
+      flags:
+        --certificate=: The CA certificate for secure communication with the OIDC provider (optional).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --extra-auth-params=: Additional authentication parameters to include in the test (optional).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issuer=!: The issuer URL of the OIDC provider to test.
+        --network-id=!: The ID of the Wickr network for which the OIDC configuration will be tested.
+        --scopes=!: The OAuth scopes to test with the OIDC provider.
+    - name: update-bot
+      description: Updates the properties of an existing bot in a Wickr network.
+      flags:
+        --bot-id=!: The unique identifier of the bot to update.
+        --challenge=: The new password for the bot account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --display-name=: The new display name for the bot.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=: The ID of the new security group to assign the bot to.
+        --network-id=!: The ID of the Wickr network containing the bot to update.
+        --no-suspend: Set to true to suspend the bot or false to unsuspend it.
+        --suspend: Set to true to suspend the bot or false to unsuspend it.
+    - name: update-data-retention
+      description: Updates the data retention bot settings, allowing you to enable or disable the data retention service, or acknowledge the public key message.
+      flags:
+        --action-type=!: The action to perform.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the data retention bot.
+      completion:
+        flag:
+            action-type:
+                - ENABLE
+                - DISABLE
+                - PUBKEY_MSG_ACK
+    - name: update-guest-user
+      description: Updates the block status of a guest user in a Wickr network.
+      flags:
+        --block!: Set to true to block the guest user or false to unblock them.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network where the guest user's status will be updated.
+        --no-block!: Set to true to block the guest user or false to unblock them.
+        --username-hash=!: The username hash (unique identifier) of the guest user to update.
+    - name: update-network
+      description: Updates the properties of an existing Wickr network, such as its name or encryption key configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --encryption-key-arn=: The ARN of the Amazon Web Services KMS customer managed key to use for encrypting sensitive data in the network.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network to update.
+        --network-name=!: The new name for the network.
+    - name: update-network-settings
+      description: Updates network-level settings for a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network whose settings will be updated.
+        --settings=!: A map of setting names to their new values.
+    - name: update-security-group
+      description: Updates the properties of an existing security group in a Wickr network, such as its name or settings.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=!: The unique identifier of the security group to update.
+        --name=: The new name for the security group.
+        --network-id=!: The ID of the Wickr network containing the security group to update.
+        --security-group-settings=: The updated configuration settings for the security group.
+    - name: update-user
+      description: Updates the properties of an existing user in a Wickr network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-id=!: The ID of the Wickr network containing the user to update.
+        --user-details=: An object containing the user details to be updated, such as name, password, security groups, and invite code settings.
+        --user-id=!: The unique identifier of the user to update.

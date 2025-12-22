@@ -243,10 +243,12 @@ commands:
         --display-name=: The user-friendly name in the console for the command.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --mandatory-parameters=:
-            description: A list of parameters that are required by the `StartCommandExecution` API.
+            description: A list of parameters that are used by `StartCommandExecution` API for execution payload generation.
             nargs: -1
         --namespace=: The namespace of the command.
-        --payload=: The payload object for the command.
+        --payload-template=: The payload template for the dynamic command.
+        --payload=: The payload object for the static command.
+        --preprocessor=: Configuration that determines how `payloadTemplate` is processed to generate command execution payload.
         --role-arn=: The IAM role that you must provide when using the `AWS-IoT-FleetWise` namespace.
         --tags=:
             description: Name-value pairs that are used as metadata to manage a command.
@@ -1510,6 +1512,8 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-verbose: The flag is used to get all the event types and their respective configuration that event-based logging supports.
+        --verbose: The flag is used to get all the event types and their respective configuration that event-based logging supports.
     - name: list-active-violations
       description: Lists the active violations for a given Device Defender security profile.
       flags:
@@ -2707,6 +2711,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --default-log-level=: The default logging level.
         --disable-all-logs: If true all logs are disabled.
+        --event-configurations=:
+            description: The list of event configurations that override account-level logging.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-disable-all-logs: If true all logs are disabled.
         --role-arn=: The ARN of the role that allows IoT to write to Cloudwatch logs.
@@ -3004,10 +3011,10 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --encryption-type=!: The type of the Amazon Web Services Key Management Service (KMS) key.
+        --encryption-type=!: The type of the KMS key.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-access-role-arn=: The Amazon Resource Name (ARN) of the IAM role assumed by Amazon Web Services IoT Core to call KMS on behalf of the customer.
-        --kms-key-arn=: The ARN of the customer-managed KMS key.
+        --kms-key-arn=: The ARN of the customer managedKMS key.
       completion:
         flag:
             encryption-type:
