@@ -30,13 +30,23 @@ func init() {
 
 	customizations["ecs.update-express-gateway-service"] = func(cmd *command.Command) error {
 		cmd.AddFlag(command.Flag{
+			Longhand:    "monitor-mode",
+			Description: "Display mode for monitoring output",
+			Value:       true,
+		})
+		cmd.AddFlag(command.Flag{
 			Longhand:    "monitor-resources",
-			Description: " Enable live monitoring of service resource status",
+			Description: "Enable live monitoring of service resource status",
 			Value:       true,
 		})
 		return nil
 	}
 	customizations["ecs.delete-express-gateway-service"] = func(cmd *command.Command) error {
+		cmd.AddFlag(command.Flag{
+			Longhand:    "monitor-mode",
+			Description: "Display mode for monitoring output",
+			Value:       true,
+		})
 		cmd.AddFlag(command.Flag{
 			Longhand:    "monitor-resources",
 			Description: " Enable live monitoring of service resource status",
@@ -45,6 +55,11 @@ func init() {
 		return nil
 	}
 	customizations["ecs.create-express-gateway-service"] = func(cmd *command.Command) error {
+		cmd.AddFlag(command.Flag{
+			Longhand:    "monitor-mode",
+			Description: "Display mode for monitoring output",
+			Value:       true,
+		})
 		cmd.AddFlag(command.Flag{
 			Longhand:    "monitor-resources",
 			Description: " Enable live monitoring of service resource status",
