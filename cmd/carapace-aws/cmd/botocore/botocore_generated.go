@@ -142,7 +142,6 @@ func init() {
 		"eks":                                 "Amazon Elastic Kubernetes Service",
 		"elasticache":                         "Amazon ElastiCache",
 		"elasticbeanstalk":                    "AWS Elastic Beanstalk",
-		"elastictranscoder":                   "Amazon Elastic Transcoder",
 		"elb":                                 "Elastic Load Balancing",
 		"elbv2":                               "Elastic Load Balancing",
 		"emr-containers":                      "Amazon EMR Containers",

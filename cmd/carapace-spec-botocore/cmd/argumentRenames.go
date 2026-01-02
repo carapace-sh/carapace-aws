@@ -32,7 +32,6 @@ var argumentRenames = map[string]string{
 	"eks.update-cluster-components-version.version":      "kubernetes-version",
 	"eks.update-cluster-version.version":                 "kubernetes-version",
 	"eks.update-nodegroup-version.version":               "kubernetes-version",
-	"elastictranscoder.*.output":                         "job-output",
 	"emr.*.job-flow-id":                                  "cluster-id",
 	"emr.*.job-flow-ids":                                 "cluster-ids",
 	"gamelift.create-build.version":                      "build-version",
