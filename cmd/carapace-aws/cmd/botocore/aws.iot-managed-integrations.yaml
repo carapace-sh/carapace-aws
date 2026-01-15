@@ -112,6 +112,7 @@ commands:
         --role=!: The type of device used.
         --serial-number=: The serial number of the device.
         --tags=: A set of key/value pairs that are used to manage the managed thing.
+        --wi-fi-simple-setup-configuration=: The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.
       completion:
         flag:
             authentication-material-type:
@@ -143,6 +144,7 @@ commands:
                 - DEVICE_LIFE_CYCLE
                 - DEVICE_STATE
                 - DEVICE_OTA
+                - DEVICE_WSS
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
@@ -269,6 +271,7 @@ commands:
                 - DEVICE_LIFE_CYCLE
                 - DEVICE_STATE
                 - DEVICE_OTA
+                - DEVICE_WSS
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
@@ -427,6 +430,7 @@ commands:
                 - DEVICE_LIFE_CYCLE
                 - DEVICE_STATE
                 - DEVICE_OTA
+                - DEVICE_WSS
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
@@ -565,6 +569,7 @@ commands:
                 - ZIGBEE
                 - CLOUD
                 - CUSTOM
+                - CONTROLLER_CAPABILITY_REDISCOVERY
     - name: list-discovered-devices
       description: Lists all devices discovered during a specific device discovery task.
       flags:
@@ -757,7 +762,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hub-token-timer-expiry-setting-in-seconds=!: A user-defined integer value that represents the hub token timer expiry setting in seconds.
     - name: put-runtime-log-configuration
-      description: Set the runtime log configuration for a specific managed thing or for all managed things as a group.
+      description: Set the runtime log configuration for a specific managed thing.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -844,7 +849,9 @@ commands:
         --controller-identifier=: The id of the end-user's IoT hub.
         --custom-protocol-detail=: Additional protocol-specific details required for device discovery, which vary based on the discovery type.
         --discovery-type=!: The discovery type supporting the type of device to be discovered in the device discovery task request.
+        --end-device-identifier=: The unique id of the end device for capability rediscovery.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --protocol=: The protocol type for capability rediscovery (ZWAVE, ZIGBEE, or CUSTOM).
         --tags=: A set of key/value pairs that are used to manage the device discovery request.
       completion:
         flag:
@@ -854,6 +861,11 @@ commands:
                 - ZWAVE
                 - ZIGBEE
                 - CLOUD
+                - CUSTOM
+                - CONTROLLER_CAPABILITY_REDISCOVERY
+            protocol:
+                - ZWAVE
+                - ZIGBEE
                 - CUSTOM
     - name: tag-resource
       description: Add tags for the specified resource.
@@ -958,6 +970,7 @@ commands:
         --name=: The name of the managed thing representing the physical device.
         --owner=: Owner of the device, usually an indication of whom the device belongs to.
         --serial-number=: The serial number of the device.
+        --wi-fi-simple-setup-configuration=: The Wi-Fi Simple Setup configuration for the managed thing, which defines provisioning capabilities and timeout settings.
       completion:
         flag:
             hub-network-mode:
@@ -981,6 +994,7 @@ commands:
                 - DEVICE_LIFE_CYCLE
                 - DEVICE_STATE
                 - DEVICE_OTA
+                - DEVICE_WSS
                 - CONNECTOR_ASSOCIATION
                 - ACCOUNT_ASSOCIATION
                 - CONNECTOR_ERROR_REPORT
