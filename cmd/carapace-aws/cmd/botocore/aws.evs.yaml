@@ -22,7 +22,7 @@ commands:
         --environment-name=: The name to give to your environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hosts=!:
-            description: The ESXi hosts to add to the environment.
+            description: The ESX hosts to add to the environment.
             nargs: -1
         --initial-vlans=!: The initial VLAN subnets for the Amazon EVS environment.
         --kms-key-id=: A unique ID for the customer-managed KMS key that is used to encrypt the VCF credential pairs for SDDC Manager, NSX Manager, and vCenter appliances.
@@ -42,13 +42,15 @@ commands:
         flag:
             vcf-version:
                 - VCF-5.2.1
+                - VCF-5.2.2
     - name: create-environment-host
-      description: Creates an ESXi host and adds it to an Amazon EVS environment.
+      description: Creates an ESX host and adds it to an Amazon EVS environment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: This parameter is not used in Amazon EVS currently.
         --environment-id=!: A unique ID for the environment that the host is added to.
+        --esx-version=: The ESX version to use for the host.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --host=!: The host that is created and added to the environment.
     - name: delete-environment
@@ -84,6 +86,12 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --environment-id=!: A unique ID for the environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-versions
+      description: Returns information about VCF versions, ESX versions and EC2 instance types provided by Amazon EVS.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-environment-hosts
       description: List the hosts within an environment.

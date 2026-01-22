@@ -288,6 +288,23 @@ commands:
         --query-as-of-time=: The time as of when to read the governed table contents.
         --table-name=!: The governed table for which to retrieve objects.
         --transaction-id=: The transaction ID at which to read the governed table contents.
+    - name: get-temporary-data-location-credentials
+      description: Allows a user or application in a secure environment to access data in a specific Amazon S3 location registered with Lake Formation by providing temporary scoped credentials that are limited to the requested data location and the caller's authorized access level.
+      flags:
+        --audit-context=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credentials-scope=: The credential scope is determined by the caller's Lake Formation permission on the associated table.
+        --data-locations=:
+            description: The Amazon S3 data location that you want to access.
+            nargs: -1
+        --duration-seconds=: The time period, between 900 and 43,200 seconds, for the timeout of the temporary credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            credentials-scope:
+                - READ
+                - READWRITE
     - name: get-temporary-glue-partition-credentials
       description: This API is identical to `GetTemporaryTableCredentials` except that this is used when the target Data Catalog resource is of type Partition.
       flags:
@@ -494,6 +511,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-resource-owner-account=: The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
         --no-hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
@@ -640,6 +658,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-resource-owner-account=: The Amazon Web Services account that owns the Glue tables associated with specific Amazon S3 locations.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
         --no-hybrid-access-enabled: Specifies whether the data access of tables pointing to the location can be managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
