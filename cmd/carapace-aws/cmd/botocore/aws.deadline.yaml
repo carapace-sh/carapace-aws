@@ -170,6 +170,7 @@ commands:
         --farm-id=!: The farm ID to include in this budget.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --schedule=!: The schedule to associate with this budget.
+        --tags=: Each tag consists of a tag key and a tag value.
         --usage-tracking-resource=!: The queue ID provided to this budget to track usage.
     - name: create-farm
       description: Creates a farm to allow space for queues and fleets.
@@ -261,8 +262,8 @@ commands:
         --client-token=: The unique token which the server uses to recognize retries of the same request.
         --display-name=!: The name that you give the monitor that is displayed in the Deadline Cloud console.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identity-center-instance-arn=!: The Amazon Resource Name (ARN) of the IAM Identity Center instance that authenticates monitor users.
-        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the monitor uses to connect to Deadline Cloud.
+        --identity-center-instance-arn=!: The Amazon Resource Name of the IAM Identity Center instance that authenticates monitor users.
+        --role-arn=!: The Amazon Resource Name of the IAM role that the monitor uses to connect to Deadline Cloud.
         --subdomain=!: The subdomain to use when creating the monitor URL.
         --tags=: The tags to add to your monitor.
     - name: create-queue
@@ -1082,10 +1083,10 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID of the job.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --filter-expressions=: The search terms for a resource.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
-        --page-size=: Specifies the number of items per page for the resource.
+        --item-offset=!: The offset for the search results.
+        --page-size=: Specifies the number of results to return.
         --queue-ids=!:
             description: The queue ID to use in the job search.
             nargs: -1
@@ -1098,11 +1099,11 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID to use for the step search.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --filter-expressions=: The search terms for a resource.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
+        --item-offset=!: The offset for the search results.
         --job-id=: The job ID to use in the step search.
-        --page-size=: Specifies the number of items per page for the resource.
+        --page-size=: Specifies the number of results to return.
         --queue-ids=!:
             description: The queue IDs in the step search.
             nargs: -1
@@ -1115,11 +1116,11 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID of the task.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --filter-expressions=: The search terms for a resource.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
+        --item-offset=!: The offset for the search results.
         --job-id=: The job ID for the task search.
-        --page-size=: Specifies the number of items per page for the resource.
+        --page-size=: Specifies the number of results to return.
         --queue-ids=!:
             description: The queue IDs to include in the search.
             nargs: -1
@@ -1132,13 +1133,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --farm-id=!: The farm ID in the workers search.
-        --filter-expressions=: The filter expression, `AND` or `OR`, to use when searching among a group of search strings in a resource.
+        --filter-expressions=: The search terms for a resource.
         --fleet-ids=!:
             description: The fleet ID of the workers to search for.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --item-offset=!: Defines how far into the scrollable list to start the return of results.
-        --page-size=: Specifies the number of items per page for the resource.
+        --item-offset=!: The offset for the search results.
+        --page-size=: Specifies the number of results to return.
         --sort-expressions=:
             description: The search terms for a resource.
             nargs: -1
@@ -1281,7 +1282,7 @@ commands:
         --display-name=: The new value to use for the monitor's display name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --monitor-id=!: The unique identifier of the monitor to update.
-        --role-arn=: The Amazon Resource Name (ARN) of the new IAM role to use with the monitor.
+        --role-arn=: The Amazon Resource Name of the new IAM role to use with the monitor.
         --subdomain=: The new value of the subdomain to use when forming the monitor URL.
     - name: update-queue
       description: Updates a queue.
@@ -1487,7 +1488,25 @@ commands:
             --farm-id=!: The farm ID of the farm in the fleet.
             --fleet-id=!: The fleet ID of the fleet to get.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: job-complete
+          description: Gets a Deadline Cloud job.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The farm ID of the farm in the job.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --job-id=!: The job ID.
+            --queue-id=!: The queue ID associated with the job.
         - name: job-create-complete
+          description: Gets a Deadline Cloud job.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --farm-id=!: The farm ID of the farm in the job.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --job-id=!: The job ID.
+            --queue-id=!: The queue ID associated with the job.
+        - name: job-succeeded
           description: Gets a Deadline Cloud job.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.

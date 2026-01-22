@@ -14,6 +14,18 @@ commands:
         --names=:
             description: A list of collection names.
             nargs: -1
+    - name: batch-get-collection-group
+      description: Returns attributes for one or more collection groups, including capacity limits and the number of collections in each group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ids=:
+            description: A list of collection group IDs.
+            nargs: -1
+        --names=:
+            description: A list of collection group names.
+            nargs: -1
     - name: batch-get-effective-lifecycle-policy
       description: Returns a list of successful and failed retrievals for the OpenSearch Serverless indexes.
       flags:
@@ -62,7 +74,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --collection-group-name=: The name of the collection group to associate with the collection.
         --description=: Description of the collection.
+        --encryption-config=: Encryption settings for the collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: Name of the collection.
         --standby-replicas=: Indicates whether standby replicas should be used for a collection.
@@ -80,6 +94,25 @@ commands:
                 - SEARCH
                 - TIMESERIES
                 - VECTORSEARCH
+    - name: create-collection-group
+      description: Creates a collection group within OpenSearch Serverless.
+      flags:
+        --capacity-limits=: The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: A description of the collection group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the collection group.
+        --standby-replicas=!: Indicates whether standby replicas should be used for a collection group.
+        --tags=:
+            description: An arbitrary set of tags (key–value pairs) to associate with the OpenSearch Serverless collection group.
+            nargs: -1
+      completion:
+        flag:
+            standby-replicas:
+                - ENABLED
+                - DISABLED
     - name: create-index
       description: Creates an index within an OpenSearch Serverless collection.
       flags:
@@ -115,7 +148,7 @@ commands:
         --iam-federation-options=: Describes IAM federation options in the form of a key-value map.
         --iam-identity-center-options=: Describes IAM Identity Center options in the form of a key-value map.
         --name=!: The name of the security configuration.
-        --saml-options=: Describes SAML options in in the form of a key-value map.
+        --saml-options=: Describes SAML options in the form of a key-value map.
         --type=!: The type of security configuration.
       completion:
         flag:
@@ -175,6 +208,14 @@ commands:
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection.
+    - name: delete-collection-group
+      description: Deletes a collection group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the collection group to delete.
     - name: delete-index
       description: Deletes an index from an OpenSearch Serverless collection.
       flags:
@@ -294,6 +335,14 @@ commands:
         flag:
             type:
                 - data
+    - name: list-collection-groups
+      description: Returns a list of collection groups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return.
+        --next-token=: If your initial `ListCollectionGroups` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListCollectionGroups` operations, which returns results in the next page.
     - name: list-collections
       description: Lists all OpenSearch Serverless collections.
       flags:
@@ -419,6 +468,16 @@ commands:
         --description=: A description of the collection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection.
+    - name: update-collection-group
+      description: Updates the description and capacity limits of a collection group.
+      flags:
+        --capacity-limits=: Updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: A new description for the collection group.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The unique identifier of the collection group to update.
     - name: update-index
       description: Updates an existing index in an OpenSearch Serverless collection.
       flags:
