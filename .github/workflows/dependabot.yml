@@ -11,9 +11,8 @@ jobs:
     container: ghcr.io/carapace-sh/go:1.25.4
     if: github.event.pull_request.user.login == 'dependabot[bot]' && github.repository == 'carapace-sh/carapace-aws'
     steps:
-    - name: shallow clone
+    - name: clone
       uses: actions/checkout@v6
-      if: "!startsWith(github.ref, 'refs/tags/')"
 
     - name: fix git safe.directory
       run:  git config --global --add safe.directory '*'
