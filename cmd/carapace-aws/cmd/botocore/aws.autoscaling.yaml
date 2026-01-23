@@ -23,7 +23,7 @@ commands:
             description: The Amazon Resource Names (ARNs) of the target groups.
             nargs: -1
     - name: attach-load-balancers
-      description: This API operation is superseded by [https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API\_AttachTrafficSources.html](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html), which can attach multiple traffic sources types.
+      description: This API operation is superseded by [AttachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_AttachTrafficSources.html), which can attach multiple traffic sources types.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -100,6 +100,7 @@ commands:
         --context=: Reserved.
         --default-cooldown=: '*Only needed if you use simple scaling policies.*'
         --default-instance-warmup=: The amount of time, in seconds, until a new instance is considered to have finished initializing and resource consumption to become stable after it enters the `InService` state.
+        --deletion-protection=: The deletion protection setting for the Auto Scaling group.
         --desired-capacity-type=: The unit of measurement for the value specified for desired capacity.
         --desired-capacity=: The desired capacity is the initial capacity of the Auto Scaling group at the time of its creation and the capacity it attempts to maintain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -140,6 +141,12 @@ commands:
             description: The list of traffic sources to attach to this Auto Scaling group.
             nargs: -1
         --vpc-zone-identifier=: A comma-separated list of subnet IDs for a virtual private cloud (VPC) where instances in the Auto Scaling group can be created.
+      completion:
+        flag:
+            deletion-protection:
+                - none
+                - prevent-force-deletion
+                - prevent-all-deletion
     - name: create-launch-configuration
       description: Creates a launch configuration.
       flags:
@@ -501,7 +508,7 @@ commands:
         --no-should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
         --should-decrement-desired-capacity!: Indicates whether the Auto Scaling group decrements the desired capacity value by the number of instances detached.
     - name: detach-load-balancer-target-groups
-      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTrafficSources.html), which can detach multiple traffic sources types.
+      description: This API operation is superseded by [DetachTrafficSources](https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DetachTrafficSources.html), which can detach multiple traffic sources types.
       flags:
         --auto-scaling-group-name=!: The name of the Auto Scaling group.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -809,6 +816,7 @@ commands:
         --context=: Reserved.
         --default-cooldown=: '*Only needed if you use simple scaling policies.*'
         --default-instance-warmup=: The amount of time, in seconds, until a new instance is considered to have finished initializing and resource consumption to become stable after it enters the `InService` state.
+        --deletion-protection=: The deletion protection setting for the Auto Scaling group.
         --desired-capacity-type=: The unit of measurement for the value specified for desired capacity.
         --desired-capacity=: The desired capacity is the initial capacity of the Auto Scaling group after this operation completes and the capacity it attempts to maintain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -833,3 +841,9 @@ commands:
             description: A policy or a list of policies that are used to select the instances to terminate.
             nargs: -1
         --vpc-zone-identifier=: A comma-separated list of subnet IDs for a virtual private cloud (VPC).
+      completion:
+        flag:
+            deletion-protection:
+                - none
+                - prevent-force-deletion
+                - prevent-all-deletion
