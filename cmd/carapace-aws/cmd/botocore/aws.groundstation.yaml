@@ -3,7 +3,7 @@ name: groundstation
 description: AWS Ground Station
 commands:
     - name: cancel-contact
-      description: Cancels a contact with a specified contact ID.
+      description: Cancels or stops a contact with a specified contact ID based on its position in the [contact lifecycle](https://docs.aws.amazon.com/ground-station/latest/ug/contacts.lifecycle.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -31,7 +31,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: Tags of a dataflow endpoint group.
     - name: create-dataflow-endpoint-group-v2
-      description: Creates a `DataflowEndpointGroupV2` containing the specified list of `DataflowEndpoint` objects.
+      description: Creates a `DataflowEndpoint` group containing the specified list of Ground Station Agent based endpoints.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -73,6 +73,7 @@ commands:
         --streams-kms-key=: KMS key to use for encrypting streams.
         --streams-kms-role=: Role to use for encrypting streams with KMS key.
         --tags=: Tags assigned to a mission profile.
+        --telemetry-sink-config-arn=: ARN of a telemetry sink `Config`.
         --tracking-config-arn=!: ARN of a tracking `Config`.
     - name: delete-config
       description: Deletes a `Config`.
@@ -92,6 +93,7 @@ commands:
                 - antenna-uplink
                 - uplink-echo
                 - s3-recording
+                - telemetry-sink
     - name: delete-dataflow-endpoint-group
       description: Deletes a dataflow endpoint group.
       flags:
@@ -160,6 +162,7 @@ commands:
                 - antenna-uplink
                 - uplink-echo
                 - s3-recording
+                - telemetry-sink
     - name: get-dataflow-endpoint-group
       description: Returns the dataflow endpoint group.
       flags:
@@ -369,6 +372,7 @@ commands:
                 - antenna-uplink
                 - uplink-echo
                 - s3-recording
+                - telemetry-sink
     - name: update-ephemeris
       description: Update an existing ephemeris.
       flags:
@@ -396,6 +400,7 @@ commands:
         --name=: Name of a mission profile.
         --streams-kms-key=: KMS key to use for encrypting streams.
         --streams-kms-role=: Role to use for encrypting streams with KMS key.
+        --telemetry-sink-config-arn=: ARN of a telemetry sink `Config`.
         --tracking-config-arn=: ARN of a tracking `Config`.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
