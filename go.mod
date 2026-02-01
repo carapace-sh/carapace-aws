@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	github.com/JohannesKaufmann/html-to-markdown/v2 v2.5.0
-	github.com/carapace-sh/carapace v1.11.0
+	github.com/carapace-sh/carapace v1.11.1
 	github.com/carapace-sh/carapace-bridge v1.5.2
 	github.com/carapace-sh/carapace-spec v1.5.0
 	github.com/neurosnap/sentences v1.1.2
