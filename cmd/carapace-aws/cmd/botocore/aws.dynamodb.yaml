@@ -71,7 +71,7 @@ commands:
     - name: create-table
       description: The `CreateTable` operation adds a new table to your account.
       flags:
-        --attribute-definitions=!:
+        --attribute-definitions=:
             description: An array of attributes that describe the key schema for the table and indexes.
             nargs: -1
         --billing-mode=: Controls how you are charged for read and write throughput and how you manage capacity.
@@ -82,7 +82,9 @@ commands:
         --global-secondary-indexes=:
             description: One or more global secondary indexes (the maximum is 20) to be created on the table.
             nargs: -1
-        --key-schema=!:
+        --global-table-settings-replication-mode=: Controls the settings synchronization mode for the global table.
+        --global-table-source-arn=: The Amazon Resource Name (ARN) of the source table used for the creation of a multi-account global table.
+        --key-schema=:
             description: Specifies the attributes that make up the primary key for a table or an index.
             nargs: -1
         --local-secondary-indexes=:
@@ -105,6 +107,10 @@ commands:
             billing-mode:
                 - PROVISIONED
                 - PAY_PER_REQUEST
+            global-table-settings-replication-mode:
+                - ENABLED
+                - DISABLED
+                - ENABLED_WITH_OVERRIDES
             table-class:
                 - STANDARD
                 - STANDARD_INFREQUENT_ACCESS
