@@ -950,6 +950,12 @@ commands:
     - name: create-user
       description: Creates a user account for the specified Amazon Connect instance.
       flags:
+        --after-contact-work-configs=:
+            description: The list of after contact work (ACW) timeout configuration settings for each channel.
+            nargs: -1
+        --auto-accept-configs=:
+            description: The list of auto-accept configuration settings for each channel.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --directory-user-id=: The identifier of the user account in the directory used for identity management.
@@ -958,13 +964,22 @@ commands:
         --identity-info=: The information about the identity of the user.
         --instance-id=!: The identifier of the Amazon Connect instance.
         --password=: The password for the user account.
-        --phone-config=!: The phone settings for the user.
+        --persistent-connection-configs=:
+            description: The list of persistent connection configuration settings for each channel.
+            nargs: -1
+        --phone-config=: The phone settings for the user.
+        --phone-number-configs=:
+            description: The list of phone number configuration settings for each channel.
+            nargs: -1
         --routing-profile-id=!: The identifier of the routing profile for the user.
         --security-profile-ids=!:
             description: The identifier of the security profile for the user.
             nargs: -1
         --tags=: The tags used to organize, track, or control access for this resource.
         --username=!: The user name for the account.
+        --voice-enhancement-configs=:
+            description: The list of voice enhancement configuration settings for each channel.
+            nargs: -1
     - name: create-user-hierarchy-group
       description: Creates a new user hierarchy group.
       flags:
@@ -4826,6 +4841,29 @@ commands:
         --id=!: The identifier of the traffic distribution group.
         --sign-in-config=: The distribution that determines which Amazon Web Services Regions should be used to sign in agents in to both the instance and its replica(s).
         --telephony-config=: The distribution of traffic between the instance and its replica(s).
+    - name: update-user-config
+      description: Updates the configuration settings for the specified user, including per-channel auto-accept and after contact work (ACW) timeout settings.
+      flags:
+        --after-contact-work-configs=:
+            description: The list of after contact work (ACW) timeout configuration settings for each channel.
+            nargs: -1
+        --auto-accept-configs=:
+            description: The list of auto-accept configuration settings for each channel.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Amazon Connect instance.
+        --persistent-connection-configs=:
+            description: The list of persistent connection configuration settings for each channel.
+            nargs: -1
+        --phone-number-configs=:
+            description: The list of phone number configuration settings for each channel.
+            nargs: -1
+        --user-id=!: The identifier of the user account.
+        --voice-enhancement-configs=:
+            description: The list of voice enhancement configuration settings for each channel.
+            nargs: -1
     - name: update-user-hierarchy
       description: Assigns the specified hierarchy group to the specified user.
       flags:
