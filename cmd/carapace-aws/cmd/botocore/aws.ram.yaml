@@ -11,7 +11,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-share-invitation-arn=!: The [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the invitation that you want to accept.
     - name: associate-resource-share
-      description: Adds the specified list of principals and list of resources to a resource share.
+      description: Adds the specified list of principals, resources, and source constraints to a resource share.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -25,7 +25,7 @@ commands:
             nargs: -1
         --resource-share-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to add principals or resources to.
         --sources=:
-            description: Specifies from which source accounts the service principal has access to the resources in this resource share.
+            description: Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) that limit when service principals can access resources in this resource share.
             nargs: -1
     - name: associate-resource-share-permission
       description: Adds or replaces the RAM permission for a resource type included in a resource share.
@@ -81,7 +81,7 @@ commands:
             description: Specifies a list of one or more ARNs of the resources to associate with the resource share.
             nargs: -1
         --sources=:
-            description: Specifies from which source accounts the service principal has access to the resources in this resource share.
+            description: Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) that limit when service principals can access resources in this resource share.
             nargs: -1
         --tags=:
             description: Specifies one or more tags to attach to the resource share itself.
@@ -112,7 +112,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-share-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to delete.
     - name: disassociate-resource-share
-      description: Removes the specified principals or resources from participating in the specified resource share.
+      description: Removes the specified principals, resources, or source constraints from participating in the specified resource share.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -126,7 +126,7 @@ commands:
             nargs: -1
         --resource-share-arn=!: Specifies [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share that you want to remove resources or principals from.
         --sources=:
-            description: Specifies from which source accounts the service principal no longer has access to the resources in this resource share.
+            description: Specifies source constraints (accounts, ARNs, organization IDs, or organization paths) to remove from the resource share.
             nargs: -1
     - name: disassociate-resource-share-permission
       description: Removes a managed permission from a resource share.
@@ -192,9 +192,13 @@ commands:
                 - FAILED
                 - DISASSOCIATING
                 - DISASSOCIATED
+                - SUSPENDED
+                - SUSPENDING
+                - RESTORING
             association-type:
                 - PRINCIPAL
                 - RESOURCE
+                - SOURCE
     - name: get-resource-share-invitations
       description: Retrieves details about invitations that you have received for resource shares.
       flags:
@@ -284,6 +288,9 @@ commands:
                 - FAILED
                 - DISASSOCIATING
                 - DISASSOCIATED
+                - SUSPENDED
+                - SUSPENDING
+                - RESTORING
             feature-set:
                 - CREATED_FROM_POLICY
                 - PROMOTING_TO_STANDARD
@@ -410,6 +417,34 @@ commands:
                 - ALL
                 - REGIONAL
                 - GLOBAL
+    - name: list-source-associations
+      description: Lists source associations for resource shares.
+      flags:
+        --association-status=: The status of the source associations that you want to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token that indicates the next set of results to retrieve.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-share-arns=:
+            description: The Amazon Resource Names (ARNs) of the resource shares for which you want to retrieve source associations.
+            nargs: -1
+        --source-id=: The identifier of the source for which you want to retrieve associations.
+        --source-type=: The type of source for which you want to retrieve associations.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            association-status:
+                - ASSOCIATING
+                - ASSOCIATED
+                - FAILED
+                - DISASSOCIATING
+                - DISASSOCIATED
+                - SUSPENDED
+                - SUSPENDING
+                - RESTORING
     - name: promote-permission-created-from-policy
       description: When you attach a resource-based policy to a resource, RAM automatically creates a resource share of `featureSet`=`CREATED_FROM_POLICY` with a managed permission that has the same IAM permissions as the original resource-based policy.
       flags:

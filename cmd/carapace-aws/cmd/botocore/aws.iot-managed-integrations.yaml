@@ -10,6 +10,7 @@ commands:
         --client-token=: An idempotency token.
         --connector-destination-id=!: The identifier of the connector destination.
         --description=: A description of the account association request.
+        --general-authorization=: The General Authorization reference by authorization material name.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the destination for the new account association.
         --tags=: A set of key/value pairs that are used to manage the account association.
@@ -32,7 +33,7 @@ commands:
       description: Create a connector destination for connecting a cloud-to-cloud (C2C) connector to the customer's Amazon Web Services account.
       flags:
         --auth-config=!: The authentication configuration details for the connector destination, including OAuth settings and other authentication parameters.
-        --auth-type=!: The authentication type used for the connector destination, which determines how credentials and access are managed.
+        --auth-type=: The authentication type used for the connector destination, which determines how credentials and access are managed.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
@@ -40,7 +41,7 @@ commands:
         --description=: A description of the connector destination.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The display name of the connector destination.
-        --secrets-manager=!: The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.
+        --secrets-manager=: The AWS Secrets Manager configuration used to securely store and manage sensitive information for the connector destination.
       completion:
         flag:
             auth-type:
@@ -121,6 +122,7 @@ commands:
                 - ZWAVE_QR_BAR_CODE
                 - ZIGBEE_QR_BAR_CODE
                 - DISCOVERED_DEVICE
+                - PRE_ONBOARDED_CLOUD
             role:
                 - CONTROLLER
                 - DEVICE
@@ -191,6 +193,7 @@ commands:
       description: Create a provisioning profile for a device to execute the provisioning flows using a provisioning template.
       flags:
         --ca-certificate=: The id of the certificate authority (CA) certificate.
+        --claim-certificate=: The claim certificate.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
@@ -735,12 +738,12 @@ commands:
                 - PUBLIC
                 - PRIVATE
     - name: list-tags-for-resource
-      description: List tags for the specified resource.
+      description: Lists the tags for a specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource for which to list tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
     - name: put-default-encryption-configuration
       description: Sets the default encryption configuration for the Amazon Web Services account.
       flags:
@@ -846,6 +849,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An idempotency token.
         --connector-association-identifier=: The id of the connector association.
+        --connector-device-id-list=:
+            description: Used as a filter for PLA discoveries.
+            nargs: -1
         --controller-identifier=: The id of the end-user's IoT hub.
         --custom-protocol-detail=: Additional protocol-specific details required for device discovery, which vary based on the discovery type.
         --discovery-type=!: The discovery type supporting the type of device to be discovered in the device discovery task request.
@@ -868,20 +874,20 @@ commands:
                 - ZIGBEE
                 - CUSTOM
     - name: tag-resource
-      description: Add tags for the specified resource.
+      description: Adds tags to a specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to which to add tags.
-        --tags=!: A set of key/value pairs that are used to manage the resource
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to add tags.
+        --tags=!: A set of key/value pairs that are used to manage the resource.
     - name: untag-resource
-      description: Remove tags for the specified resource.
+      description: Removes tags from a specified resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The ARN of the resource to which to add tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
         --tag-keys=!:
             description: A list of tag keys to remove from the resource.
             nargs: -1
