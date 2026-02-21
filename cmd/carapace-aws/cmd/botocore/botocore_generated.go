@@ -363,6 +363,7 @@ func init() {
 		"ses":                                 "Amazon Simple Email Service",
 		"sesv2":                               "Amazon Simple Email Service",
 		"shield":                              "AWS Shield",
+		"signer-data":                         "AWS Signer Data Plane",
 		"signer":                              "AWS Signer",
 		"signin":                              "AWS Sign-In Service",
 		"simspaceweaver":                      "AWS SimSpace Weaver",
