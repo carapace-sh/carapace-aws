@@ -446,7 +446,8 @@ commands:
     - name: get-automated-reasoning-policy-build-workflow-result-assets
       description: Retrieves the resulting assets from a completed Automated Reasoning policy build workflow, including build logs, quality reports, and generated policy artifacts.
       flags:
-        --asset-type=!: The type of asset to retrieve (e.g., BUILD\_LOG, QUALITY\_REPORT, POLICY\_DEFINITION).
+        --asset-id=: The unique identifier of the specific asset to retrieve when multiple assets of the same type exist.
+        --asset-type=!: The type of asset to retrieve (e.g., BUILD\_LOG, QUALITY\_REPORT, POLICY\_DEFINITION, GENERATED\_TEST\_CASES, POLICY\_SCENARIOS, FIDELITY\_REPORT, ASSET\_MANIFEST, SOURCE\_DOCUMENT).
         --build-workflow-id=!: The unique identifier of the build workflow whose result assets you want to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -460,6 +461,9 @@ commands:
                 - POLICY_DEFINITION
                 - GENERATED_TEST_CASES
                 - POLICY_SCENARIOS
+                - FIDELITY_REPORT
+                - ASSET_MANIFEST
+                - SOURCE_DOCUMENT
     - name: get-automated-reasoning-policy-next-scenario
       description: Retrieves the next test scenario for validating an Automated Reasoning policy.
       flags:
@@ -1080,6 +1084,7 @@ commands:
                 - INGEST_CONTENT
                 - REFINE_POLICY
                 - IMPORT_POLICY
+                - GENERATE_FIDELITY_REPORT
     - name: start-automated-reasoning-policy-test-workflow
       description: Initiates a test workflow to validate Automated Reasoning policy tests.
       flags:

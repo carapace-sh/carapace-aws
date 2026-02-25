@@ -144,6 +144,7 @@ func init() {
 		"elasticbeanstalk":                    "AWS Elastic Beanstalk",
 		"elb":                                 "Elastic Load Balancing",
 		"elbv2":                               "Elastic Load Balancing",
+		"elementalinference":                  "AWS Elemental Inference",
 		"emr-containers":                      "Amazon EMR Containers",
 		"emr-serverless":                      "EMR Serverless",
 		"emr":                                 "Amazon EMR",
