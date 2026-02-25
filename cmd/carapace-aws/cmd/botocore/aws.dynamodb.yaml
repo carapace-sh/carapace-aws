@@ -435,7 +435,7 @@ commands:
         --next-token=: A token to for the desired page, if there is one.
         --table-name=: The name of the table.
     - name: list-exports
-      description: Lists completed exports within the past 90 days.
+      description: Lists completed exports within the past 90 days, in reverse alphanumeric order of `ExportArn`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -844,6 +844,7 @@ commands:
         --global-secondary-index-updates=:
             description: An array of one or more global secondary indexes for the table.
             nargs: -1
+        --global-table-settings-replication-mode=: Controls the settings replication mode for a global table replica.
         --global-table-witness-updates=:
             description: A list of witness updates for a MRSC global table.
             nargs: -1
@@ -864,6 +865,10 @@ commands:
             billing-mode:
                 - PROVISIONED
                 - PAY_PER_REQUEST
+            global-table-settings-replication-mode:
+                - ENABLED
+                - DISABLED
+                - ENABLED_WITH_OVERRIDES
             multi-region-consistency:
                 - EVENTUAL
                 - STRONG
