@@ -89,6 +89,7 @@ commands:
             nargs: -1
         --new-game-session-protection-policy=: Determines whether Amazon GameLift Servers can shut down game sessions on the fleet that are actively running and hosting players.
         --per-instance-container-group-definition-name=: The name of a container group definition resource that describes a set of axillary software.
+        --player-gateway-mode=: Configures player gateway for your fleet.
         --tags=:
             description: A list of labels to assign to the new fleet resource.
             nargs: -1
@@ -100,6 +101,10 @@ commands:
             new-game-session-protection-policy:
                 - NoProtection
                 - FullProtection
+            player-gateway-mode:
+                - DISABLED
+                - ENABLED
+                - REQUIRED
     - name: create-container-group-definition
       description: '**This API works with the following fleet types:** Container'
       flags:
@@ -157,6 +162,8 @@ commands:
         --new-game-session-protection-policy=: The status of termination protection for active game sessions on the fleet.
         --peer-vpc-aws-account-id=: Used when peering your Amazon GameLift Servers fleet with a VPC, the unique identifier for the Amazon Web Services account that owns the VPC.
         --peer-vpc-id=: A unique identifier for a VPC with resources to be accessed by your Amazon GameLift Servers fleet.
+        --player-gateway-configuration=: Configuration settings for player gateway.
+        --player-gateway-mode=: Configures player gateway for your fleet.
         --resource-creation-limit-policy=: A policy that limits the number of game sessions that an individual player can create on instances in this fleet within a specified span of time.
         --runtime-configuration=: Instructions for how to launch and run server processes on the fleet.
         --script-id=: The unique identifier for a Realtime configuration script to be deployed to a fleet with compute type `EC2`.
@@ -684,6 +691,10 @@ commands:
             new-game-session-protection-policy:
                 - NoProtection
                 - FullProtection
+            player-gateway-mode:
+                - DISABLED
+                - ENABLED
+                - REQUIRED
     - name: create-fleet-locations
       description: '**This API works with the following fleet types:** EC2, Container'
       flags:
@@ -1563,7 +1574,7 @@ commands:
                 - r7a.32xlarge
                 - r7a.48xlarge
     - name: describe-fleet-attributes
-      description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
+      description: '**This API works with the following fleet types:** EC2, Anywhere'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -1746,7 +1757,7 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --status-filter=: Game session status to filter results on.
     - name: describe-instances
-      description: '**This API works with the following fleet types:** EC2'
+      description: '**This API works with the following fleet types:**EC2, Container'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -1903,6 +1914,16 @@ commands:
         --fleet-id=!: A unique identifier for the fleet that contains the instance you want to access.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: A unique identifier for the instance you want to access.
+    - name: get-player-connection-details
+      description: '**This API works with the following fleet types:** EC2 (server SDK 5.x or later), Container'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --game-session-id=!: A unique identifier for the game session for which to retrieve player connection details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --player-ids=!:
+            description: List of unique identifiers for players.
+            nargs: -1
     - name: list-aliases
       description: '**This API works with the following fleet types:** EC2, Anywhere, Container'
       flags:
