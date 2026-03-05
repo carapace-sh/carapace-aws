@@ -6,6 +6,7 @@ commands:
       description: Adds permissions to the resource-based policy of a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). Use this action to grant layer usage permission to other accounts.
       flags:
         --action=!: The API action that grants access to the layer.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -15,10 +16,20 @@ commands:
         --revision-id=: Only update the policy if the revision ID matches the ID specified.
         --statement-id=!: An identifier that distinguishes the policy from others on the same layer version.
         --version-number=!: The version number.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: add-permission
       description: Grants a [principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying) permission to use a function.
       flags:
         --action=!: The action that the principal can use on the function.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --event-source-token=: For Alexa Smart Home functions, a token that the invoker must supply.
@@ -36,6 +47,13 @@ commands:
         --statement-id=!: A statement identifier that differentiates the statement from others in the same policy.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             function-url-auth-type:
                 - NONE
                 - AWS_IAM
@@ -43,6 +61,7 @@ commands:
       description: Saves the progress of a [durable function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution during runtime.
       flags:
         --checkpoint-token=!: A unique token that identifies the current checkpoint state.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An optional idempotency token to ensure that duplicate checkpoint requests are handled correctly.
@@ -51,9 +70,19 @@ commands:
         --updates=:
             description: An array of state updates to apply during this checkpoint.
             nargs: -1
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: create-alias
       description: Creates an [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the alias.
@@ -62,11 +91,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: create-capacity-provider
       description: Creates a capacity provider that manages compute resources for Lambda functions
       flags:
         --capacity-provider-name=!: The name of the capacity provider.
         --capacity-provider-scaling-config=: The scaling configuration that defines how the capacity provider scales compute instances, including maximum vCPU count and scaling policies.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -75,22 +114,42 @@ commands:
         --permissions-config=!: The permissions configuration that specifies the IAM role ARN used by the capacity provider to manage compute resources.
         --tags=: A list of tags to associate with the capacity provider.
         --vpc-config=!: The VPC configuration for the capacity provider, including subnet IDs and security group IDs where compute instances will be launched.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: create-code-signing-config
       description: Creates a code signing configuration.
       flags:
         --allowed-publishers=!: Signing profiles for this code signing configuration.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-policies=: The code signing policies define the actions to take if the validation checks fail.
         --description=: Descriptive name for this code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: A list of tags to add to the code signing configuration.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: create-event-source-mapping
       description: Creates a mapping between an event source and an Lambda function.
       flags:
         --amazon-managed-kafka-event-source-config=: Specific configuration settings for an Amazon Managed Streaming for Apache Kafka (Amazon MSK) event source.
         --batch-size=: The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function.
         --bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-config=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.
@@ -131,6 +190,13 @@ commands:
         --tumbling-window-in-seconds=: (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             starting-position:
                 - TRIM_HORIZON
                 - LATEST
@@ -142,6 +208,7 @@ commands:
             description: The instruction set architecture that the function supports.
             nargs: -1
         --capacity-provider-config=: Configuration for the capacity provider that manages compute resources for Lambda functions.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=: To enable code signing for this function, specify the ARN of a code-signing configuration.
@@ -179,6 +246,13 @@ commands:
         --zip-file=: The path to the zip file of the code you are uploading.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             package-type:
                 - Zip
                 - Image
@@ -234,6 +308,7 @@ commands:
       description: Creates a Lambda function URL with the specified configuration parameters.
       flags:
         --auth-type=!: The type of authentication that your function URL uses.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
@@ -246,130 +321,298 @@ commands:
             auth-type:
                 - NONE
                 - AWS_IAM
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             invoke-mode:
                 - BUFFERED
                 - RESPONSE_STREAM
     - name: delete-alias
       description: Deletes a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-capacity-provider
       description: Deletes a capacity provider.
       flags:
         --capacity-provider-name=!: The name of the capacity provider to delete.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-code-signing-config
       description: Deletes the code signing configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-event-source-mapping
       description: Deletes an [event source mapping](https://docs.aws.amazon.com/lambda/latest/dg/intro-invocation-modes.html). You can get the identifier of a mapping from the output of [ListEventSourceMappings]().
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --uuid=!: The identifier of the event source mapping.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-function
       description: Deletes a Lambda function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function or version.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Specify a version to delete.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-function-code-signing-config
       description: Removes the code signing configuration from the function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-function-concurrency
       description: Removes a concurrent execution limit from a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-function-event-invoke-config
       description: Deletes the configuration for asynchronous invocation for a function, version, or alias.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: A version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-function-url-config
       description: Deletes a Lambda function URL.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: The alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-layer-version
       description: Deletes a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --version-number=!: The version number.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: delete-provisioned-concurrency-config
       description: Deletes the provisioned concurrency configuration for a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=!: The version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-account-settings
       description: Retrieves details about your account's [limits](https://docs.aws.amazon.com/lambda/latest/dg/limits.html) and usage in an Amazon Web Services Region.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-alias
       description: Returns details about a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the alias.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-capacity-provider
       description: Retrieves information about a specific capacity provider, including its configuration, state, and associated resources.
       flags:
         --capacity-provider-name=!: The name of the capacity provider to retrieve.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-code-signing-config
       description: Returns information about the specified code signing configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-durable-execution
       description: Retrieves detailed information about a specific [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), including its current status, input payload, result or error information, and execution metadata such as start time and usage statistics.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-durable-execution-history
       description: Retrieves the execution history for a [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html), showing all the steps, callbacks, and events that occurred during the execution.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
@@ -382,10 +625,20 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --reverse-order: When set to `true`, returns the history events in reverse chronological order (newest first).
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-durable-execution-state
       description: Retrieves the current execution state required for the replay process during [durable function](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) execution.
       flags:
         --checkpoint-token=!: A checkpoint token that identifies the current state of the execution.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
@@ -394,121 +647,280 @@ commands:
         --max-items=: The maximum number of operations to return per call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-event-source-mapping
       description: Returns details about an event source mapping.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --uuid=!: The identifier of the event source mapping.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function
       description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Specify a version or alias to get details about a published version of the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-code-signing-config
       description: Returns the code signing configuration for the specified function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-concurrency
       description: Returns details about the reserved concurrency configuration for a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-configuration
       description: Returns the version-specific settings of a Lambda function or version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Specify a version or alias to get details about a published version of the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-event-invoke-config
       description: Retrieves the configuration for asynchronous invocation for a function, version, or alias.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: A version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-recursion-config
       description: Returns your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name of the function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-scaling-config
       description: Retrieves the scaling configuration for a Lambda Managed Instances function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=!: Specify a version or alias to get the scaling configuration for a published version of the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-function-url-config
       description: Returns details about a Lambda function URL.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: The alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-layer-version
       description: Returns information about a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --version-number=!: The version number.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-layer-version-by-arn
       description: Returns information about a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), with a link to download the layer archive that's valid for 10 minutes.
       flags:
         --arn=!: The ARN of the layer version.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-layer-version-policy
       description: Returns the permission policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --version-number=!: The version number.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-policy
       description: Returns the [resource-based IAM policy](https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html) for a function, version, or alias.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Specify a version or alias to get the policy for that resource.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-provisioned-concurrency-config
       description: Retrieves the provisioned concurrency configuration for a function's alias or version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=!: The version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-runtime-management-config
       description: Retrieves the runtime management configuration for a function's version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Specify a version of the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: invoke
       description: Invokes a Lambda function.
       flags:
@@ -534,14 +946,25 @@ commands:
     - name: invoke-async
       description: For asynchronous function invocation, use [Invoke]().
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --invoke-args=!: The JSON that you want to provide to your Lambda function as input.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-aliases
       description: Returns a list of [aliases](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) for a Lambda function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -551,9 +974,19 @@ commands:
         --max-items=: Limit the number of aliases returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-capacity-providers
       description: Returns a list of capacity providers in your account.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -564,6 +997,13 @@ commands:
         --state=: Filter capacity providers by their current state.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             state:
                 - Pending
                 - Active
@@ -572,6 +1012,7 @@ commands:
     - name: list-code-signing-configs
       description: Returns a list of [code signing configurations](https://docs.aws.amazon.com/lambda/latest/dg/configuring-codesigning.html). A request returns up to 10,000 configurations per call.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -579,9 +1020,19 @@ commands:
         --max-items=: Maximum number of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-durable-executions-by-function
       description: Returns a list of [durable executions](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html) for a specified Lambda function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --durable-execution-name=: Filter executions by name.
@@ -599,9 +1050,19 @@ commands:
         --statuses=:
             description: Filter executions by status.
             nargs: -1
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-event-source-mappings
       description: Lists event source mappings.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --event-source-arn=: The Amazon Resource Name (ARN) of the event source.
@@ -611,9 +1072,19 @@ commands:
         --max-items=: The maximum number of event source mappings to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-function-event-invoke-configs
       description: Retrieves a list of configurations for asynchronous invocation for a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -622,9 +1093,19 @@ commands:
         --max-items=: The maximum number of configurations to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-function-url-configs
       description: Returns a list of Lambda function URLs for the specified function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -633,10 +1114,20 @@ commands:
         --max-items=: The maximum number of function URLs to return in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-function-versions-by-capacity-provider
       description: Returns a list of function versions that are configured to use a specific capacity provider.
       flags:
         --capacity-provider-name=!: The name of the capacity provider to list function versions for.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -644,9 +1135,19 @@ commands:
         --max-items=: The maximum number of function versions to return in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-functions
       description: Returns a list of Lambda functions, with the version-specific configuration of each.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-version=: Set to `ALL` to include entries for all published versions of each function.
@@ -658,11 +1159,19 @@ commands:
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             function-version:
                 - ALL
     - name: list-functions-by-code-signing-config
       description: List the functions that use the specified code signing configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
@@ -671,9 +1180,19 @@ commands:
         --max-items=: Maximum number of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-layer-versions
       description: Lists the versions of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
@@ -686,6 +1205,13 @@ commands:
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             compatible-architecture:
                 - x86_64
                 - arm64
@@ -738,6 +1264,7 @@ commands:
     - name: list-layers
       description: Lists [Lambda layers](https://docs.aws.amazon.com/lambda/latest/dg/invocation-layers.html) and shows information about the latest version of each.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compatible-architecture=: The compatible [instruction set architecture](https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html).
@@ -749,6 +1276,13 @@ commands:
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             compatible-architecture:
                 - x86_64
                 - arm64
@@ -801,6 +1335,7 @@ commands:
     - name: list-provisioned-concurrency-configs
       description: Retrieves a list of provisioned concurrency configurations for a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -809,16 +1344,36 @@ commands:
         --max-items=: Specify a number to limit the number of configurations returned.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-tags
       description: Returns a function, event source mapping, or code signing configuration's [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html). You can also view function tags with [GetFunction]().
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource=!: The resource's Amazon Resource Name (ARN).
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-versions-by-function
       description: Returns a list of [versions](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html), with the version-specific configuration of each.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -827,9 +1382,19 @@ commands:
         --max-items=: The maximum number of versions to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: publish-layer-version
       description: Creates an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html) from a ZIP archive.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --compatible-architectures=:
@@ -844,9 +1409,19 @@ commands:
         --layer-name=!: The name or Amazon Resource Name (ARN) of the layer.
         --license-info=: The layer's software license.
         --zip-file=: The path to the zip file of the content you are uploading.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: publish-version
       description: Creates a [version](https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html) from the current code and configuration of a function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-sha256=: Only publish a version if the hash value matches the value that's specified.
@@ -857,27 +1432,55 @@ commands:
         --revision-id=: Only update the function if the revision ID matches the ID that's specified.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             publish-to:
                 - LATEST_PUBLISHED
     - name: put-function-code-signing-config
       description: Update the code signing configuration for the function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-function-concurrency
       description: Sets the maximum number of simultaneous executions for a function, and reserves capacity for that concurrency level.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --reserved-concurrent-executions=!: The number of simultaneous executions to reserve for the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-function-event-invoke-config
       description: Configures options for [asynchronous invocation](https://docs.aws.amazon.com/lambda/latest/dg/invocation-async.html) on a function, version, or alias.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-config=: A destination for events after they have been sent to a function for processing.
@@ -886,9 +1489,19 @@ commands:
         --maximum-event-age-in-seconds=: The maximum age of a request that Lambda sends to a function for processing.
         --maximum-retry-attempts=: The maximum number of times to retry when the function returns an error.
         --qualifier=: A version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-function-recursion-config
       description: Sets your function's [recursive loop detection](https://docs.aws.amazon.com/lambda/latest/dg/invocation-recursion.html) configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -896,30 +1509,58 @@ commands:
         --recursive-loop=!: If you set your function's recursive loop detection configuration to `Allow`, Lambda doesn't take any action when it detects your function being invoked as part of a recursive loop.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             recursive-loop:
                 - Allow
                 - Terminate
     - name: put-function-scaling-config
       description: Sets the scaling configuration for a Lambda Managed Instances function.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --function-scaling-config=: The scaling configuration to apply to the function, including minimum and maximum execution environment limits.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=!: Specify a version or alias to set the scaling configuration for a published version of the function.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-provisioned-concurrency-config
       description: Adds a provisioned concurrency configuration to a function's alias or version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --provisioned-concurrent-executions=!: The amount of provisioned concurrency to allocate for the version or alias.
         --qualifier=!: The version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-runtime-management-config
       description: Sets the runtime management configuration for a function's version.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function.
@@ -929,6 +1570,13 @@ commands:
         --update-runtime-on=!: Specify the runtime update mode.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             update-runtime-on:
                 - Auto
                 - Manual
@@ -936,6 +1584,7 @@ commands:
     - name: remove-layer-version-permission
       description: Removes a statement from the permissions policy for a version of an [Lambda layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html). For more information, see [AddLayerVersionPermission]().
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -943,9 +1592,19 @@ commands:
         --revision-id=: Only update the policy if the revision ID matches the ID specified.
         --statement-id=!: The identifier that was specified when the statement was added.
         --version-number=!: The version number.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: remove-permission
       description: Revokes function-use permission from an Amazon Web Services service or another Amazon Web Services account.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --function-name=!: The name or ARN of the Lambda function, version, or alias.
@@ -953,48 +1612,108 @@ commands:
         --qualifier=: Specify a version or alias to remove permissions from a published version of the function.
         --revision-id=: Update the policy only if the revision ID matches the ID that's specified.
         --statement-id=!: Statement ID of the permission to remove.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: send-durable-execution-callback-failure
       description: Sends a failure response for a callback operation in a durable execution.
       flags:
         --callback-id=!: The unique identifier for the callback operation.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --error=: Error details describing why the callback operation failed.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: send-durable-execution-callback-heartbeat
       description: Sends a heartbeat signal for a long-running callback operation to prevent timeout.
       flags:
         --callback-id=!: The unique identifier for the callback operation.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: send-durable-execution-callback-success
       description: Sends a successful completion response for a callback operation in a durable execution.
       flags:
         --callback-id=!: The unique identifier for the callback operation.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --result=: The result data from the successful callback operation.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: stop-durable-execution
       description: Stops a running [durable execution](https://docs.aws.amazon.com/lambda/latest/dg/durable-functions.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --durable-execution-arn=!: The Amazon Resource Name (ARN) of the durable execution.
         --error=: Optional error details explaining why the execution is being stopped.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: tag-resource
       description: Adds [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) to a function, event source mapping, or code signing configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource=!: The resource's Amazon Resource Name (ARN).
         --tags=!: A list of tags to apply to the resource.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: untag-resource
       description: Removes [tags](https://docs.aws.amazon.com/lambda/latest/dg/tagging.html) from a function, event source mapping, or code signing configuration.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1002,9 +1721,19 @@ commands:
         --tag-keys=!:
             description: A list of tag keys to remove from the resource.
             nargs: -1
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-alias
       description: Updates the configuration of a Lambda function [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html).
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the alias.
@@ -1014,30 +1743,60 @@ commands:
         --name=!: The name of the alias.
         --revision-id=: Only update the alias if the revision ID matches the ID that's specified.
         --routing-config=: The [routing configuration](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing) of the alias.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-capacity-provider
       description: Updates the configuration of an existing capacity provider.
       flags:
         --capacity-provider-name=!: The name of the capacity provider to update.
         --capacity-provider-scaling-config=: The updated scaling configuration for the capacity provider.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-code-signing-config
       description: Update the code signing configuration.
       flags:
         --allowed-publishers=: Signing profiles for this code signing configuration.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-signing-config-arn=!: The The Amazon Resource Name (ARN) of the code signing configuration.
         --code-signing-policies=: The code signing policy.
         --description=: Descriptive name for this code signing configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-event-source-mapping
       description: Updates an event source mapping.
       flags:
         --amazon-managed-kafka-event-source-config=: ""
         --batch-size=: The maximum number of records in each batch that Lambda pulls from your stream or queue and sends to your function.
         --bisect-batch-on-function-error: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) If the function returns an error, split the batch in two and retry.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-config=: (Kinesis, DynamoDB Streams, Amazon MSK, and self-managed Apache Kafka) A configuration object that specifies the destination of an event after Lambda processes it.
@@ -1066,12 +1825,22 @@ commands:
             nargs: -1
         --tumbling-window-in-seconds=: (Kinesis and DynamoDB Streams only) The duration in seconds of a processing window for DynamoDB and Kinesis Streams event sources.
         --uuid=!: The identifier of the event source mapping.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-function-code
       description: Updates a Lambda function's code.
       flags:
         --architectures=:
             description: The instruction set architecture that the function supports.
             nargs: -1
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Set to true to validate the request parameters and access permissions without modifying the function code.
@@ -1090,12 +1859,20 @@ commands:
         --zip-file=: The base64-encoded contents of the deployment package.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             publish-to:
                 - LATEST_PUBLISHED
     - name: update-function-configuration
       description: Modify the version-specific settings of a Lambda function.
       flags:
         --capacity-provider-config=: Configuration for the capacity provider that manages compute resources for Lambda functions.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dead-letter-config=: A dead-letter queue configuration that specifies the queue or topic where Lambda sends asynchronous events when they fail processing.
@@ -1125,6 +1902,13 @@ commands:
         --vpc-config=: For network connectivity to Amazon Web Services resources in a VPC, specify a list of security groups and subnets in the VPC.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             runtime:
                 - nodejs
                 - nodejs4.3
@@ -1174,6 +1958,7 @@ commands:
     - name: update-function-event-invoke-config
       description: Updates the configuration for asynchronous invocation for a function, version, or alias.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --destination-config=: A destination for events after they have been sent to a function for processing.
@@ -1182,10 +1967,20 @@ commands:
         --maximum-event-age-in-seconds=: The maximum age of a request that Lambda sends to a function for processing.
         --maximum-retry-attempts=: The maximum number of times to retry when the function returns an error.
         --qualifier=: A version number or alias name.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: update-function-url-config
       description: Updates the configuration for a Lambda function URL.
       flags:
         --auth-type=: The type of authentication that your function URL uses.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cors=: The [cross-origin resource sharing (CORS)](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) settings for your function URL.
@@ -1198,6 +1993,13 @@ commands:
             auth-type:
                 - NONE
                 - AWS_IAM
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             invoke-mode:
                 - BUFFERED
                 - RESPONSE_STREAM
@@ -1207,51 +2009,111 @@ commands:
         - name: function-active
           description: Returns the version-specific settings of a Lambda function or version.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
         - name: function-active-v2
           description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
         - name: function-exists
           description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
         - name: function-updated
           description: Returns the version-specific settings of a Lambda function or version.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
         - name: function-updated-v2
           description: Returns information about the function or function version, with a link to download the deployment package that's valid for 10 minutes.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
         - name: published-version-active
           description: Returns the version-specific settings of a Lambda function or version.
           flags:
+            --cli-error-format=: The formatting style for error output
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --function-name=!: The name or ARN of the Lambda function, version, or alias.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --qualifier=: Specify a version or alias to get details about a published version of the function.
+          completion:
+            flag:
+                cli-error-format:
+                    - legacy
+                    - json
+                    - yaml
+                    - text
+                    - table
+                    - enhanced
     - name: wizard
       description: Interactive command for creating and configuring AWS resources.
       commands:

@@ -455,10 +455,24 @@ func isStreaming(service Service, operation Operation) bool {
 }
 
 func addCustomFlags(subCmd *command.Command, paginators map[string]Paginator, name string) {
+	subCmd.AddFlag(command.Flag{Longhand: "cli-error-format", Description: "The formatting style for error output", Value: true})
 	subCmd.AddFlag(command.Flag{Longhand: "cli-input-json", Description: "Read arguments from the JSON string provided.", Value: true})
 	subCmd.AddFlag(command.Flag{Longhand: "cli-input-yaml", Description: "Read arguments from the YAML string provided.", Value: true})
 	subCmd.AddFlag(command.Flag{Longhand: "generate-cli-skeleton", Description: "Prints a JSON skeleton to standard output without sending an API request."})
 
+	if subCmd.Completion.Flag == nil {
+		subCmd.Completion.Flag = map[string][]string{}
+	}
+	subCmd.Completion.Flag["cli-error-format"] = []string{
+		"legacy",
+		"json",
+		"yaml",
+		"text",
+		"table",
+		"enhanced",
+	}
+
+	subCmd.Documentation.Flag["cli-error-format"] = `The formatting style for error output. By default, errors are displayed in enhanced format.`
 	subCmd.Documentation.Flag["cli-input-json"] = `Reads arguments from the JSON string provided.
 The JSON string follows the  format  provided  by --generate-cli-skeleton.
 If other arguments are provided on the command line,  those  values  will override the JSON-provided values.

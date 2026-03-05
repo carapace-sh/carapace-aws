@@ -5,6 +5,7 @@ commands:
     - name: generate-data-set
       description: Given a data set type and data set publication date, asynchronously publishes the requested data set to the specified S3 bucket and notifies the specified SNS topic once the data is available.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --customer-defined-values=: (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.
@@ -17,6 +18,13 @@ commands:
         --sns-topic-arn=!: Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             data-set-type:
                 - customer_subscriber_hourly_monthly_subscriptions
                 - customer_subscriber_annual_subscriptions
@@ -46,6 +54,7 @@ commands:
     - name: start-support-data-export
       description: '*This target has been deprecated.* Given a data set type and a from date, asynchronously publishes the requested customer support data to the specified S3 bucket and notifies the specified SNS topic once the data is available.'
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --customer-defined-values=: '*This target has been deprecated.* (Optional) Key-value pairs which will be returned, unmodified, in the Amazon SNS notification message and the data set metadata file.'
@@ -58,6 +67,13 @@ commands:
         --sns-topic-arn=!: '*This target has been deprecated.* Amazon Resource Name (ARN) for the SNS Topic that will be notified when the data set has been published or if an error has occurred.'
       completion:
         flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
             data-set-type:
                 - customer_support_contacts_data
                 - test_customer_support_contacts_data

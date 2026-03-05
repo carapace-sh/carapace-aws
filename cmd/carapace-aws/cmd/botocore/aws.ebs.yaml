@@ -9,6 +9,7 @@ commands:
         --checksum-aggregation-method=: The aggregation method used to generate the checksum.
         --checksum-algorithm=: The algorithm used to generate the checksum.
         --checksum=: An aggregated Base-64 SHA256 checksum based on the checksums of each written block.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -19,6 +20,13 @@ commands:
                 - LINEAR
             checksum-algorithm:
                 - SHA256
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: get-snapshot-block
       description: Returns the data in a block in an Amazon Elastic Block Store snapshot.
       flags:
@@ -31,6 +39,7 @@ commands:
     - name: list-changed-blocks
       description: Returns information about the blocks that are different between two Amazon Elastic Block Store snapshots of the same volume/snapshot lineage.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --first-snapshot-id=: The ID of the first snapshot to use for the comparison.
@@ -39,9 +48,19 @@ commands:
         --next-token=: The token to request the next page of results.
         --second-snapshot-id=!: The ID of the second snapshot to use for the comparison.
         --starting-block-index=: The block index from which the comparison should start.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: list-snapshot-blocks
       description: Returns information about the blocks in an Amazon Elastic Block Store snapshot.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -49,6 +68,15 @@ commands:
         --next-token=: The token to request the next page of results.
         --snapshot-id=!: The ID of the snapshot from which to get block indexes and block tokens.
         --starting-block-index=: The block index from which the list should start.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: put-snapshot-block
       description: Writes a block of data to a snapshot.
       flags:
@@ -56,6 +84,7 @@ commands:
         --block-index=!: The block index of the block in which to write the data.
         --checksum-algorithm=!: The algorithm used to generate the checksum.
         --checksum=!: A Base64-encoded SHA256 checksum of the data.
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --data-length=!: The size of the data to write to the block, in bytes.
@@ -66,9 +95,17 @@ commands:
         flag:
             checksum-algorithm:
                 - SHA256
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
     - name: start-snapshot
       description: Creates a new Amazon EBS snapshot.
       flags:
+        --cli-error-format=: The formatting style for error output
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -83,3 +120,12 @@ commands:
             nargs: -1
         --timeout=: 'The amount of time (in minutes) after which the snapshot is automatically cancelled if:'
         --volume-size=!: The size of the volume, in GiB.
+      completion:
+        flag:
+            cli-error-format:
+                - legacy
+                - json
+                - yaml
+                - text
+                - table
+                - enhanced
