@@ -102,6 +102,7 @@ func init() {
 		"connectcampaigns":                    "AmazonConnectCampaignService",
 		"connectcampaignsv2":                  "AmazonConnectCampaignServiceV2",
 		"connectcases":                        "Amazon Connect Cases",
+		"connecthealth":                       "Connect Health",
 		"connectparticipant":                  "Amazon Connect Participant Service",
 		"controlcatalog":                      "AWS Control Catalog",
 		"controltower":                        "AWS Control Tower",

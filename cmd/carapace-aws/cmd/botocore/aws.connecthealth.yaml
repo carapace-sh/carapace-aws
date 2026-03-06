@@ -1,0 +1,165 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: connecthealth
+description: Connect Health
+commands:
+    - name: activate-subscription
+      description: Activates a Subscription to enable billing for a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-id=!: The unique identifier of the Subscription.
+    - name: create-domain
+      description: Creates a new Domain for managing HealthAgent resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The ARN of the KMS key to use for encrypting data in this Domain.
+        --name=!: The name for the new Domain.
+        --tags=: Tags to associate with the Domain.
+        --web-app-setup-configuration=: Configuration for the Domain web application.
+    - name: create-subscription
+      description: Creates a new Subscription within a Domain for billing and user management.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: deactivate-subscription
+      description: Deactivates a Subscription to stop billing for a user.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-id=!: The unique identifier of the Subscription.
+    - name: delete-domain
+      description: Deletes a Domain and all associated resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The id of the Domain to delete
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-domain
+      description: Retrieves information about a Domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The id of the Domain to get
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-medical-scribe-listening-session
+      description: Retrieves details about an existing Medical Scribe listening session
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The Domain identifier
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The Session identifier
+        --subscription-id=!: The Subscription identifier
+    - name: get-patient-insights-job
+      description: Get details of a started patient insights job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: ""
+    - name: get-subscription
+      description: Retrieves information about a Subscription.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subscription-id=!: The unique identifier of the Subscription.
+    - name: list-domains
+      description: Lists Domains for a given account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: Token for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter by Domain status.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - DELETING
+                - DELETED
+    - name: list-subscriptions
+      description: Lists all Subscriptions within a Domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: Token for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists the tags associated with the specified resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to list tags for
+    - name: start-medical-scribe-listening-session
+      description: Starts a new Medical Scribe listening session for real-time audio transcription
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The Domain identifier
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-stream=: ""
+        --language-code=!: The Language Code for the audio in the session
+        --media-encoding=!: The encoding for the input audio
+        --media-sample-rate-hertz=!: The sample rate of the input audio
+        --session-id=!: The Session identifier
+        --subscription-id=!: The Subscription identifier
+      completion:
+        flag:
+            language-code:
+                - en-US
+            media-encoding:
+                - pcm
+                - flac
+    - name: start-patient-insights-job
+      description: Starts a new patient insights job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --domain-id=!: ""
+        --encounter-context=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: ""
+        --insights-context=!: ""
+        --output-data-config=!: ""
+        --patient-context=!: ""
+        --user-context=!: ""
+    - name: tag-resource
+      description: Associates the specified tags with the specified resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to tag
+        --tags=!: The tags to add to the resource
+    - name: untag-resource
+      description: Removes the specified tags from the specified resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to untag
+        --tag-keys=!:
+            description: The tag keys to remove from the resource
+            nargs: -1
