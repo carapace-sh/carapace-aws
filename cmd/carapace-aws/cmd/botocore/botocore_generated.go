@@ -368,6 +368,7 @@ func init() {
 		"signer-data":                         "AWS Signer Data Plane",
 		"signer":                              "AWS Signer",
 		"signin":                              "AWS Sign-In Service",
+		"simpledbv2":                          "Amazon SimpleDB v2",
 		"simspaceweaver":                      "AWS SimSpace Weaver",
 		"snow-device-management":              "AWS Snow Device Management",
 		"snowball":                            "Amazon Import/Export Snowball",

@@ -53,6 +53,7 @@ commands:
         --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
         --definition=!: A structure that specifies the policy type and content to use for the new policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies a name for the policy that is unique among all policies within the policy store.
         --policy-store-id=!: Specifies the `PolicyStoreId` of the policy store you want to store the policy in.
     - name: create-policy-store
       description: Creates a policy store.
@@ -71,6 +72,14 @@ commands:
             deletion-protection:
                 - ENABLED
                 - DISABLED
+    - name: create-policy-store-alias
+      description: Creates a policy store alias for the specified policy store.
+      flags:
+        --alias-name=!: Specifies the name of the policy store alias to create.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-store-id=!: Specifies the ID of the policy store to associate with the alias.
     - name: create-policy-template
       description: Creates a policy template.
       flags:
@@ -79,6 +88,7 @@ commands:
         --client-token=: Specifies a unique, case-sensitive ID that you provide to ensure the idempotency of the request.
         --description=: Specifies a description for the policy template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies a name for the policy template that is unique among all policy templates within the policy store.
         --policy-store-id=!: The ID of the policy store in which to create the policy template.
         --statement=!: Specifies the content that you want to use for the new policy template, written in the Cedar policy language.
     - name: delete-identity-source
@@ -104,6 +114,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-store-id=!: Specifies the ID of the policy store that you want to delete.
+    - name: delete-policy-store-alias
+      description: Deletes the specified policy store alias.
+      flags:
+        --alias-name=!: Specifies the name of the policy store alias that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-policy-template
       description: Deletes the specified policy template from the policy store.
       flags:
@@ -135,8 +152,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-tags: Specifies whether to return the tags that are attached to the policy store.
-        --policy-store-id=!: Specifies the ID of the policy store that you want information about.
+        --policy-store-id=!: Specifies the policy store that you want information about.
         --tags: Specifies whether to return the tags that are attached to the policy store.
+    - name: get-policy-store-alias
+      description: Retrieves details about the specified policy store alias.
+      flags:
+        --alias-name=!: Specifies the name of the policy store alias that you want information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-policy-template
       description: Retrieve the details for the specified policy template in the specified policy store.
       flags:
@@ -204,6 +228,18 @@ commands:
         --next-token=: Specifies that you want to receive the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --policy-store-id=!: Specifies the ID of the policy store you want to list policies from.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-policy-store-aliases
+      description: Returns a paginated list of all policy store aliases in the calling Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies a filter to narrow the results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the total number of results that you want included in each response.
+        --next-token=: Specifies that you want to receive the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-policy-stores
       description: Returns a paginated list of all policy stores in the calling Amazon Web Services account.
@@ -278,6 +314,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --definition=: Specifies the updated policy content that you want to replace on the specified policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies a name for the policy that is unique among all policies within the policy store.
         --policy-id=!: Specifies the ID of the policy that you want to update.
         --policy-store-id=!: Specifies the ID of the policy store that contains the policy that you want to update.
     - name: update-policy-store
@@ -302,6 +339,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: Specifies a new description to apply to the policy template.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Specifies a name for the policy template that is unique among all policy templates within the policy store.
         --policy-store-id=!: Specifies the ID of the policy store that contains the policy template that you want to update.
         --policy-template-id=!: Specifies the ID of the policy template that you want to update.
         --statement=!: Specifies new statement content written in Cedar policy language to replace the current body of the policy template.
