@@ -29,6 +29,7 @@ func init() {
 	rootCmd.PersistentFlags().Bool("ca-bundle", false, "The CA certificate bundle to use when verifying SSL certificates.")
 	rootCmd.PersistentFlags().Bool("cli-auto-prompt", false, "Automatically prompt for CLI input parameters.")
 	rootCmd.PersistentFlags().String("cli-binary-format", "", "The formatting style to be used for binary blobs.")
+	rootCmd.PersistentFlags().String("cli-error-format", "", "The formatting style for error output")
 	rootCmd.PersistentFlags().String("cli-connect-timeout", "", "The maximum socket connect time in seconds.")
 	rootCmd.PersistentFlags().String("cli-read-timeout", "", "The maximum socket read time in seconds.")
 	rootCmd.PersistentFlags().String("color", "", "Turn on/off color output.")
@@ -46,14 +47,12 @@ func init() {
 	rootCmd.PersistentFlags().Bool("version", false, "Display the version of this tool.")
 
 	carapace.Gen(rootCmd).FlagCompletion(carapace.ActionMap{
-		"cli-binary-format": carapace.ActionValues(
-			"base64",
-			"raw-in-base64-out",
-		),
-		"color":   carapace.ActionValues("on", "off", "auto").StyleF(style.ForKeyword),
-		"output":  carapace.ActionValues("json", "text", "table", "yaml", "yaml-stream").StyleF(style.ForExtension),
-		"profile": aws.ActionProfiles(),
-		"region":  aws.ActionRegions(),
+		"cli-binary-format": carapace.ActionValues("base64", "raw-in-base64-out"),
+		"cli-error-format":  carapace.ActionValues("enhanced", "json", "legacy", "table", "text", "yaml"),
+		"color":             carapace.ActionValues("on", "off", "auto").StyleF(style.ForKeyword),
+		"output":            carapace.ActionValues("json", "text", "table", "yaml", "yaml-stream").StyleF(style.ForExtension),
+		"profile":           aws.ActionProfiles(),
+		"region":            aws.ActionRegions(),
 	})
 
 	for name, description := range botocore.Services() {
