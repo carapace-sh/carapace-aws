@@ -266,6 +266,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-skip-resource-in-use-check: By default, Amazon Lex checks if any other resource, such as a bot network, is using the bot alias before it is deleted and throws a `ResourceInUseException` exception if the alias is being used by another resource.
         --skip-resource-in-use-check: By default, Amazon Lex checks if any other resource, such as a bot network, is using the bot alias before it is deleted and throws a `ResourceInUseException` exception if the alias is being used by another resource.
+    - name: delete-bot-analyzer-recommendation
+      description: Permanently deletes the recommendations and analysis results for a specific bot analysis request.
+      flags:
+        --bot-analyzer-request-id=!: The unique identifier of the analysis request whose recommendations should be deleted.
+        --bot-id=!: The unique identifier of the bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-bot-locale
       description: Removes a locale from a bot.
       flags:
@@ -397,6 +405,19 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-bot-analyzer-recommendation
+      description: Retrieves the analysis results and recommendations for bot optimization.
+      flags:
+        --bot-analyzer-request-id=!: The unique identifier of the analysis request.
+        --bot-id=!: The unique identifier of the bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of recommendations to return in the response.
+        --next-token=: If the response from a previous request was truncated, the `nextToken` value is used to retrieve the next page of recommendations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-bot-locale
       description: Describes the settings that a bot has for a specific locale.
       flags:
@@ -584,6 +605,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of aliases to return in each page of results.
         --next-token=: If the response from the `ListBotAliases` operation contains more results than specified in the `maxResults` parameter, a token is returned in the response.
+    - name: list-bot-analyzer-history
+      description: Retrieves a list of historical bot analysis executions for a specific bot.
+      flags:
+        --bot-id=!: The unique identifier of the bot.
+        --bot-version=: The bot version to filter the history.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale-id=: The locale identifier to filter the history.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of history entries to return in the response.
+        --next-token=: If the response from a previous request was truncated, the `nextToken` value is used to retrieve the next page of history entries.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-bot-locales
       description: Gets a list of locales for the specified bot.
       flags:
@@ -983,6 +1018,20 @@ commands:
             search-order:
                 - Ascending
                 - Descending
+    - name: start-bot-analyzer
+      description: Initiates an asynchronous analysis of your bot configuration using AI-powered analysis to identify potential issues and recommend improvements based on AWS best practices.
+      flags:
+        --analysis-scope=!: The scope of analysis to perform.
+        --bot-id=!: The unique identifier of the bot to analyze.
+        --bot-version=: The version of the bot to analyze.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale-id=: The locale identifier for the bot locale to analyze.
+      completion:
+        flag:
+            analysis-scope:
+                - BotLocale
     - name: start-bot-recommendation
       description: Use this to provide your transcript data, and to start the bot recommendation process.
       flags:
@@ -1050,6 +1099,14 @@ commands:
         --storage-location=!: The Amazon S3 storage location for the test set generation.
         --test-set-name=!: The test set name for the test set generation request.
         --test-set-tags=: A list of tags to add to the test set.
+    - name: stop-bot-analyzer
+      description: Cancels an ongoing bot analysis execution.
+      flags:
+        --bot-analyzer-request-id=!: The unique identifier of the analysis request to stop.
+        --bot-id=!: The unique identifier of the bot.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: stop-bot-recommendation
       description: Stop an already running Bot Recommendation request.
       flags:

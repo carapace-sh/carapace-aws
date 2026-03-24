@@ -74,6 +74,26 @@ commands:
             state:
                 - ENABLED
                 - DISABLED
+    - name: create-quota-share
+      description: Creates an Batch quota share.
+      flags:
+        --capacity-limits=!:
+            description: A list that specifies the quantity and type of compute capacity allocated to the quota share.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=!: The Batch job queue associated with the quota share.
+        --preemption-configuration=!: Specifies the preemption behavior for jobs in a quota share.
+        --quota-share-name=!: The name of the quota share.
+        --resource-sharing-configuration=!: Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.
+        --state=: The state of the quota share.
+        --tags=: The tags that you apply to the quota share to help you categorize and organize your resources.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
     - name: create-scheduling-policy
       description: Creates an Batch scheduling policy.
       flags:
@@ -82,6 +102,7 @@ commands:
         --fairshare-policy=: The fair-share scheduling policy details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the fair-share scheduling policy.
+        --quota-share-policy=: The quota share scheduling policy details.
         --tags=: The tags that you apply to the scheduling policy to help you categorize and organize your resources.
     - name: create-service-environment
       description: Creates a service environment for running service jobs.
@@ -124,6 +145,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-queue=!: The short name or full Amazon Resource Name (ARN) of the queue to delete.
+    - name: delete-quota-share
+      description: Deletes the specified quota share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --quota-share-arn=!: The Amazon Resource Name (ARN) of the quota share.
     - name: delete-scheduling-policy
       description: Deletes the specified scheduling policy.
       flags:
@@ -205,6 +233,13 @@ commands:
         --jobs=!:
             description: A list of up to 100 job IDs.
             nargs: -1
+    - name: describe-quota-share
+      description: Returns a description of the specified quota share.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --quota-share-arn=!: The Amazon Resource Name (ARN) of the quota share.
     - name: describe-scheduling-policies
       description: Describes one or more of your scheduling policies.
       flags:
@@ -236,7 +271,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The job ID for the service job to describe.
     - name: get-job-queue-snapshot
-      description: Provides a list of the first 100 `RUNNABLE` jobs associated to a single job queue and includes capacity utilization, including total usage and breakdown by share for fairshare scheduling job queues.
+      description: Provides a snapshot of job queue state, including ordering of `RUNNABLE` jobs, as well as capacity utilization for already dispatched jobs.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -297,6 +332,18 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results returned by `ListJobsByConsumableResource` in paginated output.
         --next-token=: The `nextToken` value returned from a previous paginated `ListJobsByConsumableResource` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-quota-shares
+      description: Returns a list of Batch quota shares associated with a job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-queue=!: The name or full Amazon Resource Name (ARN) of the job queue used to list quota shares.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results returned by `ListQuotaShares` in paginated output.
+        --next-token=: The `nextToken` value that's returned from a previous paginated `ListQuotaShares` request where `maxResults` was used and the results exceeded the value of that parameter.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-scheduling-policies
@@ -407,6 +454,8 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-name=!: The name of the service job.
         --job-queue=!: The job queue into which the service job is submitted.
+        --preemption-configuration=: Specifies the service job behavior when preempted.
+        --quota-share-name=: The quota share for the service job.
         --retry-strategy=: The retry strategy to use for failed service jobs that are submitted with this service job request.
         --scheduling-priority=: The scheduling priority of the service job.
         --service-job-type=!: The type of service job.
@@ -504,6 +553,24 @@ commands:
             state:
                 - ENABLED
                 - DISABLED
+    - name: update-quota-share
+      description: Updates a quota share.
+      flags:
+        --capacity-limits=:
+            description: A list that specifies the quantity and type of compute capacity allocated to the quota share.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --preemption-configuration=: Specifies the preemption behavior for jobs in a quota share.
+        --quota-share-arn=!: The Amazon Resource Name (ARN) of the quota share to update.
+        --resource-sharing-configuration=: Specifies whether a quota share reserves, lends, or both lends and borrows idle compute capacity.
+        --state=: The state of the quota share.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
     - name: update-scheduling-policy
       description: Updates a scheduling policy.
       flags:
@@ -512,6 +579,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fairshare-policy=: The fair-share policy scheduling details.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --quota-share-policy=: The quota share scheduling policy details.
     - name: update-service-environment
       description: Updates a service environment.
       flags:
@@ -528,3 +596,11 @@ commands:
             state:
                 - ENABLED
                 - DISABLED
+    - name: update-service-job
+      description: Updates the priority of a specified service job in an Batch job queue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The Batch job ID of the job to update.
+        --scheduling-priority=!: The scheduling priority for the job.
