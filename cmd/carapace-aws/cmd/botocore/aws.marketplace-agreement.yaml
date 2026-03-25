@@ -2,6 +2,14 @@
 name: marketplace-agreement
 description: AWS Marketplace Agreement Service
 commands:
+    - name: cancel-agreement-payment-request
+      description: Allows sellers (proposers) to cancel a payment request that is in `PENDING_APPROVAL` status.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement associated with the payment request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payment-request-id=!: The unique identifier of the payment request to cancel.
     - name: describe-agreement
       description: Provides details about an agreement, such as the proposer, acceptor, start date, and end date.
       flags:
@@ -9,6 +17,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agreement-payment-request
+      description: Retrieves detailed information about a specific payment request.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement associated with the payment request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payment-request-id=!: The identifier of the payment request.
     - name: get-agreement-terms
       description: Obtains details about the terms in an agreement that you participated in as proposer or acceptor.
       flags:
@@ -18,6 +34,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of agreements to return in the response.
         --next-token=: A token to specify where to start pagination
+    - name: list-agreement-payment-requests
+      description: Lists payment requests available to you as a seller or buyer.
+      flags:
+        --agreement-id=: An optional parameter to list payment requests for a specific agreement.
+        --agreement-type=: An optional parameter to list payment requests by agreement type (e.g., `PurchaseAgreement`).
+        --catalog=: An optional parameter to list payment requests by catalog (e.g., `AWSMarketplace`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of payment requests to return in a single response (1-50).
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --party-type=!: The party type for the payment requests.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional parameter to list payment requests by status.
+      completion:
+        flag:
+            status:
+                - VALIDATING
+                - VALIDATION_FAILED
+                - PENDING_APPROVAL
+                - APPROVED
+                - REJECTED
+                - CANCELLED
     - name: search-agreements
       description: Searches across all agreements that a proposer has in AWS Marketplace.
       flags:
@@ -31,3 +72,15 @@ commands:
         --max-results=: The maximum number of agreements to return in the response.
         --next-token=: A token to specify where to start pagination.
         --sort=: An object that contains the `SortBy` and `SortOrder` attributes.
+    - name: send-agreement-payment-request
+      description: Allows sellers (proposers) to submit a payment request to buyers (acceptors) for a specific charge amount for an agreement that includes a `VariablePaymentTerm`.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement for which the payment request is being submitted.
+        --charge-amount=!: The amount requested to be charged to the buyer, positive decimal value in the currency of the accepted term.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: An optional detailed description of the payment request (1-2000 characters).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A descriptive name for the payment request (5-64 characters).
+        --term-id=!: The unique identifier of the `VariablePaymentTerm` for the agreement that the payment request is being sent for.
