@@ -400,7 +400,12 @@ func parseService(name, folder string) command.Command {
 				// TODO others
 			}
 		}
-		customizations.CustomizeCommand(fmt.Sprintf("%s.%s", cmd.Name, subCmd.Name), &subCmd)
+		if err := customizations.CustomizeCommand(fmt.Sprintf("%s.%s", cmd.Name, subCmd.Name), &subCmd); err != nil {
+			if _, ok := err.(*customizations.SkipError); ok {
+				continue
+			}
+			panic(err.Error()) // TODO just panic?
+		}
 		cmd.Commands = append(cmd.Commands, subCmd)
 	}
 
