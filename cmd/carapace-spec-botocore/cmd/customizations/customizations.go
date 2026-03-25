@@ -7,6 +7,12 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type SkipError struct{}
+
+func (m *SkipError) Error() string {
+	return "should be skipped"
+}
+
 var customizations = make(map[string]func(cmd *command.Command) error)
 
 func CustomizeCommand(id string, cmd *command.Command) error {
