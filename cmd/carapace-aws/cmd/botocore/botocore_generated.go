@@ -402,6 +402,7 @@ func init() {
 		"transfer":                            "AWS Transfer Family",
 		"translate":                           "Amazon Translate",
 		"trustedadvisor":                      "TrustedAdvisor Public API",
+		"uxc":                                 "AWS User Experience Customization",
 		"verifiedpermissions":                 "Amazon Verified Permissions",
 		"voice-id":                            "Amazon Voice ID",
 		"vpc-lattice":                         "Amazon VPC Lattice",
