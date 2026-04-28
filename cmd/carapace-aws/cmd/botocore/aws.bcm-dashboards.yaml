@@ -16,6 +16,17 @@ commands:
         --widgets=!:
             description: An array of widget configurations that define the visualizations to be displayed in the dashboard.
             nargs: -1
+    - name: create-scheduled-report
+      description: Creates a new scheduled report for a dashboard.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-tags=:
+            description: The tags to apply to the scheduled report resource for organization and management.
+            nargs: -1
+        --scheduled-report=!: The configuration for the scheduled report, including the dashboard to report on, the schedule, and the execution role that the service will use to generate the dashboard snapshot.
     - name: delete-dashboard
       description: Deletes a specified dashboard.
       flags:
@@ -23,6 +34,23 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-scheduled-report
+      description: Deletes a specified scheduled report.
+      flags:
+        --arn=!: The ARN of the scheduled report to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: execute-scheduled-report
+      description: Triggers an immediate execution of a scheduled report, outside of its regular schedule.
+      flags:
+        --arn=!: The ARN of the scheduled report to execute.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: When set to `true`, validates the scheduled report configuration without triggering an actual execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: When set to `true`, validates the scheduled report configuration without triggering an actual execution.
     - name: get-dashboard
       description: Retrieves the configuration and metadata of a specified dashboard, including its widgets and layout settings.
       flags:
@@ -37,8 +65,26 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the dashboard whose resource-based policy you want to retrieve.
+    - name: get-scheduled-report
+      description: Retrieves the configuration and metadata of a specified scheduled report.
+      flags:
+        --arn=!: The ARN of the scheduled report to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-dashboards
       description: Returns a list of all dashboards in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-scheduled-reports
+      description: Returns a list of scheduled reports in your account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -83,7 +129,27 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The new description for the dashboard.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: The new name for the dashboard.
+        --name=!: The new name for the dashboard.
         --widgets=:
             description: The updated array of widget configurations for the dashboard.
+            nargs: -1
+    - name: update-scheduled-report
+      description: Updates an existing scheduled report's properties, including its name, description, schedule configuration, and widget settings.
+      flags:
+        --arn=!: The ARN of the scheduled report to update.
+        --clear-widget-date-range-override: Set to true to clear existing widgetDateRangeOverride.
+        --clear-widget-ids: Set to true to clear existing widgetIds.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-arn=: The ARN of the dashboard to associate with the scheduled report.
+        --description=: The new description for the scheduled report.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new name for the scheduled report.
+        --no-clear-widget-date-range-override: Set to true to clear existing widgetDateRangeOverride.
+        --no-clear-widget-ids: Set to true to clear existing widgetIds.
+        --schedule-config=: The updated schedule configuration for the report.
+        --scheduled-report-execution-role-arn=: The ARN of the IAM role that the scheduled report uses to execute.
+        --widget-date-range-override=: The date range override to apply to widgets in the scheduled report.
+        --widget-ids=:
+            description: The list of widget identifiers to include in the scheduled report.
             nargs: -1

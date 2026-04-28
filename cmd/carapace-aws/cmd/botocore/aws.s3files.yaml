@@ -1,0 +1,219 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: s3files
+description: Amazon S3 Files
+commands:
+    - name: create-access-point
+      description: Creates an S3 File System Access Point for application-specific access with POSIX user identity and root directory enforcement.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --posix-user=: The POSIX identity with uid, gid, and secondary group IDs for user enforcement when accessing the file system through this access point.
+        --root-directory=: The root directory path for the access point, with optional creation permissions for newly created directories.
+        --tags=:
+            description: An array of key-value pairs to apply to the access point for resource tagging.
+            nargs: -1
+    - name: create-file-system
+      description: Creates an S3 File System resource scoped to a bucket or prefix within a bucket, enabling file system access to S3 data.
+      flags:
+        --accept-bucket-warning: Set to true to acknowledge and accept any warnings about the bucket configuration.
+        --bucket=!: The Amazon Resource Name (ARN) of the S3 bucket that will be accessible through the file system.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure idempotent creation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ARN, key ID, or alias of the KMS key to use for encryption.
+        --no-accept-bucket-warning: Set to true to acknowledge and accept any warnings about the bucket configuration.
+        --prefix=: An optional prefix within the S3 bucket to scope the file system access.
+        --role-arn=!: The ARN of the IAM role that grants the S3 Files service permission to read and write data between the file system and the S3 bucket.
+        --tags=:
+            description: An array of key-value pairs to apply as tags to the file system resource.
+            nargs: -1
+    - name: create-mount-target
+      description: Creates a mount target resource as an endpoint for mounting the S3 File System from compute resources in a specific Availability Zone and VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to create the mount target for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ip-address-type=: The IP address type for the mount target.
+        --ipv4-address=: A specific IPv4 address to assign to the mount target.
+        --ipv6-address=: A specific IPv6 address to assign to the mount target.
+        --security-groups=:
+            description: An array of VPC security group IDs to associate with the mount target's network interface.
+            nargs: -1
+        --subnet-id=!: The ID of the subnet where the mount target will be created.
+      completion:
+        flag:
+            ip-address-type:
+                - IPV4_ONLY
+                - IPV6_ONLY
+                - DUAL_STACK
+    - name: delete-access-point
+      description: Deletes an S3 File System Access Point.
+      flags:
+        --access-point-id=!: The ID or Amazon Resource Name (ARN) of the access point to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-file-system
+      description: Deletes an S3 File System.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to delete.
+        --force-delete: If true, allows deletion of a file system that contains data pending export to S3.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-force-delete: If true, allows deletion of a file system that contains data pending export to S3.
+    - name: delete-file-system-policy
+      description: Deletes the IAM resource policy of an S3 File System.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System whose resource policy to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-mount-target
+      description: Deletes the specified mount target.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mount-target-id=!: The ID of the mount target to delete.
+    - name: get-access-point
+      description: Returns resource information for an S3 File System Access Point.
+      flags:
+        --access-point-id=!: The ID or Amazon Resource Name (ARN) of the access point to retrieve information for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-file-system
+      description: Returns resource information for the specified S3 File System including status, configuration, and metadata.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to retrieve information for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-file-system-policy
+      description: Returns the IAM resource policy of an S3 File System.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System whose resource policy to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-mount-target
+      description: Returns detailed resource information for the specified mount target including network configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mount-target-id=!: The ID of the mount target to retrieve information for.
+    - name: get-synchronization-configuration
+      description: Returns the synchronization configuration for the specified S3 File System, including import data rules and expiration data rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to retrieve the synchronization configuration for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-access-points
+      description: Returns resource information for all S3 File System Access Points associated with the specified S3 File System.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to list access points for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of access points to return in a single response.
+        --next-token=: A pagination token returned from a previous call to continue listing access points.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-file-systems
+      description: Returns a list of all S3 File Systems owned by the account with optional filtering by bucket.
+      flags:
+        --bucket=: Optional filter to list only file systems associated with the specified S3 bucket Amazon Resource Name (ARN).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of file systems to return in a single response.
+        --next-token=: A pagination token returned from a previous call to continue listing file systems.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-mount-targets
+      description: Returns resource information for all mount targets with optional filtering by file system, access point, and VPC.
+      flags:
+        --access-point-id=: Optional filter to list only mount targets associated with the specified access point ID or Amazon Resource Name (ARN).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=: Optional filter to list only mount targets associated with the specified S3 File System ID or Amazon Resource Name (ARN).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of mount targets to return in a single response.
+        --next-token=: A pagination token returned from a previous call to continue listing mount targets.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists all tags for S3 Files resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of tags to return in a single response.
+        --next-token=: A pagination token returned from a previous call to continue listing tags.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=!: The ID or Amazon Resource Name (ARN) of the resource to list tags for.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-file-system-policy
+      description: Creates or replaces the IAM resource policy for an S3 File System to control access permissions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to apply the resource policy to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The JSON-formatted resource policy to apply to the file system.
+    - name: put-synchronization-configuration
+      description: Creates or updates the synchronization configuration for the specified S3 File System, including import data rules and expiration data rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiration-data-rules=!:
+            description: An array of expiration data rules that control when cached data expires from the file system.
+            nargs: -1
+        --file-system-id=!: The ID or Amazon Resource Name (ARN) of the S3 File System to configure synchronization for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --import-data-rules=!:
+            description: An array of import data rules that control how data is imported from S3 into the file system.
+            nargs: -1
+        --latest-version-number=: The version number of the current synchronization configuration.
+    - name: tag-resource
+      description: Creates tags for S3 Files resources using standard Amazon Web Services tagging APIs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The ID or Amazon Resource Name (ARN) of the resource to add tags to.
+        --tags=!:
+            description: An array of key-value pairs to add as tags to the resource.
+            nargs: -1
+    - name: untag-resource
+      description: Removes tags from S3 Files resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-id=!: The ID or Amazon Resource Name (ARN) of the resource to remove tags from.
+        --tag-keys=!:
+            description: An array of tag keys to remove from the resource.
+            nargs: -1
+    - name: update-mount-target
+      description: Updates the mount target resource, specifically security group configurations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mount-target-id=!: The ID of the mount target to update.
+        --security-groups=!:
+            description: An array of VPC security group IDs to associate with the mount target's network interface.
+            nargs: -1

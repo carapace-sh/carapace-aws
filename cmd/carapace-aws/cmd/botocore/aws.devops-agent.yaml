@@ -1,0 +1,542 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: devops-agent
+description: AWS DevOps Agent Service
+commands:
+    - name: associate-service
+      description: Adds a specific service association to an AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: The configuration that directs how AgentSpace interacts with the given service.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-id=!: The unique identifier of the service.
+    - name: create-agent-space
+      description: Creates a new AgentSpace with the specified name and description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Client-provided token to ensure request idempotency.
+        --description=: The description of the AgentSpace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The ARN of the AWS Key Management Service (AWS KMS) customer managed key that's used to encrypt resources.
+        --locale=: The locale for the AgentSpace, which determines the language used in agent responses.
+        --name=!: The name of the AgentSpace.
+        --tags=: Tags to add to the AgentSpace at creation time.
+    - name: create-backlog-task
+      description: Creates a new backlog task in the specified agent space
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space where the task will be created
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Client-provided token for idempotent operations
+        --description=: Optional detailed description of the task
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --priority=!: The priority level of the task
+        --reference=: Optional reference information for the task
+        --task-type=!: The type of task being created
+        --title=!: The title of the backlog task
+      completion:
+        flag:
+            priority:
+                - CRITICAL
+                - HIGH
+                - MEDIUM
+                - LOW
+                - MINIMAL
+            task-type:
+                - INVESTIGATION
+                - EVALUATION
+    - name: create-chat
+      description: Creates a new chat execution in the specified agent space
+      flags:
+        --agent-space-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=: The user identifier for the chat.
+        --user-type=: The authentication type of the user
+      completion:
+        flag:
+            user-type:
+                - IAM
+                - IDC
+                - IDP
+    - name: create-private-connection
+      description: Creates a Private Connection to a target resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: Private Connection mode configuration.
+        --name=!: Unique name for this Private Connection within the account.
+        --tags=: Tags to add to the Private Connection at creation time.
+    - name: delete-agent-space
+      description: Deletes an AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-private-connection
+      description: Deletes a Private Connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Private Connection.
+    - name: deregister-service
+      description: Deregister a service
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-id=!: The service id to deregister.
+    - name: describe-private-connection
+      description: Retrieves details of an existing Private Connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Private Connection.
+    - name: disable-operator-app
+      description: Disable the Operator App for the specified AgentSpace
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --auth-flow=: The authentication flow configured for the operator App.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            auth-flow:
+                - iam
+                - idc
+                - idp
+    - name: disassociate-service
+      description: Deletes a specific service association from an AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --association-id=!: The unique identifier of the given association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: enable-operator-app
+      description: Enable the Operator App to access the given AgentSpace
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --auth-flow=!: The authentication flow configured for the operator App.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idc-instance-arn=: The IdC instance Arn used to create an IdC auth application
+        --idp-client-id=: The OIDC client ID for the IdP application
+        --idp-client-secret=: The OIDC client secret for the IdP application
+        --issuer-url=: The OIDC issuer URL of the external Identity Provider
+        --operator-app-role-arn=!: The IAM role end users assume to access AIDevOps APIs
+        --provider=: The Identity Provider name (e.g., Entra, Okta, Google)
+      completion:
+        flag:
+            auth-flow:
+                - iam
+                - idc
+                - idp
+    - name: get-account-usage
+      description: Retrieves monthly account usage metrics and limits for the AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agent-space
+      description: Retrieves detailed information about a specific AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-association
+      description: Retrieves given associations configured for a specific AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --association-id=!: The unique identifier of the given association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-backlog-task
+      description: Gets a backlog task for the specified agent space and task id
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the task
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The unique identifier of the task to retrieve
+    - name: get-operator-app
+      description: Get the full auth configuration of operator including any enabled auth flow
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-recommendation
+      description: Retrieves a specific recommendation by its ID
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the recommendation
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-id=!: The unique identifier for the recommendation to retrieve
+        --recommendation-version=: Specific version of the recommendation to retrieve.
+    - name: get-service
+      description: Retrieves given service by it's unique identifier
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-id=!: The unique identifier of the given service.
+    - name: list-agent-spaces
+      description: Lists all AgentSpaces with optional pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return in a single call.
+        --next-token=: Token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-associations
+      description: List all associations for given AgentSpace
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-service-types=: A comma-separated list of service types to filter list associations output
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return in a single call.
+        --next-token=: Token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-backlog-tasks
+      description: Lists backlog tasks in the specified agent space with optional filtering and sorting
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the tasks
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filter criteria to apply when listing tasks
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: 'Maximum number of tasks to return in a single response (1-1000, default: 100)'
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Token for retrieving the next page of results
+        --order=: 'Sort order for the tasks based on sortField (default: DESC)'
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-field=: Field to sort by
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            order:
+                - ASC
+                - DESC
+            sort-field:
+                - CREATED_AT
+                - PRIORITY
+    - name: list-chats
+      description: Retrieves a paginated list of the user's recent chat executions
+      flags:
+        --agent-space-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of results to return
+        --next-token=: Token for pagination
+        --user-id=: The user identifier to list chats for.
+    - name: list-executions
+      description: List executions
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: Maximum number of executions to return
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Token for pagination to retrieve the next set of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --task-id=!: The unique identifier of the task whose executions to retrieve
+    - name: list-goals
+      description: Lists goals in the specified agent space with optional filtering
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal-type=: Filter goals by goal type
+        --limit=: Maximum number of goals to return
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Pagination token for the next set of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter goals by goal status
+      completion:
+        flag:
+            goal-type:
+                - CUSTOMER_DEFINED
+                - ONCALL_REPORT
+            status:
+                - ACTIVE
+                - PAUSED
+                - COMPLETE
+    - name: list-journal-records
+      description: List journal records for a specific execution
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the execution
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The unique identifier of the execution whose journal records to retrieve
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: 'Maximum number of records to return in a single response (1-100, default: 100)'
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: Token for retrieving the next page of results
+        --order=: 'Sort order for the records based on timestamp (default: DESC)'
+        --page-size=: The size of each page to get in the AWS service call.
+        --record-type=: Filter records by type (empty string returns all types)
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            order:
+                - ASC
+                - DESC
+    - name: list-pending-messages
+      description: List pending messages for a specific execution.
+      flags:
+        --agent-space-id=!: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --execution-id=!: The unique identifier of the execution whose journal records to retrieve
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-private-connections
+      description: Lists all Private Connections in the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-recommendations
+      description: Lists recommendations for the specified agent space
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the recommendations
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal-id=: Optional goal ID to filter recommendations by specific goal
+        --limit=: Maximum number of recommendations to return in a single response
+        --next-token=: Token for retrieving the next page of results
+        --priority=: Optional priority to filter recommendations by priority level
+        --status=: Optional status to filter recommendations by their current status
+        --task-id=: Optional task ID to filter recommendations by specific task
+      completion:
+        flag:
+            priority:
+                - HIGH
+                - MEDIUM
+                - LOW
+            status:
+                - PROPOSED
+                - ACCEPTED
+                - REJECTED
+                - CLOSED
+                - COMPLETED
+                - UPDATE_IN_PROGRESS
+    - name: list-services
+      description: List a list of registered service on the account level.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-service-type=: Optional filter to list only services of a specific type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return in a single call.
+        --next-token=: Token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            filter-service-type:
+                - github
+                - slack
+                - azure
+                - azuredevops
+                - dynatrace
+                - servicenow
+                - pagerduty
+                - gitlab
+                - eventChannel
+                - mcpservernewrelic
+                - mcpservergrafana
+                - mcpserverdatadog
+                - mcpserver
+                - mcpserversplunk
+                - azureidentity
+    - name: list-tags-for-resource
+      description: Lists tags for the specified AWS DevOps Agent resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource.
+    - name: list-webhooks
+      description: List all webhooks for given Association
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --association-id=!: The unique identifier of the given association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: register-service
+      description: This operation registers the specified service
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The ARN of the AWS Key Management Service (AWS KMS) customer managed key that's used to encrypt resources.
+        --name=: The display name for the service registration.
+        --private-connection-name=: The name of the private connection to use for VPC connectivity.
+        --service-details=!: Service-specific authorization configuration parameters
+        --service=!: ""
+        --tags=: Tags to add to the Service at registration time.
+      completion:
+        flag:
+            service:
+                - dynatrace
+                - servicenow
+                - pagerduty
+                - gitlab
+                - eventChannel
+                - mcpservernewrelic
+                - mcpservergrafana
+                - mcpserverdatadog
+                - mcpserver
+                - mcpserversplunk
+                - azureidentity
+    - name: send-message
+      description: Sends a chat message and streams the response for the specified agent space execution
+      flags:
+        --agent-space-id=!: The agent space identifier
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content=!: The user message content
+        --context=: Optional context for the message
+        --execution-id=!: The execution identifier for the chat session
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-id=: User identifier.
+    - name: tag-resource
+      description: Adds or overwrites tags for the specified AWS DevOps Agent resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to tag.
+        --tags=!: Tags to add to the resource.
+    - name: untag-resource
+      description: Removes tags from the specified AWS DevOps Agent resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The ARN of the resource to untag.
+        --tag-keys=!:
+            description: Tag keys to remove.
+            nargs: -1
+    - name: update-agent-space
+      description: Updates the information of an existing AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the AgentSpace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --locale=: The updated locale for the AgentSpace, which determines the language used in agent responses.
+        --name=: The updated name of the AgentSpace.
+    - name: update-association
+      description: Partially updates the configuration of an existing service association for an AgentSpace.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --association-id=!: The unique identifier of the given association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=!: The configuration that directs how AgentSpace interacts with the given service.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-backlog-task
+      description: Update an existing backlog task.
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the task
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Client-provided token for idempotent operations
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-id=!: The unique identifier of the task to update
+        --task-status=: Updated task status
+      completion:
+        flag:
+            task-status:
+                - PENDING_TRIAGE
+                - LINKED
+                - PENDING_START
+                - IN_PROGRESS
+                - PENDING_CUSTOMER_APPROVAL
+                - COMPLETED
+                - FAILED
+                - TIMED_OUT
+                - CANCELED
+    - name: update-goal
+      description: Update an existing goal
+      flags:
+        --agent-space-id=!: The unique identifier for the agent space containing the goal
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Client-provided token for idempotent operations
+        --evaluation-schedule=: Update goal schedule state
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --goal-id=!: The unique identifier of the goal to update
+    - name: update-operator-app-idp-config
+      description: Update the external Identity Provider configuration for the Operator App
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-client-secret=: The OIDC client secret for the IdP application
+    - name: update-private-connection-certificate
+      description: Updates the certificate associated with a Private Connection.
+      flags:
+        --certificate=!: The new certificate for the Private Connection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the Private Connection.
+    - name: update-recommendation
+      description: Updates an existing recommendation with new content, status, or metadata
+      flags:
+        --additional-context=: Additional context for recommendation
+        --agent-space-id=!: The unique identifier for the agent space containing the recommendation
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token that ensures idempotency of the request
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-id=!: The unique identifier for the recommendation to update
+        --status=: Current status of the recommendation
+      completion:
+        flag:
+            status:
+                - PROPOSED
+                - ACCEPTED
+                - REJECTED
+                - CLOSED
+                - COMPLETED
+                - UPDATE_IN_PROGRESS
+    - name: validate-aws-associations
+      description: Validates an aws association and set status and returns a 204 No Content response on success.
+      flags:
+        --agent-space-id=!: The unique identifier of the AgentSpace
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

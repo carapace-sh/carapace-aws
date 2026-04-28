@@ -119,6 +119,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=!: The name of the log group.
         --log-stream-name=!: The name of the log stream.
+    - name: create-lookup-table
+      description: Creates a lookup table by uploading CSV data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the lookup table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ARN of the KMS key to use to encrypt the lookup table data.
+        --lookup-table-name=!: The name of the lookup table.
+        --table-body=!: The CSV content of the lookup table.
+        --tags=: A list of key-value pairs to associate with the lookup table.
     - name: create-scheduled-query
       description: Creates a scheduled query that runs CloudWatch Logs Insights queries at regular intervals.
       flags:
@@ -246,6 +257,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-group-name=!: The name of the log group.
         --log-stream-name=!: The name of the log stream.
+    - name: delete-lookup-table
+      description: Deletes a lookup table permanently.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookup-table-arn=!: The ARN of the lookup table to delete.
     - name: delete-metric-filter
       description: Deletes the specified metric filter.
       flags:
@@ -507,6 +525,15 @@ commands:
             order-by:
                 - LogStreamName
                 - LastEventTime
+    - name: describe-lookup-tables
+      description: Retrieves metadata about lookup tables in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookup-table-name-prefix=: A prefix to filter lookup tables by name.
+        --max-results=: The maximum number of lookup tables to return in the response.
+        --next-token=: The token for the next set of items to return.
     - name: describe-metric-filters
       description: Lists the specified metric filters.
       flags:
@@ -728,12 +755,21 @@ commands:
         --log-record-pointer=!: The pointer corresponding to the log event record you want to retrieve.
         --no-unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
         --unmask: Specify `true` to display the log event fields with all sensitive data unmasked and visible.
+    - name: get-lookup-table
+      description: Retrieves the full content of a lookup table, including the CSV data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lookup-table-arn=!: The ARN of the lookup table to retrieve.
     - name: get-query-results
       description: Returns the results from the specified query.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The maximum number of log events to return in the response.
+        --next-token=: The token for the next set of items to return.
         --query-id=!: The ID number of the query.
     - name: get-scheduled-query
       description: Retrieves details about a specific scheduled query, including its configuration, execution status, and metadata.
@@ -1098,6 +1134,9 @@ commands:
             description: Use this parameter to include specific log groups as part of your query definition.
             nargs: -1
         --name=!: A name for the query definition.
+        --parameters=:
+            description: Use this parameter to include specific query parameters as part of your query definition.
+            nargs: -1
         --query-definition-id=: If you are updating a query definition, use this parameter to specify the ID of the query definition that you want to update.
         --query-language=: Specify the query language to use for this query.
         --query-string=!: The query string to use for this definition.
@@ -1332,6 +1371,16 @@ commands:
                 - FIFTEEN_MIN
                 - THIRTY_MIN
                 - ONE_HOUR
+    - name: update-lookup-table
+      description: Updates an existing lookup table by replacing all of its CSV content.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An updated description of the lookup table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The ARN of the KMS key to use to encrypt the lookup table data.
+        --lookup-table-arn=!: The ARN of the lookup table to update.
+        --table-body=!: The new CSV content to replace the existing data.
     - name: update-scheduled-query
       description: Updates an existing scheduled query with new configuration.
       flags:

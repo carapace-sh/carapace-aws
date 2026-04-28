@@ -292,6 +292,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: ARN of the customer managed key for encrypting the data at rest.
         --major-engine-version=: The version of the cache engine that will be used to create the serverless cache.
+        --network-type=: The IP protocol version used by the serverless cache.
         --security-group-ids=:
             description: A list of the one or more VPC security groups to be associated with the serverless cache.
             nargs: -1
@@ -299,7 +300,7 @@ commands:
         --snapshot-arns-to-restore=:
             description: The ARN(s) of the snapshot that the new serverless cache will be created from.
             nargs: -1
-        --snapshot-retention-limit=: The number of snapshots that will be retained for the serverless cache that is being created.
+        --snapshot-retention-limit=: The number of days for which ElastiCache retains automatic snapshots before deleting them.
         --subnet-ids=:
             description: A list of the identifiers of the subnets where the VPC endpoint for the serverless cache will be deployed.
             nargs: -1
@@ -307,6 +308,12 @@ commands:
             description: The list of tags (key, value) pairs to be added to the serverless cache resource.
             nargs: -1
         --user-group-id=: The identifier of the UserGroup to be associated with the serverless cache.
+      completion:
+        flag:
+            network-type:
+                - ipv4
+                - ipv6
+                - dual_stack
     - name: create-serverless-cache-snapshot
       description: This API creates a copy of an entire ServerlessCache at a specific moment in time.
       flags:

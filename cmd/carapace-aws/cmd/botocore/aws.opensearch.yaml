@@ -74,6 +74,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the OpenSearch Service domain to provide access to.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-options=: The options for the service, including the supported Regions for the endpoint access.
         --service=: The Amazon Web Services service SP to grant access to.
       completion:
         flag:
@@ -268,6 +269,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vpc-endpoint-id=!: The unique identifier of the endpoint.
+    - name: deregister-capability
+      description: Deregisters a capability from an OpenSearch UI application.
+      flags:
+        --application-id=!: The unique identifier of the OpenSearch UI application to deregister the capability from.
+        --capability-name=!: The name of the capability to deregister.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-domain
       description: Describes the domain configuration for the specified Amazon OpenSearch Service domain, including the domain ID, domain service endpoint, and domain ARN.
       flags:
@@ -343,6 +352,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial `DescribeInboundConnections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `DescribeInboundConnections` operations, which returns results in the next page.
+    - name: describe-insight-details
+      description: Describes the details of an existing insight for an Amazon OpenSearch Service domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity=!: The entity for which to retrieve insight details.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --insight-id=!: The unique identifier of the insight to describe.
+        --no-show-html-content: Specifies whether to show response with HTML content in response or not.
+        --show-html-content: Specifies whether to show response with HTML content in response or not.
     - name: describe-instance-type-limits
       description: Describes the instance count, storage, and master node limits for a given OpenSearch or Elasticsearch version and instance type.
       flags:
@@ -532,6 +551,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the OpenSearch application to retrieve.
+    - name: get-capability
+      description: Retrieves information about a registered capability for an OpenSearch UI application, including its configuration and current status.
+      flags:
+        --application-id=!: The unique identifier of the OpenSearch UI application.
+        --capability-name=!: The name of the capability to retrieve information about.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-compatible-versions
       description: Returns a map of OpenSearch or Elasticsearch versions and the versions you can upgrade them to.
       flags:
@@ -673,6 +700,22 @@ commands:
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial `ListDomainsForPackage` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListDomainsForPackage` operations, which returns results in the next page.
         --package-id=!: The unique identifier of the package for which to list associated domains.
+    - name: list-insights
+      description: Lists insights for an Amazon OpenSearch Service domain or Amazon Web Services account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity=!: The entity for which to list insights.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial `ListInsights` operation returns a `NextToken`, include the returned `NextToken` in subsequent `ListInsights` operations to retrieve the next page of results.
+        --sort-order=: The sort order for the results.
+        --time-range=: The time range for filtering insights, specified as epoch millisecond timestamps.
+      completion:
+        flag:
+            sort-order:
+                - ASC
+                - DESC
     - name: list-instance-type-details
       description: Lists all instance types and available features for a given OpenSearch or Elasticsearch version.
       flags:
@@ -760,6 +803,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-set-as-default!: Set to true to set the specified ARN as the default application.
         --set-as-default!: Set to true to set the specified ARN as the default application.
+    - name: register-capability
+      description: Registers a capability for an OpenSearch UI application.
+      flags:
+        --application-id=!: The unique identifier of the OpenSearch UI application to register the capability for.
+        --capability-config=!: The configuration settings for the capability being registered.
+        --capability-name=!: The name of the capability to register.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: reject-inbound-connection
       description: Allows the remote Amazon OpenSearch Service domain owner to reject an inbound cross-cluster connection request.
       flags:
@@ -785,11 +837,19 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-name=!: The name of the OpenSearch Service domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-options=: The options for the service, including the supported Regions for the endpoint access.
         --service=: The service SP to revoke access from.
       completion:
         flag:
             service:
                 - application.opensearchservice.amazonaws.com
+    - name: rollback-service-software-update
+      description: Rolls back a service software update for a domain to the previous version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The name of the domain to roll back the service software update on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-domain-maintenance
       description: Starts the node maintenance process on the data node.
       flags:

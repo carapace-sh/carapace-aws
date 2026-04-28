@@ -2,6 +2,24 @@
 name: marketplace-agreement
 description: AWS Marketplace Agreement Service
 commands:
+    - name: batch-create-billing-adjustment-request
+      description: Allows sellers (proposers) to submit billing adjustment requests for one or more invoices within an agreement.
+      flags:
+        --billing-adjustment-request-entries=!:
+            description: A list of billing adjustment request entries.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: cancel-agreement-cancellation-request
+      description: Allows sellers (proposers) to withdraw an existing agreement cancellation request that is in a pending state.
+      flags:
+        --agreement-cancellation-request-id=!: The unique identifier of the cancellation request to cancel.
+        --agreement-id=!: The unique identifier of the agreement associated with the cancellation request.
+        --cancellation-reason=!: A required message explaining why the cancellation request is being withdrawn (1-2000 characters).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: cancel-agreement-payment-request
       description: Allows sellers (proposers) to cancel a payment request that is in `PENDING_APPROVAL` status.
       flags:
@@ -14,6 +32,14 @@ commands:
       description: Provides details about an agreement, such as the proposer, acceptor, start date, and end date.
       flags:
         --agreement-id=!: The unique identifier of the agreement.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agreement-cancellation-request
+      description: Retrieves detailed information about a specific agreement cancellation request.
+      flags:
+        --agreement-cancellation-request-id=!: The unique identifier of the cancellation request.
+        --agreement-id=!: The unique identifier of the agreement associated with the cancellation request.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -34,6 +60,63 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of agreements to return in the response.
         --next-token=: A token to specify where to start pagination
+    - name: get-billing-adjustment-request
+      description: Retrieves detailed information about a specific billing adjustment request.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement associated with the billing adjustment request.
+        --billing-adjustment-request-id=!: The unique identifier of the billing adjustment request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-agreement-cancellation-requests
+      description: Lists agreement cancellation requests available to you as a seller or buyer.
+      flags:
+        --agreement-id=: An optional parameter to filter cancellation requests for a specific agreement.
+        --agreement-type=: An optional parameter to filter cancellation requests by agreement type (e.g., `PurchaseAgreement`).
+        --catalog=: An optional parameter to filter cancellation requests by catalog (e.g., `AWSMarketplace`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of cancellation requests to return in the response.
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --party-type=!: The party type for the cancellation requests.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional parameter to filter cancellation requests by status.
+      completion:
+        flag:
+            status:
+                - PENDING_APPROVAL
+                - APPROVED
+                - REJECTED
+                - CANCELLED
+                - VALIDATION_FAILED
+    - name: list-agreement-invoice-line-items
+      description: Allows sellers (proposers) to retrieve aggregated billing data from AWS Marketplace agreements using flexible grouping.
+      flags:
+        --after-issued-time=: An optional filter for invoices issued after the specified timestamp.
+        --agreement-id=!: The unique identifier of the agreement.
+        --before-issued-time=: An optional filter for invoices issued before the specified timestamp.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-by=!: Specifies a grouping strategy for line items.
+        --invoice-billing-period=: An optional filter for the billing period associated with the invoice.
+        --invoice-id=: An optional filter to retrieve invoice information for a specific invoice.
+        --invoice-type=: An optional filter for the type of invoice.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            group-by:
+                - INVOICE_ID
+            invoice-type:
+                - INVOICE
+                - CREDIT_MEMO
     - name: list-agreement-payment-requests
       description: Lists payment requests available to you as a seller or buyer.
       flags:
@@ -59,6 +142,29 @@ commands:
                 - APPROVED
                 - REJECTED
                 - CANCELLED
+    - name: list-billing-adjustment-requests
+      description: Lists billing adjustment requests for a specific agreement.
+      flags:
+        --agreement-id=: The unique identifier of the agreement to list billing adjustment requests for.
+        --agreement-type=: An optional filter to return billing adjustment requests by agreement type (e.g., `PurchaseAgreement`).
+        --catalog=: An optional filter to return billing adjustment requests by catalog (e.g., `AWSMarketplace`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: An optional filter to return billing adjustment requests created after the specified POSIX timestamp (Unix epoch seconds).
+        --created-before=: An optional filter to return billing adjustment requests created before the specified POSIX timestamp (Unix epoch seconds).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of billing adjustment requests to return in the response.
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional filter to return billing adjustment requests with the specified status.
+      completion:
+        flag:
+            status:
+                - PENDING
+                - VALIDATION_FAILED
+                - COMPLETED
     - name: search-agreements
       description: Searches across all agreements that a proposer has in AWS Marketplace.
       flags:
@@ -72,6 +178,27 @@ commands:
         --max-results=: The maximum number of agreements to return in the response.
         --next-token=: A token to specify where to start pagination.
         --sort=: An object that contains the `SortBy` and `SortOrder` attributes.
+    - name: send-agreement-cancellation-request
+      description: Allows sellers (proposers) to submit a cancellation request for an active agreement.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement for which the cancellation request is being submitted.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: An optional detailed description of the cancellation reason (1-2000 characters).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --reason-code=!: The reason code for the cancellation request.
+      completion:
+        flag:
+            reason-code:
+                - INCORRECT_TERMS_ACCEPTED
+                - REPLACING_AGREEMENT
+                - TEST_AGREEMENT
+                - ALTERNATIVE_PROCUREMENT_CHANNEL
+                - PRODUCT_DISCONTINUED
+                - UNINTENDED_RENEWAL
+                - BUYER_DISSATISFACTION
+                - OTHER
     - name: send-agreement-payment-request
       description: Allows sellers (proposers) to submit a payment request to buyers (acceptors) for a specific charge amount for an agreement that includes a `VariablePaymentTerm`.
       flags:

@@ -130,6 +130,52 @@ commands:
                 - Failed
                 - Stopping
                 - Stopped
+    - name: create-ai-benchmark-job
+      description: Creates a benchmark job that runs performance benchmarks against inference infrastructure using a predefined AI workload configuration.
+      flags:
+        --ai-benchmark-job-name=!: The name of the AI benchmark job.
+        --ai-workload-config-identifier=!: The name or Amazon Resource Name (ARN) of the AI workload configuration to use for this benchmark job.
+        --benchmark-target=!: The target endpoint to benchmark.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --network-config=: The network configuration for the benchmark job, including VPC settings.
+        --output-config=!: The output configuration for the benchmark job, including the Amazon S3 location where benchmark results are stored.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
+        --tags=:
+            description: The metadata that you apply to Amazon Web Services resources to help you categorize and organize them.
+            nargs: -1
+    - name: create-ai-recommendation-job
+      description: Creates a recommendation job that generates intelligent optimization recommendations for generative AI inference deployments.
+      flags:
+        --ai-recommendation-job-name=!: The name of the AI recommendation job.
+        --ai-workload-config-identifier=!: The name or Amazon Resource Name (ARN) of the AI workload configuration to use for this recommendation job.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-spec=: The compute resource specification for the recommendation job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-specification=: The inference framework configuration.
+        --model-source=!: The source of the model to optimize.
+        --no-optimize-model: Whether to allow model optimization techniques such as quantization, speculative decoding, and kernel tuning.
+        --optimize-model: Whether to allow model optimization techniques such as quantization, speculative decoding, and kernel tuning.
+        --output-config=!: The output configuration for the recommendation job, including the Amazon S3 location for results and an optional model package group where the optimized model is registered.
+        --performance-target=!: The performance targets for the recommendation job.
+        --role-arn=!: The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker AI to perform tasks on your behalf.
+        --tags=:
+            description: The metadata that you apply to Amazon Web Services resources to help you categorize and organize them.
+            nargs: -1
+    - name: create-ai-workload-config
+      description: Creates a reusable AI workload configuration that defines datasets, data sources, and benchmark tool settings for consistent performance testing of generative AI inference deployments on Amazon SageMaker AI.
+      flags:
+        --ai-workload-config-name=!: The name of the AI workload configuration.
+        --ai-workload-configs=: The benchmark tool configuration and workload specification.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-config=: The dataset configuration for the workload.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=:
+            description: The metadata that you apply to Amazon Web Services resources to help you categorize and organize them.
+            nargs: -1
     - name: create-algorithm
       description: Create a machine learning algorithm that you can use in SageMaker and list in the Amazon Web Services Marketplace.
       flags:
@@ -688,7 +734,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --inference-component-name=!: A unique name to assign to the inference component.
         --runtime-config=: Runtime settings for a model that is deployed with an inference component.
-        --specification=!: Details about the resources to deploy with this inference component, including the model, container, and compute resources.
+        --specification=: Details about the resources to deploy with this inference component, including the model, container, and compute resources.
         --tags=:
             description: A list of key-value pairs associated with the model.
             nargs: -1
@@ -1242,6 +1288,12 @@ commands:
                 - ml.p5.48xlarge
                 - ml.p5e.48xlarge
                 - ml.p5en.48xlarge
+                - ml.g4dn.xlarge
+                - ml.g4dn.2xlarge
+                - ml.g4dn.4xlarge
+                - ml.g4dn.8xlarge
+                - ml.g4dn.12xlarge
+                - ml.g4dn.16xlarge
                 - ml.g5.xlarge
                 - ml.g5.2xlarge
                 - ml.g5.4xlarge
@@ -1608,6 +1660,27 @@ commands:
       description: Deletes an action.
       flags:
         --action-name=!: The name of the action to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-ai-benchmark-job
+      description: Deletes the specified AI benchmark job.
+      flags:
+        --ai-benchmark-job-name=!: The name of the AI benchmark job to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-ai-recommendation-job
+      description: Deletes the specified AI recommendation job.
+      flags:
+        --ai-recommendation-job-name=!: The name of the AI recommendation job to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-ai-workload-config
+      description: Deletes the specified AI workload configuration.
+      flags:
+        --ai-workload-config-name=!: The name of the AI workload configuration to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -2074,6 +2147,27 @@ commands:
       description: Describes an action.
       flags:
         --action-name=!: The name of the action to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-ai-benchmark-job
+      description: Returns details of an AI benchmark job, including its status, configuration, target endpoint, and timing information.
+      flags:
+        --ai-benchmark-job-name=!: The name of the AI benchmark job to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-ai-recommendation-job
+      description: Returns details of an AI recommendation job, including its status, model source, performance targets, optimization recommendations, and deployment configurations.
+      flags:
+        --ai-recommendation-job-name=!: The name of the AI recommendation job to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-ai-workload-config
+      description: Returns details of an AI workload configuration, including the dataset configuration, benchmark tool settings, tags, and creation time.
+      flags:
+        --ai-workload-config-name=!: The name of the AI workload configuration to describe.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -2771,6 +2865,94 @@ commands:
         --sort-by=: The property used to sort results.
         --sort-order=: The sort order.
         --source-uri=: A filter that returns only actions with the specified source URI.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - Name
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+    - name: list-ai-benchmark-jobs
+      description: Returns a list of AI benchmark jobs in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter that returns only jobs created after the specified time.
+        --creation-time-before=: A filter that returns only jobs created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of benchmark jobs to return in the response.
+        --name-contains=: A string in the job name.
+        --next-token=: If the previous call to `ListAIBenchmarkJobs` didn't return the full set of jobs, the call returns a token for getting the next set.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The sort order for results.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: A filter that returns only benchmark jobs with the specified status.
+      completion:
+        flag:
+            sort-by:
+                - Name
+                - CreationTime
+                - Status
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
+                - Stopping
+                - Stopped
+    - name: list-ai-recommendation-jobs
+      description: Returns a list of AI recommendation jobs in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter that returns only jobs created after the specified time.
+        --creation-time-before=: A filter that returns only jobs created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of recommendation jobs to return in the response.
+        --name-contains=: A string in the job name.
+        --next-token=: If the previous call to `ListAIRecommendationJobs` didn't return the full set of jobs, the call returns a token for getting the next set.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The sort order for results.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: A filter that returns only recommendation jobs with the specified status.
+      completion:
+        flag:
+            sort-by:
+                - Name
+                - CreationTime
+                - Status
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
+                - Stopping
+                - Stopped
+    - name: list-ai-workload-configs
+      description: Returns a list of AI workload configurations in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter that returns only configurations created after the specified time.
+        --creation-time-before=: A filter that returns only configurations created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of AI workload configurations to return in the response.
+        --name-contains=: A string in the configuration name.
+        --next-token=: If the previous call to `ListAIWorkloadConfigs` didn't return the full set of configurations, the call returns a token for getting the next set of configurations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The sort order for results.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
@@ -5237,6 +5419,16 @@ commands:
         --output-parameters=:
             description: A list of the output parameters of the callback step.
             nargs: -1
+    - name: start-cluster-health-check
+      description: Start deep health checks for a SageMaker HyperPod cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster.
+        --deep-health-check-configurations=!:
+            description: A list of configurations containing instance group names, EC2 instance IDs, and deep health checks to perform.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-edge-deployment-stage
       description: Starts a stage in an edge deployment plan.
       flags:
@@ -5297,6 +5489,20 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-identifier=!: The Amazon Resource Name (ARN) of the resource to which the remote connection will be established.
+    - name: stop-ai-benchmark-job
+      description: Stops a running AI benchmark job.
+      flags:
+        --ai-benchmark-job-name=!: The name of the AI benchmark job to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-ai-recommendation-job
+      description: Stops a running AI recommendation job.
+      flags:
+        --ai-recommendation-job-name=!: The name of the AI recommendation job to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: stop-auto-ml-job
       description: A method for forcing a running job to shut down.
       flags:

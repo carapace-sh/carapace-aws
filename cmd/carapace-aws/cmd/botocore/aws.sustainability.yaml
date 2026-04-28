@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: sustainability
+description: AWS Sustainability
+commands:
+    - name: get-estimated-carbon-emissions
+      description: Returns estimated carbon emission values based on customer grouping and filtering parameters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --emissions-types=:
+            description: The emission types to include in the results.
+            nargs: -1
+        --filter-by=: The criteria for filtering estimated carbon emissions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --granularity-configuration=: Configuration for fiscal year calculations when using `YEARLY_FISCAL` or `QUARTERLY_FISCAL` granularity.
+        --granularity=: The time granularity for the results.
+        --group-by=:
+            description: The dimensions available for grouping estimated carbon emissions.
+            nargs: -1
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --time-period=!: The date range for fetching estimated carbon emissions.
+      completion:
+        flag:
+            granularity:
+                - YEARLY_CALENDAR
+                - YEARLY_FISCAL
+                - QUARTERLY_CALENDAR
+                - QUARTERLY_FISCAL
+                - MONTHLY
+    - name: get-estimated-carbon-emissions-dimension-values
+      description: Returns the possible dimension values available for a customer's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dimensions=!:
+            description: The dimensions available for grouping estimated carbon emissions.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --time-period=!: The date range for fetching the dimension values.

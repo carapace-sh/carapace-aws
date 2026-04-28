@@ -12,6 +12,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --link-id=!: The unique identifier of the link.
         --log-settings=!: Settings for the application logs.
+        --timeout-in-millis=: The timeout value in milliseconds.
     - name: create-inbound-external-link
       description: Creates an inbound external link.
       flags:
@@ -21,7 +22,7 @@ commands:
         --client-token=!: The unique client token.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-settings=!: ""
+        --log-settings=!: Settings for the application logs.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
     - name: create-link
       description: Creates a new link between gateways.
@@ -36,16 +37,17 @@ commands:
         --no-http-responder-allowed: Boolean to specify if an HTTP responder is allowed.
         --peer-gateway-id=!: The unique identifier of the peer gateway.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
+        --timeout-in-millis=: The timeout value in milliseconds.
     - name: create-outbound-external-link
       description: Creates an outbound external link.
       flags:
-        --attributes=: ""
+        --attributes=: Attributes of the link.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: The unique client token.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --log-settings=!: ""
+        --log-settings=!: Settings for the application logs.
         --public-endpoint=!: The public endpoint of the link.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
     - name: create-requester-gateway
@@ -72,7 +74,9 @@ commands:
         --client-token=!: The unique client token.
         --description=: An optional description for the responder gateway.
         --domain-name=: The domain name for the responder gateway.
+        --gateway-type=: The type of gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-config=: ""
         --managed-endpoint-configuration=: The configuration for the managed endpoint.
         --port=!: The networking port to use.
         --protocol=!: The networking protocol to use.
@@ -87,6 +91,9 @@ commands:
         --vpc-id=!: The unique identifier of the Virtual Private Cloud (VPC).
       completion:
         flag:
+            gateway-type:
+                - EXTERNAL
+                - INTERNAL
             protocol:
                 - HTTP
                 - HTTPS
@@ -242,6 +249,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --link-id=!: The unique identifier of the link.
         --log-settings=: Settings for the application logs.
+        --timeout-in-millis=: The timeout value in milliseconds.
     - name: update-link-module-flow
       description: Updates a link module flow.
       flags:
@@ -273,6 +281,7 @@ commands:
         --domain-name=: The domain name for the responder gateway.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --listener-config=: The listener configuration for the responder gateway.
         --managed-endpoint-configuration=: The configuration for the managed endpoint.
         --port=!: The networking port to use.
         --protocol=!: The networking protocol to use.
@@ -286,6 +295,14 @@ commands:
       description: Wait  until  a particular condition is satisfied.
       commands:
         - name: inbound-external-link-active
+          description: Retrieves information about an inbound external link.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --gateway-id=!: The unique identifier of the gateway.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --link-id=!: The unique identifier of the link.
+        - name: inbound-external-link-deleted
           description: Retrieves information about an inbound external link.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
@@ -309,7 +326,23 @@ commands:
             --gateway-id=!: The unique identifier of the gateway.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --link-id=!: The unique identifier of the link.
+        - name: link-deleted
+          description: Retrieves information about a link between gateways.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --gateway-id=!: The unique identifier of the gateway.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --link-id=!: The unique identifier of the link.
         - name: outbound-external-link-active
+          description: Retrieves information about an outbound external link.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --gateway-id=!: The unique identifier of the gateway.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --link-id=!: The unique identifier of the link.
+        - name: outbound-external-link-deleted
           description: Retrieves information about an outbound external link.
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
