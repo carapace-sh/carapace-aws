@@ -52,6 +52,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-data-automation-library
+      description: Creates an Amazon Bedrock Data Automation Library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: ""
+        --encryption-configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-description=: ""
+        --library-name=!: ""
+        --tags=:
+            nargs: -1
     - name: create-data-automation-project
       description: Creates an Amazon Bedrock Data Automation Project
       flags:
@@ -59,6 +71,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: ""
         --custom-output-configuration=: ""
+        --data-automation-library-configuration=: ""
         --encryption-configuration=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --override-configuration=: ""
@@ -85,6 +98,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-data-automation-library
+      description: Deletes an existing Amazon Bedrock Data Automation Library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
     - name: delete-data-automation-project
       description: Deletes an existing Amazon Bedrock Data Automation Project
       flags:
@@ -113,6 +133,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --invocation-arn=!: Invocation arn.
+    - name: get-data-automation-library
+      description: Gets an existing Amazon Bedrock Data Automation Library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+    - name: get-data-automation-library-entity
+      description: Gets an existing entity based on entity type from the library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-id=!: Unique identifier for the entity
+        --entity-type=!: The entity type for which the entity is requested
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+      completion:
+        flag:
+            entity-type:
+                - VOCABULARY
+    - name: get-data-automation-library-ingestion-job
+      description: API used to get status of data automation library ingestion job
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-arn=!: ARN of the DataAutomationLibraryIngestionJob
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
     - name: get-data-automation-project
       description: Gets an existing Amazon Bedrock Data Automation Project
       flags:
@@ -142,6 +190,29 @@ commands:
         --tags=:
             description: List of tags.
             nargs: -1
+    - name: invoke-data-automation-library-ingestion-job
+      description: 'Async API: Invoke data automation library ingestion job'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token
+        --entity-type=!: The entity type for which DataAutomationLibraryIngestionJob is being run
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-configuration=!: Input configuration of DataAutomationLibraryIngestionJob request
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+        --notification-configuration=: Notification configuration.
+        --operation-type=!: The operation to be performed by DataAutomationLibraryIngestionJob
+        --output-configuration=!: Output configuration of DataAutomationLibraryIngestionJob
+        --tags=:
+            description: List of tags
+            nargs: -1
+      completion:
+        flag:
+            entity-type:
+                - VOCABULARY
+            operation-type:
+                - UPSERT
+                - DELETE
     - name: list-blueprints
       description: Lists all existing Amazon Bedrock Data Automation Blueprints
       flags:
@@ -166,6 +237,47 @@ commands:
             resource-owner:
                 - SERVICE
                 - ACCOUNT
+    - name: list-data-automation-libraries
+      description: Lists all existing Amazon Bedrock Data Automation Libraries
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-filter=: ""
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-automation-library-entities
+      description: Lists all stored entities in the library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-type=!: The entity type for which the entity list is requested
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: Pagination token for retrieving the next set of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            entity-type:
+                - VOCABULARY
+    - name: list-data-automation-library-ingestion-jobs
+      description: Lists all data automation library ingestion jobs
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: Pagination token for retrieving the next set of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-data-automation-projects
       description: Lists all existing Amazon Bedrock Data Automation Projects
       flags:
@@ -173,6 +285,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-filter=: ""
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
@@ -229,12 +342,22 @@ commands:
             blueprint-stage:
                 - DEVELOPMENT
                 - LIVE
+    - name: update-data-automation-library
+      description: Updates an existing Amazon Bedrock Data Automation Library
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --library-arn=!: ARN generated at the server side when a DataAutomationLibrary is created
+        --library-description=: ""
     - name: update-data-automation-project
       description: Updates an existing Amazon Bedrock Data Automation Project
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-output-configuration=: ""
+        --data-automation-library-configuration=: ""
         --encryption-configuration=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --override-configuration=: ""

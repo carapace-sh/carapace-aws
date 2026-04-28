@@ -144,6 +144,13 @@ commands:
                 - Walking
                 - Bicycle
                 - Motorcycle
+    - name: cancel-job
+      description: '`CancelJob` cancels a job that is currently running or pending.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the job to cancel.
     - name: create-geofence-collection
       description: Creates a geofence collection, which manages and stores geofences.
       flags:
@@ -403,6 +410,13 @@ commands:
         --collection-name=!: The geofence collection storing the target geofence.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --geofence-id=!: The geofence you're retrieving details for.
+    - name: get-job
+      description: '`GetJob` retrieves detailed information about a specific job, including its current status, configuration, and error information if the job failed.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the job to retrieve.
     - name: get-map-glyphs
       description: This operation is no longer current and may be deprecated in the future.
       flags:
@@ -484,6 +498,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: An optional limit for the number of geofences returned in a single call.
+        --next-token=: The pagination token specifying which page of results to return in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-jobs
+      description: '`ListJobs` retrieves a list of jobs with optional filtering and pagination support.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An optional structure containing criteria by which to filter job results.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of jobs to return.
         --next-token=: The pagination token specifying which page of results to return in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -631,6 +657,24 @@ commands:
         --language=: The preferred language used to return results.
         --max-results=: An optional parameter.
         --text=!: The address, name, city, or region to be used in the search in free-form text format.
+    - name: start-job
+      description: '`StartJob` starts a new asynchronous bulk processing job.'
+      flags:
+        --action-options=: Additional parameters that can be requested for each result.
+        --action=!: The action to perform on the input data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier for this request to ensure idempotency.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that Amazon Location Service assumes during job processing.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-options=!: Configuration for input data location and format.
+        --name=: An optional name for the job resource.
+        --output-options=!: Configuration for output data location and format.
+        --tags=: Tags and corresponding values to be associated with the job.
+      completion:
+        flag:
+            action:
+                - ValidateAddress
     - name: tag-resource
       description: Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.
       flags:
@@ -765,3 +809,13 @@ commands:
             distance-unit:
                 - Kilometers
                 - Miles
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: job-completed
+          description: '`GetJob` retrieves detailed information about a specific job, including its current status, configuration, and error information if the job failed.'
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --job-id=!: The unique identifier of the job to retrieve.

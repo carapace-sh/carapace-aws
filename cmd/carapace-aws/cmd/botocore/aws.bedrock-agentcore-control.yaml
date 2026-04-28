@@ -96,7 +96,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --description=: The description of the evaluator that explains its purpose and evaluation criteria.
-        --evaluator-config=!: The configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration.
+        --evaluator-config=!: The configuration for the evaluator.
         --evaluator-name=!: The name of the evaluator.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --level=!: The evaluation level that determines the scope of evaluation.
@@ -152,7 +152,40 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata-configuration=: Optional configuration for HTTP header and query parameter propagation to and from the gateway target.
         --name=!: The name of the gateway target.
+        --private-endpoint=: The private endpoint configuration for the gateway target.
         --target-configuration=!: The configuration settings for the target, including endpoint information and schema definitions.
+    - name: create-harness
+      description: Operation to create a Harness.
+      flags:
+        --allowed-tools=:
+            description: The tools that the agent is allowed to use.
+            nargs: -1
+        --authorizer-configuration=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --environment-artifact=: The environment artifact for the harness, such as a custom container image containing additional dependencies.
+        --environment-variables=: Environment variables to set in the harness runtime environment.
+        --environment=: The compute environment configuration for the harness, including network and lifecycle settings.
+        --execution-role-arn=!: The ARN of the IAM role that the harness assumes when running.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --harness-name=!: The name of the harness.
+        --max-iterations=: The maximum number of iterations the agent loop can execute per invocation.
+        --max-tokens=: The maximum number of tokens the agent can generate per iteration.
+        --memory=: The AgentCore Memory configuration for persisting conversation context across sessions.
+        --model=: The model configuration for the harness.
+        --skills=:
+            description: The skills available to the agent.
+            nargs: -1
+        --system-prompt=:
+            description: The system prompt that defines the agent's behavior and instructions.
+            nargs: -1
+        --tags=: Tags to apply to the harness resource.
+        --timeout-seconds=: The maximum duration in seconds for the agent loop execution per invocation.
+        --tools=:
+            description: The tools available to the agent, such as remote MCP servers, AgentCore Gateway, AgentCore Browser, Code Interpreter, or inline functions.
+            nargs: -1
+        --truncation=: The truncation configuration for managing conversation context when it exceeds model limits.
     - name: create-memory
       description: Creates a new Amazon Bedrock AgentCore Memory resource.
       flags:
@@ -254,6 +287,47 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The customer-assigned immutable name for the policy engine.
         --tags=: A map of tag keys and values to assign to an AgentCore Policy.
+    - name: create-registry
+      description: Creates a new registry in your Amazon Web Services account.
+      flags:
+        --approval-configuration=: The approval configuration for registry records.
+        --authorizer-configuration=: The authorizer configuration for the registry.
+        --authorizer-type=: The type of authorizer to use for the registry.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description of the registry.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the registry.
+      completion:
+        flag:
+            authorizer-type:
+                - CUSTOM_JWT
+                - AWS_IAM
+    - name: create-registry-record
+      description: Creates a new registry record within the specified registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --description=: A description of the registry record.
+        --descriptor-type=!: The descriptor type of the registry record.
+        --descriptors=: The descriptor-type-specific configuration containing the resource schema and metadata.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the registry record.
+        --record-version=: The version of the registry record.
+        --registry-id=!: The identifier of the registry where the record will be created.
+        --synchronization-configuration=: The configuration for synchronizing registry record metadata from an external source, such as a URL-based MCP server.
+        --synchronization-type=: The type of synchronization to use for keeping the record metadata up to date from an external source.
+      completion:
+        flag:
+            descriptor-type:
+                - MCP
+                - A2A
+                - CUSTOM
+                - AGENT_SKILLS
+            synchronization-type:
+                - URL
     - name: create-workload-identity
       description: Creates a new workload identity.
       flags:
@@ -335,6 +409,14 @@ commands:
         --gateway-identifier=!: The unique identifier of the gateway associated with the target.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-id=!: The unique identifier of the gateway target to delete.
+    - name: delete-harness
+      description: Operation to delete a Harness.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --harness-id=!: The ID of the harness to delete.
     - name: delete-memory
       description: Deletes an Amazon Bedrock AgentCore Memory resource.
       flags:
@@ -372,6 +454,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-engine-id=!: The unique identifier of the policy engine to be deleted.
+    - name: delete-registry
+      description: Deletes a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=!: The identifier of the registry to delete.
+    - name: delete-registry-record
+      description: Deletes a registry record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-id=!: The identifier of the registry record to delete.
+        --registry-id=!: The identifier of the registry containing the record.
     - name: delete-resource-policy
       description: Deletes the resource-based policy for a specified resource.
       flags:
@@ -452,6 +549,13 @@ commands:
         --gateway-identifier=!: The identifier of the gateway that contains the target.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-id=!: The unique identifier of the target to retrieve.
+    - name: get-harness
+      description: Operation to get a single Harness.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --harness-id=!: The ID of the harness to retrieve.
     - name: get-memory
       description: Retrieve an existing Amazon Bedrock AgentCore Memory resource.
       flags:
@@ -502,6 +606,21 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-engine-id=!: The identifier of the policy engine associated with the policy generation request.
         --policy-generation-id=!: The unique identifier of the policy generation request to be retrieved.
+    - name: get-registry
+      description: Retrieves information about a specific registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --registry-id=!: The identifier of the registry to retrieve.
+    - name: get-registry-record
+      description: Retrieves information about a specific registry record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-id=!: The identifier of the registry record to retrieve.
+        --registry-id=!: The identifier of the registry containing the record.
     - name: get-resource-policy
       description: Retrieves the resource-based policy for a specified resource.
       flags:
@@ -649,6 +768,17 @@ commands:
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-harnesses
+      description: Operation to list Harnesses.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-memories
       description: Lists the available Amazon Bedrock AgentCore Memory resources in the current Amazon Web Services Region.
       flags:
@@ -731,6 +861,60 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --policy-engine-id=!: The identifier of the policy engine whose policy generations to retrieve.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-registries
+      description: Lists all registries in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter registries by their current status.
+      completion:
+        flag:
+            status:
+                - CREATING
+                - READY
+                - UPDATING
+                - CREATE_FAILED
+                - UPDATE_FAILED
+                - DELETING
+                - DELETE_FAILED
+    - name: list-registry-records
+      description: Lists registry records within a registry.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --descriptor-type=: Filter registry records by their descriptor type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --name=: Filter registry records by name.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registry-id=!: The identifier of the registry to list records from.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter registry records by their current status.
+      completion:
+        flag:
+            descriptor-type:
+                - MCP
+                - A2A
+                - CUSTOM
+                - AGENT_SKILLS
+            status:
+                - DRAFT
+                - PENDING_APPROVAL
+                - APPROVED
+                - REJECTED
+                - DEPRECATED
+                - CREATING
+                - UPDATING
+                - CREATE_FAILED
+                - UPDATE_FAILED
     - name: list-tags-for-resource
       description: Lists the tags associated with the specified resource.
       flags:
@@ -776,8 +960,16 @@ commands:
         --name=!: A customer-assigned name for the policy generation request.
         --policy-engine-id=!: The identifier of the policy engine that provides the context for policy generation.
         --resource=!: The resource information that provides context for policy generation.
+    - name: submit-registry-record-for-approval
+      description: Submits a registry record for approval.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-id=!: The identifier of the registry record to submit for approval.
+        --registry-id=!: The identifier of the registry containing the record.
     - name: synchronize-gateway-targets
-      description: The gateway targets.
+      description: Synchronizes the gateway targets by fetching the latest tool definitions from the target endpoints.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -851,7 +1043,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --description=: The updated description of the evaluator.
-        --evaluator-config=: The updated configuration for the evaluator, including LLM-as-a-Judge settings with instructions, rating scale, and model configuration.
+        --evaluator-config=: The updated configuration for the evaluator.
         --evaluator-id=!: The unique identifier of the evaluator to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --level=: The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines the scope of evaluation.
@@ -904,8 +1096,40 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata-configuration=: Configuration for HTTP header and query parameter propagation to the gateway target.
         --name=!: The updated name for the gateway target.
+        --private-endpoint=: The private endpoint configuration for the gateway target.
         --target-configuration=!: ""
         --target-id=!: The unique identifier of the gateway target to update.
+    - name: update-harness
+      description: Operation to update a Harness.
+      flags:
+        --allowed-tools=:
+            description: The tools that the agent is allowed to use.
+            nargs: -1
+        --authorizer-configuration=: ""
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --environment-artifact=: The environment artifact for the harness.
+        --environment-variables=: Environment variables to set in the harness runtime environment.
+        --environment=: The compute environment configuration for the harness.
+        --execution-role-arn=: The ARN of the IAM role that the harness assumes when running.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --harness-id=!: The ID of the harness to update.
+        --max-iterations=: The maximum number of iterations the agent loop can execute per invocation.
+        --max-tokens=: The maximum number of tokens the agent can generate per iteration.
+        --memory=: The AgentCore Memory configuration.
+        --model=: The model configuration for the harness.
+        --skills=:
+            description: The skills available to the agent.
+            nargs: -1
+        --system-prompt=:
+            description: The system prompt that defines the agent's behavior.
+            nargs: -1
+        --timeout-seconds=: The maximum duration in seconds for the agent loop execution per invocation.
+        --tools=:
+            description: The tools available to the agent.
+            nargs: -1
+        --truncation=: The truncation configuration for managing conversation context.
     - name: update-memory
       description: Update an Amazon Bedrock AgentCore Memory resource memory.
       flags:
@@ -1001,6 +1225,63 @@ commands:
         --description=: The new description for the policy engine.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy-engine-id=!: The unique identifier of the policy engine to be updated.
+    - name: update-registry
+      description: Updates an existing registry.
+      flags:
+        --approval-configuration=: The updated approval configuration for registry records.
+        --authorizer-configuration=: The updated authorizer configuration for the registry.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the registry.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name of the registry.
+        --registry-id=!: The identifier of the registry to update.
+    - name: update-registry-record
+      description: Updates an existing registry record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description for the registry record.
+        --descriptor-type=: The updated descriptor type for the registry record.
+        --descriptors=: The updated descriptor-type-specific configuration containing the resource schema and metadata.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name for the registry record.
+        --no-trigger-synchronization: Whether to trigger synchronization using the stored or provided configuration.
+        --record-id=!: The identifier of the registry record to update.
+        --record-version=: The version of the registry record for optimistic locking.
+        --registry-id=!: The identifier of the registry containing the record.
+        --synchronization-configuration=: The updated synchronization configuration for the registry record.
+        --synchronization-type=: The updated synchronization type for the registry record.
+        --trigger-synchronization: Whether to trigger synchronization using the stored or provided configuration.
+      completion:
+        flag:
+            descriptor-type:
+                - MCP
+                - A2A
+                - CUSTOM
+                - AGENT_SKILLS
+    - name: update-registry-record-status
+      description: Updates the status of a registry record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --record-id=!: The identifier of the registry record to update the status for.
+        --registry-id=!: The identifier of the registry containing the record.
+        --status-reason=!: The reason for the status change, such as why the record was approved or rejected.
+        --status=!: The target status for the registry record.
+      completion:
+        flag:
+            status:
+                - DRAFT
+                - PENDING_APPROVAL
+                - APPROVED
+                - REJECTED
+                - DEPRECATED
+                - CREATING
+                - UPDATING
+                - CREATE_FAILED
+                - UPDATE_FAILED
     - name: update-workload-identity
       description: Updates an existing workload identity.
       flags:

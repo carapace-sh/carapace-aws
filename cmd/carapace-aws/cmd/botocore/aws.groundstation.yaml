@@ -62,13 +62,13 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --contact-post-pass-duration-seconds=: Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.
-        --contact-pre-pass-duration-seconds=: Amount of time prior to contact start you’d like to receive a Ground Station Contact State Change event indicating an upcoming pass.
+        --contact-post-pass-duration-seconds=: Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.
+        --contact-pre-pass-duration-seconds=: Amount of time prior to contact start you'd like to receive a Ground Station Contact State Change event indicating an upcoming pass.
         --dataflow-edges=!:
             description: A list of lists of ARNs.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minimum-viable-contact-duration-seconds=!: Smallest amount of time in seconds that you’d like to see for an available contact.
+        --minimum-viable-contact-duration-seconds=!: Smallest amount of time in seconds that you'd like to see for an available contact.
         --name=!: Name of a mission profile.
         --streams-kms-key=: KMS key to use for encrypting streams.
         --streams-kms-role=: Role to use for encrypting streams with KMS key.
@@ -122,6 +122,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --contact-id=!: UUID of a contact.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-contact-version
+      description: Describes a specific version of a contact.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contact-id=!: UUID of a contact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=!: Version ID of a contact.
     - name: describe-ephemeris
       description: Retrieve information about an existing ephemeris.
       flags:
@@ -192,6 +200,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --satellite-id=!: UUID of a satellite.
+    - name: list-antennas
+      description: Returns a list of antennas at a specified ground station.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ground-station-id=!: ID of a ground station.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of antennas returned.
+        --next-token=: Next token returned in the request of a previous `ListAntennas` call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-configs
       description: Returns a list of `Config` objects.
       flags:
@@ -201,6 +221,18 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of `Configs` returned.
         --next-token=: Next token returned in the request of a previous `ListConfigs` call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-contact-versions
+      description: Returns a list of versions for a specified contact.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contact-id=!: UUID of a contact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of contact versions returned.
+        --next-token=: Next token returned in the request of a previous `ListContactVersions` call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-contacts
@@ -259,6 +291,23 @@ commands:
                 - OEM
                 - AZ_EL
                 - SERVICE_MANAGED
+    - name: list-ground-station-reservations
+      description: Returns a list of reservations for a specified ground station.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: End time of the reservation window in UTC.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ground-station-id=!: ID of a ground station.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of ground station reservations returned.
+        --next-token=: Next token returned in the request of a previous `ListGroundStationReservations` call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --reservation-types=:
+            description: Types of reservations to filter by.
+            nargs: -1
+        --start-time=!: Start time of the reservation window in UTC.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-ground-stations
       description: Returns a list of ground stations.
       flags:
@@ -373,6 +422,16 @@ commands:
                 - uplink-echo
                 - s3-recording
                 - telemetry-sink
+    - name: update-contact
+      description: Updates a specific contact.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A client token is a unique, case-sensitive string of up to 64 ASCII characters.
+        --contact-id=!: UUID of a contact.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --satellite-arn=: ARN of a satellite.
+        --tracking-overrides=: ""
     - name: update-ephemeris
       description: Update an existing ephemeris.
       flags:
@@ -389,13 +448,13 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --contact-post-pass-duration-seconds=: Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.
-        --contact-pre-pass-duration-seconds=: Amount of time after a contact ends that you’d like to receive a Ground Station Contact State Change event indicating the pass has finished.
+        --contact-post-pass-duration-seconds=: Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.
+        --contact-pre-pass-duration-seconds=: Amount of time after a contact ends that you'd like to receive a Ground Station Contact State Change event indicating the pass has finished.
         --dataflow-edges=:
             description: A list of lists of ARNs.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --minimum-viable-contact-duration-seconds=: Smallest amount of time in seconds that you’d like to see for an available contact.
+        --minimum-viable-contact-duration-seconds=: Smallest amount of time in seconds that you'd like to see for an available contact.
         --mission-profile-id=!: UUID of a mission profile.
         --name=: Name of a mission profile.
         --streams-kms-key=: KMS key to use for encrypting streams.
@@ -412,3 +471,11 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --contact-id=!: UUID of a contact.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: contact-updated
+          description: Describes a specific version of a contact.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --contact-id=!: UUID of a contact.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --version-id=!: Version ID of a contact.

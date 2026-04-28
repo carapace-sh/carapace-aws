@@ -72,13 +72,19 @@ commands:
         --tags=:
             description: The tags used to organize, track, or control access for the resource.
             nargs: -1
+        --tls-policy=: The Transport Layer Security (TLS) policy for the ingress point.
         --traffic-policy-id=!: The identifier of an existing traffic policy that you attach to an ingress endpoint resource.
         --type=!: The type of the ingress endpoint to create.
       completion:
         flag:
+            tls-policy:
+                - REQUIRED
+                - OPTIONAL
+                - FIPS
             type:
                 - OPEN
                 - AUTH
+                - MTLS
     - name: create-relay
       description: Creates a relay resource which can be used in rules to relay incoming emails to defined relay destinations.
       flags:
@@ -268,7 +274,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-trust-store-contents=: Whether to include the trust store contents in the response.
         --ingress-point-id=!: The identifier of an ingress endpoint.
+      completion:
+        flag:
+            include-trust-store-contents:
+                - EXCLUDE
+                - INCLUDE
     - name: get-member-of-address-list
       description: Fetch attributes of a member in an address list.
       flags:
@@ -531,12 +543,17 @@ commands:
         --ingress-point-name=: A user friendly name for the ingress endpoint resource.
         --rule-set-id=: The identifier of an existing rule set that you attach to an ingress endpoint resource.
         --status-to-update=: The update status of an ingress endpoint.
+        --tls-policy=: The Transport Layer Security (TLS) policy for the ingress point.
         --traffic-policy-id=: The identifier of an existing traffic policy that you attach to an ingress endpoint resource.
       completion:
         flag:
             status-to-update:
                 - ACTIVE
                 - CLOSED
+            tls-policy:
+                - REQUIRED
+                - OPTIONAL
+                - FIPS
     - name: update-relay
       description: Updates the attributes of an existing relay resource.
       flags:

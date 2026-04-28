@@ -13,7 +13,7 @@ commands:
     - name: get-sprites
       description: '`GetSprites` returns the map''s sprites.'
       flags:
-        --color-scheme=!: Sets color tone for map such as dark and light for specific map styles.
+        --color-scheme=!: Sets the color tone for the map sprites, such as dark and light.
         --file-name=!: '`Sprites` API: The name of the sprite ﬁle to retrieve, following pattern `sprites(@2x)?\.(png|json)`.'
         --style=!: Style specifies the desired map style for the `Sprites` APIs.
         --variant=!: Optimizes map styles for specific use case or industry.
@@ -32,12 +32,12 @@ commands:
         positional:
             - - $files
     - name: get-static-map
-      description: '`GetStaticMap` provides high-quality static map images with customizable options.'
+      description: This operation is not supported in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
       flags:
         --bounded-positions=: 'Takes in two or more pair of coordinates in World Geodetic System (WGS 84) format: \[longitude, latitude], with each coordinate separated by a comma.'
         --bounding-box=: 'Takes in two pairs of coordinates in World Geodetic System (WGS 84) format: \[longitude, latitude], denoting south-westerly and north-easterly edges of the image.'
         --center=: 'Takes in a pair of coordinates in World Geodetic System (WGS 84) format: \[longitude, latitude], which becomes the center point of the image.'
-        --color-scheme=: Sets color tone for map, such as dark and light for specific map styles.
+        --color-scheme=: Sets the color tone for the map, such as dark and light.
         --compact-overlay=: Takes in a string to draw geometries on the image.
         --crop-labels: It is a flag that takes in true or false.
         --file-name=!: The map scaling parameter to size the image, icons, and labels.
@@ -80,7 +80,7 @@ commands:
       description: '`GetStyleDescriptor` returns information about the style.'
       flags:
         --buildings=: Adjusts how building details are rendered on the map.
-        --color-scheme=: Sets color tone for map such as dark and light for specific map styles.
+        --color-scheme=: Sets the color tone for the map, such as dark and light.
         --contour-density=: Displays the shape and steepness of terrain features using elevation lines.
         --key=: 'Optional: The API key to be used for authorization.'
         --political-view=: Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.
@@ -98,7 +98,9 @@ commands:
                 - Light
                 - Dark
             contour-density:
+                - Low
                 - Medium
+                - High
             style:
                 - Standard
                 - Monochrome
@@ -109,6 +111,7 @@ commands:
                 - Terrain3D
             traffic:
                 - All
+                - Congestion
         positional:
             - - $files
     - name: get-tile

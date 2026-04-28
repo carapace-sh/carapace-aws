@@ -1,0 +1,160 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: interconnect
+description: Interconnect
+commands:
+    - name: accept-connection-proposal
+      description: Accepts a connection proposal which was generated at a supported partner's portal.
+      flags:
+        --activation-key=!: An Activation Key that was generated on a supported partner's portal.
+        --attach-point=!: The Attach Point to which the connection should be associated.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token used for the request.
+        --description=: A description to distinguish this [Connection]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: The tags to associate with the resulting [Connection]().
+    - name: create-connection
+      description: Initiates the process to create a Connection across the specified Environment.
+      flags:
+        --attach-point=!: The Attach Point to which the connection should be associated."
+        --bandwidth=!: The desired bandwidth of the requested [Connection]()
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token used for the request.
+        --description=: A description to distinguish this [Connection]().
+        --environment-id=!: The identifier of the [Environment]() across which this [Connection]() should be created.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remote-account=: Account and/or principal identifying information that can be verified by the partner of this specific Environment.
+        --tags=: The tag to associate with the resulting [Connection]().
+    - name: delete-connection
+      description: Deletes an existing Connection with the supplied identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token used for the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the [Connection]() to be deleted.
+    - name: describe-connection-proposal
+      description: Describes the details of a connection proposal generated at a partner's portal.
+      flags:
+        --activation-key=!: An Activation Key that was generated on a supported partner's portal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-connection
+      description: Describes the current state of a Connection resource as specified by the identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the requested [Connection]()
+    - name: get-environment
+      description: Describes a specific [Environment]()
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The identifier of the specific [Environment]() to describe.
+    - name: list-attach-points
+      description: Lists all Attach Points the caller has access to that are valid for the specified [Environment]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The identifier of the [Environment]() for which to list valid Attach Points.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The max number of list results in a single paginated response.
+        --next-token=: A pagination token from a previous paginated response indicating you wish to get the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-connections
+      description: Lists all connection objects to which the caller has access.
+      flags:
+        --attach-point=: Filter results to only include [Connection]() objects attached to the given [AttachPoint]().
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=: Filter the results to only include [Connection]() objects on the given [Environment]().
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The max number of list results in a single paginated response.
+        --next-token=: A pagination token from a previous paginated response indicating you wish to get the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --provider=: Filter the results to only include [Connection]() objects to the given [Provider]().
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Filter the results to only include [Connection]() objects in the given [Connection$state]().
+      completion:
+        flag:
+            state:
+                - available
+                - requested
+                - pending
+                - down
+                - deleting
+                - deleted
+                - failed
+                - updating
+    - name: list-environments
+      description: Lists all of the environments that can produce connections that will land in the called AWS region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --location=: Filter results to only include [Environment]() objects that connect to a given location distiguisher.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The max number of list results in a single paginated response.
+        --next-token=: A pagination token from a previous paginated response indicating you wish to get the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --provider=: Filter results to only include [Environment]() objects that connect to the [Provider]().
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: List all current tags on the specified resource.
+      flags:
+        --arn=!: The resource ARN for which to list tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: tag-resource
+      description: Add new tags to the specified resource.
+      flags:
+        --arn=!: The ARN of the resource that should receive the new tags.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=!: A map of tags to apply to the specified resource.
+    - name: untag-resource
+      description: Removes tags from the specified resource.
+      flags:
+        --arn=!: The ARN of the resource from which the specified tags should be removed.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tag-keys=!:
+            description: The list of tag keys that should be removed from the resource.
+            nargs: -1
+    - name: update-connection
+      description: Modifies an existing connection.
+      flags:
+        --bandwidth=: Request a new bandwidth size on the given [Connection]().
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token used for the request.
+        --description=: An updated description to apply to the [Connection]()
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the [Connection]() that should be updated.
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: connection-available
+          description: Describes the current state of a Connection resource as specified by the identifier.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --identifier=!: The identifier of the requested [Connection]()
+        - name: connection-deleted
+          description: Describes the current state of a Connection resource as specified by the identifier.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --identifier=!: The identifier of the requested [Connection]()

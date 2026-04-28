@@ -1,0 +1,624 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: securityagent
+description: AWS Security Agent
+commands:
+    - name: add-artifact
+      description: Adds an Artifact for the given agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --artifact-content=!: Binary content of the artifact
+        --artifact-type=!: Type of the artifact file
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --file-name=!: Name of the artifact file
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            artifact-type:
+                - TXT
+                - PNG
+                - JPEG
+                - MD
+                - PDF
+                - DOCX
+                - DOC
+                - JSON
+                - YAML
+    - name: batch-delete-pentests
+      description: Deletes multiple pentests in a single request
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentests exist
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-ids=!:
+            description: List of pentest IDs to delete
+            nargs: -1
+    - name: batch-get-agent-spaces
+      description: Retrieves multiple agent spaces in a single request
+      flags:
+        --agent-space-ids=!:
+            description: List of agent space IDs to retrieve
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-artifact-metadata
+      description: Retrieve the list of artifact metadata for the given agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --artifact-ids=!:
+            description: List of artifact identifiers
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-findings
+      description: Retrieves multiple findings in a single request
+      flags:
+        --agent-space-id=!: ID of the agent space where the findings exist
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --finding-ids=!:
+            description: List of finding IDs to retrieve
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-pentest-job-tasks
+      description: Retrieves multiple tasks for a pentest job in a single request
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-ids=!:
+            description: List of task IDs to retrieve
+            nargs: -1
+    - name: batch-get-pentest-jobs
+      description: Retrieves multiple pentest jobs in a single request
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-job-ids=!:
+            description: List of pentest job IDs to retrieve
+            nargs: -1
+    - name: batch-get-pentests
+      description: Retrieves multiple pentests in a single request
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-ids=!:
+            description: List of pentest IDs to retrieve
+            nargs: -1
+    - name: batch-get-target-domains
+      description: Retrieves multiple target domains in a single request
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-domain-ids=!:
+            description: List of target domain IDs to retrieve
+            nargs: -1
+    - name: create-agent-space
+      description: Creates an agent space record
+      flags:
+        --aws-resources=: AWS resource configurations associated with the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-settings=: Configuration for code review analysis, including controls scanning and general purpose scanning settings
+        --description=: Description of the agent space
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: Identifier of the KMS key used to encrypt data.
+        --name=!: Name of the agent space
+        --tags=: Tags to associate with the agent space
+        --target-domain-ids=:
+            description: Target domain IDs to associate with the agent space
+            nargs: -1
+    - name: create-application
+      description: Creates a new application
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-kms-key-id=: Default KMS key identifier used to encrypt application data
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idc-instance-arn=: ARN of the IAM Identity Center instance used for user authentication.
+        --role-arn=: ARN of the IAM role that the application uses to access AWS resources on your behalf
+        --tags=: Tags to associate with the application
+    - name: create-integration
+      description: Creates the Integration of the Security Agent App with an external Provider
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: Provider-specific input parameters
+        --integration-display-name=!: Display name for the integration
+        --kms-key-id=: KMS key ID for encrypting integration details
+        --provider=!: Provider to integrate with
+        --tags=: Tags to associate with the integration
+      completion:
+        flag:
+            provider:
+                - GITHUB
+    - name: create-membership
+      description: Adds a single member to an agent space with specified role
+      flags:
+        --agent-space-id=!: Agent space identifier
+        --application-id=!: Application identifier
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config=: Membership details (user or agent specific)
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-type=!: Type of member (USER or AGENT\_SPACE)
+        --membership-id=!: Member identifier (userId or agentSpaceId)
+      completion:
+        flag:
+            member-type:
+                - USER
+    - name: create-pentest
+      description: Creates a new pentest configuration
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest should be created
+        --assets=: Assets to be tested during the pentest
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-remediation-strategy=: Strategy for code remediation on findings
+        --exclude-risk-types=:
+            description: A list of risk types excluded from the pentest execution
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-config=: CloudWatch log group and stream prefix where pentest execution logs are stored
+        --network-traffic-config=: Configuration for network traffic filtering
+        --service-role=: Service role ARN for accessing customer resources
+        --title=!: Title of the pentest
+        --vpc-config=: VPC configuration that the Security Agent accesses
+      completion:
+        flag:
+            code-remediation-strategy:
+                - AUTOMATIC
+                - DISABLED
+    - name: create-target-domain
+      description: Creates a target domain record
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: Tags to associate with the target domain
+        --target-domain-name=!: Domain name of the target domain
+        --verification-method=!: Verification method for the target domain
+      completion:
+        flag:
+            verification-method:
+                - DNS_TXT
+                - HTTP_ROUTE
+    - name: delete-agent-space
+      description: Deletes an agent space record
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space to delete
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-application
+      description: Deletes an application
+      flags:
+        --application-id=!: Application ID
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-artifact
+      description: Delete an Artifact from the given agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --artifact-id=!: Unique identifier of the artifact
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-integration
+      description: Deletes the Integration of the Security Agent App with an external Provider
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: Unique identifier of the integration
+    - name: delete-membership
+      description: Removes a single member associated to an agent space
+      flags:
+        --agent-space-id=!: Agent space identifier
+        --application-id=!: Application identifier
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --member-type=: Type of member (USER or AGENT\_SPACE)
+        --membership-id=!: Member identifier (userId or agentSpaceId)
+      completion:
+        flag:
+            member-type:
+                - USER
+    - name: delete-target-domain
+      description: Deletes a target domain record
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-domain-id=!: Unique identifier of the target domain to delete
+    - name: get-application
+      description: Retrieves application details by application ID
+      flags:
+        --application-id=!: Application ID
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-artifact
+      description: Retrieve an Artifact for the given agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --artifact-id=!: Unique identifier of the artifact
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-integration
+      description: Gets Integration metadata from the provided id
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: Unique identifier of the integration
+    - name: initiate-provider-registration
+      description: Initiates the registration of Security Agent App for an external Provider
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provider=!: Provider to register with
+      completion:
+        flag:
+            provider:
+                - GITHUB
+    - name: list-agent-spaces
+      description: Lists agent spaces
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of agent spaces to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-applications
+      description: Lists all applications in the account
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-artifacts
+      description: Lists the artifacts for the associated agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-discovered-endpoints
+      description: Lists discovered endpoints associated with a pentest job with optional URI prefix filtering
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest job exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: 'Maximum number of discovered endpoints to return in a single request (default: 50)'
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --pentest-job-id=!: Identifier of the pentest job for which to retrieve discovered endpoints
+        --prefix=: Optional URI prefix filter to narrow down results
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-findings
+      description: Lists findings with filtering and pagination support.
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest job exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --confidence=: Filter findings by confidence level
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: 'Maximum number of findings to return in a single request (default: 50)'
+        --name=: Filter findings by name (case-insensitive substring search)
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --pentest-job-id=!: Identifier of the pentest job for which to retrieve associated findings
+        --risk-level=: Filter findings by risk level
+        --risk-type=: Filter findings by risk type
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter findings by status
+      completion:
+        flag:
+            confidence:
+                - FALSE_POSITIVE
+                - UNCONFIRMED
+                - LOW
+                - MEDIUM
+                - HIGH
+            risk-level:
+                - UNKNOWN
+                - INFORMATIONAL
+                - LOW
+                - MEDIUM
+                - HIGH
+                - CRITICAL
+            status:
+                - ACTIVE
+                - RESOLVED
+                - ACCEPTED
+                - FALSE_POSITIVE
+    - name: list-integrated-resources
+      description: Lists the integrated resources for an agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=: Filter integrated resources by a specific integration
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: Filter integrated resources by resource type
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - CODE_REPOSITORY
+    - name: list-integrations
+      description: Retrieves the Integrations associated with the user's account
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filter criteria for integrations
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-memberships
+      description: Lists all members associated to an agent space with pagination support
+      flags:
+        --agent-space-id=!: Agent space identifier
+        --application-id=!: Application identifier
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --member-type=: Filter by member type
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            member-type:
+                - USER
+                - ALL
+    - name: list-pentest-job-tasks
+      description: Lists tasks associated with a specific pentest job
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --category-name=: Filter tasks by category name.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of tasks to return in a single request
+        --next-token=: Token for pagination to retrieve the next set of results
+        --page-size=: The size of each page to get in the AWS service call.
+        --pentest-job-id=: Identifier of the pentest job whose tasks to list
+        --starting-token=: A token to specify where to start paginating.
+        --step-name=: Filter tasks by step name
+      completion:
+        flag:
+            step-name:
+                - PREFLIGHT
+                - STATIC_ANALYSIS
+                - PENTEST
+                - FINALIZING
+    - name: list-pentest-jobs-for-pentest
+      description: Lists pentest jobs associated with a pentest
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of pentest jobs to return in a single request
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --pentest-id=!: Identifier of the pentest for which to retrieve associated jobs
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-pentests
+      description: Lists pentests with optional filtering by status
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of pentests to return in a single request
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags-for-resource
+      description: Lists tags for a Security Agent resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource to list tags for
+    - name: list-target-domains
+      description: Lists target domains
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of target domains to return
+        --next-token=: Token for pagination
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-code-remediation
+      description: Starts code remediation for the specified findings
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest job exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --finding-ids=!:
+            description: Identifiers of the findings to start code remediation for
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-job-id=!: Identifier of the pentest job to start code remediation for
+    - name: start-pentest-job
+      description: Initiates the execution of a pentest
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-id=!: Identifier of the pentest to execute
+    - name: stop-pentest-job
+      description: Stops the execution of a running pentest
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-job-id=!: Identifier of the pentest job to stop
+    - name: tag-resource
+      description: Adds tags to a Security Agent resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource to tag
+        --tags=!: Tags to add to the resource
+    - name: untag-resource
+      description: Removes tags from a Security Agent resource
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: ARN of the resource to untag
+        --tag-keys=!:
+            description: List of tag keys to remove from the resource
+            nargs: -1
+    - name: update-agent-space
+      description: Updates an agent space record
+      flags:
+        --agent-space-id=!: ID of the agent space to update
+        --aws-resources=: AWS resource configurations associated with the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-settings=: Configuration for code review analysis, including controls scanning and general purpose scanning settings
+        --description=: Description of the agent space
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: Name of the agent space
+        --target-domain-ids=:
+            description: Target domain IDs to associate with the agent space
+            nargs: -1
+    - name: update-application
+      description: Updates application configuration
+      flags:
+        --application-id=!: Application ID
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --default-kms-key-id=: Default KMS key identifier.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=: ARN of the IAM role that the application uses to access AWS resources on your behalf
+    - name: update-finding
+      description: Updates an existing security finding with new details or status
+      flags:
+        --agent-space-id=!: ID of the agent space where the finding exists
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --finding-id=!: Identifier of the finding to update
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --risk-level=: Updated severity level of the identified risk
+        --status=: Updated status of the finding
+      completion:
+        flag:
+            risk-level:
+                - UNKNOWN
+                - INFORMATIONAL
+                - LOW
+                - MEDIUM
+                - HIGH
+                - CRITICAL
+            status:
+                - ACTIVE
+                - RESOLVED
+                - ACCEPTED
+                - FALSE_POSITIVE
+    - name: update-integrated-resources
+      description: Updates the integrated resources for an agent space
+      flags:
+        --agent-space-id=!: Unique identifier of the agent space
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: Unique identifier of the integration
+        --items=!:
+            description: List of integrated resources to update
+            nargs: -1
+    - name: update-pentest
+      description: Updates an existing pentest with new configuration or settings
+      flags:
+        --agent-space-id=!: ID of the agent space where the pentest exists
+        --assets=: Updated assets to be tested
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-remediation-strategy=: Strategy for code remediation on findings
+        --exclude-risk-types=:
+            description: A list of risk types excluded from the pentest execution
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-config=: CloudWatch log group and stream prefix where pentest execution logs are stored
+        --network-traffic-config=: Configuration for network traffic filtering
+        --pentest-id=!: Identifier of the pentest to update
+        --service-role=: Updated service role ARN for accessing customer resources
+        --title=: New title for the pentest
+        --vpc-config=: VPC configuration that the Security Agent accesses
+      completion:
+        flag:
+            code-remediation-strategy:
+                - AUTOMATIC
+                - DISABLED
+    - name: update-target-domain
+      description: Updates a target domain record
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-domain-id=!: Unique identifier of the target domain to update
+        --verification-method=!: Verification method for the target domain
+      completion:
+        flag:
+            verification-method:
+                - DNS_TXT
+                - HTTP_ROUTE
+    - name: verify-target-domain
+      description: Verifies ownership for a registered target domain
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --target-domain-id=!: Unique identifier of the target domain

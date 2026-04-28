@@ -25,9 +25,14 @@ commands:
         --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-m-d5=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a512=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-type=: This header specifies the checksum type of the object, which determines how part-level checksums are combined to create an object-level checksum for multipart objects.
+        --checksum-xxhas-h3=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h64=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h128=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --expected-bucket-owner=: The account ID of the expected bucket owner.
@@ -115,6 +120,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             metadata-directive:
                 - COPY
                 - REPLACE
@@ -199,6 +209,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: create-bucket-metadata-table-configuration
       description: We recommend that you create your S3 Metadata configurations by using the V2 [CreateBucketMetadataConfiguration](https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucketMetadataConfiguration.html) API operation.
       flags:
@@ -218,6 +233,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: create-multipart-upload
       description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
       flags:
@@ -272,6 +292,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             checksum-type:
                 - COMPOSITE
                 - FULL_OBJECT
@@ -368,7 +393,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
     - name: delete-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
+      description: Deletes an S3 Inventory configuration (identified by the inventory ID) from the bucket.
       flags:
         --bucket=!: The name of the bucket containing the inventory configuration to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -401,7 +426,7 @@ commands:
         --expected-bucket-owner=: The expected bucket owner of the general purpose bucket that you want to remove the metadata table configuration from.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
+      description: Deletes a metrics configuration for the Amazon CloudWatch request metrics (specified by the metrics configuration ID) from the bucket.
       flags:
         --bucket=!: The name of the bucket containing the metrics configuration to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -502,6 +527,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: delete-public-access-block
@@ -576,7 +606,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
     - name: get-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
+      description: Returns an S3 Inventory configuration (identified by the inventory configuration ID) from the bucket.
       flags:
         --bucket=!: The name of the bucket containing the inventory configuration to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -633,7 +663,7 @@ commands:
         --expected-bucket-owner=: The expected owner of the general purpose bucket that you want to retrieve the metadata table configuration for.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
+      description: Gets a metrics configuration (specified by the metrics configuration ID) from the bucket.
       flags:
         --bucket=!: The name of the bucket containing the metrics configuration to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -925,7 +955,7 @@ commands:
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-bucket-inventory-configurations
-      description: This operation is not supported for directory buckets.
+      description: Returns a list of S3 Inventory configurations for the bucket.
       flags:
         --bucket=!: The name of the bucket containing the inventory configurations to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -934,7 +964,7 @@ commands:
         --expected-bucket-owner=: The account ID of the expected bucket owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: list-bucket-metrics-configurations
-      description: This operation is not supported for directory buckets.
+      description: Lists the metrics configurations for the bucket.
       flags:
         --bucket=!: The name of the bucket containing the metrics configurations to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -1114,6 +1144,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-accelerate-configuration
       description: This operation is not supported for directory buckets.
       flags:
@@ -1132,6 +1167,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-acl
       description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
       flags:
@@ -1162,6 +1202,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-analytics-configuration
       description: This operation is not supported for directory buckets.
       flags:
@@ -1191,6 +1236,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-encryption
       description: This operation configures default encryption and Amazon S3 Bucket Keys for an existing bucket.
       flags:
@@ -1210,6 +1260,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-intelligent-tiering-configuration
       description: This operation is not supported for directory buckets.
       flags:
@@ -1221,7 +1276,7 @@ commands:
         --id=!: The ID used to identify the S3 Intelligent-Tiering configuration.
         --intelligent-tiering-configuration=!: Container for S3 Intelligent-Tiering configuration.
     - name: put-bucket-inventory-configuration
-      description: This operation is not supported for directory buckets.
+      description: This implementation of the `PUT` action adds an S3 Inventory configuration (identified by the inventory ID) to the bucket.
       flags:
         --bucket=!: The name of the bucket where the inventory configuration will be stored.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -1249,6 +1304,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-lifecycle-configuration
       description: Creates a new lifecycle configuration for the bucket or replaces an existing lifecycle configuration.
       flags:
@@ -1268,6 +1328,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             transition-default-minimum-object-size:
                 - varies_by_storage_class
                 - all_storage_classes_128K
@@ -1290,8 +1355,13 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-metrics-configuration
-      description: This operation is not supported for directory buckets.
+      description: Sets a metrics configuration (specified by the metrics configuration ID) for the bucket.
       flags:
         --bucket=!: The name of the bucket for which the metrics configuration is set.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -1319,6 +1389,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-notification-configuration
       description: This operation is not supported for directory buckets.
       flags:
@@ -1349,6 +1424,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-policy
       description: Applies an Amazon S3 bucket policy to an Amazon S3 bucket.
       flags:
@@ -1370,6 +1450,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-replication
       description: This operation is not supported for directory buckets.
       flags:
@@ -1390,6 +1475,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-request-payment
       description: This operation is not supported for directory buckets.
       flags:
@@ -1409,6 +1499,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-tagging
       description: This operation is not supported for directory buckets.
       flags:
@@ -1428,6 +1523,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-versioning
       description: This operation is not supported for directory buckets.
       flags:
@@ -1448,6 +1548,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-bucket-website
       description: This operation is not supported for directory buckets.
       flags:
@@ -1467,6 +1572,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: put-object
       description: 'End of support notice: As of October 1, 2025, Amazon S3 has discontinued support for Email Grantee Access Control Lists (ACLs).'
       flags:
@@ -1479,8 +1589,13 @@ commands:
         --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-m-d5=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a512=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h3=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h64=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h128=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-disposition=: Specifies presentational information for the object.
@@ -1531,6 +1646,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             object-lock-legal-hold-status:
                 - "ON"
                 - "OFF"
@@ -1594,6 +1714,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: put-object-legal-hold
@@ -1618,6 +1743,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: put-object-lock-configuration
@@ -1641,6 +1771,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: put-object-retention
@@ -1667,6 +1802,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: put-object-tagging
@@ -1691,6 +1831,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: put-public-access-block
@@ -1712,6 +1857,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: rename-object
       description: Renames an existing object in a directory bucket that uses the S3 Express One Zone storage class.
       flags:
@@ -1751,6 +1901,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: select-object-content
@@ -1791,6 +1946,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: update-bucket-metadata-journal-table-configuration
       description: Enables or disables journal table record expiration for an S3 Metadata configuration on a general purpose bucket.
       flags:
@@ -1810,6 +1970,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
     - name: update-object-encryption
       description: This operation is not supported for directory buckets or Amazon S3 on Outposts buckets.
       flags:
@@ -1832,6 +1997,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: upload-part
@@ -1843,8 +2013,13 @@ commands:
         --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-m-d5=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a512=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h3=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h64=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h128=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-length=: Size of the body in bytes.
@@ -1866,6 +2041,11 @@ commands:
                 - SHA1
                 - SHA256
                 - CRC64NVME
+                - SHA512
+                - MD5
+                - XXHASH64
+                - XXHASH3
+                - XXHASH128
             request-payer:
                 - requester
     - name: upload-part-copy
@@ -1992,8 +2172,13 @@ commands:
         --checksum-crc32-c=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc32=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-crc64-nvme=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-m-d5=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-sh-a512=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha1=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --checksum-sha256=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h3=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h64=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
+        --checksum-xxhas-h128=: This header can be used as a data integrity check to verify that the data received is the same data that was originally sent.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --content-disposition=: Specifies presentational information for the object.
