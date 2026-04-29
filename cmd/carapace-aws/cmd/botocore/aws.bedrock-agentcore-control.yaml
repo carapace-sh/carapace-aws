@@ -89,6 +89,20 @@ commands:
         --name=!: The name of the code interpreter.
         --network-configuration=!: The network configuration for the code interpreter.
         --tags=: A map of tag keys and values to assign to the code interpreter.
+    - name: create-configuration-bundle
+      description: Creates a new configuration bundle resource.
+      flags:
+        --branch-name=: The branch name for version tracking.
+        --bundle-name=!: The name for the configuration bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --commit-message=: A commit message describing the initial version of the configuration bundle.
+        --components=!: A map of component identifiers to their configurations.
+        --created-by=: The source that created this version, including the source name and optional ARN.
+        --description=: The description for the configuration bundle.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A map of tag keys and values to assign to the configuration bundle.
     - name: create-evaluator
       description: Creates a custom evaluator for agent quality assessment.
       flags:
@@ -99,6 +113,7 @@ commands:
         --evaluator-config=!: The configuration for the evaluator.
         --evaluator-name=!: The name of the evaluator.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of a customer managed KMS key to use for encrypting sensitive evaluator data, including instructions and rating scale.
         --level=!: The evaluation level that determines the scope of evaluation.
         --tags=: A map of tag keys and values to assign to an AgentCore Evaluator.
       completion:
@@ -125,7 +140,7 @@ commands:
         --name=!: The name of the gateway.
         --policy-engine-configuration=: The policy engine configuration for the gateway.
         --protocol-configuration=: The configuration settings for the protocol specified in the `protocolType` parameter.
-        --protocol-type=!: The protocol type for the gateway.
+        --protocol-type=: The protocol type for the gateway.
         --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that provides permissions for the gateway to access Amazon Web Services services.
         --tags=: A map of key-value pairs to associate with the gateway as metadata tags.
       completion:
@@ -134,10 +149,27 @@ commands:
                 - CUSTOM_JWT
                 - AWS_IAM
                 - NONE
+                - AUTHENTICATE_ONLY
             exception-level:
                 - DEBUG
             protocol-type:
                 - MCP
+    - name: create-gateway-rule
+      description: Creates a rule for a gateway.
+      flags:
+        --actions=!:
+            description: The actions to take when the rule conditions are met.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --conditions=:
+            description: The conditions that must be met for the rule to apply.
+            nargs: -1
+        --description=: The description of the gateway rule.
+        --gateway-identifier=!: The identifier of the gateway to create a rule for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --priority=!: The priority of the rule.
     - name: create-gateway-target
       description: Creates a target for a gateway.
       flags:
@@ -171,7 +203,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --harness-name=!: The name of the harness.
         --max-iterations=: The maximum number of iterations the agent loop can execute per invocation.
-        --max-tokens=: The maximum number of tokens the agent can generate per iteration.
+        --max-tokens=: The maximum total number of output tokens the agent can generate across all model calls within a single invocation.
         --memory=: The AgentCore Memory configuration for persisting conversation context across sessions.
         --model=: The model configuration for the harness.
         --skills=:
@@ -387,6 +419,13 @@ commands:
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --code-interpreter-id=!: The unique identifier of the code interpreter to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-configuration-bundle
+      description: Deletes a configuration bundle and all of its versions.
+      flags:
+        --bundle-id=!: The unique identifier of the configuration bundle to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-evaluator
       description: Deletes a custom evaluator.
       flags:
@@ -401,6 +440,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-identifier=!: The identifier of the gateway to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-gateway-rule
+      description: Deletes a gateway rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-identifier=!: The identifier of the gateway containing the rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-id=!: The unique identifier of the rule to delete.
     - name: delete-gateway-target
       description: Deletes a gateway target.
       flags:
@@ -527,6 +574,22 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-interpreter-id=!: The unique identifier of the code interpreter to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-configuration-bundle
+      description: Gets the latest version of a configuration bundle.
+      flags:
+        --branch-name=: The branch name to get the latest version from.
+        --bundle-id=!: The unique identifier of the configuration bundle to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-configuration-bundle-version
+      description: Gets a specific version of a configuration bundle by its version identifier.
+      flags:
+        --bundle-id=!: The unique identifier of the configuration bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --version-id=!: The version identifier of the configuration bundle version to retrieve.
     - name: get-evaluator
       description: Retrieves detailed information about an evaluator, including its configuration, status, and metadata.
       flags:
@@ -534,6 +597,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --evaluator-id=!: The unique identifier of the evaluator to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --included-data=: Controls which data is returned in the response.
+      completion:
+        flag:
+            included-data:
+                - ALL_DATA
+                - METADATA_ONLY
     - name: get-gateway
       description: Retrieves information about a specific Gateway.
       flags:
@@ -541,6 +610,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-identifier=!: The identifier of the gateway to retrieve.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-gateway-rule
+      description: Retrieves detailed information about a specific gateway rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-identifier=!: The identifier of the gateway containing the rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-id=!: The unique identifier of the rule to retrieve.
     - name: get-gateway-target
       description: Retrieves information about a specific gateway target.
       flags:
@@ -734,6 +811,30 @@ commands:
             type:
                 - SYSTEM
                 - CUSTOM
+    - name: list-configuration-bundle-versions
+      description: Lists all versions of a configuration bundle, with optional filtering by branch name or creation source.
+      flags:
+        --bundle-id=!: The unique identifier of the configuration bundle to list versions for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An optional filter for listing versions, including branch name, creation source, and whether to return only the latest version per branch.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-configuration-bundles
+      description: Lists all configuration bundles in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-evaluators
       description: Lists all available evaluators, including both builtin evaluators provided by the service and custom evaluators created by the user.
       flags:
@@ -743,6 +844,18 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of evaluators to return in a single response.
         --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-gateway-rules
+      description: Lists all rules for a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-identifier=!: The identifier of the gateway to list rules for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: The pagination token from a previous request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-gateway-targets
@@ -1036,6 +1149,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the API key credential provider to update.
+    - name: update-configuration-bundle
+      description: Updates a configuration bundle by creating a new version with the specified changes.
+      flags:
+        --branch-name=: The branch name for this version.
+        --bundle-id=!: The unique identifier of the configuration bundle to update.
+        --bundle-name=: The updated name for the configuration bundle.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --commit-message=: A commit message describing the changes in this version.
+        --components=: The updated component configurations.
+        --created-by=: The source that created this version, including the source name and optional ARN.
+        --description=: The updated description for the configuration bundle.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --parent-version-ids=:
+            description: A list of parent version identifiers for lineage tracking.
+            nargs: -1
     - name: update-evaluator
       description: Updates a custom evaluator's configuration, description, or evaluation level.
       flags:
@@ -1046,6 +1176,7 @@ commands:
         --evaluator-config=: The updated configuration for the evaluator.
         --evaluator-id=!: The unique identifier of the evaluator to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of a customer managed KMS key to use for encrypting sensitive evaluator data.
         --level=: The updated evaluation level (`TOOL_CALL`, `TRACE`, or `SESSION`) that determines the scope of evaluation.
       completion:
         flag:
@@ -1071,7 +1202,7 @@ commands:
         --name=!: The name of the gateway.
         --policy-engine-configuration=: The updated policy engine configuration for the gateway.
         --protocol-configuration=: ""
-        --protocol-type=!: The updated protocol type for the gateway.
+        --protocol-type=: The updated protocol type for the gateway.
         --role-arn=!: The updated IAM role ARN that provides permissions for the gateway.
       completion:
         flag:
@@ -1079,10 +1210,27 @@ commands:
                 - CUSTOM_JWT
                 - AWS_IAM
                 - NONE
+                - AUTHENTICATE_ONLY
             exception-level:
                 - DEBUG
             protocol-type:
                 - MCP
+    - name: update-gateway-rule
+      description: Updates a gateway rule's priority, conditions, actions, or description.
+      flags:
+        --actions=:
+            description: The updated actions for the rule.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conditions=:
+            description: The updated conditions for the rule.
+            nargs: -1
+        --description=: The updated description of the rule.
+        --gateway-identifier=!: The identifier of the gateway containing the rule.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --priority=: The updated priority of the rule.
+        --rule-id=!: The unique identifier of the rule to update.
     - name: update-gateway-target
       description: Updates an existing gateway target.
       flags:
@@ -1116,7 +1264,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --harness-id=!: The ID of the harness to update.
         --max-iterations=: The maximum number of iterations the agent loop can execute per invocation.
-        --max-tokens=: The maximum number of tokens the agent can generate per iteration.
+        --max-tokens=: The maximum total number of output tokens the agent can generate across all model calls within a single invocation.
         --memory=: The AgentCore Memory configuration.
         --model=: The model configuration for the harness.
         --skills=:
