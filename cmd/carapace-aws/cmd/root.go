@@ -73,16 +73,7 @@ func init() {
 			for _, subCmd := range botoCommand.Commands {
 				operationCmd := spec.Command(subCmd).ToCobra()
 				serviceCmd.AddCommand(operationCmd)
-
-				carapace.Gen(operationCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
-					// TODO same for deeper wait subcommands
-					if flag != nil && flag.Value.Type() != "bool" {
-						if _, ok := subCmd.Completion.Flag[flag.Name]; !ok {
-							return common.ActionBridgeAwsCompleter()
-						}
-					}
-					return action
-				})
+				addAwsCompleterFallbacks(operationCmd, spec.Command(subCmd))
 			}
 		})
 	}
@@ -108,4 +99,24 @@ func init() {
 	}
 
 	spec.Register(rootCmd)
+}
+
+func addAwsCompleterFallbacks(cmd *cobra.Command, command spec.Command) {
+	carapace.Gen(cmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
+		if flag != nil && flag.Value.Type() != "bool" {
+			if _, ok := command.Completion.Flag[flag.Name]; !ok {
+				return common.ActionBridgeAwsCompleter()
+			}
+		}
+		return action
+	})
+
+	for _, subCommand := range command.Commands {
+		for _, child := range cmd.Commands() {
+			if child.Name() == subCommand.Name {
+				addAwsCompleterFallbacks(child, spec.Command(subCommand))
+				break
+			}
+		}
+	}
 }
