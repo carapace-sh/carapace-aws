@@ -1166,6 +1166,14 @@ commands:
                 - BUSINESS_DESCRIPTIONS
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
+    - name: get-notebook-run
+      description: Gets the details of a notebook run in an Amazon DataZone domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run exists.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook run.
     - name: get-project
       description: Gets a project in Amazon DataZone.
       flags:
@@ -1716,6 +1724,36 @@ commands:
                 - BUSINESS_DESCRIPTIONS
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
+    - name: list-notebook-runs
+      description: Lists notebook runs in an Amazon DataZone domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon DataZone domain in which to list notebook runs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of notebook runs to return in a single call.
+        --next-token=: When the number of notebook runs is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of notebook runs, the response includes a pagination token named `NextToken`.
+        --notebook-identifier=: The identifier of the notebook to filter runs by.
+        --owning-project-identifier=!: The identifier of the project that owns the notebook runs.
+        --page-size=: The size of each page to get in the AWS service call.
+        --schedule-identifier=: The identifier of the schedule to filter notebook runs by.
+        --sort-order=: The sort order for the results.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status to filter notebook runs by.
+      completion:
+        flag:
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+            status:
+                - QUEUED
+                - STARTING
+                - RUNNING
+                - STOPPING
+                - STOPPED
+                - SUCCEEDED
+                - FAILED
     - name: list-notifications
       description: Lists all Amazon DataZone notifications.
       flags:
@@ -2332,6 +2370,32 @@ commands:
                 - BUSINESS_DESCRIPTIONS
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
+    - name: start-notebook-run
+      description: Starts a notebook run in an Amazon DataZone domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --compute-configuration=: The compute configuration for the notebook run, including instance type and environment version.
+        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run is started.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The metadata for the notebook run, specified as key-value pairs.
+        --network-configuration=: The network configuration for the notebook run, including network access type and optional VPC settings.
+        --notebook-identifier=!: The identifier of the notebook to run.
+        --owning-project-identifier=!: The identifier of the project that owns the notebook run.
+        --parameters=: The sensitive parameters for the notebook run, specified as key-value pairs.
+        --schedule-identifier=: The identifier of the schedule associated with the notebook run.
+        --timeout-configuration=: The timeout configuration for the notebook run.
+        --trigger-source=: The source that triggered the notebook run.
+    - name: stop-notebook-run
+      description: Stops a running notebook run in an Amazon DataZone domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run is stopped.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook run to stop.
     - name: tag-resource
       description: Tags a resource in Amazon DataZone.
       flags:
