@@ -141,6 +141,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-function
+      description: Deletes a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-id=!: The identifier of the function to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-live-source
       description: The live source to delete.
       flags:
@@ -246,6 +253,13 @@ commands:
         --next-token=: (Optional) If the playback configuration has more than `MaxResults` channel schedules, use `NextToken` to get the second and subsequent pages of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-function
+      description: Retrieves the configuration and metadata for a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-id=!: The identifier of the function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-playback-configuration
       description: Retrieves a playback configuration.
       flags:
@@ -281,6 +295,17 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of channels that you want MediaTailor to return in response to the current request.
+        --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-functions
+      description: Retrieves all functions associated with your AWS account in the current Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of functions that you want MediaTailor to return in response to the current request.
         --next-token=: Pagination token returned by the list request when results exceed the maximum allowed.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -365,6 +390,25 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --policy=!: Adds an IAM role that determines the permissions of your channel.
+    - name: put-function
+      description: Creates or updates a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-output-configuration=: The configuration for a `CUSTOM_OUTPUT` function.
+        --description=: A description of the function.
+        --function-id=!: The identifier of the function.
+        --function-type=!: The type of the function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --http-request-configuration=: The configuration for an `HTTP_REQUEST` function.
+        --sequential-executor-configuration=: The configuration for a `SEQUENTIAL_EXECUTOR` function.
+        --tags=: The tags to assign to the function.
+      completion:
+        flag:
+            function-type:
+                - HTTP_REQUEST
+                - CUSTOM_OUTPUT
+                - SEQUENTIAL_EXECUTOR
     - name: put-playback-configuration
       description: Creates a playback configuration.
       flags:
@@ -378,6 +422,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration-aliases=: The player parameters and aliases used as dynamic variables during session initialization.
         --dash-configuration=: The configuration for DASH content.
+        --function-mapping=: A map of lifecycle hook event names to function identifiers.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --insertion-mode=: The setting that controls whether players can use stitched or guided ad insertion.
         --live-pre-roll-configuration=: The configuration for pre-roll ad insertion.
