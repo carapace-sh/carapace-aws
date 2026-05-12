@@ -14,6 +14,23 @@ import (
 	"github.com/carapace-sh/carapace-bridge/pkg/actions/bridge"
 )
 
+func reportPatch(t *testing.T, title string, patch []string) {
+	t.Helper()
+
+	s := []string{fmt.Sprintf("\033[2m# %v\033[0m", title)}
+	for _, line := range patch {
+		switch {
+		case strings.HasPrefix(line, "-"):
+			s = append(s, fmt.Sprintf("\033[0;31m%v\033[0m", line))
+			t.Fail()
+		case strings.HasPrefix(line, "+"):
+			s = append(s, fmt.Sprintf("\033[0;32m%v\033[0m", line))
+			t.Fail()
+		}
+	}
+	fmt.Println(strings.Join(s, "\n")) // TODO locking needed?
+}
+
 func TestService(t *testing.T) {
 	testDir, err := os.MkdirTemp("", "carapace-aws_testService-*")
 	if err != nil {
@@ -36,16 +53,7 @@ func TestService(t *testing.T) {
 			bridge.ActionCarapace("carapace-aws").Chdir(testDir),
 			carapace.NewContext(""),
 		)
-		for _, line := range patch {
-			switch {
-			case strings.HasPrefix(line, "-"):
-				fmt.Printf("\033[0;31m%v\033[0m\n", line)
-				t.Fail()
-			case strings.HasPrefix(line, "+"):
-				fmt.Printf("\033[0;32m%v\033[0m\n", line)
-				t.Fail()
-			}
-		}
+		reportPatch(t, "_", patch)
 	}
 
 	for service := range botocore.Services() {
@@ -61,16 +69,7 @@ func TestService(t *testing.T) {
 				bridge.ActionCarapace("carapace-aws").Chdir(testDir),
 				carapace.NewContext(service, ""),
 			)
-			for _, line := range patch {
-				switch {
-				case strings.HasPrefix(line, "-"):
-					fmt.Printf("\033[0;31m%v\033[0m\n", line)
-					t.Fail()
-				case strings.HasPrefix(line, "+"):
-					fmt.Printf("\033[0;32m%v\033[0m\n", line)
-					t.Fail()
-				}
-			}
+			reportPatch(t, service, patch)
 
 			command, err := botocore.Get(fmt.Sprintf("aws.%s.yaml", service))
 			if err != nil {
@@ -92,18 +91,38 @@ func TestService(t *testing.T) {
 						carapace.NewContext(service, operation.Name, "--"),
 					)
 
-					s := []string{fmt.Sprintf("\033[2m# %v %v\033[0m", service, operation.Name)}
-					for _, line := range patch {
-						switch {
-						case strings.HasPrefix(line, "-"):
-							s = append(s, fmt.Sprintf("\033[0;31m%v\033[0m", line))
-							t.Fail()
-						case strings.HasPrefix(line, "+"):
-							s = append(s, fmt.Sprintf("\033[0;32m%v\033[0m", line))
-							t.Fail()
-						}
+					reportPatch(t, fmt.Sprintf("%v %v", service, operation.Name), patch)
+
+					if len(operation.Commands) == 0 {
+						return
 					}
-					fmt.Println(strings.Join(s, "\n")) // TODO locking needed?
+
+					patch = carapace.DiffPatch(
+						bridge.ActionAws("aws"),
+						bridge.ActionCarapace("carapace-aws").Chdir(testDir),
+						carapace.NewContext(service, operation.Name, ""),
+					)
+					reportPatch(t, fmt.Sprintf("%v %v", service, operation.Name), patch)
+
+					for _, subOperation := range operation.Commands {
+						t.Run(subOperation.Name, func(t *testing.T) {
+							t.Parallel()
+							patch := carapace.DiffPatch(
+								bridge.ActionAws("aws"),
+								carapace.Batch(
+									bridge.ActionCarapace("carapace-aws"),
+									// force positional completion for outfile if available (returned by aws completer for streaming operations)
+									bridge.ActionCarapace("carapace-aws").
+										Chdir(testDir).
+										Invoke(carapace.NewContext(service, operation.Name, subOperation.Name, "")).
+										Retain("outfile").ToA(),
+								).ToA(),
+								carapace.NewContext(service, operation.Name, subOperation.Name, "--"),
+							)
+
+							reportPatch(t, fmt.Sprintf("%v %v %v", service, operation.Name, subOperation.Name), patch)
+						})
+					}
 				})
 			}
 		})
