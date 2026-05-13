@@ -17,6 +17,24 @@ commands:
         --no-deletion-protection-enabled: If enabled, you can't delete your cluster.
         --policy=: An optional resource-based policy document in JSON format that defines access permissions for the cluster.
         --tags=: A map of key and value pairs to use to tag your cluster.
+    - name: create-stream
+      description: Creates a new change data capture (CDC) stream for a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-identifier=!: The ID of the cluster for which to create the stream.
+        --format=!: The format of the stream records.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ordering=!: The ordering mode for the stream.
+        --tags=: A map of key and value pairs to use to tag your stream.
+        --target-definition=!: The target destination configuration for the stream.
+      completion:
+        flag:
+            format:
+                - JSON
+            ordering:
+                - UNORDERED
     - name: delete-cluster
       description: Deletes a cluster in Amazon Aurora DSQL.
       flags:
@@ -34,6 +52,15 @@ commands:
         --expected-policy-version=: The expected version of the policy to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: ""
+    - name: delete-stream
+      description: Deletes a stream from a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cluster-identifier=!: The ID of the cluster containing the stream to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stream-identifier=!: The ID of the stream to delete.
     - name: generate-db-connect-admin-auth-token
       description: Generates an Admin authorization token used to connect to a DSQL database with IAM credentials.
       flags:
@@ -58,6 +85,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The ID of the cluster to retrieve the policy from.
+    - name: get-stream
+      description: Retrieves information about a stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-identifier=!: The ID of the cluster containing the stream to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --stream-identifier=!: The ID of the stream to retrieve.
     - name: get-vpc-endpoint-service-name
       description: Retrieves the VPC endpoint service name.
       flags:
@@ -74,6 +109,18 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: An optional parameter that specifies the maximum number of results to return.
         --next-token=: If your initial ListClusters operation returns a nextToken, you can include the returned nextToken in following ListClusters operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-streams
+      description: Retrieves information about a list of streams for a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-identifier=!: The ID of the cluster for which to list streams.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: An optional parameter that specifies the maximum number of results to return.
+        --next-token=: If your initial ListStreams operation returns a nextToken, you can include the returned nextToken in following ListStreams operations, which returns results in the next page.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
@@ -142,3 +189,19 @@ commands:
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --identifier=!: The ID of the cluster to retrieve.
+        - name: stream-active
+          description: Retrieves information about a stream.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-identifier=!: The ID of the cluster containing the stream to retrieve.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --stream-identifier=!: The ID of the stream to retrieve.
+        - name: stream-not-exists
+          description: Retrieves information about a stream.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --cluster-identifier=!: The ID of the cluster containing the stream to retrieve.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --stream-identifier=!: The ID of the stream to retrieve.
