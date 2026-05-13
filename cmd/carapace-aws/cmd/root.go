@@ -22,6 +22,33 @@ var rootCmd = &cobra.Command{
 func Execute() error {
 	return rootCmd.Execute()
 }
+
+func addAwsCompleterFallbacks(cmd *cobra.Command, command spec.Command) {
+	carapace.Gen(cmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
+		if flag != nil && flag.Value.Type() != "bool" {
+			if _, ok := command.Completion.Flag[flag.Name]; !ok {
+				return common.ActionBridgeAwsCompleter()
+			}
+		}
+		return action
+	})
+
+	for _, subCommand := range command.Commands {
+		if subCmd := findSubcommand(cmd, subCommand.Name); subCmd != nil {
+			addAwsCompleterFallbacks(subCmd, spec.Command(subCommand))
+		}
+	}
+}
+
+func findSubcommand(cmd *cobra.Command, name string) *cobra.Command {
+	for _, subCmd := range cmd.Commands() {
+		if subCmd.Name() == name {
+			return subCmd
+		}
+	}
+	return nil
+}
+
 func init() {
 	rootCmd.SetUsageFunc(func(c *cobra.Command) error { return nil })
 	carapace.Gen(rootCmd).Standalone()
@@ -72,17 +99,8 @@ func init() {
 
 			for _, subCmd := range botoCommand.Commands {
 				operationCmd := spec.Command(subCmd).ToCobra()
+				addAwsCompleterFallbacks(operationCmd, spec.Command(subCmd))
 				serviceCmd.AddCommand(operationCmd)
-
-				carapace.Gen(operationCmd).PreInvoke(func(cmd *cobra.Command, flag *pflag.Flag, action carapace.Action) carapace.Action {
-					// TODO same for deeper wait subcommands
-					if flag != nil && flag.Value.Type() != "bool" {
-						if _, ok := subCmd.Completion.Flag[flag.Name]; !ok {
-							return common.ActionBridgeAwsCompleter()
-						}
-					}
-					return action
-				})
 			}
 		})
 	}
