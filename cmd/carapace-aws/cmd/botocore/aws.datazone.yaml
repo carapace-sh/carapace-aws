@@ -508,6 +508,19 @@ commands:
             entity-type:
                 - ASSET
                 - DATA_PRODUCT
+    - name: create-notebook
+      description: Creates a [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The description of the notebook.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to create the notebook.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The metadata for the notebook, specified as key-value pairs.
+        --name=!: The name of the notebook.
+        --owning-project-identifier=!: The identifier of the project that owns the notebook.
+        --parameters=: The sensitive parameters for the notebook, specified as key-value pairs.
     - name: create-project
       description: Creates an Amazon DataZone project.
       flags:
@@ -835,6 +848,14 @@ commands:
         --domain-identifier=!: The ID of the Amazon DataZone domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The ID of the listing to be deleted.
+    - name: delete-notebook
+      description: Deletes a [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook to delete.
     - name: delete-project
       description: Deletes a project in Amazon DataZone.
       flags:
@@ -1166,12 +1187,28 @@ commands:
                 - BUSINESS_DESCRIPTIONS
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
-    - name: get-notebook-run
-      description: Gets the details of a notebook run in an Amazon DataZone domain.
+    - name: get-notebook
+      description: Gets the details of a [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run exists.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook.
+    - name: get-notebook-export
+      description: Gets the details of a notebook export in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook export exists.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook export.
+    - name: get-notebook-run
+      description: Gets the details of a [notebook run](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run exists.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The identifier of the notebook run.
     - name: get-project
@@ -1725,11 +1762,11 @@ commands:
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
     - name: list-notebook-runs
-      description: Lists notebook runs in an Amazon DataZone domain.
+      description: Lists [notebook runs](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --domain-identifier=!: The identifier of the Amazon DataZone domain in which to list notebook runs.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to list notebook runs.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of notebook runs to return in a single call.
@@ -1754,6 +1791,33 @@ commands:
                 - STOPPED
                 - SUCCEEDED
                 - FAILED
+    - name: list-notebooks
+      description: Lists [notebooks](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to list notebooks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of notebooks to return in a single call.
+        --next-token=: When the number of notebooks is greater than the default value for the `MaxResults` parameter, or if you explicitly specify a value for `MaxResults` that is less than the number of notebooks, the response includes a pagination token named `NextToken`.
+        --owning-project-identifier=!: The identifier of the project that owns the notebooks.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort the results by.
+        --sort-order=: The sort order for the results.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The status to filter notebooks by.
+      completion:
+        flag:
+            sort-by:
+                - CREATED_AT
+                - UPDATED_AT
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+            status:
+                - ACTIVE
+                - ARCHIVED
     - name: list-notifications
       description: Lists all Amazon DataZone notifications.
       flags:
@@ -2370,14 +2434,42 @@ commands:
                 - BUSINESS_DESCRIPTIONS
                 - BUSINESS_NAMES
                 - BUSINESS_GLOSSARY_ASSOCIATIONS
+    - name: start-notebook-export
+      description: Starts a notebook export in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to export the notebook.
+        --file-format=!: The file format for the notebook export.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --notebook-identifier=!: The identifier of the notebook to export.
+        --owning-project-identifier=!: The identifier of the project that owns the notebook.
+      completion:
+        flag:
+            file-format:
+                - PDF
+                - IPYNB
+    - name: start-notebook-import
+      description: Starts a notebook import in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The description of the imported notebook.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to import the notebook.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the imported notebook.
+        --owning-project-identifier=!: The identifier of the project that will own the imported notebook.
+        --source-location=!: The source location of the notebook to import.
     - name: start-notebook-run
-      description: Starts a notebook run in an Amazon DataZone domain.
+      description: Starts a notebook run in Amazon SageMaker Unified Studio.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
         --compute-configuration=: The compute configuration for the notebook run, including instance type and environment version.
-        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run is started.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is started.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata=: The metadata for the notebook run, specified as key-value pairs.
         --network-configuration=: The network configuration for the notebook run, including network access type and optional VPC settings.
@@ -2388,12 +2480,12 @@ commands:
         --timeout-configuration=: The timeout configuration for the notebook run.
         --trigger-source=: The source that triggered the notebook run.
     - name: stop-notebook-run
-      description: Stops a running notebook run in an Amazon DataZone domain.
+      description: Stops a running [notebook run](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
-        --domain-identifier=!: The identifier of the Amazon DataZone domain in which the notebook run is stopped.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook run is stopped.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The identifier of the notebook run to stop.
     - name: tag-resource
@@ -2613,6 +2705,29 @@ commands:
             status:
                 - ASSIGNED
                 - NOT_ASSIGNED
+    - name: update-notebook
+      description: Updates a [notebook](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
+      flags:
+        --cell-order=:
+            description: The updated ordered list of cells in the notebook.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The updated description of the notebook.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which the notebook exists.
+        --environment-configuration=: The updated environment configuration for the notebook.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the notebook to update.
+        --metadata=: The updated metadata for the notebook, specified as key-value pairs.
+        --name=: The updated name of the notebook.
+        --parameters=: The updated sensitive parameters for the notebook, specified as key-value pairs.
+        --status=: The updated status of the notebook.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - ARCHIVED
     - name: update-project
       description: Updates the specified project in Amazon DataZone.
       flags:
