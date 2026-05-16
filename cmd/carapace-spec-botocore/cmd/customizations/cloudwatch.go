@@ -41,4 +41,17 @@ func init() {
 		})
 		return nil
 	}
+
+	customizations["cloudwatch.get-otel-enrichment"] = func(cmd *command.Command) error {
+		cmd.Aliases = append(cmd.Aliases, "get-o-tel-enrichment")
+		return nil
+	}
+	customizations["cloudwatch.start-otel-enrichment"] = func(cmd *command.Command) error {
+		cmd.Aliases = append(cmd.Aliases, "start-o-tel-enrichment")
+		return nil
+	}
+	customizations["cloudwatch.stop-otel-enrichment"] = func(cmd *command.Command) error {
+		cmd.Aliases = append(cmd.Aliases, "stop-o-tel-enrichment")
+		return nil
+	}
 }
