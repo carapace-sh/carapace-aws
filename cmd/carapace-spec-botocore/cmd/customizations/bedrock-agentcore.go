@@ -6,4 +6,7 @@ func init() {
 	customizations["bedrock-agentcore.invoke-agent-runtime-command"] = func(cmd *command.Command) error {
 		return &SkipError{}
 	}
+	customizations["bedrock-agentcore.invoke-harness"] = func(cmd *command.Command) error {
+		return &SkipError{}
+	}
 }
