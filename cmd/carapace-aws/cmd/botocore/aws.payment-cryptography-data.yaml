@@ -23,12 +23,12 @@ commands:
         --plain-text=!: The plaintext to be encrypted.
         --wrapped-key=: The WrappedKeyBlock containing the encryption key for plaintext encryption.
     - name: generate-as2805-kek-validation
-      description: Establishes node-to-node initialization between payment processing nodes such as an acquirer, issuer or payment network using Australian Standard 2805 (AS2805).
+      description: Generates a `KekValidationRequest` or a `KekValidationResponse` for node-to-node initialization between payment processing nodes using [Australian Standard 2805 (AS2805)](https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kek-validation-type=!: Parameter information for generating a random key for KEK validation to perform node-to-node initialization.
+        --kek-validation-type=!: Defines whether to generate a KEK validation request or KEK validation response for node-to-node initialization.
         --key-identifier=!: The `keyARN` of sending KEK that Amazon Web Services Payment Cryptography uses for node-to-node initialization
         --random-key-send-variant-mask=!: The key variant to use for generating a random key for KEK validation during node-to-node initialization.
       completion:
@@ -36,6 +36,21 @@ commands:
             random-key-send-variant-mask:
                 - VARIANT_MASK_82C0
                 - VARIANT_MASK_82
+    - name: generate-auth-request-cryptogram
+      description: Generates an Authorization Request Cryptogram (ARQC) for an EMV chip payment card authorization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --key-identifier=!: The `keyARN` of the IMK-AC (TR31\_E0\_EMV\_MKEY\_APP\_CRYPTOGRAMS) that Amazon Web Services Payment Cryptography uses to generate the ARQC.
+        --major-key-derivation-mode=!: The method to use when deriving the major encryption key for ARQC generation within Amazon Web Services Payment Cryptography.
+        --session-key-derivation-attributes=!: The attributes and values to use for deriving a session key for ARQC generation within Amazon Web Services Payment Cryptography.
+        --transaction-data=!: The transaction data that Amazon Web Services Payment Cryptography uses for ARQC generation.
+      completion:
+        flag:
+            major-key-derivation-mode:
+                - EMV_OPTION_A
+                - EMV_OPTION_B
     - name: generate-card-validation-data
       description: Generates card-related validation data using algorithms such as Card Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2), or Card Security Codes (CSC).
       flags:

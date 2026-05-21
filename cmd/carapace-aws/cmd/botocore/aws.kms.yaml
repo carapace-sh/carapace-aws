@@ -60,7 +60,8 @@ commands:
         --grant-tokens=:
             description: A list of grant tokens.
             nargs: -1
-        --grantee-principal=!: The identity that gets the permissions specified in the grant.
+        --grantee-principal=: The identity that gets the permissions specified in the grant.
+        --grantee-service-principal=: The Amazon Web Services [service principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that gets the permissions specified in the grant.
         --key-id=!: Identifies the KMS key for the grant.
         --name=: A friendly name for the grant.
         --no-dry-run: Checks if your request will succeed.
@@ -68,6 +69,7 @@ commands:
             description: A list of operations that the grant permits.
             nargs: -1
         --retiring-principal=: The principal that has permission to use the [RetireGrant]() operation to retire the grant.
+        --retiring-service-principal=: The Amazon Web Services [service principal](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services) that has permission to use the [RetireGrant]() operation to retire the grant.
     - name: create-key
       description: Creates a unique customer managed [KMS key](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms-keys) in your Amazon Web Services account and Region.
       flags:
@@ -502,6 +504,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --grant-id=: Returns only the grant with the specified grant ID.
         --grantee-principal=: Returns only grants where the specified principal is the grantee principal for the grant.
+        --grantee-service-principal=: Returns only grants where the specified Amazon Web Services service principal is the grantee service principal for the grant.
         --key-id=!: Returns only grants for the specified KMS key.
         --limit=: Use this parameter to specify the maximum number of items to return.
         --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
@@ -562,7 +565,7 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-retirable-grants
-      description: Returns information about all grants in the Amazon Web Services account and Region that have the specified retiring principal.
+      description: Returns information about all grants in the Amazon Web Services account and Region that have the specified retiring principal or retiring service principal.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -571,7 +574,8 @@ commands:
         --marker=: Use this parameter in a subsequent request after you receive a response with truncated results.
         --max-items=: The  total number of items to return in the command's output.
         --page-size=: The size of each page to get in the AWS service call.
-        --retiring-principal=!: The retiring principal for which to list grants.
+        --retiring-principal=: The retiring principal for which to list grants.
+        --retiring-service-principal=: The retiring service principal for which to list grants.
         --starting-token=: A token to specify where to start paginating.
     - name: put-key-policy
       description: Attaches a key policy to the specified KMS key.
