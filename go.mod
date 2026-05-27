@@ -6,7 +6,7 @@ require (
 	github.com/JohannesKaufmann/html-to-markdown/v2 v2.5.1
 	github.com/carapace-sh/carapace v1.11.6
 	github.com/carapace-sh/carapace-bridge v1.5.3
-	github.com/carapace-sh/carapace-spec v1.5.1
+	github.com/carapace-sh/carapace-spec v1.5.3
 	github.com/neurosnap/sentences v1.1.2
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/pflag v1.0.10
