@@ -13,19 +13,45 @@ commands:
         --id=!: The ID of the feed.
         --no-dry-run: Set to true if you want to do a dry run of the associate action.
         --outputs=!:
-            description: The outputs to add to this feed.
+            description: An array of one or more outputs that you want to add to this feed now, to supplement any outputs that you specified when you created or updated the feed.
             nargs: -1
+    - name: create-dictionary
+      description: Creates a custom dictionary for improving transcription accuracy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=: The dictionary entries payload.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language=!: The language of the dictionary entries.
+        --name=!: A user-friendly name for this dictionary.
+        --tags=: Optional tags to associate with the dictionary.
+      completion:
+        flag:
+            language:
+                - eng
+                - fra
+                - ita
+                - deu
+                - spa
+                - por
     - name: create-feed
       description: Creates a feed.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: A name for this feed.
+        --name=!: A user-friendly name for this feed.
         --outputs=!:
             description: An array of outputs for this feed.
             nargs: -1
-        --tags=: If you want to include tags, add them now.
+        --tags=: Optional tags.
+    - name: delete-dictionary
+      description: Deletes the specified dictionary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the dictionary to delete.
     - name: delete-feed
       description: Deletes the specified feed.
       flags:
@@ -34,15 +60,29 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the feed.
     - name: disassociate-feed
-      description: Releases the resource (for example, an MediaLive channel) that is associated with this feed.
+      description: Releases the resource (the source media) that is associated with this feed.
       flags:
-        --associated-resource-name=!: The name of the resource currently associated with the feed'.
+        --associated-resource-name=!: The name of the resource currently associated with the feed.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Set to true if you want to do a dry run of the disassociate action.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the feed where you want to release the resource.
         --no-dry-run: Set to true if you want to do a dry run of the disassociate action.
+    - name: export-dictionary-entries
+      description: Exports the entries from the specified dictionary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the dictionary whose entries you want to export.
+    - name: get-dictionary
+      description: Retrieves information about the specified dictionary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the dictionary to retrieve.
     - name: get-feed
       description: Retrieves information about the specified feed.
       flags:
@@ -50,6 +90,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the feed to query.
+    - name: list-dictionaries
+      description: Lists the dictionaries in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the next batch of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-feeds
       description: Displays a list of feeds that belong to this AWS account.
       flags:
@@ -86,6 +137,25 @@ commands:
         --tag-keys=!:
             description: The keys of the tags to delete.
             nargs: -1
+    - name: update-dictionary
+      description: Updates the specified dictionary.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entries=: New dictionary entries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the dictionary to update.
+        --language=: A new language for the dictionary.
+        --name=: A new name for the dictionary.
+      completion:
+        flag:
+            language:
+                - eng
+                - fra
+                - ita
+                - deu
+                - spa
+                - por
     - name: update-feed
       description: Updates the name and/or outputs in a feed.
       flags:
