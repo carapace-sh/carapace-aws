@@ -325,6 +325,7 @@ func init() {
 		"rekognition":                         "Amazon Rekognition",
 		"repostspace":                         "AWS re:Post Private",
 		"resiliencehub":                       "AWS Resilience Hub",
+		"resiliencehubv2":                     "AWS Resilience Hub V2",
 		"resource-explorer-2":                 "AWS Resource Explorer",
 		"resource-groups":                     "AWS Resource Groups",
 		"resourcegroupstaggingapi":            "AWS Resource Groups Tagging API",
