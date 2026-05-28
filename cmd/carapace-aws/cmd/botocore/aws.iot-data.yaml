@@ -5,12 +5,12 @@ commands:
     - name: delete-connection
       description: Disconnects a connected MQTT client from Amazon Web Services IoT Core.
       flags:
-        --clean-session: Specifies whether to remove the client's session state when disconnecting.
+        --clean-session: Specifies whether to remove the client's persistent session state when disconnecting.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-id=!: The unique identifier of the MQTT client to disconnect.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --no-clean-session: Specifies whether to remove the client's session state when disconnecting.
+        --no-clean-session: Specifies whether to remove the client's persistent session state when disconnecting.
         --no-prevent-will-message: Controls if Amazon Web Services IoT Core publishes the client's Last Will and Testament (LWT) message upon disconnection.
         --prevent-will-message: Controls if Amazon Web Services IoT Core publishes the client's Last Will and Testament (LWT) message upon disconnection.
     - name: delete-thing-shadow
@@ -21,6 +21,15 @@ commands:
       completion:
         positional:
             - - $files
+    - name: get-connection
+      description: Retrieves connection information for the specified MQTT client.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The unique identifier of the MQTT client to retrieve connection information.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-socket-information: Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp) should be included in the GetConnection response.
+        --no-include-socket-information: Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp) should be included in the GetConnection response.
     - name: get-retained-message
       description: Gets the details of a single retained message for the specified topic.
       flags:
@@ -56,6 +65,18 @@ commands:
         --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-subscriptions
+      description: Returns a list of all subscriptions for MQTT clients with active sessions, including offline clients with persistent sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The unique identifier of the MQTT client to list subscriptions for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of subscriptions to return in a single request.
+        --next-token=: To retrieve the next set of results, the `nextToken` value from a previous response; otherwise **null** to receive the first set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: publish
       description: Publishes an MQTT message.
       flags:
@@ -72,6 +93,28 @@ commands:
         --response-topic=: A UTF-8 encoded string that's used as the topic name for a response message.
         --retain: A Boolean value that determines whether to set the RETAIN flag when the message is published.
         --topic=!: The name of the MQTT topic.
+        --user-properties=: A JSON string that contains an array of JSON objects.
+      completion:
+        flag:
+            payload-format-indicator:
+                - UNSPECIFIED_BYTES
+                - UTF8_DATA
+    - name: send-direct-message
+      description: Sends an MQTT message directly to a specific client identified by its client ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=!: The unique identifier of the MQTT client to send the message to.
+        --confirmation: A Boolean value that specifies whether to wait for delivery confirmation from the receiving client.
+        --content-type=: The MQTT5 content type property forwarded to the receiving client (for example, `application/json`).
+        --correlation-data=: The base64-encoded binary data used by the sender of the request message to identify which request the response message is for when it's received.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-confirmation: A Boolean value that specifies whether to wait for delivery confirmation from the receiving client.
+        --payload-format-indicator=: An `Enum` string value that indicates whether the payload is formatted as UTF-8.
+        --payload=: The message body.
+        --response-topic=: A UTF-8 encoded string that's used as the topic name for a response message.
+        --timeout=: An integer that represents the maximum time, in seconds, to wait for a delivery confirmation (PUBACK) from the receiving client after the message has been delivered.
+        --topic=!: The topic of the outbound MQTT Publish message to the receiving client.
         --user-properties=: A JSON string that contains an array of JSON objects.
       completion:
         flag:
