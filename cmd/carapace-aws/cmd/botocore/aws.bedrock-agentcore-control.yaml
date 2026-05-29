@@ -47,12 +47,19 @@ commands:
     - name: create-api-key-credential-provider
       description: Creates a new API key credential provider.
       flags:
-        --api-key=!: The API key to use for authentication.
+        --api-key-secret-config=: A reference to the AWS Secrets Manager secret that stores the API key.
+        --api-key-secret-source=: The source type of the API key secret.
+        --api-key=: The API key to use for authentication.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the API key credential provider.
         --tags=: A map of tag keys and values to assign to the API key credential provider.
+      completion:
+        flag:
+            api-key-secret-source:
+                - MANAGED
+                - EXTERNAL
     - name: create-browser
       description: Creates a custom browser.
       flags:
@@ -1440,11 +1447,18 @@ commands:
     - name: update-api-key-credential-provider
       description: Updates an existing API key credential provider.
       flags:
-        --api-key=!: The new API key to use for authentication.
+        --api-key-secret-config=: A reference to the AWS Secrets Manager secret that stores the API key.
+        --api-key-secret-source=: The source type of the API key secret.
+        --api-key=: The new API key to use for authentication.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the API key credential provider to update.
+      completion:
+        flag:
+            api-key-secret-source:
+                - MANAGED
+                - EXTERNAL
     - name: update-configuration-bundle
       description: Updates a configuration bundle by creating a new version with the specified changes.
       flags:
