@@ -47,6 +47,33 @@ commands:
         --name=: A name for the association that you're creating between a Resolver rule and a VPC.
         --resolver-rule-id=!: The ID of the Resolver rule that you want to associate with the VPC.
         --vpc-id=!: The ID of the VPC that you want to associate the Resolver rule with.
+    - name: batch-create-firewall-rule
+      description: Creates multiple DNS Firewall rules in the specified rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --create-firewall-rule-entries=!:
+            description: The list of firewall rules to create.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-delete-firewall-rule
+      description: Deletes multiple DNS Firewall rules from the specified rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delete-firewall-rule-entries=!:
+            description: The list of firewall rules to delete.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-update-firewall-rule
+      description: Updates multiple DNS Firewall rules in the specified rule group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-firewall-rule-entries=!:
+            description: The list of firewall rules to update.
+            nargs: -1
     - name: create-firewall-domain-list
       description: Creates an empty firewall domain list for use in DNS Firewall rules.
       flags:
@@ -74,6 +101,7 @@ commands:
         --firewall-domain-list-id=: The ID of the domain list that you want to use in the rule.
         --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
         --firewall-rule-group-id=!: The unique identifier of the firewall rule group where you want to create the rule.
+        --firewall-rule-type=: The rule type configuration for the firewall rule.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name that lets you identify the rule in the rule group.
         --priority=!: The setting that determines the processing order of the rule in the rule group.
@@ -472,6 +500,18 @@ commands:
         --next-token=: For the first call to this list request, omit this value.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-firewall-rule-types
+      description: Retrieves the available rule types that can be used in DNS Firewall rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Resolver to return for this request.
+        --next-token=: For the first call to this list request, omit this value.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-type=: The rule type to filter by.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-firewall-rules
       description: Retrieves the firewall rules that you have defined for the specified firewall rule group.
       flags:
@@ -727,6 +767,7 @@ commands:
         --firewall-domain-list-id=: The ID of the domain list to use in the rule.
         --firewall-domain-redirection-action=: How you want the the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.
         --firewall-rule-group-id=!: The unique identifier of the firewall rule group for the rule.
+        --firewall-rule-type=: The rule type configuration for the firewall rule.
         --firewall-threat-protection-id=: The DNS Firewall Advanced rule ID.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: The name of the rule.
