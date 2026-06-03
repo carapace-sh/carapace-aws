@@ -354,6 +354,7 @@ func init() {
 		"sagemaker-metrics":                   "Amazon SageMaker Metrics Service",
 		"sagemaker-runtime":                   "Amazon SageMaker Runtime",
 		"sagemaker":                           "Amazon SageMaker Service",
+		"sagemakerjobruntime":                 "Sagemaker Job Runtime Service",
 		"savingsplans":                        "AWS Savings Plans",
 		"scheduler":                           "Amazon EventBridge Scheduler",
 		"schemas":                             "Schemas",
