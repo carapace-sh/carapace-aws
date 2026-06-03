@@ -793,6 +793,25 @@ commands:
             job-type:
                 - Default
                 - Advanced
+    - name: create-job
+      description: Creates a model customization job in Amazon SageMaker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of the job.
+        --job-config-document=!: The JSON configuration document for the job.
+        --job-config-schema-version=!: The version of the configuration schema to use for the job configuration document.
+        --job-name=!: The name of the job.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to perform the job.
+        --tags=:
+            description: An array of key-value pairs to apply to the job as tags.
+            nargs: -1
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
     - name: create-labeling-job
       description: Creates a job that uses workers to label the data objects in your input dataset.
       flags:
@@ -1951,6 +1970,19 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the inference experiment you want to delete.
+    - name: delete-job
+      description: Deletes a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of the job to delete.
+        --job-name=!: The name of the job to delete.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
     - name: delete-mlflow-app
       description: Deletes an MLflow App.
       flags:
@@ -2470,6 +2502,32 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-name=!: The name of the job.
+    - name: describe-job
+      description: Returns detailed information about a job, including its current status, secondary status, configuration, and timestamps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of the job.
+        --job-name=!: The name of the job to describe.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
+    - name: describe-job-schema-version
+      description: Returns the JSON schema for a specified job category and schema version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of the job schema to describe.
+        --job-config-schema-version=: The version of the schema to retrieve.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
     - name: describe-labeling-job
       description: Gets information about a labeling job.
       flags:
@@ -4065,6 +4123,63 @@ commands:
                 - STOPPED
                 - DELETING
                 - DELETED
+    - name: list-job-schema-versions
+      description: Lists available configuration schema versions for a specified job category.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of job schemas to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of schema versions to return in the response.
+        --next-token=: If the previous response was truncated, this token retrieves the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
+    - name: list-jobs
+      description: Lists jobs in a specified category.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter that returns only jobs created after the specified time.
+        --creation-time-before=: A filter that returns only jobs created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of jobs to list.
+        --last-modified-time-after=: A filter that returns only jobs modified after the specified time.
+        --last-modified-time-before=: A filter that returns only jobs modified before the specified time.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of jobs to return in the response.
+        --name-contains=: A string in the job name to filter results.
+        --next-token=: If the previous response was truncated, this token retrieves the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The sort order for results.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: A filter that returns only jobs with the specified status.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
+            sort-by:
+                - Name
+                - CreationTime
+                - Status
+            sort-order:
+                - Ascending
+                - Descending
+            status-equals:
+                - InProgress
+                - Completed
+                - Failed
+                - Stopping
+                - Stopped
+                - Deleting
+                - DeleteFailed
     - name: list-labeling-jobs
       description: Gets a list of labeling jobs.
       flags:
@@ -5578,6 +5693,19 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-name=!: The name of the job you want to stop.
+    - name: stop-job
+      description: Stops a running job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-category=!: The category of the job to stop.
+        --job-name=!: The name of the job to stop.
+      completion:
+        flag:
+            job-category:
+                - AgentRFT
+                - AgentRFTEvaluation
     - name: stop-labeling-job
       description: Stops a running labeling job.
       flags:
