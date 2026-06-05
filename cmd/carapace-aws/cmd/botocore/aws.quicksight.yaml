@@ -13,6 +13,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --topic-id=!: The ID for the topic reviewed answer that you want to create.
+    - name: batch-delete-knowledge-base
+      description: Deletes one or more knowledge bases.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-ids=!:
+            description: A list of knowledge base identifiers to delete.
+            nargs: -1
     - name: batch-delete-topic-reviewed-answer
       description: Deletes reviewed answers for Q Topic.
       flags:
@@ -878,6 +888,14 @@ commands:
                 - REDSHIFT
                 - QBUSINESS
                 - ATHENA
+    - name: delete-knowledge-base
+      description: Deletes a knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
     - name: delete-namespace
       description: Deletes a namespace and the users and groups that are associated with the namespace.
       flags:
@@ -1390,6 +1408,22 @@ commands:
         --default-key-only: Determines whether the request returns the default key only.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-default-key-only: Determines whether the request returns the default key only.
+    - name: describe-knowledge-base
+      description: Describes a knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+    - name: describe-knowledge-base-permissions
+      description: Describes the resource permissions for a knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
     - name: describe-namespace
       description: Describes the current namespace.
       flags:
@@ -1958,6 +1992,18 @@ commands:
         --next-token=: The token for the next set of results, or null if there are no more results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-knowledge-bases
+      description: Lists all knowledge bases in an Amazon QuickSight account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-namespaces
       description: Lists the namespaces for the specified Amazon Web Services account.
       flags:
@@ -2179,6 +2225,28 @@ commands:
         --next-token=: A pagination token that can be used in a subsequent request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-users-index-capacity
+      description: Lists per-user index capacity consumption for an account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the index capacity data.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: Filters to apply.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return per page.
+        --namespace=: The namespace to scope the user search to.
+        --next-token=: The token for the next set of results, received from a previous call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The sort order for results.
+      completion:
+        flag:
+            sort-by:
+                - TOTAL_CAPACITY_BYTES
+            sort-order:
+                - ASC
+                - DESC
     - name: list-vpc-connections
       description: Lists all of the VPC connections in the current set Amazon Web Services Region of an Amazon Web Services account.
       flags:
@@ -2394,6 +2462,22 @@ commands:
         --namespace=!: The namespace that you want to search.
         --next-token=: A pagination token that can be used in a subsequent request.
         --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-knowledge-bases
+      description: Searches for a subset of knowledge bases based on specified filters.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters to apply when searching knowledge bases.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The sort configuration for the search results.
         --starting-token=: A token to specify where to start paginating.
     - name: search-spaces
       description: Searches for Amazon QuickSight spaces that match the specified filters.
@@ -2958,6 +3042,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --key-registration=!:
             description: A list of `RegisteredCustomerManagedKey` objects to be updated to the Quick Sight account.
+            nargs: -1
+    - name: update-knowledge-base-permissions
+      description: Updates the resource permissions for a knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-permissions=:
+            description: The resource permissions that you want to grant on the knowledge base.
+            nargs: -1
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --revoke-permissions=:
+            description: The resource permissions that you want to revoke from the knowledge base.
             nargs: -1
     - name: update-o-auth-client-application
       description: Updates an OAuthClientApplication.
