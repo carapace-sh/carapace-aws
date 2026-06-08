@@ -3,7 +3,7 @@ module github.com/carapace-sh/carapace-aws
 go 1.25.0
 
 require (
-	github.com/JohannesKaufmann/html-to-markdown/v2 v2.5.1
+	github.com/JohannesKaufmann/html-to-markdown/v2 v2.5.2
 	github.com/carapace-sh/carapace v1.11.7
 	github.com/carapace-sh/carapace-bridge v1.5.3
 	github.com/carapace-sh/carapace-spec v1.5.5
@@ -15,10 +15,10 @@ require (
 )
 
 require (
-	github.com/JohannesKaufmann/dom v0.2.0 // indirect
+	github.com/JohannesKaufmann/dom v0.3.1 // indirect
 	github.com/carapace-sh/carapace-shlex v1.1.1 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
-	golang.org/x/net v0.53.0 // indirect
+	golang.org/x/net v0.55.0 // indirect
 )
 
 replace github.com/spf13/pflag => github.com/carapace-sh/carapace-pflag v1.1.0
