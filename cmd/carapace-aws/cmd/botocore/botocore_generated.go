@@ -6,6 +6,7 @@ func init() {
 		"account":                             "AWS Account",
 		"acm-pca":                             "AWS Certificate Manager Private Certificate Authority",
 		"acm":                                 "AWS Certificate Manager",
+		"agenttoolkit":                        "AgentToolkit",
 		"aiops":                               "AWS AI Ops",
 		"amp":                                 "Amazon Prometheus Service",
 		"amplify":                             "AWS Amplify",
