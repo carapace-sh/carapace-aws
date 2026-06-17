@@ -24,6 +24,16 @@ commands:
                 - DOC
                 - JSON
                 - YAML
+    - name: batch-create-security-requirements
+      description: Batch creates security requirements in a customer managed pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack to add requirements to.
+        --security-requirements=!:
+            description: The list of security requirements to create.
+            nargs: -1
     - name: batch-delete-code-reviews
       description: Deletes one or more code reviews from an agent space.
       flags:
@@ -43,6 +53,26 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pentest-ids=!:
             description: The list of pentest identifiers to delete.
+            nargs: -1
+    - name: batch-delete-security-requirements
+      description: Batch deletes security requirements from a customer managed pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack to remove requirements from.
+        --security-requirement-names=!:
+            description: The list of security requirement names to delete.
+            nargs: -1
+    - name: batch-delete-threat-models
+      description: Deletes one or more threat models from an agent space.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space that contains the threat models to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-ids=!:
+            description: The list of threat model identifiers to delete.
             nargs: -1
     - name: batch-get-agent-spaces
       description: Retrieves information about one or more agent spaces.
@@ -133,6 +163,16 @@ commands:
         --pentest-ids=!:
             description: The list of pentest identifiers to retrieve.
             nargs: -1
+    - name: batch-get-security-requirements
+      description: Batch retrieves security requirements from a pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack to retrieve requirements from.
+        --security-requirement-names=!:
+            description: The list of security requirement names to retrieve.
+            nargs: -1
     - name: batch-get-target-domains
       description: Retrieves information about one or more target domains.
       flags:
@@ -141,6 +181,56 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-domain-ids=!:
             description: The list of target domain identifiers to retrieve.
+            nargs: -1
+    - name: batch-get-threat-model-job-tasks
+      description: Retrieves information about one or more tasks within a threat model job.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space that contains the tasks.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-job-task-ids=!:
+            description: The list of task identifiers to retrieve.
+            nargs: -1
+    - name: batch-get-threat-model-jobs
+      description: Retrieves information about one or more threat model jobs in an agent space.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space that contains the threat model jobs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-job-ids=!:
+            description: The list of threat model job identifiers to retrieve.
+            nargs: -1
+    - name: batch-get-threat-models
+      description: Retrieves information about one or more threat models in an agent space.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space that contains the threat models.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-ids=!:
+            description: The list of threat model identifiers to retrieve.
+            nargs: -1
+    - name: batch-get-threats
+      description: Retrieves information about one or more threats.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-ids=!:
+            description: The list of threat identifiers to retrieve.
+            nargs: -1
+    - name: batch-update-security-requirements
+      description: Batch updates security requirements within a customer managed pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack containing the requirements to update.
+        --security-requirements=!:
+            description: The list of security requirement updates to apply.
             nargs: -1
     - name: create-agent-space
       description: Creates a new agent space.
@@ -179,11 +269,15 @@ commands:
         --log-config=: The CloudWatch Logs configuration for the code review.
         --service-role=: The IAM service role to use for the code review.
         --title=!: The title of the code review.
+        --validation-mode=: The validation mode for the code review.
       completion:
         flag:
             code-remediation-strategy:
                 - AUTOMATIC
                 - DISABLED
+            validation-mode:
+                - DISABLED
+                - SIMULATED
     - name: create-integration
       description: Creates a new integration with a third-party provider, such as GitHub, for code review and remediation.
       flags:
@@ -193,12 +287,16 @@ commands:
         --input=!: The provider-specific input required to create the integration.
         --integration-display-name=!: The display name for the integration.
         --kms-key-id=: The identifier of the AWS KMS key to use for encrypting data associated with the integration.
+        --private-connection-name=: The name of an active private connection used to reach a self-hosted provider instance over private networking.
         --provider=!: The integration provider.
         --tags=: The tags to associate with the integration.
       completion:
         flag:
             provider:
                 - GITHUB
+                - GITLAB
+                - BITBUCKET
+                - CONFLUENCE
     - name: create-membership
       description: Creates a new membership, granting a user access to an agent space within an application.
       flags:
@@ -222,6 +320,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-remediation-strategy=: The code remediation strategy for the pentest.
+        --disable-managed-skills=:
+            description: A list of managed skills to disable for this pentest.
+            nargs: -1
         --exclude-risk-types=:
             description: The list of risk types to exclude from the pentest.
             nargs: -1
@@ -235,6 +336,31 @@ commands:
         flag:
             code-remediation-strategy:
                 - AUTOMATIC
+                - DISABLED
+    - name: create-private-connection
+      description: Creates a private connection for reaching a self-hosted provider instance over private networking using Amazon VPC Lattice.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The configuration for the private connection.
+        --private-connection-name=!: A unique name for the private connection within your account.
+        --tags=: The tags to attach to the private connection.
+    - name: create-security-requirement-pack
+      description: Creates a customer managed security requirement pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the security requirement pack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The identifier of the AWS KMS key used to encrypt pack contents.
+        --name=!: The name of the security requirement pack.
+        --status=: The status of the pack.
+        --tags=: The tags to associate with the security requirement pack.
+      completion:
+        flag:
+            status:
+                - ENABLED
                 - DISABLED
     - name: create-target-domain
       description: Creates a new target domain for penetration testing.
@@ -251,6 +377,60 @@ commands:
                 - DNS_TXT
                 - HTTP_ROUTE
                 - PRIVATE_VPC
+    - name: create-threat
+      description: Creates a new threat under a threat model job.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --anchor=: The DFD element this threat is anchored to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comments=: Optional customer comment on the threat.
+        --evidence=:
+            description: The source code files supporting the threat.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --impacted-assets=:
+            description: The specific assets affected by the threat.
+            nargs: -1
+        --impacted-goal=:
+            description: The security goals affected by the threat.
+            nargs: -1
+        --prerequisites=: The conditions required for the threat to be exploitable.
+        --recommendation=: The recommended mitigation guidance for this threat.
+        --severity=: The severity level of the threat.
+        --statement=: The natural-language threat statement.
+        --stride=:
+            description: The STRIDE categories applicable to this threat.
+            nargs: -1
+        --threat-action=: What the threat source can do.
+        --threat-impact=: The direct consequence of the threat action.
+        --threat-job-id=!: The unique identifier of the threat model job the threat belongs to.
+        --threat-source=: The actor or origin of the threat.
+        --title=: A short title summarizing the threat.
+      completion:
+        flag:
+            severity:
+                - CRITICAL
+                - HIGH
+                - MEDIUM
+                - LOW
+                - INFO
+    - name: create-threat-model
+      description: Creates a new threat model configuration in an agent space.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space to create the threat model in.
+        --assets=: The assets to include in the threat model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the application or system being threat modeled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-config=: The CloudWatch Logs configuration for the threat model.
+        --report-destination=: The destination for publishing scan reports to an integrated document provider.
+        --scope-docs=:
+            description: The scoped documents for the agent to focus on during threat modeling.
+            nargs: -1
+        --service-role=!: The IAM service role to use for the threat model.
+        --title=!: The title of the threat model.
     - name: delete-agent-space
       description: Deletes an agent space and all of its associated resources, including pentests, findings, and artifacts.
       flags:
@@ -294,6 +474,20 @@ commands:
         flag:
             member-type:
                 - USER
+    - name: delete-private-connection
+      description: Deletes a private connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --private-connection-name=!: The name of the private connection to delete.
+    - name: delete-security-requirement-pack
+      description: Deletes a customer managed security requirement pack and all its associated security requirements.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack to delete.
     - name: delete-target-domain
       description: Deletes a target domain registration.
       flags:
@@ -301,6 +495,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-domain-id=!: The unique identifier of the target domain to delete.
+    - name: describe-private-connection
+      description: Retrieves the details of a private connection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --private-connection-name=!: The name of the private connection to describe.
     - name: get-application
       description: Retrieves information about an application.
       flags:
@@ -323,6 +524,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --integration-id=!: The unique identifier of the integration to retrieve.
+    - name: get-security-requirement-pack
+      description: Retrieves information about a security requirement pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pack-id=!: The unique identifier of the security requirement pack to retrieve.
+    - name: import-security-requirements
+      description: Imports security requirements from uploaded documents into a customer managed security requirement pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: The import source containing the documents to extract security requirements from.
+        --pack-id=!: The unique identifier of the security requirement pack to import requirements into.
     - name: initiate-provider-registration
       description: Initiates the OAuth registration flow with a third-party provider.
       flags:
@@ -334,6 +550,9 @@ commands:
         flag:
             provider:
                 - GITHUB
+                - GITLAB
+                - BITBUCKET
+                - CONFLUENCE
     - name: list-agent-spaces
       description: Returns a paginated list of agent space summaries in your account.
       flags:
@@ -390,6 +609,7 @@ commands:
                 - STATIC_ANALYSIS
                 - PENTEST
                 - FINALIZING
+                - VALIDATION
     - name: list-code-review-jobs-for-code-review
       description: Returns a paginated list of code review job summaries for the specified code review configuration.
       flags:
@@ -486,6 +706,7 @@ commands:
         flag:
             resource-type:
                 - CODE_REPOSITORY
+                - DOCUMENT
     - name: list-integrations
       description: Lists the integrations in your account, optionally filtered by provider or provider type.
       flags:
@@ -539,6 +760,7 @@ commands:
                 - STATIC_ANALYSIS
                 - PENTEST
                 - FINALIZING
+                - VALIDATION
     - name: list-pentest-jobs-for-pentest
       description: Returns a paginated list of pentest job summaries for the specified pentest configuration.
       flags:
@@ -564,6 +786,41 @@ commands:
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-private-connections
+      description: Lists the private connections in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of private connections to return in a single response.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-security-requirement-packs
+      description: Lists all security requirement packs in the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The filter criteria for listing security requirement packs.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single request.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-security-requirements
+      description: Lists security requirements within a pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single request.
+        --next-token=: The pagination token from a previous request to retrieve the next page of results.
+        --pack-id=!: The unique identifier of the security requirement pack to list requirements for.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Returns the tags associated with the specified resource.
       flags:
@@ -582,6 +839,57 @@ commands:
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-threat-model-job-tasks
+      description: Returns a paginated list of task summaries for the specified threat model job.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --threat-model-job-id=!: The unique identifier of the threat model job to list tasks for.
+    - name: list-threat-model-jobs
+      description: Returns a paginated list of threat model job summaries for the specified threat model.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --threat-model-id=!: The unique identifier of the threat model to list jobs for.
+    - name: list-threat-models
+      description: Returns a paginated list of threat model summaries for the specified agent space.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space to list threat models for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-threats
+      description: Returns a paginated list of threats for a threat model job.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results that are returned in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --threat-job-id=!: The unique identifier of the threat model job to list threats for.
     - name: start-code-remediation
       description: Initiates code remediation for one or more security findings.
       flags:
@@ -601,6 +909,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-review-id=!: The unique identifier of the code review to start a job for.
+        --diff-source=: Source of the diff for a differential scan.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-pentest-job
       description: Starts a new pentest job for a pentest configuration.
@@ -610,6 +919,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pentest-id=!: The unique identifier of the pentest to start a job for.
+    - name: start-threat-model-job
+      description: Starts a new threat model job for a threat model configuration.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-id=!: The unique identifier of the threat model to start a job for.
     - name: stop-code-review-job
       description: Stops a running code review job.
       flags:
@@ -626,6 +943,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pentest-job-id=!: The unique identifier of the pentest job to stop.
+    - name: stop-threat-model-job
+      description: Stops a running threat model job.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --threat-model-job-id=!: The unique identifier of the threat model job to stop.
     - name: tag-resource
       description: Adds tags to a resource.
       flags:
@@ -680,20 +1005,31 @@ commands:
         --log-config=: The updated CloudWatch Logs configuration for the code review.
         --service-role=: The updated IAM service role for the code review.
         --title=: The updated title of the code review.
+        --validation-mode=: The updated validation mode for the code review.
       completion:
         flag:
             code-remediation-strategy:
                 - AUTOMATIC
                 - DISABLED
+            validation-mode:
+                - DISABLED
+                - SIMULATED
     - name: update-finding
       description: Updates the status or risk level of a security finding.
       flags:
         --agent-space-id=!: The unique identifier of the agent space that contains the finding.
+        --attack-script=: The updated attack script for the finding.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-note=: A customer-provided note on the finding.
+        --description=: The updated description for the finding.
         --finding-id=!: The unique identifier of the finding to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name for the finding.
+        --reasoning=: The updated reasoning for the finding.
         --risk-level=: The updated risk level for the finding.
+        --risk-score=: The updated numerical risk score for the finding.
+        --risk-type=: The updated risk type for the finding.
         --status=: The updated status for the finding.
       completion:
         flag:
@@ -728,6 +1064,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-remediation-strategy=: The updated code remediation strategy for the pentest.
+        --disable-managed-skills=:
+            description: The updated list of managed skills to disable for this pentest.
+            nargs: -1
         --exclude-risk-types=:
             description: The updated list of risk types to exclude from the pentest.
             nargs: -1
@@ -743,6 +1082,29 @@ commands:
             code-remediation-strategy:
                 - AUTOMATIC
                 - DISABLED
+    - name: update-private-connection-certificate
+      description: Updates the certificate associated with a private connection.
+      flags:
+        --certificate=!: The PEM-encoded certificate chain for the private connection.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --private-connection-name=!: The name of the private connection to update.
+    - name: update-security-requirement-pack
+      description: Updates a security requirement pack.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the security requirement pack.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The updated name of the security requirement pack.
+        --pack-id=!: The unique identifier of the security requirement pack to update.
+        --status=: The updated status of the security requirement pack.
+      completion:
+        flag:
+            status:
+                - ENABLED
+                - DISABLED
     - name: update-target-domain
       description: Updates the verification method for a target domain.
       flags:
@@ -757,6 +1119,62 @@ commands:
                 - DNS_TXT
                 - HTTP_ROUTE
                 - PRIVATE_VPC
+    - name: update-threat
+      description: Updates a threat.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space.
+        --anchor=: The updated DFD element this threat is anchored to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --comments=: Optional customer comment.
+        --evidence=:
+            description: The updated source code files supporting the threat.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --impacted-assets=:
+            description: The updated list of specific assets affected by the threat.
+            nargs: -1
+        --impacted-goal=:
+            description: The updated security goals affected by the threat.
+            nargs: -1
+        --prerequisites=: The updated conditions required for the threat to be exploitable.
+        --recommendation=: The updated recommended mitigation guidance for this threat.
+        --severity=: The updated severity level of the threat.
+        --statement=: The updated natural-language threat statement.
+        --status=: The updated status of the threat.
+        --threat-action=: The updated description of what the threat source can do.
+        --threat-id=!: The unique identifier of the threat to update.
+        --threat-impact=: The updated direct consequence of the threat action.
+        --threat-source=: The updated actor or origin of the threat.
+        --title=: A short title summarizing the threat.
+      completion:
+        flag:
+            severity:
+                - CRITICAL
+                - HIGH
+                - MEDIUM
+                - LOW
+                - INFO
+            status:
+                - OPEN
+                - RESOLVED
+                - DISMISSED
+    - name: update-threat-model
+      description: Updates an existing threat model configuration.
+      flags:
+        --agent-space-id=!: The unique identifier of the agent space that contains the threat model.
+        --assets=: The updated assets for the threat model.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the application or system being threat modeled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-config=: The updated CloudWatch Logs configuration for the threat model.
+        --scope-docs=:
+            description: The updated scoped documents for the agent to focus on during threat modeling.
+            nargs: -1
+        --service-role=: The updated IAM service role for the threat model.
+        --threat-model-id=!: The unique identifier of the threat model to update.
+        --title=: The updated title of the threat model.
     - name: verify-target-domain
       description: Initiates verification of a target domain.
       flags:

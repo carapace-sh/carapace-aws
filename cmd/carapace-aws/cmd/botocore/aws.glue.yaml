@@ -2,6 +2,17 @@
 name: glue
 description: AWS Glue
 commands:
+    - name: associate-glossary-terms
+      description: Associates one or more glossary terms with an asset in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --glossary-term-identifiers=!:
+            description: The list of glossary term identifiers to associate with the asset.
+            nargs: -1
+        --identifier=!: The unique identifier of the asset to associate glossary terms with.
     - name: batch-create-partition
       description: Creates one or more partitions in a batch operation.
       flags:
@@ -109,6 +120,17 @@ commands:
             description: The list of `DevEndpoint` names, which might be the names returned from the `ListDevEndpoint` operation.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: batch-get-iterable-forms
+      description: Retrieves multiple items from an iterable form on an asset in Glue Data Catalog in a single request.
+      flags:
+        --asset-identifier=!: The unique identifier of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-identifiers=!:
+            description: The list of item identifiers to retrieve.
+            nargs: -1
+        --iterable-form-name=!: The name of the iterable form to retrieve items from.
     - name: batch-get-jobs
       description: Returns a list of resource metadata for a given list of job names.
       flags:
@@ -385,6 +407,26 @@ commands:
                 - G.4X
                 - G.8X
                 - Z.2X
+    - name: create-glossary
+      description: Creates a business glossary in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The description of the glossary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the glossary.
+    - name: create-glossary-term
+      description: Creates a glossary term within a business glossary in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --glossary-identifier=!: The unique identifier of the glossary in which to create the term.
+        --long-description=: A long description of the glossary term.
+        --name=!: The name of the glossary term.
+        --short-description=: A short description of the glossary term.
     - name: create-glue-identity-center-configuration
       description: Creates a new Glue Identity Center configuration to enable integration between Glue and Amazon Web Services IAM Identity Center for authentication and authorization.
       flags:
@@ -722,6 +764,28 @@ commands:
         --max-concurrent-runs=: You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs.
         --name=!: The name to be assigned to the workflow.
         --tags=: The tags to be used with this workflow.
+    - name: delete-asset
+      description: Deletes an asset from Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the asset to delete.
+    - name: delete-asset-type
+      description: Deletes an asset type from Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the asset type to delete.
+    - name: delete-attachment
+      description: Deletes a form attachment from an asset in Glue Data Catalog.
+      flags:
+        --attachment-name=!: The name of the attachment to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the asset from which to delete the attachment.
     - name: delete-blueprint
       description: Deletes an existing blueprint.
       flags:
@@ -825,6 +889,27 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --endpoint-name=!: The name of the `DevEndpoint`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-form-type
+      description: Deletes a form type from Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the form type to delete.
+    - name: delete-glossary
+      description: Deletes a business glossary from Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary to delete.
+    - name: delete-glossary-term
+      description: Deletes a glossary term from Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary term to delete.
     - name: delete-glue-identity-center-configuration
       description: Deletes the existing Glue Identity Center configuration, removing the integration between Glue and Amazon Web Services IAM Identity Center.
       flags:
@@ -1042,6 +1127,31 @@ commands:
         --integration-identifier=: The Amazon Resource Name (ARN) for the integration.
         --marker=: A value that indicates the starting point for the next set of response records in a subsequent request.
         --max-records=: The total number of items to return in the output.
+    - name: disassociate-glossary-terms
+      description: Removes the association of one or more glossary terms from an asset in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --glossary-term-identifiers=!:
+            description: The list of glossary term identifiers to disassociate from the asset.
+            nargs: -1
+        --identifier=!: The unique identifier of the asset to disassociate glossary terms from.
+    - name: get-asset
+      description: Retrieves the metadata for an asset in Glue Data Catalog, including its forms, additional attachments, and associated glossary terms.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the asset to retrieve.
+    - name: get-asset-type
+      description: Retrieves an asset type in Glue Data Catalog by its identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the asset type to retrieve.
     - name: get-blueprint
       description: Retrieves the details of a blueprint.
       flags:
@@ -1378,6 +1488,27 @@ commands:
         --selected-fields=:
             description: List of fields that we want to fetch as part of preview data.
             nargs: -1
+    - name: get-form-type
+      description: Retrieves a form type in Glue Data Catalog by its identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the form type to retrieve.
+    - name: get-glossary
+      description: Retrieves a business glossary in Glue Data Catalog by its identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary to retrieve.
+    - name: get-glossary-term
+      description: Retrieves a glossary term in Glue Data Catalog by its identifier.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary term to retrieve.
     - name: get-glue-identity-center-configuration
       description: Retrieves the current Glue Identity Center configuration details, including the associated Identity Center instance and application information.
       flags:
@@ -1924,6 +2055,17 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-asset-types
+      description: Lists the asset types defined in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-blueprints
       description: Lists all the blueprint names in an account.
       flags:
@@ -2066,6 +2208,40 @@ commands:
         --next-token=: A continuation token, included if this is a continuation call.
         --parent-entity-name=: Name of the parent entity for which you want to list the children.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-form-types
+      description: Lists the form types defined in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-glossaries
+      description: Lists business glossaries in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-glossary-terms
+      description: Lists glossary terms within a business glossary in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --glossary-identifier=!: The unique identifier of the glossary whose terms to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-integration-resource-properties
       description: List integration resource properties for a single customer.
       flags:
@@ -2077,6 +2253,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: This is the pagination token for next page, initial value is `null`.
         --max-records=: This is total number of items to be evaluated.
+    - name: list-iterable-forms
+      description: Lists the items in an iterable form on an asset in Glue Data Catalog.
+      flags:
+        --asset-identifier=!: The unique identifier of the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iterable-form-name=!: The name of the iterable form to list items from.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-jobs
       description: Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag.
       flags:
@@ -2235,6 +2424,40 @@ commands:
         --integration-config=: The configuration settings for the integration.
         --integration-identifier=!: The Amazon Resource Name (ARN) for the integration.
         --integration-name=: A unique name for an integration in Glue.
+    - name: put-asset
+      description: Creates or updates an asset in Glue Data Catalog.
+      flags:
+        --asset-type-id=!: The identifier of the asset type for the asset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The description of the asset.
+        --forms=!: The forms to set on the asset, keyed by form name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the asset.
+        --name=!: The name of the asset.
+    - name: put-asset-type
+      description: Creates or updates an asset type in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --forms=!: The forms that make up the asset type, keyed by form name.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the asset type.
+    - name: put-attachment
+      description: Attaches a form to an asset or an iterable form item in Glue Data Catalog.
+      flags:
+        --asset-identifier=!: The unique identifier of the asset to attach the form to.
+        --attachment-name=!: The name of the attachment.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --content=!: The JSON content of the form, conforming to the schema of the specified form type.
+        --form-type-id=!: The identifier of the form type for this attachment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --item-identifier=: The identifier of the item within the iterable form.
+        --iterable-form-name=: The name of the iterable form.
     - name: put-data-catalog-encryption-settings
       description: Sets the security configuration for a specified catalog.
       flags:
@@ -2256,6 +2479,15 @@ commands:
             inclusion-annotation:
                 - INCLUDE
                 - EXCLUDE
+    - name: put-form-type
+      description: Creates or updates a form type in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the form type.
+        --schema=!: The Smithy IDL schema definition for the form type.
     - name: put-resource-policy
       description: Sets the Data Catalog resource policy for access control.
       flags:
@@ -2372,6 +2604,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --request-origin=: The origin of the request.
         --session-id=!: The Session Id of the statement to be run.
+    - name: search
+      description: Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-clause=: The filter clause to apply to the search.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-text=: The text to search for.
+        --sort=: The sort criteria for the search results.
+        --starting-token=: A token to specify where to start paginating.
     - name: search-tables
       description: Searches a set of tables based on properties in the table metadata as well as on the parent database.
       flags:
@@ -2801,6 +3047,27 @@ commands:
         --no-update-etl-libraries: '`True` if the list of custom libraries to be loaded in the development endpoint needs to be updated, or `False` if otherwise.'
         --public-key=: The public key for the `DevEndpoint` to use.
         --update-etl-libraries: '`True` if the list of custom libraries to be loaded in the development endpoint needs to be updated, or `False` if otherwise.'
+    - name: update-glossary
+      description: Updates a business glossary in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The updated description of the glossary.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary to update.
+        --name=: The updated name of the glossary.
+    - name: update-glossary-term
+      description: Updates a glossary term in Glue Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the glossary term to update.
+        --long-description=: The updated long description of the glossary term.
+        --name=: The updated name of the glossary term.
+        --short-description=: The updated short description of the glossary term.
     - name: update-glue-identity-center-configuration
       description: Updates the existing Glue Identity Center configuration, allowing modification of scopes and permissions for the integration.
       flags:

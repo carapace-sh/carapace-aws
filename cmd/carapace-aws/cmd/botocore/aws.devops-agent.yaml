@@ -6,6 +6,7 @@ commands:
       description: Adds a specific service association to an AgentSpace.
       flags:
         --agent-space-id=!: The unique identifier of the AgentSpace
+        --capabilities=: Enabled capabilities for this association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration=!: The configuration that directs how AgentSpace interacts with the given service.
@@ -70,6 +71,8 @@ commands:
             task-type:
                 - INVESTIGATION
                 - EVALUATION
+                - RELEASE_READINESS_REVIEW
+                - RELEASE_TESTING
     - name: create-chat
       description: Creates a new chat execution in the specified agent space
       flags:
@@ -98,7 +101,7 @@ commands:
       description: Creates a new Trigger in the specified agent space
       flags:
         --action=!: The action the new Trigger performs when it fires
-        --agent-space-id=!: ""
+        --agent-space-id=!: The unique identifier for the agent space where the Trigger will be created
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier used for idempotent Trigger creation
@@ -140,11 +143,11 @@ commands:
     - name: delete-trigger
       description: Deletes a Trigger from the specified agent space
       flags:
-        --agent-space-id=!: ""
+        --agent-space-id=!: The unique identifier for the agent space containing the Trigger
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trigger-id=!: ""
+        --trigger-id=!: The unique identifier of the Trigger to delete
     - name: deregister-service
       description: Deregister a service
       flags:
@@ -284,11 +287,11 @@ commands:
     - name: get-trigger
       description: Gets a Trigger from the specified agent space
       flags:
-        --agent-space-id=!: ""
+        --agent-space-id=!: The unique identifier for the agent space containing the Trigger
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --trigger-id=!: ""
+        --trigger-id=!: The unique identifier of the Trigger to retrieve
     - name: list-agent-spaces
       description: Lists all AgentSpaces with optional pagination.
       flags:
@@ -526,6 +529,8 @@ commands:
                 - mcpserversplunk
                 - azureidentity
                 - mcpserversigv4
+                - remoteagent
+                - remoteagentsigv4
     - name: list-tags-for-resource
       description: Lists tags for the specified AWS DevOps Agent resource.
       flags:
@@ -536,7 +541,7 @@ commands:
     - name: list-triggers
       description: Lists Triggers in the specified agent space
       flags:
-        --agent-space-id=!: ""
+        --agent-space-id=!: The unique identifier for the agent space whose Triggers should be listed
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -583,6 +588,8 @@ commands:
                 - mcpserversplunk
                 - azureidentity
                 - mcpserversigv4
+                - remoteagent
+                - remoteagentsigv4
     - name: send-message
       description: Sends a chat message and streams the response for the specified agent space execution
       flags:
@@ -633,7 +640,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier used for idempotent asset update
-        --content=: Optional content to set or replace.
+        --content=: Optional content update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --metadata=: Metadata fields to update.
     - name: update-asset-file
@@ -653,6 +660,7 @@ commands:
       flags:
         --agent-space-id=!: The unique identifier of the AgentSpace
         --association-id=!: The unique identifier of the given association.
+        --capabilities=: Enabled capabilities for this association.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --configuration=!: The configuration that directs how AgentSpace interacts with the given service.
@@ -729,13 +737,13 @@ commands:
     - name: update-trigger
       description: Updates the status of an existing Trigger
       flags:
-        --agent-space-id=!: ""
+        --agent-space-id=!: The unique identifier for the agent space containing the Trigger
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier used for idempotent Trigger update
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --status=: The new status for the Trigger
-        --trigger-id=!: ""
+        --trigger-id=!: The unique identifier of the Trigger to update
     - name: validate-aws-associations
       description: Validates an aws association and set status and returns a 204 No Content response on success.
       flags:

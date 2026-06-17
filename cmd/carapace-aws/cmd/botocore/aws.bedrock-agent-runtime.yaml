@@ -2,6 +2,24 @@
 name: bedrock-agent-runtime
 description: Agents for Amazon Bedrock Runtime
 commands:
+    - name: agentic-retrieve-stream
+      description: Retrieves information from one or more knowledge bases using an agentic approach.
+      flags:
+        --agentic-retrieve-configuration=!: Configuration settings for the agentic retrieval operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generate-response: Whether to generate a response based on the retrieved results.
+        --messages=!:
+            description: The list of messages for the agentic retrieval conversation.
+            nargs: -1
+        --next-token=: Opaque continuation token for paginated results.
+        --no-generate-response: Whether to generate a response based on the retrieved results.
+        --policy-configuration=: Policy configuration for guardrails and content filtering.
+        --retrievers=!:
+            description: The list of retrievers to use for agentic retrieval.
+            nargs: -1
+        --user-context=: Contains information about the user making the request.
     - name: create-invocation
       description: Creates a new invocation within a session.
       flags:
@@ -70,6 +88,22 @@ commands:
         flag:
             memory-type:
                 - SESSION_SUMMARY
+    - name: get-document-content
+      description: Retrieves the content of an ingested document from a knowledge base.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The unique identifier of the data source that contains the document.
+        --document-id=!: The unique identifier of the document to retrieve content for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that contains the document.
+        --output-format=: The output format for the document content.
+        --user-context=: ""
+      completion:
+        flag:
+            output-format:
+                - RAW
+                - EXTRACTED
     - name: get-execution-flow-snapshot
       description: Retrieves the flow definition snapshot used for a flow execution.
       flags:
@@ -220,6 +254,7 @@ commands:
         --retrieval-configuration=: Contains configurations for the knowledge base query and retrieval process.
         --retrieval-query=!: Contains the query to send the knowledge base.
         --starting-token=: A token to specify where to start paginating.
+        --user-context=: ""
     - name: retrieve-and-generate
       description: Queries a knowledge base and generates responses based on the retrieved results and using the specified foundation model or [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html).
       flags:
@@ -230,6 +265,7 @@ commands:
         --retrieve-and-generate-configuration=: Contains configurations for the knowledge base query and retrieval process.
         --session-configuration=: Contains details about the session with the knowledge base.
         --session-id=: The unique identifier of the session.
+        --user-context=: ""
     - name: start-flow-execution
       description: Starts an execution of an Amazon Bedrock flow.
       flags:
