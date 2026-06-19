@@ -5,6 +5,7 @@ commands:
     - name: associate-glossary-terms
       description: Associates one or more glossary terms with an asset in Glue Data Catalog.
       flags:
+        --asset-identifier=!: The unique identifier of the asset to associate glossary terms with.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -12,7 +13,6 @@ commands:
         --glossary-term-identifiers=!:
             description: The list of glossary term identifiers to associate with the asset.
             nargs: -1
-        --identifier=!: The unique identifier of the asset to associate glossary terms with.
     - name: batch-create-partition
       description: Creates one or more partitions in a batch operation.
       flags:
@@ -781,11 +781,13 @@ commands:
     - name: delete-attachment
       description: Deletes a form attachment from an asset in Glue Data Catalog.
       flags:
+        --asset-identifier=!: The unique identifier of the asset from which to delete the attachment.
         --attachment-name=!: The name of the attachment to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: The unique identifier of the asset from which to delete the attachment.
+        --item-identifier=: The identifier of the item within the iterable form.
+        --iterable-form-name=: The name of the iterable form.
     - name: delete-blueprint
       description: Deletes an existing blueprint.
       flags:
@@ -1130,6 +1132,7 @@ commands:
     - name: disassociate-glossary-terms
       description: Removes the association of one or more glossary terms from an asset in Glue Data Catalog.
       flags:
+        --asset-identifier=!: The unique identifier of the asset to disassociate glossary terms from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
@@ -1137,7 +1140,6 @@ commands:
         --glossary-term-identifiers=!:
             description: The list of glossary term identifiers to disassociate from the asset.
             nargs: -1
-        --identifier=!: The unique identifier of the asset to disassociate glossary terms from.
     - name: get-asset
       description: Retrieves the metadata for an asset in Glue Data Catalog, including its forms, additional attachments, and associated glossary terms.
       flags:
@@ -2604,7 +2606,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --request-origin=: The origin of the request.
         --session-id=!: The Session Id of the statement to be run.
-    - name: search
+    - name: search-assets
       description: Searches for assets in Glue Data Catalog using full-text search, filters, sorting, and aggregations.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
