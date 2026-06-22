@@ -222,6 +222,8 @@ func init() {
 		"kinesisvideo":                        "Amazon Kinesis Video Streams",
 		"kms":                                 "AWS Key Management Service",
 		"lakeformation":                       "AWS Lake Formation",
+		"lambda-core":                         "AWS Lambda Core",
+		"lambda-microvms":                     "Lambda MicroVMs",
 		"lambda":                              "AWS Lambda",
 		"launch-wizard":                       "AWS Launch Wizard",
 		"lex-models":                          "Amazon Lex Model Building Service",

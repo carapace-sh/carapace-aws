@@ -1,0 +1,288 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: lambda-microvms
+description: Lambda MicroVMs
+commands:
+    - name: create-microvm-auth-token
+      description: Creates an authentication token for accessing a running MicroVM.
+      flags:
+        --allowed-ports=!:
+            description: The list of port specifications that the authentication token grants access to on the MicroVM.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiration-in-minutes=!: The duration in minutes before the authentication token expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to create an authentication token for.
+    - name: create-microvm-image
+      description: Creates a MicroVM image from the specified code artifact and base image.
+      flags:
+        --additional-os-capabilities=:
+            description: Additional OS capabilities granted to the MicroVM runtime environment.
+            nargs: -1
+        --base-image-arn=!: The ARN of the Lambda-managed base MicroVM image to build upon.
+        --base-image-version=: The specific version of the base MicroVM image to use.
+        --build-role-arn=!: The ARN of the IAM role assumed during the image build process.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+        --code-artifact=!: The code artifact containing the application code and metadata for the MicroVM image.
+        --cpu-configurations=:
+            description: The list of supported CPU configurations for the MicroVM.
+            nargs: -1
+        --description=: A description of the MicroVM image.
+        --egress-network-connectors=:
+            description: The list of egress network connectors available to the MicroVM at runtime.
+            nargs: -1
+        --environment-variables=: Environment variables set in the MicroVM runtime environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hooks=: ""
+        --logging=: The logging configuration for build-time and runtime logs.
+        --name=!: The name of the MicroVM image.
+        --resources=:
+            description: The resource requirements for the MicroVM.
+            nargs: -1
+        --tags=: A set of key-value pairs that you can attach to the resource.
+    - name: create-microvm-shell-auth-token
+      description: Creates a shell authentication token for interactive shell access to a running MicroVM.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expiration-in-minutes=!: The duration in minutes before the shell authentication token expires.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to create a shell authentication token for.
+    - name: delete-microvm-image
+      description: Deletes a MicroVM image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image to delete.
+    - name: delete-microvm-image-version
+      description: Deletes a specific version of a MicroVM image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image.
+        --image-version=!: The version of the MicroVM image to delete.
+    - name: get-microvm
+      description: Retrieves the details of a specific MicroVM, including its state, endpoint, image information, and configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to retrieve.
+    - name: get-microvm-image
+      description: Retrieves the details of a MicroVM image, including its state, versions, and configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image to retrieve.
+    - name: get-microvm-image-build
+      description: Retrieves the details of a specific MicroVM image build, including its state, target architecture, and snapshot information.
+      flags:
+        --build-id=!: The unique identifier of the build to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image.
+        --image-version=!: The version of the MicroVM image.
+    - name: get-microvm-image-version
+      description: Retrieves the details of a specific version of a MicroVM image, including its configuration, state, and build information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image.
+        --image-version=!: The version of the MicroVM image to retrieve.
+    - name: list-managed-microvm-image-versions
+      description: Lists versions of a managed MicroVM image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the managed MicroVM image to list versions for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-managed-microvm-images
+      description: Lists AWS managed MicroVM images available for use as base images.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-microvm-image-builds
+      description: Lists builds for a MicroVM image version with optional filtering by architecture and chipset.
+      flags:
+        --architecture=: Filters builds by target CPU architecture.
+        --chipset-generation=: Filters builds by target chipset generation.
+        --chipset=: Filters builds by target chipset.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image.
+        --image-version=!: The version of the MicroVM image to list builds for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            architecture:
+                - ARM_64
+            chipset:
+                - GRAVITON
+    - name: list-microvm-image-versions
+      description: Lists versions of a MicroVM image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image to list versions for.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-microvm-images
+      description: Lists MicroVM images in the account with optional name filtering.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --name-filter=: Filters images whose name contains the specified string.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-microvms
+      description: Lists MicroVMs in the account with optional filtering by image and version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=: Optional filter to list only MicroVMs running the specified image.
+        --image-version=: Optional filter to list only MicroVMs running the specified image version.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token from a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-tags
+      description: Lists the tags associated with a Lambda MicroVM resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The ARN of the resource to list tags for.
+    - name: resume-microvm
+      description: Resumes a suspended MicroVM, restoring it to RUNNING state with all state intact.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to resume.
+    - name: run-microvm
+      description: Runs a new MicroVM from the specified image.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+        --egress-network-connectors=:
+            description: The list of egress network connectors to configure for the MicroVM.
+            nargs: -1
+        --execution-role-arn=: The ARN of the IAM role to be assumed by the MicroVM during execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idle-policy=: Configuration to control auto-suspend and auto-resume behavior.
+        --image-identifier=!: The identifier (ARN or ID) of the MicroVM image to run.
+        --image-version=: The version of the MicroVM image to run.
+        --ingress-network-connectors=:
+            description: The list of ingress network connectors to configure for the MicroVM.
+            nargs: -1
+        --logging=: The logging configuration for this MicroVM instance.
+        --maximum-duration-in-seconds=: The maximum duration in seconds that the MicroVM can exist before being terminated by the platform.
+        --run-hook-payload=: Per-MicroVM initialization data delivered as the request body of the /run lifecycle hook.
+    - name: suspend-microvm
+      description: Suspends a running MicroVM, preserving its full memory and disk state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to suspend.
+    - name: tag-resource
+      description: Adds tags to a Lambda MicroVM resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The ARN of the resource to tag.
+        --tags=!: The key-value pairs of tags to add to the resource.
+    - name: terminate-microvm
+      description: Terminates a MicroVM.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --microvm-identifier=!: The ID of the MicroVM to terminate.
+    - name: untag-resource
+      description: Removes tags from a Lambda MicroVM resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The ARN of the resource to remove tags from.
+        --tag-keys=!:
+            description: The list of tag keys to remove from the resource.
+            nargs: -1
+    - name: update-microvm-image
+      description: Updates the configuration of a MicroVM image and triggers a new version build.
+      flags:
+        --additional-os-capabilities=:
+            description: Additional OS capabilities granted to the MicroVM runtime environment.
+            nargs: -1
+        --base-image-arn=!: The ARN of the base MicroVM image.
+        --base-image-version=: The specific version of the base MicroVM image to use.
+        --build-role-arn=!: The ARN of the IAM build role.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier you provide to ensure the idempotency of the request.
+        --code-artifact=!: The code artifact containing the application code and metadata for the MicroVM image.
+        --cpu-configurations=:
+            description: The list of supported CPU configurations for the MicroVM.
+            nargs: -1
+        --description=: The description of the MicroVM image.
+        --egress-network-connectors=:
+            description: The list of egress network connectors available to the MicroVM at runtime.
+            nargs: -1
+        --environment-variables=: Environment variables set in the MicroVM runtime environment.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hooks=: ""
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image to update.
+        --logging=: The logging configuration for build-time and runtime logs.
+        --resources=:
+            description: The resource requirements for the MicroVM.
+            nargs: -1
+    - name: update-microvm-image-version
+      description: Updates the status of a specific MicroVM image version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --image-identifier=!: The unique identifier (ARN or ID) of the MicroVM image.
+        --image-version=!: The version of the MicroVM image to update.
+        --status=!: The new status to set for the MicroVM image version.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
