@@ -2,6 +2,13 @@
 name: application-signals
 description: Amazon CloudWatch Application Signals
 commands:
+    - name: batch-delete-instrumentation-configurations
+      description: Deletes multiple instrumentation configurations in a single request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --deletion-target=!: The deletion target - either bulk by scope or targeted by ARN list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: batch-get-service-level-objective-budget-report
       description: Use this operation to retrieve one or more *service level objective (SLO) budget reports*.
       flags:
@@ -27,6 +34,33 @@ commands:
         --slo-ids=!:
             description: The list of SLO IDs to add or remove exclusion windows from.
             nargs: -1
+    - name: create-instrumentation-configuration
+      description: Creates a dynamic instrumentation configuration for a specific code or endpoint location within a service and environment.
+      flags:
+        --attribute-filters=:
+            description: Client-side filters that target specific instances.
+            nargs: -1
+        --capture-configuration=!: Specifies what to capture when the instrumentation point is hit.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: An optional short description (up to 50 characters) that explains the purpose of this instrumentation.
+        --environment=!: The environment that the service is running in, such as `eks:cluster-prod/namespace` or `ec2:production`.
+        --expires-at=: 'For BREAKPOINT: optional, defaults to 24 hours, must be between 5 min and 24 hours.'
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instrumentation-type=!: 'Type of instrumentation: BREAKPOINT (temporary) or PROBE (permanent)'
+        --location=!: The location where instrumentation should be applied.
+        --service=!: The name of the service to instrument.
+        --signal-type=!: The telemetry signal type to emit for this instrumentation.
+        --tags=:
+            description: An optional list of key-value pairs to associate with the instrumentation configuration.
+            nargs: -1
+      completion:
+        flag:
+            instrumentation-type:
+                - BREAKPOINT
+                - PROBE
+            signal-type:
+                - SNAPSHOT
     - name: create-service-level-objective
       description: Creates a service level objective (SLO), which can help you ensure that your critical business operations are meeting customer expectations.
       flags:
@@ -54,6 +88,24 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-instrumentation-configuration
+      description: Deletes the specified instrumentation configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment=!: Environment name for the instrumentation configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instrumentation-type=!: Type of instrumentation configuration (BREAKPOINT or PROBE).
+        --location-identifier=!: Location identifier - either full code location or a pre-computed hash.
+        --service=!: Service name for the instrumentation configuration.
+        --signal-type=!: Signal type for the instrumentation configuration.
+      completion:
+        flag:
+            instrumentation-type:
+                - BREAKPOINT
+                - PROBE
+            signal-type:
+                - SNAPSHOT
     - name: delete-service-level-objective
       description: Deletes the specified service level objective.
       flags:
@@ -61,6 +113,55 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ARN or name of the service level objective to delete.
+    - name: get-instrumentation-configuration
+      description: Returns the details of a single instrumentation configuration identified by service, environment, signal type, and location.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment=!: Environment name for the instrumentation configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instrumentation-type=!: Type of instrumentation configuration (BREAKPOINT or PROBE).
+        --location-identifier=!: Location identifier - either full code location or a pre-computed hash.
+        --service=!: Service name for the instrumentation configuration.
+        --signal-type=!: Signal type for the instrumentation configuration.
+      completion:
+        flag:
+            instrumentation-type:
+                - BREAKPOINT
+                - PROBE
+            signal-type:
+                - SNAPSHOT
+    - name: get-instrumentation-configuration-status
+      description: Retrieves the status history for a single instrumentation configuration during a specified time range.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=: The end of the time range to retrieve status events for.
+        --environment=!: Environment name for the instrumentation configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instrumentation-type=!: Type of instrumentation configuration (BREAKPOINT or PROBE).
+        --location-identifier=!: Location identifier - either full code location or a pre-computed hash.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of status events to return in one call.
+        --next-token=: Use the token returned by a previous call to retrieve the next page of status events.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service=!: Service name for the instrumentation configuration.
+        --signal-type=!: Signal type for the instrumentation configuration.
+        --start-time=: The start of the time range to retrieve status events for.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The single status to query for.
+      completion:
+        flag:
+            instrumentation-type:
+                - BREAKPOINT
+                - PROBE
+            signal-type:
+                - SNAPSHOT
+            status:
+                - READY
+                - ERROR
+                - ACTIVE
+                - DISABLED
     - name: get-service
       description: Returns information about a service discovered by Application Signals.
       flags:
@@ -123,6 +224,26 @@ commands:
         --include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
         --next-token=: Include this value, if it was returned by the previous operation, to get the next set of grouping attribute definitions.
         --no-include-linked-accounts: If you are using this operation in a monitoring account, specify `true` to include grouping attributes from source accounts in the returned data.
+    - name: list-instrumentation-configurations
+      description: Returns all active instrumentation configurations for a service and environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment=!: The environment that the service is running in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instrumentation-type=!: Type of instrumentation configuration (BREAKPOINT or PROBE).
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of configurations to return in one call.
+        --next-token=: Use the token returned by a previous call to retrieve the next page of configurations.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service=!: The name of the service to retrieve instrumentation configurations for.
+        --starting-token=: A token to specify where to start paginating.
+        --synced-at=: The timestamp from the last successful sync.
+      completion:
+        flag:
+            instrumentation-type:
+                - BREAKPOINT
+                - PROBE
     - name: list-service-dependencies
       description: Returns a list of service dependencies of the service that you specify.
       flags:
@@ -249,6 +370,17 @@ commands:
         --grouping-attribute-definitions=!:
             description: An array of grouping attribute definitions that specify how services should be grouped.
             nargs: -1
+    - name: report-instrumentation-configuration-status
+      description: Reports the status of one or more instrumentation configurations from SDK instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configurations=!:
+            description: An array of configuration status reports (up to 100) that include the instrumentation type, signal type, location hash, status, timestamp, and optional error cause.
+            nargs: -1
+        --environment=!: The environment that the service is running in.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service=!: The service that the reported configurations belong to.
     - name: start-discovery
       description: Enables this Amazon Web Services account to be able to use CloudWatch Application Signals by creating the *AWSServiceRoleForCloudWatchApplicationSignals* service-linked role.
       flags:
