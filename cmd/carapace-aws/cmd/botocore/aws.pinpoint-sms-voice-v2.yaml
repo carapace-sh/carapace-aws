@@ -291,6 +291,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rcs-agent-id=!: The unique identifier of the RCS agent to delete.
+    - name: delete-rcs-message-spend-limit-override
+      description: Deletes an account-level monthly spending limit override for sending RCS messages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-registration
       description: Permanently delete an existing registration from your account.
       flags:
@@ -1154,6 +1160,26 @@ commands:
                 - VITORIA
                 - ZEINA
                 - ZHIYU
+    - name: send-rcs-message
+      description: Creates a new RCS message and sends it to a recipient's phone number.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration-set-name=: The name of the configuration set to use.
+        --context=: You can specify custom data in this field.
+        --destination-phone-number=!: The destination phone number in E.164 format.
+        --dry-run: When set to true, the message is checked and validated, but isn't sent to the end recipient.
+        --fallback-configuration=: Configuration for SMS or MMS fallback when RCS delivery fails.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-price=: The maximum amount that you want to spend, in US dollars, per each RCS message.
+        --message-feedback-enabled: Set to true to enable message feedback for the message.
+        --message-traffic-type=: The traffic type of the RCS message.
+        --no-dry-run: When set to true, the message is checked and validated, but isn't sent to the end recipient.
+        --no-message-feedback-enabled: Set to true to enable message feedback for the message.
+        --origination-identity=!: The origination identity of the message.
+        --protect-configuration-id=: The unique identifier of the protect configuration to use.
+        --rcs-message-content=: The content of the RCS message.
+        --time-to-live=: The duration in seconds that the RCS message is valid for delivery.
     - name: send-text-message
       description: Creates a new text message and sends it to a recipient's phone number.
       flags:
@@ -1316,6 +1342,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --monthly-limit=!: The new monthly limit to enforce on notify messages.
+    - name: set-rcs-message-spend-limit-override
+      description: Sets an account level monthly spend limit override for sending RCS messages.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --monthly-limit=!: The new monthly limit to enforce on RCS message spending.
     - name: set-text-message-spend-limit-override
       description: Sets an account level monthly spend limit override for sending text messages.
       flags:
@@ -1380,7 +1413,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --default-template-id=: The template ID to set as the default, or the special value UNSET\_DEFAULT\_TEMPLATE to clear the current default template.
+        --default-template-id=: The default template identifier to associate with the notify configuration.
         --deletion-protection-enabled: When set to true the notify configuration can't be deleted.
         --enabled-channels=:
             description: An array of channels to enable for the notify configuration.
@@ -1391,7 +1424,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-deletion-protection-enabled: When set to true the notify configuration can't be deleted.
         --notify-configuration-id=!: The identifier of the notify configuration to update.
-        --pool-id=: The pool ID or ARN to associate, or the special value UNSET\_DEFAULT\_POOL\_FOR\_NOTIFY to clear the current default pool.
+        --pool-id=: The pool identifier or Amazon Resource Name (ARN) to associate with the notify configuration.
     - name: update-phone-number
       description: Updates the configuration of an existing origination phone number.
       flags:
@@ -1469,6 +1502,12 @@ commands:
         --two-way-channel-arn=: The Amazon Resource Name (ARN) of the two way channel.
         --two-way-channel-role=: An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.
         --two-way-enabled: By default this is set to false.
+        --two-way-media-s3-bucket-name=: The name of the S3 bucket where inbound RCS media files are stored.
+        --two-way-media-s3-key-prefix=: The key prefix used for inbound RCS media objects in the S3 bucket.
+        --two-way-media-s3-role=: The ARN of the IAM role used to write inbound RCS media files to the S3 bucket.
+        --two-way-rcs-events-enabled=:
+            description: The list of RCS event types to enable for two-way messaging.
+            nargs: -1
     - name: update-sender-id
       description: Updates the configuration of an existing sender ID.
       flags:
