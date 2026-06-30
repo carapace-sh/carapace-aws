@@ -74,7 +74,7 @@ commands:
         --creator-ml-member-abilities=: The ML abilities granted to the collaboration creator.
         --creator-payment-configuration=: The collaboration creator's payment responsibilities set by the collaboration creator.
         --data-encryption-metadata=: The settings for client-side encryption with Cryptographic Computing for Clean Rooms.
-        --description=!: A description of the collaboration provided by the collaboration owner.
+        --description=: A description of the collaboration provided by the collaboration owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --is-metrics-enabled: An indicator as to whether metrics have been enabled or disabled for the collaboration.
         --job-log-status=: Specifies whether job logs are enabled for this collaboration.
@@ -209,6 +209,33 @@ commands:
         --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association.
         --name=!: The name for the ID namespace association.
         --tags=: An optional label that you can assign to a resource when you create it.
+    - name: create-intermediate-table
+      description: Creates an intermediate table in a membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the intermediate table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the customer-managed KMS key used to encrypt the intermediate table data.
+        --membership-identifier=!: The unique identifier of the membership where the intermediate table is created.
+        --name=!: The display name for the intermediate table.
+        --population-analysis-configuration=!: The configuration that defines the analysis used to populate the intermediate table.
+        --retention-in-days=: The number of days to retain populated data versions.
+        --tags=: An optional label that you can assign to a resource when you create it.
+    - name: create-intermediate-table-analysis-rule
+      description: Creates an analysis rule for an intermediate table.
+      flags:
+        --analysis-rule-policy=!: The analysis rule policy to apply to the intermediate table.
+        --analysis-rule-type=!: The type of analysis rule to create.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table for which to create the analysis rule.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+      completion:
+        flag:
+            analysis-rule-type:
+                - CUSTOM
     - name: create-membership
       description: Creates a membership for a specific collaboration identifier and joins the collaboration.
       flags:
@@ -334,6 +361,27 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to delete.
         --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to delete.
+    - name: delete-intermediate-table
+      description: Deletes an intermediate table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table to delete.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+    - name: delete-intermediate-table-analysis-rule
+      description: Deletes an analysis rule from an intermediate table.
+      flags:
+        --analysis-rule-type=!: The type of analysis rule to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table from which to delete the analysis rule.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+      completion:
+        flag:
+            analysis-rule-type:
+                - CUSTOM
     - name: delete-member
       description: Removes the specified member from a collaboration.
       flags:
@@ -357,6 +405,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
         --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
+    - name: disallow-intermediate-table
+      description: Invalidates a specific intermediate table that references the caller's base table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-descendants: Specifies whether to cascade the disallow action to descendant intermediate tables.
+        --intermediate-table-name=!: The name of the intermediate table to disallow.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table to disallow.
+        --no-include-descendants: Specifies whether to cascade the disallow action to descendant intermediate tables.
     - name: get-analysis-template
       description: Retrieves an analysis template.
       flags:
@@ -480,6 +538,27 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to retrieve.
         --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to retrieve.
+    - name: get-intermediate-table
+      description: Retrieves an intermediate table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table to retrieve.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+    - name: get-intermediate-table-analysis-rule
+      description: Retrieves the analysis rule for an intermediate table.
+      flags:
+        --analysis-rule-type=!: The type of analysis rule to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table for which to retrieve the analysis rule.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+      completion:
+        flag:
+            analysis-rule-type:
+                - CUSTOM
     - name: get-membership
       description: Retrieves a specified membership for an identifier.
       flags:
@@ -711,6 +790,31 @@ commands:
         --next-token=: The pagination token that's used to fetch the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-intermediate-table-versions
+      description: Lists the version history of an intermediate table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table for which to list versions.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-intermediate-tables
+      description: Lists intermediate tables owned by the caller in a membership.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: The unique identifier of the membership for which to list intermediate tables.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-members
       description: Lists all members within a collaboration.
       flags:
@@ -835,6 +939,7 @@ commands:
             schema-type:
                 - TABLE
                 - ID_MAPPING_TABLE
+                - INTERMEDIATE_TABLE
     - name: list-tags-for-resource
       description: Lists all of the tags that have been added to a resource.
       flags:
@@ -857,6 +962,17 @@ commands:
                 - BATCH
                 - INCREMENTAL
                 - DELETE_ONLY
+    - name: populate-intermediate-table
+      description: Executes the stored query of an intermediate table to materialize data into managed storage.
+      flags:
+        --analysis-payer-account-id=: The account ID of the member that pays for the analysis compute costs.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --compute-configuration=: The compute configuration for the population query execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table to populate.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+        --parameters=: The runtime parameter values that override the defaults in the stored query.
     - name: preview-privacy-impact
       description: An estimate of the number of aggregation functions that the member who can query can run given epsilon and noise parameters.
       flags:
@@ -1050,6 +1166,33 @@ commands:
         --id-namespace-association-identifier=!: The unique identifier of the ID namespace association that you want to update.
         --membership-identifier=!: The unique identifier of the membership that contains the ID namespace association that you want to update.
         --name=: A new name for the ID namespace association.
+    - name: update-intermediate-table
+      description: Updates an intermediate table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --columns=:
+            description: The list of columns with updated type definitions.
+            nargs: -1
+        --description=: A new description for the intermediate table.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table to update.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the customer-managed KMS key to use for encrypting future population data.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+    - name: update-intermediate-table-analysis-rule
+      description: Updates the analysis rule policy for an intermediate table.
+      flags:
+        --analysis-rule-policy=!: The updated analysis rule policy for the intermediate table.
+        --analysis-rule-type=!: The type of analysis rule to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --intermediate-table-identifier=!: The unique identifier of the intermediate table for which to update the analysis rule.
+        --membership-identifier=!: The unique identifier of the membership that contains the intermediate table.
+      completion:
+        flag:
+            analysis-rule-type:
+                - CUSTOM
     - name: update-membership
       description: Updates a membership.
       flags:

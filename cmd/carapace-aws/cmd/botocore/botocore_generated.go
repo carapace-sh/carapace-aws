@@ -400,6 +400,7 @@ func init() {
 		"supplychain":                         "AWS Supply Chain",
 		"support-app":                         "AWS Support App",
 		"support":                             "AWS Support",
+		"supportauthz":                        "SupportAuthZ",
 		"sustainability":                      "AWS Sustainability",
 		"swf":                                 "Amazon Simple Workflow Service",
 		"synthetics":                          "Synthetics",
