@@ -143,6 +143,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --cpu-options=: The CPU configuration options to apply to the Dedicated Host.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --host-maintenance=: Indicates whether to enable or disable host maintenance for the Dedicated Host.
         --host-recovery=: Indicates whether to enable or disable host recovery for the Dedicated Host.
@@ -3901,6 +3902,14 @@ commands:
         --attribute-names=:
             description: The account attribute names.
             nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: describe-account-vpc-encryption-control
+      description: Describes the account-level VPC Encryption Control configuration for your account.
+      flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
@@ -8222,10 +8231,12 @@ commands:
             description: The filters.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-managed-resources: Indicates whether to include managed resources in the output.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results (up to a limit of 500) to be returned in a paginated request.
         --next-token=: The token returned from a previous paginated request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --no-include-managed-resources: Indicates whether to include managed resources in the output.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --volume-ids=:
@@ -10410,6 +10421,53 @@ commands:
             lock-mode:
                 - compliance
                 - governance
+    - name: modify-account-vpc-encryption-control
+      description: Modifies the account-level VPC Encryption Control configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --egress-only-internet-gateway=: Specifies whether to exclude egress-only internet gateway resource from account-level encryption enforcement.
+        --elastic-file-system=: Specifies whether to exclude Elastic File System service from account-level encryption enforcement.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --internet-gateway=: Specifies whether to exclude internet gateway resource from account-level encryption enforcement.
+        --lambda=: Specifies whether to exclude Lambda service from account-level encryption enforcement.
+        --mode=: The encryption mode for the account encryption control configuration.
+        --nat-gateway=: Specifies whether to exclude NAT gateway resource from account-level encryption enforcement.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --virtual-private-gateway=: Specifies whether to exclude virtual private gateway resource from account-level encryption enforcement.
+        --vpc-lattice=: Specifies whether to exclude VPC Lattice service from account-level encryption enforcement.
+        --vpc-peering=: Specifies whether to exclude VPC peering connection resource from account-level encryption enforcement.
+      completion:
+        flag:
+            egress-only-internet-gateway:
+                - enable
+                - disable
+            elastic-file-system:
+                - enable
+                - disable
+            internet-gateway:
+                - enable
+                - disable
+            lambda:
+                - enable
+                - disable
+            mode:
+                - unmanaged
+                - attempt-monitor
+                - attempt-enforce
+            nat-gateway:
+                - enable
+                - disable
+            virtual-private-gateway:
+                - enable
+                - disable
+            vpc-lattice:
+                - enable
+                - disable
+            vpc-peering:
+                - enable
+                - disable
     - name: modify-address-attribute
       description: Modifies an attribute of the specified Elastic IP address.
       flags:
