@@ -296,6 +296,7 @@ func init() {
 		"partnercentral-account":              "Partner Central Account API",
 		"partnercentral-benefits":             "Partner Central Benefits API",
 		"partnercentral-channel":              "Partner Central Channel API",
+		"partnercentral-revenue-measurement":  "Partner Central Revenue Measurement API",
 		"partnercentral-selling":              "Partner Central Selling API",
 		"payment-cryptography-data":           "Payment Cryptography Data Plane",
 		"payment-cryptography":                "Payment Cryptography Control Plane",

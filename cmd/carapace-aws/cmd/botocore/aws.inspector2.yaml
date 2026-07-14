@@ -142,6 +142,22 @@ commands:
             level:
                 - ORGANIZATION
                 - ACCOUNT
+    - name: create-connector
+      description: Creates a connector that links an external cloud provider to Amazon Inspector for vulnerability scanning.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --description=: A description of the connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the connector.
+        --provider-detail=!: The provider-specific configuration details for the connector.
+        --provider=!: The cloud provider for the connector.
+        --tags=: The tags to apply to the connector.
+      completion:
+        flag:
+            provider:
+                - AZURE
     - name: create-filter
       description: Creates a filter resource using specified filter criteria.
       flags:
@@ -208,6 +224,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to delete.
+    - name: delete-connector
+      description: Deletes a connector from your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-filter
       description: Deletes a filter resource.
       flags:
@@ -345,8 +368,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to retrieve.
     - name: get-configuration
-      description: Retrieves setting configurations for Inspector scans.
+      description: Retrieves setting configurations for Amazon Inspector scans.
       flags:
+        --account-id=: The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want to retrieve.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -378,6 +402,9 @@ commands:
                 - AWS_ECR_REPOSITORY
                 - AWS_LAMBDA_FUNCTION
                 - CODE_REPOSITORY
+                - Microsoft.Compute/virtualMachines
+                - Microsoft.ContainerRegistry/registry/containerImage
+                - Microsoft.Web/sites
             scan-type:
                 - NETWORK
                 - PACKAGE
@@ -549,6 +576,32 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: A token to use for paginating results that are returned in the response.
+    - name: list-connector-scan-configurations
+      description: Lists scan configurations for Amazon Web Services Config connectors.
+      flags:
+        --aws-config-connector-arns=:
+            description: The list of Amazon Web Services Config connector ARNs to filter results.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-connectors
+      description: Lists connectors in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: The filter criteria to apply to the list of connectors.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A token to use for paginating results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-coverage
       description: Lists coverage details for your environment.
       flags:
@@ -580,6 +633,10 @@ commands:
                 - ACCOUNT_ID
                 - RESOURCE_TYPE
                 - ECR_REPOSITORY_NAME
+                - PROVIDER
+                - PROVIDER_ACCOUNT_ID
+                - PROVIDER_REGION
+                - PROVIDER_ORG_ID
     - name: list-delegated-admin-accounts
       description: Lists information about the Amazon Inspector delegated administrator of your organization.
       flags:
@@ -642,6 +699,9 @@ commands:
                 - AWS_LAMBDA_FUNCTION
                 - LAMBDA_LAYER
                 - CODE_REPOSITORY
+                - VM_INSTANCE
+                - CONTAINER_IMAGE
+                - SERVERLESS_FUNCTION
     - name: list-findings
       description: Lists findings for your environment.
       flags:
@@ -705,6 +765,9 @@ commands:
                 - AWS_ECR_REPOSITORY
                 - AWS_LAMBDA_FUNCTION
                 - CODE_REPOSITORY
+                - Microsoft.Compute/virtualMachines
+                - Microsoft.ContainerRegistry/registry/containerImage
+                - Microsoft.Web/sites
             scan-type:
                 - NETWORK
                 - PACKAGE
@@ -814,13 +877,32 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scan-configuration-arn=!: The Amazon Resource Name (ARN) of the scan configuration to update.
     - name: update-configuration
-      description: Updates setting configurations for your Amazon Inspector account.
+      description: Updates the scan configuration for your Amazon Inspector account.
       flags:
+        --account-id=: The 12-digit Amazon Web Services account ID of the member account whose scan configuration you want to update.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --ec2-configuration=: Specifies how the Amazon EC2 automated scan will be updated for your environment.
         --ecr-configuration=: Specifies how the ECR automated re-scan will be updated for your environment.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-configuration-inheritance=: Specifies which scan-type configurations to reset to the delegated administrator's inherited values for the targeted member account.
+    - name: update-connector
+      description: Updates the description or provider-specific configuration details of an existing connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector to update.
+        --description=: The updated description of the connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --provider-detail=: The updated provider-specific configuration details for the connector.
+    - name: update-connector-scan-configuration
+      description: Updates scan configuration settings for resources associated with an Amazon Web Services Config connector.
+      flags:
+        --aws-config-connector-arn=!: The ARN of the Amazon Web Services Config connector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-configuration=!: The scan configuration settings to apply.
     - name: update-ec2-deep-inspection-configuration
       description: Activates, deactivates Amazon Inspector deep inspection, or updates custom paths for your account.
       flags:
@@ -849,6 +931,9 @@ commands:
                 - AWS_ECR_REPOSITORY
                 - AWS_LAMBDA_FUNCTION
                 - CODE_REPOSITORY
+                - Microsoft.Compute/virtualMachines
+                - Microsoft.ContainerRegistry/registry/containerImage
+                - Microsoft.Web/sites
             scan-type:
                 - NETWORK
                 - PACKAGE
@@ -886,3 +971,42 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: connector-connected
+          description: Lists connectors in your account.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --filter-criteria=: The filter criteria to apply to the list of connectors.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-results=: The maximum number of results to return in a single call.
+            --next-token=: A token to use for paginating results.
+            --page-size=: The size of each page to get in the AWS service call.
+            --starting-token=: A token to specify where to start paginating.
+        - name: connector-deleted
+          description: Lists connectors in your account.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --filter-criteria=: The filter criteria to apply to the list of connectors.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-results=: The maximum number of results to return in a single call.
+            --next-token=: A token to use for paginating results.
+            --page-size=: The size of each page to get in the AWS service call.
+            --starting-token=: A token to specify where to start paginating.
+        - name: connector-enabled
+          description: Lists connectors in your account.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --filter-criteria=: The filter criteria to apply to the list of connectors.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --max-items=: The  total number of items to return in the command's output.
+            --max-results=: The maximum number of results to return in a single call.
+            --next-token=: A token to use for paginating results.
+            --page-size=: The size of each page to get in the AWS service call.
+            --starting-token=: A token to specify where to start paginating.

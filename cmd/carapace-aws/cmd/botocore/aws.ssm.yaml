@@ -25,6 +25,7 @@ commands:
                 - OpsMetadata
                 - Automation
                 - Association
+                - CloudConnector
     - name: associate-ops-item-related-item
       description: Associates a related item to a Systems Manager OpsCenter OpsItem.
       flags:
@@ -129,6 +130,20 @@ commands:
             description: One or more associations.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-cloud-connector
+      description: Creates a cloud connector that establishes a connection between Systems Manager and a third-party cloud environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --config-connector-arn=!: The ARN of the Amazon Web Services Config connector associated with this cloud connector.
+        --configuration=!: The configuration details for connecting to the third-party cloud environment.
+        --description=: A description for the cloud connector.
+        --display-name=!: A friendly name for the cloud connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the cloud connector uses to communicate with the third-party cloud environment.
+        --tags=:
+            description: Optional metadata that you assign to a resource.
+            nargs: -1
     - name: create-document
       description: Creates a Amazon Web Services Systems Manager (SSM document).
       flags:
@@ -321,6 +336,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=: The managed node ID.
         --name=: The name of the SSM document.
+    - name: delete-cloud-connector
+      description: Deletes a cloud connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-connector-id=!: The ID of the cloud connector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-document
       description: Deletes the Amazon Web Services Systems Manager document (SSM document) and all managed node associations to the document.
       flags:
@@ -987,6 +1009,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-cloud-connector
+      description: Returns detailed information about a cloud connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-connector-id=!: The ID of the cloud connector to retrieve information about.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-command-invocation
       description: Returns detailed information about command execution for an invocation or plugin.
       flags:
@@ -1317,6 +1346,20 @@ commands:
         --next-token=: The token for the next set of items to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-cloud-connectors
+      description: Returns a list of cloud connectors in the current Amazon Web Services account and Amazon Web Services Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: One or more filters to limit the cloud connectors returned in the response.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return for this call.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-command-invocations
       description: An invocation is copy of a command sent to a specific managed node.
       flags:
@@ -1564,6 +1607,7 @@ commands:
                 - OpsMetadata
                 - Automation
                 - Association
+                - CloudConnector
     - name: modify-document-permission
       description: Shares a Amazon Web Services Systems Manager document (SSM document)publicly or privately.
       flags:
@@ -1745,6 +1789,7 @@ commands:
                 - OpsMetadata
                 - Automation
                 - Association
+                - CloudConnector
     - name: reset-service-setting
       description: '`ServiceSetting` is an account-level setting for an Amazon Web Services service.'
       flags:
@@ -1994,6 +2039,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The managed node ID.
         --name=!: The name of the SSM document.
+    - name: update-cloud-connector
+      description: Updates an existing cloud connector with new configuration details.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-connector-id=!: The ID of the cloud connector to update.
+        --configuration=: The updated configuration details for connecting to the third-party cloud environment.
+        --description=: A new description for the cloud connector.
+        --display-name=: A new friendly name for the cloud connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-document
       description: Updates one or more values for an SSM document.
       flags:
@@ -2230,6 +2285,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --setting-id=!: The Amazon Resource Name (ARN) of the service setting to update.
         --setting-value=!: The new value to specify for the service setting.
+    - name: validate-cloud-connector
+      description: Validates the configuration and connectivity of a cloud connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-connector-id=!: The ID of the cloud connector to validate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of validation findings to return.
+        --next-token=: The token for the next set of items to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

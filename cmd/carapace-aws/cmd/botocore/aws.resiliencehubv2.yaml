@@ -310,15 +310,29 @@ commands:
     - name: list-failure-mode-assessments
       description: Lists failure mode assessments.
       flags:
+        --assessment-statuses=:
+            description: Specifies the assessment statuses to include in the results.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ended-before=: Specifies that only assessments that ended at or before this timestamp appear in the results.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --service-arn=!: ""
+        --sort-by=: The field to use for sorting failure mode assessments.
+        --sort-order=: The sort order for results.
+        --started-after=: Specifies that only assessments that started at or after this timestamp appear in the results.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - STARTED_AT
+            sort-order:
+                - ASC
+                - DESC
     - name: list-failure-mode-findings
       description: List findings.
       flags:
@@ -404,13 +418,18 @@ commands:
       description: List resources.
       flags:
         --aws-region=: Filter resources by AWS Region.
+        --billable: Specifies whether to filter non-billable resources.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: ""
         --next-token=: ""
+        --no-billable: Specifies whether to filter non-billable resources.
         --page-size=: The size of each page to get in the AWS service call.
+        --resource-types=:
+            description: The CloudFormation resource types to include in the response.
+            nargs: -1
         --service-arn=!: ""
         --service-function-id=: Filter resources by service function identifier.
         --starting-token=: A token to specify where to start paginating.
@@ -529,7 +548,7 @@ commands:
         --starting-token=: A token to specify where to start paginating.
         --system-arn=!: ""
     - name: start-failure-mode-assessment
-      description: Start a failure mode assessment.
+      description: Starts a failure mode assessment.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -673,15 +692,29 @@ commands:
         - name: failure-mode-assessment-success
           description: Lists failure mode assessments.
           flags:
+            --assessment-statuses=:
+                description: Specifies the assessment statuses to include in the results.
+                nargs: -1
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
+            --ended-before=: Specifies that only assessments that ended at or before this timestamp appear in the results.
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --max-items=: The  total number of items to return in the command's output.
             --max-results=: ""
             --next-token=: ""
             --page-size=: The size of each page to get in the AWS service call.
             --service-arn=!: ""
+            --sort-by=: The field to use for sorting failure mode assessments.
+            --sort-order=: The sort order for results.
+            --started-after=: Specifies that only assessments that started at or after this timestamp appear in the results.
             --starting-token=: A token to specify where to start paginating.
+          completion:
+            flag:
+                sort-by:
+                    - STARTED_AT
+                sort-order:
+                    - ASC
+                    - DESC
         - name: report-succeeded
           description: List reports for a service, or all reports owned by the account if serviceArn is not provided.
           flags:
