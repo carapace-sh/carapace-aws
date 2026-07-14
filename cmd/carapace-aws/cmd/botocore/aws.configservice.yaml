@@ -67,6 +67,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --conformance-pack-name=!: Name of the conformance pack you want to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-connector
+      description: Deletes the specified connector.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the connector that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-delivery-channel
       description: Deletes the delivery channel.
       flags:
@@ -139,10 +146,11 @@ commands:
     - name: delete-service-linked-configuration-recorder
       description: Deletes an existing service-linked configuration recorder.
       flags:
+        --arn=: The Amazon Resource Name (ARN) of the service-linked configuration recorder that you want to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.
+        --service-principal=: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to delete.
     - name: delete-stored-query
       description: Deletes the stored query for a single Amazon Web Services account and a single Amazon Web Services Region.
       flags:
@@ -636,6 +644,13 @@ commands:
         --next-token=: The nextToken string returned on a previous page that you use to get the next page of results in a paginated response.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-connector
+      description: Returns the details of the specified connector.
+      flags:
+        --arn=!: The Amazon Resource Name (ARN) of the connector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-custom-rule-policy
       description: Returns the policy definition containing the logic for your Config Custom Policy rule.
       flags:
@@ -1840,6 +1855,20 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
+    - name: list-connectors
+      description: Returns a list of connectors depending on the filters you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: Filters the results based on a list of `ConnectorFilter` objects that you specify.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to include in the response.
+        --next-token=: The `NextToken` string returned on a previous page that you use to get the next page of results in a paginated response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-discovered-resources
       description: Returns a list of resource resource identifiers for the specified resource types for the resources of that type.
       flags:
@@ -2491,6 +2520,16 @@ commands:
         --template-body=: A string that contains the full conformance pack template body.
         --template-s3-uri=: The location of the file containing the template body (`s3://bucketname/prefix`).
         --template-ssm-document-details=: An object of type `TemplateSSMDocumentDetails`, which contains the name or the Amazon Resource Name (ARN) of the Amazon Web Services Systems Manager document (SSM document) and the version of the SSM document that is used to create a conformance pack.
+    - name: put-connector
+      description: Creates a connector that specifies the connection between a third-party cloud service provider and Config.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-configuration=!: The provider-specific configuration for connecting to the third-party cloud service provider.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=:
+            description: The tags for the connector.
+            nargs: -1
     - name: put-delivery-channel
       description: Creates or updates a delivery channel to deliver configuration information and other compliance information.
       flags:
@@ -2613,6 +2652,18 @@ commands:
         --stored-query=!: A list of `StoredQuery` objects.
         --tags=:
             description: A list of `Tags` object.
+            nargs: -1
+    - name: put-third-party-service-linked-configuration-recorder
+      description: Creates or updates a service-linked configuration recorder that is linked to a third-party cloud service provider based on the `ConnectorArn` you specify.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-arn=!: The Amazon Resource Name (ARN) of the connector that specifies the connection between the third-party cloud service provider and Config.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope-configuration=!: Specifies the scope of resources to record from the third-party cloud service provider.
+        --service-principal=!: The service principal of the Amazon Web Services service for the service-linked configuration recorder that you want to create.
+        --tags=:
+            description: The tags for a service-linked configuration recorder.
             nargs: -1
     - name: select-aggregate-resource-config
       description: Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties.

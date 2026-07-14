@@ -69,6 +69,7 @@ commands:
         --elasticsearch-cluster-config=: Configuration options for an Elasticsearch domain.
         --elasticsearch-version=: String of format X.Y to specify version for the Elasticsearch domain eg.
         --encryption-at-rest-options=: Specifies the Encryption At Rest Options.
+        --engine-mode=: The engine mode for the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-publishing-options=: Map of `LogType` and `LogPublishingOption`, each containing options to publish a given type of Elasticsearch log.
         --node-to-node-encryption-options=: Specifies the NodeToNodeEncryptionOptions.
@@ -76,7 +77,18 @@ commands:
         --tag-list=:
             description: A list of `Tag` added during domain creation.
             nargs: -1
+        --use-case=: The primary use case for the domain.
         --vpc-options=: Options to specify the subnets and security groups for VPC endpoint.
+      completion:
+        flag:
+            engine-mode:
+                - GENERAL
+                - OPTIMIZED
+            use-case:
+                - SEARCH
+                - VECTOR
+                - OBSERVABILITY
+                - MIXED
     - name: create-outbound-cross-cluster-search-connection
       description: Creates a new cross-cluster search connection from a source domain to a destination domain.
       flags:
@@ -512,12 +524,24 @@ commands:
         --ebs-options=: Specify the type and size of the EBS volume that you want to use.
         --elasticsearch-cluster-config=: The type and number of instances to instantiate for the domain cluster.
         --encryption-at-rest-options=: Specifies the Encryption At Rest Options.
+        --engine-mode=: The engine mode for the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-publishing-options=: Map of `LogType` and `LogPublishingOption`, each containing options to publish a given type of Elasticsearch log.
         --no-dry-run: This flag, when set to True, specifies whether the `UpdateElasticsearchDomain` request should return the results of validation checks without actually applying the change.
         --node-to-node-encryption-options=: Specifies the NodeToNodeEncryptionOptions.
         --snapshot-options=: Option to set the time, in UTC format, for the daily automated snapshot.
+        --use-case=: The primary use case for the domain.
         --vpc-options=: Options to specify the subnets and security groups for VPC endpoint.
+      completion:
+        flag:
+            engine-mode:
+                - GENERAL
+                - OPTIMIZED
+            use-case:
+                - SEARCH
+                - VECTOR
+                - OBSERVABILITY
+                - MIXED
     - name: update-package
       description: Updates a package for use with Amazon ES domains.
       flags:

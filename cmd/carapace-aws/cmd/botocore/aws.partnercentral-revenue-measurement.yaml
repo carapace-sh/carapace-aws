@@ -1,0 +1,353 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: partnercentral-revenue-measurement
+description: Partner Central Revenue Measurement API
+commands:
+    - name: create-marketplace-revenue-share
+      description: Creates a new marketplace revenue share resource in the specified catalog.
+      flags:
+        --catalog=!: The catalog in which to create the marketplace revenue share.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the create request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-id=!: The AWS Marketplace product identifier for this revenue share.
+        --tags=:
+            description: Tags to associate with the marketplace revenue share upon creation.
+            nargs: -1
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: create-marketplace-revenue-share-allocation
+      description: Creates a new marketplace revenue share allocation for the specified product.
+      flags:
+        --catalog=!: The catalog in which to create the allocation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the create request.
+        --effective-from=!: The effective start date for the allocation.
+        --effective-until=: The effective end date for the allocation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
+        --revenue-share-percent=!: The revenue share percentage for this allocation.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: create-revenue-attribution
+      description: Creates a new revenue attribution record in the specified catalog.
+      flags:
+        --catalog=!: The catalog in which to create the revenue attribution.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the create request.
+        --description=: A description of the revenue attribution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the revenue attribution.
+        --product-identifier=: The unique product identifier in AWS Marketplace.
+        --tags=:
+            description: Tags to associate with the revenue attribution upon creation.
+            nargs: -1
+        --tenancy-model=!: The tenancy model for this revenue attribution.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            tenancy-model:
+                - MULTI_TENANT
+                - SINGLE_TENANT
+    - name: get-marketplace-revenue-share
+      description: Retrieves the details of a specific marketplace revenue share.
+      flags:
+        --catalog=!: The catalog that the marketplace revenue share belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-id=!: The AWS Marketplace product identifier of the revenue share to retrieve.
+        --revision=: The revision of the marketplace revenue share to retrieve.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: get-marketplace-revenue-share-allocation
+      description: Retrieves the details of a specific marketplace revenue share allocation.
+      flags:
+        --catalog=!: The catalog that the allocation belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marketplace-revenue-share-allocation-id=!: The unique identifier of the allocation to retrieve.
+        --marketplace-revenue-share-revision=: The revision of the parent marketplace revenue share at which to retrieve the allocation.
+        --product-id=!: The AWS Marketplace product identifier of the parent revenue share.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: get-revenue-attribution
+      description: Retrieves the details of a specific revenue attribution.
+      flags:
+        --catalog=!: The catalog that the revenue attribution belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the revenue attribution to retrieve.
+        --revision=: The revision of the attribution to retrieve.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: get-revenue-attribution-allocation
+      description: Retrieves a single allocation by its RevenueAttributionAllocationId.
+      flags:
+        --catalog=!: The catalog that contains the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revenue-attribution-allocation-id=!: The allocation identifier.
+        --revenue-attribution-identifier=!: The revenue attribution identifier.
+        --revenue-attribution-revision=: Point-in-time revision number to query.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: get-revenue-attribution-allocations-task
+      description: Retrieves the current status of a previously submitted allocations task.
+      flags:
+        --catalog=!: The catalog that contains the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revenue-attribution-identifier=!: The revenue attribution identifier.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: list-marketplace-revenue-share-allocations
+      description: Returns a paginated list of allocations under a marketplace revenue share, with optional filtering by status and effective date range.
+      flags:
+        --after-effective-from=: Inclusive lower bound for EffectiveFrom date filter.
+        --before-effective-from=: Exclusive upper bound for EffectiveFrom date filter (half-open range).
+        --catalog=!: The catalog containing the allocations.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marketplace-revenue-share-revision=: Optional share revision for historical list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results per page.
+        --next-token=: Pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
+        --sort-by=: The field to sort marketplace revenue share allocations by.
+        --sort-order=: The direction to sort results.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter by allocation status.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            sort-by:
+                - EffectiveFrom
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: list-marketplace-revenue-shares
+      description: Returns a paginated list of marketplace revenue shares with optional filters.
+      flags:
+        --catalog=!: The catalog to list marketplace revenue shares from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: Filter results to only include marketplace revenue shares created after this timestamp.
+        --created-before=: Filter results to only include marketplace revenue shares created before this timestamp.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: Token for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --product-codes=:
+            description: Filter results to only include shares with these product codes.
+            nargs: -1
+        --product-ids=:
+            description: Filter results to only include shares with these product identifiers.
+            nargs: -1
+        --sort-by=: The field to sort marketplace revenue shares by.
+        --sort-order=: The direction to sort results.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            sort-by:
+                - LastModifiedDate
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-revenue-attribution-allocations
+      description: Returns a paginated list of committed allocations with support for filtering by entity, customer, status, or date range.
+      flags:
+        --after-effective-from=: Inclusive lower bound for EffectiveFrom date filter.
+        --after-effective-until=: Inclusive lower bound for EffectiveUntil date filter.
+        --before-effective-from=: Exclusive upper bound for EffectiveFrom date filter (half-open range).
+        --before-effective-until=: Exclusive upper bound for EffectiveUntil date filter (half-open range).
+        --catalog=!: The catalog that contains the resource.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-aws-account-id-filters=:
+            description: Filter by customer AWS account IDs for associated deal entities.
+            nargs: -1
+        --entity-identifier-filters=:
+            description: Filter by deal entity identifiers.
+            nargs: -1
+        --entity-type-filters=:
+            description: Filter by deal entity types.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum results per page.
+        --next-token=: Pagination token from previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --revenue-attribution-identifier=!: The revenue attribution identifier to query.
+        --revenue-attribution-revision=: Point-in-time revision number to query.
+        --sort-by=: Field to sort by.
+        --sort-order=: Sort direction.
+        --starting-token=: A token to specify where to start paginating.
+        --status-filter=: Filter by allocation status.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            sort-by:
+                - EffectiveFrom
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+            status-filter:
+                - ACTIVE
+                - INACTIVE
+    - name: list-revenue-attributions
+      description: Returns a paginated list of revenue attributions with optional filters.
+      flags:
+        --catalog=!: The catalog to list revenue attributions from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --created-after=: Filter results to only include revenue attributions created after this timestamp.
+        --created-before=: Filter results to only include revenue attributions created before this timestamp.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifiers=:
+            description: Filter results to only include revenue attributions with the specified identifiers.
+            nargs: -1
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: Token for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort revenue attributions by.
+        --sort-order=: The direction to sort results.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            sort-by:
+                - LastModifiedDate
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-tags-for-resource
+      description: Returns the tags associated with the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list tags for.
+    - name: start-revenue-attribution-allocations-task
+      description: Submits a batch of up to 250 allocation changes (CREATE and/or UPDATE) for asynchronous processing.
+      flags:
+        --catalog=!: The catalog context for this operation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for deduplication and retry.
+        --description=: Human-readable description of the batch.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revenue-attribution-identifier=!: The revenue attribution identifier.
+        --revenue-attribution-revision=!: Current revision of the revenue attribution for optimistic locking.
+        --revenue-share-allocations=!:
+            description: The list of allocation changes to process in this batch.
+            nargs: -1
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+    - name: tag-resource
+      description: Adds or overwrites one or more tags for the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to tag.
+        --tags=!:
+            description: The tags to add to the resource.
+            nargs: -1
+    - name: untag-resource
+      description: Removes one or more tags from the specified resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
+        --tag-keys=!:
+            description: The tag keys to remove from the resource.
+            nargs: -1
+    - name: update-marketplace-revenue-share-allocation
+      description: Updates an existing marketplace revenue share allocation.
+      flags:
+        --catalog=!: The catalog containing the allocation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the update request.
+        --effective-from=: The new effective start date.
+        --effective-until=: The new effective end date.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marketplace-revenue-share-allocation-id=!: The identifier of the allocation to update.
+        --marketplace-revenue-share-revision=!: The current revision of the parent share.
+        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
+        --revenue-share-percent=: The new revenue share percentage.
+        --status=: The new status.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
+            status:
+                - ACTIVE
+                - INACTIVE
+    - name: update-revenue-attribution
+      description: Updates an existing revenue attribution record.
+      flags:
+        --catalog=!: The catalog that the revenue attribution belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the update request.
+        --description=: The updated description of the revenue attribution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the revenue attribution to update.
+        --revision=!: The current revision of the revenue attribution.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
