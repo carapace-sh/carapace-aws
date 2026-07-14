@@ -47,6 +47,7 @@ var removals = map[string][]string{
 		"invoke-inline-agent",
 		"optimize-prompt",
 		"retrieve-and-generate-stream",
+		"agentic-retrieve-stream",
 	},
 	"bedrock-agentcore": {
 		"invoke-code-interpreter",
