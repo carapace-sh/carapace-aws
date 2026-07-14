@@ -270,9 +270,11 @@ func parse(path string) (*command.Command, error) {
 		if err != nil {
 			return nil, err
 		}
-		cmd.Commands = append(cmd.Commands,
-			parseService(serviceDir.Name(), filepath.Join(path, versions[len(versions)-1].Name())),
-		)
+		subCmd := parseService(serviceDir.Name(), filepath.Join(path, versions[len(versions)-1].Name()))
+		if subCmd == nil {
+			continue
+		}
+		cmd.Commands = append(cmd.Commands, *subCmd)
 	}
 	return cmd, nil
 }
@@ -299,7 +301,7 @@ func parsePaginators(folder string) (map[string]Paginator, error) {
 	return paginators.Pagination, nil
 }
 
-func parseService(name, folder string) command.Command {
+func parseService(name, folder string) *command.Command {
 	tokenizer, err := english.NewSentenceTokenizer(nil)
 	if err != nil {
 		panic(err.Error())
@@ -442,11 +444,16 @@ func parseService(name, folder string) command.Command {
 		cmd.Commands = append(cmd.Commands, waitCmd)
 	}
 
-	customizations.CustomizeCommand(cmd.Name, &cmd)
+	if err := customizations.CustomizeCommand(cmd.Name, &cmd); err != nil {
+		if _, ok := err.(*customizations.SkipError); ok {
+			return nil
+		}
+		panic(err.Error())
+	}
 
 	// TODO sort in carapace-spec
 	slices.SortFunc(cmd.Commands, func(a, b command.Command) int { return strings.Compare(a.Name, b.Name) })
-	return cmd
+	return &cmd
 }
 
 func isStreaming(service Service, operation Operation) bool {
