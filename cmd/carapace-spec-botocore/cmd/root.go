@@ -123,7 +123,6 @@ func CamelCaseToDash(s string) string {
 		"create-cachedi-scsi-volume":                         "create-cached-iscsi-volume",
 		"create-environment-e-c2":                            "create-environment-ec2",
 		"create-storedi-scsi-volume":                         "create-stored-iscsi-volume",
-		"create-o-auth2-token":                               "create-oauth2-token",
 		"create-o-auth2-token-with-iam":                      "create-oauth2-token-with-iam",
 		"create-whats-app-flow":                              "create-whatsapp-flow",
 		"create-whats-app-message-template":                  "create-whatsapp-message-template",
