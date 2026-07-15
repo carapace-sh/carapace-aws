@@ -2,6 +2,24 @@
 name: healthlake
 description: Amazon HealthLake
 commands:
+    - name: create-data-transformation-profile
+      description: Creates a data transformation profile in DRAFT state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The AWS Key Management Service (AWS KMS) key identifier used to encrypt the profile content at rest.
+        --profile-description=: A human-readable description of the profile's purpose.
+        --profile-name=!: A name for the data transformation profile.
+        --source-format=!: The source data format that this profile converts from (Consolidated Clinical Document Architecture (C-CDA) or Comma-separated values (CSV)).
+        --source=!: The source for the initial profile content.
+        --tags=: The tags to associate with the profile at creation time.
+      completion:
+        flag:
+            source-format:
+                - CCDA
+                - CSV
     - name: create-fhir-datastore
       description: Create a FHIR-enabled data store.
       flags:
@@ -24,6 +42,13 @@ commands:
         flag:
             datastore-type-version:
                 - R4
+    - name: delete-data-transformation-profile
+      description: Deletes a data transformation profile and all its versions, including the DRAFT and all published versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of the profile to delete.
     - name: delete-fhir-datastore
       description: Delete a FHIR-enabled data store.
       flags:
@@ -31,6 +56,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The AWS-generated identifier for the data store to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-data-transformation-job
+      description: Describes a data transformation job, including its current status, configuration, and progress information.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the data transformation job to describe.
     - name: describe-fhir-datastore
       description: Get properties for a FHIR-enabled data store.
       flags:
@@ -54,6 +86,67 @@ commands:
         --datastore-id=!: The data store identifier.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The import job identifier.
+    - name: get-data-transformation-profile
+      description: Retrieves a data transformation profile's metadata and profile content at a specific version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of the profile to retrieve.
+        --profile-version=: The version number to retrieve.
+    - name: list-data-transformation-jobs
+      description: Lists data transformation jobs for your AWS account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=: Filters the results to include only jobs with the specified name.
+        --job-status=: Filters the results to include only jobs with the specified status.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of jobs to return per page.
+        --next-token=: The pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --submitted-after=: Filters the results to include only jobs submitted at or after this timestamp.
+        --submitted-before=: Filters the results to include only jobs submitted at or before this timestamp.
+      completion:
+        flag:
+            job-status:
+                - SUBMITTED
+                - QUEUED
+                - IN_PROGRESS
+                - COMPLETED
+                - COMPLETED_WITH_ERRORS
+                - FAILED
+    - name: list-data-transformation-profile-versions
+      description: Lists all versions of a specific data transformation profile (DRAFT and published), in reverse chronological order (newest first).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of profile versions to return per page.
+        --next-token=: The pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --profile-id=!: The unique identifier of the profile whose versions to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-data-transformation-profiles
+      description: Lists all data transformation profiles in your account, returning the latest version summary for each.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of profiles to return per page.
+        --next-token=: The pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --source-format=!: Filters the results by source data format.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            source-format:
+                - CCDA
+                - CSV
     - name: list-fhir-datastores
       description: List all FHIR-enabled data stores in a user’s account, regardless of data store status.
       flags:
@@ -122,6 +215,37 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the data store to which tags are being added.
+    - name: publish-data-transformation-profile
+      description: Promotes the current DRAFT version of a data transformation profile to a new immutable published version.
+      flags:
+        --change-description=: A description of what changed or why this version is being published.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --from-existing-version=: The version number of a previously published version to republish as the new latest version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of the profile to publish.
+        --source-format=!: The source data format of the profile.
+      completion:
+        flag:
+            source-format:
+                - CCDA
+                - CSV
+    - name: start-data-transformation-job
+      description: Starts an asynchronous data transformation job that converts source files from Amazon Simple Storage Service (Amazon S3) and writes the output to Amazon S3 or AWS HealthLake.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that AWS HealthLake assumes to read from and write to the specified Amazon S3 locations.
+        --drift-detection-enabled: Specifies whether drift detection is enabled for this job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-data-config=!: The Amazon S3 location and format of the source files to transform.
+        --job-name=: A descriptive name for the data transformation job.
+        --no-drift-detection-enabled: Specifies whether drift detection is enabled for this job.
+        --no-provenance-enabled: Specifies whether FHIR R4 Provenance resource generation is enabled for this transformation job.
+        --output-data-config=!: The Amazon S3 output location and AWS Key Management Service (AWS KMS) encryption configuration.
+        --profile-id=!: The unique identifier of the data transformation profile to use for conversion.
+        --provenance-enabled: Specifies whether FHIR R4 Provenance resource generation is enabled for this transformation job.
     - name: start-fhir-export-job
       description: Start a FHIR export job.
       flags:
@@ -141,10 +265,14 @@ commands:
         --client-token=: The optional user-provided token used for ensuring API idempotency.
         --data-access-role-arn=!: The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.
         --datastore-id=!: The data store identifier.
+        --drift-detection-enabled: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-data-config=!: The input properties for the import job request.
+        --input-format=: ""
         --job-name=: The import job name.
         --job-output-data-config=!: ""
+        --no-drift-detection-enabled: ""
+        --profile-id=: ""
         --validation-level=: The validation level of the import job.
       completion:
         flag:
@@ -172,6 +300,15 @@ commands:
         --tag-keys=!:
             description: The keys for the tags to be removed from the data store.
             nargs: -1
+    - name: update-data-transformation-profile
+      description: Updates the DRAFT version (version 0) of a data transformation profile with new profile content.
+      flags:
+        --change-description=: A description of what changed in this update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier of the profile to update.
+        --profile-mapping=!: The new profile content for the DRAFT version.
     - name: update-fhir-datastore
       description: Update the properties of a FHIR-enabled data store.
       flags:
@@ -184,9 +321,31 @@ commands:
         --identity-provider-configuration=: The identity provider configuration for the data store.
         --nlp-configuration=: The natural language processing (NLP) configuration for the data store.
         --profile-configuration=: The profile configuration for the data store.
+    - name: update-profile-with-agent
+      description: Updates a data transformation profile using chat-based interaction with an agent.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --conversation-id=: The conversation identifier for multi-turn interactions.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-message=!: The message to send to the agent.
+        --profile-id=!: The unique identifier of the profile to update via the agent.
+        --source-format=!: The source data format for the transformation.
+      completion:
+        flag:
+            source-format:
+                - CCDA
+                - CSV
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: data-transformation-job-completed
+          description: Describes a data transformation job, including its current status, configuration, and progress information.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --job-id=!: The unique identifier of the data transformation job to describe.
         - name: fhir-datastore-active
           description: Get properties for a FHIR-enabled data store.
           flags:
