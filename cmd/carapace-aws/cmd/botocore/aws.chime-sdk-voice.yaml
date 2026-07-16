@@ -120,7 +120,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the SIP rule.
         --no-disabled: Disables or enables a SIP rule.
-        --target-applications=:
+        --target-applications=!:
             description: List of SIP media applications, with priority and AWS Region.
             nargs: -1
         --trigger-type=!: The type of trigger assigned to the SIP rule in `TriggerValue`, currently `RequestUriHostname` or `ToPhoneNumber`.
@@ -167,6 +167,7 @@ commands:
     - name: create-voice-connector-group
       description: Creates an Amazon Chime SDK Voice Connector group under the administrator's AWS account.
       flags:
+        --call-distribution-type=: ""
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -174,6 +175,11 @@ commands:
         --voice-connector-items=:
             description: Lists the Voice Connectors that inbound calls are routed to.
             nargs: -1
+      completion:
+        flag:
+            call-distribution-type:
+                - PriorityWeightedDistribution
+                - LoadBalancedDistribution
     - name: create-voice-profile
       description: Creates a voice profile, which consists of an enrolled user and their latest voice print.
       flags:
@@ -811,7 +817,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --voice-connector=: The Voice Connector settings.
+        --voice-connector=!: The Voice Connector settings.
     - name: update-phone-number
       description: Updates phone number details, such as product type, calling name, or phone number name for the specified phone number ID.
       flags:
@@ -892,6 +898,7 @@ commands:
     - name: update-voice-connector-group
       description: Updates the settings for the specified Amazon Chime SDK Voice Connector group.
       flags:
+        --call-distribution-type=: ""
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -900,6 +907,11 @@ commands:
         --voice-connector-items=!:
             description: The `VoiceConnectorItems` to associate with the Voice Connector group.
             nargs: -1
+      completion:
+        flag:
+            call-distribution-type:
+                - PriorityWeightedDistribution
+                - LoadBalancedDistribution
     - name: update-voice-profile
       description: Updates the specified voice profile’s voice print and refreshes its expiration timestamp.
       flags:
