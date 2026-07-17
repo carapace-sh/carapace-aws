@@ -25,6 +25,8 @@ commands:
     - name: create-autonomous-database
       description: Creates a new Autonomous Database.
       flags:
+        --admin-password-source-configuration=: The configuration of the admin password source for the Autonomous Database.
+        --admin-password-source=: The source of the admin password for the Autonomous Database.
         --admin-password=: The password for the `ADMIN` user of the Autonomous Database.
         --allowlisted-ips=:
             description: The list of IP addresses that are allowed to access the Autonomous Database.
@@ -84,6 +86,9 @@ commands:
         --transportable-tablespace=: The transportable tablespace configuration to use when creating the Autonomous Database.
       completion:
         flag:
+            admin-password-source:
+                - CUSTOMER_MANAGED_AWS_SECRET
+                - API_REQUEST_PARAMETER
             autonomous-maintenance-schedule-type:
                 - EARLY
                 - REGULAR
@@ -132,10 +137,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A client-provided token to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --password=!: The password to encrypt the keys inside the wallet.
+        --password-source-configuration=: The configuration of the password source for the Autonomous Database wallet.
+        --password-source=: The source of the password for encrypting the wallet.
+        --password=: The password to encrypt the keys inside the wallet.
         --wallet-type=: The type of wallet to create, either a regional wallet or an instance wallet.
       completion:
         flag:
+            password-source:
+                - CUSTOMER_MANAGED_AWS_SECRET
+                - API_REQUEST_PARAMETER
             wallet-type:
                 - REGIONAL
                 - INSTANCE
@@ -447,11 +457,17 @@ commands:
     - name: initialize-service
       description: Initializes the ODB service for the first time in an account.
       flags:
+        --autonomous-database-oci-aws-secrets-manager-integration=: Specifies whether to enable or disable the OCI service-account role for Amazon Web Services Secrets Manager integration with Autonomous Database.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-oci-identity-domain: The Oracle Cloud Infrastructure (OCI) identity domain configuration for service initialization.
         --oci-identity-domain: The Oracle Cloud Infrastructure (OCI) identity domain configuration for service initialization.
+      completion:
+        flag:
+            autonomous-database-oci-aws-secrets-manager-integration:
+                - ENABLED
+                - DISABLED
     - name: list-autonomous-database-backups
       description: Lists the backups of the specified Autonomous Database.
       flags:
@@ -782,6 +798,8 @@ commands:
     - name: update-autonomous-database
       description: Updates the properties of an Autonomous Database.
       flags:
+        --admin-password-source-configuration=: The configuration of the admin password source for the Autonomous Database.
+        --admin-password-source=: The source of the admin password for the Autonomous Database.
         --admin-password=: The new password for the `ADMIN` user of the Autonomous Database.
         --allowlisted-ips=:
             description: The list of IP addresses that are allowed to access the Autonomous Database.
@@ -847,6 +865,9 @@ commands:
         --time-of-auto-refresh-start=: The date and time at which the automatic refresh of the refreshable clone Autonomous Database starts.
       completion:
         flag:
+            admin-password-source:
+                - CUSTOMER_MANAGED_AWS_SECRET
+                - API_REQUEST_PARAMETER
             autonomous-maintenance-schedule-type:
                 - EARLY
                 - REGULAR
