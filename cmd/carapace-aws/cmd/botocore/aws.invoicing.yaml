@@ -165,6 +165,14 @@ commands:
         --purchase-order-retrieval-enabled!: Updated flag indicating whether purchase order retrieval is enabled for this procurement portal preference.
         --selector=: ""
         --test-env-preference=: Updated configuration settings for the test environment of the procurement portal.
+    - name: send-procurement-portal-validation
+      description: '***This feature API is subject to changing at any time.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --procurement-portal-preference-arn=!: The Amazon Resource Name (ARN) of the procurement portal preference to validate.
     - name: tag-resource
       description: Adds a tag to a resource.
       flags:
@@ -213,6 +221,7 @@ commands:
         flag:
             einvoice-delivery-preference-status:
                 - PENDING_VERIFICATION
+                - VALIDATED
                 - TEST_INITIALIZED
                 - TEST_INITIALIZATION_FAILED
                 - TEST_FAILED
@@ -220,8 +229,18 @@ commands:
                 - SUSPENDED
             purchase-order-retrieval-preference-status:
                 - PENDING_VERIFICATION
+                - VALIDATED
                 - TEST_INITIALIZED
                 - TEST_INITIALIZATION_FAILED
                 - TEST_FAILED
                 - ACTIVE
                 - SUSPENDED
+    - name: verify-procurement-portal-validation
+      description: '***This feature API is subject to changing at any time.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure idempotency of the request.
+        --code=!: The validation code received from the procurement portal in response to a previous `SendProcurementPortalValidation` request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --procurement-portal-preference-arn=!: The Amazon Resource Name (ARN) of the procurement portal preference to validate.
