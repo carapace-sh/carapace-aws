@@ -1827,6 +1827,8 @@ commands:
             status:
                 - ACTIVE
                 - ARCHIVED
+                - SYNC_IN_PROGRESS
+                - SYNC_FAILED
     - name: list-notifications
       description: Lists all Amazon DataZone notifications.
       flags:
@@ -2493,6 +2495,20 @@ commands:
         --schedule-identifier=: The identifier of the schedule associated with the notebook run.
         --timeout-configuration=: The timeout configuration for the notebook run.
         --trigger-source=: The source that triggered the notebook run.
+    - name: start-notebook-sync
+      description: Starts a notebook sync in Amazon SageMaker Unified Studio.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --description=: The description of the notebook.
+        --domain-identifier=!: The identifier of the Amazon SageMaker Unified Studio domain in which to sync the notebook.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --git-metadata=: The Git metadata for the notebook sync, including repository, branch, and commit information.
+        --name=: The name of the notebook.
+        --notebook-id=: The identifier of an existing notebook to sync.
+        --owning-project-identifier=!: The identifier of the project that will own the synced notebook.
+        --source-location=!: The source location of the notebook to sync.
     - name: stop-notebook-run
       description: Stops a running [notebook run](https://docs.aws.amazon.com/sagemaker-unified-studio/latest/userguide/notebooks.html) in Amazon SageMaker Unified Studio.
       flags:
@@ -2742,6 +2758,8 @@ commands:
             status:
                 - ACTIVE
                 - ARCHIVED
+                - SYNC_IN_PROGRESS
+                - SYNC_FAILED
     - name: update-project
       description: Updates the specified project in Amazon DataZone.
       flags:
