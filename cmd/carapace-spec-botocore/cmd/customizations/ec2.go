@@ -7,6 +7,25 @@ import (
 )
 
 func init() {
+	customizations["ec2"] = func(cmd *command.Command) error {
+		for i := range cmd.Commands {
+			if cmd.Commands[i].Name == "wait" {
+				for j := range cmd.Commands[i].Commands {
+					if cmd.Commands[i].Commands[j].Name == "password-data-available" {
+						flags := make(command.FlagSet)
+						for k, v := range cmd.Commands[i].Commands[j].Flags {
+							if k != "--priv-launch-key=" {
+								flags[k] = v
+							}
+						}
+						cmd.Commands[i].Commands[j].Flags = flags
+					}
+				}
+			}
+		}
+		return nil
+	}
+
 	customizations["ec2.modify-instance-attribute"] = func(cmd *command.Command) error {
 		delete(cmd.Flags, "--enable-api-termination") // TODO should be this but seems awscli is missing the rename here
 		cmd.AddFlag(command.Flag{
