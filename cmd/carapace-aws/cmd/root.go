@@ -94,6 +94,7 @@ func init() {
 		"history",
 		"login",
 		"logout",
+		"update",
 	} {
 		subCmd := &cobra.Command{
 			Use:                extension,
