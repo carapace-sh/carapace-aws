@@ -73,6 +73,31 @@ func init() {
 			}
 			cmd.Commands = append(cmd.Commands, specCommand)
 		}
+		for i := range cmd.Commands {
+			if cmd.Commands[i].Name != "wait" {
+				continue
+			}
+			for j := range cmd.Commands[i].Commands {
+				waitSubCmd := &cmd.Commands[i].Commands[j]
+				if waitSubCmd.Name != "cluster-running" && waitSubCmd.Name != "cluster-terminated" {
+					continue
+				}
+				waitSubCmd.AddFlag(command.Flag{
+					Longhand:    "cli-input-json",
+					Description: "Read arguments from the JSON string provided.",
+					Value:       true,
+				})
+				waitSubCmd.AddFlag(command.Flag{
+					Longhand:    "cli-input-yaml",
+					Description: "Read arguments from the YAML string provided.",
+					Value:       true,
+				})
+				waitSubCmd.AddFlag(command.Flag{
+					Longhand:    "generate-cli-skeleton",
+					Description: "Prints a JSON skeleton to standard output without sending an API request.",
+				})
+			}
+		}
 		return nil
 	}
 
