@@ -446,12 +446,21 @@ func parseService(name, folder string) *command.Command {
 
 		for name, waiter := range waiters {
 			operationName := CamelCaseToDash(waiter.Operation)
-			for _, command := range cmd.Commands {
-				if command.Name == operationName {
-					command.Name = CamelCaseToDash(name)
-					waitCmd.Commands = append(waitCmd.Commands, command)
-					break
+			for i := range cmd.Commands {
+				if cmd.Commands[i].Name != operationName {
+					continue
 				}
+				waitSub := cmd.Commands[i]
+				waitSub.Name = CamelCaseToDash(name)
+				if waitSub.Flags != nil {
+					flagsCopy := make(command.FlagSet, len(waitSub.Flags))
+					for k, v := range waitSub.Flags {
+						flagsCopy[k] = v
+					}
+					waitSub.Flags = flagsCopy
+				}
+				waitCmd.Commands = append(waitCmd.Commands, waitSub)
+				break
 			}
 			// TODO sort in carapace-spec
 			slices.SortFunc(waitCmd.Commands, func(a, b command.Command) int { return strings.Compare(a.Name, b.Name) })
