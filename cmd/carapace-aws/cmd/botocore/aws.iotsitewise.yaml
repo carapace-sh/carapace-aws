@@ -22,8 +22,20 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --property-id=!: The ID of the asset property.
+    - name: batch-associate-data-segments-to-dataset
+      description: Associates a batch of data segments with a curated dataset.
+      flags:
+        --associate-data-segment-entries=!:
+            description: The list of data segment entries to associate with the dataset.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --dataset-id=!: The ID of the curated dataset to associate data segments with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=!: The name of the workspace that contains the dataset.
     - name: batch-associate-project-assets
-      description: Associates a group (batch) of assets with an IoT SiteWise Monitor project.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --asset-ids=!:
             description: The IDs of the assets to be associated to the project.
@@ -33,6 +45,30 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --project-id=!: The ID of the project to which to associate the assets.
+    - name: batch-delete-dataset-data-segments
+      description: Deletes a batch of data segments from a session dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --dataset-id=!: The ID of the session dataset from which to delete data segments.
+        --delete-data-segment-entries=!:
+            description: The list of data segment entries to delete.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=!: The name of the workspace that contains the dataset.
+    - name: batch-disassociate-data-segments-from-dataset
+      description: Disassociates a batch of data segments from a curated dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --dataset-id=!: The ID of the curated dataset to disassociate data segments from.
+        --disassociate-data-segment-entries=!:
+            description: The list of data segment entries to disassociate from the dataset.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=!: The name of the workspace that contains the dataset.
     - name: batch-disassociate-project-assets
       description: Disassociates a group (batch) of assets from an IoT SiteWise Monitor project.
       flags:
@@ -87,8 +123,34 @@ commands:
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-enable-partial-entry-processing: This setting enables partial ingestion at entry-level.
+    - name: cancel-enrichment-job
+      description: Cancels a running or pending enrichment job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the enrichment job to cancel.
+        --workspace-name=!: The name of the IoT SiteWise workspace containing the enrichment job to cancel.
+    - name: cancel-pipeline-execution
+      description: Cancels a pipeline execution in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-execution-id=!: The unique identifier of the pipeline execution.
+        --pipeline-name=!: The name of the pipeline.
+        --reason=: A message describing why the pipeline execution is being cancelled.
+        --workspace-name=!: The name of the workspace.
+    - name: cancel-query
+      description: Cancels a running query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique identifier for the query execution to cancel.
+        --workspace-name=!: The name of the workspace associated with the query.
     - name: create-access-policy
-      description: Creates an access policy that grants the specified identity (IAM Identity Center user, IAM Identity Center group, or IAM user) access to the specified IoT SiteWise Monitor portal or project resource.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --access-policy-identity=!: The identity for this access policy.
         --access-policy-permission=!: The permission level for this access policy.
@@ -103,6 +165,18 @@ commands:
             access-policy-permission:
                 - ADMINISTRATOR
                 - VIEWER
+    - name: create-application
+      description: Creates a new application for the workspace and IdC application provided
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique client token for idempotent request handling
+        --description=: Description of the application
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idc-instance-arn=!: Identity Center Instance ARN to create the application in
+        --name=!: Name of the application
+        --tags=: A list of key-value pairs that contain metadata for the application.
+        --workspace-name=!: Name of the workspace to associate with the underlying Application
     - name: create-asset
       description: Creates an asset from an existing asset model.
       flags:
@@ -176,17 +250,19 @@ commands:
         --adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=: The ID of the session dataset to ingest data into.
         --delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
         --error-report-location=!: The Amazon S3 destination where errors associated with the job creation request are saved.
         --files=!:
             description: The files in the specified Amazon S3 bucket that contain your data.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --job-configuration=!: Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
+        --job-configuration=: Contains the configuration information of a job, such as the file format used to save data in Amazon S3.
         --job-name=!: The unique name that helps identify the job request.
         --job-role-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the IAM role that allows IoT SiteWise to read Amazon S3 data.
         --no-adaptive-ingestion: If set to true, ingest new data into IoT SiteWise storage.
         --no-delete-files-after-import: If set to true, your data files is deleted from S3, after ingestion into IoT SiteWise storage.
+        --workspace-name=: The name of the workspace that contains the session dataset.
     - name: create-computation-model
       description: Create a computation model with a configuration and data binding.
       flags:
@@ -200,7 +276,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: A list of key-value pairs that contain metadata for the asset.
     - name: create-dashboard
-      description: Creates a dashboard in an IoT SiteWise Monitor project.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -212,17 +288,47 @@ commands:
         --project-id=!: The ID of the project in which to create the dashboard.
         --tags=: A list of key-value pairs that contain metadata for the dashboard.
     - name: create-dataset
-      description: Creates a dataset to connect an external datasource.
+      description: Creates a dataset.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dataset-config=: The configuration for the dataset.
         --dataset-description=: A description about the dataset, and its functionality.
         --dataset-id=: The ID of the dataset.
         --dataset-name=!: The name of the dataset.
         --dataset-source=!: The data source for the dataset.
+        --dataset-type=: 'The type of dataset: a session dataset, a curated dataset, or a connection to an external datasource.'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The metadata for the dataset, provided as key-value pairs.
         --tags=: A list of key-value pairs that contain metadata for the access policy.
+        --workspace-name=: The name of the workspace that contains the dataset.
+      completion:
+        flag:
+            dataset-type:
+                - SESSION
+                - CURATED
+                - EXTERNAL
+    - name: create-dataset-export-job
+      description: Starts an asynchronous job that exports dataset and time-series data from a workspace to Amazon S3.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --destination-s3-uri=!: The S3 URI where output clips will be written.
+        --error-report-location=!: The location where the error report will be written on failure.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input=!: The processing input source.
+        --workspace-name=!: The name of the workspace in which to create the dataset export job.
+    - name: create-enrichment-job
+      description: Creates an asynchronous enrichment job to analyze time-series sensor data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Optional unique token that makes the operation idempotent.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-configuration=!: Configuration defining the type of enrichment analysis to perform and which video data to analyze.
+        --workspace-name=!: The name of the IoT SiteWise workspace containing the video data to analyze.
     - name: create-gateway
       description: Creates a gateway, which is a virtual or edge device that delivers industrial data streams from local servers to IoT SiteWise.
       flags:
@@ -233,8 +339,23 @@ commands:
         --gateway-version=: The version of the gateway to create.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --tags=: A list of key-value pairs that contain metadata for the gateway.
+    - name: create-pipeline
+      description: Creates a new pipeline in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --computations=!:
+            description: The list of compute nodes that form the pipeline DAG.
+            nargs: -1
+        --description=: A description of the pipeline.
+        --environment-variables=: Environment variables shared across all compute nodes in the pipeline.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to create.
+        --tags=: A list of key-value pairs that contain metadata for the pipeline.
+        --workspace-name=!: The name of the workspace.
     - name: create-portal
-      description: Creates a portal, which can contain projects and dashboards.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -260,7 +381,7 @@ commands:
                 - SITEWISE_PORTAL_V1
                 - SITEWISE_PORTAL_V2
     - name: create-project
-      description: Creates a project in the specified portal.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -270,6 +391,29 @@ commands:
         --project-description=: A description for the project.
         --project-name=!: A friendly name for the project.
         --tags=: A list of key-value pairs that contain metadata for the project.
+    - name: create-task
+      description: Creates a new task in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: A description of the task.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that contain metadata for the task.
+        --task-configuration=!: The task execution configuration.
+        --task-name=!: The name of the task to create.
+        --workspace-name=!: The name of the workspace.
+    - name: create-workspace
+      description: Creates a workspace in IoT SiteWise.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --encryption-configuration=!: The encryption configuration for the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=: A list of key-value pairs that contain metadata for the workspace.
+        --workspace-description=: A description for the workspace.
+        --workspace-name=!: The name of the workspace to create.
     - name: delete-access-policy
       description: Deletes an access policy that grants the specified identity access to the specified IoT SiteWise Monitor resource.
       flags:
@@ -278,6 +422,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-application
+      description: Deletes an application by ID
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ID of the Application to delete
+        --workspace-name=!: Name of the workspace to associate with the underlying Application
     - name: delete-asset
       description: Deletes an asset.
       flags:
@@ -352,6 +504,7 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --dataset-id=!: The ID of the dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=: The name of the workspace that contains the dataset.
     - name: delete-gateway
       description: Deletes a gateway from IoT SiteWise.
       flags:
@@ -359,6 +512,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-id=!: The ID of the gateway to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-pipeline
+      description: Deletes a pipeline from the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to delete.
+        --workspace-name=!: The name of the workspace.
     - name: delete-portal
       description: Deletes a portal from IoT SiteWise Monitor.
       flags:
@@ -375,6 +536,14 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --project-id=!: The ID of the project.
+    - name: delete-task
+      description: Deletes a task from the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-name=!: The name of the task to delete.
+        --workspace-name=!: The name of the workspace.
     - name: delete-time-series
       description: Deletes a time series (data stream).
       flags:
@@ -385,6 +554,15 @@ commands:
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --property-id=: The ID of the asset property.
+        --workspace-name=: The name of the workspace.
+    - name: delete-workspace
+      description: Deletes a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=!: The name of the workspace to delete.
     - name: describe-access-policy
       description: Describes an access policy, which specifies an identity's access to an IoT SiteWise Monitor portal or project.
       flags:
@@ -399,6 +577,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-application
+      description: Retrieves Application details based on the ID
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: ID of the Application
+        --workspace-name=!: Name of the workspace to associate with the underlying Application
     - name: describe-asset
       description: Retrieves information about an asset.
       flags:
@@ -458,6 +644,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: The ID of the job.
+        --workspace-name=: The name of the workspace.
     - name: describe-computation-model
       description: Retrieves information about a computation model.
       flags:
@@ -492,13 +679,31 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dataset-id=!: The ID of the dataset.
+        --dataset-version=: The version of the dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=: The name of the workspace that contains the dataset.
+    - name: describe-dataset-export-job
+      description: Retrieves information about a dataset export job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier for the dataset export job.
+        --workspace-name=!: The name of the workspace that contains the dataset export job.
     - name: describe-default-encryption-configuration
       description: Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-enrichment-job
+      description: Retrieves detailed information about a specific enrichment job, including its current status, configuration, and timestamps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the enrichment job to retrieve.
+        --workspace-name=!: The name of the IoT SiteWise workspace containing the enrichment job.
     - name: describe-execution
       description: Retrieves information about the execution.
       flags:
@@ -527,6 +732,30 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=: The name of the workspace.
+    - name: describe-pipeline
+      description: Retrieves detailed information about a specific pipeline in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline.
+        --pipeline-version=: The version number of the pipeline to retrieve.
+        --workspace-name=!: The name of the workspace.
+    - name: describe-pipeline-execution
+      description: Retrieves detailed information about a specific pipeline execution, including the overall execution status and the status of each individual compute node.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of compute nodes to return per request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pipeline-execution-id=!: The unique identifier of the pipeline execution.
+        --pipeline-name=!: The name of the pipeline.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace.
     - name: describe-portal
       description: Retrieves information about a portal.
       flags:
@@ -541,12 +770,37 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --project-id=!: The ID of the project.
+    - name: describe-query
+      description: Retrieves information about a query, including its status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique identifier for the query execution.
+        --workspace-name=!: The name of the workspace associated with the query.
+    - name: describe-search
+      description: Returns the current status and metadata of a single search, including the query that was submitted, the search type, and — when the search has failed — the reason.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --search-id=!: The identifier of the search to describe.
+        --workspace-name=!: The name of the workspace the search belongs to.
     - name: describe-storage-configuration
       description: Retrieves information about the storage configuration for IoT SiteWise.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-task
+      description: Retrieves detailed information about a specific task in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-name=!: The name of the task.
+        --task-version=: The version number of the task to retrieve.
+        --workspace-name=!: The name of the workspace.
     - name: describe-time-series
       description: Retrieves information about a time series (data stream).
       flags:
@@ -556,6 +810,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --property-id=: The ID of the asset property.
+        --workspace-name=: The name of the workspace.
+    - name: describe-workspace
+      description: Retrieves information about a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-name=!: The name of the workspace.
     - name: disassociate-assets
       description: Disassociates a child asset from the given parent asset through a hierarchy defined in the parent asset's model.
       flags:
@@ -663,6 +925,19 @@ commands:
             time-ordering:
                 - ASCENDING
                 - DESCENDING
+    - name: get-capture-data
+      description: Retrieves video data for a specific time range.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time=!: The end time for the video data range.
+        --format-settings=: The optional format settings for the output.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --next-token=: The token from a previous response used to continue retrieving data.
+        --property-alias=: The property alias that identifies the capture source.
+        --start-time=!: The start time for the video data range.
+        --time-series-id=: The time series ID that identifies the capture source.
+        --workspace-name=!: The name of the workspace that contains the capture source.
     - name: get-interpolated-asset-property-values
       description: Get interpolated values for an asset property for a specified time interval, during a period of time.
       flags:
@@ -691,6 +966,32 @@ commands:
                 - GOOD
                 - BAD
                 - UNCERTAIN
+    - name: get-query-results
+      description: Retrieves the paginated results of a query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --query-id=!: The unique identifier for the query execution.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace associated with the query.
+    - name: get-search-results
+      description: Retrieves the ranked results of a search, ordered by descending relevance score.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: The pagination token returned by a previous GetSearchResults call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-id=!: The identifier of the search whose results are retrieved.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace the search belongs to.
     - name: list-access-policies
       description: Retrieves a paginated list of access policies for an identity (an IAM Identity Center user, an IAM Identity Center group, or an IAM user) or an IoT SiteWise Monitor resource (a portal or project).
       flags:
@@ -738,6 +1039,17 @@ commands:
             target-resource-type:
                 - ASSET
                 - COMPUTATION_MODEL
+    - name: list-applications
+      description: Retrieves a paginated list of existing applications
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return
+        --next-token=: Next Page Token
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-asset-model-composite-models
       description: Retrieves a paginated list of composite models associated with the asset model
       flags:
@@ -869,6 +1181,7 @@ commands:
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+        --workspace-name=: The name of the workspace.
       completion:
         flag:
             filter:
@@ -943,11 +1256,61 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --project-id=!: The ID of the project.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-dataset-data-segment-relationships
+      description: Retrieves a paginated list of data segment relationships for a session dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The ID of the session dataset to list data segment relationships for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace that contains the dataset.
+    - name: list-dataset-data-segments
+      description: Retrieves a paginated list of data segments associated with a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The ID of the dataset.
+        --dataset-version=: The version of the dataset to list data segments for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace that contains the dataset.
+    - name: list-dataset-export-jobs
+      description: Retrieves a paginated list of dataset export jobs for a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: The optional filter that returns only jobs matching the given filter value.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace whose dataset export jobs should be listed.
+      completion:
+        flag:
+            filter:
+                - ALL
+                - SUBMITTED
+                - RUNNING
+                - COMPLETED
+                - COMPLETED_WITH_ERRORS
+                - FAILED
     - name: list-datasets
       description: Retrieves a paginated list of datasets for a specific target resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-type=: 'The type of dataset to filter by: a session dataset, a curated dataset, or a connection to an external datasource.'
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return for each paginated request.
@@ -955,10 +1318,46 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --source-type=!: The type of data source for the dataset.
         --starting-token=: A token to specify where to start paginating.
+        --workspace-name=: The name of the workspace to filter datasets by.
       completion:
         flag:
+            dataset-type:
+                - SESSION
+                - CURATED
+                - EXTERNAL
             source-type:
                 - KENDRA
+                - SITEWISE
+    - name: list-enrichment-jobs
+      description: Lists enrichment jobs within a workspace with optional filtering and pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=: Filter jobs by dataset ID.
+        --end-date=: The inclusive end of the date range for filtering jobs by creation time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-type=: Filter by enrichment job type.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of jobs to return per page.
+        --next-token=: Pagination token from a previous ListEnrichmentJobs response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --property-alias=: Filter by property alias (human-readable sensor name).
+        --start-date=: The exclusive start of the date range for filtering jobs by creation time.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter by job status.
+        --time-series-id=: Filter by time series ID (system identifier).
+        --workspace-name=!: The name of the IoT SiteWise workspace to list enrichment jobs from.
+      completion:
+        flag:
+            job-type:
+                - EVENT_DETECTION
+            status:
+                - PENDING
+                - RUNNING
+                - COMPLETED
+                - FAILED
+                - TIMED_OUT
+                - CANCELLED
     - name: list-executions
       description: Retrieves a paginated list of summaries of all executions.
       flags:
@@ -1005,6 +1404,45 @@ commands:
         --next-token=: The token to be used for the next set of paginated results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-pipeline-executions
+      description: Lists pipeline executions for a specific pipeline in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --end-time-after=: Inclusive lower bound on execution end time (ISO-8601).
+        --end-time-before=: Exclusive upper bound on execution end time (ISO-8601).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --pipeline-name=!: The name of the pipeline.
+        --start-time-after=: Inclusive lower bound on execution start time (ISO-8601).
+        --start-time-before=: Exclusive upper bound on execution start time (ISO-8601).
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Filter by execution state.
+        --workspace-name=!: The name of the workspace.
+      completion:
+        flag:
+            state:
+                - NOT_STARTED
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+                - CANCELLING
+                - CANCELLED
+    - name: list-pipelines
+      description: Lists pipelines in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace.
     - name: list-portals
       description: Retrieves a paginated list of IoT SiteWise Monitor portals.
       flags:
@@ -1040,6 +1478,32 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --portal-id=!: The ID of the portal.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-queries
+      description: Retrieves a paginated list of queries for a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: An optional filter to return only queries with the specified status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace to list queries for.
+    - name: list-searches
+      description: Lists the searches in a workspace, most recently started first.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --list-searches-filters=: Optional filters that restrict which searches are returned.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of searches to return in a single page.
+        --next-token=: The pagination token returned by a previous ListSearches call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace whose searches are listed.
     - name: list-tags-for-resource
       description: Retrieves the list of tags for an IoT SiteWise resource.
       flags:
@@ -1047,6 +1511,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The [ARN](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource.
+    - name: list-tasks
+      description: Lists tasks in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --workspace-name=!: The name of the workspace.
     - name: list-time-series
       description: Retrieves a paginated list of time series (data streams).
       flags:
@@ -1061,11 +1537,23 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --time-series-type=: The type of the time series.
+        --workspace-name=: The name of the workspace.
       completion:
         flag:
             time-series-type:
                 - ASSOCIATED
                 - DISASSOCIATED
+    - name: list-workspaces
+      description: Retrieves a paginated list of workspaces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each paginated request.
+        --next-token=: The token to be used for the next set of paginated results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-asset-model-interface-relationship
       description: Creates or updates an interface relationship between an asset model and an interface asset model.
       flags:
@@ -1096,6 +1584,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-options=!: The logging options to set.
+        --workspace-name=: The name of the workspace.
     - name: put-storage-configuration
       description: Configures storage settings for IoT SiteWise.
       flags:
@@ -1121,6 +1610,43 @@ commands:
             warm-tier:
                 - ENABLED
                 - DISABLED
+    - name: start-pipeline-execution
+      description: Starts execution of a pipeline in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --execution-environment-variable-overrides=: Runtime environment variable overrides for the execution.
+        --execution-priority=: Scheduling priority for the execution.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to execute.
+        --workspace-name=!: The name of the workspace containing the pipeline.
+    - name: start-query
+      description: Starts an asynchronous SQL query against workspace telemetry, annotations, data segment, and dataset data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-statement=!: The SQL query to execute against the workspace telemetry, annotations, data segment, and dataset data.
+        --workspace-name=!: The name of the workspace to query.
+    - name: start-search
+      description: Starts an asynchronous search over the data in a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier you provide to ensure the request is idempotent.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=: An optional caller-supplied identifier used to group related searches together.
+        --query-statement=!: The natural-language query describing the data to search for.
+        --search-filters=: Optional filters that restrict the search to a subset of the workspace's data.
+        --search-type=: The search strategy to use.
+        --workspace-name=!: The name of the workspace whose data is searched.
+      completion:
+        flag:
+            search-type:
+                - DEEP
+                - QUICK
     - name: tag-resource
       description: Adds tags to an IoT SiteWise resource.
       flags:
@@ -1140,7 +1666,7 @@ commands:
             description: A list of keys for tags to remove from the resource.
             nargs: -1
     - name: update-access-policy
-      description: Updates an existing access policy that specifies an identity's access to an IoT SiteWise Monitor portal or project resource.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --access-policy-id=!: The ID of the access policy.
         --access-policy-identity=!: The identity for this access policy.
@@ -1247,7 +1773,7 @@ commands:
         --computation-model-name=!: The name of the computation model.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-dashboard
-      description: Updates an IoT SiteWise Monitor dashboard.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -1263,11 +1789,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique case-sensitive identifier that you can provide to ensure the idempotency of the request.
+        --dataset-config=: The updated configuration for the dataset.
         --dataset-description=: A description about the dataset, and its functionality.
         --dataset-id=!: The ID of the dataset.
         --dataset-name=!: The name of the dataset.
         --dataset-source=!: The data source for the dataset.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --metadata=: The updated metadata for the dataset.
+        --workspace-name=: The name of the workspace that contains the dataset.
     - name: update-gateway
       description: Updates a gateway's name.
       flags:
@@ -1285,8 +1814,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-id=!: The ID of the gateway to be updated.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-pipeline
+      description: Updates an existing pipeline in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --computations=:
+            description: Updated list of compute nodes forming the pipeline DAG.
+            nargs: -1
+        --description=: A new description for the pipeline.
+        --environment-variables=: Updated environment variables shared across all compute nodes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-name=!: The name of the pipeline to update.
+        --workspace-name=!: The name of the workspace.
     - name: update-portal
-      description: Updates an IoT SiteWise Monitor portal.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --alarms=: Contains the configuration information of an alarm created in an IoT SiteWise Monitor portal.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -1308,7 +1850,7 @@ commands:
                 - SITEWISE_PORTAL_V1
                 - SITEWISE_PORTAL_V2
     - name: update-project
-      description: Updates an IoT SiteWise Monitor project.
+      description: The IoT SiteWise Monitor feature will no longer be open to new customers starting November 7, 2025. If you would like to use the IoT SiteWise Monitor feature, sign up prior to that date.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -1317,6 +1859,26 @@ commands:
         --project-description=: A new description for the project.
         --project-id=!: The ID of the project to update.
         --project-name=!: A new friendly name for the project.
+    - name: update-task
+      description: Updates an existing task in the specified workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the task.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --task-configuration=: The updated task execution configuration.
+        --task-name=!: The name of the task to update.
+        --workspace-name=!: The name of the workspace.
+    - name: update-workspace
+      description: Updates a workspace.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is idempotent.
+        --encryption-configuration=: The encryption configuration for the workspace.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --workspace-description=: A new description for the workspace.
+        --workspace-name=!: The name of the workspace to update.
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:

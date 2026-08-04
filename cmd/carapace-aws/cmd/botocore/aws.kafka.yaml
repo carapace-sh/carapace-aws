@@ -22,6 +22,22 @@ commands:
         --secret-arn-list=!:
             description: List of AWS Secrets Manager secret ARNs.
             nargs: -1
+    - name: create-channel
+      description: Creates a Channel that streams records from an Amazon MSK Express cluster topic to Amazon S3 or Apache Iceberg.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --encryption-configuration=: The encryption configuration applied to the channel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iceberg-destination-configuration=: The Apache Iceberg destination for the channel.
+        --logging-info=: The destinations to which the channel publishes operational logs.
+        --s3-destination-configuration=: The Amazon S3 destination for the channel.
+        --tags=: The tags attached to the channel.
+        --topic-configuration-list=!:
+            description: The list of topic configurations for the channel.
+            nargs: -1
     - name: create-cluster
       description: Creates a new MSK cluster.
       flags:
@@ -117,6 +133,14 @@ commands:
         --tags=: A map of tags for the VPC connection.
         --target-cluster-arn=!: The cluster Amazon Resource Name (ARN) for the VPC connection.
         --vpc-id=!: The VPC ID of VPC connection.
+    - name: delete-channel
+      description: Deletes the channel specified by channelArn from the cluster specified by clusterArn.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-cluster
       description: Deletes the MSK cluster specified by the Amazon Resource Name (ARN) in the request.
       flags:
@@ -161,6 +185,14 @@ commands:
         --arn=!: The Amazon Resource Name (ARN) that uniquely identifies an MSK VPC connection.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel
+      description: Returns the current configuration and state of a channel.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-cluster
       description: Returns a description of the MSK cluster whose Amazon Resource Name (ARN) is specified in the request.
@@ -261,6 +293,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-arn=: The Amazon Resource Name (ARN) of the cluster check.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-channels
+      description: Returns the list of channels in a cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: Maximum number of channels to return in a single response.
+        --next-token=: If the response of ListChannels is truncated, it returns a nextToken in the response.
+        --topic-name-filter=: Filters results to channels whose topic name matches the specified value.
     - name: list-client-vpc-connections
       description: Returns a list of all the VPC connections in this Region.
       flags:
@@ -497,6 +539,16 @@ commands:
         --current-version=!: The cluster version that you want to change.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target-instance-type=!: The Amazon MSK broker type that you want all of the brokers in this cluster to be.
+    - name: update-channel
+      description: Updates the destination configuration of an existing channel.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iceberg-destination-update=: Updates fields on an Apache Iceberg destination.
+        --s3-destination-update=: Updates fields on an Amazon S3 destination.
     - name: update-cluster-configuration
       description: Updates the cluster with the configuration that is specified in the request body.
       flags:
