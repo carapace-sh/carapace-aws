@@ -219,7 +219,7 @@ commands:
         --target-data-provider-descriptors=!:
             description: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
             nargs: -1
-        --transformation-rules=: The settings in JSON format for migration rules.
+        --transformation-rules=: A JSON string that specifies the transformation rules for the migration project.
     - name: create-replication-config
       description: Creates a configuration that you can later provide to configure and start an DMS Serverless replication.
       flags:
@@ -508,7 +508,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the data providers described in the form of key-value pairs.
+            description: The filters to apply to the data providers.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
@@ -610,17 +610,17 @@ commands:
             source-type:
                 - replication-instance
     - name: describe-extension-pack-associations
-      description: Returns a paginated list of extension pack associations for the specified migration project.
+      description: Returns a paginated list of extension pack installation requests for a migration project, initiated by [StartExtensionPackAssociation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartExtensionPackAssociation.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the extension pack associations described in the form of key-value pairs.
+            description: The filters to apply to the extension pack installation requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the migration project.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-fleet-advisor-collectors
       description: 'End of support notice: On May 20, 2026, Amazon Web Services will end support for Amazon Web Services DMS Fleet Advisor;.'
       flags:
@@ -679,7 +679,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the instance profiles described in the form of key-value pairs.
+            description: The filters to apply to the instance profiles.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
@@ -692,24 +692,24 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         --origin=!: Specifies whether to retrieve metadata from the source or target tree.
-        --selection-rules=!: The JSON string that specifies which metadata model to retrieve.
+        --selection-rules=!: A JSON string that identifies the metadata model to retrieve.
       completion:
         flag:
             origin:
                 - SOURCE
                 - TARGET
     - name: describe-metadata-model-assessments
-      description: Returns a paginated list of metadata model assessments for your account in the current region.
+      description: Returns a paginated list of metadata model assessment requests for a migration project, initiated by [StartMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model assessments described in the form of key-value pairs.
+            description: The filters to apply to the metadata model assessment requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-records=: The maximum number of records to include in the response.
-        --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project.
+        --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-metadata-model-children
       description: Gets a list of child metadata models for the specified metadata model in the database hierarchy.
       flags:
@@ -722,7 +722,7 @@ commands:
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         --origin=!: Specifies whether to retrieve metadata from the source or target tree.
         --page-size=: The size of each page to get in the AWS service call.
-        --selection-rules=!: The JSON string that specifies which metadata model's children to retrieve.
+        --selection-rules=!: A JSON string that identifies the metadata model whose children to retrieve.
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
@@ -730,67 +730,67 @@ commands:
                 - SOURCE
                 - TARGET
     - name: describe-metadata-model-conversions
-      description: Returns a paginated list of metadata model conversions for a migration project.
+      description: Returns a paginated list of metadata model conversion requests for a migration project, initiated by [StartMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model conversions described in the form of key-value pairs.
+            description: The filters to apply to the metadata model conversion requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-records=: The maximum number of records to include in the response.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-metadata-model-creations
-      description: Returns a paginated list of metadata model creation requests for a migration project.
+      description: Returns a paginated list of metadata model creation requests for a migration project, initiated by [StartMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model creation requests described in the form of key-value pairs.
+            description: The filters to apply to the metadata model creation requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --marker=: Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests.
+        --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-items=: The  total number of items to return in the command's output.
-        --max-records=: The maximum number of metadata model creation requests to include in the response.
+        --max-records=: The maximum number of records to include in the response.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-metadata-model-exports-as-script
-      description: Returns a paginated list of metadata model exports.
+      description: Returns a paginated list of metadata model export requests for a migration project, initiated by [StartMetadataModelExportAsScript](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model exports described in the form of key-value pairs.
+            description: The filters to apply to the metadata model export requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-records=: The maximum number of records to include in the response.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-metadata-model-exports-to-target
-      description: Returns a paginated list of metadata model exports.
+      description: Returns a paginated list of metadata model export requests for a migration project, initiated by [StartMetadataModelExportToTarget](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model exports described in the form of key-value pairs.
+            description: The filters to apply to the metadata model export requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
         --max-records=: The maximum number of records to include in the response.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-metadata-model-imports
-      description: Returns a paginated list of metadata model imports.
+      description: Returns a paginated list of metadata model import requests for a migration project, initiated by [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html).
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the metadata model imports described in the form of key-value pairs.
+            description: The filters to apply to the metadata model import requests.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-        --max-records=: A paginated list of metadata model imports.
+        --max-records=: The maximum number of records to include in the response.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: describe-migration-projects
       description: Returns a paginated list of migration projects for your account in the current region.
@@ -798,7 +798,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=:
-            description: Filters applied to the migration projects described in the form of key-value pairs.
+            description: The filters to apply to the migration projects.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
@@ -1013,7 +1013,7 @@ commands:
         --file-name=: The name of the assessment file to create in your Amazon S3 bucket.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to assess.
+        --selection-rules=!: A JSON string that identifies the metadata models to export a conversion assessment report for.
     - name: get-target-selection-rules
       description: Converts source selection rules into their target counterparts for schema conversion operations.
       flags:
@@ -1021,7 +1021,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: The JSON string representing the source selection rules for conversion.
+        --selection-rules=!: A JSON string that contains the source selection rules to convert into their target counterparts.
     - name: import-certificate
       description: Uploads the specified certificate.
       flags:
@@ -1050,7 +1050,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --conversion-configuration=!: The new conversion configuration.
+        --conversion-configuration=!: A JSON string that contains the schema conversion settings to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: modify-data-migration
@@ -1194,7 +1194,7 @@ commands:
         --target-data-provider-descriptors=:
             description: Information about the target data provider, including the name, ARN, and Amazon Web Services Secrets Manager parameters.
             nargs: -1
-        --transformation-rules=: The settings in JSON format for migration rules.
+        --transformation-rules=: A JSON string that specifies the transformation rules for the migration project.
     - name: modify-replication-config
       description: Modifies an existing DMS Serverless replication configuration that you can use to start a replication.
       flags:
@@ -1363,74 +1363,74 @@ commands:
                 - resume-processing
                 - start-replication
     - name: start-extension-pack-association
-      description: Applies the extension pack to your target database.
+      description: Queues the installation of the extension pack on your target database.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
     - name: start-metadata-model-assessment
-      description: Creates a database migration assessment report by assessing the migration complexity for your source database.
+      description: Queues an assessment of the selected source metadata models (database objects such as tables, views, and procedures) to evaluate conversion complexity to the target database format.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to assess.
+        --selection-rules=!: A JSON string that identifies the metadata models to assess.
     - name: start-metadata-model-conversion
-      description: Converts your source database objects to a format compatible with the target database.
+      description: Queues a conversion of the selected source metadata models (database objects such as tables, views, and procedures) to the target database format.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --selection-rules=!: A value that specifies the database objects to convert.
+        --selection-rules=!: A JSON string that identifies the metadata models to convert.
     - name: start-metadata-model-creation
-      description: Creates source metadata model of the given type with the specified properties for schema conversion operations.
+      description: Queues the creation of a metadata model in the source metadata tree.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --metadata-model-name=!: The name of the metadata model.
+        --metadata-model-name=!: The name for the metadata model to use in subsequent operations.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --properties=!: The properties of metadata model in JSON format.
-        --selection-rules=!: The JSON string that specifies the location where the metadata model will be created.
+        --properties=!: The properties of the metadata model.
+        --selection-rules=!: A JSON string that identifies the source schema for the metadata model.
     - name: start-metadata-model-export-as-script
-      description: Saves your converted code to a file as a SQL script, and stores this file on your Amazon S3 bucket.
+      description: Queues an export of metadata models (database objects such as tables, views, and procedures) as a data definition language (DDL) script.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --file-name=: The name of the model file to create in the Amazon S3 bucket.
+        --file-name=: The name for the exported file.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --origin=!: Whether to export the metadata model from the source or the target.
-        --selection-rules=!: A value that specifies the database objects to export.
+        --origin=!: Specifies the metadata tree to export from.
+        --selection-rules=!: A JSON string that identifies the metadata models to export as a SQL script.
       completion:
         flag:
             origin:
                 - SOURCE
                 - TARGET
     - name: start-metadata-model-export-to-target
-      description: Applies converted database objects to your target database.
+      description: Queues an export of the selected converted metadata models (database objects such as tables, views, and procedures) to your target database.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --no-overwrite-extension-pack: Whether to overwrite the migration project extension pack.
-        --overwrite-extension-pack: Whether to overwrite the migration project extension pack.
-        --selection-rules=!: A value that specifies the database objects to export.
+        --no-overwrite-extension-pack: Specifies whether to overwrite the extension pack if one already exists on the target database.
+        --overwrite-extension-pack: Specifies whether to overwrite the extension pack if one already exists on the target database.
+        --selection-rules=!: A JSON string that identifies the metadata models to export to the target database.
     - name: start-metadata-model-import
-      description: Loads the metadata for all the dependent database objects of the parent object.
+      description: Queues an import of metadata models (database objects such as tables, views, and procedures) from your data provider into the metadata tree.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
-        --no-refresh: If `true`, DMS loads metadata for the specified objects from the source database.
-        --origin=!: Whether to load metadata to the source or target database.
-        --refresh: If `true`, DMS loads metadata for the specified objects from the source database.
-        --selection-rules=!: A value that specifies the database objects to import.
+        --no-refresh: Specifies whether to refresh the selected metadata models from the data provider.
+        --origin=!: Specifies the metadata tree to import into.
+        --refresh: Specifies whether to refresh the selected metadata models from the data provider.
+        --selection-rules=!: A JSON string that identifies the metadata models to import from the data provider.
       completion:
         flag:
             origin:
@@ -1557,118 +1557,118 @@ commands:
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
         - name: extension-pack-associated
-          description: Returns a paginated list of extension pack associations for the specified migration project.
+          description: Returns a paginated list of extension pack installation requests for a migration project, initiated by [StartExtensionPackAssociation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartExtensionPackAssociation.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the extension pack associations described in the form of key-value pairs.
+                description: The filters to apply to the extension pack installation requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
-            --migration-project-identifier=!: The name or Amazon Resource Name (ARN) for the migration project.
+            --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-assessed
-          description: Returns a paginated list of metadata model assessments for your account in the current region.
+          description: Returns a paginated list of metadata model assessment requests for a migration project, initiated by [StartMetadataModelAssessment](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelAssessment.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model assessments described in the form of key-value pairs.
+                description: The filters to apply to the metadata model assessment requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
-            --migration-project-identifier=!: The name or Amazon Resource Name (ARN) of the migration project.
+            --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-conversion-cancelled
-          description: Returns a paginated list of metadata model conversions for a migration project.
+          description: Returns a paginated list of metadata model conversion requests for a migration project, initiated by [StartMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model conversions described in the form of key-value pairs.
+                description: The filters to apply to the metadata model conversion requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-converted
-          description: Returns a paginated list of metadata model conversions for a migration project.
+          description: Returns a paginated list of metadata model conversion requests for a migration project, initiated by [StartMetadataModelConversion](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelConversion.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model conversions described in the form of key-value pairs.
+                description: The filters to apply to the metadata model conversion requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-created
-          description: Returns a paginated list of metadata model creation requests for a migration project.
+          description: Returns a paginated list of metadata model creation requests for a migration project, initiated by [StartMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model creation requests described in the form of key-value pairs.
+                description: The filters to apply to the metadata model creation requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests.
+            --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of metadata model creation requests to include in the response.
+            --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
         - name: metadata-model-creation-cancelled
-          description: Returns a paginated list of metadata model creation requests for a migration project.
+          description: Returns a paginated list of metadata model creation requests for a migration project, initiated by [StartMetadataModelCreation](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelCreation.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model creation requests described in the form of key-value pairs.
+                description: The filters to apply to the metadata model creation requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-            --marker=: Specifies the unique pagination token that makes it possible to display the next page of metadata model creation requests.
+            --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-items=: The  total number of items to return in the command's output.
-            --max-records=: The maximum number of metadata model creation requests to include in the response.
+            --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
             --page-size=: The size of each page to get in the AWS service call.
             --starting-token=: A token to specify where to start paginating.
         - name: metadata-model-exported-as-script
-          description: Returns a paginated list of metadata model exports.
+          description: Returns a paginated list of metadata model export requests for a migration project, initiated by [StartMetadataModelExportAsScript](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportAsScript.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model exports described in the form of key-value pairs.
+                description: The filters to apply to the metadata model export requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-exported-to-target
-          description: Returns a paginated list of metadata model exports.
+          description: Returns a paginated list of metadata model export requests for a migration project, initiated by [StartMetadataModelExportToTarget](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelExportToTarget.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model exports described in the form of key-value pairs.
+                description: The filters to apply to the metadata model export requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
             --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: metadata-model-imported
-          description: Returns a paginated list of metadata model imports.
+          description: Returns a paginated list of metadata model import requests for a migration project, initiated by [StartMetadataModelImport](https://docs.aws.amazon.com/dms/latest/APIReference/API_StartMetadataModelImport.html).
           flags:
             --cli-input-json=: Read arguments from the JSON string provided.
             --cli-input-yaml=: Read arguments from the YAML string provided.
             --filters=:
-                description: Filters applied to the metadata model imports described in the form of key-value pairs.
+                description: The filters to apply to the metadata model import requests.
                 nargs: -1
             --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
             --marker=: Specifies the unique pagination token that makes it possible to display the next page of results.
-            --max-records=: A paginated list of metadata model imports.
+            --max-records=: The maximum number of records to include in the response.
             --migration-project-identifier=!: The migration project name or Amazon Resource Name (ARN).
         - name: replication-instance-available
           description: Returns information about replication instances for your account in the current region.

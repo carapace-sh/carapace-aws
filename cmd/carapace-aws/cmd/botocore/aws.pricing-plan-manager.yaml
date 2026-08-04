@@ -1,0 +1,101 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: pricing-plan-manager
+description: PricingPlanManager
+commands:
+    - name: approve-paid-subscription
+      description: Approves a subscription that is in `PENDING_APPROVAL` status, activating it and starting billing.
+      flags:
+        --arn=!: The ARN of the subscription to approve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+    - name: associate-resources-to-subscription
+      description: Adds one or more resources to an existing subscription.
+      flags:
+        --arn=!: The ARN of the subscription to add resources to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+        --resource-arns=!:
+            description: The ARNs of the resources to add to the subscription.
+            nargs: -1
+    - name: cancel-subscription
+      description: Cancels a flat-rate pricing subscription.
+      flags:
+        --arn=!: The ARN of the subscription to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+    - name: cancel-subscription-change
+      description: Cancels a pending scheduled change on a subscription, such as a pending downgrade or cancellation.
+      flags:
+        --arn=!: The ARN of the subscription whose pending change you want to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+    - name: create-subscription
+      description: Creates a flat-rate pricing subscription for the specified resources.
+      flags:
+        --approval-mode=: Determines whether the subscription requires explicit approval before billing starts.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plan-family=!: The pricing plan family to subscribe to, such as `CloudFront`.
+        --plan-tier=!: The tier level for the subscription, such as `FREE`, `PRO`, `BUSINESS`, or `PREMIUM`.
+        --resource-arns=!:
+            description: The ARNs of the AWS resources to include in the subscription.
+            nargs: -1
+        --usage-level=: The usage level within the plan tier.
+      completion:
+        flag:
+            approval-mode:
+                - MANUAL
+                - IMMEDIATE
+    - name: disassociate-resources-from-subscription
+      description: Removes one or more resources from an existing subscription.
+      flags:
+        --arn=!: The ARN of the subscription to remove resources from.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+        --resource-arns=!:
+            description: The ARNs of the resources to remove from the subscription.
+            nargs: -1
+    - name: get-subscription
+      description: Returns the details of a flat-rate pricing subscription, including its current status, associated resources, and any pending scheduled changes.
+      flags:
+        --arn=!: The ARN of the subscription to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-subscriptions
+      description: Returns a summary of all flat-rate pricing subscriptions in the calling account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token from a previous `ListSubscriptions` response.
+        --starting-token=: A token to specify where to start paginating.
+    - name: update-subscription
+      description: Changes the plan tier of an existing subscription.
+      flags:
+        --arn=!: The ARN of the subscription to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the request is handled only once.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --if-match=!: The `ETag` value from a previous `GetSubscription` or `ListSubscriptions` response.
+        --plan-tier=!: The new tier level for the subscription.
+        --usage-level=: The usage level within the plan tier.

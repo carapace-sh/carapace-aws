@@ -310,6 +310,7 @@ func init() {
 		"pinpoint":                            "Amazon Pinpoint",
 		"pipes":                               "Amazon EventBridge Pipes",
 		"polly":                               "Amazon Polly",
+		"pricing-plan-manager":                "PricingPlanManager",
 		"pricing":                             "AWS Price List Service",
 		"proton":                              "AWS Proton",
 		"qapps":                               "QApps",

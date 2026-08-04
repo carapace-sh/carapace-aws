@@ -48,6 +48,7 @@ commands:
         flag:
             report-type:
                 - FAILURE_MODE
+                - TESTING
     - name: create-service
       description: Creates a service.
       flags:
@@ -65,7 +66,7 @@ commands:
         --permission-model=!: The permission model for the service.
         --policy-arn=: ""
         --regions=!:
-            description: The AWS Regions where the service operates.
+            description: The Regions where the service operates.
             nargs: -1
         --report-configuration=: ""
         --tags=: ""
@@ -114,6 +115,20 @@ commands:
         --no-sharing-enabled: Indicates whether cross-account sharing is enabled for the system.
         --sharing-enabled: Indicates whether cross-account sharing is enabled for the system.
         --tags=: ""
+    - name: create-test
+      description: Creates a test for a service by configuring a test template.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The logging configuration for the test.
+        --parameters=: The parameter values for the test.
+        --role-name=: The name of the IAM execution role to use when running the test.
+        --service-arn=!: The ARN of the service to create the test for.
+        --stop-conditions=:
+            description: The stop conditions for the test.
+            nargs: -1
+        --test-template-arn=!: The ARN of the test template to configure.
     - name: create-user-journey
       description: Creates a user journey within a system.
       flags:
@@ -181,6 +196,25 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --system-arn=!: ""
+    - name: delete-test
+      description: Deletes a test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --test-id=!: The identifier of the test to delete.
+    - name: delete-test-sources
+      description: Removes monitoring sources from a test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --test-id=!: The identifier of the test to remove sources from.
+        --test-sources=!:
+            description: The monitoring sources to remove.
+            nargs: -1
     - name: delete-user-journey
       description: Deletes a user journey.
       flags:
@@ -218,6 +252,29 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --system-arn=!: ""
+    - name: get-test
+      description: Retrieves a test by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --test-id=!: The identifier of the test to retrieve.
+    - name: get-test-run
+      description: Retrieves a test run by ID, including its status, results, and the configuration snapshotted when the run started.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test run belongs to.
+        --test-run-id=!: The identifier of the test run to retrieve.
+    - name: get-test-template
+      description: Retrieves a resilience test template by ARN, including the parameters it accepts and the fault actions it runs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --test-template-arn=!: The ARN of the test template to retrieve.
     - name: get-user-journey
       description: Retrieves a user journey.
       flags:
@@ -410,10 +467,25 @@ commands:
         --report-type=: Filter reports by type.
         --service-arn=: Optional.
         --starting-token=: A token to specify where to start paginating.
+        --test-run-id=: ""
       completion:
         flag:
             report-type:
                 - FAILURE_MODE
+                - TESTING
+    - name: list-resolved-test-run-target-resources
+      description: Lists the AWS resources that AWS Fault Injection Service (AWS FIS) resolved as targets for a test run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service the test run belongs to.
+        --starting-token=: A token to specify where to start paginating.
+        --test-run-id=!: The identifier of the test run to list resolved target resources for.
     - name: list-resources
       description: List resources.
       flags:
@@ -535,6 +607,90 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: ""
+    - name: list-test-run-events
+      description: Lists the events in a test run's timeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --ended-at=: Return events at or before this timestamp.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service the test run belongs to.
+        --started-at=: Return events at or after this timestamp.
+        --starting-token=: A token to specify where to start paginating.
+        --test-run-id=!: The identifier of the test run to list events for.
+    - name: list-test-run-sources
+      description: Lists the monitoring source snapshots captured for a test run, optionally filtered by type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service the test run belongs to.
+        --starting-token=: A token to specify where to start paginating.
+        --test-run-id=!: The identifier of the test run to list sources for.
+        --type=: Filter sources by type.
+      completion:
+        flag:
+            type:
+                - SUCCESS_CRITERIA
+                - OBSERVABILITY
+    - name: list-test-runs
+      description: Lists the runs of a test, or all test runs for a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service to list test runs for.
+        --starting-token=: A token to specify where to start paginating.
+        --test-id=: Filter test runs by test identifier.
+    - name: list-test-sources
+      description: Lists the monitoring sources attached to a test, optionally filtered by type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --starting-token=: A token to specify where to start paginating.
+        --test-id=!: The identifier of the test to list sources for.
+        --type=: Filter sources by type.
+      completion:
+        flag:
+            type:
+                - SUCCESS_CRITERIA
+                - OBSERVABILITY
+    - name: list-test-templates
+      description: Lists the available resilience test templates.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-tests
+      description: Lists the tests configured for a service.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-arn=!: The ARN of the service to list tests for.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-user-journeys
       description: Lists user journeys for a system.
       flags:
@@ -547,6 +703,17 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --system-arn=!: ""
+    - name: put-test-sources
+      description: Adds or updates the monitoring sources on a test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --test-id=!: The identifier of the test to add sources to.
+        --test-sources=!:
+            description: The monitoring sources to add or update.
+            nargs: -1
     - name: start-failure-mode-assessment
       description: Starts a failure mode assessment.
       flags:
@@ -555,6 +722,22 @@ commands:
         --client-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --service-arn=!: ""
+    - name: start-test-run
+      description: Starts a run of a test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --test-id=!: The identifier of the test to run.
+    - name: stop-test-run
+      description: Stops an in-progress test run.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --service-arn=!: The ARN of the service the test run belongs to.
+        --test-run-id=!: The identifier of the test run to stop.
     - name: tag-resource
       description: Adds tags to a resource.
       flags:
@@ -675,6 +858,20 @@ commands:
         --no-sharing-enabled: Whether cross-account sharing is enabled for the system.
         --sharing-enabled: Whether cross-account sharing is enabled for the system.
         --system-arn=!: ""
+    - name: update-test
+      description: Updates the configuration of an existing test.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The updated logging configuration for the test.
+        --parameters=: The updated parameter values for the test.
+        --role-name=: The updated IAM execution role name.
+        --service-arn=!: The ARN of the service the test belongs to.
+        --stop-conditions=:
+            description: The updated stop conditions for the test.
+            nargs: -1
+        --test-id=!: The identifier of the test to update.
     - name: update-user-journey
       description: Updates an existing user journey.
       flags:
@@ -728,10 +925,12 @@ commands:
             --report-type=: Filter reports by type.
             --service-arn=: Optional.
             --starting-token=: A token to specify where to start paginating.
+            --test-run-id=: ""
           completion:
             flag:
                 report-type:
                     - FAILURE_MODE
+                    - TESTING
         - name: service-assessment-completed
           description: Retrieves a service by ARN.
           flags:
