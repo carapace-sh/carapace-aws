@@ -2,6 +2,16 @@
 name: timestream-influxdb
 description: Timestream InfluxDB
 commands:
+    - name: create-db-backup
+      description: Creates a new on-demand backup of a Timestream for InfluxDB resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-resource-id=!: The id of the DB instance or DB cluster to back up.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the backup.
+        --retention-days=: The number of days to retain the backup.
+        --tags=: A list of key-value pairs to associate with the backup.
     - name: create-db-cluster
       description: Creates a new Timestream for InfluxDB cluster.
       flags:
@@ -9,12 +19,16 @@ commands:
         --bucket=: The name of the initial InfluxDB bucket.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-backup-configurations=:
+            description: A list of backup configurations to enable automated backups for the DB cluster.
+            nargs: -1
         --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
         --db-parameter-group-identifier=: The ID of the DB parameter group to assign to your DB cluster.
         --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
         --deployment-type=: Specifies the type of cluster to create.
         --failover-mode=: Specifies the behavior of failure recovery when the primary node of the cluster fails.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Web Services KMS key identifier to use for encryption of the DB cluster.
         --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
         --maintenance-schedule=: Specifies the maintenance schedule for the DB cluster, including the preferred maintenance window and timezone.
         --name=!: The name that uniquely identifies the DB cluster when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
@@ -63,11 +77,15 @@ commands:
         --bucket=: The name of the initial InfluxDB bucket.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-backup-configurations=:
+            description: A list of backup configurations to enable automated backups for the DB instance.
+            nargs: -1
         --db-instance-type=!: The Timestream for InfluxDB DB instance type to run InfluxDB on.
         --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
         --db-storage-type=: The Timestream for InfluxDB DB storage type to read and write InfluxDB data.
         --deployment-type=: Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Web Services KMS key identifier to use for encryption of the DB instance.
         --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to a specified S3 bucket.
         --maintenance-schedule=: Specifies the maintenance schedule for the DB instance, including the preferred maintenance window and timezone.
         --name=!: The name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.
@@ -117,6 +135,13 @@ commands:
         --name=!: The name of the DB parameter group.
         --parameters=: A list of the parameters that comprise the DB parameter group.
         --tags=: A list of key-value pairs to associate with the DB parameter group.
+    - name: delete-db-backup
+      description: Deletes a Timestream for InfluxDB backup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the backup to delete.
     - name: delete-db-cluster
       description: Deletes a Timestream for InfluxDB cluster.
       flags:
@@ -124,6 +149,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --db-cluster-id=!: Service-generated unique identifier of the DB cluster.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-retain-automated-backups: Specifies whether to retain automated backups after the DB cluster is deleted.
+        --retain-automated-backups: Specifies whether to retain automated backups after the DB cluster is deleted.
     - name: delete-db-instance
       description: Deletes a Timestream for InfluxDB DB instance.
       flags:
@@ -131,6 +158,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The id of the DB instance.
+        --no-retain-automated-backups: Specifies whether to retain automated backups after the DB instance is deleted.
+        --retain-automated-backups: Specifies whether to retain automated backups after the DB instance is deleted.
+    - name: get-db-backup
+      description: Returns information about a specific Timestream for InfluxDB backup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the backup to retrieve information for.
     - name: get-db-cluster
       description: Retrieves information about a Timestream for InfluxDB cluster.
       flags:
@@ -152,6 +188,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The id of the DB parameter group.
+    - name: list-db-backups
+      description: Returns a list of Timestream for InfluxDB backups.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-resource-id=: The identifier of the DB instance or DB cluster to list backups for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of items to return in the output.
+        --next-token=: The pagination token.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-db-clusters
       description: Returns a list of Timestream for InfluxDB DB clusters.
       flags:
@@ -221,6 +269,46 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The id of the DB instance to reboot.
+    - name: restore-from-db-backup
+      description: Restores a Timestream for InfluxDB resource from a backup.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-backup-configurations=:
+            description: A list of backup configurations to apply to the restored resource.
+            nargs: -1
+        --db-backup-id=!: The identifier of the backup to restore from.
+        --deployment-type=: Specifies the deployment type of the restored resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=: The Amazon Web Services KMS key identifier to use for encryption of the restored resource.
+        --log-delivery-configuration=: Configuration for sending InfluxDB engine logs to the specified S3 bucket for the restored resource.
+        --maintenance-schedule=: The maintenance schedule for the restored resource.
+        --name=!: The name of the new resource to create from the restore.
+        --network-type=: Specifies the network type of the restored resource.
+        --no-publicly-accessible: Specifies whether the restored resource is publicly accessible.
+        --port=: The port number on which the restored InfluxDB resource accepts connections.
+        --publicly-accessible: Specifies whether the restored resource is publicly accessible.
+        --restore-mode=: Specifies whether to restore to a new resource or replace the existing resource.
+        --restore-to-time=: The point in time to restore to, for continuous backups.
+        --tags=: A list of key-value pairs to associate with the restored resource.
+        --vpc-security-group-ids=:
+            description: A list of VPC security group IDs for the restored resource.
+            nargs: -1
+        --vpc-subnet-ids=:
+            description: A list of VPC subnet IDs for the restored resource.
+            nargs: -1
+      completion:
+        flag:
+            deployment-type:
+                - SINGLE_AZ
+                - WITH_MULTIAZ_STANDBY
+                - MULTI_NODE_READ_REPLICAS
+            network-type:
+                - IPV4
+                - DUAL
+            restore-mode:
+                - NEW_RESOURCE
+                - REPLACE_EXISTING
     - name: tag-resource
       description: Tags are composed of a Key/Value pairs.
       flags:
@@ -244,6 +332,9 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-backup-configurations=:
+            description: A list of backup configurations to update for the DB cluster.
+            nargs: -1
         --db-cluster-id=!: Service-generated unique identifier of the DB cluster to update.
         --db-instance-type=: Update the DB cluster to use the specified DB instance Type.
         --db-parameter-group-identifier=: Update the DB cluster to use the specified DB parameter group.
@@ -273,6 +364,9 @@ commands:
         --allocated-storage=: The amount of storage to allocate for your DB storage type (in gibibytes).
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --db-backup-configurations=:
+            description: A list of backup configurations to update for the DB instance.
+            nargs: -1
         --db-instance-type=: The Timestream for InfluxDB DB instance type to run InfluxDB on.
         --db-parameter-group-identifier=: The id of the DB parameter group to assign to your DB instance.
         --db-storage-type=: The Timestream for InfluxDB DB storage type that InfluxDB stores data on.

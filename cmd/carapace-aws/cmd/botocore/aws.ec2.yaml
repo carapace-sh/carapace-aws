@@ -262,6 +262,22 @@ commands:
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --private-ip-address=: The primary or secondary private IP address to associate with the Elastic IP address.
         --public-ip=: Deprecated.
+    - name: associate-application-status-check
+      description: Associates an application status check with instances or [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html). Once you create an association, health monitoring automatically begins for the specified instances or for instances that match the specified tags.
+      flags:
+        --application-status-check-id=!: The ID of the application status check to associate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=:
+            description: The IDs of the instances to associate with the application status check.
+            nargs: -1
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --target-tag-associations=:
+            description: The [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) to associate the application status check with.
+            nargs: -1
     - name: associate-capacity-reservation-billing-owner
       description: Initiates a request to assign billing of the unused capacity of a shared Capacity Reservation to a consumer account that is consolidated under the same Amazon Web Services organizations payer account.
       flags:
@@ -842,6 +858,47 @@ commands:
                 - sc1
                 - st1
                 - gp3
+    - name: create-application-status-check
+      description: Creates an application status check for monitoring the health of applications running on your instances.
+      flags:
+        --aggregation=: The aggregation setting for the application status check.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --device-index=: The index of the network device to use for the health check.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --failure-threshold=: The number of consecutive failed health checks before the application status is considered impaired.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-paths=:
+            description: The health check paths to use for the application status check.
+            nargs: -1
+        --initialization-grace-period-seconds=: The number of seconds to wait before starting health checks after an instance is launched.
+        --interval=: The interval, in seconds, between health checks.
+        --ip-scope=: The IP scope to use for the health check.
+        --ip-version=: The IP version to use for the health check.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --path=: The URL path to use for the health check HTTP request (for example, `/health` or `/status`).
+        --port=!: The port to use for the health check.
+        --protocol=!: The protocol to use for the health check.
+        --status-code-matcher=: The HTTP status codes that indicate a successful health check response.
+        --success-threshold=: The number of consecutive successful health checks before the application status is considered healthy.
+        --tag-specifications=:
+            description: The tags to apply to the application status check.
+            nargs: -1
+        --timeout=: The amount of time, in seconds, to wait for a health check response before considering it failed.
+      completion:
+        flag:
+            aggregation:
+                - included
+                - excluded
+            ip-scope:
+                - private
+            ip-version:
+                - ipv4
+                - ipv6
+            protocol:
+                - http
+                - https
     - name: create-capacity-manager-data-export
       description: Creates a new data export configuration for EC2 Capacity Manager.
       flags:
@@ -2103,7 +2160,7 @@ commands:
         --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ipv4-cidr-block=!: The IPv4 CIDR block for the secondary network.
+        --ipv4-cidr-block=: The IPv4 CIDR block for the secondary network.
         --network-type=!: The type of secondary network.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --tag-specifications=:
@@ -2934,6 +2991,16 @@ commands:
         flag:
             type:
                 - ipsec.1
+    - name: delete-application-status-check
+      description: Deletes an application status check.
+      flags:
+        --application-status-check-id=!: The ID of the application status check to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: delete-capacity-manager-data-export
       description: Deletes an existing Capacity Manager data export configuration.
       flags:
@@ -4000,6 +4067,56 @@ commands:
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: describe-application-status
+      description: Describes the application status for the specified instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: The filters.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=:
+            description: The IDs of the instances for which to describe application status.
+            nargs: -1
+        --max-results=: The maximum number of items to return for this request.
+        --next-token=: The token returned from a previous paginated request.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+    - name: describe-application-status-check-associations
+      description: Describes the associations for one or more application status checks.
+      flags:
+        --application-status-check-ids=:
+            description: The IDs of the application status checks for which to describe associations.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: The filters to use to limit the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of items to return for this request.
+        --next-token=: The token returned from a previous paginated request.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+    - name: describe-application-status-checks
+      description: Describes one or more application status checks.
+      flags:
+        --application-status-check-ids=:
+            description: The IDs of the application status checks to describe.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: The filters.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-all: Specifies whether to include recently deleted application status checks that remain available during the deletion grace period.
+        --max-results=: The maximum number of items to return for this request.
+        --next-token=: The token returned from a previous paginated request.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --no-include-all: Specifies whether to include recently deleted application status checks that remain available during the deletion grace period.
     - name: describe-availability-zones
       description: Describes the Availability Zones, Local Zones, and Wavelength Zones that are available to you.
       flags:
@@ -8848,6 +8965,18 @@ commands:
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: disable-application-status-check-suppression
+      description: Disables suppression of application status checks for the specified instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=:
+            description: The IDs of the instances for which to disable application status check suppression.
+            nargs: -1
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: disable-aws-network-performance-metric-subscription
       description: Disables Infrastructure Performance metric subscriptions.
       flags:
@@ -9049,6 +9178,22 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --public-ip=: Deprecated.
+    - name: disassociate-application-status-check
+      description: Disassociates an application status check from instances or [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html). After disassociation, health monitoring stops for the affected instances.
+      flags:
+        --application-status-check-id=!: The ID of the application status check to disassociate.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=:
+            description: The IDs of the instances to disassociate from the application status check.
+            nargs: -1
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --target-tag-associations=:
+            description: The [tags](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) to disassociate from the application status check.
+            nargs: -1
     - name: disassociate-capacity-reservation-billing-owner
       description: Cancels a pending request to assign billing of the unused capacity of a Capacity Reservation to a consumer account, or revokes a request that has already been accepted.
       flags:
@@ -9238,6 +9383,19 @@ commands:
             allowed-images-settings-state:
                 - enabled
                 - audit-mode
+    - name: enable-application-status-check-suppression
+      description: Suppresses application status checks for the specified instances.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --duration-seconds=: The duration, in seconds, for which to suppress application status checks.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-ids=:
+            description: The IDs of the instances for which to suppress application status checks.
+            nargs: -1
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: enable-aws-network-performance-metric-subscription
       description: Enables Infrastructure Performance subscriptions.
       flags:
@@ -10697,6 +10855,45 @@ commands:
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: modify-application-status-check
+      description: Modifies an existing application status check.
+      flags:
+        --aggregation=: The aggregation setting for the application status check.
+        --application-status-check-id=!: The ID of the application status check to modify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --device-index=: The index of the network device to use for the health check.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --failure-threshold=: The number of consecutive failed health checks before the application status is considered impaired.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --health-check-paths=:
+            description: The health check paths to use for the application status check.
+            nargs: -1
+        --initialization-grace-period-seconds=: The number of seconds to wait before starting health checks after an instance is launched.
+        --interval=: The interval, in seconds, between health checks.
+        --ip-scope=: The IP scope to use for the health check.
+        --ip-version=: The IP version to use for the health check.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --path=: The URL path to use for the health check HTTP request (for example, `/health` or `/status`).
+        --port=: The port to use for the health check.
+        --protocol=: The protocol to use for the health check.
+        --status-code-matcher=: The HTTP status codes that indicate a successful health check response.
+        --success-threshold=: The number of consecutive successful health checks before the application status is considered healthy.
+        --timeout=: The amount of time, in seconds, to wait for a health check response before considering it failed.
+      completion:
+        flag:
+            aggregation:
+                - included
+                - excluded
+            ip-scope:
+                - private
+            ip-version:
+                - ipv4
+                - ipv6
+            protocol:
+                - http
+                - https
     - name: modify-availability-zone-group
       description: Changes the opt-in status of the specified zone group for your account.
       flags:
