@@ -94,10 +94,16 @@ commands:
         --firewall-policy-arn=!: The Amazon Resource Name (ARN) of the [FirewallPolicy]() that you want to use for the firewall.
         --firewall-policy-change-protection: A setting indicating whether the firewall is protected against a change to the firewall policy association.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --nat-gateway-mappings=:
+            description: The NAT gateways that the firewall uses to proxy traffic when `NoSourcePreservation` is `TRUE`.
+            nargs: -1
         --no-availability-zone-change-protection: Optional.
         --no-delete-protection: A flag indicating whether it is possible to delete the firewall.
         --no-firewall-policy-change-protection: A setting indicating whether the firewall is protected against a change to the firewall policy association.
+        --no-no-source-preservation: Optional.
+        --no-source-preservation: Optional.
         --no-subnet-change-protection: A setting indicating whether the firewall is protected against changes to the subnet associations.
+        --proxy-settings=: The listener configuration for a proxy mode firewall, used when `NoSourcePreservation` is `TRUE`.
         --subnet-change-protection: A setting indicating whether the firewall is protected against changes to the subnet associations.
         --subnet-mappings=:
             description: The public subnets to use for your Network Firewall firewalls.
@@ -106,6 +112,7 @@ commands:
             description: The key:value pairs to associate with the resource.
             nargs: -1
         --transit-gateway-id=: Required when creating a transit gateway-attached firewall.
+        --vpc-endpoint=: The VPC and subnets for the firewall endpoint, used when `NoSourcePreservation` is `TRUE`.
         --vpc-id=: The unique identifier of the VPC where Network Firewall should create the firewall.
     - name: create-firewall-policy
       description: Creates the firewall policy for the firewall according to the specifications.
@@ -996,6 +1003,16 @@ commands:
                 - PRE_DNS
                 - PRE_REQ
                 - POST_RES
+    - name: update-proxy-settings
+      description: Modifies the proxy listener configuration of a proxy mode firewall.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --firewall-arn=: The Amazon Resource Name (ARN) of the firewall.
+        --firewall-name=: The descriptive name of the firewall.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --proxy-settings=: The proxy listener configuration to set on the firewall.
+        --update-token=: An optional token that you can use for optimistic locking.
     - name: update-rule-group
       description: Updates the rule settings for the specified rule group.
       flags:
