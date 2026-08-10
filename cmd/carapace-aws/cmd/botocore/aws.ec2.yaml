@@ -633,6 +633,19 @@ commands:
             description: The tags applied to the security group rule.
             nargs: -1
         --to-port=: If the protocol is TCP or UDP, this is the end of the port range.
+    - name: batch-modify-ipam-routing-policy-registrations
+      description: Modifies multiple routing policy registrations in a single operation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --delta-json=!: The batch modifications to apply, in JSON format.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --force: Forces the batch modification even if individual changes conflict with announced routes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --no-force: Forces the batch modification even if individual changes conflict with announced routes.
     - name: bundle-instance
       description: Bundles an Amazon instance store-backed Windows instance.
       flags:
@@ -1493,6 +1506,29 @@ commands:
         --tag-specifications=:
             description: Token tags.
             nargs: -1
+    - name: create-ipam-internet-registry-association
+      description: Creates an association between an IPAM and a Regional Internet Registry (RIR) for Resource Public Key Infrastructure (RPKI) management.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: A description for the internet registry association.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-id=!: The ID of the IPAM to associate with the internet registry.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --organization-handle=!: The organization handle at the internet registry (for example, a RIPE NCC organization ID or ARIN Org ID).
+        --rir=!: The Regional Internet Registry to associate with.
+        --tag-specifications=:
+            description: The tags to assign to the internet registry association.
+            nargs: -1
+      completion:
+        flag:
+            rir:
+                - ripe
+                - apnic
+                - arin
+                - lacnic
     - name: create-ipam-policy
       description: Creates an IPAM policy.
       flags:
@@ -1604,6 +1640,26 @@ commands:
         --tag-specifications=:
             description: Tag specifications for the IPAM resource discovery.
             nargs: -1
+    - name: create-ipam-routing-policy-registration
+      description: Creates a routing policy registration and publishes Route Origin Authorizations (ROAs) to the RPKI for the specified CIDR prefix and ASNs.
+      flags:
+        --asns=!:
+            description: The Autonomous System Numbers (ASNs) authorized to originate the prefix.
+            nargs: -1
+        --cidr=!: The IP address prefix in CIDR notation to authorize in the ROA.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: A description for the routing policy registration.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --force: Forces the creation of the routing policy registration even if it conflicts with an announced route.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-length=: The maximum prefix length that the ASNs are authorized to announce.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --no-force: Forces the creation of the routing policy registration even if it conflicts with an announced route.
+        --no-permit-more-specific-announcements: Specifies whether to permit more specific route announcements than the CIDR prefix.
+        --permit-more-specific-announcements: Specifies whether to permit more specific route announcements than the CIDR prefix.
     - name: create-ipam-scope
       description: Create an IPAM scope.
       flags:
@@ -2160,7 +2216,7 @@ commands:
         --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --ipv4-cidr-block=: The IPv4 CIDR block for the secondary network.
+        --ipv4-cidr-block=!: The IPv4 CIDR block for the secondary network.
         --network-type=!: The type of secondary network.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --tag-specifications=:
@@ -3176,6 +3232,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ipam-external-resource-verification-token-id=!: The token ID.
         --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+    - name: delete-ipam-internet-registry-association
+      description: Deletes an IPAM internet registry association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association to delete.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: delete-ipam-policy
       description: Deletes an IPAM policy.
       flags:
@@ -3223,6 +3288,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ipam-resource-discovery-id=!: The IPAM resource discovery ID.
         --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+    - name: delete-ipam-routing-policy-registration
+      description: Deletes a routing policy registration for a specified CIDR prefix.
+      flags:
+        --cidr=!: The IP address prefix in CIDR notation identifying the routing policy registration to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --force: Forces the deletion even if it conflicts with an announced route.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --no-force: Forces the deletion even if it conflicts with an announced route.
     - name: delete-ipam-scope
       description: Delete the scope for an IPAM.
       flags:
@@ -5346,6 +5424,22 @@ commands:
         --max-results=: The maximum number of tokens to return in one page of results.
         --next-token=: The token for the next page of results.
         --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+    - name: describe-ipam-internet-registry-associations
+      description: Describes one or more IPAM internet registry associations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-ids=:
+            description: The IDs of the internet registry associations to describe.
+            nargs: -1
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: describe-ipam-policies
       description: Describes one or more IPAM policies.
       flags:
@@ -9518,6 +9612,21 @@ commands:
             nargs: -1
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --sql-server-credentials=: The ARN of the Secrets Manager secret containing the SQL Server access credentials.
+    - name: enable-ipam-internet-registry-association
+      description: Enables Resource Public Key Infrastructure (RPKI) on an existing IPAM internet registry association by providing BGP Public Key Infrastructure (BPKI) certificate details.
+      flags:
+        --child-handle=!: The child handle for the BPKI certificate hierarchy from the Parent Response XML.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association to enable.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --parent-bpki-ta=!: The parent BPKI Trust Anchor certificate in PEM format from the Parent Response XML.
+        --parent-handle=!: The parent handle for the BPKI certificate hierarchy from the Parent Response XML.
+        --rpki-version=!: The RPKI version to use from the Parent Response XML.
+        --service-uri=!: The RPKI service URI for the publication point from the Parent Response XML.
     - name: enable-ipam-organization-admin-account
       description: Enable an Organizations member account as the IPAM admin account.
       flags:
@@ -10090,6 +10199,49 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --resource-region=!: A resource Region.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-ipam-discovered-routes
+      description: Retrieves Border Gateway Protocol (BGP) routes discovered by IPAM resource discovery for a specified Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-resource-discovery-id=!: The ID of the IPAM resource discovery.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --resource-region=!: The Amazon Web Services Region to retrieve discovered routes for.
+    - name: get-ipam-internet-registry-association-asns
+      description: Retrieves Autonomous System Numbers (ASNs) registered with an internet registry for an IPAM internet registry association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+    - name: get-ipam-internet-registry-association-cidrs
+      description: Retrieves IP address CIDRs registered with an internet registry for an IPAM internet registry association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: get-ipam-policy-allocation-rules
       description: Gets the allocation rules for an IPAM policy.
       flags:
@@ -10246,6 +10398,64 @@ commands:
                 - ipv6-pool
                 - eni
                 - anycast-ip-list
+    - name: get-ipam-route-origin-authorizations
+      description: Retrieves the current Route Origin Authorizations (ROAs) published to the RPKI for an IPAM internet registry association.
+      flags:
+        --cidr=: Filter results to a specific CIDR prefix.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+    - name: get-ipam-route-protection-findings
+      description: Retrieves route protection findings for an IPAM.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-id=!: The ID of the IPAM to retrieve route protection findings for.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+    - name: get-ipam-routing-policy-registration-deltas
+      description: Retrieves the history of routing policy registration changes for an IPAM internet registry association.
+      flags:
+        --chronological-order=: The chronological order to return results in.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delta-id=: Filter results to a specific delta ID.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --end-time=: The end of the time range to filter deltas by.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --start-time=: The start of the time range to filter deltas by.
+      completion:
+        flag:
+            chronological-order:
+                - forward
+                - reverse
+    - name: get-ipam-routing-policy-registrations
+      description: Retrieves routing policy registrations for an IPAM internet registry association.
+      flags:
+        --cidr=: Filter results to a specific CIDR prefix.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
     - name: get-launch-template-data
       description: Retrieves the configuration data of the specified instance.
       flags:
@@ -10412,6 +10622,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-local-zones: Specify `true` so that the response returns scores that include Local Zones.
         --instance-requirements-with-metadata=: The attributes for the instance types.
         --instance-types=:
             description: The instance types.
@@ -10420,6 +10631,7 @@ commands:
         --max-results=: The maximum number of items to return for this request.
         --next-token=: The token returned from a previous paginated request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --no-include-local-zones: Specify `true` so that the response returns scores that include Local Zones.
         --no-single-availability-zone: Specify `true` so that the response returns a list of scored Availability Zones.
         --page-size=: The size of each page to get in the AWS service call.
         --region-names=:
@@ -11537,6 +11749,26 @@ commands:
         --remove-organizational-unit-exclusions=:
             description: Remove an Organizational Unit (OU) exclusion to your IPAM.
             nargs: -1
+    - name: modify-ipam-routing-policy-registration
+      description: Modifies an existing routing policy registration.
+      flags:
+        --asns=!:
+            description: The updated list of Autonomous System Numbers (ASNs) authorized to originate the prefix.
+            nargs: -1
+        --cidr=!: The IP address prefix in CIDR notation identifying the routing policy registration to modify.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: A new description for the routing policy registration.
+        --dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --force: Forces the modification even if it conflicts with an announced route.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ipam-internet-registry-association-id=!: The ID of the IPAM internet registry association.
+        --max-length=: The new maximum prefix length that the ASNs are authorized to announce.
+        --no-dry-run: Checks whether you have the required permissions for the operation, without actually making the request, and provides an error response.
+        --no-force: Forces the modification even if it conflicts with an announced route.
+        --no-permit-more-specific-announcements: Specifies whether to permit more specific route announcements than the CIDR prefix.
+        --permit-more-specific-announcements: Specifies whether to permit more specific route announcements than the CIDR prefix.
     - name: modify-ipam-scope
       description: Modify an IPAM scope.
       flags:

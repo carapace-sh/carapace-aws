@@ -6,6 +6,8 @@ func init() {
 		"account":                             "AWS Account",
 		"acm-pca":                             "AWS Certificate Manager Private Certificate Authority",
 		"acm":                                 "AWS Certificate Manager",
+		"agent-registry-control":              "Agent Registry Control",
+		"agent-registry":                      "Agent Registry",
 		"agent-toolkit":                       "AgentToolkit",
 		"aiops":                               "AWS AI Ops",
 		"amp":                                 "Amazon Prometheus Service",

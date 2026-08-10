@@ -128,7 +128,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: The ARN of the KMS key to use to encrypt the lookup table data.
         --lookup-table-name=!: The name of the lookup table.
-        --query-id=: The ID of a completed CloudWatch Logs query whose results populate the lookup table.
+        --query-id=: The ID of a completed or cancelled CloudWatch Logs query whose results populate the lookup table.
         --table-body=: The CSV content of the lookup table.
         --tags=: A list of key-value pairs to associate with the lookup table.
     - name: create-scheduled-query
@@ -436,11 +436,14 @@ commands:
                 - PENDING_CANCEL
                 - RUNNING
     - name: describe-field-indexes
-      description: Returns a list of custom and default field indexes which are discovered in log data.
+      description: Returns a list of field indexes discovered in log data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-categories=:
+            description: The index categories to return.
+            nargs: -1
         --log-group-identifiers=!:
             description: An array containing the names or ARNs of the log groups that you want to retrieve field indexes for.
             nargs: -1
@@ -1436,7 +1439,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-id=: The ARN of the KMS key to use to encrypt the lookup table data.
         --lookup-table-arn=!: The ARN of the lookup table to update.
-        --query-id=: The ID of a completed CloudWatch Logs query whose results replace the lookup table content.
+        --query-id=: The ID of a completed or cancelled CloudWatch Logs query whose results replace the lookup table content.
         --table-body=: The new CSV content to replace the existing data.
     - name: update-scheduled-query
       description: Updates an existing scheduled query with new configuration.
