@@ -750,6 +750,35 @@ commands:
                 - SALESFORCE
                 - ZENDESK
                 - CASES
+    - name: create-metric
+      description: Creates a new metric definition for the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: The description of the metric.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --metric-calculation=!: The calculation definition for the metric, including the formula expression and the component metrics it references.
+        --name=!: The name of the metric.
+        --positive-trend-indicator=: How an increase in the metric value should be interpreted.
+        --status=: The publish status of the metric.
+        --tags=: The tags used to organize, track, or control access for this resource.
+        --unit=!: The display unit for the metric's data.
+      completion:
+        flag:
+            positive-trend-indicator:
+                - POSITIVE
+                - NEGATIVE
+                - NEUTRAL
+            status:
+                - PUBLISHED
+                - SAVED
+            unit:
+                - INTEGER
+                - DOUBLE
+                - PERCENT
+                - SECONDS
     - name: create-notification
       description: Creates a new notification to be delivered to specified recipients.
       flags:
@@ -1305,6 +1334,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-id=!: The identifier of the Connect Customer instance.
         --integration-association-id=!: The identifier for the integration association.
+    - name: delete-metric
+      description: Deletes an existing metric from the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --metric-id=!: The identifier of the metric to delete.
     - name: delete-notification
       description: Deletes a notification.
       flags:
@@ -1671,6 +1708,14 @@ commands:
                 - REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
                 - REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                 - EMAIL_MESSAGES
+    - name: describe-metric
+      description: Retrieves the full definition of an existing metric from the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --metric-id=!: The identifier of the metric to describe.
     - name: describe-notification
       description: Retrieves detailed information about a specific notification, including its content, priority, recipients, and metadata.
       flags:
@@ -2771,6 +2816,24 @@ commands:
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-metrics
+      description: Retrieves a paginated list of metric summaries for the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: The type of metrics to list.
+      completion:
+        flag:
+            type:
+                - AWS_MANAGED
+                - CUSTOMER_MANAGED
     - name: list-notifications
       description: Retrieves a paginated list of all notifications in the Amazon Connect instance.
       flags:
@@ -3748,6 +3811,20 @@ commands:
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --search-criteria=: The search criteria to be used to return hours of operations.
+        --search-filter=: Filters to be applied to search results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-metrics
+      description: Searches for metrics in the specified Connect Customer instance using search criteria and optional tag-based filters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-criteria=: The search criteria to filter the metrics.
         --search-filter=: Filters to be applied to search results.
         --starting-token=: A token to specify where to start paginating.
     - name: search-notifications
@@ -4821,6 +4898,38 @@ commands:
                 - REAL_TIME_CONTACT_ANALYSIS_CHAT_SEGMENTS
                 - REAL_TIME_CONTACT_ANALYSIS_VOICE_SEGMENTS
                 - EMAIL_MESSAGES
+    - name: update-metric-content
+      description: Updates the calculation, unit, and/or trend indicator of an existing metric in the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --metric-calculation=: The updated calculation definition for the metric.
+        --metric-id=!: The identifier of the metric to update.
+        --positive-trend-indicator=: How an increase in the metric value should be interpreted.
+        --unit=: The updated display unit for the metric.
+      completion:
+        flag:
+            positive-trend-indicator:
+                - POSITIVE
+                - NEGATIVE
+                - NEUTRAL
+            unit:
+                - INTEGER
+                - DOUBLE
+                - PERCENT
+                - SECONDS
+    - name: update-metric-metadata
+      description: Updates the name and/or description of an existing metric in the specified Connect Customer instance.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The updated description of the metric.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --metric-id=!: The identifier of the metric to update.
+        --name=: The updated name of the metric.
     - name: update-notification-content
       description: Updates the localized content of an existing notification.
       flags:

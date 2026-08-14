@@ -406,7 +406,7 @@ commands:
         --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
         --privacy-budget-template-identifier=!: A unique identifier for your privacy budget template.
     - name: disallow-intermediate-table
-      description: Invalidates a specific intermediate table that references the caller's base table.
+      description: Marks an intermediate table as invalid when it references the caller's base table.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -415,6 +415,14 @@ commands:
         --intermediate-table-name=!: The name of the intermediate table to disallow.
         --membership-identifier=!: The unique identifier of the membership that contains the intermediate table to disallow.
         --no-include-descendants: Specifies whether to cascade the disallow action to descendant intermediate tables.
+    - name: get-analysis-log-export
+      description: Returns information about an analysis log export, including its current status and, if the export failed, the reason for the failure.
+      flags:
+        --analysis-log-export-identifier=!: The unique identifier of the analysis log export to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership that the analysis log export belongs to.
     - name: get-analysis-template
       description: Retrieves an analysis template.
       flags:
@@ -614,6 +622,26 @@ commands:
                 - LIST
                 - CUSTOM
                 - ID_MAPPING_TABLE
+    - name: list-analysis-log-exports
+      description: Lists analysis log exports, sorted by the most recent export.
+      flags:
+        --analysis-identifier=: A filter on the unique identifier of the protected query that the analysis logs were exported for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that are returned for an API request call.
+        --membership-identifier=!: A unique identifier for the membership to list analysis log exports for.
+        --next-token=: The pagination token that's used to fetch the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: A filter on the status of the analysis log export.
+      completion:
+        flag:
+            status:
+                - IN_PROGRESS
+                - SUCCESS
+                - FAILED
     - name: list-analysis-templates
       description: Lists analysis templates that the caller owns.
       flags:
@@ -963,7 +991,7 @@ commands:
                 - INCREMENTAL
                 - DELETE_ONLY
     - name: populate-intermediate-table
-      description: Executes the stored query of an intermediate table to materialize data into managed storage.
+      description: Runs the stored query of an intermediate table and makes the results available for querying.
       flags:
         --analysis-payer-account-id=: The account ID of the member that pays for the analysis compute costs.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -981,6 +1009,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --membership-identifier=!: A unique identifier for one of your memberships for a collaboration.
         --parameters=!: Specifies the desired epsilon and noise parameters to preview.
+    - name: start-analysis-log-export
+      description: Starts an export of the Apache Spark logs for a protected query to an Amazon S3 bucket that you own.
+      flags:
+        --analysis-id=!: The unique identifier of the protected query that you want to export the analysis logs for.
+        --analysis-type=!: The type of analysis that the logs are exported for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --membership-identifier=!: A unique identifier for the membership to export the analysis logs for.
+        --result-configuration=!: The details needed to write the exported analysis logs.
+      completion:
+        flag:
+            analysis-type:
+                - PROTECTED_QUERY
     - name: start-protected-job
       description: Creates a protected job that is started by Clean Rooms.
       flags:
