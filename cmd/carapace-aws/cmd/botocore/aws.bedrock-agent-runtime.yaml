@@ -2,6 +2,16 @@
 name: bedrock-agent-runtime
 description: Agents for Amazon Bedrock Runtime
 commands:
+    - name: check-ingested-document-acl
+      description: Checks whether a user has access to a specific document by verifying against the ingested access control list (ACL) in a knowledge base.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The unique identifier of the data source that contains the document.
+        --document-id=!: The unique identifier of the document to check access for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that contains the document.
+        --user-context=!: The context object containing identity information for access control filtering, including user ID and optional group memberships used to evaluate the document access control list (ACL).
     - name: create-invocation
       description: Creates a new invocation within a session.
       flags:
@@ -80,7 +90,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier of the knowledge base that contains the document.
         --output-format=: The output format for the document content.
-        --user-context=: ""
+        --user-context=: Contains information about the user making the request.
       completion:
         flag:
             output-format:
@@ -104,6 +114,15 @@ commands:
         --flow-alias-identifier=!: The unique identifier of the flow alias used for the execution.
         --flow-identifier=!: The unique identifier of the flow.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-ingested-document-acl
+      description: Retrieves the ingested access control list (ACL) for a specific document in a knowledge base.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source-id=!: The unique identifier of the data source that contains the document.
+        --document-id=!: The unique identifier of the document to retrieve the ingested access control list (ACL) for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that contains the document.
     - name: get-invocation-step
       description: Retrieves the details of a specific invocation step within an invocation in a session.
       flags:
@@ -236,7 +255,7 @@ commands:
         --retrieval-configuration=: Contains configurations for the knowledge base query and retrieval process.
         --retrieval-query=!: Contains the query to send the knowledge base.
         --starting-token=: A token to specify where to start paginating.
-        --user-context=: ""
+        --user-context=: Contains information about the user making the request.
     - name: retrieve-and-generate
       description: Queries a knowledge base and generates responses based on the retrieved results and using the specified foundation model or [inference profile](https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html).
       flags:
@@ -247,7 +266,7 @@ commands:
         --retrieve-and-generate-configuration=: Contains configurations for the knowledge base query and retrieval process.
         --session-configuration=: Contains details about the session with the knowledge base.
         --session-id=: The unique identifier of the session.
-        --user-context=: ""
+        --user-context=: Contains information about the user making the request.
     - name: start-flow-execution
       description: Starts an execution of an Amazon Bedrock flow.
       flags:

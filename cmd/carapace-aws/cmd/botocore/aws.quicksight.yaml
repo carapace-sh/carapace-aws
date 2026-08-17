@@ -34,6 +34,19 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --topic-id=!: The ID for the topic reviewed answer that you want to delete.
+    - name: batch-describe-user-limits
+      description: Describes the effective resource limits for one or more Amazon Quick Sight users, including the limits that apply to each user based on their profile assignments.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the users.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-types=:
+            description: An optional filter that limits the results to specific resource types.
+            nargs: -1
+        --users=:
+            description: A list of users to describe limits for.
+            nargs: -1
     - name: cancel-ingestion
       description: Cancels an ongoing ingestion of data into SPICE.
       flags:
@@ -203,6 +216,25 @@ commands:
             nargs: -1
         --theme-arn=: The ARN for the theme to apply to the analysis that you're creating.
         --validation-strategy=: The option to relax the validation needed to create an analysis with definition objects.
+    - name: create-approval-policy
+      description: Creates an approval policy in Quick Sight.
+      flags:
+        --actions=!:
+            description: The list of governed actions that trigger the approval workflow.
+            nargs: -1
+        --applicable-to=!: The scoping configuration that determines who the approval policy applies to.
+        --approval-groups=!:
+            description: The list of group ARNs whose members can approve requests.
+            nargs: -1
+        --asset-types=!:
+            description: The list of asset types that the approval policy applies to.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the approval policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the approval policy.
+        --policy-id=!: The unique identifier to assign to the approval policy.
     - name: create-brand
       description: Creates an Quick Sight brand.
       flags:
@@ -366,6 +398,31 @@ commands:
                 - WEB_CRAWLER
                 - S3_KNOWLEDGE_BASE
                 - QBUSINESS
+    - name: create-dlp-setting
+      description: Creates a data loss prevention (DLP) setting configuration for an Amazon Web Services account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account in which to create the DLP setting.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dlp-setting-id=!: A unique identifier for the DLP setting.
+        --enabled!: Specifies whether DLP enforcement is active for this setting.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A human-readable display name for the DLP setting.
+        --no-enabled!: Specifies whether DLP enforcement is active for this setting.
+        --provider-config=!: The provider-specific configuration for the DLP integration.
+        --provider-outage-action=!: The behavior to apply when the DLP provider is unreachable.
+        --provider-type=!: The type of external DLP provider to use for sensitivity label classification.
+        --tags=:
+            description: A list of resource tags to apply to the DLP setting.
+            nargs: -1
+      completion:
+        flag:
+            provider-outage-action:
+                - ALLOW
+                - WARN
+                - BLOCK
+            provider-type:
+                - MICROSOFT_PURVIEW
     - name: create-flow
       description: Creates a new flow in the specified Amazon Web Services account.
       flags:
@@ -498,6 +555,17 @@ commands:
         --tags=:
             description: The tags to assign to the knowledge base.
             nargs: -1
+    - name: create-limits-profile
+      description: Creates a limits profile that defines resource usage limits for Amazon Quick Sight users.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the limits profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: A description for the limits profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-name=!: A display name for the limits profile.
+        --resource-limits=!: A map of resource types to their limit values for this profile.
     - name: create-namespace
       description: (Enterprise edition only) Creates a new namespace for you to use with Amazon Quick Sight.
       flags:
@@ -786,6 +854,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-force-delete-without-recovery: This option defaults to the value `NoForceDeleteWithoutRecovery`.
         --recovery-window-in-days=: A value that specifies the number of days that Amazon Quick Sight waits before it deletes the analysis.
+    - name: delete-approval-policy
+      description: Deletes an approval policy in Quick Sight.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: The unique identifier of the approval policy to delete.
     - name: delete-brand
       description: This API permanently deletes the specified Quick Sight brand.
       flags:
@@ -850,6 +925,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --namespace=: The Quick Sight namespace that you want to delete a linked Amazon Q Business application from.
+    - name: delete-dlp-setting
+      description: Deletes a DLP setting configuration from an Amazon Web Services account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the DLP setting that you want to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dlp-setting-id=!: The ID of the DLP setting that you want to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-flow
       description: Permanently deletes a flow from the specified Amazon Web Services account.
       flags:
@@ -935,6 +1018,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier for the knowledge base.
+    - name: delete-limits-profile
+      description: Deletes a limits profile.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the limits profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier for the limits profile to delete.
     - name: delete-namespace
       description: Deletes a namespace and the users and groups that are associated with the namespace.
       flags:
@@ -1188,6 +1279,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-approval-policy
+      description: Describes an approval policy in Quick Sight.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=!: The unique identifier of the approval policy to describe.
     - name: describe-asset-bundle-export-job
       description: Describes an existing export job.
       flags:
@@ -1351,6 +1449,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --namespace=: The Quick Sight namespace that contains the linked Amazon Q Business application.
+    - name: describe-dlp-setting
+      description: Describes the full configuration of a DLP setting in an Amazon Web Services account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the DLP setting that you want to describe.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dlp-setting-id=!: The ID of the DLP setting that you want to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-flow
       description: Returns the full details of a flow for the latest version of the requested publish state.
       flags:
@@ -1471,6 +1577,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier for the knowledge base.
+    - name: describe-limits-profile
+      description: Describes the properties of an existing limits profile.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the limits profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier for the limits profile.
     - name: describe-namespace
       description: Describes the current namespace.
       flags:
@@ -1825,6 +1939,17 @@ commands:
         --next-token=: A pagination token that can be used in a subsequent request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-approval-policies
+      description: Lists all approval policies in the specified Quick Sight account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-asset-bundle-export-jobs
       description: Lists all asset bundle export jobs that have been taken place in the last 14 days.
       flags:
@@ -1919,6 +2044,18 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to be returned per request.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-dlp-settings
+      description: Lists all DLP settings in an Amazon Web Services account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the DLP settings that you want to list.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per request.
         --next-token=: The token for the next set of results, or null if there are no more results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
@@ -2067,6 +2204,24 @@ commands:
         --next-token=: The token for the next set of results, or null if there are no more results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-limits-profiles
+      description: Lists all limits profiles in an Amazon Quick Sight account.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the limits profiles.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-type=: An optional filter that limits the results to profiles that contain the specified resource type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-type:
+                - INDEX_STORAGE
+                - AGENT_HOURS
     - name: list-namespaces
       description: Lists the namespaces for the specified Amazon Web Services account.
       flags:
@@ -2830,6 +2985,25 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --namespace=!: The namespace of the Quick application.
+    - name: update-approval-policy
+      description: Updates an approval policy in Quick Sight.
+      flags:
+        --actions=:
+            description: The list of governed actions that trigger the approval workflow.
+            nargs: -1
+        --applicable-to=: The scoping configuration that determines who the approval policy applies to.
+        --approval-groups=:
+            description: The list of group ARNs whose members can approve requests.
+            nargs: -1
+        --asset-types=:
+            description: The list of asset types that the approval policy applies to.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the approval policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the approval policy.
+        --policy-id=!: The unique identifier of the approval policy to update.
     - name: update-brand
       description: Updates a brand.
       flags:
@@ -3018,6 +3192,28 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --namespace=: The Quick Sight namespace that contains the linked Amazon Q Business application.
+    - name: update-dlp-setting
+      description: Updates an existing DLP setting configuration in an Amazon Web Services account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the DLP setting that you want to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dlp-setting-id=!: The ID of the DLP setting that you want to update.
+        --enabled: Specifies whether DLP enforcement is active for this setting.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: An updated display name for the DLP setting.
+        --no-enabled: Specifies whether DLP enforcement is active for this setting.
+        --provider-config=: An updated provider-specific configuration for the DLP integration.
+        --provider-outage-action=: An updated behavior to apply when the DLP provider is unreachable.
+        --provider-type=: An updated DLP provider type.
+      completion:
+        flag:
+            provider-outage-action:
+                - ALLOW
+                - WARN
+                - BLOCK
+            provider-type:
+                - MICROSOFT_PURVIEW
     - name: update-flow
       description: Updates an existing flow.
       flags:
@@ -3164,6 +3360,17 @@ commands:
         --revoke-permissions=:
             description: The resource permissions that you want to revoke from the knowledge base.
             nargs: -1
+    - name: update-limits-profile
+      description: Updates the properties of an existing limits profile.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the limits profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the limits profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique identifier for the limits profile to update.
+        --profile-name=: A new display name for the limits profile.
+        --resource-limits=: A map of resource types to their updated limit values.
     - name: update-o-auth-client-application
       description: Updates an OAuthClientApplication.
       flags:
