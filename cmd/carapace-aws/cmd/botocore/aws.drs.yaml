@@ -10,6 +10,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-network-id=!: The Source Network ID to associate with CloudFormation template.
+    - name: cancel-recovery-plan-execution
+      description: Cancels an in-progress Recovery Plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-arn=!: The ARN of the Recovery Plan execution to cancel.
     - name: create-extended-source-server
       description: Create an extended source server in the target Account based on the source server in staging account.
       flags:
@@ -50,6 +57,27 @@ commands:
                 - NONE
                 - BASIC
                 - IN_AWS
+    - name: create-recovery-plan
+      description: Creates a Recovery Plan to orchestrate multi-server disaster recovery.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique string provided to ensure request idempotency.
+        --description=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: ""
+        --tags=: The tags to apply to the Recovery Plan.
+    - name: create-recovery-plan-step
+      description: Creates a step in a Recovery Plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique string provided to ensure request idempotency.
+        --configuration=!: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-arn=!: The ARN of the Recovery Plan to add the step to.
+        --step-name=!: ""
+        --step-order=: ""
     - name: create-replication-configuration-template
       description: Creates a new ReplicationConfigurationTemplate.
       flags:
@@ -136,6 +164,27 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --recovery-instance-id=!: The ID of the Recovery Instance to be deleted.
+    - name: delete-recovery-plan
+      description: Deletes a Recovery Plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-arn=!: The ARN of the Recovery Plan to delete.
+    - name: delete-recovery-plan-execution
+      description: Deletes a Recovery Plan execution record.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-arn=!: The ARN of the Recovery Plan execution to delete.
+    - name: delete-recovery-plan-step
+      description: Deletes a step from a Recovery Plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-step-arn=!: The ARN of the Recovery Plan step to delete.
     - name: delete-replication-configuration-template
       description: Deletes a single Replication Configuration Template by ID
       flags:
@@ -299,6 +348,34 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: The ID of the Source Server that we want to retrieve a Launch Configuration for.
+    - name: get-recovery-plan
+      description: Gets a Recovery Plan by ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-arn=!: The ARN of the Recovery Plan to retrieve.
+    - name: get-recovery-plan-execution
+      description: Gets the details of a Recovery Plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-arn=!: The ARN of the Recovery Plan execution.
+    - name: get-recovery-plan-execution-step
+      description: Gets the details of a step within a Recovery Plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-step-arn=!: The ARN of the execution step.
+    - name: get-recovery-plan-step
+      description: Gets a Recovery Plan step by ARN.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-step-arn=!: The ARN of the Recovery Plan step to retrieve.
     - name: get-replication-configuration
       description: Gets a ReplicationConfiguration, filtered by Source Server ID.
       flags:
@@ -336,6 +413,64 @@ commands:
         --next-token=: Next token to use when listing resource launch actions.
         --page-size=: The size of each page to get in the AWS service call.
         --resource-id=!: ""
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-recovery-plan-execution-steps
+      description: Lists all steps within a Recovery Plan execution.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Filters for listing execution steps.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --recovery-plan-execution-arn=!: The ARN of the Recovery Plan execution.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-recovery-plan-executions
+      description: Lists executions of Recovery Plans, optionally filtered by plan or status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --recovery-plan-arn=: Filter executions by Recovery Plan ARN.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filter executions by status.
+      completion:
+        flag:
+            status:
+                - CREATED
+                - IN_PROGRESS
+                - COMPLETED
+                - FAILED
+                - CANCELLING
+                - CANCELLED
+    - name: list-recovery-plan-steps
+      description: Lists all steps in a Recovery Plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --recovery-plan-arn=!: The ARN of the Recovery Plan.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-recovery-plans
+      description: Lists all Recovery Plans in the account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-staging-accounts
       description: Returns an array of staging accounts for existing extended source servers.
@@ -382,6 +517,16 @@ commands:
                 - CONFIGURATION
                 - SECURITY
                 - OTHER
+    - name: reorder-recovery-plan-steps
+      description: Reorders steps in a Recovery Plan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ordered-step-arns=!:
+            description: Ordered list of all step ARNs representing the desired sequence.
+            nargs: -1
+        --recovery-plan-arn=!: The ARN of the Recovery Plan.
     - name: retry-data-replication
       description: 'WARNING: RetryDataReplication is deprecated.'
       flags:
@@ -389,6 +534,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --source-server-id=!: The ID of the Source Server whose data replication should be retried.
+    - name: retry-recovery-plan-execution-step
+      description: Retries a failed `SERVER` type execution step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-step-arn=!: The ARN of the execution step to retry.
     - name: reverse-replication
       description: Start replication to origin / target region - applies only to protected instances that originated in EC2.
       flags:
@@ -418,6 +570,24 @@ commands:
             description: The Source Servers that we want to start a Recovery Job for.
             nargs: -1
         --tags=: The tags to be associated with the Recovery Job.
+    - name: start-recovery-plan-execution
+      description: Starts executing a Recovery Plan in `DRILL` or `RECOVERY` mode.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique string provided to ensure request idempotency.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The execution mode (`DRILL` or `RECOVERY`).
+        --recovery-plan-arn=!: The ARN of the Recovery Plan to execute.
+        --source-servers=:
+            description: Optional list of source servers with specific recovery snapshots.
+            nargs: -1
+        --tags=: The tags to apply to the Recovery Plan execution.
+      completion:
+        flag:
+            mode:
+                - DRILL
+                - RECOVERY
     - name: start-replication
       description: Starts replication for a stopped Source Server.
       flags:
@@ -572,6 +742,46 @@ commands:
                 - NONE
                 - BASIC
                 - IN_AWS
+    - name: update-recovery-plan
+      description: Updates a Recovery Plan's name or description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: ""
+        --recovery-plan-arn=!: The ARN of the Recovery Plan to update.
+    - name: update-recovery-plan-execution-step
+      description: Updates an execution step.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-execution-step-arn=!: The ARN of the execution step to update.
+        --servers=:
+            description: Full replacement of the server list.
+            nargs: -1
+        --status=: Only SKIPPED is accepted.
+        --wait-duration-minutes=: Updated wait duration.
+      completion:
+        flag:
+            status:
+                - NOT_STARTED
+                - EXECUTING
+                - WAITING
+                - COMPLETED
+                - FAILED
+                - TIMED_OUT
+                - SKIPPED
+    - name: update-recovery-plan-step
+      description: Updates a Recovery Plan step's name or configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recovery-plan-step-arn=!: The ARN of the Recovery Plan step to update.
+        --step-name=: ""
     - name: update-replication-configuration
       description: Allows you to update a ReplicationConfiguration by Source Server ID.
       flags:

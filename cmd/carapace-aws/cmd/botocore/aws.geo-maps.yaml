@@ -32,7 +32,7 @@ commands:
         positional:
             - - $files
     - name: get-static-map
-      description: This operation is not supported in `ap-southeast-1` and `ap-southeast-5` regions for [GrabMaps](https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html) customers.
+      description: '`GetStaticMap` provides high-quality static map images with customizable options.'
       flags:
         --bounded-positions=: 'Takes in two or more pair of coordinates in World Geodetic System (WGS 84) format: \[longitude, latitude], with each coordinate separated by a comma.'
         --bounding-box=: 'Takes in two pairs of coordinates in World Geodetic System (WGS 84) format: \[longitude, latitude], denoting south-westerly and north-easterly edges of the image.'
@@ -83,6 +83,10 @@ commands:
         --color-scheme=: Sets the color tone for the map, such as dark and light.
         --contour-density=: Displays the shape and steepness of terrain features using elevation lines.
         --key=: 'Optional: The API key to be used for authorization.'
+        --poi-categories=:
+            description: Renders only the specified categories of points of interest.
+            nargs: -1
+        --poi-density=: Controls how densely points of interest are rendered on the map.
         --political-view=: Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.
         --style=!: Style specifies the desired map style.
         --terrain=: Adjusts how physical terrain details are rendered on the map.
@@ -101,6 +105,13 @@ commands:
                 - Low
                 - Medium
                 - High
+            poi-density:
+                - "Off"
+                - VerySparse
+                - Sparse
+                - Default
+                - Dense
+                - VeryDense
             style:
                 - Standard
                 - Monochrome
