@@ -676,12 +676,30 @@ commands:
             description: A list of IAM roles to associate with the namespace.
             nargs: -1
         --kms-key-id=: The ID of the Amazon Web Services Key Management Service key used to encrypt your data.
+        --log-destination-type=: The destination for the log data.
         --log-exports=:
             description: The types of logs the namespace can export.
             nargs: -1
         --manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
         --namespace-name=!: The name of the namespace to update.
         --no-manage-admin-password: If `true`, Amazon Redshift uses Secrets Manager to manage the namespace's admin credentials.
+        --s3-table-action=: Whether to enable or disable Amazon S3 Tables publishing.
+        --s3-table-granularity=: The scope of the Amazon S3 Tables destination.
+        --s3-table-kms-key-id=: The identifier of the Key Management Service key used to encrypt the published Amazon S3 Tables data.
+        --s3-table-names=:
+            description: The system tables to publish (on enable) or to stop publishing (on disable).
+            nargs: -1
+      completion:
+        flag:
+            log-destination-type:
+                - s3table
+                - cloudwatch
+            s3-table-action:
+                - Enable
+                - Disable
+            s3-table-granularity:
+                - namespace
+                - account
     - name: update-scheduled-action
       description: Updates a scheduled action.
       flags:

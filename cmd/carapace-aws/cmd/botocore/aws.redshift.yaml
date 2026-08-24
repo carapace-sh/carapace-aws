@@ -1268,6 +1268,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-identifier=!: The identifier of the cluster on which logging is to be stopped.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --log-destination-type=: The log destination type.
+        --log-exports=:
+            description: The collection of log types to stop exporting.
+            nargs: -1
+      completion:
+        flag:
+            log-destination-type:
+                - s3
+                - cloudwatch
+                - s3table
     - name: disable-snapshot-copy
       description: Disables the automatic copying of snapshots from one region to another region for a specified cluster.
       flags:
@@ -1299,11 +1309,14 @@ commands:
             description: The collection of exported log types.
             nargs: -1
         --s3-key-prefix=: The prefix applied to the log file names.
+        --s3-table-granularity=: The scope of system table publishing.
+        --s3-table-kms-key-id=: The identifier of a customer managed KMS key used to encrypt the S3 tables.
       completion:
         flag:
             log-destination-type:
                 - s3
                 - cloudwatch
+                - s3table
     - name: enable-snapshot-copy
       description: Enables the automatic copy of snapshots from one region to another region for a specified cluster.
       flags:
