@@ -183,6 +183,7 @@ func init() {
 		"guardduty":                           "Amazon GuardDuty",
 		"health":                              "AWS Health APIs and Notifications",
 		"healthlake":                          "Amazon HealthLake",
+		"iam-toolbox":                         "IAM Toolbox (Preview)",
 		"iam":                                 "AWS Identity and Access Management",
 		"identitystore":                       "AWS SSO Identity Store",
 		"imagebuilder":                        "EC2 Image Builder",
