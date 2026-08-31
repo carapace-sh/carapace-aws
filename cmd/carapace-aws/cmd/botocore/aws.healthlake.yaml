@@ -9,7 +9,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --kms-key-id=: The AWS Key Management Service (AWS KMS) key identifier used to encrypt the profile content at rest.
+        --kms-key-id=: The Amazon Web Services Key Management Service (Amazon Web Services KMS) key identifier used to encrypt the profile content at rest.
         --profile-description=: A human-readable description of the profile's purpose.
         --profile-name=!: A name for the data transformation profile.
         --source-format=!: The source data format that this profile converts from (Consolidated Clinical Document Architecture (C-CDA) or Comma-separated values (CSV)).
@@ -24,6 +24,7 @@ commands:
       description: Create a FHIR-enabled data store.
       flags:
         --analytics-configuration=: The analytics configuration for the data store.
+        --backup-configuration=: The backup configuration for the data store.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: An optional user-provided token to ensure API idempotency.
@@ -54,7 +55,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --datastore-id=!: The AWS-generated identifier for the data store to be deleted.
+        --datastore-id=!: The Amazon Web Services-generated identifier for the data store to be deleted.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-data-transformation-job
       description: Describes a data transformation job, including its current status, configuration, and progress information.
@@ -95,7 +96,7 @@ commands:
         --profile-id=!: The unique identifier of the profile to retrieve.
         --profile-version=: The version number to retrieve.
     - name: list-data-transformation-jobs
-      description: Lists data transformation jobs for your AWS account.
+      description: Lists data transformation jobs for your Amazon Web Services account.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -230,20 +231,38 @@ commands:
             source-format:
                 - CCDA
                 - CSV
+    - name: restore-fhir-datastore
+      description: Restore a backup-enabled data store to a point in time.
+      flags:
+        --analytics-configuration=: The analytics configuration for the restored data store.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An optional user-provided token to ensure API idempotency of the restore.
+        --datastore-name=: The name for the restored data store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: The identity provider configuration for the restored data store.
+        --nlp-configuration=: The NLP configuration for the restored data store.
+        --profile-configuration=: The profile configuration for the restored data store.
+        --restore-configuration=!: The restore configuration specifying the type and parameters for the restore.
+        --source-datastore-id=!: The identifier of the source data store to restore from.
+        --sse-configuration=: The server-side encryption key configuration for the restored data store.
+        --tags=:
+            description: The resource tags applied to the restored data store.
+            nargs: -1
     - name: start-data-transformation-job
-      description: Starts an asynchronous data transformation job that converts source files from Amazon Simple Storage Service (Amazon S3) and writes the output to Amazon S3 or AWS HealthLake.
+      description: Starts an asynchronous data transformation job that converts source files from Amazon Simple Storage Service (Amazon S3) and writes the output to Amazon S3 or HealthLake.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=!: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that AWS HealthLake assumes to read from and write to the specified Amazon S3 locations.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that HealthLake assumes to read from and write to the specified Amazon S3 locations.
         --drift-detection-enabled: Specifies whether drift detection is enabled for this job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-data-config=!: The Amazon S3 location and format of the source files to transform.
         --job-name=: A descriptive name for the data transformation job.
         --no-drift-detection-enabled: Specifies whether drift detection is enabled for this job.
         --no-provenance-enabled: Specifies whether FHIR R4 Provenance resource generation is enabled for this transformation job.
-        --output-data-config=!: The Amazon S3 output location and AWS Key Management Service (AWS KMS) encryption configuration.
+        --output-data-config=!: The Amazon S3 output location and Amazon Web Services Key Management Service (Amazon Web Services KMS) encryption configuration.
         --profile-id=!: The unique identifier of the data transformation profile to use for conversion.
         --provenance-enabled: Specifies whether FHIR R4 Provenance resource generation is enabled for this transformation job.
     - name: start-fhir-export-job
@@ -263,17 +282,17 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The optional user-provided token used for ensuring API idempotency.
-        --data-access-role-arn=!: The Amazon Resource Name (ARN) that grants access permission to AWS HealthLake.
+        --data-access-role-arn=!: The Amazon Resource Name (ARN) that grants access permission to HealthLake.
         --datastore-id=!: The data store identifier.
-        --drift-detection-enabled: ""
+        --drift-detection-enabled: Specifies whether to enable drift detection for the import job.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --input-data-config=!: The input properties for the import job request.
-        --input-format=: ""
+        --input-format=: The input format of the data to be imported.
         --job-name=: The import job name.
         --job-output-data-config=!: ""
-        --no-drift-detection-enabled: ""
+        --no-drift-detection-enabled: Specifies whether to enable drift detection for the import job.
         --no-provenance-enabled: Specifies whether to enable provenance for the import job.
-        --profile-id=: ""
+        --profile-id=: The data transformation profile identifier to use for the import job.
         --provenance-enabled: Specifies whether to enable provenance for the import job.
         --validation-level=: The validation level of the import job.
       completion:
@@ -315,6 +334,7 @@ commands:
       description: Update the properties of a FHIR-enabled data store.
       flags:
         --analytics-configuration=: The analytics configuration for the data store.
+        --backup-configuration=: The backup configuration for the data store.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --datastore-id=!: The data store identifier.
