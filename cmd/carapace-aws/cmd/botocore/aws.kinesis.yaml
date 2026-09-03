@@ -12,6 +12,22 @@ commands:
         --stream-id=: Not Implemented.
         --stream-name=: The name of the stream.
         --tags=!: A set of up to 50 key-value pairs to use to create the tags.
+    - name: create-channel
+      description: Creates a channel that delivers records from a Kinesis data stream to a destination.
+      flags:
+        --channel-name=!: The name of the channel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: The server-side encryption configuration that uses an Amazon Web Services KMS key to encrypt data delivered to the destination.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The Amazon CloudWatch Logs configuration for the channel.
+        --s3-destination-configuration=: The configuration for delivery to a general purpose Amazon S3 bucket.
+        --s3-tables-destination-configuration=: The configuration for delivery to streaming tables on Apache Iceberg in Amazon S3 Tables.
+        --service-execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that Amazon Kinesis Data Streams assumes to write records to the destination.
+        --stream-configuration-list=!:
+            description: The source stream configuration for the channel.
+            nargs: -1
+        --tags=: A set of key-value pairs to assign to the channel.
     - name: create-stream
       description: Creates a Kinesis data stream.
       flags:
@@ -34,6 +50,13 @@ commands:
         --stream-arn=: The ARN of the stream.
         --stream-id=: Not Implemented.
         --stream-name=: The name of the stream to modify.
+    - name: delete-channel
+      description: Deletes the specified channel.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) of the channel to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-resource-policy
       description: Delete a policy for the specified data stream or consumer.
       flags:
@@ -66,6 +89,13 @@ commands:
     - name: describe-account-settings
       description: Describes the account-level settings for Amazon Kinesis Data Streams.
       flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-channel
+      description: Describes the specified channel, including its configuration and current status.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) of the channel to describe.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -181,6 +211,20 @@ commands:
         --stream-arn=: The ARN of the stream.
         --stream-id=: Not Implemented.
         --stream-name=: The name of the stream to modify.
+    - name: list-channels
+      description: Lists the channels in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of channels to return in a single call.
+        --next-token=: The pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --stream-filter=:
+            description: Filters the results to channels associated with the specified streams.
+            nargs: -1
     - name: list-shards
       description: Lists the shards in a stream and provides information about each shard.
       flags:
@@ -380,6 +424,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --minimum-throughput-billing-commitment=!: Specifies the minimum throughput billing commitment configuration for your account.
+    - name: update-channel
+      description: Updates the data freshness interval or the Amazon CloudWatch Logs configuration of an existing channel.
+      flags:
+        --channel-arn=!: The Amazon Resource Name (ARN) of the channel to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --logging-configuration=: The updated Amazon CloudWatch Logs configuration for the channel.
+        --s3-destination-configuration=: The updated configuration for a general purpose Amazon S3 destination.
+        --s3-tables-destination-configuration=: The updated configuration for a streaming table destination.
     - name: update-max-record-size
       description: This allows you to update the `MaxRecordSize` of a single record that you can write to, and read from a stream.
       flags:
@@ -427,6 +481,13 @@ commands:
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: channel-active
+          description: Describes the specified channel, including its configuration and current status.
+          flags:
+            --channel-arn=!: The Amazon Resource Name (ARN) of the channel to describe.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: stream-exists
           description: Describes the specified Kinesis data stream.
           flags:

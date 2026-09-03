@@ -14,6 +14,15 @@ commands:
         --values=!:
             description: A list of key values.
             nargs: -1
+    - name: associate-stream-for-segments
+      description: Associates an Amazon Kinesis data stream to receive segment membership events for a given domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --destination-arn=!: The Amazon Resource Name (ARN) of the Amazon Kinesis data stream to deliver segment membership events to.
+        --destination-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that allows Customer Profiles service principal to assume the role for conducting AWS Key Management Service (KMS) and Amazon Kinesis operations.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: batch-get-calculated-attribute-for-profile
       description: Fetch the possible attribute values given the attribute name.
       flags:
@@ -75,6 +84,7 @@ commands:
                 - MAXIMUM
                 - AVERAGE
                 - MAX_OCCURRENCE
+                - RECENT_OCCURRENCES
     - name: create-domain
       description: Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys.
       flags:
@@ -416,6 +426,14 @@ commands:
         --domain-name=!: The unique name of the domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --segment-definition-name=!: The unique name of the segment definition.
+    - name: delete-segment-subscription
+      description: Deletes a segment subscription for membership events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --segment-definition-name=!: The unique name of the segment definition.
     - name: delete-workflow
       description: Deletes the specified workflow and all its corresponding resources.
       flags:
@@ -434,6 +452,13 @@ commands:
         --objects=!:
             description: A string that is serialized from a JSON object.
             nargs: -1
+    - name: disassociate-stream-for-segments
+      description: Disassociates the Amazon Kinesis data stream configured for segment membership events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-auto-merging-preview
       description: Tests the auto-merging settings of your Identity Resolution Job without merging your data.
       flags:
@@ -641,6 +666,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --segment-definition-name=!: The unique name of the segment definition.
         --snapshot-id=!: The unique identifier of the segment snapshot.
+    - name: get-segment-subscription
+      description: Returns the current subscription configuration, execution schedule, and status for segment membership events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --segment-definition-name=!: The unique name of the segment definition.
     - name: get-similar-profiles
       description: Returns a set of profiles that belong to the same matching group using the `matchId` or `profileId`.
       flags:
@@ -661,6 +694,13 @@ commands:
             match-type:
                 - RULE_BASED_MATCHING
                 - ML_BASED_MATCHING
+    - name: get-stream-for-segments
+      description: Returns information about the segment membership event stream configured for a specific domain, including the stream state and associated segments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-upload-job
       description: This API retrieves the details of a specific upload job.
       flags:
@@ -958,6 +998,19 @@ commands:
         --next-token=: The pagination token from the previous call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-segment-subscription-events
+      description: Returns the most recent membership events for a segment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of events to return per page.
+        --next-token=: The pagination token from the previous call to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --segment-definition-name=!: The unique name of the segment definition.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Displays the tags associated with an Amazon Connect Customer Profiles resource.
       flags:
@@ -1077,6 +1130,15 @@ commands:
         --source-priority=: An integer that determines the priority of this object type when data from multiple sources is ingested.
         --tags=: The tags used to organize, track, or control access for this resource.
         --template-id=: A unique identifier for the object template.
+    - name: put-segment-subscription
+      description: Creates or updates a segment subscription for membership events.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-name=!: The unique name of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schedule-configuration=: The optional schedule configuration that controls how often membership snapshots are run.
+        --segment-definition-name=!: The unique name of the segment definition.
     - name: search-profiles
       description: Searches for profiles within a specific domain using one or more predefined search keys (e.g., \_fullName, \_phone, \_email, \_account, etc.) and/or custom-defined search keys.
       flags:
