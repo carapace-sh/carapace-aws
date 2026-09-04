@@ -30,6 +30,41 @@ commands:
             description: The IDs of the findings that you want to archive.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-custom-detection-rule-association
+      description: Enables a custom detection rule for your account by creating an association.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The rule execution mode.
+        --rule-id=!: The unique identifier for the custom detection rule.
+        --tags=: The tags to be added to the new custom detection rule association resource.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
+    - name: create-custom-detection-rule-org-configuration
+      description: Creates an organization-level configuration that enables a custom detection rule across your organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --exclude-account-ids=:
+            description: The account IDs to exclude from the organization configuration.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-account-ids=:
+            description: The account IDs to include in the organization configuration.
+            nargs: -1
+        --mode=!: The execution mode of the organization configuration.
+        --rule-id=!: The unique identifier for the custom detection rule.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
     - name: create-detector
       description: Creates a single GuardDuty detector.
       flags:
@@ -230,6 +265,27 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-custom-detection-rule-association
+      description: Disables a custom detection rule by deleting its association.
+      flags:
+        --association-id=!: The unique identifier for the association to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-id=!: The unique identifier for the custom detection rule.
+    - name: delete-custom-detection-rule-org-configuration
+      description: Deletes the organization-level configuration for a custom detection rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The execution mode of the organization configuration to delete.
+        --rule-id=!: The unique identifier for the custom detection rule.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
     - name: delete-detector
       description: Deletes an Amazon GuardDuty detector that is specified by the detector ID.
       flags:
@@ -398,6 +454,34 @@ commands:
         --statistics-type=!:
             description: Represents the statistics type used to aggregate the coverage details.
             nargs: -1
+    - name: get-custom-detection-rule
+      description: Returns details for a custom detection rule in GuardDuty, including its detection logic.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-id=!: The unique identifier for the custom detection rule.
+    - name: get-custom-detection-rule-association
+      description: Returns details for a custom detection rule association.
+      flags:
+        --association-id=!: The unique identifier for the association.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-id=!: The unique identifier for the custom detection rule.
+    - name: get-custom-detection-rule-org-configuration
+      description: Returns the organization-level configuration for a custom detection rule.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The execution mode of the organization configuration to retrieve.
+        --rule-id=!: The unique identifier for the custom detection rule.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
     - name: get-detector
       description: Retrieves a GuardDuty detector specified by the detectorId.
       flags:
@@ -606,6 +690,56 @@ commands:
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --sort-criteria=: Represents the criteria used to sort the coverage details.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-custom-detection-rule-associations
+      description: Returns all custom detection rule associations for your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --mode=: The rule execution mode to filter associations by.
+        --next-token=: A pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-id=: The unique identifier for the custom detection rule to filter associations by.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
+    - name: list-custom-detection-rule-org-configurations
+      description: Returns all organization-level configurations for custom detection rules.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: A pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The configuration status to filter by.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - PROCESSING
+                - FAILED
+    - name: list-custom-detection-rules
+      description: Returns all available custom detection rules in GuardDuty.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: A list of filter criteria to apply when listing custom detection rules.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: A pagination token from a previous response.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-detectors
       description: Lists detectorIds of all the existing Amazon GuardDuty detector resources.
@@ -840,6 +974,39 @@ commands:
         --tag-keys=!:
             description: The tag keys to remove from the resource.
             nargs: -1
+    - name: update-custom-detection-rule-association
+      description: Updates the mode of an existing custom detection rule association.
+      flags:
+        --association-id=!: The unique identifier for the association to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --mode=!: The rule execution mode.
+        --rule-id=!: The unique identifier for the custom detection rule.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
+    - name: update-custom-detection-rule-org-configuration
+      description: Updates the organization-level configuration for a custom detection rule, including the mode and include/exclude account lists.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --exclude-account-ids=:
+            description: The account IDs to exclude from the organization configuration.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-account-ids=:
+            description: The account IDs to include in the organization configuration.
+            nargs: -1
+        --mode=!: The execution mode of the organization configuration.
+        --rule-id=!: The unique identifier for the custom detection rule.
+      completion:
+        flag:
+            mode:
+                - LIVE
+                - DRY_RUN
     - name: update-detector
       description: Updates the GuardDuty detector specified by the detector ID.
       flags:
