@@ -112,6 +112,9 @@ commands:
     - name: create-network-migration-definition
       description: Creates a new network migration definition that specifies the source and target network configuration for a migration.
       flags:
+        --cidr-mappings=:
+            description: A list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: A description of the network migration definition.
@@ -125,11 +128,15 @@ commands:
         --target-deployment=: The target deployment configuration for the migrated network.
         --target-network=!: The target network configuration including topology and CIDR ranges.
         --target-s3-configuration=!: The S3 configuration for storing the target network artifacts.
+        --vpc-provisioning-strategy=: Specifies whether to create new target VPCs or use existing ones.
       completion:
         flag:
             target-deployment:
                 - SINGLE_ACCOUNT
                 - MULTI_ACCOUNT
+            vpc-provisioning-strategy:
+                - CREATE_NEW
+                - USE_EXISTING
     - name: create-replication-configuration-template
       description: Creates a new ReplicationConfigurationTemplate.
       flags:
@@ -296,7 +303,7 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-replication-configuration-templates
-      description: Lists all ReplicationConfigurationTemplates, filtered by Source Server IDs.
+      description: Lists all ReplicationConfigurationTemplates, filtered by replication configuration template IDs.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -315,7 +322,7 @@ commands:
     - name: describe-source-servers
       description: Retrieves all SourceServers or multiple SourceServers by ID.
       flags:
-        --account-id=: Request to filter Source Servers list by Accoun ID.
+        --account-id=: Request to filter Source Servers list by Account ID.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --filters=: Request to filter Source Servers list.
@@ -864,7 +871,7 @@ commands:
         --s3-bucket-owner=: Start export request s3 bucket owner.
         --s3-bucket=!: Start export request s3 bucket.
         --s3-key=!: Start export request s3key.
-        --tags=: Start import request tags.
+        --tags=: Start export request tags.
     - name: start-import
       description: Start import.
       flags:
@@ -1113,6 +1120,9 @@ commands:
     - name: update-network-migration-definition
       description: Updates an existing network migration definition with new source or target configurations.
       flags:
+        --cidr-mappings=:
+            description: The updated list of CIDR mappings that map original source CIDR ranges to updated target CIDR ranges.
+            nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --description=: The updated description of the network migration definition.
@@ -1126,11 +1136,15 @@ commands:
         --target-deployment=: The updated target deployment configuration.
         --target-network=: The updated target network configuration.
         --target-s3-configuration=: The updated S3 configuration for storing the target network artifacts.
+        --vpc-provisioning-strategy=: Updates whether the migration creates new target VPCs or uses existing ones.
       completion:
         flag:
             target-deployment:
                 - SINGLE_ACCOUNT
                 - MULTI_ACCOUNT
+            vpc-provisioning-strategy:
+                - CREATE_NEW
+                - USE_EXISTING
     - name: update-network-migration-mapper-segment
       description: Updates a mapper segment's configuration, such as changing its scope tags.
       flags:
@@ -1195,7 +1209,7 @@ commands:
                 - IPV4
                 - IPV6
     - name: update-replication-configuration-template
-      description: Updates multiple ReplicationConfigurationTemplates by ID.
+      description: Updates a ReplicationConfigurationTemplate by ID.
       flags:
         --arn=: Update replication configuration template ARN request.
         --associate-default-security-group: Update replication configuration template associate default Application Migration Service Security group request.

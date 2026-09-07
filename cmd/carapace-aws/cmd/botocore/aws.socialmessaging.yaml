@@ -26,6 +26,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --clone-flow-id=: The ID of an existing Flow within the same WhatsApp Business Account to clone.
+        --endpoint-uri=: Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the Flow's endpoint\_uri and called by Meta directly.
         --flow-json=: The Flow JSON definition that describes the screens, components, and logic of the Flow.
         --flow-name=!: The name of the Flow.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -112,6 +113,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the phone number.
+    - name: get-whats-app-business-public-key
+      description: Retrieves the business public key for a phone number and its signature status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --origination-phone-number-id=!: The unique identifier of the phone number whose business public key to retrieve.
     - name: get-whatsapp-flow
       description: Retrieves the metadata and status of a WhatsApp Flow, including validation errors, preview information, and health status.
       flags:
@@ -237,6 +245,15 @@ commands:
         --flow-id=!: The unique identifier of the Flow to publish.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the WhatsApp Business Account associated with this Flow.
+    - name: put-whats-app-business-public-key
+      description: Sets the business public key used to encrypt the data exchanged with the endpoint of a data exchange Flow.
+      flags:
+        --business-public-key=: PEM-encoded RSA public key.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: Customer-managed KMS asymmetric RSA key ARN.
+        --origination-phone-number-id=!: The unique identifier of the phone number to associate with the business public key.
     - name: put-whatsapp-business-account-event-destinations
       description: Add an event destination to log event data from WhatsApp for a WhatsApp Business Account (WABA).
       flags:
@@ -293,10 +310,12 @@ commands:
             nargs: -1
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-uri=: Optional HTTPS endpoint for a dynamic Flow, registered with Meta as the Flow's endpoint\_uri and called by Meta directly.
         --flow-id=!: The unique identifier of the Flow to update.
         --flow-name=: The updated name for the Flow.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the WhatsApp Business Account associated with this Flow.
+        --meta-app-id=: Optional Meta app ID to attach to the Flow.
     - name: update-whatsapp-flow-assets
       description: Updates the Flow JSON definition (assets) of a WhatsApp Flow.
       flags:
