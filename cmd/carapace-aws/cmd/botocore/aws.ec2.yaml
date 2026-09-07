@@ -1465,6 +1465,12 @@ commands:
         --tag-specifications=:
             description: The tags to apply to the interruptible Capacity Reservation during creation.
             nargs: -1
+        --zero-size-preference=: Specifies the behavior for the interruptible Capacity Reservation when you reduce its allocation to zero instances.
+      completion:
+        flag:
+            zero-size-preference:
+                - retain
+                - default
     - name: create-ipam
       description: Create an IPAM.
       flags:
@@ -15175,7 +15181,13 @@ commands:
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
-        --target-instance-count=!: The new number of instances to allocate.
+        --target-instance-count=: The new number of instances to allocate.
+        --zero-size-preference=: Specifies the updated behavior for the interruptible Capacity Reservation when you reduce its allocation to zero instances.
+      completion:
+        flag:
+            zero-size-preference:
+                - retain
+                - default
     - name: update-security-group-rule-descriptions-egress
       description: Updates the description of an egress (outbound) security group rule.
       flags:
@@ -15207,6 +15219,17 @@ commands:
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --security-group-rule-descriptions=:
             description: The description for the ingress security group rules.
+            nargs: -1
+    - name: validate-security-group-quotas-for-interface
+      description: Validates whether the specified security groups can be associated with a single network interface.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --security-group-ids=!:
+            description: The IDs of the security groups to validate for association with a single network interface.
             nargs: -1
     - name: wait
       description: Wait  until  a particular condition is satisfied.

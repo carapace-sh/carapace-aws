@@ -150,6 +150,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --kms-key-arn=: Optional KMS key ARN for encrypting component configurations.
         --tags=: A map of tag keys and values to assign to the configuration bundle.
+    - name: create-consent-portal
+      description: Creates a new consent portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the consent portal.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the consent portal assumes to access the resources defined in its sources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-config=!: The identity provider configuration that the consent portal uses to authenticate end users.
+        --name=!: The name of the consent portal.
+        --sources=!:
+            description: The resources served by the consent portal.
+            nargs: -1
+        --tags=: A map of tag keys and values to assign to the consent portal.
     - name: create-dataset
       description: Creates a new dataset resource asynchronously.
       flags:
@@ -401,6 +415,7 @@ commands:
             nargs: -1
         --no-enable-on-create!: Whether to enable the online evaluation configuration immediately upon creation.
         --online-evaluation-config-name=!: The name of the online evaluation configuration.
+        --output-config=: ""
         --rule=!: The evaluation rule that defines sampling configuration, filters, and session detection settings for the online evaluation.
         --tags=: A map of tag keys and values to assign to an AgentCore Online Evaluation Config.
     - name: create-payment-connector
@@ -607,6 +622,13 @@ commands:
         --bundle-id=!: The unique identifier of the configuration bundle to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-consent-portal
+      description: Deletes a consent portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consent-portal-identifier=!: The identifier of the consent portal.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-dataset
       description: Deletes a dataset version or an entire dataset asynchronously.
@@ -841,6 +863,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --version-id=!: The version identifier of the configuration bundle version to retrieve.
+    - name: get-consent-portal
+      description: Retrieves information about a consent portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consent-portal-identifier=!: The identifier of the consent portal.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-dataset
       description: Retrieves dataset metadata.
       flags:
@@ -1177,6 +1206,17 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-consent-portals
+      description: Lists all of the consent portals in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of consent portals to return in a single call.
+        --next-token=: A token to retrieve the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-dataset-examples
@@ -1674,6 +1714,16 @@ commands:
         --parent-version-ids=!:
             description: A list of parent version identifiers for lineage tracking.
             nargs: -1
+    - name: update-consent-portal
+      description: Updates an existing consent portal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --consent-portal-identifier=!: The identifier of the consent portal.
+        --description=: The description of the consent portal.
+        --execution-role-arn=: The Amazon Resource Name (ARN) of the IAM role that the consent portal assumes to access the resources defined in its sources.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-config=: The identity provider configuration that the consent portal uses to authenticate end users.
     - name: update-dataset
       description: Updates a dataset's metadata.
       flags:
@@ -1906,6 +1956,7 @@ commands:
             description: The updated list of insight types to run against agent sessions.
             nargs: -1
         --online-evaluation-config-id=!: The unique identifier of the online evaluation configuration to update.
+        --output-config=: ""
         --rule=: The updated evaluation rule containing sampling configuration, filters, and session settings.
       completion:
         flag:
