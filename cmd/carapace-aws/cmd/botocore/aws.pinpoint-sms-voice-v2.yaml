@@ -796,6 +796,30 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the End User Messaging SMS resource attached to the resource-based policy.
+    - name: list-available-phone-numbers
+      description: Search available phone numbers from aggregator inventory, optionally filtered by pattern.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --iso-country-code=!: The two-character code, in ISO 3166-1 alpha-2 format, for the country or region in which to search for available phone numbers.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per page.
+        --next-token=: The token returned from a previous request to retrieve the next page of results.
+        --number-capabilities=!:
+            description: The capabilities to filter by, such as SMS.
+            nargs: -1
+        --number-preference=:
+            description: Optional.
+            nargs: -1
+        --number-type=!: The type of phone number to search for.
+        --page-size=: The size of each page to get in the AWS service call.
+        --registration-id=: The registration associated with the request.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            number-type:
+                - TEN_DLC
     - name: list-notify-countries
       description: Lists countries that support notify messaging.
       flags:
@@ -975,6 +999,9 @@ commands:
         --no-international-sending-enabled: By default this is set to false.
         --number-capabilities=!:
             description: Indicates if the phone number will be used for text messages, voice messages, or both.
+            nargs: -1
+        --number-preference=:
+            description: An optional selection preference used to request a specific phone number, such as a number that starts with, ends with, or contains a particular digit pattern.
             nargs: -1
         --number-type=!: The type of phone number to request.
         --opt-out-list-name=: The name of the OptOutList to associate with the phone number.
