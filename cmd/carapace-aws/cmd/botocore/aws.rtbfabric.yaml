@@ -28,7 +28,7 @@ commands:
         --attributes=: Attributes of the link.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-settings=!: Settings for the application logs.
@@ -42,7 +42,7 @@ commands:
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --http-responder-allowed: Boolean to specify if an HTTP responder is allowed.
-        --log-settings=!: Settings for the application logs.
+        --log-settings=!: Application log settings for the link.
         --no-http-responder-allowed: Boolean to specify if an HTTP responder is allowed.
         --peer-gateway-id=!: The unique identifier of the peer gateway.
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
@@ -65,7 +65,7 @@ commands:
         --attributes=: Attributes of the link.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --log-settings=!: Settings for the application logs.
@@ -76,7 +76,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: An optional description for the requester gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --security-group-ids=!:
@@ -92,7 +92,8 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-routing-policy=: The client routing policy of the gateway.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: An optional description for the responder gateway.
         --domain-name=: The domain name for the responder gateway.
         --gateway-type=: The type of gateway.
@@ -105,13 +106,16 @@ commands:
             description: The unique identifiers of the security groups.
             nargs: -1
         --subnet-ids=!:
-            description: The unique identifiers of the subnets.
+            description: Unique identifiers of the subnets.
             nargs: -1
         --tags=: A map of the key-value pairs of the tag or tags to assign to the resource.
         --trust-store-configuration=: The configuration of the trust store.
         --vpc-id=!: The unique identifier of the Virtual Private Cloud (VPC).
       completion:
         flag:
+            client-routing-policy:
+                - AVAILABILITY_ZONE_AFFINITY
+                - ANY_AVAILABILITY_ZONE
             gateway-type:
                 - EXTERNAL
                 - INTERNAL
@@ -335,7 +339,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --link-id=!: The unique identifier of the link.
@@ -358,27 +362,31 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: An optional description for the requester gateway.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-responder-gateway
-      description: Updates a responder gateway.
+      description: Updates the description, Auto Scaling group managed endpoint configuration, trust store configuration, and client routing policy of a responder gateway.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --client-token=!: The unique client token.
+        --client-routing-policy=: The client routing policy of the gateway.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --description=: An optional description for the responder gateway.
-        --domain-name=: The domain name for the responder gateway.
+        --domain-name=: Domain name for the responder gateway.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --listener-config=: The listener configuration for the responder gateway.
         --managed-endpoint-configuration=: The configuration for the managed endpoint.
-        --port=!: The networking port to use.
-        --protocol=!: The networking protocol to use.
+        --port=!: Networking port to use.
+        --protocol=!: Networking protocol to use.
         --trust-store-configuration=: The configuration of the trust store.
       completion:
         flag:
+            client-routing-policy:
+                - AVAILABILITY_ZONE_AFFINITY
+                - ANY_AVAILABILITY_ZONE
             protocol:
                 - HTTP
                 - HTTPS
