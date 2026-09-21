@@ -62,23 +62,25 @@ commands:
         --name=!: The name of the resource configuration.
         --no-allow-association-to-shareable-service-network: (SINGLE, GROUP, ARN) Specifies whether the resource configuration can be associated with a sharable service network.
         --port-ranges=:
-            description: '(SINGLE, GROUP, CHILD) The TCP port ranges that a consumer can use to access a resource configuration (for example: 1-65535).'
+            description: '(SINGLE, GROUP, CHILD, CIDR) The port ranges that a consumer can use to access a resource configuration (for example: 1-65535).'
             nargs: -1
-        --protocol=: (SINGLE, GROUP) The protocol accepted by the resource configuration.
+        --protocol=: (SINGLE, GROUP, CIDR) The protocol accepted by the resource configuration.
         --resource-configuration-definition=: 'Identifies the resource configuration in one of the following ways:'
         --resource-configuration-group-identifier=: (CHILD) The ID or ARN of the parent resource configuration of type `GROUP`.
-        --resource-gateway-identifier=: (SINGLE, GROUP, ARN) The ID or ARN of the resource gateway used to connect to the resource configuration.
+        --resource-gateway-identifier=: (SINGLE, GROUP, ARN, CIDR) The ID or ARN of the resource gateway used to connect to the resource configuration.
         --tags=: The tags for the resource configuration.
         --type=!: The type of resource configuration.
       completion:
         flag:
             protocol:
                 - TCP
+                - TCP_UDP
             type:
                 - GROUP
                 - CHILD
                 - SINGLE
                 - ARN
+                - CIDR
     - name: create-resource-gateway
       description: A resource gateway is a point of ingress into the VPC where a resource resides.
       flags:
@@ -89,7 +91,7 @@ commands:
         --ip-address-type=: A resource gateway can have IPv4, IPv6 or dualstack addresses.
         --ipv4-addresses-per-eni=: The number of IPv4 addresses in each ENI for the resource gateway.
         --name=!: The name of the resource gateway.
-        --resource-config-dns-resolution=: Indicates how DNS is resolved for resource configurations associated to this resource gateway.
+        --resource-config-dns-resolution=: Indicates how DNS is resolved for resource configurations associated with this resource gateway.
         --security-group-ids=:
             description: The IDs of the security groups to apply to the resource gateway.
             nargs: -1
