@@ -17,7 +17,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --contact-identifier=!: A unique value of an Account Contact Type to associate with the `ManagedNotificationConfiguration`.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-sensitive-events-subscribed: Specifies whether this contact is subscribed to sensitive events.
         --managed-notification-configuration-arn=!: The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` to associate with the Account Contact.
+        --no-is-sensitive-events-subscribed: Specifies whether this contact is subscribed to sensitive events.
       completion:
         flag:
             contact-identifier:
@@ -32,7 +34,9 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-sensitive-events-subscribed: Specifies whether this channel is subscribed to sensitive events.
         --managed-notification-configuration-arn=!: The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` to associate with the additional Channel.
+        --no-is-sensitive-events-subscribed: Specifies whether this channel is subscribed to sensitive events.
     - name: associate-organizational-unit
       description: Associates an organizational unit with a notification configuration.
       flags:
@@ -85,12 +89,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: deregister-notification-hub
-      description: Deregisters a `NotificationConfiguration` in the specified Region.
+      description: Deregisters a `NotificationHub` in the specified Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --notification-hub-region=!: The `NotificationConfiguration` Region.
+        --notification-hub-region=!: The `NotificationHub` Region.
     - name: disable-notifications-access-for-organization
       description: Disables service trust between User Notifications and Amazon Web Services Organizations.
       flags:
@@ -337,10 +341,12 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --end-time=: Latest time of events to return from this call.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-sensitive-events: Specifies whether to include sensitive events in the result.
         --locale=: The locale code of the language used for the retrieved NotificationEvent.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to be returned in this call.
         --next-token=: The start token for paginated calls.
+        --no-include-sensitive-events: Specifies whether to include sensitive events in the result.
         --organizational-unit-id=: The Organizational Unit Id that an Amazon Web Services account belongs to.
         --page-size=: The size of each page to get in the AWS service call.
         --related-account=: The Amazon Web Services account ID associated with the Managed Notification Events.
@@ -481,7 +487,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: register-notification-hub
-      description: Registers a `NotificationConfiguration` in the specified Region.
+      description: Registers a `NotificationHub` in the specified Region.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -516,6 +522,16 @@ commands:
         --regions=:
             description: A list of Amazon Web Services Regions that sends events to this `EventRule`.
             nargs: -1
+    - name: update-managed-notification-channel-association
+      description: Updates the `isSensitiveEventsSubscribed` property of a particular ManagedNotification channel association.
+      flags:
+        --channel-identifier=!: The identifier of the channel association to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --is-sensitive-events-subscribed: Specifies whether the association is subscribed to sensitive events.
+        --managed-notification-configuration-arn=!: The Amazon Resource Name (ARN) of the `ManagedNotificationConfiguration` whose Channel association property you want to update.
+        --no-is-sensitive-events-subscribed: Specifies whether the association is subscribed to sensitive events.
     - name: update-notification-configuration
       description: Updates a `NotificationConfiguration`.
       flags:
