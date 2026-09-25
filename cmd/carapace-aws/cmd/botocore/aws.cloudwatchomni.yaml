@@ -1,0 +1,714 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: cloudwatchomni
+description: CloudWatch Omni
+commands:
+    - name: create-access-grant
+      description: Creates an AccessGrant that authorizes a principal to perform a set of actions on resources in a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --domain-id=!: The ID of the domain that contains the space.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name that identifies the access grant.
+        --permission=!: The permission to grant.
+        --principal=!: The principal receiving the grant.
+        --scoped-actions=:
+            description: Groups of actions to allow, each with the resource scopes and conditions that limit those actions.
+            nargs: -1
+        --space-id=!: The ID of the space to scope the grant to.
+        --tags=: The tags to associate with the access grant.
+      completion:
+        flag:
+            permission:
+                - SPACE_ADMIN
+                - READ
+                - READ_WRITE_DELETE
+                - CUSTOM
+    - name: create-access-profile
+      description: Creates an access profile in a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --description=: An optional description of the access profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name that identifies the access profile.
+        --space-id=!: The unique ID of the space to create the profile in.
+        --tags=: The tags to associate with the access profile.
+    - name: create-alert
+      description: Creates a new alert within a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --description=: An optional description of the alert.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Alert name, for display.
+        --no-notifications-enabled: Whether actions (notifications) are enabled for this alert.
+        --notification-rules=:
+            description: The notification rules that determine when and where notifications are sent.
+            nargs: -1
+        --notifications-enabled: Whether actions (notifications) are enabled for this alert.
+        --profile-id=!: The ID of the access profile the alert uses to evaluate its query and execute notifications.
+        --rule=!: The rule that defines how the alert is evaluated.
+        --space-id=!: The unique ID of the space to create the alert in.
+        --tags=: The tags to associate with the alert.
+    - name: create-domain
+      description: Creates a domain with identity provider configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Identity provider configuration for the domain.
+        --identity-providers=!:
+            description: The identity providers to configure for the domain.
+            nargs: -1
+        --name=!: A name that identifies the domain.
+        --tags=: The tags to associate with the domain.
+    - name: create-domain-access-grant-for-organization
+      description: Creates an AccessGrant that authorizes a principal to administer an organization domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --domain-id=!: The ID of the organization domain to create the grant on.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name that identifies the access grant.
+        --permission=!: The permission to grant.
+        --principal=!: The principal receiving the grant.
+        --tags=: The tags to associate with the access grant.
+      completion:
+        flag:
+            permission:
+                - ADMIN
+    - name: create-domain-for-organization
+      description: Creates an organization-scoped domain for the caller's AWS Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --domain-access-role-arn=!: The ARN of an IAM role in the management account used for domain access.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Identity provider configuration for the domain.
+        --identity-providers=!:
+            description: The identity providers to configure for the domain.
+            nargs: -1
+        --name=!: A name that identifies the organization domain.
+        --tags=: The tags to associate with the domain.
+    - name: create-integration
+      description: Creates an integration with a third-party provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --credential=: The credential used to authenticate with the third-party provider.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-attributes=: Provider-specific attributes to associate with the integration.
+        --integration-type=!: The type of third-party provider to integrate with.
+        --name=!: The name for the new integration; unique within the account.
+        --role-arn=: The Amazon Resource Name of the IAM role assumed to access the integration.
+        --tags=: Tags to apply to the integration at creation time (Tagris tag-on-create).
+      completion:
+        flag:
+            integration-type:
+                - AWS_CONFIG_SLREC
+                - SLACK
+                - EXTERNAL_AGENT
+                - AWS_INTEGRATION
+    - name: create-omni-dashboard
+      description: Creates a new dashboard within a space.
+      flags:
+        --body=!: The dashboard definition, as a JSON document.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --description=: An optional description of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name that identifies the dashboard.
+        --space-id=!: The unique ID of the space to create the dashboard in.
+        --tags=: The tags to associate with the dashboard.
+    - name: create-one-time-deep-link-code
+      description: Generates a one-time code for deep-link authentication.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The ID of the domain to generate the code for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --redirect-url=: The URL to redirect to after the deep-link code is used.
+        --ttl-seconds=: How long the code remains valid, in seconds.
+    - name: create-space
+      description: Creates a space in a domain.
+      flags:
+        --agent-core-evaluation-role-arn=: The ARN of the IAM role used by AgentCore online evaluation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --data-access-role-arn=!: The ARN of the IAM role used for data access.
+        --domain-id=!: The ID of the domain to create the space in.
+        --encryption-configuration=: How to encrypt the space's data at rest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name that identifies the space.
+        --tags=: The tags to associate with the space.
+    - name: create-view
+      description: Creates a new SQL view.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --definition=!: The SQL query that defines the view.
+        --description=: A description of the view.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the view.
+        --tags=: Resource tags.
+    - name: delete-access-grant
+      description: Removes an existing AccessGrant, revoking the access it granted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=!: The ID of the access grant to delete.
+    - name: delete-access-profile
+      description: Removes an access profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique ID of the access profile to delete.
+        --space-id=!: The unique ID of the space.
+    - name: delete-alert
+      description: Deletes an alert by its identifier.
+      flags:
+        --alert-id=!: The alert to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space.
+    - name: delete-domain
+      description: Removes a domain and all of its resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique ID of the domain to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-domain-access-grant-for-organization
+      description: Removes an existing organization access grant, revoking the access it granted.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=!: The ID of the access grant to delete.
+    - name: delete-domain-for-organization
+      description: Removes an organization domain and all of its resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The ID of the organization domain to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-integration
+      description: Deletes an integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Identifies the integration to delete — exactly one of integrationId, integrationArn, or integrationName.
+    - name: delete-omni-dashboard
+      description: Removes a dashboard from a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The unique ID of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space.
+    - name: delete-space
+      description: Removes a space and all of its resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space to delete.
+    - name: delete-view
+      description: Deletes the specified view.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the view to delete.
+    - name: get-access-grant
+      description: Retrieves the full detail of a single AccessGrant by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=!: The ID of the access grant to retrieve.
+    - name: get-access-profile
+      description: Retrieves an access profile by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-id=!: The unique ID of the access profile.
+        --space-id=!: The unique ID of the space.
+    - name: get-alert
+      description: Retrieves a single alert by its identifier.
+      flags:
+        --alert-id=!: The alert to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space.
+    - name: get-context-graph
+      description: Queries the context graph with filtering, traversal, and pagination support.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --depth=: How many hops to traverse out from the nodes matched by nodeFilters.
+        --edge-filters=: Criteria restricting which edges are returned.
+        --end-time=!: End of the time range (UTC), inclusive.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-metadata: Whether to return the metadata block, semantics included, on each node and edge.
+        --max-edges-per-node=: The maximum number of edges to return per node, bounding the fan-out of a densely connected node.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of nodes to return in a single page.
+        --next-token=: Pagination token from a previous response, to retrieve the next page.
+        --no-include-metadata: Whether to return the metadata block, semantics included, on each node and edge.
+        --node-filters=: Criteria restricting which nodes are returned.
+        --page-size=: The size of each page to get in the AWS service call.
+        --start-time=!: Start of the time range (UTC), inclusive.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-domain
+      description: Retrieves the details of a domain by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique ID of the domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-domain-access-grant-for-organization
+      description: Retrieves the full detail of a single organization access grant by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-id=!: The ID of the access grant to retrieve.
+    - name: get-domain-for-organization
+      description: Retrieves the details of an organization domain by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The ID of the organization domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-integration
+      description: Returns the details of a single integration, identified by its identifier, Amazon Resource Name, or name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Identifies the integration to return — exactly one of integrationId, integrationArn, or integrationName.
+    - name: get-intelligence-configuration
+      description: Retrieves the intelligence configuration for the calling account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-omni-dashboard
+      description: Retrieves a dashboard by ID within a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The unique ID of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space.
+    - name: get-space
+      description: Retrieves the details of a space by ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --space-id=!: The unique ID of the space.
+    - name: get-space-credentials-for-organization
+      description: Returns temporary credentials for a space in an organization member account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context=!: Context for credential resolution.
+        --credential-type=!: Selects which member-account credential to return.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            credential-type:
+                - SPACE_OPERATION
+    - name: get-telemetry-query-results
+      description: Returns the results for the specified query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of result rows to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --query-id=!: The unique ID of the query.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-view
+      description: Returns the definition and metadata of the specified view.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the view.
+    - name: list-access-grants
+      description: Returns AccessGrants, with optional filtering by domain, space, principal, or permission.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=: Filter by domain ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of access grants to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --permission=: Filter by permission level.
+        --principal-id=: Filter by principal ID.
+        --principal-type=: Filter by principal type.
+        --space-id=: Filter by space ID.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            permission:
+                - SPACE_ADMIN
+                - READ
+                - READ_WRITE_DELETE
+                - CUSTOM
+            principal-type:
+                - IDC_USER
+                - IDC_GROUP
+                - IAM_USER
+                - IAM_ROLE
+                - IAM_ROOT
+                - ACCESS_PROFILE
+                - ALERT
+                - AGENT
+    - name: list-access-profiles
+      description: Returns the access profiles in a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of access profiles to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-id=!: The unique ID of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-alerts
+      description: Lists alerts within a space, optionally filtered by exact name(s), a single name prefix, or exact alertId(s), with pagination.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-criteria=: Filter criteria narrowing which alerts are returned.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of alerts to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to sort results by.
+        --sort-order=: The order in which to sort results.
+        --space-id=!: The unique ID of the space.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            sort-by:
+                - NAME
+                - STATE
+            sort-order:
+                - ASC
+                - DESC
+    - name: list-domain-access-grants-for-organization
+      description: Returns organization-level domain access grants, with optional filtering by domain, principal, or permission.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=: Filter by domain ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of access grants to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --permission=: Filter by permission level.
+        --principal-id=: Filter by principal ID.
+        --principal-type=: Filter by principal type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            permission:
+                - ADMIN
+            principal-type:
+                - IDC_USER
+                - IDC_GROUP
+                - IAM_USER
+                - IAM_ROLE
+                - IAM_ROOT
+    - name: list-domains
+      description: 'Returns the caller''s domains: the account-scoped domain and the organization-scoped domain, if either exists.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of domains to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-integrations
+      description: Lists the integrations in the account, optionally filtered by type, status, or name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-type=: Returns only integrations of this provider type.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of integrations to return in one page.
+        --name=: Returns only the integration with this exact name.
+        --next-token=: Pagination token from a previous response; omit for the first page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Returns only integrations in this status.
+      completion:
+        flag:
+            integration-type:
+                - AWS_CONFIG_SLREC
+                - SLACK
+                - EXTERNAL_AGENT
+                - AWS_INTEGRATION
+            status:
+                - ACTIVE
+                - DELETED
+                - PENDING
+                - PENDING_OAUTH
+                - ERROR
+                - FAILED
+    - name: list-omni-dashboards
+      description: Returns the dashboards in a space, optionally filtered by name prefix.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of dashboards to return per page.
+        --name-prefix=: Filter to dashboards whose name starts with this prefix.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --space-id=!: The unique ID of the space.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-spaces
+      description: Returns the spaces in the account, optionally filtered by domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=: Filter by domain ID.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of spaces to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-spaces-for-organization
+      description: Returns the spaces across all member accounts in the organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of spaces to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-telemetry-fields
+      description: Lists fields available for telemetry queries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-set-name=!: The name of the dataset to list fields for.
+        --end-time=: Inclusive end of the lookback window.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --next-token=: A token to retrieve the next page of results.
+        --start-time=: Inclusive start of the lookback window.
+        --starting-token=: A token to specify where to start paginating.
+        --telemetry-type=: The type of telemetry to filter fields by.
+      completion:
+        flag:
+            telemetry-type:
+                - LOGS
+                - TRACES
+    - name: list-telemetry-query-sessions
+      description: Lists telemetry query sessions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of sessions to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-views
+      description: Lists the views in the caller's account and region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of views to return per page.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: Return only views of this ownership category.
+      completion:
+        flag:
+            type:
+                - USER
+                - MANAGED
+    - name: put-intelligence-configuration
+      description: Creates or updates the intelligence configuration for the calling account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Idempotency token for safe retries.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: Optional KMS key ARN to configure customer-managed encryption for anomaly data.
+        --no-remove-kms-key: Set to true to disassociate the configured KMS key.
+        --remove-kms-key: Set to true to disassociate the configured KMS key.
+    - name: search-principals
+      description: Searches Identity Center for users and groups in a domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The ID of the domain to search within.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A token to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --search-query=!: A search term to match against user names, display names, and IDs.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-telemetry-query
+      description: Starts a telemetry query within a session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-string=!: The query string to execute.
+        --session-id=!: The unique ID of the session.
+    - name: start-telemetry-query-session
+      description: Starts a new telemetry query session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-name=: A human-readable name for the session.
+    - name: stop-telemetry-query
+      description: Stops a running telemetry query.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --query-id=!: The unique ID of the query.
+    - name: stop-telemetry-query-session
+      description: Stops a telemetry query session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --session-id=!: The unique ID of the session.
+    - name: update-access-profile
+      description: Updates the name or description of an access profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description of the access profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A new name for the access profile.
+        --profile-id=!: The unique ID of the access profile to update.
+        --space-id=!: The unique ID of the space.
+    - name: update-alert
+      description: Updates an existing alert.
+      flags:
+        --alert-id=!: The alert to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description of the alert.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A new display name for the alert.
+        --no-notifications-enabled: Whether actions (notifications) are enabled for this alert.
+        --notification-rules=:
+            description: Replaces the entire notification rule list when present; full-replace, not merge.
+            nargs: -1
+        --notifications-enabled: Whether actions (notifications) are enabled for this alert.
+        --profile-id=: The ID of the access profile associated with the alert.
+        --rule=: The rule that defines how the alert is evaluated.
+        --space-id=!: The unique ID of the space.
+    - name: update-domain
+      description: Updates a domain's name or identity provider configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique ID of the domain to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Identity provider configuration for the domain.
+        --identity-providers=:
+            description: The identity providers to configure for the domain.
+            nargs: -1
+        --name=: A new name for the domain.
+    - name: update-domain-for-organization
+      description: Updates an organization domain's name or identity provider configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The ID of the organization domain to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-provider-configuration=: Identity provider configuration for the domain.
+        --identity-providers=:
+            description: The identity providers to configure for the domain.
+            nargs: -1
+        --name=: A new name for the organization domain.
+    - name: update-integration
+      description: Updates an existing integration, identified by its id, ARN, or name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --credential=: The replacement credential used to authenticate with the provider.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Identifies the integration to update — exactly one of integrationId, integrationArn, or integrationName.
+        --integration-attributes=: The provider-specific attributes to associate with the integration.
+        --role-arn=: The Amazon Resource Name of the IAM role assumed to access the integration.
+    - name: update-omni-dashboard
+      description: Updates an existing dashboard within a space.
+      flags:
+        --body=: The new dashboard definition, as a JSON document.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dashboard-id=!: The unique ID of the dashboard.
+        --description=: A new description of the dashboard.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A new name for the dashboard.
+        --space-id=!: The unique ID of the space.
+    - name: update-space
+      description: Updates a space.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: How to encrypt the space's data at rest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: A new name for the space.
+        --space-id=!: The unique ID of the space to update.
+    - name: update-view
+      description: Updates an existing view's definition and/or description.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --definition=: The new SQL query that defines the view.
+        --description=: The new description of the view.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the view to update.
