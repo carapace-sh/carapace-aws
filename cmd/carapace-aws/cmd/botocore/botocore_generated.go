@@ -82,6 +82,7 @@ func init() {
 		"cloudtrail-data":                     "AWS CloudTrail Data Service",
 		"cloudtrail":                          "AWS CloudTrail",
 		"cloudwatch":                          "Amazon CloudWatch",
+		"cloudwatchomni":                      "CloudWatch Omni",
 		"codeartifact":                        "CodeArtifact",
 		"codebuild":                           "AWS CodeBuild",
 		"codecatalyst":                        "Amazon CodeCatalyst",
