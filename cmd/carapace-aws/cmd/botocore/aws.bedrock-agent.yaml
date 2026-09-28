@@ -202,6 +202,34 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --prompt-identifier=!: The unique identifier of the prompt that you want to create a version of.
         --tags=: Any tags that you want to attach to the version of the prompt.
+    - name: create-vpc-configuration
+      description: Creates a VPC configuration that lets a knowledge base connect to a resource in your private VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --description=: An optional description of the VPC configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-header=: An optional HTTP `Host` header value to send when invoking the resource.
+        --knowledge-base-id=!: The unique identifier of the knowledge base to associate this VPC configuration with.
+        --name=: An optional human-readable name for the VPC configuration.
+        --port=!: The port on which to reach the resource.
+        --protocol=!: The protocol used to connect to the resource.
+        --resolution-mode=!: Controls how a domain-name `resourceTarget` is resolved.
+        --resource-target=!: The private IPv4 address or DNS name of the resource you want the knowledge base to reach.
+        --subnet-ids=!:
+            description: The subnets, in the VPC identified by `vpcId`, that the knowledge base uses to connect to the resource.
+            nargs: -1
+        --tls-server-name=: The expected TLS server name.
+        --vpc-id=!: The identifier of the VPC that the knowledge base connects through to reach the resource.
+      completion:
+        flag:
+            protocol:
+                - HTTP
+                - HTTPS
+            resolution-mode:
+                - PUBLIC
+                - IN_VPC
     - name: delete-agent
       description: Deletes an agent.
       flags:
@@ -310,6 +338,14 @@ commands:
         --expected-revision-id=: The expected revision identifier of the resource policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the knowledge base to remove the resource policy from.
+    - name: delete-vpc-configuration
+      description: Deletes a VPC configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that owns the VPC configuration.
+        --vpc-configuration-id=!: The unique identifier of the VPC configuration to delete.
     - name: disassociate-agent-collaborator
       description: Disassociates an agent collaborator.
       flags:
@@ -469,6 +505,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the knowledge base to retrieve the resource policy for.
+    - name: get-vpc-configuration
+      description: Returns the details and current status of a single VPC configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base that owns the VPC configuration.
+        --vpc-configuration-id=!: The unique identifier of the VPC configuration to retrieve.
     - name: ingest-knowledge-base-documents
       description: Ingests documents directly into the knowledge base that is connected to the data source.
       flags:
@@ -662,6 +706,27 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which to list tags.
+    - name: list-vpc-configurations
+      description: Returns a paginated list of the VPC configurations for a knowledge base.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier of the knowledge base whose VPC configurations you want to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: A pagination token to retrieve the next page of results, returned in a previous response when more results are available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status-filter=: The status to filter the results by.
+      completion:
+        flag:
+            status-filter:
+                - CREATING
+                - CREATED
+                - DELETING
+                - CREATE_FAILED
+                - DELETE_FAILED
     - name: prepare-agent
       description: Creates a `DRAFT` version of the agent that can be used for internal testing.
       flags:
