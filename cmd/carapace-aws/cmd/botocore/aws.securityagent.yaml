@@ -320,6 +320,7 @@ commands:
       flags:
         --agent-space-id=!: The unique identifier of the agent space to create the pentest in.
         --assets=: The assets to include in the pentest, such as endpoints, actors, documents, and source code.
+        --cicd-configuration=: The CI/CD pentesting configuration to apply to the pentest.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-remediation-strategy=: The code remediation strategy for the pentest.
@@ -788,12 +789,19 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-type=: Filters the returned pentest jobs to only those of the specified job type.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: A token to use for paginating results that are returned in the response.
         --page-size=: The size of each page to get in the AWS service call.
         --pentest-id=!: The unique identifier of the pentest to list jobs for.
         --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            job-type:
+                - FULL
+                - REVALIDATION
+                - CICD
     - name: list-pentests
       description: Returns a paginated list of pentest summaries for the specified agent space.
       flags:
@@ -940,6 +948,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-type=: The type of pentest job to start.
         --pentest-id=!: The unique identifier of the pentest to start a job for.
+        --scope-changes=:
+            description: The code changes that define the scope of a CI/CD pentest job.
+            nargs: -1
         --selected-finding-ids=:
             description: The list of finding identifiers to revalidate.
             nargs: -1
@@ -948,6 +959,7 @@ commands:
             job-type:
                 - FULL
                 - REVALIDATION
+                - CICD
     - name: start-threat-model-job
       description: Starts a new threat model job for a threat model configuration.
       flags:
@@ -1093,6 +1105,7 @@ commands:
       flags:
         --agent-space-id=!: The unique identifier of the agent space that contains the pentest.
         --assets=: The updated assets for the pentest.
+        --cicd-configuration=: The updated CI/CD pentesting configuration to apply to the pentest.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --code-remediation-strategy=: The updated code remediation strategy for the pentest.
