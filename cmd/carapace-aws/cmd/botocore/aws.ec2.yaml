@@ -1096,6 +1096,7 @@ commands:
         --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --connection-log-options=!: Information about the client connection logging options.
         --description=: A brief description of the Client VPN endpoint.
+        --device-posture-options=: The device posture options for the Client VPN endpoint.
         --disconnect-on-session-timeout: Indicates whether the client VPN session is disconnected after the maximum timeout specified in `SessionTimeoutHours` is reached.
         --dns-servers=:
             description: Information about the DNS servers to be used for DNS resolution.
@@ -1555,6 +1556,7 @@ commands:
                 - apnic
                 - arin
                 - lacnic
+                - nicbr
     - name: create-ipam-policy
       description: Creates an IPAM policy.
       flags:
@@ -2922,12 +2924,12 @@ commands:
         --no-private-dns-enabled: (Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC.
         --policy-document=: (Interface and gateway endpoints) A policy to attach to the endpoint that controls access to the service.
         --private-dns-enabled: (Interface endpoint) Indicates whether to associate a private hosted zone with the specified VPC.
-        --resource-configuration-arn=: The Amazon Resource Name (ARN) of a resource configuration that will be associated with the VPC endpoint of type resource.
+        --resource-configuration-arn=: (Resource and Tunnel endpoints only) The Amazon Resource Name (ARN) of a resource configuration associated with the VPC endpoint.
         --route-table-ids=:
             description: (Gateway endpoint) The route table IDs.
             nargs: -1
         --security-group-ids=:
-            description: (Interface endpoint) The IDs of the security groups to associate with the endpoint network interfaces.
+            description: (Interface, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the security groups to associate with the endpoint network interfaces.
             nargs: -1
         --service-name=: The name of the endpoint service.
         --service-network-arn=: The Amazon Resource Name (ARN) of a service network that will be associated with the VPC endpoint of type service-network.
@@ -2936,7 +2938,7 @@ commands:
             description: The subnet configurations for the endpoint.
             nargs: -1
         --subnet-ids=:
-            description: (Interface and Gateway Load Balancer endpoints) The IDs of the subnets in which to create endpoint network interfaces.
+            description: (Interface, Gateway Load Balancer endpoints, Resource, ServiceNetwork, and Tunnel endpoints only) The IDs of the subnets in which to create endpoint network interfaces.
             nargs: -1
         --tag-specifications=:
             description: The tags to associate with the endpoint.
@@ -3108,6 +3110,15 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-vpn-endpoint-id=!: The ID of the Client VPN to be deleted.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: delete-client-vpn-endpoint-authorization-policy
+      description: Deletes the authorization policy for a Client VPN endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-vpn-endpoint-id=!: The ID of the Client VPN endpoint.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
@@ -10005,6 +10016,15 @@ commands:
         --max-results=: The maximum number of items to return for this request.
         --next-token=: The token to use to retrieve the next page of results.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+    - name: get-client-vpn-endpoint-authorization-policy
+      description: Describes the authorization policy for a Client VPN endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-vpn-endpoint-id=!: The ID of the Client VPN endpoint.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
     - name: get-coip-pool-usage
       description: Describes the allocations from the specified customer-owned address pool.
       flags:
@@ -11243,6 +11263,7 @@ commands:
         --client-vpn-endpoint-id=!: The ID of the Client VPN endpoint to modify.
         --connection-log-options=: Information about the client connection logging options.
         --description=: A brief description of the Client VPN endpoint.
+        --device-posture-options=: The device posture options for the Client VPN endpoint.
         --disconnect-on-session-timeout: Indicates whether the client VPN session is disconnected after the maximum timeout specified in `sessionTimeoutHours` is reached.
         --dns-servers=: Information about the DNS servers to be used by Client VPN connections.
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
@@ -11263,6 +11284,24 @@ commands:
       completion:
         flag:
             self-service-portal:
+                - enabled
+                - disabled
+    - name: modify-client-vpn-endpoint-authorization-policy
+      description: Creates or updates the authorization policy for a Client VPN endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --client-vpn-endpoint-id=!: The ID of the Client VPN endpoint.
+        --description=: A brief description of the authorization policy.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --policy-document=: The authorization policy document, written in the Cedar policy language.
+        --shadow-mode=: Specifies whether the authorization policy is evaluated in shadow mode.
+      completion:
+        flag:
+            shadow-mode:
                 - enabled
                 - disabled
     - name: modify-default-credit-specification
