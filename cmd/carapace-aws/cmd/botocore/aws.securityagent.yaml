@@ -300,6 +300,7 @@ commands:
                 - GITLAB
                 - BITBUCKET
                 - CONFLUENCE
+                - AZURE_DEVOPS
     - name: create-membership
       description: Creates a new membership, granting a user access to an agent space within an application.
       flags:
@@ -551,8 +552,12 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-id=: The client ID of the OAuth application registered on your self-managed provider instance.
+        --client-secret=: The client secret of the OAuth application registered on your self-managed provider instance.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --organization-name=: The name of the organization to connect.
         --provider=!: The provider to initiate registration with.
+        --target-url=: The HTTPS URL of a self-managed provider instance.
       completion:
         flag:
             provider:
@@ -560,6 +565,7 @@ commands:
                 - GITLAB
                 - BITBUCKET
                 - CONFLUENCE
+                - AZURE_DEVOPS
     - name: list-actor-messages
       description: Returns a paginated list of the email MFA messages received for an actor at its server-generated email address, most recent first.
       flags:
@@ -1100,6 +1106,19 @@ commands:
         --items=!:
             description: The list of integrated resource items to update.
             nargs: -1
+    - name: update-integration
+      description: Creates an integration's webhook, or rotates the HMAC signing secret of an existing one.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: The ID of the integration whose webhook you want to create or rotate.
+        --webhook-action=!: The action to perform on the integration's webhook.
+      completion:
+        flag:
+            webhook-action:
+                - CREATE_IF_ABSENT
+                - ROTATE
     - name: update-pentest
       description: Updates an existing pentest configuration.
       flags:
