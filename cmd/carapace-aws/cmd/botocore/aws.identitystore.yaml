@@ -63,6 +63,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --group-id=!: The identifier for a group in the identity store.
         --identity-store-id=!: The globally unique identifier for the identity store.
+        --revision=: The expected current revision of the group.
     - name: delete-group-membership
       description: Delete a membership within a group given `MembershipId`.
       flags:
@@ -78,6 +79,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-store-id=!: The globally unique identifier for the identity store.
+        --revision=: The expected current revision of the user.
         --user-id=!: The identifier for a user in the identity store.
     - name: describe-group
       description: Retrieves the group metadata and attributes from `GroupId` in an identity store.
@@ -95,6 +97,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identity-store-id=!: The globally unique identifier for the identity store.
         --membership-id=!: The identifier for a `GroupMembership` in an identity store.
+    - name: describe-identity-store
+      description: Retrieves details about the specified identity store, including its Amazon Resource Name (ARN) and network configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-store-id=!: The globally unique identifier for the identity store.
     - name: describe-user
       description: Retrieves the user metadata and attributes from the `UserId` in an identity store.
       flags:
@@ -183,6 +192,17 @@ commands:
         --next-token=: The pagination token used for the `ListUsers` and `ListGroups` API operations.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-identity-stores
+      description: Lists the identity stores that you have access to.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per request.
+        --next-token=: The pagination token used for the `ListIdentityStores` API operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-users
       description: Lists all users in the identity store.
       flags:
@@ -212,6 +232,15 @@ commands:
         --operations=!:
             description: A list of `AttributeOperation` objects to apply to the requested group.
             nargs: -1
+        --revision=: The expected current revision of the group.
+    - name: update-identity-store
+      description: Updates the configuration of the specified identity store, including its network configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identity-store-id=!: The globally unique identifier for the identity store.
+        --network-configuration=: The network configuration to apply to the identity store.
     - name: update-user
       description: Updates the specified user metadata and attributes in the specified identity store.
       flags:
@@ -222,4 +251,5 @@ commands:
         --operations=!:
             description: A list of `AttributeOperation` objects to apply to the requested user.
             nargs: -1
+        --revision=: The expected current revision of the user.
         --user-id=!: The identifier for a user in the identity store.
