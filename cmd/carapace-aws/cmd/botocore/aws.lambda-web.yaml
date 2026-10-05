@@ -1,0 +1,275 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: lambda-web
+description: Lambda Web
+commands:
+    - name: create-web-function
+      description: Creates a web function with an initial revision and endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-config=: The configuration for the initial endpoint of the web function.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision-config=: The configuration for the initial revision of the web function, including code and service settings.
+        --tags=: A map of tag keys and values to apply to the web function.
+    - name: create-web-function-endpoint
+      description: Creates an endpoint for a web function.
+      flags:
+        --auth-type=!: The authorization type for the endpoint.
+        --auto-deployment-mode=: The auto-deployment mode for the endpoint.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the endpoint.
+        --endpoint-name=!: The name of the endpoint to create.
+        --endpoint-type=!: The type of endpoint to create.
+        --function-name=!: The name of the web function to create the endpoint for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --regions=:
+            description: The list of Regions for the endpoint.
+            nargs: -1
+        --revision-weights=:
+            description: A list of revision weights that determine how traffic is distributed across revisions.
+            nargs: -1
+        --scaling-config=: The scaling configuration for the endpoint.
+        --throttle-config=: The throttling configuration for the endpoint.
+      completion:
+        flag:
+            auth-type:
+                - ApplicationManaged
+                - IamAuth
+            auto-deployment-mode:
+                - LatestRevision
+                - Disabled
+            endpoint-type:
+                - HomeRegion
+                - MultiRegion
+                - PerRegion
+    - name: create-web-function-revision
+      description: Creates an immutable revision for a web function.
+      flags:
+        --build-config=!: The build configuration for the revision, including code location and runtime settings.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the revision.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-arn=: The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) key used to encrypt the revision's code and environment variables.
+        --service-config=!: The service configuration for the revision, including execution role, timeout, and concurrency settings.
+    - name: delete-resource-policy
+      description: Removes the resource-based policy from a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the web function.
+        --revision-id=: The revision ID of the policy.
+    - name: delete-web-function
+      description: Deletes a web function and all of its associated revisions and endpoints.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name of the web function to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-web-function-endpoint
+      description: Deletes a web function endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the endpoint to delete.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-web-function-revision
+      description: Deletes a web function revision.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision-id=!: The identifier of the revision to delete.
+    - name: get-resource-policy
+      description: Retrieves the resource-based policy attached to a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the web function.
+    - name: get-web-account-settings
+      description: Retrieves details about your AWS Lambda Web Functions account settings for the current AWS Region, including the quotas that apply to web functions and your current usage.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-web-function
+      description: Retrieves details about a web function, including its current state and configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name of the web function to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-web-function-endpoint
+      description: Retrieves details about a web function endpoint, including its current state, configuration, and domain name.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --endpoint-name=!: The name of the endpoint to retrieve.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-web-function-revision
+      description: Retrieves details about a web function revision, including its state and configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision-id=!: The identifier of the revision to retrieve.
+    - name: list-tags
+      description: Returns a list of tags applied to a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The Amazon Resource Name (ARN) of the web function.
+    - name: list-web-function-endpoints
+      description: Lists endpoints for a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: A list of filters to apply to the results.
+            nargs: -1
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token that's returned by a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-web-function-revisions
+      description: Lists revisions for a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: A list of filters to apply to the results.
+            nargs: -1
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token that's returned by a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-web-functions
+      description: Lists web functions in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: A list of filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The pagination token that's returned by a previous request to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Adds or updates a resource-based policy on a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The JSON-formatted resource-based policy to attach to the web function.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the web function.
+        --revision-id=: The revision ID of the existing policy.
+    - name: tag-resource
+      description: Adds tags to a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The Amazon Resource Name (ARN) of the web function.
+        --tags=!: A map of tag keys and values to add to the web function.
+    - name: untag-resource
+      description: Removes tags from a web function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --resource=!: The Amazon Resource Name (ARN) of the web function.
+        --tag-keys=!:
+            description: A list of tag keys to remove from the web function.
+            nargs: -1
+    - name: update-web-function-endpoint
+      description: Updates the configuration of a web function endpoint.
+      flags:
+        --auth-type=: The authorization type for the endpoint.
+        --auto-deployment-mode=: The auto-deployment mode for the endpoint.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the endpoint.
+        --endpoint-name=!: The name of the endpoint to update.
+        --function-name=!: The name of the web function.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --revision-weights=:
+            description: A list of revision weights that determine how traffic is distributed across revisions.
+            nargs: -1
+        --scaling-config=: The scaling configuration for the endpoint.
+        --throttle-config=: The throttling configuration for the endpoint.
+      completion:
+        flag:
+            auth-type:
+                - ApplicationManaged
+                - IamAuth
+            auto-deployment-mode:
+                - LatestRevision
+                - Disabled
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: web-function-active
+          description: Retrieves details about a web function, including its current state and configuration.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --function-name=!: The name of the web function to retrieve.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: web-function-deleted
+          description: Retrieves details about a web function, including its current state and configuration.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --function-name=!: The name of the web function to retrieve.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: web-function-endpoint-active
+          description: Retrieves details about a web function endpoint, including its current state, configuration, and domain name.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --endpoint-name=!: The name of the endpoint to retrieve.
+            --function-name=!: The name of the web function.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: web-function-endpoint-deleted
+          description: Retrieves details about a web function endpoint, including its current state, configuration, and domain name.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --endpoint-name=!: The name of the endpoint to retrieve.
+            --function-name=!: The name of the web function.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: web-function-endpoint-updated
+          description: Retrieves details about a web function endpoint, including its current state, configuration, and domain name.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --endpoint-name=!: The name of the endpoint to retrieve.
+            --function-name=!: The name of the web function.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        - name: web-function-revision-active
+          description: Retrieves details about a web function revision, including its state and configuration.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --function-name=!: The name of the web function.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --revision-id=!: The identifier of the revision to retrieve.
