@@ -152,6 +152,13 @@ commands:
         --standards-control-association-updates=!:
             description: Updates the enablement status of a security control in a specified standard.
             nargs: -1
+    - name: cancel-export-job-v2
+      description: Cancels a findings export job that is in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-job-id=!: The unique identifier of the export job to cancel.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-action-target
       description: Creates a custom action target in Security Hub CSPM.
       flags:
@@ -645,6 +652,13 @@ commands:
             description: The list of the standards subscription ARNs for the standards to retrieve.
             nargs: -1
         --starting-token=: A token to specify where to start paginating.
+    - name: get-export-job-v2
+      description: Returns the details of a single findings export job, including its current `Status`, the `Destination` it writes to, the `OutputConfiguration` it was started with, and its `StartedAt` and `EndedAt` timestamps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --export-job-id=!: The unique identifier of the export job to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-finding-aggregator
       description: The *aggregation Region* is now called the *home Region*.
       flags:
@@ -992,6 +1006,28 @@ commands:
         --next-token=: The token that is required for pagination.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-export-jobs-v2
+      description: Returns the findings export jobs in your account as a paginated list of `ExportSummary` objects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-type=: Filters the results to export jobs that produce the specified data type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token required for pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters the results to export jobs that have the specified status.
+      completion:
+        flag:
+            data-type:
+                - FINDINGS
+            status:
+                - RUNNING
+                - SUCCEEDED
+                - FAILED
+                - CANCELLED
     - name: list-exposures-by-remediation-v2
       description: Retrieves the exposure findings tied to a specific remediation target.
       flags:
@@ -1131,6 +1167,17 @@ commands:
         --configuration-policy-identifier=!: The Amazon Resource Name (ARN) of a configuration policy, the universally unique identifier (UUID) of a configuration policy, or a value of `SELF_MANAGED_SECURITY_HUB` for a self-managed configuration.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --target=: The identifier of the target account, organizational unit, or the root to disassociate from the specified configuration.
+    - name: start-export-job-v2
+      description: Starts an ad hoc export job that writes Security Hub findings to an Amazon Simple Storage Service (Amazon S3) bucket that you own.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique identifier used to ensure idempotency.
+        --destination=!: The destination that Security Hub writes the export to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: An optional, user-provided name for the export job that helps you identify it in `ListExportJobsV2` results.
+        --output-configuration=!: Specifies what data to export and how to format it.
+        --scopes=: Limits the export to findings from specific organizational units (OUs) or from the delegated administrator's organization.
     - name: tag-resource
       description: Adds one or more tags to a resource.
       flags:
