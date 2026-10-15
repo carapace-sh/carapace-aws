@@ -1623,6 +1623,22 @@ commands:
             nargs: -1
         --training-plan-name=!: The name of the training plan to create.
         --training-plan-offering-id=!: The unique identifier of the training plan offering to use for creating this plan.
+    - name: create-training-session
+      description: Creates a training session in Amazon SageMaker.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --lora-config=!: The Low-Rank Adaptation (LoRA) configuration for the training session, including the rank and alpha parameters.
+        --model-config=!: The configuration for the base model, including the model ARN and end-user license agreement (EULA) acceptance.
+        --model-package-group-arn=: The Amazon Resource Name (ARN) of the model package group where checkpoints and fine-tuned model artifacts are published.
+        --output-config=!: The output configuration for the training session, including the S3 location and optional encryption settings.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that Amazon SageMaker assumes to access resources on your behalf.
+        --tags=:
+            description: An array of key-value pairs to apply to the training session as tags.
+            nargs: -1
+        --training-session-name=!: The name of the training session.
+        --vpc-config=: The Virtual Private Cloud (VPC) configuration for the training session.
     - name: create-transform-job
       description: Starts a transform job.
       flags:
@@ -2186,6 +2202,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --training-job-name=!: The name of the training job to delete.
+    - name: delete-training-session
+      description: Deletes a training session.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --training-session-name=!: The name of the training session to delete.
     - name: delete-trial
       description: Deletes the specified trial.
       flags:
@@ -2796,6 +2819,13 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --training-plan-arn=!: The Amazon Resource Name (ARN); of the training plan to retrieve extension history for.
+    - name: describe-training-session
+      description: Retrieves detailed information about a training session, including its current status, model configuration, Low-Rank Adaptation (LoRA) parameters, and timestamps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --training-session-name=!: The name of the training session to describe.
     - name: describe-transform-job
       description: Returns information about a transform job.
       flags:
@@ -5284,6 +5314,34 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: list-training-sessions
+      description: Lists training sessions in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --creation-time-after=: A filter that returns only training sessions created after the specified time.
+        --creation-time-before=: A filter that returns only training sessions created before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of training sessions to return in the response.
+        --name-contains=: A string in the training session name to filter results.
+        --next-token=: If the response was truncated, use the token returned in the previous response to retrieve the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status-equals=: A filter that returns only training sessions with the specified status.
+      completion:
+        flag:
+            status-equals:
+                - Created
+                - Blocked
+                - Running
+                - Failed
+                - Scheduled
+                - Stopping
+                - Stopped
+                - Expired
+                - Deleting
+                - DeletionFailed
     - name: list-transform-jobs
       description: Lists transform jobs.
       flags:
@@ -5824,6 +5882,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --training-job-name=!: The name of the training job to stop.
+    - name: stop-training-session
+      description: Stops a running training session and sets the session status to `Stopping`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --training-session-name=!: The name of the training session to stop.
     - name: stop-transform-job
       description: Stops a batch transform job.
       flags:

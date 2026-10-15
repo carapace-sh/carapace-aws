@@ -366,6 +366,7 @@ func init() {
 		"sagemaker-runtime":                   "Amazon SageMaker Runtime",
 		"sagemaker":                           "Amazon SageMaker Service",
 		"sagemakerjobruntime":                 "Sagemaker Job Runtime Service",
+		"sagemakertrainingsessionruntime":     "SageMaker Training Session Runtime",
 		"savingsplans":                        "AWS Savings Plans",
 		"scheduler":                           "Amazon EventBridge Scheduler",
 		"schemas":                             "Schemas",

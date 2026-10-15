@@ -19,14 +19,35 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: ""
+        --identifier=!: The identifier of the network connector to delete.
     - name: get-network-connector
       description: Retrieves the current configuration, state, and metadata of a network connector.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: ""
+        --identifier=!: The identifier of the network connector to retrieve.
+    - name: list-network-connector-versions
+      description: Returns a paginated list of the versions of a network connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The identifier of the network connector whose versions you want to list.
+        --marker=: The pagination token from a previous `ListNetworkConnectorVersions` response.
+        --max-items=: The maximum number of versions to return per page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Optional filter to return only versions in the specified state (for example, `ACTIVE` or `FAILED`).
+      completion:
+        flag:
+            state:
+                - PENDING
+                - ACTIVE
+                - INACTIVE
+                - FAILED
+                - DELETING
+                - DELETE_FAILED
     - name: list-network-connectors
       description: Returns a paginated list of network connectors in your account for the current Region.
       flags:
@@ -55,5 +76,5 @@ commands:
         --client-token=: A unique, case-sensitive identifier to ensure idempotency of the update request.
         --configuration=: The updated network configuration for the connector.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --identifier=!: ""
+        --identifier=!: The identifier of the network connector to update.
         --operator-role=: The updated ARN of the IAM role that Lambda assumes to manage ENIs.
