@@ -74,6 +74,31 @@ commands:
         --threat-model-ids=!:
             description: The list of threat model identifiers to delete.
             nargs: -1
+    - name: batch-disassociate-finding-issue
+      description: Disassociates a batch of findings from their linked issues.
+      flags:
+        --agent-space-id=!: The identifier of the agent space where the job exists.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-job-id=: The identifier of the code review job.
+        --finding-ids=!:
+            description: The identifiers of the findings to disassociate from their issues.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pentest-job-id=: The identifier of the penetration test job.
+    - name: batch-export-findings
+      description: Exports a batch of findings to the connected issue tracker as issues.
+      flags:
+        --agent-space-id=!: The identifier of the agent space where the job exists.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --code-review-job-id=: The identifier of the code review job.
+        --finding-ids=!:
+            description: The identifiers of the findings to export.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issue-destination=!: The destination issue-tracker project the findings are exported to.
+        --pentest-job-id=: The identifier of the penetration test job.
     - name: batch-get-agent-spaces
       description: Retrieves information about one or more agent spaces.
       flags:
@@ -301,6 +326,7 @@ commands:
                 - BITBUCKET
                 - CONFLUENCE
                 - AZURE_DEVOPS
+                - JIRA
     - name: create-membership
       description: Creates a new membership, granting a user access to an agent space within an application.
       flags:
@@ -567,6 +593,7 @@ commands:
                 - BITBUCKET
                 - CONFLUENCE
                 - AZURE_DEVOPS
+                - JIRA
     - name: list-actor-messages
       description: Returns a paginated list of the email MFA messages received for an actor at its server-generated email address, most recent first.
       flags:
@@ -735,6 +762,7 @@ commands:
             resource-type:
                 - CODE_REPOSITORY
                 - DOCUMENT
+                - PROJECT
     - name: list-integrations
       description: Lists the integrations in your account, optionally filtered by provider or provider type.
       flags:
