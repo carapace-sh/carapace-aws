@@ -23,6 +23,18 @@ commands:
         --principal-arn=!: The Amazon Resource Name (ARN) of the SAML provider in IAM that describes the IdP.
         --role-arn=!: The role that represents an IAM principal whose scope down policy allows it to call credential vending APIs such as `GetTemporaryTableCredentials`.
         --saml-assertion=!: A SAML assertion consisting of an assertion statement for the user who needs temporary credentials.
+    - name: attach-rls-policy
+      description: Attaches a row-level security policy to a resource for a principal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the row-level security policy to attach.
+        --no-set-default: Indicates whether this policy becomes the default row-level security policy for the resource.
+        --principal=: The principal to which the row-level security policy applies.
+        --resource=!: The resource to which the row-level security policy is attached.
+        --set-default: Indicates whether this policy becomes the default row-level security policy for the resource.
     - name: batch-grant-permissions
       description: Batch operation to grant permissions to the principal.
       flags:
@@ -111,6 +123,17 @@ commands:
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name for the expression.
+    - name: create-rls-policy
+      description: Creates a row-level security (RLS) policy.
+      flags:
+        --attachment-columns=!:
+            description: The list of columns that the filter expression references.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-expression=!: A filter predicate, written in a SQL-like syntax, that Lake Formation evaluates against each row.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A unique name for the row-level security policy within the Data Catalog.
     - name: delete-data-cells-filter
       description: Deletes a data cell filter.
       flags:
@@ -166,6 +189,13 @@ commands:
             nargs: -1
         --table-name=!: The name of the governed table.
         --transaction-id=!: ID of the transaction that the writes occur in.
+    - name: delete-rls-policy
+      description: Deletes a row-level security policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the row-level security policy to delete.
     - name: deregister-resource
       description: Deregisters the resource as managed by the Data Catalog.
       flags:
@@ -194,6 +224,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --transaction-id=!: The transaction for which to return status.
+    - name: detach-rls-policy
+      description: Detaches a row-level security policy from a resource for a principal.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --condition=: A Lake Formation condition, which applies to the row-level security policy attachment and contains an expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the row-level security policy to detach.
+        --no-remove-default: Indicates whether to remove this policy as the default row-level security policy for the resource.
+        --principal=: The principal for which the row-level security policy is detached.
+        --remove-default: Indicates whether to remove this policy as the default row-level security policy for the resource.
+        --resource=!: The resource from which the row-level security policy is detached.
     - name: extend-transaction
       description: Indicates to the service that the specified transaction is still active and should not be treated as idle and aborted.
       flags:
@@ -274,6 +316,13 @@ commands:
         --no-show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
         --resource=!: The database, table, or column resource for which you want to return LF-tags.
         --show-assigned-lf-tags: Indicates whether to show the assigned LF-tags.
+    - name: get-rls-policy
+      description: Returns the definition of a row-level security policy, including its attachment columns and filter expression.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the row-level security policy to retrieve.
     - name: get-table-objects
       description: Returns the set of Amazon S3 objects that make up the specified governed table.
       flags:
@@ -462,6 +511,31 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of resource results.
         --next-token=: A continuation token, if this is not the first call to retrieve these resources.
+    - name: list-rls-policies
+      description: Lists the row-level security policies in the Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of row-level security policies to return in a single response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-rls-policy-attachments
+      description: Lists the row-level security policy attachments in the Data Catalog.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of attachments to return in a single response.
+        --next-token=: A continuation token, if this is a continuation call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-name=: If specified, returns only the attachments for the row-level security policy with this name.
+        --principal=: If specified, returns only the attachments for the given principal.
+        --resource=: If specified, returns only the attachments for the given resource.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-table-storage-optimizers
       description: Returns the configuration of all storage optimizers associated with a specified table.
       flags:
@@ -666,6 +740,14 @@ commands:
         --resource-arn=!: The resource ARN.
         --role-arn=!: The new role to use for the given resource registered in Lake Formation.
         --with-federation: Whether or not the resource is a federated resource.
+    - name: update-rls-policy
+      description: Updates the filter expression of an existing row-level security policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter-expression=: The new filter predicate, written in a SQL-like syntax, that replaces the policy's current filter expression.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the row-level security policy to update.
     - name: update-table-objects
       description: Updates the manifest of Amazon S3 objects that make up the specified governed table.
       flags:
