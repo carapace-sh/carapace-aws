@@ -104,6 +104,7 @@ commands:
         --endpoint-details=: The virtual private cloud (VPC) endpoint settings that are configured for your server.
         --endpoint-type=: The type of endpoint that you want your server to use.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --host-key-storage-type=: Specifies whether the host key is stored by Transfer Family (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
         --host-key=: The RSA, ECDSA, or ED25519 private key to use for your SFTP-enabled server.
         --identity-provider-details=: Required when `IdentityProviderType` is set to `AWS_DIRECTORY_SERVICE`, `Amazon Web Services_LAMBDA` or `API_GATEWAY`.
         --identity-provider-type=: The mode of authentication for a server.
@@ -133,6 +134,9 @@ commands:
                 - PUBLIC
                 - VPC
                 - VPC_ENDPOINT
+            host-key-storage-type:
+                - SERVICE_MANAGED
+                - SECRETS_MANAGER
             identity-provider-type:
                 - SERVICE_MANAGED
                 - API_GATEWAY
@@ -420,10 +424,17 @@ commands:
         --description=: The text description that identifies this host key.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --host-key-body=!: The private key portion of an SSH key pair.
+        --kms-key=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key.
         --server-id=!: The identifier of the server that contains the host key that you are importing.
+        --storage-type=: Specifies whether the host key is stored by Transfer Family (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
         --tags=:
             description: Key-value pairs that can be used to group and search for host keys.
             nargs: -1
+      completion:
+        flag:
+            storage-type:
+                - SERVICE_MANAGED
+                - SECRETS_MANAGER
     - name: import-ssh-public-key
       description: Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a `UserName` value assigned to the specific file transfer protocol-enabled server, identified by `ServerId`.
       flags:
@@ -797,14 +808,21 @@ commands:
                 - IPV4
                 - DUALSTACK
     - name: update-host-key
-      description: Updates the description for the host key that's specified by the `ServerId` and `HostKeyId` parameters.
+      description: Updates the host key that's specified by the `ServerId` and `HostKeyId` parameters.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --description=!: An updated description for the host key.
+        --description=: An updated description for the host key.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --host-key-id=!: The identifier of the host key that you are updating.
+        --kms-key=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the Secrets Manager secret that stores the host key.
         --server-id=!: The identifier of the server that contains the host key that you are updating.
+        --storage-type=: Specifies whether the host key is stored by Transfer Family (`SERVICE_MANAGED`) or in Secrets Manager (`SECRETS_MANAGER`).
+      completion:
+        flag:
+            storage-type:
+                - SERVICE_MANAGED
+                - SECRETS_MANAGER
     - name: update-profile
       description: Updates some of the parameters for an existing profile.
       flags:
