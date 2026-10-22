@@ -202,6 +202,27 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --prompt-identifier=!: The unique identifier of the prompt that you want to create a version of.
         --tags=: Any tags that you want to attach to the version of the prompt.
+    - name: create-retrieval-instruction
+      description: Creates a new retrieval instruction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A caller-supplied token that makes a retried create return the existing resource rather than a second one.
+        --customer-encryption-key-arn=: The Amazon Resource Name (ARN) of a customer managed AWS Key Management Service (AWS KMS) key used to encrypt the instruction content at rest.
+        --description=: Specifies a description of the retrieval instruction.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instruction=!: The instruction content, as a set of named fields.
+        --name=!: Specifies the name of the retrieval instruction.
+        --tags=: Tags for the retrieval instruction.
+    - name: create-retrieval-instruction-version
+      description: Creates an immutable numbered version from the retrieval instruction's current reviewed content.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A caller-supplied token that makes a retried call return the version created by the first call rather than a second version.
+        --description=: A description of this version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retrieval-instruction-id=!: The identifier of the retrieval instruction to version.
     - name: create-vpc-configuration
       description: Creates a VPC configuration that lets a knowledge base connect to a resource in your private VPC.
       flags:
@@ -338,6 +359,14 @@ commands:
         --expected-revision-id=: The expected revision identifier of the resource policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the knowledge base to remove the resource policy from.
+    - name: delete-retrieval-instruction
+      description: Deletes a retrieval instruction or a single version of it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retrieval-instruction-id=!: The identifier of the retrieval instruction to delete.
+        --retrieval-instruction-version=: The version to delete.
     - name: delete-vpc-configuration
       description: Deletes a VPC configuration.
       flags:
@@ -505,6 +534,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the knowledge base to retrieve the resource policy for.
+    - name: get-retrieval-instruction
+      description: Gets a retrieval instruction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --retrieval-instruction-id=!: The identifier of the retrieval instruction to get.
+        --retrieval-instruction-version=: 'The version to return: a version number, or DRAFT for the retrieval instruction''s current reviewed content.'
     - name: get-vpc-configuration
       description: Returns the details and current status of a single VPC configuration.
       flags:
@@ -699,6 +736,35 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --prompt-identifier=: The unique identifier of the prompt for whose versions you want to return information.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-retrieval-instruction-versions
+      description: Lists the numbered versions of a retrieval instruction, newest first.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of versions to return in a single page.
+        --next-token=: The pagination token from a previous ListRetrievalInstructionVersions response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --retrieval-instruction-id=!: The identifier of the retrieval instruction whose versions to list.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-retrieval-instructions
+      description: Lists the retrieval instructions in the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: The pagination token from a previous ListRetrievalInstructions response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Return only instructions with this availability status.
+      completion:
+        flag:
+            status:
+                - ACTIVE
+                - INACTIVE
     - name: list-tags-for-resource
       description: List all the tags for the resource you specify.
       flags:
@@ -968,6 +1034,15 @@ commands:
         --variants=:
             description: A list of objects, each containing details about a variant of the prompt.
             nargs: -1
+    - name: update-retrieval-instruction
+      description: Updates the content of a retrieval instruction.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A replacement description; applied together with the content when the review passes.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instruction=!: The replacement instruction content.
+        --retrieval-instruction-id=!: The identifier of the retrieval instruction to update.
     - name: validate-flow-definition
       description: Validates the definition of a flow.
       flags:
