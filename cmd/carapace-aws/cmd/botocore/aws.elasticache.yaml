@@ -48,14 +48,15 @@ commands:
             nargs: -1
         --service-update-name=!: The unique ID of the service update
     - name: complete-migration
-      description: Complete the migration of data.
+      description: Completes the migration of data.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --force: Forces the migration to stop without ensuring that data is in sync.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-force: Forces the migration to stop without ensuring that data is in sync.
-        --replication-group-id=!: The ID of the replication group to which data is being migrated.
+        --replication-group-id=: The ID of the replication group to which data is being migrated.
+        --serverless-cache-name=: The name of the serverless cache to which data is being migrated.
     - name: copy-serverless-cache-snapshot
       description: Creates a copy of an existing serverless cache’s snapshot.
       flags:
@@ -1094,6 +1095,18 @@ commands:
         --user-ids-to-remove=:
             description: The list of user IDs to remove from the user group.
             nargs: -1
+    - name: prepare-migration
+      description: Prepares the serverless cache for data migration by validating the configuration and setting up the migration resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-node-endpoint-list=!:
+            description: The list of endpoints from which to migrate data.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --serverless-cache-name=!: The name of the serverless cache to prepare for migration.
+        --source-authentication-configuration=: The authentication configuration for connecting to the source during migration.
+        --source-tls-configuration=: The TLS configuration for connecting to the source during migration.
     - name: purchase-reserved-cache-nodes-offering
       description: Allows you to purchase a reserved cache node offering.
       flags:
@@ -1157,15 +1170,27 @@ commands:
         --ec2-security-group-owner-id=!: The Amazon account number of the Amazon EC2 security group owner.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-migration
-      description: Start the migration of data.
+      description: Starts the migration of data.
+      flags:
+        --auto-cutover: Specifies whether ElastiCache automatically attempts to complete the migration after data sync is established.
+        --clear-target-cache-data: Specifies whether ElastiCache deletes existing data in the serverless cache before migration begins.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --customer-node-endpoint-list=:
+            description: The list of endpoints from which to migrate data.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-auto-cutover: Specifies whether ElastiCache automatically attempts to complete the migration after data sync is established.
+        --no-clear-target-cache-data: Specifies whether ElastiCache deletes existing data in the serverless cache before migration begins.
+        --replication-group-id=: The ID of the replication group to which data should be migrated.
+        --serverless-cache-name=: The name of the serverless cache to which data is being migrated.
+    - name: stop-migration
+      description: Stops an ongoing data sync between the source and the serverless cache.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --customer-node-endpoint-list=!:
-            description: List of endpoints from which data should be migrated.
-            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --replication-group-id=!: The ID of the replication group to which data should be migrated.
+        --serverless-cache-name=!: The name of the serverless cache for which to stop the data sync.
     - name: test-failover
       description: Represents the input of a `TestFailover` operation which tests automatic failover on a specified node group (called shard in the console) in a replication group (called cluster in the console).
       flags:

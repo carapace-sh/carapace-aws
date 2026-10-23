@@ -2,6 +2,14 @@
 name: ecs
 description: Amazon EC2 Container Service
 commands:
+    - name: associate-gateway-with-cluster
+      description: Associates a gateway with an Amazon ECS cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster=!: The name or Amazon Resource Name (ARN) of the cluster to associate the gateway with.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway to associate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: continue-service-deployment
       description: Continues or rolls back an Amazon ECS service deployment that is paused at a lifecycle hook.
       flags:
@@ -108,6 +116,27 @@ commands:
             cpu-architecture:
                 - X86_64
                 - ARM64
+    - name: create-gateway
+      description: Creates a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --configuration=!: The type-specific configuration for the gateway.
+        --deletion-protection: Specifies whether to enable deletion protection for the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --infrastructure-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the gateway assumes to create and manage infrastructure on your behalf.
+        --name=!: The name for the gateway.
+        --no-deletion-protection: Specifies whether to enable deletion protection for the gateway.
+        --propagate-tags=: Specifies whether to propagate the tags from the gateway to the infrastructure that the gateway manages.
+        --tags=:
+            description: The metadata that you apply to the gateway to help you categorize and organize it.
+            nargs: -1
+      completion:
+        flag:
+            propagate-tags:
+                - NONE
+                - GATEWAY
     - name: create-service
       description: Runs and maintains your desired number of tasks from a specified task definition.
       flags:
@@ -125,6 +154,9 @@ commands:
         --disable-execute-command: Determines whether the execute command functionality is turned on for the service.
         --enable-ecs-managed-tags: Specifies whether to turn on Amazon ECS managed tags for the tasks within the service.
         --enable-execute-command: Determines whether the execute command functionality is turned on for the service.
+        --gateway-connectors=:
+            description: The gateway connectors that attach the service to a gateway ingress path.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-grace-period-seconds=: The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started.
         --launch-type=: The infrastructure that you run your service on.
@@ -280,6 +312,13 @@ commands:
         --monitor-mode=: Display mode for monitoring output
         --monitor-resources=: ' Enable live monitoring of service resource status'
         --service-arn=!: The Amazon Resource Name (ARN) of the Express service to delete.
+    - name: delete-gateway
+      description: Deletes a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-service
       description: Deletes a specified service within a cluster.
       flags:
@@ -418,6 +457,29 @@ commands:
             description: Specifies additional information to include in the response.
             nargs: -1
         --service-arn=!: The Amazon Resource Name (ARN) of the Express service to describe.
+    - name: describe-gateway
+      description: Describes a gateway, including its configuration, status, and the type-specific infrastructure settings that it uses.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-gateway-resources
+      description: Returns the infrastructure that a gateway has created and manages, so that you can follow the traffic path from top-level shared resources, such as load balancers, to the service-specific resources represented as gateway routes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results that the operation returns in a single page.
+        --next-token=: The `nextToken` value returned from a previous paginated request.
+    - name: describe-gateway-route
+      description: Describes a gateway route, including its status, the service it routes traffic to, and the service-specific infrastructure, such as target groups and listener rules, that the gateway manages for it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-route-arn=!: The Amazon Resource Name (ARN) of the gateway route to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-service-deployments
       description: Describes one or more of your service deployments.
       flags:
@@ -486,6 +548,14 @@ commands:
         --tasks=!:
             description: A list of up to 100 task IDs or full ARN entries.
             nargs: -1
+    - name: disassociate-gateway-from-cluster
+      description: Removes the association between a gateway and an Amazon ECS cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster=!: The name or Amazon Resource Name (ARN) of the cluster to disassociate the gateway from.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway to disassociate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: discover-poll-endpoint
       description: This action is only used by the Amazon ECS agent, and it is not intended for use outside of the agent.
       flags:
@@ -647,6 +717,57 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of daemon results that `ListDaemons` returned in paginated output.
         --next-token=: The `nextToken` value returned from a `ListDaemons` request indicating that more results are available to fulfill the request and further calls will be needed.
+    - name: list-gateway-cluster-associations
+      description: Returns a list of the associations between gateways and clusters.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster=: The name or Amazon Resource Name (ARN) of a cluster to filter the results by.
+        --gateway=: The name or Amazon Resource Name (ARN) of a gateway to filter the results by.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that the operation returns in a single page.
+        --next-token=: The `nextToken` value returned from a previous paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: The association status to filter the results by.
+            nargs: -1
+    - name: list-gateway-routes
+      description: Returns a list of gateway routes.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster=: The name or Amazon Resource Name (ARN) of a cluster to filter the results by.
+        --gateway=: The name or Amazon Resource Name (ARN) of a gateway to filter the results by.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results that the operation returns in a single page.
+        --next-token=: The `nextToken` value returned from a previous paginated request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --service-container-port-name=: The name of a task definition container port to filter the results by.
+        --service=: The name or Amazon Resource Name (ARN) of a service to filter the results by.
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: The gateway route status to filter the results by.
+            nargs: -1
+    - name: list-gateways
+      description: Returns a list of gateways in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of gateway results that `ListGateways` returns in a single page.
+        --names=:
+            description: The gateway names to filter the results by.
+            nargs: -1
+        --next-token=: The `nextToken` value returned from a previous paginated `ListGateways` request where `maxResults` was used and the results exceeded the value of that parameter.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=:
+            description: The gateway statuses to filter the results by.
+            nargs: -1
     - name: list-service-deployments
       description: This operation lists all the service deployments that meet the specified filter criteria.
       flags:
@@ -1237,6 +1358,23 @@ commands:
             cpu-architecture:
                 - X86_64
                 - ARM64
+    - name: update-gateway
+      description: Modifies the configuration of a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: The updated type-specific configuration for the gateway.
+        --deletion-protection: Specifies whether to enable deletion protection for the gateway.
+        --gateway=!: The name or Amazon Resource Name (ARN) of the gateway to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --infrastructure-role-arn=: The Amazon Resource Name (ARN) of the IAM role that the gateway assumes to manage infrastructure on your behalf.
+        --no-deletion-protection: Specifies whether to enable deletion protection for the gateway.
+        --propagate-tags=: Specifies whether to propagate the tags from the gateway to the infrastructure that the gateway manages.
+      completion:
+        flag:
+            propagate-tags:
+                - NONE
+                - GATEWAY
     - name: update-service
       description: Modifies the parameters of a service.
       flags:
@@ -1254,6 +1392,9 @@ commands:
         --enable-ecs-managed-tags: Determines whether to turn on Amazon ECS managed tags for the tasks in the service.
         --enable-execute-command: If `true`, this enables execute command functionality on all task containers.
         --force-new-deployment: Determines whether to force a new deployment of the service.
+        --gateway-connectors=:
+            description: The updated set of gateway connectors that connect the service to a gateway ingress path.
+            nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --health-check-grace-period-seconds=: The period of time, in seconds, that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing, VPC Lattice, and container health checks after a task has first started.
         --load-balancers=:
