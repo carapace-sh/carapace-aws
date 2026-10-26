@@ -53,6 +53,15 @@ commands:
         --ids=!:
             description: A list of VPC endpoint identifiers.
             nargs: -1
+    - name: cancel-ingestion-job
+      description: Cancels an in-progress ingestion job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --collection-id=!: The unique identifier of the collection that the ingestion job belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-job-id=!: The unique identifier of the ingestion job to cancel.
     - name: create-access-policy
       description: Creates a data access policy for OpenSearch Serverless.
       flags:
@@ -130,6 +139,37 @@ commands:
         --id=!: The unique identifier of the collection in which to create the index.
         --index-name=!: The name of the index to create.
         --index-schema=: The JSON schema definition for the index, including field mappings and settings.
+    - name: create-ingestion-job
+      description: Creates an ingestion job that performs a one-time bulk ingestion of data from an Amazon S3 bucket into an index in an OpenSearch Serverless collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --collection-id=!: The unique identifier of the collection to ingest data into.
+        --failure-index-name=: The name of the index where documents that fail to be ingested are recorded.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to ingest documents into.
+        --ingestion-job-name=!: The name of the ingestion job.
+        --source=!: The Amazon S3 source to ingest data from.
+        --tags=:
+            description: An arbitrary set of tags (key–value pairs) to associate with the ingestion job.
+            nargs: -1
+    - name: create-ingestion-stream
+      description: Creates an ingestion stream that continuously ingests data from an Amazon S3 bucket into an index in an OpenSearch Serverless collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --collection-id=!: The unique identifier of the collection to ingest data into.
+        --failure-index-name=: The name of the index where documents that fail to be ingested are recorded.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --index-name=!: The name of the index to ingest documents into.
+        --ingestion-stream-name=!: The name of the ingestion stream.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that OpenSearch Serverless assumes to read data from the source.
+        --source=!: The Amazon S3 source to ingest data from, including the Amazon SQS queue that receives S3 event notifications.
+        --tags=:
+            description: An arbitrary set of tags (key–value pairs) to associate with the ingestion stream.
+            nargs: -1
     - name: create-lifecycle-policy
       description: Creates a lifecyle policy to be applied to OpenSearch Serverless indexes.
       flags:
@@ -232,6 +272,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection containing the index to delete.
         --index-name=!: The name of the index to delete.
+    - name: delete-ingestion-stream
+      description: Deletes an ingestion stream.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
+        --collection-id=!: The unique identifier of the collection that the ingestion stream belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-stream-id=!: The unique identifier of the ingestion stream to delete.
     - name: delete-lifecycle-policy
       description: Deletes an OpenSearch Serverless lifecycle policy.
       flags:
@@ -301,6 +350,22 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection containing the index.
         --index-name=!: The name of the index to retrieve information about.
+    - name: get-ingestion-job
+      description: Returns information about an ingestion job, including its configuration, status, and processing state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The unique identifier of the collection that the ingestion job belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-job-id=!: The unique identifier of the ingestion job to retrieve.
+    - name: get-ingestion-stream
+      description: Returns information about an ingestion stream, including its configuration, status, and processing state.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The unique identifier of the collection that the ingestion stream belongs to.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ingestion-stream-id=!: The unique identifier of the ingestion stream to retrieve.
     - name: get-policies-stats
       description: Returns statistical information about your OpenSearch Serverless access policies, security configurations, and security policies.
       flags:
@@ -360,6 +425,30 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return.
         --next-token=: If your initial `ListCollections` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListCollections` operations, which returns results in the next page.
+    - name: list-ingestion-jobs
+      description: Returns a list of ingestion jobs in a collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The unique identifier of the collection to list ingestion jobs for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: If your initial `ListIngestionJobs` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListIngestionJobs` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-ingestion-streams
+      description: Returns a list of ingestion streams in a collection.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collection-id=!: The unique identifier of the collection to list ingestion streams for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: If your initial `ListIngestionStreams` operation returns a `nextToken`, you can include the returned `nextToken` in subsequent `ListIngestionStreams` operations, which returns results in the next page.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-lifecycle-policies
       description: Returns a list of OpenSearch Serverless lifecycle policies.
       flags:
@@ -475,6 +564,7 @@ commands:
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.
         --deletion-protection=: Indicates whether to enable or disable deletion protection for the collection.
         --description=: A description of the collection.
+        --encryption-config=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the collection.
         --vector-options=: Configuration options for vector search capabilities in the collection.
@@ -486,7 +576,7 @@ commands:
     - name: update-collection-group
       description: Updates the description and capacity limits of a collection group.
       flags:
-        --capacity-limits=: Updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).
+        --capacity-limits=: The updated capacity limits for the collection group, in OpenSearch Compute Units (OCUs).
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: Unique, case-sensitive identifier to ensure idempotency of the request.

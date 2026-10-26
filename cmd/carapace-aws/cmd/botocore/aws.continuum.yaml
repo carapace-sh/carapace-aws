@@ -1,0 +1,329 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: continuum
+description: AWS Continuum
+commands:
+    - name: associate-collector
+      description: Associates one Collector with this Environment and configures the customer role Continuum uses to authorize access to associated Collector data.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Caller-provided token that makes retried association requests idempotent.
+        --collector-arn=!: The ARN of the Collector to associate with this Environment.
+        --collector-data-access-role-arn=!: IAM role in the Environment account that Continuum assumes before authorizing access to associated Collector inventory.
+        --environment-id=!: The unique identifier of the Environment making the association.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-code-finding
+      description: Ingests a customer-supplied security finding into an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Caller-provided idempotency token.
+        --environment-id=!: The environment to ingest the finding into.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ocsf-document=!: The OCSF finding document to ingest, verbatim.
+    - name: create-code-scan
+      description: Creates an explicit scan request for one environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An optional token identifying one scan request for this environment.
+        --environment-id=!: Environment to scan.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-collector
+      description: Creates the Collector for the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Caller-provided token that makes retried create requests return the original Collector rather than creating a duplicate.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-cluster-role=: IAM role configuration used to collect Kubernetes cluster metadata.
+        --type=: Source to collect.
+      completion:
+        flag:
+            type:
+                - AWS_COLLECTOR
+    - name: create-environment
+      description: Creates an environment and starts its validation and any requested provisioning.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: Type-specific configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The customer-visible name of the environment.
+    - name: create-integration
+      description: Creates a new integration with an external source provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: An optional token identifying one create attempt within the caller's account, Region, and operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name for the integration.
+        --provider-configuration=!: The provider-specific configuration required to create the integration.
+    - name: delete-collector
+      description: Deletes the Collector for the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-id=!: The unique identifier of the Collector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-environment
+      description: Deletes an environment and its associated resources.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the environment to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-integration
+      description: Deletes an integration and releases its name and account quota.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: The unique identifier of the integration to delete.
+    - name: disassociate-collector
+      description: Removes one Collector association from this Environment, preserving its other associations.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-arn=!: The ARN of the Collector to disassociate from this Environment.
+        --environment-id=!: The unique identifier of the Environment whose associations are updated.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-code-finding
+      description: Retrieves the current state and details of a finding.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment that owns the finding.
+        --finding-id=!: The unique identifier of the finding to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-code-issue
+      description: Retrieves the current state and details of an issue.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment that owns the issue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issue-id=!: The unique identifier of the issue to retrieve.
+    - name: get-code-issue-artifact
+      description: Retrieves one immutable artifact attached to an issue, including its content.
+      flags:
+        --artifact-id=!: The unique identifier of the artifact to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment that owns the issue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issue-id=!: The issue the artifact is attached to.
+    - name: get-code-scan
+      description: Retrieves one customer-visible environment scan.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: Environment that owns the scan.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scan-run-id=!: Scan to retrieve.
+    - name: get-collector
+      description: Retrieves the current state of the Collector for the caller's account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-id=!: The unique identifier of the Collector to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-collector-data-access-authorization
+      description: Authorizes an Environment's access to a Collector's data.
+      flags:
+        --account-id=!: The AWS account that owns the Collector.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-id=!: The unique identifier of the Collector.
+        --environment-arn=: The full ARN of the Environment requesting the Collector's data.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-environment
+      description: Retrieves the current state and configuration of an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the environment to retrieve.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-integration
+      description: Retrieves information about an integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: The unique identifier of the integration to retrieve.
+    - name: get-resource-policy
+      description: Retrieves the resource policy attached to a Continuum resource.
+      flags:
+        --arn=!: The ARN of a resource in the caller's account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-associated-collectors
+      description: Lists the Collectors currently associated with one Environment in ascending collectorId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The unique identifier of the Environment whose associations to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of associated Collectors to return.
+        --next-token=: Pagination token returned by a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-associated-environments
+      description: Lists the Environments currently associated with one Collector in lexicographically ascending environmentArn order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-id=!: The unique identifier of the Collector whose associations to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of Environment associations to return.
+        --next-token=: Pagination token returned by a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-code-findings
+      description: Lists the findings in an environment in descending findingId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment whose findings to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-code-issue-artifacts
+      description: Lists the artifacts attached to an issue in descending artifactId order.
+      flags:
+        --artifact-type=: Optional filter for a semantic artifact category.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment that owns the issue.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issue-id=!: The issue whose artifacts to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            artifact-type:
+                - EVIDENCE
+                - AGENT_COMMUNICATION
+                - VALIDATION_EVIDENCE
+                - REMEDIATION_PROPOSAL
+                - DECISION
+                - PATCH
+    - name: list-code-issues
+      description: Lists the issues in an environment in descending issueId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: The environment whose issues to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-code-scans
+      description: Lists customer-visible scans for one environment in descending scanRunId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --environment-id=!: Environment whose scans to list.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of scans to return.
+        --next-token=: Pagination token returned by a prior request.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-collectors
+      description: Lists the Collectors owned by the authenticated caller's account, including a Collector whose deletion is in progress.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-environments
+      description: Lists all environments in your account in descending environmentId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-integrations
+      description: Lists the integrations in your account in descending integrationId order.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: put-resource-policy
+      description: Creates or replaces the resource policy attached to a Continuum resource.
+      flags:
+        --arn=!: The ARN of a resource in the caller's account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --expected-revision-id=: Optional optimistic-concurrency token for the currently observed policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=: Omit or supply an empty Statement array to clear resource-policy grants and store the canonical empty-statement policy.
+    - name: start-integration-authorization
+      description: Starts an OAuth authorization for a new integration and returns the values the caller sends to the provider's authorization endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name the integration will be created with.
+        --provider-type=!: The provider to authorize.
+      completion:
+        flag:
+            provider-type:
+                - GITHUB
+    - name: update-collector
+      description: Updates the customer-controlled mutable properties of a Collector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --collector-id=!: The unique identifier of the Collector to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kubernetes-cluster-role=: Atomic update to the IAM role configuration used to collect Kubernetes cluster metadata.
+        --name=: The new customer-visible name.
+    - name: update-environment
+      description: Updates the customer-controlled mutable properties of an environment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --configuration=: Type-specific configuration changes.
+        --environment-id=!: The unique identifier of the environment to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The new customer-visible name.
+    - name: update-integration
+      description: Rotates the credentials used by an Amazon S3 integration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --integration-id=!: The unique identifier of the S3 integration to update.
+        --provider-configuration=!: The provider-specific changes to apply.
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: code-scan-succeeded
+          description: Retrieves one customer-visible environment scan.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --environment-id=!: Environment that owns the scan.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --scan-run-id=!: Scan to retrieve.
