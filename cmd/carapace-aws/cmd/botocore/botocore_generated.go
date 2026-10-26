@@ -109,6 +109,7 @@ func init() {
 		"connectcases":                        "Amazon Connect Cases",
 		"connecthealth":                       "Connect Health",
 		"connectparticipant":                  "Amazon Connect Participant Service",
+		"continuum":                           "AWS Continuum",
 		"controlcatalog":                      "AWS Control Catalog",
 		"controltower":                        "AWS Control Tower",
 		"cost-optimization-hub":               "Cost Optimization Hub",
