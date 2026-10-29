@@ -2,22 +2,33 @@
 name: signin
 description: AWS Sign-In Service
 commands:
+    - name: create-o-auth2-token-with-token-exchange
+      description: Exchanges a supported token for an OAuth 2.0 access token scoped to a resource, which you can use to access AWS services from applications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --grant-type=!: The OAuth 2.0 grant type.
+        --resource=: The OAuth resource for which the access token is requested.
+        --scope=: IAM managed policy Amazon Resource Names (ARNs) to apply as session policies that further scope down the permissions of the issued access token, provided as a space-delimited list.
+        --subject-token-type=: The token type of the subject token.
+        --subject-token=: The subject token that represents the identity of the party on whose behalf the request is made.
     - name: create-oauth2-token
       aliases:
         - create-o-auth2-token
-      description: CreateOAuth2Token API
+      description: Exchanges an authorization code or refresh token for an OAuth 2.0 access token and refresh token.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token-input=!: Flattened token operation inputs The specific operation is determined by grant\_type in the request body
+        --token-input=!: Flattened token operation inputs.
     - name: create-oauth2-token-with-iam
-      description: Grants permission to exchange client credentials for an OAuth 2.0 access token scoped to a resource that can be used to access AWS services from applications
+      description: Exchanges client credentials for an OAuth 2.0 access token scoped to a resource, which you can use to access AWS services from applications.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --grant-type=!: OAuth 2.0 grant type.
+        --grant-type=!: The OAuth 2.0 grant type.
         --resource=!: The OAuth resource for which the access token is requested.
     - name: delete-console-authorization-configuration
       description: Delete console authorization configuration with automatic scope detection
@@ -48,13 +59,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: introspect-oauth2-token-with-iam
-      description: Grants permission to inspect the metadata and state of an OAuth 2.0 access token or refresh token
+      description: Inspects the metadata and active state of an OAuth 2.0 access token or refresh token.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token-type-hint=: Optional hint about the type of the token submitted for introspection.
-        --token=!: The string value of the token to introspect.
+        --token-type-hint=: An optional hint about the type of the token submitted for introspection, as defined in RFC 7662 §2.1.
+        --token=!: The access token or refresh token issued by AWS Sign-In.
     - name: list-resource-permission-statements
       description: Retrieve all permission statements in the account's SignIn resource-based policy
       flags:
@@ -88,9 +99,9 @@ commands:
         --source-vpc=: VPC identifier to restrict console access
         --vpc-source-ip=: Source IP address within VPC
     - name: revoke-oauth2-token-with-iam
-      description: Grants permission to revoke an OAuth 2.0 refresh token and its associated refresh tokens
+      description: Revokes an OAuth 2.0 refresh token and its associated token chain.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --token=!: The refresh\_token to revoke.
+        --token=!: The refresh token to revoke.
