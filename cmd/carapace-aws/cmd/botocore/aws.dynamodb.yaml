@@ -50,6 +50,13 @@ commands:
             return-item-collection-metrics:
                 - SIZE
                 - NONE
+    - name: cancel-bulk-operation
+      description: Cancels an in-progress bulk operation asynchronously.
+      flags:
+        --bulk-operation-arn=!: The Amazon Resource Name (ARN) of the bulk operation to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-backup
       description: Creates a backup for an existing table.
       flags:
@@ -181,6 +188,13 @@ commands:
       description: Describes an existing backup of a table.
       flags:
         --backup-arn=!: The Amazon Resource Name (ARN) associated with the backup.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-bulk-operation
+      description: Describes the specified bulk operation.
+      flags:
+        --bulk-operation-arn=!: The Amazon Resource Name (ARN) of the bulk operation to describe.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -429,6 +443,17 @@ commands:
                 - SYSTEM
                 - AWS_BACKUP
                 - ALL
+    - name: list-bulk-operations
+      description: Lists bulk operations that started within the past 90 days for the current Amazon Web Services account and Amazon Web Services Region, with the most recent operations first.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of bulk operation summaries to return in one page.
+        --next-token=: An optional string that, if supplied, must be copied from the output of a previous call to `ListBulkOperations`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-contributor-insights
       description: Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
       flags:
@@ -700,6 +725,23 @@ commands:
                 - INDEXES
                 - TOTAL
                 - NONE
+    - name: start-bulk-put-items
+      description: Starts an asynchronous bulk operation that reads items from Amazon S3 and writes them to an existing DynamoDB table, so you can efficiently load or migrate large datasets.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that ensures the bulk operation starts no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-s3-configuration=!: The Amazon S3 location, data format, and compression settings for the input objects.
+        --max-write-request-units=: The maximum rate, in write request units per second, at which the bulk operation attempts to write.
+        --output-s3-configuration=!: The Amazon S3 location, encryption settings, and output types for the bulk operation.
+        --performance-tier=: The performance tier for the bulk operation.
+        --table-name=!: The name or ARN of the existing DynamoDB table that receives the items.
+      completion:
+        flag:
+            performance-tier:
+                - STANDARD
+                - ACCELERATED
     - name: tag-resource
       description: Associate a set of tags with an Amazon DynamoDB resource.
       flags:
@@ -938,6 +980,13 @@ commands:
     - name: wait
       description: Wait  until  a particular condition is satisfied.
       commands:
+        - name: bulk-operation-completed
+          description: Describes the specified bulk operation.
+          flags:
+            --bulk-operation-arn=!: The Amazon Resource Name (ARN) of the bulk operation to describe.
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         - name: contributor-insights-enabled
           description: Returns information about contributor insights for a given table or global secondary index.
           flags:

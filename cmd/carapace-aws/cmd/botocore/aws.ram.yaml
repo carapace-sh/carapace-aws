@@ -36,6 +36,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-replace: Specifies whether the specified permission should replace the existing permission associated with the resource share.
         --permission-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the RAM permission to associate with the resource share.
+        --permission-template-parameters=:
+            description: Specifies the template parameter values for the permission being associated.
+            nargs: -1
         --permission-version=: Specifies the version of the RAM permission to associate with the resource share.
         --replace: Specifies whether the specified permission should replace the existing permission associated with the resource share.
         --resource-share-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share to which you want to add or replace permissions.
@@ -47,6 +50,9 @@ commands:
         --client-token=: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: Specifies the name of the customer managed permission.
+        --permission-template-parameters=:
+            description: Specifies a list of template parameter declarations for this permission.
+            nargs: -1
         --policy-template=!: 'A string in JSON format string that contains the following elements of a resource-based policy:'
         --resource-type=!: Specifies the name of the resource type that this customer managed permission applies to.
         --tags=:
@@ -60,6 +66,9 @@ commands:
         --client-token=: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --permission-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the customer managed permission you're creating a new version for.
+        --permission-template-parameters=:
+            description: Specifies a list of template parameter declarations for this version of the permission.
+            nargs: -1
         --policy-template=!: 'A string in JSON format string that contains the following elements of a resource-based policy:'
     - name: create-resource-share
       description: Creates a resource share.
@@ -73,6 +82,9 @@ commands:
         --no-allow-external-principals: Specifies whether principals outside your organization in Organizations can be associated with a resource share.
         --permission-arns=:
             description: Specifies the [Amazon Resource Names (ARNs)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the RAM permission to associate with the resource share.
+            nargs: -1
+        --permission-template-parameters=:
+            description: Specifies the template parameter values for each permission being associated that has template parameters.
             nargs: -1
         --principals=:
             description: Specifies a list of one or more principals to associate with the resource share.
@@ -151,6 +163,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --permission-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the permission whose contents you want to retrieve.
+        --permission-template-parameters=:
+            description: Specifies the template parameter values to use when rendering the permission's policy template.
+            nargs: -1
         --permission-version=: Specifies the version number of the RAM permission to retrieve.
     - name: get-resource-policies
       description: Retrieves the resource policies for the specified resources that you own and have shared.
@@ -280,6 +295,8 @@ commands:
         --no-default-version: When `true`, specifies that you want to list only those associations with resource shares that use the default version of the specified managed permission.
         --permission-arn=: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission.
         --permission-version=: Specifies that you want to list only those associations with resource shares that use this version of the managed permission.
+        --resource-owner=: 'Specifies that you want to list only those associations with resource shares owned by a specific entity:'
+        --resource-share-arn=: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the resource share for which you want to retrieve permission associations.
         --resource-type=: Specifies that you want to list only those associations with resource shares that include at least one resource of this resource type.
       completion:
         flag:
@@ -296,6 +313,9 @@ commands:
                 - CREATED_FROM_POLICY
                 - PROMOTING_TO_STANDARD
                 - STANDARD
+            resource-owner:
+                - SELF
+                - OTHER-ACCOUNTS
     - name: list-permission-versions
       description: Lists the available versions of the specified RAM permission.
       flags:
@@ -313,14 +333,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: Specifies the total number of results that you want included on each page of the response.
         --next-token=: Specifies that you want to receive the next page of results.
+        --permission-status=: Specifies that you want to filter the results to include only permissions with the specified status.
         --permission-type=: 'Specifies that you want to list only permissions of this type:'
+        --resource-owner=: 'Specifies that you want to list only permissions owned by a specific entity:'
         --resource-type=: Specifies that you want to list only those permissions that apply to the specified resource type.
       completion:
         flag:
+            permission-status:
+                - ATTACHABLE
+                - UNATTACHABLE
+                - DELETING
+                - DELETED
+                - DEPRECATED
             permission-type:
                 - ALL
                 - AWS_MANAGED
                 - CUSTOMER_MANAGED
+            resource-owner:
+                - SELF
+                - OTHER-ACCOUNTS
     - name: list-principals
       description: Lists the principals that you are sharing resources with or that are sharing resources with you.
       flags:
@@ -479,6 +510,9 @@ commands:
         --from-permission-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the managed permission that you want to replace.
         --from-permission-version=: Specifies that you want to updated the permissions for only those resource shares that use the specified version of the managed permission.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permission-template-parameters=:
+            description: Specifies the template parameter values to apply when replacing the permission.
+            nargs: -1
         --to-permission-arn=!: Specifies the ARN of the managed permission that you want to associate with resource shares in place of the one specified by `fromPerssionArn` and `fromPermissionVersion`.
     - name: set-default-permission-version
       description: Designates the specified version number as the default version for the specified customer managed permission.
@@ -511,6 +545,20 @@ commands:
         --tag-keys=!:
             description: Specifies a list of one or more tag keys that you want to remove.
             nargs: -1
+    - name: update-permission
+      description: Updates the status of the specified customer managed permission.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --permission-arn=!: Specifies the [Amazon Resource Name (ARN)](https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of the customer managed permission that you want to update.
+        --status=!: Specifies the new status for the permission.
+      completion:
+        flag:
+            status:
+                - ATTACHABLE
+                - DEPRECATED
     - name: update-resource-share
       description: Modifies some of the properties of the specified resource share.
       flags:

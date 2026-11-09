@@ -2,6 +2,19 @@
 name: connectcases
 description: Amazon Connect Cases
 commands:
+    - name: batch-create-related-item
+      description: Creates a comment and associates it with multiple cases in a single request.
+      flags:
+        --cases=!:
+            description: The list of cases to associate the related item with.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --content=!: The content of the related item to be created.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --performed-by=: The entity that created the related item.
     - name: batch-get-case-rule
       description: Gets a batch of case rules.
       flags:
@@ -33,8 +46,26 @@ commands:
         --options=!:
             description: A list of `FieldOption` objects.
             nargs: -1
+    - name: batch-update-case
+      description: Updates fields on multiple cases in a single request.
+      flags:
+        --cases=!:
+            description: The list of cases to update.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --customer-id=: The ARN of the customer profile to associate with all cases in the request.
+        --domain-id=!: The unique identifier of the Cases domain.
+        --fields=!:
+            description: An array of objects, each with a `fieldIdentifier` and a `value`.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --performed-by=: The entity that performed the action.
+        --status=: The status to apply to all cases in the request.
+        --title=: The title to apply to all cases in the request.
     - name: create-case
-      description: If you provide a value for `PerformedBy.UserArn` you must also have [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the User ARN resource that you provide
+      description: If you provide a value for `PerformedBy.UserArn`, you must also have the [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the user ARN that you provide.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -45,7 +76,7 @@ commands:
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --performed-by=: ""
-        --tags=: A map of of key-value pairs that represent tags on a resource.
+        --tags=: A map of key-value pairs that represent tags on a resource.
         --template-id=!: A unique identifier of a template.
     - name: create-case-rule
       description: Creates a new case rule.
@@ -163,7 +194,7 @@ commands:
         --domain-id=!: The unique identifier of the Cases domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-field
-      description: Deletes a field from a cases template.
+      description: Deletes a field from a Cases template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -171,7 +202,7 @@ commands:
         --field-id=!: Unique identifier of the field.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-layout
-      description: Deletes a layout from a cases template.
+      description: Deletes a layout from a Cases template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -188,7 +219,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --related-item-id=!: A unique identifier of a related item.
     - name: delete-template
-      description: Deletes a cases template.
+      description: Deletes a Cases template.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -264,7 +295,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --contact-arn=!: A unique identifier of a contact in Amazon Connect.
+        --contact-arn=!: A unique identifier of a contact in Connect Customer.
         --domain-id=!: The unique identifier of the Cases domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to return per page.
@@ -396,7 +427,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --tags=!: A map of of key-value pairs that represent tags on a resource.
+        --tags=!: A map of key-value pairs that represent tags on a resource.
     - name: untag-resource
       description: Untags a resource.
       flags:
@@ -408,7 +439,7 @@ commands:
             description: List of tag keys.
             nargs: -1
     - name: update-case
-      description: If you provide a value for `PerformedBy.UserArn` you must also have [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the User ARN resource that you provide
+      description: If you provide a value for `PerformedBy.UserArn`, you must also have the [connect:DescribeUser](https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html) permission on the user ARN that you provide.
       flags:
         --case-id=!: A unique identifier of the case.
         --cli-input-json=: Read arguments from the JSON string provided.
