@@ -3,6 +3,7 @@ package botocore
 func init() {
 	services = map[string]string{
 		"accessanalyzer":                      "Access Analyzer",
+		"account-access-runtime":              "Account Access Runtime",
 		"account-access":                      "Account Access",
 		"account":                             "AWS Account",
 		"acm-pca":                             "AWS Certificate Manager Private Certificate Authority",

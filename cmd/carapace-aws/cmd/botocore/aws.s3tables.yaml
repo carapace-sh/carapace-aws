@@ -2,6 +2,13 @@
 name: s3tables
 description: Amazon S3 Tables
 commands:
+    - name: complete-table-migration
+      description: Completes the migration of a table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --table-arn=!: The Amazon Resource Name (ARN) of the migrated table to complete the migration of.
     - name: create-namespace
       description: Creates a namespace.
       flags:
@@ -214,6 +221,14 @@ commands:
         --name=!: The name of the table.
         --namespace=!: The namespace of the table.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
+    - name: get-table-migration
+      description: Gets the details of a migration, including its state, the reason it failed, its statistics and the location of its reports.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-id=: The ID of the migration to get.
+        --table-arn=: The Amazon Resource Name (ARN) of the destination table.
     - name: get-table-policy
       description: Gets details about a table policy.
       flags:
@@ -291,6 +306,36 @@ commands:
             type:
                 - customer
                 - aws
+    - name: list-table-migrations
+      description: Lists the migrations whose destination is in a table bucket, a namespace or a table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --has-valid-plan: The `hasValidPlan` value to filter the list by.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of migrations to return, from 1 to 1,000.
+        --name=: The name of the table to list migrations for.
+        --namespace=: The namespace to list migrations for.
+        --next-token=: The `nextToken` from a previous response, to get the next page of results.
+        --no-has-valid-plan: The `hasValidPlan` value to filter the list by.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: The state to filter the list by.
+        --table-arn=: The Amazon Resource Name (ARN) of the table to list migrations for.
+        --table-bucket-arn=: The Amazon Resource Name (ARN) of the table bucket to list migrations for.
+      completion:
+        flag:
+            state:
+                - new
+                - planning
+                - pendingReview
+                - queued
+                - migrating
+                - succeeded
+                - failed
+                - cancelling
+                - cancelled
     - name: list-tables
       description: List tables in the given table bucket.
       flags:
@@ -420,6 +465,35 @@ commands:
         --new-namespace-name=: The new name for the namespace.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
         --version-token=: The version token of the table.
+    - name: start-table-migration
+      description: Starts migrating an Amazon Web Services Glue Data Catalog table into a new table in a table bucket.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-migration=: The maintenance settings and migration policies for the destination table.
+        --destination-table=!: The table to create and migrate the source into.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-output=!: The bucket and prefixes that the migration writes its reports to.
+        --no-review-migration-plan: Specifies whether the migration waits in the `pendingReview` state, so that you can review the compatibility reports before it migrates any data.
+        --review-migration-plan: Specifies whether the migration waits in the `pendingReview` state, so that you can review the compatibility reports before it migrates any data.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the migration uses to read the source table and its data and to write the destination table and the reports.
+        --source-type=!: The type of the source.
+        --source=!: The source table to migrate.
+      completion:
+        flag:
+            source-type:
+                - glueTable
+    - name: sync-table-migration
+      description: Migrates the changes in the source table since the previous start or sync, such as added and deleted source objects, into the destination table.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-output=!: The bucket and prefixes that the sync writes its reports to.
+        --no-review-migration-plan: Specifies whether the sync waits in the `pendingReview` state, so that you can review the compatibility reports before it migrates any data.
+        --review-migration-plan: Specifies whether the sync waits in the `pendingReview` state, so that you can review the compatibility reports before it migrates any data.
+        --role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the sync uses to read the source table and its data and to write the destination table and the reports.
+        --table-arn=!: The Amazon Resource Name (ARN) of the destination table to sync.
     - name: tag-resource
       description: Applies one or more user-defined tags to an Amazon S3 Tables resource or updates existing tags.
       flags:
@@ -449,3 +523,18 @@ commands:
         --namespace=!: The namespace of the table.
         --table-bucket-arn=!: The Amazon Resource Name (ARN) of the table bucket.
         --version-token=!: The version token of the table.
+    - name: update-table-migration
+      description: Requests a state change for a migration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --migration-id=: The ID of the migration to update.
+        --requested-state=!: 'The state to move the migration to: `queued` to continue a migration in the `pendingReview` state, or `cancelled` to cancel a migration in the `new`, `planning`, `pendingReview`, `queued` or `migrating` state.'
+        --table-arn=: The Amazon Resource Name (ARN) of the destination table.
+        --update-description=: A description of the update, up to 1,024 characters, with no control characters.
+      completion:
+        flag:
+            requested-state:
+                - queued
+                - cancelled

@@ -1632,6 +1632,14 @@ commands:
         --next-token=: A continuation token, if this is a continuation call.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-job-upgrade-analysis
+      description: Retrieves the current status and results of an upgrade analysis.
+      flags:
+        --analysis-id=!: The unique identifier of the upgrade analysis to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: The name of the job associated with the analysis.
     - name: get-jobs
       description: Retrieves all current job definitions.
       flags:
@@ -2938,6 +2946,20 @@ commands:
                 - R.2X
                 - R.4X
                 - R.8X
+    - name: start-job-upgrade-analysis
+      description: Resumes an analysis that is waiting for upgrade consent.
+      flags:
+        --analysis-id=: The unique identifier of the upgrade analysis.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: The name of the job associated with the analysis to resume.
+        --upgrade-consent=: The customer's decision on whether to proceed with the upgrade.
+      completion:
+        flag:
+            upgrade-consent:
+                - APPROVE
+                - DECLINE
     - name: start-materialized-view-refresh-task-run
       description: Starts a materialized view refresh task run for a specified materialized view.
       flags:
@@ -3011,6 +3033,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --crawler-name=!: Name of the crawler whose schedule state to set.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-job-upgrade-analysis
+      description: Stops an in-progress upgrade analysis.
+      flags:
+        --analysis-id=!: The unique identifier of the analysis to stop.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-name=!: The name of the job associated with the analysis.
     - name: stop-materialized-view-refresh-task-run
       description: Stops a materialized view refresh task run for a specified materialized view.
       flags:
