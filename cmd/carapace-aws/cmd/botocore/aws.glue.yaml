@@ -371,6 +371,39 @@ commands:
         --name=!: A name for the custom pattern that allows it to be retrieved or deleted later.
         --regex-string=!: A regular expression string that is used for detecting sensitive data in a custom pattern.
         --tags=: A list of tags applied to the custom entity type.
+    - name: create-data-quality-evaluation-config
+      description: Creates a data quality evaluation configuration, which evaluates the data quality of a collection of tables in the Glue Data Catalog once, on a schedule, or when table metadata changes.
+      flags:
+        --additional-data-sources=: A map of reference strings to additional data sources you can specify for an evaluation run.
+        --additional-run-options=: Additional run options you can specify for an evaluation run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time.
+        --data-source=!: The catalog, database, or table that the configuration applies to, as specified by `Level`.
+        --end-at=: The time at which the schedule stops running, exclusive.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --level=!: The Glue Data Catalog hierarchical level that the configuration applies to.
+        --managed-ruleset-name=: A built-in ruleset that profiles each table, used when `RulesetName` is not set.
+        --name=!: A name for the data quality evaluation configuration.
+        --number-of-workers=: The number of `G.1X` workers to be used in the run.
+        --role=!: The IAM role that evaluations assume.
+        --ruleset-name=: The name of a Data Quality Definition Language (DQDL) ruleset, containing analyzers, rules, or both, to evaluate tables with.
+        --schedule-expression=: A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for example `cron(0 6 * * ?
+        --start-at=: The time from which the schedule runs, inclusive.
+        --tags=: A list of tags applied to the data quality evaluation configuration.
+        --timeout=: The timeout for a run in minutes.
+        --triggers=:
+            description: When the configuration evaluates tables.
+            nargs: -1
+      completion:
+        flag:
+            level:
+                - CATALOG
+                - DATABASE
+                - TABLE
+            managed-ruleset-name:
+                - SIMPLE
+                - ADVANCED
     - name: create-data-quality-ruleset
       description: Creates a data quality ruleset with DQDL rules applied to a specified Glue table.
       flags:
@@ -915,6 +948,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the custom pattern that you want to delete.
+    - name: delete-data-quality-evaluation-config
+      description: Deletes a data quality evaluation configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data quality evaluation configuration to delete.
     - name: delete-data-quality-ruleset
       description: Deletes a data quality ruleset.
       flags:
@@ -1429,6 +1469,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-data-quality-evaluation-config
+      description: Retrieves a data quality evaluation configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the data quality evaluation configuration.
     - name: get-data-quality-model
       description: Retrieve the training status of the model along with more information (CompletedOn, StartedOn, FailureReason).
       flags:
@@ -2221,6 +2268,24 @@ commands:
         --max-results=: The maximum number of results to return.
         --next-token=: A paginated token to offset the results.
         --tags=: A list of key-value pair tags.
+    - name: list-data-quality-evaluation-configs
+      description: Lists the data quality evaluation configurations in your account, optionally filtered by level.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --level=: Lists only the configurations that apply to this level.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: A paginated token to offset the results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            level:
+                - CATALOG
+                - DATABASE
+                - TABLE
     - name: list-data-quality-results
       description: Returns all data quality execution results for your account.
       flags:
@@ -3220,6 +3285,34 @@ commands:
         --crawler-name=!: The name of the crawler whose schedule to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --schedule=: 'The updated `cron` expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers](https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html). For example, to run something every day at 12:15 UTC, you would specify: `cron(15 12 * * ?'
+    - name: update-data-quality-evaluation-config
+      description: Updates a data quality evaluation configuration.
+      flags:
+        --additional-data-sources=: A map of reference strings to additional data sources you can specify for an evaluation run.
+        --additional-run-options=: Additional run options you can specify for an evaluation run.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-source=: The database or table that the configuration applies to.
+        --end-at=: The time at which the schedule stops running, exclusive.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-ruleset-name=: A built-in ruleset, `SIMPLE` or `ADVANCED`, that profiles each table.
+        --name=!: The name of the data quality evaluation configuration to update.
+        --no-pause-runs: Specifies whether to pause the configuration.
+        --number-of-workers=: The number of `G.1X` workers to be used in the run.
+        --pause-runs: Specifies whether to pause the configuration.
+        --role=: The IAM role that evaluations assume.
+        --ruleset-name=: The name of a Data Quality Definition Language (DQDL) ruleset, containing analyzers, rules, or both, to evaluate tables with.
+        --schedule-expression=: A cron or rate expression, in UTC, for the `SCHEDULE` trigger, for example `cron(0 6 * * ?
+        --start-at=: The time from which the schedule runs, inclusive.
+        --timeout=: The timeout for a run in minutes.
+        --triggers=:
+            description: When the configuration evaluates tables.
+            nargs: -1
+      completion:
+        flag:
+            managed-ruleset-name:
+                - SIMPLE
+                - ADVANCED
     - name: update-data-quality-ruleset
       description: Updates the specified data quality ruleset.
       flags:
