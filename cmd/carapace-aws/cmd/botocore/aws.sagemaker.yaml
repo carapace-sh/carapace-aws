@@ -337,6 +337,20 @@ commands:
             node-recovery:
                 - Automatic
                 - None
+    - name: create-cluster-extension
+      description: Installs an extension, such as `sagemaker-observability`, on a SageMaker HyperPod cluster orchestrated by Slurm.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide so that the operation completes no more than one time.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which to install the extension.
+        --configuration-values=: The configuration settings for the extension, as a JSON object serialized as a string, for example `{"metricsProvider":{"nodeMetrics":{"level":"ADVANCED"}}}`.
+        --extension-name=!: The name of the extension to install, for example `sagemaker-observability`.
+        --extension-version=: The version of the extension to install, in `MAJOR.MINOR.PATCH` format, for example `1.0.0`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=:
+            description: Custom tags for managing the extension as an Amazon Web Services resource.
+            nargs: -1
     - name: create-cluster-scheduler-config
       description: Create cluster policy configuration.
       flags:
@@ -1454,6 +1468,9 @@ commands:
         --pipeline-description=: A description of the pipeline.
         --pipeline-display-name=: The display name of the pipeline.
         --pipeline-name=!: The name of the pipeline.
+        --pipeline-version-aliases=:
+            description: The aliases to assign to the first version of the pipeline.
+            nargs: -1
         --role-arn=!: The Amazon Resource Name (ARN) of the role used by the pipeline to access and create resources.
         --tags=:
             description: A list of tags to apply to the created pipeline.
@@ -1835,6 +1852,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cluster-name=!: The string name or the Amazon Resource Name (ARN) of the SageMaker HyperPod cluster to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-cluster-extension
+      description: Deletes an extension from a SageMaker HyperPod cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the extension is installed.
+        --extension-arn=!: The Amazon Resource Name (ARN) of the extension to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-cluster-scheduler-config
       description: Deletes the cluster policy of the cluster.
@@ -2356,6 +2381,14 @@ commands:
         --cluster-name=!: The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the event.
         --event-id=!: The unique identifier (UUID) of the event to describe.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-cluster-extension
+      description: Retrieves information about an extension installed on a SageMaker HyperPod cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the extension is installed.
+        --extension-arn=!: The Amazon Resource Name (ARN) of the extension to describe.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-cluster-node
       description: Retrieves information of a node (also called a *instance* interchangeably) of a SageMaker HyperPod cluster.
       flags:
@@ -2735,6 +2768,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-name=!: The name or Amazon Resource Name (ARN) of the pipeline to describe.
+        --pipeline-version-alias=: The alias of the pipeline version to describe.
         --pipeline-version-id=: The ID of the pipeline version to describe.
     - name: describe-pipeline-definition-for-execution
       description: Describes the details of an execution's pipeline definition.
@@ -3365,6 +3399,20 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: list-cluster-extensions
+      description: Lists the extensions installed on a SageMaker HyperPod cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster whose extensions you want to list.
+        --creation-time-after=: A filter that returns extensions created at or after the specified time.
+        --creation-time-before=: A filter that returns extensions created at or before the specified time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of extensions to return in the response.
+        --next-token=: If the result of the previous `ListClusterExtensions` request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-cluster-nodes
       description: Retrieves the list of instances (also called *nodes* interchangeably) in a SageMaker HyperPod cluster.
       flags:
@@ -4973,6 +5021,7 @@ commands:
         --next-token=: If the result of the previous `ListPipelineExecutions` request was truncated, the response includes a `NextToken`.
         --page-size=: The size of each page to get in the AWS service call.
         --pipeline-name=!: The name or Amazon Resource Name (ARN) of the pipeline.
+        --pipeline-version-alias=: The alias of a pipeline version.
         --sort-by=: The field by which to sort results.
         --sort-order=: The sort order for results.
         --starting-token=: A token to specify where to start paginating.
@@ -5024,6 +5073,7 @@ commands:
         --created-after=: A filter that returns the pipelines that were created after a specified time.
         --created-before=: A filter that returns the pipelines that were created before a specified time.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --managed-by=: Filters the pipelines by who manages them.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of pipelines to return in the response.
         --next-token=: If the result of the previous `ListPipelines` request was truncated, the response includes a `NextToken`.
@@ -5034,6 +5084,9 @@ commands:
         --starting-token=: A token to specify where to start paginating.
       completion:
         flag:
+            managed-by:
+                - AWS
+                - CUSTOMER
             sort-by:
                 - Name
                 - CreationTime
@@ -5731,7 +5784,9 @@ commands:
         --pipeline-parameters=:
             description: Contains a list of pipeline parameters.
             nargs: -1
+        --pipeline-version-alias=: The alias of the pipeline version to start the execution from.
         --pipeline-version-id=: The ID of the pipeline version to start execution from.
+        --role-arn=: The Amazon Resource Name (ARN) of the IAM role that the execution uses.
         --selective-execution-config=: The selective execution configuration applied to the pipeline run.
     - name: start-session
       description: Initiates a remote connection session between a local integrated development environments (IDEs) and a remote SageMaker space.
@@ -5973,6 +6028,17 @@ commands:
             node-recovery:
                 - Automatic
                 - None
+    - name: update-cluster-extension
+      description: Updates the configuration or the version of an extension installed on a SageMaker HyperPod cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide so that the request is idempotent.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster on which the extension is installed.
+        --configuration-values=: The configuration changes to apply, as a JSON object serialized as a string.
+        --extension-arn=!: The Amazon Resource Name (ARN) of the extension to update.
+        --extension-version=: The version to update the extension to, in `MAJOR.MINOR.PATCH` format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-cluster-scheduler-config
       description: Update the cluster policy configuration.
       flags:
@@ -6680,6 +6746,9 @@ commands:
         --pipeline-description=: The description of the pipeline.
         --pipeline-display-name=: The display name of the pipeline.
         --pipeline-name=!: The name of the pipeline to update.
+        --pipeline-version-aliases=:
+            description: The aliases to assign to the new pipeline version that this update creates.
+            nargs: -1
         --role-arn=: The Amazon Resource Name (ARN) that the pipeline uses to execute.
     - name: update-pipeline-execution
       description: Updates a pipeline execution.
@@ -6698,6 +6767,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pipeline-arn=!: The Amazon Resource Name (ARN) of the pipeline.
+        --pipeline-version-alias-operations=: The aliases to add to or remove from the pipeline version.
         --pipeline-version-description=: The description of the pipeline version.
         --pipeline-version-display-name=: The display name of the pipeline version.
         --pipeline-version-id=!: The pipeline version ID to update.
