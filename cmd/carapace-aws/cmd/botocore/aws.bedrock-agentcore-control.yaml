@@ -41,11 +41,15 @@ commands:
             description: The filesystem configurations to mount into the AgentCore Runtime.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hooks-configuration=: The lifecycle hooks configuration for the AgentCore Runtime.
         --lifecycle-configuration=: The life cycle configuration for the AgentCore Runtime.
         --network-configuration=: The network configuration for the AgentCore Runtime.
         --platform-version=: The version of the runtime platform to use for the AgentCore Runtime.
         --protocol-configuration=: The protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.
         --request-header-configuration=: Configuration for HTTP request headers that will be passed through to the runtime.
+        --resource-configurations=:
+            description: The resource configurations for the AgentCore Runtime, such as the minimum amount of memory to allocate to the runtime.
+            nargs: -1
         --role-arn=!: The IAM role ARN that provides permissions for the AgentCore Runtime.
         --tags=: A map of tag keys and values to assign to the agent runtime.
     - name: create-agent-runtime-endpoint
@@ -223,6 +227,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --description=: The description of the gateway.
+        --domain-override=: The public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.
         --exception-level=: The level of detail in error messages returned when invoking the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --interceptor-configurations=:
@@ -352,7 +357,7 @@ commands:
         --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
         --description=: The description of the memory.
         --encryption-key-arn=: The Amazon Resource Name (ARN) of the KMS key used to encrypt the memory data.
-        --event-expiry-duration=!: The duration after which memory events expire.
+        --event-expiry-duration=!: The number of days after which memory events expire, between 7 and 3650 days.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --indexed-keys=:
             description: Metadata keys to index for filtering.
@@ -1685,12 +1690,16 @@ commands:
             description: The updated filesystem configurations to mount into the AgentCore Runtime.
             nargs: -1
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --hooks-configuration=: The updated lifecycle hooks configuration for the AgentCore Runtime.
         --lifecycle-configuration=: The updated life cycle configuration for the AgentCore Runtime.
         --metadata-configuration=: The updated configuration for microVM Metadata Service (MMDS) settings for the AgentCore Runtime.
         --network-configuration=: The updated network configuration for the AgentCore Runtime.
         --platform-version=: The updated version of the runtime platform to use for the AgentCore Runtime.
         --protocol-configuration=: The updated protocol configuration for the AgentCore Runtime, including the protocol, port, and path on which the agent server is available.
         --request-header-configuration=: The updated configuration for HTTP request headers that will be passed through to the runtime.
+        --resource-configurations=:
+            description: The updated resource configurations for the AgentCore Runtime.
+            nargs: -1
         --role-arn=!: The updated IAM role ARN that provides permissions for the AgentCore Runtime.
     - name: update-agent-runtime-endpoint
       description: Updates an existing Amazon Bedrock AgentCore Runtime endpoint.
@@ -1802,6 +1811,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --custom-transform-configuration=: The updated custom transformation configuration for the gateway.
         --description=: The updated description for the gateway.
+        --domain-override=: The updated public domain names that the gateway advertises in its OAuth discovery URLs instead of the inbound Host header.
         --exception-level=: The level of detail in error messages returned when invoking the gateway.
         --gateway-identifier=!: The identifier of the gateway to update.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -1928,7 +1938,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A client token is used for keeping track of idempotent requests.
         --description=: The updated description of the AgentCore Memory resource.
-        --event-expiry-duration=: The number of days after which memory events will expire, between 7 and 365 days.
+        --event-expiry-duration=: The number of days after which memory events expire, between 7 and 3650 days.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --memory-execution-role-arn=: The ARN of the IAM role that provides permissions for the AgentCore Memory resource.
         --memory-id=!: The unique identifier of the memory to update.

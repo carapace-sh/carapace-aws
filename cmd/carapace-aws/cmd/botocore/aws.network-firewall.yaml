@@ -129,6 +129,21 @@ commands:
         --tags=:
             description: The key:value pairs to associate with the resource.
             nargs: -1
+    - name: create-firewall-policy-v2
+      description: Creates a Next Generation policy according to the specifications.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the firewall policy.
+        --dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
+        --encryption-configuration=: A complex type that contains settings for encryption of your firewall policy resources.
+        --firewall-policy-v2-name=!: The descriptive name of the Next Generation policy.
+        --firewall-policy-v2=!: The rule groups and other settings that define the Next Generation policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
+        --tags=:
+            description: The key:value pairs to associate with the resource.
+            nargs: -1
     - name: create-proxy
       description: Creates an Network Firewall [Proxy]()
       flags:
@@ -195,7 +210,9 @@ commands:
         --description=: A description of the rule group.
         --dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
         --encryption-configuration=: A complex type that contains settings for encryption of your rule group resources.
+        --firewall-rule-group=: An object that defines the rules in a firewall engine rule group, for use in a Next Generation policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ips-rule-group=: An object that defines the rules in an IPS engine rule group, for use in a Next Generation policy.
         --no-analyze-rule-group: Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.
         --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
         --rule-group-name=!: The descriptive name of the rule group.
@@ -206,13 +223,15 @@ commands:
         --tags=:
             description: The key:value pairs to associate with the resource.
             nargs: -1
-        --type=!: Indicates whether the rule group is stateless or stateful.
+        --type=!: Indicates the type of the rule group.
       completion:
         flag:
             type:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: create-tls-inspection-configuration
       description: Creates an Network Firewall TLS inspection configuration.
       flags:
@@ -262,6 +281,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --firewall-policy-arn=: The Amazon Resource Name (ARN) of the firewall policy.
         --firewall-policy-name=: The descriptive name of the firewall policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-firewall-policy-v2
+      description: Deletes the specified [FirewallPolicyV2]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --firewall-policy-v2-arn=: The Amazon Resource Name (ARN) of the Next Generation policy.
+        --firewall-policy-v2-name=: The descriptive name of the Next Generation policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-network-firewall-transit-gateway-attachment
       description: Deletes a transit gateway attachment from a Network Firewall.
@@ -321,13 +348,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-group-arn=: The Amazon Resource Name (ARN) of the rule group.
         --rule-group-name=: The descriptive name of the rule group.
-        --type=: Indicates whether the rule group is stateless or stateful.
+        --type=: Indicates the type of the rule group.
       completion:
         flag:
             type:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: delete-tls-inspection-configuration
       description: Deletes the specified [TLSInspectionConfiguration]().
       flags:
@@ -374,6 +403,20 @@ commands:
         --firewall-policy-arn=: The Amazon Resource Name (ARN) of the firewall policy.
         --firewall-policy-name=: The descriptive name of the firewall policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-firewall-policy-v2
+      description: Returns the data objects for the specified Next Generation policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --firewall-policy-v2-arn=: The Amazon Resource Name (ARN) of the Next Generation policy.
+        --firewall-policy-v2-name=: The descriptive name of the Next Generation policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --rule-output-format=: The format in which to return the rules of any firewall engine rule groups that are embedded in the policy.
+      completion:
+        flag:
+            rule-output-format:
+                - FIREWALL_RULES
+                - RULES_STRING
     - name: describe-flow-operation
       description: Returns key information about a specific flow operation.
       flags:
@@ -444,13 +487,19 @@ commands:
         --no-analyze-rule-group: Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.
         --rule-group-arn=: The Amazon Resource Name (ARN) of the rule group.
         --rule-group-name=: The descriptive name of the rule group.
-        --type=: Indicates whether the rule group is stateless or stateful.
+        --rule-output-format=: For a firewall engine rule group, the format in which to return the rules.
+        --type=: Indicates the type of the rule group.
       completion:
         flag:
+            rule-output-format:
+                - FIREWALL_RULES
+                - RULES_STRING
             type:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: describe-rule-group-metadata
       description: High-level information about a rule group, returned by operations like create and describe.
       flags:
@@ -459,13 +508,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-group-arn=: The descriptive name of the rule group.
         --rule-group-name=: The descriptive name of the rule group.
-        --type=: Indicates whether the rule group is stateless or stateful.
+        --type=: Indicates the type of the rule group.
       completion:
         flag:
             type:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: describe-rule-group-summary
       description: Returns detailed information for a stateful rule group.
       flags:
@@ -481,6 +532,8 @@ commands:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: describe-tls-inspection-configuration
       description: Returns the data objects for the specified TLS inspection configuration.
       flags:
@@ -575,6 +628,17 @@ commands:
         --starting-token=: A token to specify where to start paginating.
     - name: list-firewall-policies
       description: Retrieves the metadata for the firewall policies that you have defined.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of objects that you want Network Firewall to return for this request.
+        --next-token=: When you request a list of objects with a `MaxResults` setting, if the number of objects that are still available for retrieval exceeds the maximum you requested, Network Firewall returns a `NextToken` value in the response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-firewall-policies-v2
+      description: Retrieves the metadata for the Next Generation policies that you have defined.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -702,6 +766,8 @@ commands:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: list-tags-for-resource
       description: Retrieves the tags associated with the specified resource.
       flags:
@@ -915,6 +981,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-firewall-policy-change-protection!: A setting indicating whether the firewall is protected against a change to the firewall policy association.
         --update-token=: An optional token that you can use for optimistic locking.
+    - name: update-firewall-policy-v2
+      description: Updates the properties of the specified Next Generation policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the firewall policy.
+        --dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
+        --encryption-configuration=: A complex type that contains settings for encryption of your firewall policy resources.
+        --firewall-policy-v2-arn=: The Amazon Resource Name (ARN) of the Next Generation policy.
+        --firewall-policy-v2-name=: The descriptive name of the Next Generation policy.
+        --firewall-policy-v2=!: The updated rule groups and other settings that define the Next Generation policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
+        --update-token=!: A token used for optimistic locking.
     - name: update-logging-configuration
       description: Sets the logging configuration for the specified firewall.
       flags:
@@ -1027,7 +1107,9 @@ commands:
         --description=: A description of the rule group.
         --dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
         --encryption-configuration=: A complex type that contains settings for encryption of your rule group resources.
+        --firewall-rule-group=: An object that defines the rules in a firewall engine rule group, for use in a Next Generation policy.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --ips-rule-group=: An object that defines the rules in an IPS engine rule group, for use in a Next Generation policy.
         --no-analyze-rule-group: Indicates whether you want Network Firewall to analyze the stateless rules in the rule group for rule behavior such as asymmetric routing.
         --no-dry-run: Indicates whether you want Network Firewall to just check the validity of the request, rather than run the request.
         --rule-group-arn=: The Amazon Resource Name (ARN) of the rule group.
@@ -1036,7 +1118,7 @@ commands:
         --rules=: A string containing stateful rule group rules specifications in Suricata flat format, with one rule per line.
         --source-metadata=: A complex type that contains metadata about the rule group that your own rule group is copied from.
         --summary-configuration=: Updates the selected summary configuration for a rule group.
-        --type=: Indicates whether the rule group is stateless or stateful.
+        --type=: Indicates the type of the rule group.
         --update-token=!: A token used for optimistic locking.
       completion:
         flag:
@@ -1044,6 +1126,8 @@ commands:
                 - STATELESS
                 - STATEFUL
                 - STATEFUL_DOMAIN
+                - FIREWALL
+                - IPS
     - name: update-subnet-change-protection
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
