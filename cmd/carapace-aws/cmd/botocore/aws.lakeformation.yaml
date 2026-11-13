@@ -276,6 +276,16 @@ commands:
         --max-results=: The maximum number of results to return.
         --next-token=: A continuation token, if this is not the first call to retrieve this list.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to get permissions.
+    - name: get-glue-function-session-context
+      description: Returns a session context for one or more user-defined functions that an integrated analytics engine runs together in a job.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The number of seconds the session context is valid.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-defined-function-arns=!:
+            description: The ARNs of one or more user-defined functions to include in the session context, each in the format `arn:aws:glue:region:account-id:userDefinedFunction/database-name/function-name`.
+            nargs: -1
     - name: get-lf-tag
       description: Returns an LF-tag definition.
       flags:
@@ -354,6 +364,14 @@ commands:
             credentials-scope:
                 - READ
                 - READWRITE
+    - name: get-temporary-glue-function-credentials
+      description: Returns temporary credentials that you can use to download the artifacts of a user-defined function whose `GovernanceMode` is `LAKE_FORMATION`.
+      flags:
+        --audit-context=: Context for the request, such as the column names and query ID, that Lake Formation uses for auditing.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --user-defined-function-arn=!: The ARN of the user-defined function whose artifacts you want to download, in the format `arn:aws:glue:region:account-id:userDefinedFunction/database-name/function-name`.
     - name: get-temporary-glue-partition-credentials
       description: This API is identical to `GetTemporaryTableCredentials` except that this is used when the target Data Catalog resource is of type Partition.
       flags:
@@ -491,6 +509,7 @@ commands:
       completion:
         flag:
             resource-type:
+                - ANY_RESOURCE
                 - CATALOG
                 - DATABASE
                 - TABLE
@@ -500,6 +519,7 @@ commands:
                 - LF_TAG_POLICY_DATABASE
                 - LF_TAG_POLICY_TABLE
                 - LF_NAMED_TAG_EXPRESSION
+                - USER_DEFINED_FUNCTION
     - name: list-resources
       description: Lists the resources registered to be managed by the Data Catalog.
       flags:

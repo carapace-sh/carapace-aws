@@ -9,20 +9,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A name for the association.
+        --priority=: The priority of the Profile association.
         --profile-id=!: ID of the Profile.
         --resource-id=!: The ID of the VPC.
         --tags=:
             description: A list of the tag keys and values that you want to identify the Profile association.
             nargs: -1
     - name: associate-resource-to-profile
-      description: Associates a DNS reource configuration to a Route 53 Profile.
+      description: Associates a DNS resource configuration to a Route 53 Profile.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: Name for the resource association.
         --profile-id=!: ID of the Profile.
-        --resource-arn=!: Amazon resource number, ARN, of the DNS resource.
+        --resource-arn=!: Amazon resource number, ARN, of the resource to associate.
         --resource-properties=: If you are adding a DNS Firewall rule group, include also a priority.
     - name: create-profile
       description: Creates an empty Route 53 Profile.
@@ -103,6 +104,7 @@ commands:
         --next-token=: For the first call to this list request, omit this value.
         --page-size=: The size of each page to get in the AWS service call.
         --profile-id=!: The ID of the Profile.
+        --resource-arn=: The Amazon Resource Name (ARN) of a resource.
         --resource-type=: ID of a resource if you want information on only one type.
         --starting-token=: A token to specify where to start paginating.
     - name: list-profiles
@@ -141,6 +143,15 @@ commands:
         --tag-keys=!:
             description: The tags that you want to remove to the specified resource.
             nargs: -1
+    - name: update-profile-association
+      description: Updates the name or priority of the specified Route 53 Profile association with a VPC.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the Profile association.
+        --priority=: The new priority of the Profile association.
+        --profile-association-id=!: The ID of the Profile association to update.
     - name: update-profile-resource-association
       description: Updates the specified Route 53 Profile resourse association.
       flags:
