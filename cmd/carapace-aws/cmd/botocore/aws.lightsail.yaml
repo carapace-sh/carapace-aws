@@ -54,6 +54,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --instance-name=!: The instance name to which you want to attach the static IP address.
         --static-ip-name=!: The name of the static IP.
+    - name: check-subdomain-availability
+      description: Checks whether a Lightsail subdomain is available to create.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-reserve: Specifies whether to reserve the subdomain for your account if it's available.
+        --reserve: Specifies whether to reserve the subdomain for your account if it's available.
+        --subdomain-name=!: The subdomain to check (for example, `mysite` or `blog.mysite`).
     - name: close-instance-public-ports
       description: Closes ports for a specific Amazon Lightsail instance.
       flags:
@@ -267,6 +276,7 @@ commands:
         --no-enable-private-origin-access: Specifies whether to enable private origin access for the distribution.
         --no-enable-waf: Specifies whether to enable Web Application Firewall (WAF) for the distribution.
         --origin=!: An object that describes the origin resource for the distribution, such as a Lightsail instance, bucket, or load balancer.
+        --subdomain-name=: The Lightsail subdomain to create and associate with the distribution (for example, `mysite`, for the web address `mysite.amazonlightsail.com`).
         --tags=:
             description: The tag keys and optional values to add to the distribution during create.
             nargs: -1
@@ -481,6 +491,16 @@ commands:
         --tags=:
             description: The tag keys and optional values to add to the resource during create.
             nargs: -1
+    - name: create-subdomain
+      description: Creates a Lightsail subdomain, such as `mysite`, with the web address `mysite.amazonlightsail.com`. After the subdomain is created, use the `UpdateSubdomainAssociation` action to associate it with a Lightsail resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subdomain-name=!: The subdomain to create (for example, `mysite` or `blog.mysite`).
+        --tags=:
+            description: The tag keys and optional values to add to the subdomain during create.
+            nargs: -1
     - name: delete-alarm
       description: Deletes an alarm.
       flags:
@@ -650,6 +670,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --relational-database-snapshot-name=!: The name of the database snapshot that you are deleting.
+    - name: delete-subdomain
+      description: Deletes a Lightsail subdomain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subdomain-name=!: The subdomain to delete (for example, `mysite` or `blog.mysite`), not its web address.
     - name: detach-certificate-from-distribution
       description: Detaches an SSL/TLS certificate from your Amazon Lightsail content delivery network (CDN) distribution.
       flags:
@@ -1539,6 +1566,14 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --page-token=: The token to advance to the next page of results from your request.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-subdomains
+      description: Returns information about one or more of your Lightsail subdomains.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --page-token=: The token to advance to the next page of results from your request.
+        --subdomain-name=: The subdomain for which to return information (for example, `mysite` or `blog.mysite`), not its web address.
     - name: import-key-pair
       description: Imports a public SSH key from a specific key pair.
       flags:
@@ -1741,6 +1776,7 @@ commands:
                 - Distribution
                 - Certificate
                 - Bucket
+                - Subdomain
     - name: set-resource-access-for-bucket
       description: Sets the Amazon Lightsail resources that can access the specified Lightsail bucket.
       flags:
@@ -2027,3 +2063,18 @@ commands:
             description: The database parameters to update.
             nargs: -1
         --relational-database-name=!: The name of your database for which to update parameters.
+    - name: update-subdomain-association
+      description: Associates a Lightsail subdomain with a resource, disassociates it from a resource, or moves it from one resource to another resource.
+      flags:
+        --action=!: The association change to make.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --subdomain-name=!: The subdomain to update (for example, `mysite` or `blog.mysite`), not its web address.
+        --target-resource-arn=: The Amazon Resource Name (ARN) of the resource to associate the subdomain with.
+      completion:
+        flag:
+            action:
+                - ASSOCIATE
+                - DISASSOCIATE
+                - TRANSFER

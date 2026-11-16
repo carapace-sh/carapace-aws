@@ -22,6 +22,16 @@ commands:
         flag:
             aws-integration:
                 - KmsTde
+    - name: associate-virtual-machines-to-cloud-vm-cluster
+      description: Adds virtual machines to the specified VM cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-vm-cluster-id=!: The unique identifier of the VM cluster to add virtual machines to.
+        --db-servers=!:
+            description: The list of database server IDs for the virtual machines to add to the VM cluster.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: associate-virtual-machines-to-exadb-vm-cluster
       description: Adds virtual machines to the specified Exascale VM cluster.
       flags:
@@ -448,6 +458,16 @@ commands:
         flag:
             aws-integration:
                 - KmsTde
+    - name: disassociate-virtual-machines-from-cloud-vm-cluster
+      description: Removes virtual machines from the specified VM cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-vm-cluster-id=!: The unique identifier of the VM cluster to remove virtual machines from.
+        --db-servers=!:
+            description: The list of database server IDs for the virtual machines to remove from the VM cluster.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: disassociate-virtual-machines-from-exadb-vm-cluster
       description: Removes virtual machines from the specified Exascale VM cluster.
       flags:
@@ -1083,14 +1103,66 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --retention-period-in-days=: The retention period, in days, for the Autonomous Database backup.
+    - name: update-cloud-autonomous-vm-cluster
+      description: Updates the properties of the specified Autonomous VM cluster.
+      flags:
+        --autonomous-data-storage-size-in-tbs=: The data storage size to allocate for Autonomous Databases in the Autonomous VM cluster, in terabytes (TB).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-autonomous-vm-cluster-id=!: The unique identifier of the Autonomous VM cluster to update.
+        --cpu-core-count-per-node=: The number of CPU cores to enable per node in the Autonomous VM cluster.
+        --description=: A user-provided description of the Autonomous VM cluster.
+        --display-name=: A new user-friendly name for the Autonomous VM cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-model=: The Oracle license model to apply to the Autonomous VM cluster.
+        --maintenance-window=: The scheduling details for the maintenance window.
+        --total-container-databases=: The total number of Autonomous Container Databases that can be created in the Autonomous VM cluster.
+      completion:
+        flag:
+            license-model:
+                - BRING_YOUR_OWN_LICENSE
+                - LICENSE_INCLUDED
     - name: update-cloud-exadata-infrastructure
       description: Updates the properties of an Exadata infrastructure resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --cloud-exadata-infrastructure-id=!: The unique identifier of the Exadata infrastructure to update.
+        --compute-count=: The number of database servers for the Exadata infrastructure.
+        --display-name=: A new user-friendly name for the Exadata infrastructure.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --maintenance-window=: ""
+        --maintenance-window=: The maintenance window configuration for the Exadata Cloud infrastructure.
+        --storage-count=: The number of storage servers to activate for the Exadata infrastructure.
+    - name: update-cloud-exadata-infrastructure-storage-capacity
+      description: Adds storage capacity to the specified Exadata infrastructure.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-exadata-infrastructure-id=!: The unique identifier or Amazon Resource Name (ARN) of the Exadata infrastructure to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-cloud-vm-cluster
+      description: Updates the properties of the specified VM cluster.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cloud-vm-cluster-id=!: The unique identifier of the VM cluster to update.
+        --cpu-core-count=: The number of CPU cores to enable on the VM cluster.
+        --data-collection-options=: The set of preferences for the diagnostic collection options for the VM cluster.
+        --data-storage-size-in-tbs=: The size of the data disk group, in terabytes (TB), to allocate for the VM cluster.
+        --db-node-storage-size-in-gbs=: The amount of local node storage, in gigabytes (GB), to allocate for the VM cluster.
+        --display-name=: A new user-friendly name for the VM cluster.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --license-model=: The Oracle license model to apply to the VM cluster.
+        --memory-size-in-gbs=: The amount of memory, in gigabytes (GB), to allocate for the VM cluster.
+        --ssh-public-keys=:
+            description: The public key portion of one or more key pairs used for SSH access to the VM cluster.
+            nargs: -1
+        --storage-size-in-g-bs=: The amount of local node storage, in gigabytes (GB), to allocate to the VM cluster.
+      completion:
+        flag:
+            license-model:
+                - BRING_YOUR_OWN_LICENSE
+                - LICENSE_INCLUDED
     - name: update-exadb-vm-cluster
       description: Updates the specified Exascale VM cluster.
       flags:
