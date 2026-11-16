@@ -2398,6 +2398,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --node-id=: The ID of the SageMaker HyperPod cluster node.
         --node-logical-id=: The logical identifier of the node to describe.
+    - name: describe-cluster-operation
+      description: Retrieves detailed information about a specific operation for a given HyperPod cluster, such as a scaling operation or a deep health check.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name or Amazon Resource Name (ARN) of the HyperPod cluster associated with the operation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --operation-id=!: The unique identifier (UUID) of the operation to describe.
     - name: describe-cluster-scheduler-config
       description: Description of the cluster policy.
       flags:
@@ -3383,6 +3391,7 @@ commands:
         --max-results=: The maximum number of events to return in the response.
         --next-token=: A token to retrieve the next set of results.
         --node-id=: The EC2 instance ID to filter events.
+        --operation-id=: The unique identifier (UUID) of a cluster operation for which to filter events.
         --page-size=: The size of each page to get in the AWS service call.
         --resource-type=: The type of resource for which to filter events.
         --sort-by=: The field to use for sorting the event list.
@@ -3399,6 +3408,18 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: list-cluster-extension-versions
+      description: Lists the versions of an extension that you can install on a SageMaker HyperPod cluster, from the highest version to the lowest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --extension-name=!: The name of the extension whose versions you want to list, for example `sagemaker-observability`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of versions to return in the response.
+        --next-token=: If the result of the previous `ListClusterExtensionVersions` request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-cluster-extensions
       description: Lists the extensions installed on a SageMaker HyperPod cluster.
       flags:
@@ -3440,6 +3461,38 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: list-cluster-operations
+      description: Retrieves a list of operation summaries for a specified HyperPod cluster, such as scaling operations and deep health checks.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-name=!: The name or Amazon Resource Name (ARN) of the HyperPod cluster for which to list operations.
+        --creation-time-after=: The start of the time range for filtering operations.
+        --creation-time-before=: The end of the time range for filtering operations.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of operations to return in the response.
+        --next-token=: A token to retrieve the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort-by=: The field to use for sorting the operation list.
+        --sort-order=: The order in which to sort the results.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: The operation status to filter by.
+        --type=: The operation type to filter by.
+      completion:
+        flag:
+            sort-by:
+                - CreationTime
+            sort-order:
+                - Ascending
+                - Descending
+            status:
+                - InProgress
+                - Superseded
+                - Done
+            type:
+                - Scaling
+                - DeepHealthCheck
     - name: list-cluster-scheduler-configs
       description: List the cluster policy configurations.
       flags:
