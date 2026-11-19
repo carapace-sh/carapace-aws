@@ -21,6 +21,15 @@ commands:
             description: The list of profile ARNs to associate with the workload.
             nargs: -1
         --workload-id=!: ""
+    - name: create-agent-basic-profile
+      description: Creates a Basic profile for the calling account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --tags=:
+            description: Tags to apply to the Basic profile at creation time.
+            nargs: -1
     - name: create-agent-context
       description: Creates a context associated with an optimization profile.
       flags:
@@ -45,10 +54,39 @@ commands:
         --description=: A description of the goal.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --pillars=!:
-            description: The Well-Architected Tool Framework pillars to associate with this goal.
+            description: The Amazon Web Services Well-Architected Framework pillars to associate with this goal.
             nargs: -1
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile to associate the goal with.
         --title=!: The title of the goal.
+    - name: create-agent-organizational-profile
+      description: Creates an Organizational Profile for use with AWS Organizations integration.
+      flags:
+        --business-overview=: The business overview for this organizational profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --deletion-protection: Indicates whether deletion protection is enabled for the organizational profile.
+        --description=: A description of the organizational profile.
+        --display-name=: The display name of the organizational profile shown to users.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The system name of the organizational profile.
+        --no-deletion-protection: Indicates whether deletion protection is enabled for the organizational profile.
+        --organizational-aggregation-configuration=: The organizational monitoring boundary.
+        --pillars=!:
+            description: The Amazon Web Services Well-Architected Framework pillars to associate with this organizational profile.
+            nargs: -1
+        --tags=:
+            description: The tags to associate with the organizational profile.
+            nargs: -1
+    - name: create-agent-organizational-report
+      description: Creates an Organizational Report, which is an asynchronously-materialized, point-in-time snapshot of recommendations across all Agent Profiles within the caller's AWS Organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A caller-supplied idempotency token.
+        --filters=: Optional filters narrowing the report's scope.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --label=: Optional human-readable label (1-500 characters) that helps callers distinguish reports created with the same filters.
     - name: create-agent-profile
       description: Creates an optimization profile that defines the scope and configuration for generating recommendations.
       flags:
@@ -67,7 +105,7 @@ commands:
         --name=!: The system name of the profile.
         --no-deletion-protection: Indicates whether deletion protection is enabled for the profile.
         --pillars=!:
-            description: The Well-Architected Tool Framework pillars to associate with this profile.
+            description: The Amazon Web Services Well-Architected Framework pillars to associate with this profile.
             nargs: -1
         --tags=:
             description: The tags to associate with the profile.
@@ -219,6 +257,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the goal to delete.
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile containing the goal.
+    - name: delete-agent-organizational-report
+      description: Deletes an Organizational Report and its associated artifacts.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: Identifier of the report to delete.
     - name: delete-agent-profile
       description: Deletes an optimization profile and its associated configuration.
       flags:
@@ -226,6 +271,20 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile to delete.
+    - name: delete-agent-profile-policy
+      description: Removes the resource-based policy from an Agent Profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The ARN of the Agent Profile whose policy to delete.
+    - name: delete-agent-recommendation-policy
+      description: Removes the resource-based policy from an individual Agent Recommendation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-arn=!: The ARN of the Agent Recommendation whose policy to delete.
     - name: delete-lens
       description: Delete an existing lens.
       flags:
@@ -344,6 +403,33 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The unique identifier of the goal to retrieve.
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile containing the goal.
+    - name: get-agent-organizational-report
+      description: Retrieves metadata and current state for a single Organizational Report.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: Identifier of the report to retrieve.
+    - name: get-agent-organizational-report-data
+      description: Retrieves the data artifact for a completed Organizational Report as a short-lived presigned S3 URL.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=!: Format of the returned artifact (CSV, JSON, or PARQUET).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --report-id=!: Identifier of the report whose data is being retrieved.
+      completion:
+        flag:
+            format:
+                - CSV
+                - JSON
+                - PARQUET
+    - name: get-agent-preferences
+      description: Returns the caller's complete set of Well-Architected Agent preferences with their current states.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-agent-profile
       description: Retrieves detailed information about an optimization profile, including its configuration and metadata.
       flags:
@@ -351,8 +437,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --profile-arn=!: The Amazon Resource Name (ARN) of the optimization profile to retrieve.
+    - name: get-agent-profile-policy
+      description: Retrieves the resource-based policy attached to an Agent Profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --profile-arn=!: The ARN of the Agent Profile whose policy to retrieve.
     - name: get-agent-recommendation
-      description: Retrieves detailed information about a specific optimization recommendation, including its impact analysis, content, and implementation guidance.
+      description: Application-level recommendations are a new recommendation format currently in beta.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -369,13 +462,20 @@ commands:
                 - IAC
                 - MCP
     - name: get-agent-recommendation-generation
-      description: Retrieves information about a recommendation generation process, including its status, progress, and results.
+      description: Application-level recommendations are a new recommendation format currently in beta.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --generation-id=!: The unique identifier of the recommendation generation to retrieve.
         --profile-arn=!: The ARN of the optimization profile associated with this generation.
+    - name: get-agent-recommendation-policy
+      description: Retrieves the resource-based policy attached to an individual Agent Recommendation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --recommendation-arn=!: The ARN of the Agent Recommendation whose policy to retrieve.
     - name: get-answer
       description: Get the answer to a specific question in a workload review.
       flags:
@@ -513,8 +613,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
-        --max-results=: ""
-        --next-token=: ""
+        --max-results=: The maximum number of contexts to return in a single call.
+        --next-token=: A pagination token returned from a previous call to continue retrieving results.
         --page-size=: The size of each page to get in the AWS service call.
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile to list contexts for.
         --starting-token=: A token to specify where to start paginating.
@@ -530,6 +630,28 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --profile-arn=!: The Amazon Resource Name (ARN) of the optimization profile to list goals for.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-agent-organizational-reports
+      description: Lists Organizational Reports owned by the caller's account within the caller's AWS Organization, ordered by most recently created first.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Maximum number of items to return in a single page.
+        --next-token=: Pagination token from a previous ListAgentOrganizationalReports response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --state=: Optional filter restricting the response to reports in a single lifecycle state.
+      completion:
+        flag:
+            state:
+                - DISCOVERING
+                - SNAPSHOTTING
+                - AGGREGATING
+                - COMPRESSING
+                - COMPLETED
+                - FAILED
+                - DELETING
     - name: list-agent-profiles
       description: Lists optimization profiles in your account.
       flags:
@@ -542,7 +664,7 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-agent-recommendation-generations
-      description: Lists recommendation generation processes for a specified profile.
+      description: Application-level recommendations are a new recommendation format currently in beta.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -561,7 +683,7 @@ commands:
                 - ARCHITECTURE
                 - APPLICATION
     - name: list-agent-recommendation-items
-      description: Lists recommendation items for a specific recommendation.
+      description: Application-level recommendations are a new recommendation format currently in beta.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -579,7 +701,7 @@ commands:
                 - AWS_RESOURCE
                 - RECOMMENDATION
     - name: list-agent-recommendations
-      description: Lists active optimization recommendations for a specified profile with optional filtering by state.
+      description: Application-level recommendations are a new recommendation format currently in beta.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -882,6 +1004,23 @@ commands:
         --max-results=: The maximum number of results to return for this request.
         --next-token=: ""
         --workload-name-prefix=: ""
+    - name: put-agent-preferences
+      description: Creates or replaces the caller's Well-Architected Agent preferences.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --preferences=!:
+            description: Preference updates to apply.
+            nargs: -1
+    - name: put-agent-profile-policy
+      description: Attaches or replaces a resource-based policy on an Agent Profile.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy=!: The IAM resource-based policy document in JSON format.
+        --profile-arn=!: The ARN of the Agent Profile to attach the policy to.
     - name: put-agent-recommendation-feedback
       description: Submits user feedback on a recommendation to help improve future optimization suggestions and track implementation outcomes.
       flags:
@@ -903,16 +1042,40 @@ commands:
             type:
                 - USEFUL
                 - NOT_USEFUL
-    - name: start-agent-recommendation-generation
-      description: Initiates a new recommendation generation process for the specified optimization profile.
+    - name: put-agent-recommendation-policy
+      description: Attaches or replaces a resource-based policy on an individual Agent Recommendation.
       flags:
-        --additional-context=: Optional additional context to guide the recommendation generation, such as specific business requirements or constraints.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=: An optional name for this generation process to help identify it in lists and logs.
+        --policy=!: The IAM resource-based policy document in JSON format.
+        --recommendation-arn=!: The ARN of the Agent Recommendation to attach the policy to.
+    - name: send-agent-organizational-report-data-to-s3
+      description: Writes the data artifact for a completed Organizational Report directly into a caller-owned S3 bucket.
+      flags:
+        --bucket-arn=!: ARN of the caller-owned S3 bucket that will receive the artifact.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --format=!: Format of the delivered artifact (CSV, JSON, or PARQUET).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --object-key=!: S3 object key under bucketArn where the artifact will be written.
+        --report-id=!: Identifier of the report whose data is being delivered.
+      completion:
+        flag:
+            format:
+                - CSV
+                - JSON
+                - PARQUET
+    - name: start-agent-recommendation-generation
+      description: Starts a recommendation generation process for the specified agent profile.
+      flags:
+        --additional-context=: The location of the infrastructure as code (IaC) template to review, and the lenses to review it against.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: An optional name for this generation that identifies the architecture review in the console and in `ListAgentRecommendationGenerations` results.
         --profile-arn=!: The Amazon Resource Name (ARN) of the optimization profile to use for generating recommendations.
-        --scope=!: Scope configuration to focus the generation on specific pillars or goals.
+        --scope=: Defines which pillars, goals, and items the review covers.
         --types=!:
             description: The types of recommendations to generate.
             nargs: -1
@@ -959,11 +1122,28 @@ commands:
             nargs: -1
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile containing the goal to update.
         --title=: The updated title for the goal.
+    - name: update-agent-organizational-profile
+      description: Updates an Organizational Profile.
+      flags:
+        --business-overview=: The updated business overview for the organizational profile.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --deletion-protection: Indicates whether deletion protection is enabled for the organizational profile.
+        --description=: The updated description of the organizational profile.
+        --display-name=: The updated display name of the organizational profile.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-deletion-protection: Indicates whether deletion protection is enabled for the organizational profile.
+        --organizational-aggregation-configuration=: The organizational monitoring boundary.
+        --pillars=:
+            description: The updated Amazon Web Services Well-Architected Framework pillars for the organizational profile.
+            nargs: -1
+        --profile-arn=!: The Amazon Resource Name (ARN) of the organizational profile to update.
     - name: update-agent-profile
       description: Updates an existing optimization profile's configuration, including its pillars, execution role, and aggregation settings.
       flags:
         --aggregation-configuration=:
-            description: The updated aggregation configuration.
+            description: The updated aggregation configuration, as a list of per-account entries.
             nargs: -1
         --business-overview=: The updated business overview for the profile.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -976,7 +1156,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-deletion-protection: Indicates whether deletion protection is enabled for the profile.
         --pillars=:
-            description: The updated Well-Architected Tool Framework pillars for the profile.
+            description: The updated Amazon Web Services Well-Architected Framework pillars for the profile.
             nargs: -1
         --profile-arn=!: The Amazon Resource Name (ARN) of the profile to update.
     - name: update-agent-recommendation-status
@@ -1218,3 +1398,13 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --lens-alias=!: ""
         --template-arn=!: The ARN of the review template.
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: agent-organizational-report-completed
+          description: Retrieves metadata and current state for a single Organizational Report.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --report-id=!: Identifier of the report to retrieve.

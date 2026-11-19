@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: sagemaker-inference-router-runtime
+description: Amazon SageMaker Inference Router Runtime
+commands:
+    - name: invoke-inference-router
+      description: Sends a real-time inference request to an inference router.
+      flags:
+        --accept=: The MIME type that you want for the inference response.
+        --body=!: The input data for the inference, in the format that your model expects.
+        --content-type=: The MIME type of the input data in the request body.
+        --custom-attributes=: Provides additional information about the inference request.
+        --inference-id=: An identifier for the inference request.
+        --inference-router-name=!: The name of the inference router to invoke.
+        --prefix-aware-id=: An optional, stable identifier that serves as a routing hint for prefix-aware routing.
+        --routing-target-name=!: The name of the routing target in the inference router.
+      completion:
+        positional:
+            - - $files
+    - name: invoke-inference-router-async
+      description: Submits an asynchronous inference request to an inference router.
+      flags:
+        --accept=: The MIME type that you want for the inference response.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=: The MIME type of the input data in Amazon S3.
+        --custom-attributes=: Provides additional information about the inference request.
+        --filename=: The file name of the inference response stored in Amazon S3.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inference-id=: An identifier for the inference request.
+        --inference-router-name=!: The name of the inference router to invoke.
+        --input-location=!: The Amazon S3 URI of the object that contains the input data for the inference.
+        --invocation-timeout-seconds=: The maximum time, in seconds, that a destination can spend processing the request before the request is marked as expired.
+        --request-ttl-seconds=: The time to live of the request, in seconds, measured from when the router accepts it.
+        --routing-target-name=!: The name of the routing target in the inference router.
+        --s3-output-path-extension=: The path extension that is appended to the routing target's Amazon S3 output path where the inference response is stored.

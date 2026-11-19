@@ -1,0 +1,82 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: connectscheduling
+description: Amazon Connect Scheduling
+commands:
+    - name: approve-time-off
+      description: Approves a time off request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description recorded with the approval.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --rule-failure-action=: Controls what happens when a configured rule fails.
+        --time-off-id=!: The unique identifier of the time off request to approve.
+        --user-id=!: The identifier of the user who the time off request belongs to.
+      completion:
+        flag:
+            rule-failure-action:
+                - REJECT
+                - OVERRIDE
+    - name: cancel-time-off
+      description: Cancels a time off request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description recorded with the cancellation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --time-off-id=!: The unique identifier of the time off request to cancel.
+        --user-id=!: The identifier of the user who the time off request belongs to.
+    - name: create-time-off
+      description: Creates a time off request for a user.
+      flags:
+        --approval-type=!: Controls who approves the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --description=: A description recorded on the time off request.
+        --end-at=!: The end of the time off window, exclusive.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --rule-failure-action=: Controls what happens when a configured rule fails.
+        --shift-activity-id=!: The identifier of the shift activity that defines the type of time off being requested.
+        --start-at=!: The start of the time off window, inclusive.
+        --user-id=!: The identifier of the user who the time off request is for.
+      completion:
+        flag:
+            approval-type:
+                - AWAIT_APPROVAL
+                - AUTOMATIC
+            rule-failure-action:
+                - REJECT
+                - OVERRIDE
+    - name: get-time-off
+      description: Returns a time off request, including its current status and validation results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --time-off-id=!: The identifier of the time off request.
+        --user-id=!: The identifier of the user who the time off request belongs to.
+    - name: put-time-off-balance
+      description: Sets the time off balance for one user and shift activity.
+      flags:
+        --balance=!: The new time off balance for the user and activity.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --shift-activity-id=!: The identifier of the shift activity that the balance applies to.
+        --user-id=!: The identifier of the user whose balance is being updated.
+    - name: reject-time-off
+      description: Rejects a time off request.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description recorded with the rejection, such as the reason.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-id=!: The identifier of the Connect Customer instance.
+        --time-off-id=!: The unique identifier of the time off request to reject.
+        --user-id=!: The identifier of the user who the time off request belongs to.
