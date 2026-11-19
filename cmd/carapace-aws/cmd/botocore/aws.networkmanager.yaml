@@ -19,6 +19,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of your global network.
         --link-id=: The ID of the link.
+    - name: associate-context-store
+      description: Associates a transit gateway with a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transit-gateway-arn=: The Amazon Resource Name (ARN) of the transit gateway to associate with the context store.
     - name: associate-customer-gateway
       description: Associates a customer gateway with a device and optionally, with a link.
       flags:
@@ -104,6 +112,18 @@ commands:
         --link-id=: The ID of the link for the first device.
         --tags=:
             description: The tags to apply to the resource during creation.
+            nargs: -1
+    - name: create-context-store
+      description: Creates a context store in a global network.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --description=: A description of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-network-id=!: The ID of the global network to create the context store in.
+        --tags=:
+            description: The tags to apply to the context store during creation.
             nargs: -1
     - name: create-core-network
       description: Creates a core network as part of your global network, and optionally, with a core network policy.
@@ -307,6 +327,13 @@ commands:
         --connection-id=!: The ID of the connection.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
+    - name: delete-context-store
+      description: Deletes a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-core-network
       description: Deletes a core network along with all core network policies.
       flags:
@@ -405,6 +432,14 @@ commands:
         --connect-peer-id=!: The ID of the Connect peer to disassociate from a device.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
+    - name: disassociate-context-store
+      description: Disassociates a transit gateway from a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway to disassociate from the context store.
     - name: disassociate-customer-gateway
       description: Disassociates a customer gateway from a device and a link.
       flags:
@@ -483,6 +518,28 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: get-context-store
+      description: Returns information about a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-context-store-association
+      description: Returns information about the association between a context store and a transit gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --transit-gateway-arn=!: The Amazon Resource Name (ARN) of the transit gateway.
+    - name: get-context-version
+      description: Returns the current version of the context entries of a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-core-network
       description: Returns information about the LIVE policy for a core network.
       flags:
@@ -863,6 +920,55 @@ commands:
         --next-token=: The token for the next page of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-context-changes
+      description: Returns the context entries that were added to or removed from a context store after the specified version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --from-version-id=!: The version to return changes from.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-context-store-associations
+      description: Returns the transit gateway associations of a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-context-stores
+      description: Returns the context stores in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-network-id=: The ID of a global network.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-contexts
+      description: Returns the context entries of a context store, and the version of the context entries.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-core-network-policy-versions
       description: Returns a list of core network policy versions.
       flags:
@@ -1107,6 +1213,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --global-network-id=!: The ID of the global network.
         --link-id=: The ID of the link for the first device in the connection.
+    - name: update-context-store
+      description: Updates the description of a context store.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-store-id=!: The ID of the context store.
+        --description=: The new description of the context store.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: update-core-network
       description: Updates the description of a core network.
       flags:

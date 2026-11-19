@@ -86,6 +86,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --service-id=!: The ID of the VPC endpoint service.
+        --transit-gateway-attachment-ids=:
+            description: The IDs of the transit gateway attachments to accept.
+            nargs: -1
         --vpc-endpoint-ids=!:
             description: The IDs of the interface VPC endpoints.
             nargs: -1
@@ -363,6 +366,16 @@ commands:
         --tag-specifications=:
             description: Tag specifications.
             nargs: -1
+    - name: associate-kms-key-id
+      description: Associates an additional KMS key with an encrypted Amazon EBS snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: The ID, alias, or ARN of the KMS key to associate with the snapshot.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --snapshot-id=: The ID of the Amazon EBS snapshot.
     - name: associate-nat-gateway-address
       description: Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public NAT gateway.
       flags:
@@ -2663,6 +2676,25 @@ commands:
             description: The tags for the transit gateway multicast domain.
             nargs: -1
         --transit-gateway-id=!: The ID of the transit gateway.
+    - name: create-transit-gateway-network-function-attachment
+      description: Creates a network function attachment that connects the specified transit gateway to a Gateway Load Balancer endpoint service.
+      flags:
+        --availability-zone-ids=:
+            description: The IDs of the Availability Zones for the attachment.
+            nargs: -1
+        --availability-zones=:
+            description: The names of the Availability Zones for the attachment.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --service-name=!: The name of the Gateway Load Balancer endpoint service.
+        --tag-specifications=:
+            description: The tags to apply to the network function attachment.
+            nargs: -1
+        --transit-gateway-id=!: The ID of the transit gateway.
     - name: create-transit-gateway-peering-attachment
       description: Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter).
       flags:
@@ -3869,6 +3901,15 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --transit-gateway-multicast-domain-id=!: The ID of the transit gateway multicast domain.
+    - name: delete-transit-gateway-network-function-attachment
+      description: Deletes the specified network function attachment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --transit-gateway-attachment-id=!: The ID of the network function attachment.
     - name: delete-transit-gateway-peering-attachment
       description: Deletes a transit gateway peering attachment.
       flags:
@@ -8586,6 +8627,22 @@ commands:
         --transit-gateway-multicast-domain-ids=:
             description: The ID of the transit gateway multicast domain.
             nargs: -1
+    - name: describe-transit-gateway-network-function-attachments
+      description: Describes one or more network function attachments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --filters=:
+            description: One or more filters.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return with a single call.
+        --next-token=: The token for the next page of results.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --transit-gateway-attachment-ids=:
+            description: The IDs of the network function attachments.
+            nargs: -1
     - name: describe-transit-gateway-peering-attachments
       description: Describes your transit gateway peering attachments.
       flags:
@@ -9580,6 +9637,16 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ipam-resource-discovery-association-id=!: A resource discovery association ID.
         --no-dry-run: A check for whether you have the required permissions for the action without actually making the request and provides an error response.
+    - name: disassociate-kms-key-id
+      description: Removes an associated KMS key from an Amazon EBS snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --kms-key-id=!: The ID, alias, or ARN of the associated KMS key to remove from the snapshot.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --snapshot-id=: The ID of the Amazon EBS snapshot.
     - name: disassociate-nat-gateway-address
       description: Disassociates secondary Elastic IP addresses (EIPs) from a public NAT gateway.
       flags:
@@ -12513,6 +12580,27 @@ commands:
             description: The IDs of middlebox attachments to remove from the metering policy.
             nargs: -1
         --transit-gateway-metering-policy-id=!: The ID of the transit gateway metering policy to modify.
+    - name: modify-transit-gateway-network-function-attachment
+      description: Adds Availability Zones to or removes Availability Zones from the specified network function attachment.
+      flags:
+        --add-availability-zone-ids=:
+            description: The IDs of the Availability Zones to add to the attachment.
+            nargs: -1
+        --add-availability-zones=:
+            description: The names of the Availability Zones to add to the attachment.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --remove-availability-zone-ids=:
+            description: The IDs of the Availability Zones to remove from the attachment.
+            nargs: -1
+        --remove-availability-zones=:
+            description: The names of the Availability Zones to remove from the attachment.
+            nargs: -1
+        --transit-gateway-attachment-id=!: The ID of the network function attachment.
     - name: modify-transit-gateway-policy-table-entry
       description: Modifies the specified transit gateway policy table entry.
       flags:
@@ -12922,10 +13010,16 @@ commands:
         --dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
+        --permission-type=: The type of permission to add or remove.
         --remove-allowed-principals=:
             description: The Amazon Resource Names (ARN) of the principals.
             nargs: -1
         --service-id=!: The ID of the service.
+      completion:
+        flag:
+            permission-type:
+                - vpc-endpoint
+                - transit-gateway-attachment
     - name: modify-vpc-peering-connection-options
       description: Modifies the VPC peering connection options on one side of a VPC peering connection.
       flags:
@@ -13354,6 +13448,9 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --no-dry-run: Checks whether you have the required permissions for the action, without actually making the request, and provides an error response.
         --service-id=!: The ID of the service.
+        --transit-gateway-attachment-ids=:
+            description: The IDs of the transit gateway attachments to reject.
+            nargs: -1
         --vpc-endpoint-ids=!:
             description: The IDs of the VPC endpoints.
             nargs: -1

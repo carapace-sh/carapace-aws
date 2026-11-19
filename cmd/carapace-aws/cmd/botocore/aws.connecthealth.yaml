@@ -10,6 +10,16 @@ commands:
         --domain-id=!: The unique identifier of the parent Domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subscription-id=!: The unique identifier of the Subscription.
+    - name: create-dataset
+      description: Creates a Dataset in a Domain and starts building it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the operation completes no more than one time.
+        --config=!: The configuration of the dataset.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the dataset.
     - name: create-domain
       description: Creates a new Domain for managing HealthAgent resources.
       flags:
@@ -35,12 +45,28 @@ commands:
         --domain-id=!: The unique identifier of the parent Domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subscription-id=!: The unique identifier of the Subscription.
+    - name: delete-dataset
+      description: Starts deleting a Dataset and the resources that Amazon Connect Health built for it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The unique identifier of the dataset to delete.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-domain
       description: Deletes a Domain and all associated resources.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The id of the Domain to delete
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-dataset
+      description: Retrieves information about a Dataset, including its status and, after it is built, its results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The unique identifier of the dataset.
+        --domain-id=!: The unique identifier of the parent Domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-domain
       description: Retrieves information about a Domain.
@@ -49,6 +75,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --domain-id=!: The id of the Domain to get
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-medical-coding-job
+      description: Retrieves information about a medical coding job, including its status and, when it succeeds, the location of its results.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the medical coding job.
     - name: get-medical-scribe-listening-session
       description: Retrieves details about an existing Medical Scribe listening session
       flags:
@@ -74,6 +108,23 @@ commands:
         --domain-id=!: The unique identifier of the parent Domain.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --subscription-id=!: The unique identifier of the Subscription.
+    - name: list-datasets
+      description: Lists the Datasets in a Domain.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of datasets to return in one page.
+        --next-token=: The token for the next page of results, from a previous ListDatasets response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=: Returns only datasets of this type.
+      completion:
+        flag:
+            type:
+                - MEDICAL_CODING
     - name: list-domains
       description: Lists Domains for a given account.
       flags:
@@ -111,6 +162,19 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the resource to list tags for
+    - name: start-medical-coding-job
+      description: Starts an asynchronous job that generates medical codes (ICD-10 and CPT) for clinical text.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --dataset-id=: The unique identifier of an ACTIVE medical coding dataset in the Domain to code against.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --encounter-context=: Encounter context for the job.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --output-data-config=!: The output configuration for the job.
+        --patient-context=: Patient context for the job.
+        --text=!: The clinical text to generate medical codes for, such as a clinical note.
     - name: start-medical-scribe-listening-session
       description: Starts a new Medical Scribe listening session for real-time audio transcription
       flags:
@@ -146,6 +210,25 @@ commands:
         --output-data-config=!: ""
         --patient-context=!: ""
         --user-context=!: ""
+    - name: submit-feedback
+      description: Submits feedback on a clinical document or a set of medical codes that Amazon Connect Health generated.
+      flags:
+        --artifact-source-id=!: The identifier of the artifact source.
+        --artifact-type=!: The type of artifact that you submit feedback for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --comments=: Optional comments about the feedback.
+        --domain-id=!: The unique identifier of the parent Domain.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generated-artifact-s3-uri=: The Amazon S3 URI of the clinical document or set of medical codes that Amazon Connect Health generated.
+        --signed-artifact-s3-uri=!: The Amazon Simple Storage Service (Amazon S3) URI of the final artifact that the clinician signed.
+        --subscription-id=: The unique identifier of the Subscription.
+      completion:
+        flag:
+            artifact-type:
+                - CLINICAL_DOC
+                - MEDICAL_CODES
     - name: tag-resource
       description: Associates the specified tags with the specified resource
       flags:
