@@ -41,21 +41,24 @@ commands:
     - name: create-access-source
       description: Creates an access source for a DNS view.
       flags:
-        --cidr=!: The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.
+        --cidr=: The IP address or CIDR range that is allowed to send DNS queries to the Route 53 Global Resolver.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique string that identifies the request and ensures idempotency.
+        --core-network-endpoint-id=: The ID of the core network endpoint to associate with this access source.
         --dns-view-id=!: The ID of the DNS view to associate with this access source.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address type for this access source.
         --name=: A descriptive name for the access source.
         --protocol=!: The DNS protocol that is permitted for this access source.
+        --segment=: The name of the segment to associate with this access source.
         --tags=: Tags to associate with the access source.
       completion:
         flag:
             ip-address-type:
                 - IPV4
                 - IPV6
+                - NONE
             protocol:
                 - DO53
                 - DOH
@@ -71,6 +74,20 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=: A descriptive name for the access token.
         --tags=: An array of user-defined keys and optional values.
+    - name: create-core-network-endpoint
+      description: Creates a core network endpoint, which enables DNS resolution for Amazon Web Services Cloud WAN core network segments.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that ensures the request is idempotent.
+        --core-network-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services Cloud WAN core network to connect to this endpoint.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --global-resolver-id=!: The ID of the Route 53 Global Resolver to associate with this core network endpoint.
+        --ip-addresses=!:
+            description: The IP addresses that the core network endpoint uses to resolve DNS queries within the Amazon Web Services Cloud WAN core network.
+            nargs: -1
+        --name=: A descriptive name for the core network endpoint.
+        --tags=: An array of user-defined keys and optional values that you can use to categorize and organize the core network endpoint.
     - name: create-dns-view
       description: Creates a DNS view within a Route 53 Global Resolver.
       flags:
@@ -158,6 +175,7 @@ commands:
         --ip-address-type=: The IP address type for the Route 53 Global Resolver.
         --name=!: A descriptive name for the Route 53 Global Resolver instance.
         --observability-region=: The Amazon Web Services Region where query resolution logs and metrics will be aggregated and delivered.
+        --public-ip-status=: Specifies the public IP connectivity to configure for the Route 53 Global Resolver.
         --regions=!:
             description: List of Amazon Web Services Regions where the Route 53 Global Resolver will operate.
             nargs: -1
@@ -167,6 +185,10 @@ commands:
             ip-address-type:
                 - IPV4
                 - DUAL_STACK
+            public-ip-status:
+                - ENABLED_RESERVED
+                - DISABLED_RESERVED
+                - DISABLED_RELEASED
     - name: delete-access-source
       description: Deletes an access source.
       flags:
@@ -180,6 +202,13 @@ commands:
         --access-token-id=!: The unique identifier of the access token to delete.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-core-network-endpoint
+      description: Deletes a core network endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-network-endpoint-id=!: The unique identifier of the core network endpoint to delete.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-dns-view
       description: Deletes a DNS view.
@@ -244,6 +273,13 @@ commands:
         --access-token-id=!: ID of the token.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-core-network-endpoint
+      description: Retrieves information about a core network endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-network-endpoint-id=!: The unique identifier of the core network endpoint to retrieve information about.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-dns-view
       description: Retrieves information about a DNS view.
@@ -315,6 +351,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --dns-view-id=!: The ID of the DNS view to list the tokens for.
         --filters=: Filtering parameters.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to retrieve in a single call.
+        --next-token=: A pagination token used for large sets of results that can't be returned in a single response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-core-network-endpoints
+      description: Lists the core network endpoints in your Amazon Web Services account, with pagination support.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=: Values to filter the results.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to retrieve in a single call.
@@ -448,6 +496,7 @@ commands:
         --cidr=: The CIDR block for the access source.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dns-view-id=: The ID of the DNS view to associate with this access source.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ip-address-type=: The IP address type for the access source.
         --name=: The name of the access source.
@@ -457,6 +506,7 @@ commands:
             ip-address-type:
                 - IPV4
                 - IPV6
+                - NONE
             protocol:
                 - DO53
                 - DOH
@@ -469,6 +519,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The new name of the token.
+    - name: update-core-network-endpoint
+      description: Updates the configuration of a core network endpoint.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --core-network-endpoint-id=!: The unique identifier of the core network endpoint to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the core network endpoint.
+        --update-ip-addresses=:
+            description: The IP address changes to apply to the core network endpoint.
+            nargs: -1
     - name: update-dns-view
       description: Updates the configuration of a DNS view.
       flags:
@@ -552,6 +613,7 @@ commands:
         --ip-address-type=: The IP address type for the Global Resolver.
         --name=: The name of the Global Resolver.
         --observability-region=: The Amazon Web Services Regions in which the users' Global Resolver query resolution logs will be propagated.
+        --public-ip-status=: Specifies the public IP connectivity to configure for the Route 53 Global Resolver.
         --regions=:
             description: The list of Amazon Web Services Regions where the Global Resolver will operate.
             nargs: -1
@@ -560,6 +622,10 @@ commands:
             ip-address-type:
                 - IPV4
                 - DUAL_STACK
+            public-ip-status:
+                - ENABLED_RESERVED
+                - DISABLED_RESERVED
+                - DISABLED_RELEASED
     - name: update-hosted-zone-association
       description: Updates the configuration of a hosted zone association.
       flags:

@@ -46,6 +46,50 @@ commands:
             description: An array of outputs for this feed.
             nargs: -1
         --tags=: Optional tags.
+    - name: create-function
+      description: Creates a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the function.
+        --event-bridge-delivery=: Specifies whether Elemental Inference also sends this function's results to Amazon EventBridge.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for this function.
+        --request-expression=!: The JSONata expression that builds the request.
+        --response-expression=: The JSONata expression that selects what to store.
+        --tags=: The tags to associate with this function.
+        --target=!: The destination for the request that the function builds.
+      completion:
+        flag:
+            event-bridge-delivery:
+                - ENABLED
+                - DISABLED
+    - name: create-question-set
+      description: Creates a question set.
+      flags:
+        --choose-one=:
+            description: An array of questions that Elemental Inference answers by choosing one of their options.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A user-friendly name for this question set.
+        --tags=: Optional tags to associate with the question set.
+        --yes-no-per-option=:
+            description: An array of questions that you ask about each of their options.
+            nargs: -1
+        --yes-no=:
+            description: An array of questions that Elemental Inference answers with yes or no. You can specify up to 50 yesNo questions.
+            nargs: -1
+    - name: create-question-set-version
+      description: Publishes the DRAFT version of the specified question set as a new version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A description of the new version.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set whose DRAFT version you want to publish.
+        --sha256=: The SHA-256 hash of the DRAFT version that you want to publish, as returned by GetQuestionSet or UpdateQuestionSet.
     - name: create-schedule-action
       description: Creates a schedule action on a feed.
       flags:
@@ -79,6 +123,28 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --id=!: The ID of the feed whose policy you want to delete.
+    - name: delete-function
+      description: Deletes a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the function.
+    - name: delete-question-set
+      description: Deletes the specified question set, including its DRAFT version and all its published versions.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set to delete.
+    - name: delete-question-set-version
+      description: Deletes a published version of the specified question set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set that contains the version.
+        --question-set-version=!: The number of the published version to delete.
     - name: delete-schedule-action
       description: Deletes a schedule action from a feed.
       flags:
@@ -132,6 +198,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --fixture-id=!: The ID of the fixture to retrieve, as returned by SearchFixtures.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-function
+      description: Retrieves the details of a function, including its expressions, the media context that Elemental Inference derived from the request expression, and the feeds that currently reference it.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the function.
+    - name: get-question-set
+      description: Retrieves information about the specified question set at one version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set to retrieve.
+        --question-set-version=: 'The version of the question set to retrieve: DRAFT or the number of a published version.'
     - name: list-dictionaries
       description: Lists the dictionaries in your account.
       flags:
@@ -152,6 +233,40 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return per API request.
         --next-token=: The token that identifies the batch of results that you want to see.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-functions
+      description: Lists the functions in this account, in this Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of functions to return in one response.
+        --next-token=: The token that identifies the page of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-question-set-versions
+      description: Lists the versions of the specified question set.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set whose versions you want to list.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the next batch of results to return.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-question-sets
+      description: Lists the question sets in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return per API request.
+        --next-token=: The token that identifies the next batch of results to return.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-schedule-actions
@@ -251,6 +366,41 @@ commands:
         --name=!: Required.
         --outputs=!:
             description: Required.
+            nargs: -1
+    - name: update-function
+      description: Updates a function.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: A new description for the function.
+        --event-bridge-delivery=: Specifies whether Elemental Inference also sends this function's marked results to Amazon EventBridge, as described for CreateFunction.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the function.
+        --name=: A new name for the function.
+        --request-expression=: A new request expression for the function.
+        --response-expression=: A new response expression for the function.
+        --target=: A new target for the function.
+      completion:
+        flag:
+            event-bridge-delivery:
+                - ENABLED
+                - DISABLED
+    - name: update-question-set
+      description: Updates the DRAFT version of the specified question set.
+      flags:
+        --choose-one=:
+            description: An array of questions that Elemental Inference answers by choosing one of their options, to replace all the chooseOne questions in DRAFT.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --id=!: The ID of the question set to update.
+        --name=: A new name for the question set.
+        --yes-no-per-option=:
+            description: An array of questions that you ask about each of their options, to replace all the yesNoPerOption questions in DRAFT.
+            nargs: -1
+        --yes-no=:
+            description: An array of questions that Elemental Inference answers with yes or no, to replace all the yesNo questions in DRAFT.
             nargs: -1
     - name: wait
       description: Wait  until  a particular condition is satisfied.

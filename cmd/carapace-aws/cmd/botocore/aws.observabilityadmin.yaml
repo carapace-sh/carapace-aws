@@ -11,6 +11,17 @@ commands:
         --rule-name=!: A unique name for the organization-wide centralization rule being created.
         --rule=!: The configuration details for the organization-wide centralization rule, including the source configuration and the destination configuration to centralize telemetry data across the organization.
         --tags=: The key-value pairs to associate with the organization telemetry rule resource for categorization and management purposes.
+    - name: create-connector
+      description: Creates a connector to a third-party cloud provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time.
+        --connector-configuration=!: The configuration for connecting to the third-party cloud provider.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the connector.
+        --role-arn=!: The Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that CloudWatch assumes to get credentials for the third-party cloud provider.
+        --tags=: The tags that you want to apply to the connector.
     - name: create-dataset-integration
       description: Creates a dataset integration for the caller's account in the current region and returns its ARN.
       flags:
@@ -62,6 +73,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to delete.
+    - name: delete-connector
+      description: Deletes a connector and its telemetry manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-identifier=!: The connector to delete.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-dataset-integration
       description: Deletes a dataset integration for the caller's account in the current region.
       flags:
@@ -104,6 +122,32 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-identifier=!: The identifier (name or ARN) of the organization centralization rule to retrieve.
+    - name: get-connector
+      description: Retrieves the details of a connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-identifier=!: The connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-connector-telemetry-manifest
+      description: Retrieves the telemetry manifest of a connector and its current version.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-identifier=!: The connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-connector-telemetry-setup
+      description: Generates the artifacts that you use to create the infrastructure in your cloud provider that delivers the telemetry declared in the connector's telemetry manifest.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-identifier=!: The connector whose telemetry manifest you want to generate the setup from.
+        --format=: The format of the setup artifacts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            format:
+                - BICEP
     - name: get-dataset-integration
       description: Returns the dataset integration for the caller's account in the current region.
       flags:
@@ -157,6 +201,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --rule-identifier=!: The identifier (name or ARN) of the organization telemetry rule to retrieve.
+    - name: get-third-party-telemetry-enrichment
+      description: Returns the details of a third-party telemetry enrichment, including its status and source configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --telemetry-enrichment-identifier=!: The identifier of the enrichment to return.
     - name: list-centralization-rules-for-organization
       description: Lists all centralization rules in your organization.
       flags:
@@ -170,6 +221,17 @@ commands:
         --no-all-regions: A flag determining whether to return organization centralization rules from all regions or only the current region.
         --page-size=: The size of each page to get in the AWS service call.
         --rule-name-prefix=: A string to filter organization centralization rules whose names begin with the specified prefix.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-connectors
+      description: Lists the connectors in the account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of connectors to return in one call.
+        --next-token=: The token for the next page of results, returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-dataset-integrations
       description: Returns the dataset integrations in your account.
@@ -219,6 +281,16 @@ commands:
             nargs: -1
         --starting-token=: A token to specify where to start paginating.
         --telemetry-configuration-state=: A key-value pair to filter resources in the organization based on the telemetry type and the state of the telemetry configuration.
+    - name: list-resources-by-connector
+      description: Lists resources in your cloud provider that the connector can access, such as management groups, subscriptions, resource types, Regions, resources, and Event Hubs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --connector-identifier=!: The connector to use for the query.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-results=: The maximum number of results to return in one call.
+        --next-token=: The token for the next page of results, returned by a previous call.
+        --selector=!: 'What to list: one cloud provider, and one type of resource in that provider.'
     - name: list-s3-table-integrations
       description: Lists all S3 Table integrations in your account.
       flags:
@@ -278,6 +350,38 @@ commands:
             description: The list of organizational unit IDs to filter organization telemetry rules by their source organizational units.
             nargs: -1
         --starting-token=: A token to specify where to start paginating.
+    - name: list-third-party-telemetry-enrichments
+      description: Returns a summary of each third-party telemetry enrichment in your account and Region.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next set of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Returns only the enrichments that have this status.
+        --telemetry-source=: Returns only the enrichments for this third-party telemetry source.
+      completion:
+        flag:
+            status:
+                - Initializing
+                - Running
+                - Stopped
+                - Impaired
+            telemetry-source:
+                - Azure
+    - name: put-connector-telemetry-manifest
+      description: Creates or replaces the telemetry manifest of a connector.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time.
+        --connector-identifier=!: The connector.
+        --expected-version=: The version of the telemetry manifest that you expect to replace, as returned by `GetConnectorTelemetryManifest`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --manifest=!: The telemetry manifest.
     - name: start-telemetry-enrichment
       description: Enables the resource tags for telemetry feature for your account, which enhances telemetry data with additional resource metadata from Resource Explorer to provide richer context for monitoring and observability.
       flags:
@@ -306,6 +410,22 @@ commands:
         --regions=:
             description: An optional list of Amazon Web Services Regions to include in multi-region telemetry evaluation for the organization.
             nargs: -1
+    - name: start-telemetry-pipeline-refresh
+      description: Starts a refresh of an external-cloud telemetry pipeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --pipeline-identifier=!: The Amazon Resource Name (ARN) of the telemetry pipeline to refresh.
+    - name: start-third-party-telemetry-enrichment
+      description: Starts a third-party telemetry enrichment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: A name for the enrichment.
+        --tags=: The tags to associate with the enrichment resource.
+        --telemetry-source-configuration=!: The third-party telemetry source to collect resource metadata from.
     - name: stop-telemetry-enrichment
       description: Disables the resource tags for telemetry feature for your account, stopping the enhancement of telemetry data with additional resource metadata.
       flags:
@@ -324,6 +444,13 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: stop-third-party-telemetry-enrichment
+      description: Stops a third-party telemetry enrichment.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --telemetry-enrichment-identifier=!: The identifier of the enrichment to stop.
     - name: tag-resource
       description: Adds or updates tags for a resource.
       flags:

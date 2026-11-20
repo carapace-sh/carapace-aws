@@ -2,6 +2,13 @@
 name: marketplace-agreement
 description: AWS Marketplace Agreement Service
 commands:
+    - name: accept-agreement-approval
+      description: Allows the management account or a delegated administrator of the buyer's AWS organization to approve an agreement approval that is in `PENDING_APPROVAL` status, as the organization administrator approver or on behalf of another approver.
+      flags:
+        --buyer-agreement-approval-approver-input=: The approval decision for an agreement approval that the buyer's organization requires.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: accept-agreement-cancellation-request
       description: Allows buyers (acceptors) to accept a cancellation request that is in `PENDING_APPROVAL` status.
       flags:
@@ -62,9 +69,17 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --payment-request-id=!: The unique identifier of the payment request to cancel.
+    - name: cancel-agreement-request
+      description: Allows buyers (acceptors) to cancel an agreement request that is in `PENDING_APPROVAL` status, or in `APPROVED` status when no agreement has been created from it.
+      flags:
+        --agreement-request-id=!: The unique identifier of the agreement request to cancel.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-agreement-request
       description: Creates an agreement request that acts as a quote for the terms you want to accept.
       flags:
+        --acceptor-contact=: The contact information of the acceptor.
         --agreement-proposal-identifier=: The agreement proposal signed by the proposer.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -89,11 +104,25 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agreement-approval
+      description: Retrieves detailed information about a specific agreement approval, including its approval levels, the approvers at each level, and the decision of each approver.
+      flags:
+        --agreement-approval-id=!: The unique identifier of the agreement approval to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-agreement-cancellation-request
       description: Retrieves detailed information about a specific agreement cancellation request.
       flags:
         --agreement-cancellation-request-id=!: The unique identifier of the cancellation request.
         --agreement-id=!: The unique identifier of the agreement associated with the cancellation request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agreement-contacts
+      description: Obtains details about the acceptor's contact information for an active agreement that you participate in as the proposer, acceptor, or manufacturer.
+      flags:
+        --agreement-id=!: The unique identifier of the agreement.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -117,6 +146,37 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --payment-request-id=!: The identifier of the payment request.
+    - name: get-agreement-request
+      description: Retrieves detailed information about a specific agreement request, including its status, intent, approval requirement, and charges.
+      flags:
+        --agreement-request-id=!: The unique identifier of the agreement request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-agreement-request-approval-plans
+      description: Retrieves the approval plans that apply to an agreement request.
+      flags:
+        --agreement-request-id=!: The unique identifier of the agreement request to retrieve the approval plans for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of approval plans to return in a single response (1-50).
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: get-agreement-request-terms
+      description: Retrieves the terms proposed for an agreement request, such as pricing, legal, and renewal terms.
+      flags:
+        --agreement-request-id=!: The unique identifier of the agreement request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of terms to return in the response.
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: get-agreement-terms
       description: Obtains details about the terms in an agreement that you participated in as proposer or acceptor.
       flags:
@@ -137,6 +197,35 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-agreement-approvals
+      description: Lists agreement approvals available to you as a buyer.
+      flags:
+        --agreement-request-id=: An optional parameter to filter agreement approvals for a specific agreement request.
+        --approval-type=: An optional parameter to filter agreement approvals by type.
+        --catalog=: An optional parameter to filter agreement approvals by catalog (for example, `AWSMarketplace`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of agreement approvals to return in a single response (1-50).
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --party-type=!: The party type for the agreement approvals.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional parameter to filter agreement approvals by status.
+      completion:
+        flag:
+            approval-type:
+                - BUYER_AGREEMENT_APPROVAL
+            party-type:
+                - REQUESTER
+                - AWS_ORGANIZATION_ADMIN
+            status:
+                - PENDING_APPROVAL
+                - APPROVED
+                - REJECTED
+                - EXPIRED
+                - CANCELLED
     - name: list-agreement-cancellation-requests
       description: Lists agreement cancellation requests available to you as a seller or buyer.
       flags:
@@ -225,6 +314,29 @@ commands:
                 - APPROVED
                 - REJECTED
                 - CANCELLED
+    - name: list-agreement-requests
+      description: Lists agreement requests available to you as a buyer (acceptor).
+      flags:
+        --catalog=: An optional parameter to list agreement requests by catalog (for example, `AWSMarketplace`).
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of agreement requests to return in a single response (1-50).
+        --next-token=: A token to specify where to start pagination.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-id=: An optional parameter to list agreement requests for a specific resource, such as a product.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: An optional parameter to list agreement requests by status.
+      completion:
+        flag:
+            status:
+                - DRAFT
+                - PENDING_APPROVAL
+                - APPROVED
+                - ACCEPTED
+                - REJECTED
+                - CANCELLED
     - name: list-billing-adjustment-requests
       description: Lists billing adjustment requests for a specific agreement.
       flags:
@@ -248,6 +360,13 @@ commands:
                 - PENDING
                 - VALIDATION_FAILED
                 - COMPLETED
+    - name: reject-agreement-approval
+      description: Allows the management account or a delegated administrator of the buyer's AWS organization to reject an agreement approval that is in `PENDING_APPROVAL` status, as the organization administrator approver or on behalf of another approver.
+      flags:
+        --buyer-agreement-approval-rejection-input=: The rejection decision for an agreement approval that the buyer's organization requires.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: reject-agreement-cancellation-request
       description: Allows buyers (acceptors) to reject a cancellation request that is in `PENDING_APPROVAL` status.
       flags:
@@ -315,6 +434,19 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: A descriptive name for the payment request (5-64 characters).
         --term-id=!: The unique identifier of the `VariablePaymentTerm` for the agreement that the payment request is being sent for.
+    - name: start-agreement-approvals
+      description: Allows buyers (acceptors) to start the approvals that their organization requires for an agreement request.
+      flags:
+        --agreement-request-id=!: The unique identifier of the agreement request to start approvals for.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --plan-inputs=!:
+            description: The approval plans to start agreement approvals for.
+            nargs: -1
+        --purchase-orders=:
+            description: An optional list of purchase order references to associate with charges on the agreement request.
+            nargs: -1
     - name: update-purchase-orders
       description: Allows acceptors to associate purchase orders with agreement charges after an agreement is created.
       flags:

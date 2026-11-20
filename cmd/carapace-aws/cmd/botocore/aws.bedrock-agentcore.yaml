@@ -135,6 +135,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-id=!: The unique identifier of the capacity provider session to delete.
+    - name: delete-dataset-generation
+      description: Deletes the record of a dataset generation.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The unique identifier of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generation-id=!: The unique identifier of the dataset generation.
     - name: delete-event
       description: Deletes an event from an AgentCore Memory resource.
       flags:
@@ -208,6 +216,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --qualifier=: Optional qualifier to specify an agent alias, such as `prod`code&gt; or `dev`.
         --runtime-session-id=: The session ID that the AgentCore Runtime agent is using.
+    - name: get-agent-insight
+      description: Amazon Bedrock AgentCore Agent Insights identifies patterns detected across your agent sessions.
+      flags:
+        --agent-insight-id=!: The unique identifier of the Agent Insight to retrieve.
+        --application-name=!: The application that the Agent Insight belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-batch-evaluation
       description: Retrieves detailed information about a batch evaluation, including its status, configuration, results, and any error details.
       flags:
@@ -231,6 +247,14 @@ commands:
         --code-interpreter-identifier=!: The unique identifier of the code interpreter associated with the session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-id=!: The unique identifier of the code interpreter session to retrieve.
+    - name: get-dataset-generation
+      description: Gets a dataset generation, including its status, the request it was started with, its progress counts, its redaction summary and its errors.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The unique identifier of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generation-id=!: The unique identifier of the dataset generation.
     - name: get-event
       description: Retrieves information about a specific event in an AgentCore Memory resource.
       flags:
@@ -449,6 +473,25 @@ commands:
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-agent-insights
+      description: Lists Amazon Bedrock AgentCore Agent Insight summaries in your account and Region.
+      flags:
+        --application-name=: Filters the results to Agent Insights for an application.
+        --archive-status=: Filters the results by archive status.
+        --batch-evaluation-id=: Filters the results to Agent Insights produced by a batch evaluation.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of Agent Insight summaries to return in one response.
+        --next-token=: A token to specify where to start paginating the results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            archive-status:
+                - ACTIVE
+                - ARCHIVED
     - name: list-batch-evaluations
       description: Lists all batch evaluations in the account, providing summary information about each evaluation's status and configuration.
       flags:
@@ -490,6 +533,18 @@ commands:
             status:
                 - READY
                 - TERMINATED
+    - name: list-dataset-generations
+      description: Lists the generations for a dataset.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --dataset-id=!: The unique identifier of the dataset.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in the response.
+        --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-events
       description: Lists events in an AgentCore Memory resource based on specified criteria.
       flags:
@@ -667,6 +722,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
         --data-source-config=!: The data source configuration that specifies where to pull agent session traces from for evaluation.
+        --dataset-execution-config=: The configuration for running the scenarios in a dataset against an agent before evaluating the resulting sessions.
         --description=: The description of the batch evaluation.
         --evaluation-metadata=: Optional metadata for the evaluation, including session-specific ground truth data and test scenario identifiers.
         --evaluators=:
@@ -724,6 +780,23 @@ commands:
         --session-timeout-seconds=: The duration in seconds (time-to-live) after which the session automatically terminates, regardless of ongoing activity.
         --trace-id=: The trace identifier for request tracking.
         --trace-parent=: The parent trace information for distributed tracing.
+    - name: start-dataset-generation
+      description: Starts a dataset generation, which creates examples for an existing dataset from your agent's traces.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure that the API request completes no more than one time.
+        --dataset-id=!: The unique identifier of the dataset to add the generated examples to.
+        --description=: A description of the dataset generation.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the dataset generation.
+        --scenario-type=: The type of scenario to generate.
+        --source=!: Where the generation reads sessions from, and how it selects, samples, labels and redacts them.
+      completion:
+        flag:
+            scenario-type:
+                - FIXED
+                - DYNAMIC
     - name: start-memory-extraction-job
       description: Starts a memory extraction job that processes events that failed extraction previously in an AgentCore Memory resource and produces structured memory records.
       flags:
@@ -814,6 +887,20 @@ commands:
                 - RUNNING
                 - STOPPED
                 - NOT_STARTED
+    - name: update-agent-insight
+      description: Updates the archive status of an Amazon Bedrock AgentCore Agent Insight.
+      flags:
+        --agent-insight-id=!: The unique identifier of the Agent Insight to update.
+        --application-name=!: The application that the Agent Insight belongs to.
+        --archive-status=!: The archive status to apply to the Agent Insight.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            archive-status:
+                - ACTIVE
+                - ARCHIVED
     - name: update-browser-stream
       description: Updates a browser stream.
       flags:
