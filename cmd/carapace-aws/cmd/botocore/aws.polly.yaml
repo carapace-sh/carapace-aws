@@ -2,6 +2,30 @@
 name: polly
 description: Amazon Polly
 commands:
+    - name: create-voice
+      description: Creates a custom voice from recordings of a speaker and returns it in `pending` status.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --customer-managed-encryption=: The customer managed key that you want Amazon Polly to encrypt the voice with.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --language-code=!: The language of the recordings, for example, `en-US`.
+        --name=!: The name of the voice.
+        --no-terms-accepted!: 'Confirms the following two statements:'
+        --tags=: The tags that you apply to the voice to help you categorize and organize it.
+        --terms-accepted!: 'Confirms the following two statements:'
+        --voice-creation-data=!: The recordings that Amazon Polly uses to create the voice.
+      completion:
+        flag:
+            language-code:
+                - de-DE
+                - en-US
+                - es-US
+                - fr-FR
+                - hi-IN
+                - it-IT
+                - pt-BR
     - name: delete-lexicon
       description: Deletes the specified pronunciation lexicon stored in an Amazon Web Services Region.
       flags:
@@ -9,8 +33,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the lexicon to delete.
+    - name: delete-voice
+      description: Deletes a custom voice.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-id=!: The ID of the custom voice to delete, for example, `vc-9a8fa85dd3`.
     - name: describe-voices
-      description: Returns the list of voices that are available for use when requesting speech synthesis.
+      description: 'Returns the list of voices: the voices that Amazon Polly provides and the custom voices in your account.'
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -86,6 +117,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --task-id=!: The Amazon Polly generated identifier for a speech synthesis task.
+    - name: get-voice
+      description: Returns the status and properties of a custom voice.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --voice-id=!: The ID of the custom voice that `CreateVoice` returned, for example, `vc-9a8fa85dd3`.
     - name: list-lexicons
       description: Returns a list of pronunciation lexicons stored in an Amazon Web Services Region.
       flags:
@@ -120,7 +158,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) that identifies the resource for which to list the tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to list the tags for.
     - name: put-lexicon
       description: Stores a pronunciation lexicon in an Amazon Web Services Region.
       flags:
@@ -131,7 +169,7 @@ commands:
         --name=!: Name of the lexicon.
         --tags=: The metadata that you apply to the lexicon to help you categorize and organize it.
     - name: start-speech-synthesis-task
-      description: Allows the creation of an asynchronous synthesis task, by starting a new `SpeechSynthesisTask`.
+      description: Starts an asynchronous synthesis task by creating a new `SpeechSynthesisTask`.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -151,7 +189,7 @@ commands:
             nargs: -1
         --text-type=: Specifies whether the input text is plain text or SSML.
         --text=!: The input text to synthesize.
-        --voice-id=!: Voice ID to use for the synthesis.
+        --voice-id=!: The voice ID to use for the synthesis.
       completion:
         flag:
             engine:
@@ -345,7 +383,7 @@ commands:
             nargs: -1
         --text-type=: Specifies whether the input text is plain text or SSML.
         --text=!: Input text to synthesize.
-        --voice-id=!: Voice ID to use for the synthesis.
+        --voice-id=!: The voice ID to use for the synthesis.
       completion:
         flag:
             engine:
@@ -532,7 +570,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to which to add tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to add tags to.
         --tags=!: The tags to add to the resource, as key-value pairs.
     - name: untag-resource
       description: Deletes specified tags from a resource.
@@ -540,7 +578,17 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) of the resource from which to remove tags.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource to remove tags from.
         --tag-keys=!:
             description: The keys of the tags to be removed.
             nargs: -1
+    - name: wait
+      description: Wait  until  a particular condition is satisfied.
+      commands:
+        - name: voice-active
+          description: Returns the status and properties of a custom voice.
+          flags:
+            --cli-input-json=: Read arguments from the JSON string provided.
+            --cli-input-yaml=: Read arguments from the YAML string provided.
+            --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+            --voice-id=!: The ID of the custom voice that `CreateVoice` returned, for example, `vc-9a8fa85dd3`.

@@ -113,6 +113,16 @@ commands:
         --tags=:
             description: A list of session tags.
             nargs: -1
+    - name: get-scoped-credentials
+      description: Returns a set of temporary security credentials that are scoped down from the caller's existing temporary security credentials.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --duration-seconds=: The duration, in seconds, of the resulting scoped down credentials.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --minimum-session-token-size=: ""
+        --policy=: An IAM policy in JSON format that you want to use as a scope down policy.
+        --scoped-session-description=: A caller-supplied description of the scoped session.
     - name: get-session-token
       description: Returns a set of temporary credentials for an Amazon Web Services account or IAM user.
       flags:
@@ -124,7 +134,7 @@ commands:
         --serial-number=: The identification number of the MFA device that is associated with the IAM user who is making the `GetSessionToken` call.
         --token-code=: The value provided by the MFA device, if MFA is required.
     - name: get-web-identity-token
-      description: Returns a signed JSON Web Token (JWT) that represents the calling Amazon Web Services identity.
+      description: Returns a signed JSON Web Token (JWT) that represents the calling Amazon Web Services identity or, if you set `SubjectMode` to `OriginIdentity`, the human user or workload on whose behalf the calling session acts.
       flags:
         --audience=!:
             description: The intended recipient of the web identity token.
@@ -133,7 +143,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --duration-seconds=: The duration, in seconds, for which the JSON Web Token (JWT) will remain valid.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=: One or more OAuth 2.0 scope values to include in the JSON Web Token (JWT).
         --signing-algorithm=!: The cryptographic algorithm to use for signing the JSON Web Token (JWT).
+        --subject-mode=: Specifies which identity STS puts in the `sub` (subject) claim of the JSON Web Token (JWT).
         --tags=:
             description: An optional list of tags to include in the JSON Web Token (JWT).
             nargs: -1
+      completion:
+        flag:
+            subject-mode:
+                - AWSIdentity
+                - OriginIdentity

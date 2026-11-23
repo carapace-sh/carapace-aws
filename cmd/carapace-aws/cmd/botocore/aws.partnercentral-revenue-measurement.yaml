@@ -10,7 +10,9 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token to ensure idempotency of the create request.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --product-id=!: The AWS Marketplace product identifier for this revenue share.
+        --products=!:
+            description: The products in the marketplace revenue share, each with its typed account lists.
+            nargs: -1
         --tags=:
             description: Tags to associate with the marketplace revenue share upon creation.
             nargs: -1
@@ -20,16 +22,17 @@ commands:
                 - AWS
                 - Sandbox
     - name: create-marketplace-revenue-share-allocation
-      description: Creates a new marketplace revenue share allocation for the specified product.
+      description: Creates a new allocation under the specified marketplace revenue share.
       flags:
         --catalog=!: The catalog in which to create the allocation.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token to ensure idempotency of the create request.
         --effective-from=!: The effective start date for the allocation.
-        --effective-until=: The effective end date for the allocation.
+        --effective-until=!: The effective end date for the allocation.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
+        --marketplace-revenue-share-identifier=!: The parent marketplace revenue share, by ID (mrs-...) or ARN.
+        --marketplace-revenue-share-revision=!: The revision of the parent marketplace revenue share that the caller last read, for optimistic concurrency control.
         --revenue-share-percent=!: The revenue share percentage for this allocation.
       completion:
         flag:
@@ -43,6 +46,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token to ensure idempotency of the create request.
+        --context=: Program-defined key-value attributes for the revenue attribution.
         --description=: A description of the revenue attribution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the revenue attribution.
@@ -66,7 +70,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --product-id=!: The AWS Marketplace product identifier of the revenue share to retrieve.
+        --identifier=!: The marketplace revenue share to retrieve, by ID (mrs-...) or ARN.
         --revision=: The revision of the marketplace revenue share to retrieve.
       completion:
         flag:
@@ -81,8 +85,8 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marketplace-revenue-share-allocation-id=!: The unique identifier of the allocation to retrieve.
+        --marketplace-revenue-share-identifier=!: The parent marketplace revenue share, by ID (mrs-...) or ARN.
         --marketplace-revenue-share-revision=: The revision of the parent marketplace revenue share at which to retrieve the allocation.
-        --product-id=!: The AWS Marketplace product identifier of the parent revenue share.
       completion:
         flag:
             catalog:
@@ -134,21 +138,23 @@ commands:
       description: Returns a paginated list of allocations under a marketplace revenue share, with optional filtering by status and effective date range.
       flags:
         --after-effective-from=: Inclusive lower bound for EffectiveFrom date filter.
+        --after-effective-until=: Inclusive lower bound for EffectiveUntil date filter.
         --before-effective-from=: Exclusive upper bound for EffectiveFrom date filter (half-open range).
+        --before-effective-until=: Exclusive upper bound for EffectiveUntil date filter (half-open range).
         --catalog=!: The catalog containing the allocations.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --marketplace-revenue-share-identifier=!: The parent marketplace revenue share, by ID (mrs-...) or ARN.
         --marketplace-revenue-share-revision=: Optional share revision for historical list.
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of results per page.
         --next-token=: Pagination token from a previous response.
         --page-size=: The size of each page to get in the AWS service call.
-        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
         --sort-by=: The field to sort marketplace revenue share allocations by.
         --sort-order=: The direction to sort results.
         --starting-token=: A token to specify where to start paginating.
-        --status=: Filter by allocation status.
+        --status-filter=: Filter by allocation status.
       completion:
         flag:
             catalog:
@@ -159,7 +165,7 @@ commands:
             sort-order:
                 - ASCENDING
                 - DESCENDING
-            status:
+            status-filter:
                 - ACTIVE
                 - INACTIVE
     - name: list-marketplace-revenue-shares
@@ -168,18 +174,21 @@ commands:
         --catalog=!: The catalog to list marketplace revenue shares from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
-        --created-after=: Filter results to only include marketplace revenue shares created after this timestamp.
-        --created-before=: Filter results to only include marketplace revenue shares created before this timestamp.
+        --created-after=: Filter results to marketplace revenue shares created at or after this timestamp (inclusive).
+        --created-before=: Filter results to marketplace revenue shares created before this timestamp (exclusive).
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifiers=:
+            description: Filter results to only include these marketplace revenue shares, by ID or ARN.
+            nargs: -1
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: Token for pagination.
         --page-size=: The size of each page to get in the AWS service call.
         --product-codes=:
-            description: Filter results to only include shares with these product codes.
+            description: Filter results to the marketplace revenue shares that contain a product with any of these product codes.
             nargs: -1
         --product-ids=:
-            description: Filter results to only include shares with these product identifiers.
+            description: Filter results to the marketplace revenue shares that contain any of these products.
             nargs: -1
         --sort-by=: The field to sort marketplace revenue shares by.
         --sort-order=: The direction to sort results.
@@ -243,6 +252,9 @@ commands:
         --catalog=!: The catalog to list revenue attributions from.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --context-filters=:
+            description: Filter results by context.
+            nargs: -1
         --created-after=: Filter results to only include revenue attributions created after this timestamp.
         --created-before=: Filter results to only include revenue attributions created before this timestamp.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
@@ -312,6 +324,24 @@ commands:
         --tag-keys=!:
             description: The tag keys to remove from the resource.
             nargs: -1
+    - name: update-marketplace-revenue-share
+      description: Replaces the products of a marketplace revenue share.
+      flags:
+        --catalog=!: The catalog that the marketplace revenue share belongs to.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique token to ensure idempotency of the update request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The marketplace revenue share to update, by ID (mrs-...) or ARN.
+        --products=!:
+            description: The complete desired set of products in the marketplace revenue share, each with its typed account lists.
+            nargs: -1
+        --revision=!: The current revision of the marketplace revenue share, for optimistic concurrency control.
+      completion:
+        flag:
+            catalog:
+                - AWS
+                - Sandbox
     - name: update-marketplace-revenue-share-allocation
       description: Updates an existing marketplace revenue share allocation.
       flags:
@@ -319,12 +349,10 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token to ensure idempotency of the update request.
-        --effective-from=: The new effective start date.
-        --effective-until=: The new effective end date.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --marketplace-revenue-share-allocation-id=!: The identifier of the allocation to update.
+        --marketplace-revenue-share-identifier=!: The parent marketplace revenue share, by ID (mrs-...) or ARN.
         --marketplace-revenue-share-revision=!: The current revision of the parent share.
-        --product-id=!: The AWS Marketplace product identifier for the parent revenue share.
         --revenue-share-percent=: The new revenue share percentage.
         --status=: The new status.
       completion:
@@ -342,6 +370,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: A unique token to ensure idempotency of the update request.
+        --context=: Full-replacement context map.
         --description=: The updated description of the revenue attribution.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the revenue attribution to update.

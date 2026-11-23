@@ -10,6 +10,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the channel handshake to accept.
+    - name: cancel-channel-contract
+      description: Cancels a pending channel contract created within the last 30 days.
+      flags:
+        --catalog=!: The catalog identifier for the channel contract.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the channel contract to cancel.
+        --reason=: The reason for canceling the channel contract.
     - name: cancel-channel-handshake
       description: Cancels a pending channel handshake request.
       flags:
@@ -18,6 +28,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the channel handshake to cancel.
+    - name: create-channel-contract
+      description: Creates a new channel contract and sends it to the signatory for signature.
+      flags:
+        --catalog=!: The catalog identifier for the channel contract.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier to ensure idempotency of the request.
+        --contract-type=!: The type of channel contract to create (for example, managed services attestation).
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --payload=!: The payload containing specific details for the contract type.
+        --tags=:
+            description: Key-value pairs to associate with the channel contract.
+            nargs: -1
+      completion:
+        flag:
+            contract-type:
+                - MANAGED_SERVICES_ATTESTATION
     - name: create-channel-handshake
       description: Creates a new channel handshake request to establish a partnership with another AWS account.
       flags:
@@ -52,16 +79,22 @@ commands:
         --tags=:
             description: Key-value pairs to associate with the program management account.
             nargs: -1
+        --type=: The type of the program management account (for example, resale billing transfer, managed services), required for the managed services provider program.
       completion:
         flag:
             program:
                 - SOLUTION_PROVIDER
                 - DISTRIBUTION
                 - DISTRIBUTION_SELLER
+                - MANAGED_SERVICES_PROVIDER
+            type:
+                - RESALE_BILLING_TRANSFER
+                - MANAGED_SERVICES
     - name: create-relationship
       description: Creates a new partner relationship between accounts.
       flags:
-        --associated-account-id=!: The AWS account ID to associate in this relationship.
+        --account-scope=: The account scope for a managed services relationship (for example, entire organization, specific member accounts).
+        --associated-account-id=: The AWS account ID to associate in this relationship.
         --association-type=!: The type of association for the relationship (e.g., reseller, distributor).
         --catalog=!: The catalog identifier for the relationship.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -73,15 +106,20 @@ commands:
         --requested-support-plan=: The support plan requested for this relationship.
         --resale-account-model=: The resale account model for the relationship.
         --sector=!: The business sector for the relationship.
+        --start-date=: The start date of the managed services relationship.
         --tags=:
             description: Key-value pairs to associate with the relationship.
             nargs: -1
       completion:
         flag:
+            account-scope:
+                - ENTIRE_ORGANIZATION
+                - SPECIFIC_MEMBER_ACCOUNTS
             association-type:
                 - DOWNSTREAM_SELLER
                 - END_CUSTOMER
                 - INTERNAL
+                - MANAGED_SERVICES_END_CUSTOMER
             resale-account-model:
                 - DISTRIBUTOR
                 - END_CUSTOMER
@@ -109,6 +147,14 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the relationship to delete.
         --program-management-account-identifier=!: The identifier of the program management account associated with the relationship.
+    - name: get-channel-contract
+      description: Retrieves details of a specific channel contract.
+      flags:
+        --catalog=!: The catalog identifier for the channel contract.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The unique identifier of the channel contract to retrieve.
     - name: get-relationship
       description: Retrieves details of a specific partner relationship.
       flags:
@@ -118,6 +164,28 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: The unique identifier of the relationship to retrieve.
         --program-management-account-identifier=!: The identifier of the program management account associated with the relationship.
+    - name: list-channel-contracts
+      description: Lists channel contracts based on specified criteria.
+      flags:
+        --catalog=!: The catalog identifier to filter channel contracts.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --contract-type-filters=: Type-specific filters for channel contracts.
+        --contract-type-sort=: Type-specific sorting options for channel contracts.
+        --contract-type=!: Filter results by contract type.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: Token for retrieving the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --statuses=:
+            description: Filter results by channel contract status.
+            nargs: -1
+      completion:
+        flag:
+            contract-type:
+                - MANAGED_SERVICES_ATTESTATION
     - name: list-channel-handshakes
       description: Lists channel handshakes based on specified criteria.
       flags:
@@ -174,6 +242,12 @@ commands:
         --statuses=:
             description: Filter by program management account statuses.
             nargs: -1
+        --type=: Filter by program management account type.
+      completion:
+        flag:
+            type:
+                - RESALE_BILLING_TRANSFER
+                - MANAGED_SERVICES
     - name: list-relationships
       description: Lists partner relationships based on specified criteria.
       flags:

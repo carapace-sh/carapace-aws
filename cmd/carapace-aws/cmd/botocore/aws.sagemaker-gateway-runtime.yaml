@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: sagemaker-gateway-runtime
+description: Amazon SageMaker Gateway Runtime
+commands:
+    - name: invoke-global-inference-gateway
+      description: Buffered (non-streaming) inference.
+      flags:
+        --accept=: The MIME type you want for the response.
+        --body=!: 'The inference request body: one OpenAI JSON object, at most 10 MiB.'
+        --content-type=!: The MIME type of the request body.
+        --customer-identity-token=: Per-caller customer identity token (a JWT), forwarded unchanged to the inference gateway, which validates it.
+        --gateway-id=!: The ID of the Global Inference Gateway to invoke.
+      completion:
+        positional:
+            - - $files
+    - name: invoke-global-inference-gateway-with-response-stream
+      description: Streaming inference.
+      flags:
+        --accept=: The MIME type you want for the response.
+        --body=!: 'The inference request body, as for InvokeGlobalInferenceGateway, except that the request is always sent with `"stream": true`: this operation returns an event stream, so a `"stream": false` in the body (or no `stream` key) is overridden.'
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --content-type=!: The MIME type of the request body, as for InvokeGlobalInferenceGateway.
+        --customer-identity-token=: The customer identity token (a JWT), as for InvokeGlobalInferenceGateway.
+        --gateway-id=!: The ID of the Global Inference Gateway to invoke, as for InvokeGlobalInferenceGateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

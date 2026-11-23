@@ -177,6 +177,21 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-available-module
+      description: Returns a module that you can attach.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --module-id=!: The module's ID.
+    - name: get-available-module-version
+      description: Returns an ACTIVE or DEPRECATED version of a module that you can attach.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --module-id=!: The module's ID.
+        --version=!: The version.
     - name: get-certificate-association
       description: Retrieves the details of a certificate association with a responder gateway.
       flags:
@@ -232,6 +247,52 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-update
+      description: Returns ResourceNotFoundException for an updateId past the 90-day retention window, indistinguishable in the response from an id that never existed.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The unique identifier of the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --update-id=!: The unique identifier of the update.
+    - name: list-available-module-versions
+      description: Lists the ACTIVE and DEPRECATED versions of a module that you can attach, highest version first (numerically by MAJOR, then MINOR, then PATCH).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results for each page, from 1 to 10. The default is 10.
+        --module-id=!: The module's ID.
+        --next-token=: If nextToken is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Lists only versions in this status.
+      completion:
+        flag:
+            status:
+                - CREATING
+                - CREATE_FAILED
+                - ACTIVE
+                - DEPRECATED
+    - name: list-available-modules
+      description: Lists the modules that you can attach, newest first by `createdAt`.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results for each page, from 1 to 10. The default is 10.
+        --next-token=: If nextToken is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --subscription-type=: Lists only modules that you have access to this way.
+      completion:
+        flag:
+            subscription-type:
+                - MARKETPLACE
+                - PRIVATE
+                - AWS_BUILT_IN
     - name: list-certificate-associations
       description: Lists the certificate associations for a responder gateway.
       flags:
@@ -298,6 +359,46 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource for which you want to retrieve tags.
+    - name: list-updates
+      description: Lists the updates on a gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --gateway-id=!: The unique identifier of the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=: The ID of a link on this gateway, to list only that link's updates.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return for each call.
+        --next-token=: If nextToken is returned, there are more results available.
+        --page-size=: The size of each page to get in the AWS service call.
+        --rule-id=: The ID of a routing rule, to list only that rule's updates.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Lists only updates in this status.
+        --type=: Lists only updates of this type.
+      completion:
+        flag:
+            status:
+                - IN_PROGRESS
+                - SUCCESSFUL
+                - FAILED
+            type:
+                - GATEWAY_CONFIG_UPDATE
+                - LINK_CONFIG_UPDATE
+                - LINK_FLOW_UPDATE
+                - ROUTING_RULE_UPDATE
+    - name: put-link-flows
+      description: Replaces a link's flow configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --flows=!:
+            description: The link's flows, replacing the current ones.
+            nargs: -1
+        --gateway-id=!: The unique identifier of the gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --link-id=!: The unique identifier of the link.
+        --lock-token=!: The concurrency token that you read from GetLink.
     - name: reject-link
       description: Rejects a link request between gateways.
       flags:
@@ -329,6 +430,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier for the request.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --link-id=!: The unique identifier of the link.
@@ -351,6 +453,7 @@ commands:
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier for the request.
         --conditions=!: The updated conditions for the routing rule.
         --gateway-id=!: The unique identifier of the gateway.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.

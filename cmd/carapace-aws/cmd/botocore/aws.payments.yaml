@@ -1,0 +1,85 @@
+# yaml-language-server: $schema=https://carapace.sh/schemas/command.json
+name: payments
+description: AWS Payments
+commands:
+    - name: batch-get-financial-record
+      description: Retrieves up to 100 financial records in one request, including the details that are specific to each record's type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --keys=!:
+            description: The keys of the financial records to retrieve.
+            nargs: -1
+    - name: get-account-balance
+      description: Retrieves one balance of your account, selected by balance type, as one amount for each merchant of record and currency.
+      flags:
+        --balance-type=!: The balance to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one page.
+        --next-token=: The pagination token from the `nextToken` of the previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            balance-type:
+                - INVOICES_DUE
+                - INVOICES_PAST_DUE
+                - OUTSTANDING_CREDIT_MEMOS
+    - name: get-financial-record
+      description: Retrieves a single financial record, including the details that are specific to its type.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=: The ID that Amazon Web Services Payments issued for the financial record, as returned in `id`.
+        --invoice-identifier=: The invoice ID that Amazon Web Services Invoicing issued for an invoice or a credit memo.
+    - name: get-payment-instrument
+      description: Retrieves a payment instrument on your account, including the details that are specific to its payment method, such as a card's last four digits.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The instrument to retrieve.
+    - name: list-financial-records
+      description: Lists the financial records on your account, with the newest first by default.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --issued-after=: The earliest date and time to return records for, inclusive.
+        --issued-before=: The latest date and time to return records for, exclusive.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in one page.
+        --next-token=: The pagination token from the `nextToken` of the previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --settlement-statuses=:
+            description: The settlement statuses to filter by.
+            nargs: -1
+        --sort-by=: The field to sort the results by.
+        --sort-order=: The order to sort the results in.
+        --starting-token=: A token to specify where to start paginating.
+        --types=!:
+            description: The financial record types to return.
+            nargs: -1
+      completion:
+        flag:
+            sort-by:
+                - ISSUED_AT
+            sort-order:
+                - ASCENDING
+                - DESCENDING
+    - name: list-payment-instruments
+      description: Lists the payment instruments on your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of payment instruments to return in one page.
+        --next-token=: The pagination token from the `nextToken` of the previous response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
