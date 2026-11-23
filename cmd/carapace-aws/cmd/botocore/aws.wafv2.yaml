@@ -111,6 +111,7 @@ commands:
     - name: create-web-acl
       description: Creates a [WebACL]() per the specifications provided.
       flags:
+        --analytics-config=: Specifies the security analytics configuration for the web ACL.
         --application-config=: Configures the ability for the WAF console to store and retrieve application attributes during the web ACL creation process.
         --association-config=: Specifies custom configurations for the associations between the web ACL and protected resources.
         --captcha-config=: Specifies how WAF should handle `CAPTCHA` evaluations for rules that don't have their own `CaptchaConfig` settings.
@@ -312,6 +313,33 @@ commands:
         --api-key=!: The encrypted API key.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-event
+      description: Retrieves the details of the specified event for the specified web ACL, including the event actors that are associated with the event and the event timeline.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-id=!: The unique identifier of the event.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL that the event is associated with.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+    - name: get-event-actor
+      description: Retrieves the details of the specified event actor.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --event-actor-id=!: The unique identifier of the event actor.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
       completion:
@@ -630,6 +658,91 @@ commands:
             scope:
                 - CLOUDFRONT
                 - REGIONAL
+    - name: list-event-actors
+      description: Retrieves a paginated list of the event actors in your account that are associated with events in the specified time window.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --limit=: The maximum number of event actors that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --sort-by=: The field to sort event actors by.
+        --time-window=!: The time range for the event actors to return.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+            sort-by:
+                - EVENT_COUNT
+    - name: list-events
+      description: Retrieves a paginated list of event summaries for your account.
+      flags:
+        --api-pattern-filters=:
+            description: Filters that narrow the results to events that involve the specified API patterns.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: Filters that narrow the results by event category or by the Amazon Resource Name (ARN) of the protected resource.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=:
+            description: Additional fields to return with each event summary.
+            nargs: -1
+        --limit=: The maximum number of events that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --sort-by=: The field that WAF sorts the events by.
+        --sort-order=: The order in which WAF sorts the events.
+        --time-window=: The time range for the events to return.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+            sort-by:
+                - START_TIME
+                - END_TIME
+                - CONFIDENCE
+            sort-order:
+                - ASC
+                - DESC
+    - name: list-events-by-web-acl
+      description: Retrieves a paginated list of event summaries for the specified web ACL.
+      flags:
+        --api-pattern-filters=:
+            description: Filters that narrow the results to events that involve the specified API patterns.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: Filters that narrow the results by event category or by the Amazon Resource Name (ARN) of the protected resource.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include=:
+            description: Additional fields to return with each event summary.
+            nargs: -1
+        --limit=: The maximum number of events that you want WAF to return for this request.
+        --next-marker=: When you request a list of objects with a `Limit` setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a `NextMarker` value in the response.
+        --scope=!: Specifies whether this is for a global resource type, such as a Amazon CloudFront distribution.
+        --sort-by=: The field that WAF sorts the events by.
+        --sort-order=: The order in which WAF sorts the events.
+        --time-window=: The time range for the events to return.
+        --web-acl-arn=!: The Amazon Resource Name (ARN) of the web ACL whose events you want to retrieve.
+      completion:
+        flag:
+            scope:
+                - CLOUDFRONT
+                - REGIONAL
+            sort-by:
+                - START_TIME
+                - END_TIME
+                - CONFIDENCE
+            sort-order:
+                - ASC
+                - DESC
     - name: list-ip-sets
       description: Retrieves an array of [IPSetSummary]() objects for the IP sets that you manage.
       flags:
@@ -923,6 +1036,7 @@ commands:
     - name: update-web-acl
       description: Updates the specified [WebACL]().
       flags:
+        --analytics-config=: Specifies the security analytics configuration for the web ACL.
         --application-config=: Configures the ability for the WAF console to store and retrieve application attributes.
         --association-config=: Specifies custom configurations for the associations between the web ACL and protected resources.
         --captcha-config=: Specifies how WAF should handle `CAPTCHA` evaluations for rules that don't have their own `CaptchaConfig` settings.

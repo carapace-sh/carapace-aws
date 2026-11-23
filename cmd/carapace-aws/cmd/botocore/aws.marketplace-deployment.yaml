@@ -2,13 +2,58 @@
 name: marketplace-deployment
 description: AWS Marketplace Deployment Service
 commands:
+    - name: get-deployment-configuration
+      description: Returns the active deployment configuration for a product and delivery option.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-option-type=!: The delivery option type of the deployment configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-id=!: The ID of the AWS Marketplace product, for example `prod-1234567890abc`.
+      completion:
+        flag:
+            delivery-option-type:
+                - data-as-a-service
+    - name: get-deployment-configuration-job
+      description: Returns the details of a deployment configuration job.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-option-type=!: The delivery option type of the deployment configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: The unique identifier of the deployment configuration job.
+        --product-id=!: The ID of the AWS Marketplace product, for example `prod-1234567890abc`.
+      completion:
+        flag:
+            delivery-option-type:
+                - data-as-a-service
+    - name: list-deployment-configuration-jobs
+      description: Lists the deployment configuration jobs that you started for a product and delivery option, ordered from newest to oldest.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --delivery-option-type=!: The delivery option type of the deployment configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of jobs to return in a single page.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --product-id=!: The ID of the AWS Marketplace product, for example `prod-1234567890abc`.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            delivery-option-type:
+                - data-as-a-service
     - name: list-tags-for-resource
-      description: Lists all tags that have been added to a deployment parameter resource.
+      description: Lists all tags that have been added to a resource.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --resource-arn=!: The Amazon Resource Name (ARN) associated with the deployment parameter resource you want to list tags on.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the resource you want to list tags on.
     - name: put-deployment-parameter
       description: Creates or updates a deployment parameter and is targeted by `catalog` and `agreementId`.
       flags:
@@ -17,11 +62,27 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-token=: The idempotency token for deployment parameters.
-        --deployment-parameter=!: The deployment parameter targeted to the acceptor of an agreement for which to create the AWS Secret Manager resource.
+        --deployment-parameter=!: The deployment parameter targeted to the acceptor of an agreement for which to create the AWS Secrets Manager resource.
         --expiration-date=: The date when deployment parameters expire and are scheduled for deletion.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --product-id=!: The product for which AWS Marketplace will save secrets for the buyer’s account.
         --tags=: A map of key-value pairs, where each pair represents a tag saved to the resource.
+    - name: start-deployment-configuration-job
+      description: Starts a job that publishes a deployment configuration for a product and delivery option.
+      flags:
+        --catalog=!: The catalog related to the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --configuration=!: The deployment configuration to publish.
+        --delivery-option-type=!: The delivery option type of the deployment configuration.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --product-id=!: The ID of the AWS Marketplace product, for example `prod-1234567890abc`.
+        --tags=: A map of key-value pairs, where each pair represents a tag to apply to the deployment configuration.
+      completion:
+        flag:
+            delivery-option-type:
+                - data-as-a-service
     - name: tag-resource
       description: Tags a resource.
       flags:

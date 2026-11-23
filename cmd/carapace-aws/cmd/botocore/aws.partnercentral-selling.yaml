@@ -38,6 +38,19 @@ commands:
                 - AwsMarketplaceOfferSets
                 - AwsMarketplaceSolutions
                 - AwsMarketplaceProducts
+    - name: create-customer-account
+      description: Use `CreateCustomerAccount` to map a customer account from your records to an AWS customer.
+      flags:
+        --account=!: Specifies the details of the customer, such as the company name, website, and address.
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: Specifies a unique, case-sensitive identifier that you provide to make the request idempotent.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --partner-account-identifier=: Specifies your own identifier for the customer account, such as the account ID in your CRM system.
+        --tags=:
+            description: Specifies the tags to add to the customer account.
+            nargs: -1
     - name: create-engagement
       description: The `CreateEngagement` action allows you to create an `Engagement`, which serves as a collaborative space between different parties such as AWS Partners and AWS Sellers.
       flags:
@@ -60,7 +73,7 @@ commands:
         --client-token=!: A unique, case-sensitive identifier provided by the client to ensure that the request is handled exactly once.
         --engagement-identifier=!: The unique identifier of the `Engagement` for which the context is being created.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --payload=!: ""
+        --payload=!: Contains the contextual information to add to the engagement.
         --type=!: Specifies the type of context being created for the engagement.
       completion:
         flag:
@@ -68,6 +81,7 @@ commands:
                 - CustomerProject
                 - Lead
                 - ProspectingResult
+                - CustomerAccount
     - name: create-engagement-invitation
       description: This action creates an invitation from a sender to a single receiver to join an engagement.
       flags:
@@ -151,6 +165,14 @@ commands:
         flag:
             resource-type:
                 - Opportunity
+    - name: delete-customer-account
+      description: Use `DeleteCustomerAccount` to delete a customer account.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the customer account.
     - name: delete-resource-snapshot-job
       description: Use this action to deletes a previously created resource snapshot job.
       flags:
@@ -186,6 +208,49 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --related-opportunity-identifier=!: The unique identifier for the related partner opportunity.
+    - name: get-customer-account
+      description: Use `GetCustomerAccount` to retrieve the details of a customer account, including the customer information that you provided, the enrichment status, and the enrichment information that AWS provides when the status is `ENRICHED`.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the customer account.
+    - name: get-customer-account-bulk-job
+      description: Use `GetCustomerAccountBulkJob` to retrieve the status and record counts of a bulk job.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the bulk job.
+    - name: get-customer-account-bulk-job-report-url
+      description: Use `GetCustomerAccountBulkJobReportUrl` to get a temporary URL for downloading the report of a bulk job, such as the list of records that failed.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the bulk job.
+        --report-type=: Specifies which records the report covers.
+      completion:
+        flag:
+            report-type:
+                - FAILED_RECORDS
+                - ALL_RECORDS
+    - name: get-customer-account-statistics
+      description: Use `GetCustomerAccountStatistics` to count your customer accounts and group them by fields such as industry, geography, or enrichment status.
+      flags:
+        --aggregations=:
+            description: Specifies how to group the customer accounts.
+            nargs: -1
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies a filter tree that narrows the customer accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --include-missing: Specifies whether to include a group for customer accounts that have no value for the grouped field.
+        --no-include-missing: Specifies whether to include a group for customer accounts that have no value for the grouped field.
     - name: get-engagement
       description: Use this action to retrieve the engagement record for a given `EngagementIdentifier`.
       flags:
@@ -210,6 +275,23 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: Read-only, system generated `Opportunity` unique identifier.
+    - name: get-opportunity-bulk-job-report-url
+      description: Gets the status of the failed-records report for a finished opportunity bulk job and, when the report is ready, a temporary URL to download it.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: Specifies the identifier of the bulk job.
+        --report-format=!: Specifies the format of the report.
+        --report-type=: Specifies which records the report covers.
+      completion:
+        flag:
+            report-format:
+                - CSV
+            report-type:
+                - FAILED_RECORDS
+                - ALL_RECORDS
     - name: get-prospecting-from-engagement-task
       description: Retrieves the details and current status of a prospecting task previously started with `StartProspectingFromEngagementTask` to enable polling for completion and access to per-engagement processing results.
       flags:
@@ -249,6 +331,38 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: list-customer-account-bulk-job-results
+      description: Use `ListCustomerAccountBulkJobResults` to list the outcome of each record in a bulk job.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the bulk job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: Specifies the token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters the results to records with the specified outcome.
+      completion:
+        flag:
+            status:
+                - SUCCEEDED
+                - FAILED
+    - name: list-customer-account-bulk-jobs
+      description: Use `ListCustomerAccountBulkJobs` to list the bulk jobs in the specified catalog.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies criteria to filter the bulk jobs, such as the job identifier or status.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: Specifies the token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-engagement-by-accepting-invitation-tasks
       description: Lists all in-progress, completed, or failed StartEngagementByAcceptingInvitationTask tasks that were initiated by the caller's account.
       flags:
@@ -275,7 +389,7 @@ commands:
             description: Filters the tasks based on their current status.
             nargs: -1
     - name: list-engagement-from-opportunity-tasks
-      description: Lists all in-progress, completed, or failed `EngagementFromOpportunity` tasks that were initiated by the caller's account.
+      description: Lists all in-progress, completed, or failed EngagementFromOpportunity tasks that were initiated by the caller's account.
       flags:
         --catalog=!: Specifies the catalog related to the request.
         --cli-input-json=: Read arguments from the JSON string provided.
@@ -299,6 +413,29 @@ commands:
         --task-status=:
             description: Filters the tasks based on their current status.
             nargs: -1
+    - name: list-engagement-groups
+      description: Lists the active, fully curated AWS Partner Central engagement groups that are available to you in the specified catalog.
+      flags:
+        --catalog=!: Specifies the catalog in which to list engagement groups.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --engagement-group-identifiers=:
+            description: Filters the results to the specified engagement groups.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --readiness-level=: Filters the results to engagement groups with the specified readiness level.
+        --sort=: Specifies the field and direction used to sort the results.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            readiness-level:
+                - SalesReady
+                - MarketingReady
+                - LowPotential
     - name: list-engagement-invitations
       description: Retrieves a list of engagement invitations sent to the partner.
       flags:
@@ -389,7 +526,7 @@ commands:
         --max-results=: The maximum number of results to return in a single call.
         --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
-        --sort=: ""
+        --sort=: Specifies how to sort the returned engagements.
         --starting-token=: A token to specify where to start paginating.
     - name: list-opportunities
       description: This request accepts a list of filters that retrieve opportunity subsets as well as sort options.
@@ -419,6 +556,46 @@ commands:
         --sort=: An object that specifies how the response is sorted.
         --starting-token=: A token to specify where to start paginating.
         --target-close-date=: Filters opportunities based on their target close date.
+    - name: list-opportunity-bulk-job-results
+      description: Lists the outcome of each record in an opportunity bulk job.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=!: Specifies the identifier of the bulk job.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters the results to records with this status.
+      completion:
+        flag:
+            status:
+                - SUCCEEDED
+                - FAILED
+    - name: list-opportunity-bulk-jobs
+      description: Lists the opportunity bulk jobs in the specified catalog, newest first.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-id=: Filters the results to the bulk job with this identifier.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token used to retrieve the next set of results in subsequent calls.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status=: Filters the results to bulk jobs with this status.
+      completion:
+        flag:
+            status:
+                - SUBMITTED
+                - IN_PROGRESS
+                - COMPLETED
+                - FAILED
     - name: list-opportunity-from-engagement-tasks
       description: Lists all in-progress, completed, or failed opportunity creation tasks from engagements that were initiated by the caller's account.
       flags:
@@ -439,7 +616,7 @@ commands:
             description: Filters tasks by the identifiers of the opportunities they created or are associated with.
             nargs: -1
         --page-size=: The size of each page to get in the AWS service call.
-        --sort=: ""
+        --sort=: Specifies how to sort the returned tasks.
         --starting-token=: A token to specify where to start paginating.
         --task-identifier=:
             description: Filters tasks by their unique identifiers.
@@ -558,6 +735,60 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --identifier=!: This is the unique identifier of the rejected `EngagementInvitation`.
         --rejection-reason=: This describes the reason for rejecting the engagement invitation, which helps AWS track usage patterns.
+    - name: search-customer-accounts
+      description: Use `SearchCustomerAccounts` to find customer accounts in the specified catalog.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: Specifies a filter tree that narrows the customer accounts.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: Specifies the token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the field and direction used to sort the results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-engagements
+      description: Searches the engagements in AWS Partner Central that match your criteria, such as customer industry or geography.
+      flags:
+        --catalog=!: Specifies the catalog to search.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A recursive, structured filter tree.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --group-id=: The identifier of an engagement group that `ListEngagementGroups` returns.
+        --keyword=: An optional free-text query string matched against the engagement title, description, customer company name, and member company names.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Specifies the maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the field and direction used to sort the search results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: search-opportunities
+      description: The `SearchOpportunities` operation in the AWS Partner Central Selling API searches and filters the opportunities available to you in AWS Partner Central.
+      flags:
+        --catalog=!: Specifies the catalog in which you run the search.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filter=: A recursive, structured filter tree.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --keyword=: An optional free-text query string matched against opportunity fields.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: A pagination token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --sort=: Specifies the field and direction used to sort the search results.
+        --starting-token=: A token to specify where to start paginating.
+    - name: start-customer-account-bulk-job
+      description: Use `StartCustomerAccountBulkJob` to create many customer accounts from a single file.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: Specifies a unique, case-sensitive identifier that you provide to make the request idempotent.
+        --file-uri=!: Specifies the location of the file that contains the customer accounts to create.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: start-engagement-by-accepting-invitation-task
       description: This action starts the engagement by accepting an `EngagementInvitation`.
       flags:
@@ -573,7 +804,7 @@ commands:
     - name: start-engagement-from-opportunity-task
       description: Similar to `StartEngagementByAcceptingInvitationTask`, this action is asynchronous and performs multiple steps before completion.
       flags:
-        --aws-submission=!: ""
+        --aws-submission=!: Specifies the level of AWS involvement for the opportunity.
         --catalog=!: Specifies the catalog in which the engagement is tracked.
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -583,6 +814,20 @@ commands:
         --tags=:
             description: A map of the key-value pairs of the tag or tags to assign.
             nargs: -1
+    - name: start-opportunity-bulk-job
+      description: The `StartOpportunityBulkJob` operation creates or updates many opportunities in AWS Partner Central (Partner Central) from a single CSV file.
+      flags:
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=!: A unique, case-sensitive identifier that you provide to ensure the operation completes no more than one time.
+        --file-format=!: Specifies the format of the input file.
+        --file-uri=!: Specifies the location of the CSV file that contains the opportunities to create or update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+      completion:
+        flag:
+            file-format:
+                - CSV
     - name: start-opportunity-from-engagement-task
       description: This action creates an opportunity from an existing engagement context.
       flags:
@@ -662,6 +907,17 @@ commands:
         --tag-keys=!:
             description: The keys of the key-value pairs for the tag or tags you want to remove from the specified resource.
             nargs: -1
+    - name: update-customer-account
+      description: Use `UpdateCustomerAccount` to replace the customer information on an existing customer account.
+      flags:
+        --account=!: Specifies the complete, updated details of the customer.
+        --catalog=!: Specifies the catalog for the request.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: Specifies the ARN or the identifier of the customer account.
+        --last-modified-date=!: Specifies the `LastModifiedDate` of the customer account as you last read it.
+        --partner-account-identifier=: Specifies your own identifier for the customer account, such as the account ID in your CRM system.
     - name: update-engagement-context
       description: Updates the context information for an existing engagement with new or modified data.
       flags:
@@ -680,6 +936,7 @@ commands:
                 - CustomerProject
                 - Lead
                 - ProspectingResult
+                - CustomerAccount
     - name: update-opportunity
       description: Updates the `Opportunity` record identified by a given `Identifier`.
       flags:

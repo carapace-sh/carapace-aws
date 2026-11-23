@@ -19,6 +19,16 @@ commands:
                 - DerivedFrom
                 - Produced
                 - SameAs
+    - name: add-inference-gateway
+      description: Adds an in-cluster inference gateway to a global inference gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway.
+        --name=!: The name of the `InferenceGatewayConfig` resource that defines the in-cluster inference gateway.
+        --namespace=!: The Kubernetes namespace of the in-cluster inference gateway.
     - name: add-tags
       description: Adds or overwrites one or more tags for the specified SageMaker resource.
       flags:
@@ -626,6 +636,22 @@ commands:
         --role-arn=!: The Amazon Resource Name (ARN) of the role needed to call other services on your behalf.
         --tags=:
             description: An array of key-value pairs that contain metadata to help you categorize and organize a flow definition.
+            nargs: -1
+    - name: create-global-inference-gateway
+      description: Creates a global inference gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+        --execution-role-arn=!: The Amazon Resource Name (ARN) of the IAM role that the global inference gateway assumes to access your SageMaker HyperPod clusters.
+        --gateways=!:
+            description: The 1 to 10 in-cluster inference gateways to add to the global inference gateway.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The name of the global inference gateway.
+        --routing=: The routing configuration of the global inference gateway.
+        --tags=:
+            description: Custom tags for managing the global inference gateway as an Amazon Web Services resource.
             nargs: -1
     - name: create-hub
       description: Create a hub.
@@ -1993,6 +2019,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --flow-definition-name=!: The name of the flow definition you are deleting.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-global-inference-gateway
+      description: Delete a global inference gateway and its member inference gateways, which are then free to join another global inference gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway to delete.
     - name: delete-hub
       description: Delete a hub.
       flags:
@@ -2568,6 +2601,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --flow-definition-name=!: The name of the flow definition.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-global-inference-gateway
+      description: Retrieves information about a global inference gateway, including its status, endpoints, and routing configuration.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway.
     - name: describe-hub
       description: Describes a hub.
       flags:
@@ -4027,6 +4067,20 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: list-global-inference-gateways
+      description: Lists summaries of the global inference gateways in your account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of global inference gateways to return in the response.
+        --next-token=: If the result of the previous `ListGlobalInferenceGateways` request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-hub-content-versions
       description: List hub content versions.
       flags:
@@ -4300,6 +4354,21 @@ commands:
                 - Cancelled
             type:
                 - ShadowMode
+    - name: list-inference-gateways
+      description: Lists the in-cluster inference gateways in a global inference gateway, in the order that they were added.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters to apply to the results.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of in-cluster inference gateways to return in the response.
+        --next-token=: If the result of the previous `ListInferenceGateways` request was truncated, the response includes a `NextToken`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-inference-recommendations-job-steps
       description: Returns a list of the subtasks for an Inference Recommender job.
       flags:
@@ -5687,6 +5756,24 @@ commands:
             sort-order:
                 - Ascending
                 - Descending
+    - name: move-cluster-nodes
+      description: Moves running nodes from one instance group to another instance group.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --instance-count=: The number of nodes to move, from 1 to 50. HyperPod selects the nodes from the source instance group.
+        --node-ids=:
+            description: A list of instance IDs of the nodes to move.
+            nargs: -1
+        --node-logical-ids=:
+            description: A list of `NodeLogicalIds` of the nodes to move.
+            nargs: -1
+        --source-cluster-arn=!: The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes are moved from.
+        --source-instance-group-name=!: The name of the instance group in the source cluster that the nodes are moved from.
+        --target-cluster-arn=!: The Amazon Resource Name (ARN) of the HyperPod cluster that the nodes are moved to.
+        --target-instance-group-name=!: The name of the instance group in the target cluster that the nodes are moved to.
     - name: put-endpoint-policy
       description: Attaches a resource-based policy to an endpoint.
       flags:
@@ -5738,6 +5825,16 @@ commands:
         --tags=:
             description: The tags associated with devices.
             nargs: -1
+    - name: remove-inference-gateway
+      description: Removes an in-cluster inference gateway from a global inference gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-arn=!: The Amazon Resource Name (ARN) of the SageMaker HyperPod cluster that runs the in-cluster inference gateway.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway.
+        --name=!: The name of the `InferenceGatewayConfig` resource that defines the in-cluster inference gateway.
+        --namespace=!: The Kubernetes namespace of the in-cluster inference gateway.
     - name: render-ui-template
       description: Renders the UI template so that you can preview the worker's experience.
       flags:
@@ -6350,6 +6447,14 @@ commands:
         --parameter-removals=:
             description: A list of parameter keys that you can specify to remove parameters that describe your feature.
             nargs: -1
+    - name: update-global-inference-gateway
+      description: Updates the routing configuration of a global inference gateway.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --identifier=!: The name, Amazon Resource Name (ARN), or ID of the global inference gateway to update.
+        --routing=!: The new routing configuration of the global inference gateway.
     - name: update-hub
       description: Update a hub.
       flags:

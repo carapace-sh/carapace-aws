@@ -2,6 +2,13 @@
 name: bedrock
 description: Amazon Bedrock
 commands:
+    - name: archive-project
+      description: Archives a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-identifier=!: The id or ARN of the project to archive.
     - name: batch-delete-advanced-prompt-optimization-job
       description: Deletes one or more advanced prompt optimization jobs.
       flags:
@@ -300,6 +307,17 @@ commands:
             model-invocation-type:
                 - InvokeModel
                 - Converse
+    - name: create-project
+      description: 'Creates a project: a workload boundary within the account that inference requests can be associated with.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-retention=: The project's data-retention mode.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: The display name for the project.
+        --tags=:
+            description: The tags to associate with the project.
+            nargs: -1
     - name: create-prompt-router
       description: Creates a prompt router that manages the routing of requests between multiple foundation models based on the routing criteria.
       flags:
@@ -336,6 +354,18 @@ commands:
             commitment-duration:
                 - OneMonth
                 - SixMonths
+    - name: delete-account-data-retention-storage
+      description: Deletes your account's retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
     - name: delete-automated-reasoning-policy
       description: Deletes an Automated Reasoning policy or policy version.
       flags:
@@ -426,6 +456,31 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-organization-data-retention-storage
+      description: Deletes the organization's retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
+    - name: delete-project-data-retention-storage
+      description: Deletes a project's retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+        --project-identifier=!: The ID or ARN of a named project owned by the calling account in this AWS Region.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
     - name: delete-prompt-router
       description: Deletes a specified prompt router.
       flags:
@@ -467,6 +522,18 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-account-data-retention-storage
+      description: Returns your account's stored retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
     - name: get-advanced-prompt-optimization-job
       description: Gets information about an advanced prompt optimization job.
       flags:
@@ -571,6 +638,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --model-identifier=!: The model identifier.
+        --project-identifier=: The ID or Amazon Resource Name (ARN) of a project.
     - name: get-foundation-model-availability
       description: Get information about the Foundation model availability.
       flags:
@@ -600,6 +668,7 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --inference-profile-identifier=!: The ID or Amazon Resource Name (ARN) of the inference profile.
+        --project-identifier=: The ID or Amazon Resource Name (ARN) of a project.
     - name: get-marketplace-model-endpoint
       description: Retrieves details about a specific endpoint for a model from Amazon Bedrock Marketplace.
       flags:
@@ -641,6 +710,38 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-organization-data-retention-storage
+      description: Returns the organization's retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
+    - name: get-project
+      description: Retrieves a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-identifier=!: The id or ARN of the project to retrieve.
+    - name: get-project-data-retention-storage
+      description: Returns a project's retention storage configuration for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+        --project-identifier=!: The ID or ARN of a named project owned by the calling account in this AWS Region.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
     - name: get-prompt-router
       description: Retrieves details about a prompt router.
       flags:
@@ -662,6 +763,36 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the Bedrock resource to which this resource policy applies.
+    - name: get-trusted-access-program
+      description: Gets trusted access program details and resolves participation for your account and its current organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: Identifier of the trusted access program.
+        --project-identifier=: The ID or ARN of a named Bedrock project owned by the calling account in this Region.
+    - name: get-trusted-access-program-account-enrollment
+      description: Gets the calling account's stored enrollment setting for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: The identifier of the trusted access program.
+    - name: get-trusted-access-program-organization-enrollment
+      description: Gets the current organization's stored enrollment setting for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: The identifier of the trusted access program.
+    - name: get-trusted-access-program-project-enrollment
+      description: Gets a named project's stored enrollment setting for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: The identifier of the trusted access program.
+        --project-identifier=!: The id or ARN of the named Bedrock project.
     - name: get-use-case-for-model-access
       description: Get usecase for model access.
       flags:
@@ -865,6 +996,7 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-identifier=: The ID or Amazon Resource Name (ARN) of a project.
       completion:
         flag:
             by-customization-type:
@@ -923,6 +1055,7 @@ commands:
         --max-results=: The maximum number of results to return in the response.
         --next-token=: If the total number of results is greater than the `maxResults` value provided in the request, enter the token returned in the `nextToken` field in the response in this field to return the next batch of results.
         --page-size=: The size of each page to get in the AWS service call.
+        --project-identifier=: The ID or Amazon Resource Name (ARN) of a project.
         --starting-token=: A token to specify where to start paginating.
         --type-equals=: Filters for inference profiles that match the type you specify.
       completion:
@@ -1065,6 +1198,23 @@ commands:
                 - Expired
                 - Validating
                 - Scheduled
+    - name: list-projects
+      description: Lists the account's projects.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of projects to return in one response, from 1 to 100. The default is 20.
+        --next-token=: Continuation token from a previous ListProjects response.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --status-filter=: Returns only the projects in this lifecycle status.
+      completion:
+        flag:
+            status-filter:
+                - active
+                - archived
     - name: list-prompt-routers
       description: Retrieves a list of prompt routers.
       flags:
@@ -1119,6 +1269,18 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The Amazon Resource Name (ARN) of the resource.
+    - name: list-trusted-access-programs
+      description: Lists all trusted access programs visible to your account, ordered by program ID.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: Reserved for future pagination support.
+        --next-token=: Reserved for future pagination support.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-identifier=: The ID or ARN of a named Bedrock project owned by the calling account in this Region.
+        --starting-token=: A token to specify where to start paginating.
     - name: put-account-data-retention
       description: Sets the account-wide data retention mode for Amazon Bedrock.
       flags:
@@ -1134,6 +1296,23 @@ commands:
                 - aws_review
                 - provider_data_share
                 - inherit
+    - name: put-account-data-retention-storage
+      description: Creates or replaces the calling account's retention storage record for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+        --storage-configuration=: Destination bucket and key.
+        --storage-destination=!: Where retained data is delivered for this scope.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
+            storage-destination:
+                - customer_managed
+                - amazon_managed
     - name: put-enforced-guardrail-configuration
       description: Sets the account-level enforced guardrail configuration.
       flags:
@@ -1149,6 +1328,41 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --logging-config=!: The logging configuration values to set.
+    - name: put-organization-data-retention-storage
+      description: Creates or replaces the organization's retention storage record for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+        --storage-configuration=: Destination bucket and key.
+        --storage-destination=!: Where retained data is delivered for this scope.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
+            storage-destination:
+                - customer_managed
+                - amazon_managed
+    - name: put-project-data-retention-storage
+      description: Creates or replaces a project's retention storage record for a model provider.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --model-provider=!: The model provider whose retention storage configuration is addressed by this request.
+        --project-identifier=!: The ID or ARN of a named project owned by the calling account in this AWS Region.
+        --storage-configuration=: Destination bucket and key.
+        --storage-destination=!: Where retained data is delivered for this scope.
+      completion:
+        flag:
+            model-provider:
+                - anthropic
+                - openai
+            storage-destination:
+                - customer_managed
+                - amazon_managed
     - name: put-resource-policy
       description: Adds a resource policy for a Bedrock resource.
       flags:
@@ -1157,6 +1371,49 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --resource-arn=!: The ARN of the Bedrock resource to which this resource policy applies.
         --resource-policy=!: The JSON string representing the Bedrock resource policy.
+    - name: put-trusted-access-program-account-enrollment
+      description: Sets your account's enrollment preference for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opt-in=!: The enrollment preference to store.
+        --program-identifier=!: The identifier of the trusted access program.
+      completion:
+        flag:
+            opt-in:
+                - inherit
+                - enabled
+                - disabled
+    - name: put-trusted-access-program-organization-enrollment
+      description: Sets the current organization's enrollment preference for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opt-in=!: The enrollment preference to store for the organization.
+        --program-identifier=!: The identifier of the trusted access program.
+      completion:
+        flag:
+            opt-in:
+                - inherit
+                - enabled
+                - disabled
+    - name: put-trusted-access-program-project-enrollment
+      description: Sets a named project's enrollment preference for a trusted access program.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --opt-in=!: The enrollment preference to store.
+        --program-identifier=!: The identifier of the trusted access program.
+        --project-identifier=!: The id or ARN of the named Bedrock project.
+      completion:
+        flag:
+            opt-in:
+                - inherit
+                - enabled
+                - disabled
     - name: put-use-case-for-model-access
       description: Put usecase for model access.
       flags:
@@ -1204,6 +1461,28 @@ commands:
         --test-case-ids=:
             description: The list of test identifiers to run.
             nargs: -1
+    - name: start-trusted-access-program-account-application
+      description: Prepare a provider application handoff for the calling account.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: Identifier of the trusted access program.
+    - name: start-trusted-access-program-organization-application
+      description: Prepare a provider application handoff for the calling account's current organization.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: Identifier of the trusted access program.
+    - name: start-trusted-access-program-project-application
+      description: Prepare a provider application handoff for a named project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --program-identifier=!: Identifier of the trusted access program.
+        --project-identifier=!: The id or ARN of the named Bedrock project.
     - name: stop-advanced-prompt-optimization-job
       description: Stops an advanced prompt optimization job that is in progress.
       flags:
@@ -1334,6 +1613,15 @@ commands:
         --endpoint-arn=!: The Amazon Resource Name (ARN) of the endpoint you want to update.
         --endpoint-config=!: The new configuration for the endpoint, including the number and type of instances to use.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: update-project
+      description: 'Updates one mutable project field per call: exactly one of `name` or `dataRetention` must be set.'
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --data-retention=: The project's new data-retention mode.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The project's new display name.
+        --project-identifier=!: The id or ARN of the project to update.
     - name: update-provisioned-model-throughput
       description: Updates the name or associated model for a Provisioned Throughput.
       flags:

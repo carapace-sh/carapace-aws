@@ -53,6 +53,7 @@ commands:
             firewall-type:
                 - WAF
                 - SHIELD_ADVANCED
+                - IGW_FIREWALL
     - name: create-policy-snapshot
       description: Creates a snapshot of the current published version of the specified policy.
       flags:
@@ -81,6 +82,7 @@ commands:
         flag:
             firewall-type:
                 - WAF
+                - IGW_FIREWALL
             rule-type:
                 - CONFIGURATION
                 - INSPECTION
@@ -105,7 +107,12 @@ commands:
         --scope-configuration=!: The configuration that defines which accounts and resources are in scope.
         --scope-description=: A description of the scope.
         --scope-name=!: The name of the scope.
+        --specialized-scope-type=: The specialized type of the scope.
         --tags=: The tags to add to the resource when it is created.
+      completion:
+        flag:
+            specialized-scope-type:
+                - IGW_FIREWALL_SUBNET_CONNECTIVITY_OVERRIDE
     - name: create-scope-snapshot
       description: Creates a snapshot of the current published version of the specified scope.
       flags:
@@ -135,6 +142,7 @@ commands:
         flag:
             firewall-type:
                 - WAF
+                - IGW_FIREWALL
     - name: create-template-snapshot
       description: Creates a snapshot of the current published version of the specified template.
       flags:
@@ -202,6 +210,7 @@ commands:
         flag:
             rule-firewall-type:
                 - WAF
+                - IGW_FIREWALL
             rule-type:
                 - CONFIGURATION
                 - INSPECTION
@@ -317,6 +326,19 @@ commands:
                 - ACTIVE
                 - DRAFT
                 - DISABLED
+    - name: list-entity-coverages
+      description: Lists the protected resources that the specified Network Security Manager entity covers.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-arn=!: The Amazon Resource Name (ARN) of the Network Security Manager entity to list covered resources for.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-owner-account-id=: Filters the results to the protected resources owned by the specified AWS account.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-policies
       description: Lists the policies in the account.
       flags:
@@ -347,6 +369,27 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --policy-identifier=!: The identifier of the policy.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-protected-resource-coverages
+      description: Lists the AWS Network Security Manager entities that cover the specified protected resource.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --entity-type=: Filters the results by the type of the entity that covers the resource.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token for the next page of results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --resource-arn=!: The Amazon Resource Name (ARN) of the protected resource to list coverage for.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            entity-type:
+                - Rule
+                - Template
+                - Policy
+                - Deployment
+                - Scope
     - name: list-resource-associations
       description: Lists the resources associated with the specified resource.
       flags:
@@ -469,12 +512,16 @@ commands:
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
         --status=: Filters the results by status, either `ACTIVE` or `DRAFT`.
+        --template-owner=: Specifies which templates to list.
       completion:
         flag:
             status:
                 - ACTIVE
                 - DRAFT
                 - DISABLED
+            template-owner:
+                - CUSTOMER
+                - AWS
     - name: put-admin-account
       description: Sets the AWS account that serves as an AWS Network Security Manager administrator account, and optionally configures the scope of resources that the administrator can manage.
       flags:

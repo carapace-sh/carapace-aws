@@ -62,6 +62,41 @@ commands:
         --kms-key-id=: The identifier for your AWS Key Management Service key (AWS KMS key).
         --output-config=!: ""
         --tags=: A set of tags (key-value pairs) that you want to attach to the adapter version.
+    - name: create-blueprint
+      description: Creates a blueprint that defines the schema Amazon Textract uses to extract structured data from a document during a document insights job.
+      flags:
+        --blueprint-name=!: A unique name for the blueprint.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --encryption-configuration=: The AWS KMS encryption configuration used to encrypt the blueprint at rest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema=!: The schema of the blueprint, which defines the fields to extract and their expected structure.
+        --tags=: A set of tags (key-value pairs) to assign to the blueprint.
+    - name: create-blueprint-version
+      description: Creates a new, immutable version of an existing blueprint so that projects can pin to a specific version.
+      flags:
+        --blueprint-arn=!: The Amazon Resource Name (ARN) of the blueprint to create a new version of.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: create-project
+      description: Creates a project that groups the configuration used to run document insights jobs.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: A unique, case-sensitive identifier that you provide to ensure that the operation completes no more than one time.
+        --custom-configuration=: The configuration that associates blueprints with the project for custom output extraction.
+        --encryption-configuration=: The AWS KMS encryption configuration used to encrypt the project at rest.
+        --extraction-configuration=!: The configuration that controls how Amazon Textract extracts content from the document, including bounding boxes, granularity, and output format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generative-configuration=: The configuration that controls generative capabilities such as summarization and figure captioning.
+        --project-description=: A description of the project.
+        --project-name=!: A unique name for the project.
+        --sensitive-data-configuration=: The configuration that controls detection and redaction of sensitive data, such as personally identifiable information (PII).
+        --splitter-configuration=: The configuration that controls whether multi-document packets are split into individual documents.
+        --tags=: A set of tags (key-value pairs) to assign to the project.
     - name: delete-adapter
       description: Deletes an Amazon Textract adapter.
       flags:
@@ -77,6 +112,21 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-blueprint
+      description: Deletes a blueprint, or a specific version of a blueprint.
+      flags:
+        --blueprint-arn=!: The Amazon Resource Name (ARN) of the blueprint to delete.
+        --blueprint-version=: The version of the blueprint to delete.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-project
+      description: Deletes a project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-arn=!: The Amazon Resource Name (ARN) of the project to delete.
     - name: detect-document-text
       description: Detects text in the input document.
       flags:
@@ -99,6 +149,14 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: get-blueprint
+      description: Gets the details of a blueprint, including its schema, encryption settings, and timestamps.
+      flags:
+        --blueprint-arn=!: The Amazon Resource Name (ARN) of the blueprint to retrieve.
+        --blueprint-version=: The version of the blueprint to retrieve.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: get-document-analysis
       description: Gets the results for an Amazon Textract asynchronous operation that analyzes text in a document.
       flags:
@@ -108,6 +166,13 @@ commands:
         --job-id=!: A unique identifier for the text-detection job.
         --max-results=: The maximum number of results to return per paginated call.
         --next-token=: If the previous response was incomplete (because there are more blocks to retrieve), Amazon Textract returns a pagination token in the response.
+    - name: get-document-insights
+      description: Gets the status and results of a document insights job that was started by [StartDocumentInsights]().
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --job-arn=!: The Amazon Resource Name (ARN) of the document insights job to retrieve.
     - name: get-document-text-detection
       description: Gets the results for an Amazon Textract asynchronous operation that detects text in a document.
       flags:
@@ -142,6 +207,13 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --job-id=!: A unique identifier for the lending or text-detection job.
+    - name: get-project
+      description: Gets the details of a project, including its configuration, status, and timestamps.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --project-arn=!: The Amazon Resource Name (ARN) of the project to retrieve.
     - name: list-adapter-versions
       description: List all version of an adapter that meet the specified filtration criteria.
       flags:
@@ -169,6 +241,37 @@ commands:
         --next-token=: Identifies the next page of results to return when listing adapters.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-blueprints
+      description: Lists the blueprints that are available to the caller, with optional filtering by project and resource owner.
+      flags:
+        --blueprint-arn=: The Amazon Resource Name (ARN) of a blueprint to filter the results by.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of blueprints to return in each page of results.
+        --next-token=: A pagination token returned from a previous call to `ListBlueprints`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --project-filter=: A filter that limits the results to blueprints associated with the specified project.
+        --resource-owner=: A filter that limits the results to blueprints owned by your account or to blueprints provided by Amazon Textract.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            resource-owner:
+                - ACCOUNT
+                - SERVICE
+    - name: list-projects
+      description: Lists the projects that are available to the caller, with optional filtering by blueprint.
+      flags:
+        --blueprint-filter=: A filter that limits the results to projects associated with the specified blueprint.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of projects to return in each page of results.
+        --next-token=: A pagination token returned from a previous call to `ListProjects`.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-tags-for-resource
       description: Lists all tags for an Amazon Textract resource.
       flags:
@@ -193,6 +296,21 @@ commands:
         --notification-channel=: The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to.
         --output-config=: Sets if the output will go to a customer defined bucket.
         --queries-config=: ""
+    - name: start-document-insights
+      description: Starts an asynchronous job that analyzes a document using the configuration defined by a project or a set of blueprints.
+      flags:
+        --blueprints=:
+            description: The blueprints used to extract custom structured output from the document.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: The AWS KMS encryption configuration used to encrypt the analysis output.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --input-configuration=!: The Amazon S3 location of the input document to analyze.
+        --notification-configuration=: Notification settings for the job.
+        --output-configuration=!: The Amazon S3 location where the analysis results are written.
+        --project-arn=: The Amazon Resource Name (ARN) of the project whose configuration is used to analyze the document.
+        --tags=: A set of tags (key-value pairs) to assign to the document insights job.
     - name: start-document-text-detection
       description: Starts the asynchronous detection of text in a document.
       flags:
@@ -262,3 +380,26 @@ commands:
             auto-update:
                 - ENABLED
                 - DISABLED
+    - name: update-blueprint
+      description: Updates an existing blueprint, replacing its schema and, optionally, its encryption configuration.
+      flags:
+        --blueprint-arn=!: The Amazon Resource Name (ARN) of the blueprint to update.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --encryption-configuration=: The AWS KMS encryption configuration used to encrypt the blueprint at rest.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --schema=: The updated schema of the blueprint, which defines the fields to extract and their expected structure.
+    - name: update-project
+      description: Updates the configuration of an existing project.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --custom-configuration=: The configuration that associates blueprints with the project for custom output extraction.
+        --encryption-configuration=: The AWS KMS encryption configuration used to encrypt the project at rest.
+        --extraction-configuration=: The configuration that controls how Amazon Textract extracts content from the document, including bounding boxes, granularity, and output format.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --generative-configuration=: The configuration that controls generative capabilities such as summarization and figure captioning.
+        --project-arn=!: The Amazon Resource Name (ARN) of the project to update.
+        --project-description=: The updated description of the project.
+        --sensitive-data-configuration=: The configuration that controls detection and redaction of sensitive data, such as personally identifiable information (PII).
+        --splitter-configuration=: The configuration that controls whether multi-document packets are split into individual documents.
