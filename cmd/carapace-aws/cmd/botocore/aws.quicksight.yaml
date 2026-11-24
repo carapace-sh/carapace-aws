@@ -23,6 +23,17 @@ commands:
         --knowledge-base-ids=!:
             description: A list of knowledge base identifiers to delete.
             nargs: -1
+    - name: batch-delete-policy-assignment-by-policy
+      description: Removes a governance policy from multiple Amazon Quick Sight principals in a single request.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the policy and the principals.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The ARN of the policy to remove.
+        --principal-arns=!:
+            description: A list of 1–50 principal ARNs to remove the policy from.
+            nargs: -1
     - name: batch-delete-topic-reviewed-answer
       description: Deletes reviewed answers for Q Topic.
       flags:
@@ -47,6 +58,17 @@ commands:
         --users=:
             description: A list of users to describe limits for.
             nargs: -1
+    - name: batch-put-policy-assignment-by-policy
+      description: Assigns a governance policy to multiple Amazon Quick Sight principals in a single request.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the policy and the principals.
+        --assignments=!:
+            description: A list of 1–50 principals to assign the policy to.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The ARN of the policy to assign.
     - name: cancel-ingestion
       description: Cancels an ongoing ingestion of data into SPICE.
       flags:
@@ -56,6 +78,37 @@ commands:
         --data-set-id=!: The ID of the dataset used in the ingestion.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --ingestion-id=!: An ID for the ingestion.
+    - name: create-access-control-application
+      description: Creates an access control application in an Amazon Quick Sight account.
+      flags:
+        --application-id=!: The ID for the access control application.
+        --authentication-type=!: The authentication protocol that the access control application uses.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the access control application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-authorizing-configuration=!: The identity provider configuration of the access control application.
+        --name=!: The name of the access control application.
+        --namespace=!: The Quick Sight namespace for the access control application.
+        --quick-authentication-configuration=!: The Quick Sight authentication configuration of the access control application.
+        --tags=:
+            description: The tags to assign to the access control application.
+            nargs: -1
+      completion:
+        flag:
+            authentication-type:
+                - OIDC
+    - name: create-access-control-application-secret
+      description: Creates a client secret for an access control application.
+      flags:
+        --application-id=!: The ID of the access control application.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-secret-configuration=!: The source of the client secret, which is your IdP, and the Amazon Web Services Secrets Manager ARNs of the secret.
+        --description=: A description of the client secret, for example `rotation-june-2026`.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: create-account-customization
       description: Creates Amazon Quick Sight customizations.
       flags:
@@ -326,6 +379,9 @@ commands:
         --tags=:
             description: Contains a map of the key-value pairs for the resource tag or tags assigned to the dataset.
             nargs: -1
+        --unmaterialized-calculated-columns=:
+            description: A list of unmaterialized calculated columns for the dataset.
+            nargs: -1
         --use-as=: The usage of the dataset.
       completion:
         flag:
@@ -519,6 +575,20 @@ commands:
                 - ENABLED
                 - DRAFT
                 - DISABLED
+    - name: create-inbound-connector
+      description: Creates an inbound connector in a Quick Sight account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The description of the inbound connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-configuration=!: The configuration of the inbound connector.
+        --inbound-connector-id=!: The ID for the inbound connector.
+        --name=!: The name of the inbound connector.
+        --tags=:
+            description: The tags to assign to the inbound connector.
+            nargs: -1
     - name: create-ingestion
       description: Creates and starts a new SPICE ingestion for a dataset.
       flags:
@@ -555,6 +625,23 @@ commands:
         --tags=:
             description: The tags to assign to the knowledge base.
             nargs: -1
+    - name: create-knowledge-base-refresh-schedule
+      description: Creates a schedule that periodically refreshes an Amazon Quick Sight knowledge base at the frequency that you specify.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --schedule-frequency=!: The frequency configuration for the refresh schedule.
+        --schedule-id=!: A unique identifier for the knowledge base refresh schedule.
+        --start-time=: The date and time, in ISO 8601 format, after which the schedule can start refreshing the knowledge base.
+        --state=: The state that you want the refresh schedule to have when you create it.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
     - name: create-limits-profile
       description: Creates a limits profile that defines resource usage limits for Amazon Quick Sight users.
       flags:
@@ -805,6 +892,24 @@ commands:
             description: A map of the key-value pairs for the resource tag or tags assigned to the VPC connection.
             nargs: -1
         --vpc-connection-id=!: The ID of the VPC connection that you're creating.
+    - name: delete-access-control-application
+      description: Deletes an access control application.
+      flags:
+        --application-id=: The ID of the access control application to delete.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idc-application-arn=: The ARN of an IAM Identity Center application that Quick Sight created for an access control application that has already been deleted.
+    - name: delete-access-control-application-secret
+      description: Deletes a client secret from an access control application.
+      flags:
+        --application-id=!: The ID of the access control application.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-secret-id=!: The ID of the client secret.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-account-custom-permission
       description: Unapplies a custom permissions profile from an account.
       flags:
@@ -1018,6 +1123,14 @@ commands:
                 - QBUSINESS
                 - ATHENA
                 - GLUE_DATA_CATALOG
+    - name: delete-inbound-connector
+      description: Deletes an inbound connector.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-id=!: The ID of the inbound connector.
     - name: delete-knowledge-base
       description: Deletes a knowledge base.
       flags:
@@ -1026,6 +1139,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier for the knowledge base.
+    - name: delete-knowledge-base-refresh-schedule
+      description: Deletes the refresh schedule for an Amazon Quick Sight knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --schedule-id=!: The unique identifier for the refresh schedule to delete.
     - name: delete-limits-profile
       description: Deletes a limits profile.
       flags:
@@ -1050,6 +1172,16 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --o-auth-client-application-id=!: The ID of the OAuthClientApplication that you want to delete.
+    - name: delete-policy-assignment
+      description: Removes a governance policy from an Amazon Quick Sight principal.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the principal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The ARN of the policy to remove.
+        --principal-arn=!: The ARN of the user, group, or account to remove the policy from.
+        --revision=: The revision of the assignment from your most recent read.
     - name: delete-refresh-schedule
       description: Deletes a refresh schedule from a dataset.
       flags:
@@ -1200,6 +1332,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vpc-connection-id=!: The ID of the VPC connection that you're creating.
+    - name: describe-access-control-application
+      description: Describes an access control application.
+      flags:
+        --application-id=!: The ID of the access control application.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: describe-account-custom-permission
       description: Describes the custom permissions profile that is applied to an account.
       flags:
@@ -1560,6 +1700,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --namespace=!: The namespace that contains the assignment.
+    - name: describe-inbound-connector
+      description: Describes an inbound connector.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-id=!: The ID of the inbound connector.
     - name: describe-ingestion
       description: Describes a SPICE ingestion.
       flags:
@@ -1601,6 +1749,15 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --knowledge-base-id=!: The unique identifier for the knowledge base.
+    - name: describe-knowledge-base-refresh-schedule
+      description: Describes the refresh schedule for an Amazon Quick Sight knowledge base, including the schedule's frequency, start time, and state.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --schedule-id=!: The unique identifier for the refresh schedule.
     - name: describe-limits-profile
       description: Describes the properties of an existing limits profile.
       flags:
@@ -1830,7 +1987,7 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --vpc-connection-id=!: The ID of the VPC connection that you're creating.
     - name: generate-embed-url-for-anonymous-user
-      description: Generates an embed URL that you can use to embed an Amazon Quick dashboard or visual in your website, without having to register any reader users.
+      description: Generates an embed URL that you can use to embed an Quick dashboard or visual in your website, without having to register any reader users.
       flags:
         --allowed-domains=:
             description: The domains that you want to add to the allow list for access to the generated URL that is then embedded.
@@ -1849,7 +2006,7 @@ commands:
             description: Session tags are user-specified strings that identify a session in your application.
             nargs: -1
     - name: generate-embed-url-for-registered-user
-      description: Generates an embed URL that you can use to embed an Amazon Quick experience in your website.
+      description: Generates an embed URL that you can use to embed an Quick experience in your website.
       flags:
         --allowed-domains=:
             description: The domains that you want to add to the allow list for access to the generated URL that is then embedded.
@@ -1893,7 +2050,7 @@ commands:
         --session-lifetime-in-minutes=: How many minutes the session is valid.
         --state-persistence-enabled: Adds persistence of state for the user session in an embedded dashboard.
         --undo-redo-disabled: Remove the undo/redo button on the embedded dashboard.
-        --user-arn=: The Amazon Quick user's Amazon Resource Name (ARN), for use with `QUICKSIGHT` identity type.
+        --user-arn=: The Quick user's Amazon Resource Name (ARN), for use with `QUICKSIGHT` identity type.
       completion:
         flag:
             identity-type:
@@ -1927,6 +2084,20 @@ commands:
         --namespace=: The namespace of the user that you want to get identity context for.
         --session-expires-at=: The timestamp at which the session will expire.
         --user-identifier=!: The identifier for the user whose identity context you want to retrieve.
+    - name: get-policy-assignment
+      description: Describes the policy of the specified type that an Amazon Quick Sight principal has.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the principal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-type=!: The type of policy to describe.
+        --principal-arn=!: The ARN of the user, group, or account.
+      completion:
+        flag:
+            policy-type:
+                - LIMITS_PROFILE
+                - CUSTOM_PERMISSIONS
     - name: get-session-embed-url
       description: Generates a session URL and authorization code that you can use to embed the Amazon Amazon Quick Sight console in your web server code.
       flags:
@@ -1936,7 +2107,20 @@ commands:
         --entry-point=: The URL you use to access the embedded session.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --session-lifetime-in-minutes=: How many minutes the session is valid.
-        --user-arn=: The Amazon Quick user's Amazon Resource Name (ARN), for use with `QUICKSIGHT` identity type.
+        --user-arn=: The Quick user's Amazon Resource Name (ARN), for use with `QUICKSIGHT` identity type.
+    - name: list-access-control-applications
+      description: Lists the access control applications in a Quick Sight account in the current Amazon Web Services Region.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --namespace=: The namespace to filter by.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
     - name: list-action-connectors
       description: Lists all action connectors in the specified Amazon Web Services account.
       flags:
@@ -2222,6 +2406,34 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --max-results=: The maximum number of results to be returned.
         --next-token=: The token for the next set of results, or null if there are no more results.
+    - name: list-inbound-connector-application-associations
+      description: Lists the access control applications that are associated with an inbound connector.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-id=!: The ID of the inbound connector.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-inbound-connectors
+      description: Lists the inbound connectors in a Quick Sight account.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return.
+        --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --type=:
+            description: The inbound connector type to filter by.
+            nargs: -1
     - name: list-ingestions
       description: Lists the history of SPICE ingestions for a dataset.
       flags:
@@ -2233,6 +2445,19 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: The maximum number of results to be returned per request.
         --next-token=: The token for the next set of results, or null if there are no more results.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: list-knowledge-base-refresh-schedules
+      description: Lists the refresh schedules for an Amazon Quick Sight knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single page.
+        --next-token=: The token for the next set of results.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: list-knowledge-bases
@@ -2289,6 +2514,26 @@ commands:
         --next-token=: A pagination token that can be used in a subsequent request.
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
+    - name: list-principals-for-policy
+      description: Lists the Amazon Quick Sight principals that have a governance policy.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the policy.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: The maximum number of results to return in a single call.
+        --next-token=: The token returned by a previous call.
+        --page-size=: The size of each page to get in the AWS service call.
+        --policy-arn=!: The ARN of the policy.
+        --principal-type=: An optional filter that limits the results to principals of the specified type.
+        --starting-token=: A token to specify where to start paginating.
+      completion:
+        flag:
+            principal-type:
+                - USER
+                - GROUP
+                - ACCOUNT
     - name: list-refresh-schedules
       description: Lists the refresh schedules of a dataset.
       flags:
@@ -2557,6 +2802,17 @@ commands:
         --data-set-id=!: The ID of the dataset.
         --data-set-refresh-properties=!: The dataset refresh properties.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: put-policy-assignment
+      description: Assigns a governance policy to an Amazon Quick Sight principal.
+      flags:
+        --account-id=!: The ID of the Amazon Web Services account that contains the policy and the principal.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --existing-policy-arn=: The ARN of the policy that you expect the principal to have before this request.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-arn=!: The Amazon Resource Name (ARN) of the policy to assign.
+        --principal-arn=!: The ARN of the user, group, or account to assign the policy to.
+        --revision=: The revision of the assignment from your most recent read.
     - name: register-user
       description: Creates an Amazon Quick Sight user whose identity is associated with the Identity and Access Management (IAM) identity or role specified in the request.
       flags:
@@ -2911,6 +3167,37 @@ commands:
         --tag-keys=!:
             description: The keys of the key-value pairs for the resource tag or tags assigned to the resource.
             nargs: -1
+    - name: update-access-control-application
+      description: Updates an access control application.
+      flags:
+        --application-id=!: The ID of the access control application.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description of the access control application.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --idp-authorizing-configuration=: The identity provider settings to update, such as the client ID and issuer URL.
+        --name=: The new name of the access control application.
+        --quick-authentication-configuration=: The Quick Sight authentication settings to update, such as redirect URIs.
+        --status=: The new status of the access control application.
+      completion:
+        flag:
+            status:
+                - ENABLED
+                - DISABLED
+    - name: update-access-control-application-secret
+      description: Updates the Amazon Web Services Secrets Manager secret ARNs of an IdP-provided client secret.
+      flags:
+        --application-id=!: The ID of the access control application.
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-secret-id=!: The ID of the client secret.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --remove-regional-secret-manager-arns=:
+            description: The Regions whose ARNs to remove.
+            nargs: -1
+        --update-regional-secret-manager-arns=: The Region ARNs to add or replace.
     - name: update-account-custom-permission
       description: Applies a custom permissions profile to an account.
       flags:
@@ -3215,6 +3502,9 @@ commands:
         --row-level-permission-data-set=: The row-level security configuration for the data you want to create.
         --row-level-permission-tag-configuration=: The configuration of tags on a dataset to set row-level security.
         --semantic-model-configuration=: The semantic model configuration for the dataset.
+        --unmaterialized-calculated-columns=:
+            description: A list of unmaterialized calculated columns for the dataset.
+            nargs: -1
       completion:
         flag:
             import-mode:
@@ -3387,6 +3677,37 @@ commands:
                 - QBUSINESS
                 - ATHENA
                 - GLUE_DATA_CATALOG
+    - name: update-inbound-connector
+      description: Updates an inbound connector.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --description=: The new description of the inbound connector.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-configuration=: The new configuration of the inbound connector.
+        --inbound-connector-id=!: The ID of the inbound connector.
+        --inbound-connector-status=: The new status of the inbound connector.
+        --name=: The new name of the inbound connector.
+      completion:
+        flag:
+            inbound-connector-status:
+                - ENABLED
+                - DISABLED
+    - name: update-inbound-connector-application-associations
+      description: Associates access control applications with an inbound connector, disassociates them from it, or both.
+      flags:
+        --associate-access-control-applications=:
+            description: The ARNs of up to 20 access control applications to associate with the inbound connector.
+            nargs: -1
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the Quick Sight account.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --disassociate-access-control-applications=:
+            description: The ARNs of up to 20 access control applications to disassociate from the inbound connector.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --inbound-connector-id=!: The ID of the inbound connector.
     - name: update-ip-restriction
       description: Updates the content and status of IP rules.
       flags:
@@ -3438,6 +3759,23 @@ commands:
         --revoke-permissions=:
             description: The resource permissions that you want to revoke from the knowledge base.
             nargs: -1
+    - name: update-knowledge-base-refresh-schedule
+      description: Updates the refresh schedule for an Amazon Quick Sight knowledge base.
+      flags:
+        --aws-account-id=!: The ID of the Amazon Web Services account that contains the knowledge base.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --knowledge-base-id=!: The unique identifier for the knowledge base.
+        --schedule-frequency=: The frequency configuration for the refresh schedule.
+        --schedule-id=!: The unique identifier for the refresh schedule to update.
+        --start-time=: The date and time, in ISO 8601 format, after which the schedule can start refreshing the knowledge base.
+        --state=: The state of the refresh schedule.
+      completion:
+        flag:
+            state:
+                - ENABLED
+                - DISABLED
     - name: update-limits-profile
       description: Updates the properties of an existing limits profile.
       flags:
