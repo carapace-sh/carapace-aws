@@ -82,6 +82,31 @@ commands:
             description: (Optional) The tags to apply to the backup at backup creation.
             nargs: -1
         --volume-id=: (Optional) The ID of the FSx for ONTAP volume to back up.
+    - name: create-cluster-peer
+      description: Creates a cluster peer relationship between an Amazon FSx for NetApp ONTAP file system and another ONTAP cluster.
+      flags:
+        --allowed-svm-ids=:
+            description: Specifies the IDs of the SVMs on the file system that are preauthorized for SVM peering with the peer cluster.
+            nargs: -1
+        --allowed-svm-mode=!: Specifies which SVMs on the file system are preauthorized for SVM peering with the peer cluster.
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --file-system-id=!: Specifies the ID of the Amazon FSx for NetApp ONTAP file system on which to create the cluster peer relationship.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --passphrase-secret-arn=!: Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager secret containing the cluster peering passphrase.
+        --peer-addresses=!:
+            description: Specifies the IP addresses of the intercluster logical interfaces (LIFs) on the peer cluster.
+            nargs: -1
+        --peer-cluster-name=: Specifies the name that the file system uses to identify the peer cluster.
+        --tags=:
+            nargs: -1
+      completion:
+        flag:
+            allowed-svm-mode:
+                - ALL
+                - NONE
+                - SPECIFIED
     - name: create-data-repository-association
       description: Creates an Amazon FSx for Lustre data repository association (DRA).
       flags:
@@ -224,17 +249,75 @@ commands:
                 - SSD
                 - HDD
                 - INTELLIGENT_TIERING
+    - name: create-snapmirror-policy
+      description: Creates a SnapMirror policy for an Amazon FSx for NetApp ONTAP file system or storage virtual machine (SVM).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --file-system-id=: Specifies the ID of the Amazon FSx for NetApp ONTAP file system on which to create the SnapMirror policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies the name of the SnapMirror policy.
+        --network-compression-enabled: Specifies whether SnapMirror compresses data when it transfers the data over the network.
+        --no-network-compression-enabled: Specifies whether SnapMirror compresses data when it transfers the data over the network.
+        --retention-rules=:
+            description: Specifies the rules that determine which snapshots SnapMirror retains on the destination volume, based on their SnapMirror labels.
+            nargs: -1
+        --snapshot-copy-mode=: 'Specifies which snapshots SnapMirror transfers to the destination volume:'
+        --storage-virtual-machine-id=: Specifies the ID of the SVM on which to create the SnapMirror policy.
+        --tags=:
+            nargs: -1
+        --throttle-in-kbps=: Specifies the maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to transfer data.
+        --transfer-schedule=: Specifies the name of the ONTAP schedule that determines when SnapMirror transfers data.
+      completion:
+        flag:
+            snapshot-copy-mode:
+                - COPY_ALL_SOURCE_SNAPSHOTS
+                - COPY_LATEST_SOURCE_SNAPSHOT
+                - NO_CREATE_SNAPSHOT_ON_SOURCE
+    - name: create-snapmirror-relationship
+      description: Creates a SnapMirror relationship that replicates data from a source volume to a destination volume on an Amazon FSx for NetApp ONTAP file system.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --destination=!: Specifies the destination endpoint of the SnapMirror relationship.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=: Specifies the ID of the SnapMirror policy that the SnapMirror relationship uses.
+        --source=!: Specifies the source endpoint of the SnapMirror relationship.
+        --tags=:
+            nargs: -1
+        --throttle-in-kbps=: Specifies the maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to transfer data for the relationship.
+        --transfer-schedule=: Specifies the name of the ONTAP schedule that determines when SnapMirror transfers data for the relationship.
     - name: create-snapshot
-      description: Creates a snapshot of an existing Amazon FSx for OpenZFS volume.
+      description: Creates a snapshot of an existing Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP volume.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --name=!: The name of the snapshot.
+        --ontap-configuration=: Specifies the configuration to use when creating the ONTAP snapshot.
         --tags=:
             nargs: -1
         --volume-id=!: The ID of the volume that you are taking a snapshot of.
+    - name: create-snapshot-policy
+      description: Creates a snapshot policy for an Amazon FSx for NetApp ONTAP file system or storage virtual machine (SVM).
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --enabled: Specifies whether the snapshot policy is enabled.
+        --file-system-id=: Specifies the ID of the Amazon FSx for NetApp ONTAP file system on which to create the snapshot policy.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=!: Specifies the name of the snapshot policy.
+        --no-enabled: Specifies whether the snapshot policy is enabled.
+        --schedules=!:
+            description: Specifies the schedules on which ONTAP creates snapshots for the snapshot policy.
+            nargs: -1
+        --storage-virtual-machine-id=: Specifies the ID of the SVM on which to create the snapshot policy.
+        --tags=:
+            nargs: -1
     - name: create-storage-virtual-machine
       description: Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file system.
       flags:
@@ -255,6 +338,22 @@ commands:
                 - UNIX
                 - NTFS
                 - MIXED
+    - name: create-storage-virtual-machine-peer
+      description: Creates a storage virtual machine (SVM) peer relationship between an SVM on an Amazon FSx for NetApp ONTAP file system and another SVM.
+      flags:
+        --applications=!:
+            description: Specifies the applications that the SVM peer relationship authorizes.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --peer-cluster-name=: Specifies the name of the peer cluster that the peer SVM is on.
+        --peer-svm-alias=: Specifies the name that the local cluster uses to identify the peer SVM.
+        --peer-svm-name=!: Specifies the name of the SVM to peer with.
+        --storage-virtual-machine-id=!: Specifies the ID of the SVM on which to create the SVM peer relationship.
+        --tags=:
+            nargs: -1
     - name: create-volume
       description: Creates an FSx for ONTAP or Amazon FSx for OpenZFS storage volume.
       flags:
@@ -293,6 +392,14 @@ commands:
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: A string of up to 63 ASCII characters that Amazon FSx uses to ensure idempotent deletion.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: delete-cluster-peer
+      description: Deletes an Amazon FSx for NetApp ONTAP cluster peer relationship.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --cluster-peer-id=!: The ID of the cluster peer that you are deleting.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
     - name: delete-data-repository-association
       description: Deletes a data repository association on an Amazon FSx for Lustre file system.
       flags:
@@ -322,14 +429,38 @@ commands:
         --lustre-configuration=: ""
         --open-zfs-configuration=: The configuration object for the OpenZFS file system used in the `DeleteFileSystem` operation.
         --windows-configuration=: ""
+    - name: delete-snapmirror-policy
+      description: Deletes an Amazon FSx for NetApp ONTAP SnapMirror policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapmirror-policy-id=!: The ID of the SnapMirror policy that you are deleting.
+    - name: delete-snapmirror-relationship
+      description: Deletes an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapmirror-relationship-id=!: The ID of the SnapMirror relationship that you are deleting.
     - name: delete-snapshot
-      description: Deletes an Amazon FSx for OpenZFS snapshot.
+      description: Deletes an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP snapshot.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --snapshot-id=!: The ID of the snapshot that you want to delete.
+    - name: delete-snapshot-policy
+      description: Deletes an Amazon FSx for NetApp ONTAP snapshot policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --snapshot-policy-id=!: The ID of the snapshot policy that you are deleting.
     - name: delete-storage-virtual-machine
       description: Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM).
       flags:
@@ -338,6 +469,14 @@ commands:
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --storage-virtual-machine-id=!: The ID of the SVM that you want to delete.
+    - name: delete-storage-virtual-machine-peer
+      description: Deletes an Amazon FSx for NetApp ONTAP storage virtual machine (SVM) peer relationship.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --storage-virtual-machine-peer-id=!: The ID of the SVM peer that you are deleting.
     - name: delete-volume
       description: Deletes an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
       flags:
@@ -363,6 +502,23 @@ commands:
         --max-items=: The  total number of items to return in the command's output.
         --max-results=: Maximum number of backups to return in the response.
         --next-token=: An opaque pagination token returned from a previous `DescribeBackups` operation.
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-cluster-peers
+      description: Returns the description of specific Amazon FSx for NetApp ONTAP cluster peers, if a `ClusterPeerIds` value is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --cluster-peer-ids=:
+            description: The IDs of the cluster peers that you want to retrieve.
+            nargs: -1
+        --filters=:
+            description: The filters structure.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
         --page-size=: The size of each page to get in the AWS service call.
         --starting-token=: A token to specify where to start paginating.
     - name: describe-data-repository-associations
@@ -450,8 +606,59 @@ commands:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+    - name: describe-snapmirror-policies
+      description: Returns the description of specific Amazon FSx for NetApp ONTAP SnapMirror policies, if a `SnapmirrorPolicyIds` value is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --snapmirror-policy-ids=:
+            description: The IDs of the SnapMirror policies that you want to retrieve.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-snapmirror-relationships
+      description: Returns the description of specific Amazon FSx for NetApp ONTAP SnapMirror relationships, if a `SnapmirrorRelationshipIds` value is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --snapmirror-relationship-ids=:
+            description: The IDs of the SnapMirror relationships that you want to retrieve.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
+    - name: describe-snapshot-policies
+      description: Returns the description of specific Amazon FSx for NetApp ONTAP snapshot policies, if a `SnapshotPolicyIds` value is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --snapshot-policy-ids=:
+            description: The IDs of the snapshot policies that you want to retrieve.
+            nargs: -1
+        --starting-token=: A token to specify where to start paginating.
     - name: describe-snapshots
-      description: Returns the description of specific Amazon FSx for OpenZFS snapshots, if a `SnapshotIds` value is provided.
+      description: Returns the description of specific Amazon FSx for OpenZFS and Amazon FSx for NetApp ONTAP snapshots, if a `SnapshotIds` value is provided.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
@@ -469,6 +676,23 @@ commands:
             description: The IDs of the snapshots that you want to retrieve.
             nargs: -1
         --starting-token=: A token to specify where to start paginating.
+    - name: describe-storage-virtual-machine-peers
+      description: Returns the description of specific Amazon FSx for NetApp ONTAP storage virtual machine (SVM) peers, if a `StorageVirtualMachinePeerIds` value is provided.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --filters=:
+            description: The filters structure.
+            nargs: -1
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --max-items=: The  total number of items to return in the command's output.
+        --max-results=: ""
+        --next-token=: ""
+        --page-size=: The size of each page to get in the AWS service call.
+        --starting-token=: A token to specify where to start paginating.
+        --storage-virtual-machine-peer-ids=:
+            description: The IDs of the SVM peers that you want to retrieve.
+            nargs: -1
     - name: describe-storage-virtual-machines
       description: Describes one or more Amazon FSx for NetApp ONTAP storage virtual machines (SVMs).
       flags:
@@ -582,6 +806,18 @@ commands:
         --tag-keys=!:
             description: A list of keys of tags on the resource to untag.
             nargs: -1
+    - name: update-cluster-peer
+      description: Updates an Amazon FSx for NetApp ONTAP cluster peer relationship.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --cluster-peer-id=!: The ID of the cluster peer that you want to update.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --peer-addresses=:
+            description: Specifies the IP addresses of the intercluster logical interfaces (LIFs) on the peer cluster.
+            nargs: -1
+        --peer-cluster-name=: Specifies the name that the file system uses to identify the peer cluster.
     - name: update-data-repository-association
       description: Updates the configuration of an existing data repository association on an Amazon FSx for Lustre file system.
       flags:
@@ -634,15 +870,59 @@ commands:
         --client-request-token=: ""
         --enable-fsx-route-table-updates-from-participant-accounts=: Specifies whether participant accounts can create FSx for ONTAP Multi-AZ file systems in shared subnets.
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-    - name: update-snapshot
-      description: Updates the name of an Amazon FSx for OpenZFS snapshot.
+    - name: update-snapmirror-policy
+      description: Updates an Amazon FSx for NetApp ONTAP SnapMirror policy.
       flags:
         --cli-input-json=: Read arguments from the JSON string provided.
         --cli-input-yaml=: Read arguments from the YAML string provided.
         --client-request-token=: ""
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
-        --name=!: The name of the snapshot to update.
+        --network-compression-enabled: Specifies whether SnapMirror compresses data when it transfers the data over the network.
+        --no-network-compression-enabled: Specifies whether SnapMirror compresses data when it transfers the data over the network.
+        --retention-rules=:
+            description: Specifies the rules that determine which snapshots SnapMirror retains on the destination volume, based on their SnapMirror labels.
+            nargs: -1
+        --snapmirror-policy-id=!: The ID of the SnapMirror policy that you want to update.
+        --throttle-in-kbps=: Specifies the maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to transfer data.
+        --transfer-schedule=: Specifies the name of the ONTAP schedule that determines when SnapMirror transfers data.
+    - name: update-snapmirror-relationship
+      description: Updates an Amazon FSx for NetApp ONTAP SnapMirror relationship.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --policy-id=: Specifies the ID of the SnapMirror policy that the SnapMirror relationship uses.
+        --snapmirror-relationship-id=!: The ID of the SnapMirror relationship that you want to update.
+        --state=: 'Specifies the state to set for the SnapMirror relationship:'
+        --throttle-in-kbps=: Specifies the maximum bandwidth, in kilobytes per second (KBps), that SnapMirror uses to transfer data for the relationship.
+        --transfer-schedule=: Specifies the name of the ONTAP schedule that determines when SnapMirror transfers data for the relationship.
+      completion:
+        flag:
+            state:
+                - SNAPMIRRORED
+                - PAUSED
+                - BROKEN_OFF
+    - name: update-snapshot
+      description: Updates an Amazon FSx for OpenZFS or Amazon FSx for NetApp ONTAP snapshot.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --name=: The name of the snapshot to update.
+        --ontap-configuration=: The configuration of the ONTAP snapshot that you are updating.
         --snapshot-id=!: The ID of the snapshot that you want to update, in the format `fsvolsnap-0123456789abcdef0`.
+    - name: update-snapshot-policy
+      description: Updates an Amazon FSx for NetApp ONTAP snapshot policy.
+      flags:
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --enabled: Specifies whether the snapshot policy is enabled.
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --no-enabled: Specifies whether the snapshot policy is enabled.
+        --snapshot-policy-id=!: The ID of the snapshot policy that you want to update.
     - name: update-storage-virtual-machine
       description: Updates an FSx for ONTAP storage virtual machine (SVM).
       flags:
@@ -653,6 +933,25 @@ commands:
         --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
         --storage-virtual-machine-id=!: The ID of the SVM that you want to update, in the format `svm-0123456789abcdef0`.
         --svm-admin-password=: Specifies a new SvmAdminPassword.
+    - name: update-storage-virtual-machine-peer
+      description: Updates an Amazon FSx for NetApp ONTAP storage virtual machine (SVM) peer relationship.
+      flags:
+        --applications=:
+            description: Specifies the applications that the SVM peer relationship authorizes.
+            nargs: -1
+        --cli-input-json=: Read arguments from the JSON string provided.
+        --cli-input-yaml=: Read arguments from the YAML string provided.
+        --client-request-token=: ""
+        --generate-cli-skeleton: Prints a JSON skeleton to standard output without sending an API request.
+        --peer-svm-alias=: Specifies the name that the local cluster uses to identify the peer SVM.
+        --state=: 'Specifies the state to set for the SVM peer relationship:'
+        --storage-virtual-machine-peer-id=!: The ID of the SVM peer that you want to update.
+      completion:
+        flag:
+            state:
+                - PEERED
+                - REJECTED
+                - SUSPENDED
     - name: update-volume
       description: Updates the configuration of an Amazon FSx for NetApp ONTAP or Amazon FSx for OpenZFS volume.
       flags:
